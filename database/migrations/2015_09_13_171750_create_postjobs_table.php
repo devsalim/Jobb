@@ -16,8 +16,8 @@ class CreatePostjobsTable extends Migration {
 		{
 			$table->increments('id');
 			$table->string('post_type')->nullable();
-			$table->string('individual_id')->nullable();
-			$table->string('corporate_id')->nullable();
+			$table->integer('individual_id')->unsigned();;
+			$table->integer('corporate_id')->unsigned();;
             $table->string('post_title')->nullable();
             $table->string('post_duration')->nullable();
             $table->string('post_compname')->nullable();
