@@ -1,0 +1,287 @@
+
+
+<div class="row">
+
+
+
+
+
+
+
+
+<div class="col-md-12">
+								<div class="portlet light">
+									<div class="portlet-title tabbable-line">
+										<label style="font-size: 19px;text-align: center;margin: auto;width: 75%;border-bottom:2px solid darkred;">Do you know about any job opening?<br>Post Job information for FREE!!</label>
+										
+									</div>
+									<div class="portlet-body form" style="width: 75%;">
+										
+													<div class="row-md-6">
+														<div class="col-md-12">
+															<div class="form-group">
+															
+																<label>Skill Title</label>
+																	
+																<div class="input-group">
+																
+														<span class="input-group-addon">
+														<i class="fa fa-user" style="color:darkcyan;"></i>
+														</span>
+														<input type="text" class="form-control" placeholder="Job Title">
+													</div>
+															</div>
+														</div>
+													</div>
+													<div class="row-md-3"></div>
+													
+													
+												
+													<div class="row-md-2"></div>
+													<div class="row-md-10">
+														<div class="col-md-6">
+															<div class="form-group">
+																<label>Job Category</label>
+																<div class="input-group">
+													<span class="input-group-addon">
+													<i class="fa fa-university " style="color:darkcyan;"></i>
+													</span>
+													<select class="form-control" >
+														<option value="AL">Alabama</option>
+														<option value="WY">Wyoming</option>
+													</select>
+												</div>
+															</div>
+														</div>
+														<!--/span-->
+														<div class="col-md-6">
+															<div class="form-group">
+																<label>Job Role</label>
+																<div class="input-group">
+													<span class="input-group-addon">
+													<i class="fa fa-university" style="color:darkcyan;"></i>
+													</span>
+													<select class="form-control" >
+														<option value="AL">Alabama</option>
+														<option value="WY">Wyoming</option>
+													</select>
+												</div>
+															</div>
+														</div>
+														<!--/span-->
+													</div>
+													<div class="row-md-2"></div>
+													<div class="row-md-10">
+														<div class="col-md-6">
+															<div class="form-group">
+																<label>City</label>
+																
+																<div class="input-group">
+																<span class="input-group-addon">
+																<i class="fa fa-map-marker" style="color:darkcyan;"></i>
+																</span>
+																<input type="text" class="form-control" placeholder="City">
+																</div>
+															</div>
+														</div>
+														<!--/span-->
+														<div class="col-md-6">
+															<div class="form-group">
+																<label>State</label>
+																<div class="input-group">
+													<span class="input-group-addon">
+													<i class="fa fa-map-marker" style="color:darkcyan;"></i>
+													</span>
+													<select class="form-control" >
+														<option value="AL">Alabama</option>
+														<option value="WY">Wyoming</option>
+													</select>
+												</div>
+															</div>
+														</div>
+														<!--/span-->
+													</div>
+													
+													<div class="row-md-2"></div>
+													<div class="row-md-10">
+														<div class="col-md-6">
+															<div class="form-group">
+																
+																
+																<label class=" control-label">Experience (in Years)</label>
+											<div class="">
+												<input id="range_1" type="text" name="range_1" value=""/>
+											</div>
+															</div>
+														</div>
+														<!--/span-->
+														<div class="col-md-6">
+															<div class="form-group">
+																
+																
+																<label class=" control-label"><input type="checkbox">&nbsp;Salary (<i class="fa fa-rupee (alias)"></i>/Month)</label>
+											<div class="">
+												<input id="range_7" type="text" name="range_1" value=""/>
+											</div>
+															</div>
+														</div>
+														<!--/span-->
+													</div>
+													<script type="text/javascript">
+													function ShowHide(chk,txt)
+
+    {          
+
+        if(document.getElementById(chk).checked)  
+
+            document.getElementById(txt).style.display='';
+
+        else
+
+            document.getElementById(txt).style.display='none';  
+    }
+
+
+													</script>
+													<div class="row-md-10">
+													<div class="form-group">
+													<label style="
+    padding-left: 15px;
+">Job Details</label>
+											<div class="col-md-12" style="
+    padding-bottom: 10px;
+">
+												<textarea class="wysihtml5 form-control" rows="6"></textarea>
+											</div>
+											</div></div>
+													
+													
+													<br><br><br>
+													<div class="row-md-10">
+														<div class="col-md-6">
+															<div class="form-group">
+																<label >Key Skills</label>
+																<input id="tags_1" type="text" class="form-control tags" value="foo,bar,baz,roffle"/>
+															</div>
+														</div>
+														<!--/span-->
+														<div class="col-md-6">
+															<div class="form-group">
+																<label>Post Duration</label>
+																<div class="input-group">
+																		<span class="input-group-addon">
+																		<i class="fa fa-university"></i>
+																		</span>
+																		<select class="form-control" >
+																			
+																			<option value="3">3 Days</option>
+																			<option value="7">7 Days</option>
+																			<option value="15">15 Days</option>
+																			<option value="30">30 Days</option>
+																			</select>
+																	</div>
+															</div>
+														</div>
+														<!--/span-->
+													</div>
+													<div class="row-md-2"></div>
+													<div class="row-md-10">
+														<div class="col-md-6">
+															<div class="form-group">
+																<label>Email Id (Registered)</label>
+																<div class="input-group">
+																<span class="input-group-addon">
+																<i class="icon-envelope" style="color:darkcyan;"></i>
+																</span>
+																<input type="text" class="form-control" placeholder="">
+																</div>
+															</div>
+														</div>
+														<!--/span-->
+														<div class="col-md-6">
+															<div class="form-group">
+																<label>Email Id</label>
+																<div class="input-group">
+																<span class="input-group-addon">
+																<i class="icon-envelope" style="color:darkcyan;"></i>
+																</span>
+																<input type="text" class="form-control" placeholder="Email Id">
+																</div>
+															</div>
+														</div>
+														<!--/span-->
+													</div>
+													<div class="row-md-2"></div>
+													<div class="row-md-10">
+														<div class="col-md-6">
+															<div class="form-group">
+																<label>Phone No (Registered)</label>
+																<div class="input-group">
+																<span class="input-group-addon">
+																<i class="icon-call-end" style="color:darkcyan;"></i>
+																</span>
+																<input type="phone" class="form-control" placeholder="">
+																
+		</span>
+																</div>
+															</div>
+														</div>
+														<!--/span-->
+														<div class="col-md-6">
+															<div class="form-group">
+																<label>Alternate Phone No (Optional)</label>
+																<div class="input-group">
+																<span class="input-group-addon">
+																<i class="icon-call-end" style="color:darkcyan;"></i>
+																</span>
+																<input type="text" class="form-control" placeholder="Phone No">
+																</div>
+															</div>
+														</div>
+														<!--/span-->
+													</div>
+													<div class="form-actions ">
+													<button type="button" class="btn default">Cancel</button>
+													<button type="submit" class="btn blue"><i class="fa fa-check"></i> Save</button>
+												</div>
+												</div>
+											
+											</div>
+										
+										
+							
+
+
+
+
+
+
+
+
+
+
+</div>
+
+
+									
+	
+	
+<script>
+jQuery(document).ready(function() {       
+   // initiate layout and plugins
+   Metronic.init(); // init metronic core components
+Layout.init(); // init current layout
+Demo.init(); // init demo features
+   ComponentsEditors.init();
+   ComponentsIonSliders.init();
+});   
+</script>
+<script>
+jQuery(document).ready(function() {
+// initiate layout and plugins
+Metronic.init(); // init metronic core components
+Layout.init(); // init current layout
+Demo.init(); // init demo features
+FormEditable.init();
+});
+</script>
