@@ -17,6 +17,7 @@ Route::get('firm_details', 'PagesController@firmDetailMain');
 Route::get('mypostnew', 'PagesController@mypost');
 Route::get('postskill', 'PagesController@postskill');
 Route::get('postjobupdate', 'PagesController@newPost');
+Route::get('newPostJob', 'PagesController@newPost');
 Route::get('master', 'PagesController@master');
 Route::post('register', 'UserController@store');
 Route::post('updateProfessionalDetail', 'UserController@updateProfessionalDetail');
