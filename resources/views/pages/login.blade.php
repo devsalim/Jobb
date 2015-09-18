@@ -427,35 +427,13 @@
 				</div>
 				<div id="radio_error"></div>
 			</div>
-			<div class="form-group">
-											<div class="col-md-2"></div>
-											<div class="col-md-9">
-												<div class="fileinput fileinput-new user-images" data-provides="fileinput">
-													<div class="fileinput-preview thumbnail img-responsive" data-trigger="fileinput" style="width: 170px; height: 170px;border-radius: 100px;">	
-														<span class="input-group" style="width: 100%;height: 100%;padding-top: 60px;">
-															<i class="fa fa-university" style="font-size: 90px;"></i>
-														</span>
-													</div>
-													
-													
-													<div class="hover-images" style="margin-left: 63px;margin-top:-50px;">
-														
-														<span class="btn default btn-file">
-														<span class="fileinput-new">
-														<i class="fa fa-upload"></i> </span>
-														<span class="fileinput-exists">
-														<i class="glyphicon glyphicon-edit"></i></span>
-														<input type="file" name="...">
-														</span>
-														<a href="javascript:;" class="btn red fileinput-exists" data-dismiss="fileinput">
-														<i class="glyphicon glyphicon-trash"></i></a>
-														
-													</div>
-													
-												</div>
-												
-											</div>
-										</div>				
+			<div class="profile-userpic user-image" style="margin-top: 20px;">
+				<div class="hover-image">
+					<h3 class="form-title" style="font-size: 14px;">
+						<a class="" style="color: white;text-decoration: blink; font-size:11px;" id="ajax-demo" data-toggle="modal">Upload Image </a>
+					</h3>
+				</div>
+			</div>	
 			<div class="form-group margin-top-20 margin-bottom-20">
 				<label class="check" style="font-size: 13px;">
 					<input type="checkbox" name="ctnc"/> I agree to the <a href="javascript:;">Terms of Service </a>
