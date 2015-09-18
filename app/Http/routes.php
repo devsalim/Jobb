@@ -17,6 +17,7 @@ Route::get('individual', 'UserController@index');
 Route::get('individual/create', 'UserController@create');
 Route::post('individual/store', 'UserController@store');
 Route::post('individual/update', 'UserController@update');
+Route::post('individual/basicupdate', 'UserController@basicUpdate');
 
 Route::get('corporate', 'CorporateController@index');
 Route::get('corporate/create', 'CorporateController@create');

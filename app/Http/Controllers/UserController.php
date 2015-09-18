@@ -76,7 +76,7 @@ class UserController extends Controller {
 	 */
 	public function update($id)
 	{
-		$data = Induser::where('email', '=', Input::get('email'))->first();
+		$data = Induser::where('id', '=', Auth::id())->first();
 		if($data != null){
 			$data->education = Input::get('education');
 			$data->branch = Input::get('branch');
@@ -103,6 +103,18 @@ class UserController extends Controller {
 	public function destroy($id)
 	{
 		//
+	}
+
+	public function basicUpdate(){
+		$data = Induser::where('id', '=', Auth::id())->first();
+		if($data != null){
+			$data->fname = Input::get('fname');
+			$data->lname = Input::get('lname');
+			$data->email = Input::get('email');
+			$data->mobile = Input::get('mobile');
+			$data->save();
+			return redirect('/master');
+		}
 	}
 
 }

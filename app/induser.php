@@ -4,6 +4,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class induser extends Model {
 
-	protected $fillable = ['name', 'email', 'mobile', 'password'];
+	protected $fillable = ['fname', 'lname', 'email', 'mobile', 'password'];
 
 }

@@ -13,7 +13,8 @@
 	</div>
 	<div class="portlet-body form">
 		<!-- BEGIN FORM-->
-		<form action="#" class="horizontal-form">
+		<form action="{{ url('/individual/basicupdate') }}" class="horizontal-form" method="post">
+			<input type="hidden" name="_token" value="{{ csrf_token() }}">
 			<div class="form-body">
 				<div class="row">
 				<div class="" style=""></div>
@@ -25,6 +26,17 @@
 						<div id="ajax-modal" class="modal fade" tabindex="-1"></div>
 					</div>
 					<div class="row-md-10">
+
+						@if (count($errors) > 0)
+						<div class="alert alert-danger">
+							<ul>
+								@foreach ($errors->all() as $error)
+									<li>{{ $error }}</li>
+								@endforeach
+							</ul>
+						</div>
+					@endif
+
 						<div class="col-md-6">
 							<div class="form-group">
 								<label>First Name</label>
@@ -32,7 +44,7 @@
 									<span class="input-group-addon">
 										<i class="glyphicon glyphicon-font" style="color:darkcyan;"></i>
 									</span>
-									<input type="text" class="form-control" placeholder="First Name" value="{{ $user->fname }}">
+									<input type="text" name="fname" class="form-control" placeholder="First Name" value="{{ $user->fname }}">
 								</div>
 							</div>
 						</div>
@@ -44,7 +56,7 @@
 									<span class="input-group-addon">
 										<i class="glyphicon glyphicon-font" style="color:darkcyan;"></i>
 									</span>
-									<input type="text" class="form-control" value="{{ $user->lname }}" placeholder="Last Name">
+									<input type="text" name="lname" class="form-control" value="{{ $user->lname }}" placeholder="Last Name">
 								</div>
 							</div>
 						</div>
@@ -59,7 +71,7 @@
 									<span class="input-group-addon">
 										<i class="icon-call-end" style="color:darkcyan;"></i>
 									</span>
-									<input type="text" class="form-control" placeholder="Mobile No" value="{{ $user->mobile }}">
+									<input type="text" name="mobile" class="form-control" placeholder="Mobile No" value="{{ $user->mobile }}">
 								</div>
 							</div>
 						</div>
@@ -71,7 +83,7 @@
 									<span class="input-group-addon">
 										<i class="icon-envelope" style="color:darkcyan;"></i>
 									</span>
-									<input type="text" class="form-control" placeholder="Email Id" value="{{ $user->email }}">
+									<input type="text" name="email" class="form-control" placeholder="Email Id" value="{{ $user->email }}">
 								</div>
 							</div>
 						</div>

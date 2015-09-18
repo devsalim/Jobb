@@ -49,17 +49,9 @@ class AuthController extends Controller {
 	        return redirect()->intended($this->redirectPath());
 	    }
 
-
 		$this->validate($request, [
 			'email' => 'required', 'password' => 'required',
 		]);
-
-		// $credentials = $request->only('email', 'password');
-
-		// if ($this->auth->attempt($credentials, $request->has('remember')))
-		// {
-		// 	return redirect()->intended($this->redirectPath());
-		// }
 
 		return redirect($this->loginPath())
 					->withInput($request->only('email', 'remember'))

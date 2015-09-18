@@ -15,8 +15,9 @@ class CreateIndusersTable extends Migration {
 		Schema::create('indusers', function(Blueprint $table)
 		{
 			$table->increments('id');
-			$table->string('reg_via')->nullable();
-            $table->string('name');
+   			$table->string('reg_via')->nullable();
+            $table->string('fname')->nullable();
+            $table->string('lname')->nullable();
             $table->string('email')->nullable();
             $table->string('mobile')->nullable();
             $table->string('password',255);
@@ -37,7 +38,7 @@ class CreateIndusersTable extends Migration {
             $table->string('city')->nullable();
             $table->string('state')->nullable();
             $table->rememberToken();
-			$table->timestamps();
+   			$table->timestamps();
 		});
 	}
 
