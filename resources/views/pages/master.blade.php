@@ -68,6 +68,9 @@ License: You must have a valid license purchased only from themeforest(the above
 <link id="style_color" href="{{ asset('/assets/admin/layout2/css/themes/grey.css') }}" rel="stylesheet" type="text/css"/>
 <link href="{{ asset('/assets/admin/layout2/css/custom.css') }}" rel="stylesheet" type="text/css"/>
 <link href="{{ asset('/assets/admin/pages/css/timeline.css') }}" rel="stylesheet" type="text/css"/>
+<link href="{{ asset('/assets/custom.css') }}" rel="stylesheet"/>
+<link href="{{ asset('/assets/global/plugins/ion.rangeslider/css/ion.rangeSlider.css') }}" rel="stylesheet"/>
+<link href="{{ asset('/assets/global/plugins/ion.rangeslider/css/ion.rangeSlider.Metronic.css') }}" rel="stylesheet"/>
 
 <style type="css/text" rel="stylesheet">
 body.page-boxed{
@@ -1060,6 +1063,7 @@ float: none;margin:18px auto;width:60%;height: 60%;-webkit-border-radius: 50% !i
 <script type="text/javascript" src="{{ asset('/assets/global/plugins/bootstrap-editable/inputs-ext/address/address.js') }}"></script>
 <script type="text/javascript" src="{{ asset('/assets/global/plugins/bootstrap-editable/inputs-ext/wysihtml5/wysihtml5.js') }}"></script>
 <script src="{{ asset('/assets/admin/pages/scripts/form-editable.js') }}"></script>
+<script src="{{ asset('/assets/admin/pages/scripts/components-jqueryui-sliders.js') }}" type="text/javascript"></script>
 
 <script src="{{ asset('/assets/admin/pages/scripts/login.js') }}" type="text/javascript"></script>
 
