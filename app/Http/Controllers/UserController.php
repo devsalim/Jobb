@@ -8,10 +8,6 @@ use App\Induser;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use App\Http\Requests\CreateUserRequest;
-<<<<<<< HEAD
-=======
-
->>>>>>> origin/master
 
 class UserController extends Controller {
 
@@ -48,11 +44,6 @@ class UserController extends Controller {
 
 		return redirect()->intended("login");
 	}
-
-<<<<<<< HEAD
-=======
-	
->>>>>>> origin/master
 
 	/**
 	 * Display the specified resource.

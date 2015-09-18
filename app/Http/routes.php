@@ -9,11 +9,7 @@ Route::controllers([
 	'auth'		=>	'Auth\AuthController',
 	'password'	=>	'Auth\PasswordController',
 ]);
-<<<<<<< HEAD
 
-=======
-
->>>>>>> origin/master
 Route::get('master', 'PagesController@master');
 Route::get('mypost', 'PagesController@myPost');
 
