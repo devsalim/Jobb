@@ -4,17 +4,28 @@ var ComponentsIonSliders = function () {
         //main function to initiate the module
         init: function () {
 
-            $("#range_1").ionRangeSlider({
+           $("#range_1").ionRangeSlider({
                 min: 0,
-                max: 5000,
-                from: 1000,
-                to: 4000,
+                max: 15,com
+                from: 2,
+                to: 5,
                 type: 'double',
                 step: 1,
-                prefix: "$",
+                postfix: "",
                 prettify: false,
                 hasGrid: true
             });
+             $("#range_7").ionRangeSlider({
+                min: 5000,
+                max: 100000,
+                from: 5000,
+                to: 10000,
+                type: 'double',
+                step: 1,
+                prefix: "Rs.",
+                prettify: false,
+                hasGrid: true
+            });    
 
             $("#range_2").ionRangeSlider();
 
