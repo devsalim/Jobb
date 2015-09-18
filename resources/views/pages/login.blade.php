@@ -258,7 +258,18 @@
 					<span class="input-group-addon">
 						<i class="glyphicon glyphicon-font"></i>
 					</span>	
-					<input type="text" name="name" class="form-control" placeholder="Full Name" value="{{ old('fullname') }}">
+					<input type="text" name="fname" class="form-control" placeholder="First Name" value="{{ old('fname') }}">
+				</div>
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="input-icon right">
+				<i class="fa"></i>
+				<div class="input-group margin-top-15">
+					<span class="input-group-addon">
+						<i class="glyphicon glyphicon-font"></i>
+					</span>	
+					<input type="text" name="lname" class="form-control" placeholder="Last Name" value="{{ old('lname') }}">
 				</div>
 			</div>
 		</div>
@@ -406,27 +417,34 @@
 				</div>
 			</div>
 
-			<div class="form-group form-md-radios" style="margin-top:25px;margin-left:36px;">					
-				<div class="md-radio-inline">
-					<div class="md-radio">
-						<input type="radio" id="radio6" name="firm_type" class="md-radiobtn" value="company">
-						<label for="radio6" style="">
-						<span></span>
-						<span class="check"></span>
-						<span class="box"></span>
-						Company </label>
+				<div class="form-group">
+					<div class="col-md-4"></div>
+					<label class="control-label col-md-6" style="">Firm Type</label>
+					<div class="col-md-12">
+							<div class="md-radio-inline" style="margin-left:22px;">
+								<div class="md-radio">
+									<input type="radio" id="radio6" name="firm_type" value="company" class="md-radiobtn">
+									<label for="radio6" style="">
+									<span></span>
+									<span class="check"></span>
+									<span class="box"></span>
+									Company </label>
+								</div>
+								<div class="md-radio">
+									<input type="radio" id="radio7" name="firm_type" value="consultancy" class="md-radiobtn" >
+									<label for="radio7" style="">
+									<span></span>
+									<span class="check"></span>
+									<span class="box"></span>
+									Consultancy </label>
+								</div>
+							</div>	
+							<div id="radio_error"></div>					<!-- /input-group -->
 					</div>
-					<div class="md-radio">
-						<input type="radio" id="radio7" name="firm_type" class="md-radiobtn" value="consultancy">
-						<label for="radio7" style="">
-						<span></span>
-						<span class="check"></span>
-						<span class="box"></span>
-						Consultancy </label>
-					</div>
+					
 				</div>
-				<div id="radio_error"></div>
-			</div>
+
+			
 			<div class="profile-userpic user-image" style="margin-top: 20px;">
 				<div class="hover-image">
 					<h3 class="form-title" style="font-size: 14px;">
