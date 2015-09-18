@@ -4,7 +4,7 @@ var ComponentsIonSliders = function () {
         //main function to initiate the module
         init: function () {
 
-           $("#range_1").ionRangeSlider({
+            $("#range_1").ionRangeSlider({
                 min: 0,
                 max: 15,com
                 from: 2,
@@ -15,7 +15,7 @@ var ComponentsIonSliders = function () {
                 prettify: false,
                 hasGrid: true
             });
-             $("#range_7").ionRangeSlider({
+            $("#range_7").ionRangeSlider({
                 min: 5000,
                 max: 100000,
                 from: 5000,
