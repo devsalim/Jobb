@@ -36,14 +36,8 @@ class PagesController extends Controller {
 		return view('pages.mypost');
 	}
 
-<<<<<<< HEAD
-=======
-	
-
->>>>>>> origin/master
 	public function fillItLater(){
 		return redirect('/login');
 	}
-
 
 }
