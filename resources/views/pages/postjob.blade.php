@@ -201,7 +201,7 @@
 							<label>Post Duration</label>
 							<div class="input-group">
 									<span class="input-group-addon">
-									<i class="fa fa-university"></i>
+									<i class="icon-clock"></i>
 									</span>
 									<select name="post_duration" class="form-control" >						
 										<option value="3">3 Days</option>
