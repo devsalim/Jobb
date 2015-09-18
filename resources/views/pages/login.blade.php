@@ -201,7 +201,7 @@
 	<!-- END FORGOT PASSWORD FORM -->
 	
 	<!-- BEGIN REGISTRATION FORM -->
-	<form class="register-form" id="myindividual" action="{{ url('/register') }}" method="post">
+	<form class="register-form" id="myindividual" action="{{ url('/individual/store') }}" method="post">
 		<input type="hidden" name="_token" value="{{ csrf_token() }}">
 		<div class="login-option" style=" margin-right: 10px;padding-bottom:6px;">
 			<h3 class="form-title" style="margin-top: 4px;margin-bottom: 16px;color:khaki;font-size: 27px;text-shadow: 0px 1px 1px blue;">
@@ -339,7 +339,7 @@
 	<!-- Start Upload Profile FORM -->	
 	<!-- END Upload Profile FORM -->
 	
-	<form class="register-corporate-form" action="{{ url('/registerCorp') }}" method="post">
+	<form class="register-corporate-form" action="{{ url('/corporate/store') }}" method="post">
 		<input type="hidden" name="_token" value="{{ csrf_token() }}">
 		<div class="login-option" style=" margin-right: 26px;">
 			<h3 class="form-title" style="margin-top: 4px;margin-bottom: 16px;color:khaki;font-size: 27px;text-shadow: 0px 1px 1px blue;">

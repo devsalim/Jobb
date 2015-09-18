@@ -3,13 +3,11 @@
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+use Auth;
+use App\Induser;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
-use Auth;
 use App\Http\Requests\CreateUserRequest;
-use App\Induser;
-use App\Http\Requests\CreateCorpRequest;
-use App\Corpuser;
 
 class UserController extends Controller {
 
@@ -30,7 +28,8 @@ class UserController extends Controller {
 	 */
 	public function create()
 	{
-		
+		$user = Induser::where('id', '=', Auth::id())->first();
+		return view('pages.professional_page', compact('user'));
 	}
 
 	/**
@@ -42,17 +41,10 @@ class UserController extends Controller {
 	{
 		$request['password'] = bcrypt($request['password']);
 		Induser::create($request->all());
-		$email = $request['email'];
-		return view('pages.professionalDetail', compact('email'));
+
+		return redirect()->intended("login");
 	}
 
-	public function storeCorp(CreateCorpRequest $request)
-	{
-		$request['firm_password'] = bcrypt($request['firm_password']);
-		Corpuser::create($request->all());
-		$email = $request['firm_email_id'];
-		return view('pages.firmDetail', compact('email'));
-	}
 
 	/**
 	 * Display the specified resource.
@@ -85,21 +77,6 @@ class UserController extends Controller {
 	 */
 	public function update($id)
 	{
-		//
-	}
-
-	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function destroy($id)
-	{
-		//
-	}
-
-	public function updateProfessionalDetail(){
 		$data = Induser::where('email', '=', Input::get('email'))->first();
 		if($data != null){
 			$data->education = Input::get('education');
@@ -118,23 +95,15 @@ class UserController extends Controller {
 		}
 	}
 
-	public function updateFirmDetail(){
-	  $data = Corpuser::where('firm_email_id', '=', Input::get('firm_email_id'))->first();
-	  if($data != null){
-	   $data->about_firm = Input::get('aboutfirm');
-	   $data->industry = Input::get('industry');
-	   $data->operating_since = Input::get('operatingsince');
-	   $data->firm_mobile_no = Input::get('phone');
-	   $data->firm_address = Input::get('address');
-	   $data->state = Input::get('state');
-	   $data->city = Input::get('city');
-	   $data->website_url = Input::get('website');
-	   $data->linked_skill = Input::get('workarea');
-	   $data->save();
-	   return redirect('/login');
-	  }else{
-	   return 'some error occured.'+Input::get('email');
-	  }
+	/**
+	 * Remove the specified resource from storage.
+	 *
+	 * @param  int  $id
+	 * @return Response
+	 */
+	public function destroy($id)
+	{
+		//
 	}
 
 }

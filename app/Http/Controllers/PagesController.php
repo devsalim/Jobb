@@ -23,18 +23,8 @@ class PagesController extends Controller {
 		return view('pages.login');
 	}
 
-	public function professionalDetail(){
-		$data = Request::input('email');
-		return view('pages.professionalDetail')->with('email', $data);
-	}
-
-	public function firmDetail(){
-		$data = Request::input('email');
-		return view('pages.firmDetail')->with('email', $data);
-	}
-
 	public function master(){
-		$user = Induser::where('id', '=', Auth::id())->first();
+	    $user = Induser::where('id', '=', Auth::id())->first();
 		return View('pages.master', compact('user'));
 	}
 
@@ -42,22 +32,8 @@ class PagesController extends Controller {
 		return view('pages.home');
 	}
 
-	public function professionalDetailMain(){
-		$user = Induser::where('id', '=', Auth::id())->first();
-		return view('pages.professional_page', compact('user'));
-	}
-
-	public function firmDetailMain(){
-		$user = Corpuser::where('id', '=', Auth::id())->first();
-		return view('pages.firm_details', compact('user'));
-	}
-
 	public function myPost(){
 		return view('pages.mypost');
-	}
-
-	public function newPost(){
-		return view('pages.newpost');
 	}
 
 	public function fillItLater(){

@@ -17,8 +17,8 @@ class CreateIndusersTable extends Migration {
 			$table->increments('id');
 			$table->string('reg_via')->nullable();
             $table->string('name');
-            $table->string('email')->unique()->nullable();
-            $table->string('mobile')->unique()->nullable();
+            $table->string('email')->nullable();
+            $table->string('mobile')->nullable();
             $table->string('password',255);
             $table->string('profile_pic')->nullable();
             $table->string('profile_pic_link')->nullable();
