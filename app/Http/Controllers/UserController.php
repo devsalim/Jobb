@@ -148,7 +148,7 @@ class UserController extends Controller {
 	}
 
 	public function newPostJob(){
-	  $data = Postjob::where('email', '=', Input::get('email_id'))->first();
+	  $data = Postjob::where('email_id', '=', Input::get('email_id'))->first();
 	  if($data != null){
 	   $data->post_title = Input::get('post_title');
 	   $data->post_compname = Input::get('post_compname');
