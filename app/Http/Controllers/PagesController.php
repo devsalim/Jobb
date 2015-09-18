@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Request;
 use App\Induser;
 use App\Corpuser;
+use App\Postjob;
 use Auth;
 
 class PagesController extends Controller {
@@ -29,7 +30,8 @@ class PagesController extends Controller {
 	}
 
 	public function home(){
-		return view('pages.home');
+		$posts = Postjob::all();
+		return view('pages.home', compact('posts'));
 	}
 
 	public function myPost(){

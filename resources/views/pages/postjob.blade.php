@@ -12,7 +12,15 @@
 		<!-- BEGIN FORM-->
 		<form action="{{ url('job/store') }}" method="post" class="horizontal-form">
 			<input type="hidden" name="_token" value="{{ csrf_token() }}">
-			<input type="hidden" name="email" value="">
+			@if (count($errors) > 0)
+				<div class="alert alert-danger">
+					<ul>
+						@foreach ($errors->all() as $error)
+							<li>{{ $error }}</li>
+						@endforeach
+					</ul>
+				</div>
+			@endif
 			<div class="form-body">
 				<div class="row">
 					<div class="col-md-12">

@@ -22,7 +22,7 @@ class CreatePostjobRequest extends Request {
 	public function rules()
 	{
 		return [
-			'job_title'	=>	'required'
+			'post_title'	=>	'required'
 			
 		];
 	}

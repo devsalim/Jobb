@@ -1,71 +1,48 @@
-<div class="portlet light bordered">
-										
-										<div class="portlet-body form">
-											<!-- BEGIN FORM-->
-											<form action="#" class="horizontal-form">
-												<div class="form-body">
-												
-												<div class="row">
-	<div class="" style=""></div>
-		<div class="col-md-11" style="">
-<div class="timeline">
-					<!-- TIMELINE ITEM -->
-					<div class="timeline-item">
-						<div class="timeline-badge">
-							<img class="timeline-badge-userpic" src="../../assets/admin/pages/media/users/avatar80_1.jpg">
-						</div>
-						<div class="timeline-body">
-							<div class="timeline-body-arrow">
-							</div>
-							<div class="timeline-body-head">
-								<div class="timeline-body-head-caption">
-									<a href="javascript:;" class="timeline-body-title font-blue-madison">Job Tip</a>
-									<span class="timeline-body-time font-grey-cascade">Posted Job At 03-09-2015/17:02</span>
-								</div>
-								
-							</div>
-							<div class="timeline-body-content">
-								<span class="font-grey-cascade">
-								Job Title,Role: abc<br>at XYZ Company, City: Chennai<br>Exp:0-5 Years Pay Scale: 0-100000<br>Details: abc,xyz
+<div class="portlet light bordered">										
+	<div class="portlet-body form">
+		<!-- BEGIN FORM-->
+		<form action="#" class="horizontal-form">
+			<div class="form-body">
+				<div class="row">
+					<div class="" style=""></div>
+					<div class="col-md-11" style="">
+						<div class="timeline">
 
-								</span>
-							</div>
-							
-						</div>
-						
-					</div>
-					
-					<!-- END TIMELINE ITEM -->
-					<!-- TIMELINE ITEM -->
-					<div class="timeline-item">
-						<div class="timeline-badge">
-							<img class="timeline-badge-userpic" src="../../assets/admin/pages/media/users/avatar80_2.jpg">
-						</div>
-						<div class="timeline-body">
-							<div class="timeline-body-arrow">
-							</div>
-							<div class="timeline-body-head">
-								<div class="timeline-body-head-caption">
-									<a href="javascript:;" class="timeline-body-title font-blue-madison">Vanessa Bond</a>
-									<span class="timeline-body-time font-grey-cascade">Posted Skills at 5:10 PM</span>
+							@foreach($posts as $post)
+							<!-- TIMELINE ITEM -->
+							<div class="timeline-item">
+								<div class="timeline-badge">
+									<img class="timeline-badge-userpic" src="../../assets/admin/pages/media/users/avatar80_1.jpg">
 								</div>
-								<div class="timeline-body-head-actions">
+								<div class="timeline-body">
+									<div class="timeline-body-arrow">
+									</div>
+									<div class="timeline-body-head">
+										<div class="timeline-body-head-caption">
+											<a href="javascript:;" class="timeline-body-title font-blue-madison">{{ $post->post_compname }}</a>
+											<span class="timeline-body-time font-grey-cascade">Posted Job At 
+												{{ date('F d, Y', strtotime($post->created_at)) }}
+											</span>
+										</div>
+									</div>
+									<div class="timeline-body-content">
+										<span class="font-grey-cascade">
+										{{ $post->post_title }}, Role: {{ $post->role }}<br>at {{ $post->post_compname }}, City: {{ $post->city }}<br>Exp: {{ $post->min_exp}} Years Pay Scale: {{ $post->min_sal }}<br>Details: {{ $post->job_detail }}
+										</span>
+									</div>
 								</div>
 							</div>
-							<div class="timeline-body-content">
-								<span class="font-grey-cascade">
-								Skills Title,Role: abc<br>at XYZ Company, City: Chennai<br>Exp:0-5 Years Pay Scale: 0-100000<br>Details: abc,xyz
-								
-								</span>
-							</div>
+							<!-- END TIMELINE ITEM -->
+							 @endforeach
+
 						</div>
-					</div>
-				</div>
-			</div>			
+					</div>			
 					<!-- END TIMELINE ITEM -->
 				</div>
-											</form>
-											<!-- END FORM-->
-										</div></div></div>
+			</div>
+		</form>
+		<!-- END FORM-->
+	</div>
+</div>
 
 

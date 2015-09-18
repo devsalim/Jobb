@@ -4,7 +4,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class postjob extends Model {
 
-	protected $fillable = ['post_title', 
+	protected $fillable =  ['post_title', 
 							'post_compname', 
 							'prof_category', 
 							'role', 
@@ -15,10 +15,10 @@ class postjob extends Model {
 							'job_detail', 
 							'linked_skill', 
 							'post_duration', 
-							'email_id', 
-							'alt_emailid', 
-							'phone', 
-							'alt_phone'
-							];
+							'email_id',
+							'phone',
+							'individual_id',
+							'corporate_id'
+						   ];
 
 }

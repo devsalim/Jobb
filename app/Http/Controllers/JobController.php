@@ -4,6 +4,9 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
+use App\Postjob;
+use App\Http\Requests\CreatePostjobRequest;
+use Auth;
 
 class JobController extends Controller {
 
@@ -32,29 +35,11 @@ class JobController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function store()
+	public function store(CreatePostjobRequest $request)
 	{
-		$data = Postjob::where('email_id', '=', Input::get('email_id'))->first();
-		if($data != null){
-			$data->post_title = Input::get('post_title');
-			$data->post_compname = Input::get('post_compname');
-			$data->prof_category = Input::get('prof_category');
-			$data->role = Input::get('role');
-			$data->job_detail = Input::get('job_detail');
-			$data->state = Input::get('state');
-			$data->city = Input::get('city');
-			$data->min_exp = Input::get('min_exp');
-			$data->min_sal = Input::get('min_sal');
-			$data->linked_skill = Input::get('linked_skill');
-			$data->post_duration = Input::get('post_duration');
-			$data->alt_emailid = Input::get('alt_emailid');
-			$data->phone = Input::get('phone');
-			$data->alt_phone = Input::get('alt_phone');
-			$data->save();
-			return redirect('/master');
-		}else{
-			return 'some error occured.'+Input::get('email');
-		}
+		$request['individual_id'] = Auth::id();
+		Postjob::create($request->all());
+		return redirect()->intended("master");
 	}
 
 	/**
