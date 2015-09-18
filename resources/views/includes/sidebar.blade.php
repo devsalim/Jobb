@@ -51,6 +51,15 @@ float: none;margin:18px auto;width:60%;height: 60%;-webkit-border-radius: 50% !i
         </a>
       </li>
       <li >
+        <a class="ajaxify" href="skill/create">
+        <i class=" icon-note"></i>
+        <span class="title">
+        Post Skill</span>
+        <span class="selected">
+        </span>
+        </a>
+      </li>
+      <li >
         <a class="ajaxify" href="individual/create">
         <i class=" icon-note"></i>
         <span class="title">
