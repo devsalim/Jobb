@@ -1,20 +1,18 @@
-  .user-image:hover .hover-image{
+.user-image:hover .hover-image{
         display: block;
 }
 .hover-image{
   display: none;
 }
-
-
 .profile-userpic {
     position: relative;
     overflow: hidden;
     width: 136px;
     height: 136px;
-    border-radius: 50%;
+    border-radius: 50% !important ;
     margin: auto;
-	border: 1px solid white;
-    background: url("images/couple.png");
+	border: 1px solid darkcyan;
+    background: url("images/couple.png") !important;
 }
 .hover-image {
     position: absolute;
@@ -33,8 +31,6 @@
 .hover-images{
   display: none;
 }
-
-
 .profile-userpics {
     position: relative;
     overflow: hidden;
@@ -56,8 +52,6 @@
 .hover-images h3 {
     margin-top: 70%;
 }
-
-
 /* alert message */
 .alert ul {
     list-style: none;
