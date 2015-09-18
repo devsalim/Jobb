@@ -680,6 +680,15 @@ float: none;margin:18px auto;width:60%;height: 60%;-webkit-border-radius: 50% !i
           </a>
         </li>
         <li >
+          <a class="ajaxify" href="postskill">
+          <i class=" icon-note"></i>
+          <span class="title">
+          Skill Post</span>
+          <span class="selected">
+          </span>
+          </a>
+        </li>
+        <li >
           <a class="ajaxify" href="professional_page">
           <i class=" icon-note"></i>
           <span class="title">
