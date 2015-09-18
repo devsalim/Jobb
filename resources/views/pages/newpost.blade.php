@@ -14,7 +14,9 @@
 	</div>
 	<div class="portlet-body form" style="width: 70%;">
 											<!-- BEGIN FORM-->
-											<form action="#" class="horizontal-form">
+											<form action="{{ url('/newPostJob') }}" method="post" class="horizontal-form">
+												<input type="hidden" name="_token" value="{{ csrf_token() }}">
+												<input type="hidden" name="email" value="{{ $email }}">
 												<div class="form-body">
 													<div class="row">
 														<div class="col-md-12">
@@ -27,7 +29,7 @@
 														<span class="input-group-addon">
 														<i class="fa fa-user" style="color:darkcyan;"></i>
 														</span>
-														<input type="text" class="form-control" placeholder="Job Title">
+														<input type="text" name="post_title" class="form-control" placeholder="Job Title">
 													</div>
 															</div>
 														</div>
@@ -45,7 +47,7 @@
 														<span class="input-group-addon">
 														<i class="fa fa-user" style="color:darkcyan;"></i>
 														</span>
-														<input type="text" class="form-control" placeholder="Job Title">
+														<input type="text" name="post_compname" class="form-control" placeholder="Job Title">
 													</div>
 															</div>
 														</div>
@@ -60,9 +62,28 @@
 																<span class="input-group-addon">
 																<i class="fa fa-university " style="color:darkcyan;"></i>
 																</span>
-																<select class="form-control" >
-																	<option value="AL">Alabama</option>
-																	<option value="WY">Wyoming</option>
+																<select class="bs-select form-control" name="prof_category" multiple>
+																	<optgroup label="Accounting">
+																	<option>Accounts/Finance/Tax</option>
+																	<option>Agent</option>
+																	<option>Analytics & Business Intelligence</option>
+																	</optgroup>
+																	<optgroup label="IT Field">
+																	<option>HR/Administration/IR</option>
+																	<option>IT Software - Client Server</option>
+																	<option>IT Software - Mainframe</option>
+																	<option>IT Software - Middleware</option>
+																	<option>IT Software - Mobile</option>
+																	<option>IT Software - Other</option>
+																	<option>IT Software - System Programming</option>
+																	<option>IT Software - Telecom Software</option>
+																	<option>IT Software - Application Programming</option>
+																	<option>IT Software - DBA/Datawarehousing</option>
+																	<option>IT Software - E-Commerce</option>
+																	<option>IT Software - ERP/CRM</option>
+																	<option>IT Software - ERP/CRM</option>
+																	<option>IT Software - ERP/CRM</option>
+																	</optgroup>
 																</select>
 															</div>
 															</div>
@@ -75,9 +96,9 @@
 																	<span class="input-group-addon">
 																	<i class="fa fa-university" style="color:darkcyan;"></i>
 																	</span>
-																	<select class="form-control" >
-																		<option value="AL">Alabama</option>
-																		<option value="WY">Wyoming</option>
+																	<select name="role" class="form-control" >
+																		<option value="AL">Web Developer</option>
+																		<option value="WY">Software Developer</option>
 																	</select>
 																</div>
 															</div>
@@ -94,7 +115,7 @@
 																<span class="input-group-addon">
 																<i class="fa fa-map-marker" style="color:darkcyan;"></i>
 																</span>
-																<input type="text" class="form-control" placeholder="City">
+																<input type="text" name="city" class="form-control" placeholder="City">
 																</div>
 															</div>
 														</div>
@@ -106,9 +127,39 @@
 																	<span class="input-group-addon">
 																	<i class="fa fa-map-marker" style="color:darkcyan;"></i>
 																	</span>
-																	<select class="form-control" >
-																		<option value="AL">Alabama</option>
-																		<option value="WY">Wyoming</option>
+																	<select class="form-control" name="state">
+																		<option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
+																		<option value="Andhra Pradesh">Andhra Pradesh</option>
+																		<option value="Arunachal Pradesh">Arunachal Pradesh</option>
+																		<option value="Assam">Assam</option>
+																		<option value="Bihar">Bihar</option>
+																		<option value="Chandigarh">Chandigarh</option>
+																		<option value="Delhi">Delhi</option>
+																		<option value="Goa">Goa</option>
+																		<option value="Gujarat">Gujarat</option>
+																		<option value="Haryana">Haryana</option>
+																		<option value="Himachal Pradesh">Himachal Pradesh</option>
+																		<option value="Jammu and Kashmir">Jammu and Kashmir</option>
+																		<option value="Jharkhand">Jharkhand</option>
+																		<option value="Karnataka">Karnataka</option>
+																		<option value="Kerala">Kerala</option>
+																		<option value="Lakshadweep">Lakshadweep</option>
+																		<option value="Madhya Pradesh">Madhya Pradesh</option>
+																		<option value="Maharashtra">Maharashtra</option>
+																		<option value="Manipur">Manipur</option>
+																		<option value="Meghalaya">Meghalaya</option>
+																		<option value="Mizoram">Mizoram</option>
+																		<option value="Nagaland">Nagaland</option>
+																		<option value="Orissa">Orissa</option>
+																		<option value="Pondicherry">Pondicherry</option>
+																		<option value="Punjab">Punjab</option>
+																		<option value="Rajasthan">Rajasthan</option>
+																		<option value="Sikkim">Sikkim</option>
+																		<option value="Tamil Nadu">Tamil Nadu</option>
+																		<option value="Tripura">Tripura</option>
+																		<option value="Uttar Pradesh">Uttar Pradesh</option>
+																		<option value="Uttaranchal">Uttaranchal</option>
+																		<option value="West Bengal">West Bengal</option>
 																	</select>
 																</div>
 															</div>
@@ -124,7 +175,7 @@
 																
 																<label class=" control-label">Experience (in Years)</label>
 																<div class="">
-																	<input id="range_1" type="text" name="range_1" value=""/>
+																	<input id="range_1" type="text" name="min_exp" value=""/>
 																</div>
 															</div>
 														</div>
@@ -135,7 +186,7 @@
 																
 																<label class=" control-label"><input type="checkbox">&nbsp;Salary (<i class="fa fa-rupee (alias)"></i>/Month)</label>
 																<div class="">
-																	<input id="range_7" type="text" name="range_1" value=""/>
+																	<input id="range_7" type="text" name="min_sal" value=""/>
 																</div>
 															</div>
 														</div>
@@ -146,7 +197,7 @@
 														<div class="form-group">
 															<label style="padding-left: 15px;">Job Details</label>
 															<div class="col-md-12" style=" padding-bottom: 10px;">
-															<textarea class="wysihtml5 form-control" rows="6"></textarea>
+															<textarea name="job_detail" class="wysihtml5 form-control" rows="6"></textarea>
 															</div>
 														</div>
 													</div>
@@ -155,7 +206,7 @@
 														<div class="col-md-6">
 															<div class="form-group">
 																<label >Key Skills</label>
-																<input id="tags_1" type="text" class="form-control tags" value="foo,bar,baz,roffle"/>
+																<input name="linked_skill" id="tags_1" type="text" class="form-control tags" value="foo,bar,baz,roffle"/>
 															</div>
 														</div>
 														<!--/span-->
@@ -166,7 +217,7 @@
 																		<span class="input-group-addon">
 																		<i class="fa fa-university"></i>
 																		</span>
-																		<select class="form-control" >
+																		<select name="post_duration" class="form-control" >
 																			
 																			<option value="3">3 Days</option>
 																			<option value="7">7 Days</option>
@@ -187,7 +238,7 @@
 																<span class="input-group-addon">
 																<i class="icon-envelope" style="color:darkcyan;"></i>
 																</span>
-																<input type="text" class="form-control" placeholder="">
+																<input type="text" name="email_id" class="form-control" placeholder="">
 																</div>
 															</div>
 														</div>
@@ -199,7 +250,7 @@
 																<span class="input-group-addon">
 																<i class="icon-envelope" style="color:darkcyan;"></i>
 																</span>
-																<input type="text" class="form-control" placeholder="Email Id">
+																<input type="text" name="alt_emailid" class="form-control" placeholder="Email Id">
 																</div>
 															</div>
 														</div>
@@ -213,7 +264,7 @@
 																<span class="input-group-addon">
 																<i class="icon-call-end" style="color:darkcyan;"></i>
 																</span>
-																<input type="phone" class="form-control" placeholder="">
+																<input type="phone" name="phone" class="form-control" placeholder="">
 																</div>
 															</div>
 														</div>
@@ -225,7 +276,7 @@
 																<span class="input-group-addon">
 																<i class="icon-call-end" style="color:darkcyan;"></i>
 																</span>
-																<input type="text" class="form-control" placeholder="Phone No">
+																<input type="text" name="alt_phone" class="form-control" placeholder="Phone No">
 																</div>
 															</div>
 														</div>
