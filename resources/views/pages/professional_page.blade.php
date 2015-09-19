@@ -125,18 +125,18 @@
 						<span class="input-group-addon">
 						<i class="fa fa-university"></i>
 						</span>
-						<select class="form-control" name="education" value="{{ $user->education }}">
-							<option value="B.E.">B.E.</option>
-							<option value="B.A">B.A</option>
-							<option value="B.Arch">B.Arch</option>
-							<option >BCA</option>
-							<option >B.B.A</option>
+						<select class="form-control" name="education" id="parent_selection" value="{{ $user->education }}">
+							<option value="">--Please Select--</option>
+							<option value="BA">B.A</option>
+							<option value="BArch">B.Arch</option>
+							<option value="BCA">BCA</option>
+							<option value="BBA">BBA</option>
 							<option >B.Com</option>
 							<option >B.Ed</option>
 							<option >BDS</option>
 							<option >BHM</option>
 							<option >B.Pharma</option>
-							<option >B.Tech/B.E.</option>
+							<option value="btech">B.Tech/B.E.</option>
 							<option >LLB</option>
 							<option >MBBS</option>
 							<option >Diploma</option>
@@ -155,10 +155,8 @@
 						<span class="input-group-addon">
 						<i class="fa fa-university" style="color:darkcyan;"></i>
 						</span>
-						<select class="form-control" value="{{ $user->branch }}" >
-							<option value="Mustard">Mustard</option>
-							<option value="Ketchup">Ketchup</option>
-							<option value="Relish">Relish</option>
+						<select class="form-control" id="child_selection" value="{{ $user->branch }}" >
+							<option value="">--Please Select--</option>
 						</select>
 					</div>
 								</div>
@@ -175,9 +173,25 @@
 						<i class="fa fa-university " style="color:darkcyan;"></i>
 						</span>
 						<select class="form-control" value="{{ $user->prof_category }}" >
-							<option value="Mustard">Mustard</option>
-							<option value="Ketchup">Ketchup</option>
-							<option value="Relish">Relish</option>
+							<optgroup label="Accounting">
+								<option value="Accounts/Finance/Tax">Accounts/Finance/Tax</option>
+								<option value="Agent">Agent</option>
+								<option value="Analytics & Business Intelligence">Analytics & Business Intelligence</option>
+								</optgroup>
+								<optgroup label="IT Field">
+								<option value="HR/Administration/IR">HR/Administration/IR</option>
+								<option value="IT Software - Client Server">IT Software - Client Server</option>
+								<option value="IT Software - Mainframe">IT Software - Mainframe</option>
+								<option value="IT Software - Middleware">IT Software - Middleware</option>
+								<option value="IT Software - Mobile">IT Software - Mobile</option>
+								<option value="IT Software - Other">IT Software - Other</option>
+								<option value="IT Software - System Programming">IT Software - System Programming</option>
+								<option value="IT Software - Telecom Software">IT Software - Telecom Software</option>
+								<option value="IT Software - Application Programming">IT Software - Application Programming</option>
+								<option value="IT Software - DBA/Datawarehousing">IT Software - DBA/Datawarehousing</option>
+								<option value="IT Software - E-Commerce">IT Software - E-Commerce</option>
+								<option value="IT Software - ERP/CRM">IT Software - ERP/CRM</option>
+								</optgroup>
 						</select>
 					</div>
 								</div>
@@ -260,6 +274,7 @@
 							<option value="Rajasthan">Rajasthan</option>
 							<option value="Sikkim">Sikkim</option>
 							<option value="Tamil Nadu">Tamil Nadu</option>
+							<option value="Telangana">Telangana</option>
 							<option value="Tripura">Tripura</option>
 							<option value="Uttar Pradesh">Uttar Pradesh</option>
 							<option value="Uttaranchal">Uttaranchal</option>

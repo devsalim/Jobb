@@ -316,6 +316,8 @@ body.page-boxed{
 <script src="{{ asset('/assets/admin/pages/scripts/login.js') }}" type="text/javascript"></script>
 
 <script src="{{ asset('/assets/global/plugins/bootstrap-tabdrop/js/bootstrap-tabdrop.js') }}" type="text/javascript"></script>
+<script src="{{ asset('/assets/Edubranch.js') }}" type="text/javascript"></script>
+
 <script>
 jQuery(document).ready(function() {    
    Metronic.init(); // init metronic core components

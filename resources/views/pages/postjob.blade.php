@@ -62,25 +62,23 @@
 							</span>
 							<select class="bs-select form-control" name="prof_category">
 								<optgroup label="Accounting">
-								<option>Accounts/Finance/Tax</option>
-								<option>Agent</option>
-								<option>Analytics & Business Intelligence</option>
+								<option value="Accounts/Finance/Tax">Accounts/Finance/Tax</option>
+								<option value="Agent">Agent</option>
+								<option value="Analytics & Business Intelligence">Analytics & Business Intelligence</option>
 								</optgroup>
 								<optgroup label="IT Field">
-								<option>HR/Administration/IR</option>
-								<option>IT Software - Client Server</option>
-								<option>IT Software - Mainframe</option>
-								<option>IT Software - Middleware</option>
-								<option>IT Software - Mobile</option>
-								<option>IT Software - Other</option>
-								<option>IT Software - System Programming</option>
-								<option>IT Software - Telecom Software</option>
-								<option>IT Software - Application Programming</option>
-								<option>IT Software - DBA/Datawarehousing</option>
-								<option>IT Software - E-Commerce</option>
-								<option>IT Software - ERP/CRM</option>
-								<option>IT Software - ERP/CRM</option>
-								<option>IT Software - ERP/CRM</option>
+								<option value="HR/Administration/IR">HR/Administration/IR</option>
+								<option value="IT Software - Client Server">IT Software - Client Server</option>
+								<option value="IT Software - Mainframe">IT Software - Mainframe</option>
+								<option value="IT Software - Middleware">IT Software - Middleware</option>
+								<option value="IT Software - Mobile">IT Software - Mobile</option>
+								<option value="IT Software - Other">IT Software - Other</option>
+								<option value="IT Software - System Programming">IT Software - System Programming</option>
+								<option value="IT Software - Telecom Software">IT Software - Telecom Software</option>
+								<option value="IT Software - Application Programming">IT Software - Application Programming</option>
+								<option value="IT Software - DBA/Datawarehousing">IT Software - DBA/Datawarehousing</option>
+								<option value="IT Software - E-Commerce">IT Software - E-Commerce</option>
+								<option value="IT Software - ERP/CRM">IT Software - ERP/CRM</option>
 								</optgroup>
 							</select>
 						</div>
@@ -95,8 +93,8 @@
 									<i class="fa fa-university" style="color:darkcyan;"></i>
 								</span>
 								<select name="role" class="form-control" >
-									<option value="AL">Web Developer</option>
-									<option value="WY">Software Developer</option>
+									<option value="Web Developer">Web Developer</option>
+									<option value="Software Developer">Software Developer</option>
 								</select>
 							</div>
 						</div>
