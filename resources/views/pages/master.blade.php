@@ -71,6 +71,9 @@ License: You must have a valid license purchased only from themeforest(the above
 <link href="{{ asset('/assets/global/plugins/ion.rangeslider/css/ion.rangeSlider.css') }}" rel="stylesheet"/>
 <link href="{{ asset('/assets/global/plugins/ion.rangeslider/css/ion.rangeSlider.Metronic.css') }}" rel="stylesheet"/>
 <link href="{{ asset('/assets/custom.css') }}" rel="stylesheet"/>
+<!-- END PAGE LEVEL STYLES -->
+<link href="{{ asset('assets/global/plugins/jquery-ui/jquery-ui.min.css') }}" rel="stylesheet"/>
+
 <style type="css/text" rel="stylesheet">
 body.page-boxed{
   background-attachment: fixed !important;
@@ -319,7 +322,7 @@ body.page-boxed{
 <script src="{{ asset('/assets/global/plugins/bootstrap-tabdrop/js/bootstrap-tabdrop.js') }}" type="text/javascript"></script>
 <script src="{{ asset('/assets/global/plugins/ion.rangeslider/js/ion-rangeSlider/ion.rangeSlider.min.js') }}" type="text/javascript"></script>
 <script src="{{ asset('/assets/admin/pages/scripts/components-jqueryui-sliders.js') }}" type="text/javascript"></script>
-<script src="{{ asset('/assets/Edubranch.js') }}" type="text/javascript"></script>
+
 
 <script>
 jQuery(document).ready(function() {    

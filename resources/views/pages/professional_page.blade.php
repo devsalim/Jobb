@@ -328,10 +328,13 @@
 					<button type="submit" class="btn blue"><i class="fa fa-check"></i> Save</button>
 				</div>
 			</div>
+
 		</form>
 		<!-- END FORM-->
 	</div>
 </div>
+		</div></div></div>
+<script src="{{ asset('/assets/Edubranch.js') }}"></script>
 
 <script>
     jQuery(document).ready(function() {       
