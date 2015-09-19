@@ -170,7 +170,9 @@
 						<div class="form-group">							
 							<label class=" control-label">Experience (in Years)</label>
 							<div class="">
-								<input id="range_1" type="text" name="min_exp" value=""/>
+								<input id="range_1" type="text"  value=""/>
+								<input type="hidden" name="min_exp" class="min-exp">
+								<input type="hidden" name="max_exp" class="max-exp">
 							</div>
 						</div>
 					</div>
@@ -179,7 +181,9 @@
 						<div class="form-group">							
 							<label class=" control-label"><input type="checkbox">&nbsp;Salary (<i class="fa fa-rupee (alias)"></i>/Month)</label>
 							<div class="">
-								<input id="range_7" type="text" name="min_sal" value=""/>
+								<input id="range_7" type="text"  value=""/>
+								<input type="hidden" name="min_sal" class="min-sal">
+								<input type="hidden" name="max_sal" class="max-sal">
 							</div>
 						</div>
 					</div>

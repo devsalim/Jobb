@@ -40,6 +40,7 @@ class JobController extends Controller {
 		$request['individual_id'] = Auth::id();
 		Postjob::create($request->all());
 		return redirect()->intended("master");
+		
 	}
 
 	/**

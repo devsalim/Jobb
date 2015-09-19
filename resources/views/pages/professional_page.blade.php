@@ -220,6 +220,7 @@
 					<div class="slider-value">
 						 Experience: <span id="slider-range-max-amount">{{ $user->experience }}
 						</span>
+						<input type="hidden" class="min-exp">
 					</div>
 								</div>
 							</div>

@@ -1,8 +1,60 @@
 var ComponentsIonSliders = function () {
+// var $range = $(".js-range-slider"),
+//     $result = $(".js-result"),
+//     $getvalues = $(".js-get-values"),
 
+//     from = 0,
+//     to = 0;
+
+// var saveResult = function (data) {
+//     from = data.fromNumber;
+//     to = data.toNumber;
+// };
+
+// var writeResult = function () {
+//     var result = "from: " + from + ", to: " + to;
+//     $result.html(result);
+// };
+
+// $range.ionRangeSlider({
+//     type: "double",
+//     min: 10,
+//     max: 50,
+//     from: from,
+//     to: to,
+//     onLoad: function (data) {
+//         saveResult(data);
+//         writeResult();
+//     },
+//     onChange: saveResult,
+//     onFinish: saveResult
+// });
+
+// $getvalues.on("click", writeResult);
     return {
         //main function to initiate the module
         init: function () {
+                minSal = 0,
+                maxSal = 0,
+                minExp = 0,
+                maxExp = 0;
+                var saveExp = function (data) {
+                    minExp = data.fromNumber;
+                    maxExp = data.toNumber;
+                };
+                 var saveSal = function (data) {
+                    minSal = data.fromNumber;
+                    maxSal = data.toNumber;
+                };
+                var writeExp = function () {
+                    $(".min-exp").val(minExp);
+                    $(".max-exp").val(maxExp);
+                };
+                var writeSalary = function () {
+                    $(".min-sal").val(minSal);
+                    $(".max-sal").val(maxSal);
+                };
+
 
             $("#range_1").ionRangeSlider({
                 min: 0,
@@ -13,7 +65,13 @@ var ComponentsIonSliders = function () {
                 step: 1,
                 postfix: "",
                 prettify: false,
-                hasGrid: true
+                hasGrid: true,
+                onLoad: function (data) {
+                    saveExp(data);
+                    writeExp();
+                },
+                onChange: saveExp,
+                onFinish: writeExp
             });
             $("#range_7").ionRangeSlider({
                 min: 5000,
@@ -22,9 +80,15 @@ var ComponentsIonSliders = function () {
                 to: 10000,
                 type: 'double',
                 step: 1,
-                prefix: "Rs.",
+                postfix: "",
                 prettify: false,
-                hasGrid: true
+                hasGrid: true,
+                onLoad: function (data) {
+                    saveSal(data);
+                    writeSalary();
+                },
+                onChange: saveSal,
+                onFinish: writeSalary
             });    
 
             $("#range_2").ionRangeSlider();
