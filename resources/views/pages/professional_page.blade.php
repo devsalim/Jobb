@@ -122,29 +122,29 @@
 								<div class="form-group">
 									<label>Education</label>
 									<div class="input-group">
-						<span class="input-group-addon">
-						<i class="fa fa-university"></i>
-						</span>
-						<select class="form-control" name="education" id="parent_selection" value="{{ $user->education }}">
-							<option value="">--Please Select--</option>
-							<option value="BA">B.A</option>
-							<option value="BArch">B.Arch</option>
-							<option value="BCA">BCA</option>
-							<option value="BBA">BBA</option>
-							<option >B.Com</option>
-							<option >B.Ed</option>
-							<option >BDS</option>
-							<option >BHM</option>
-							<option >B.Pharma</option>
-							<option value="btech">B.Tech/B.E.</option>
-							<option >LLB</option>
-							<option >MBBS</option>
-							<option >Diploma</option>
-							<option >BVSC</option>
-							<option >10+2</option>
-							<option >10</option>
-						</select>
-					</div>
+										<span class="input-group-addon">
+										<i class="fa fa-university"></i>
+										</span>
+										<select class="form-control" name="education" id="parent_selection" value="{{ $user->education }}">
+											<option value="">--Please Select--</option>
+											<option value="BA">B.A</option>
+											<option value="BArch">B.Arch</option>
+											<option value="BCA">BCA</option>
+											<option value="BBA">BBA</option>
+											<option >B.Com</option>
+											<option >B.Ed</option>
+											<option >BDS</option>
+											<option >BHM</option>
+											<option >B.Pharma</option>
+											<option value="btech">B.Tech/B.E.</option>
+											<option >LLB</option>
+											<option >MBBS</option>
+											<option >Diploma</option>
+											<option >BVSC</option>
+											<option >10+2</option>
+											<option >10</option>
+										</select>
+									</div>
 								</div>
 							</div>
 							<!--/span-->
@@ -152,13 +152,13 @@
 								<div class="form-group">
 									<label>Branch</label>
 									<div class="input-group">
-						<span class="input-group-addon">
-						<i class="fa fa-university" style="color:darkcyan;"></i>
-						</span>
-						<select class="form-control" name="branch" id="child_selection" value="{{ $user->branch }}" >
-							<option value="">--Please Select--</option>
-						</select>
-					</div>
+										<span class="input-group-addon">
+										<i class="fa fa-university" style="color:darkcyan;"></i>
+										</span>
+										<select class="form-control" name="branch" id="child_selection" value="{{ $user->branch }}" >
+											<option value="">--Please Select--</option>
+										</select>
+									</div>
 								</div>
 							</div>
 							<!--/span-->
@@ -329,6 +329,7 @@
 				<!-- END FORM-->
 			</div>
 		</div></div></div>
+<script src="{{ asset('/assets/Edubranch.js') }}"></script>
 
 <script>
     jQuery(document).ready(function() {       
