@@ -52,3 +52,4 @@ class CreatePostjobsTable extends Migration {
 	}
 
 }
+

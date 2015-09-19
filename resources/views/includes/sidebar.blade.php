@@ -6,7 +6,7 @@
     <!-- BEGIN SIDEBAR MENU1 -->
     <ul class="page-sidebar-menu page-sidebar-menu-compact page-sidebar-menu-hover-submenu" data-slide-speed="200"  data-auto-scroll="false" data-slide-speed="200">
       <li >
-        <div class="profile-userpic">
+        <div class="">
           <img src="../../assets/admin/pages/media/profile/profile_user.jpg" class="img-responsive" alt="" style="
 float: none;margin:18px auto;width:60%;height: 60%;-webkit-border-radius: 50% !important;-moz-border-radius: 50% !important;border-radius: 50% !important;">
           @if (Auth::guest())

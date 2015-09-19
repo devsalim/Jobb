@@ -68,7 +68,9 @@ License: You must have a valid license purchased only from themeforest(the above
 <link id="style_color" href="{{ asset('/assets/admin/layout2/css/themes/grey.css') }}" rel="stylesheet" type="text/css"/>
 <link href="{{ asset('/assets/admin/layout2/css/custom.css') }}" rel="stylesheet" type="text/css"/>
 <link href="{{ asset('/assets/admin/pages/css/timeline.css') }}" rel="stylesheet" type="text/css"/>
-
+<link href="{{ asset('/assets/global/plugins/ion.rangeslider/css/ion.rangeSlider.css') }}" rel="stylesheet"/>
+<link href="{{ asset('/assets/global/plugins/ion.rangeslider/css/ion.rangeSlider.Metronic.css') }}" rel="stylesheet"/>
+<link href="{{ asset('/assets/custom.css') }}" rel="stylesheet"/>
 <style type="css/text" rel="stylesheet">
 body.page-boxed{
   background-attachment: fixed !important;
@@ -312,10 +314,11 @@ body.page-boxed{
 <script type="text/javascript" src="{{ asset('/assets/global/plugins/bootstrap-editable/inputs-ext/address/address.js') }}"></script>
 <script type="text/javascript" src="{{ asset('/assets/global/plugins/bootstrap-editable/inputs-ext/wysihtml5/wysihtml5.js') }}"></script>
 <script src="{{ asset('/assets/admin/pages/scripts/form-editable.js') }}"></script>
-
-<script src="{{ asset('/assets/admin/pages/scripts/login.js') }}" type="text/javascript"></script>
+<script src="{{ asset('/assets/admin/pages/scripts/components-ion-sliders.js') }}" type="text/javascript"></script>
 
 <script src="{{ asset('/assets/global/plugins/bootstrap-tabdrop/js/bootstrap-tabdrop.js') }}" type="text/javascript"></script>
+<script src="{{ asset('/assets/global/plugins/ion.rangeslider/js/ion-rangeSlider/ion.rangeSlider.min.js') }}" type="text/javascript"></script>
+<script src="{{ asset('/assets/admin/pages/scripts/components-jqueryui-sliders.js') }}" type="text/javascript"></script>
 <script src="{{ asset('/assets/Edubranch.js') }}" type="text/javascript"></script>
 
 <script>
