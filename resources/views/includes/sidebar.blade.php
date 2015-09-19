@@ -14,9 +14,14 @@ float: none;margin:18px auto;width:60%;height: 60%;-webkit-border-radius: 50% !i
             <h3 class="form-title" style="font-size: 14px;text-align:center;margin-top: -25px;">ABC Company</h3>
             <h3 class="form-title" style="font-size: 14px;text-align:center;margin-top: -25px;">City: California</h3>
           @else
-            <h3 class="form-title" style="font-size: 20px;text-align:center;">{{ Auth::user()->name }}</h3>
-            <h3 class="form-title" style="font-size: 14px;text-align:center;margin-top: -25px;">{{ $user->working_at }}</h3>
-            <h3 class="form-title" style="font-size: 14px;text-align:center;margin-top: -25px;">{{ $user->city }}, {{ $user->state }} 
+            <h3 class="form-title" style="font-size: 20px;text-align:center;">
+              {{ Auth::user()->fname }} {{ Auth::user()->lname }}
+            </h3>
+            <h3 class="form-title" style="font-size: 14px;text-align:center;margin-top: -25px;">
+              {{ $user->working_at }}
+            </h3>
+            <h3 class="form-title" style="font-size: 14px;text-align:center;margin-top: -25px;">
+              {{ $user->city }}, {{ $user->state }} 
             </h3>             
             
           @endif
@@ -206,27 +211,28 @@ float: none;margin:18px auto;width:60%;height: 60%;-webkit-border-radius: 50% !i
         <ul class="sub-menu">
           <li>
             <a class="ajaxify" href="accountsetting.html">
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="icon-user"></i>&nbsp;Account </a>
+              <i class="icon-user"></i>&nbsp;Account 
+            </a>
           </li>
           <li>
             <a class="ajaxify" href="notification.html">
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="icon-bulb"></i>&nbsp;Notification </a>
+              <i class="icon-bulb"></i>&nbsp;Notification 
+            </a>
           </li>
           <li>
             <a class="ajaxify" href="feedback.html">
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="icon-star"></i>&nbsp;Feedback</a>
+              <i class="icon-star"></i>&nbsp;Feedback
+            </a>
           </li>
           
         </ul>
       </li>
       <li class="last">
         <a href="javascript:;">
-        <i class="icon-logout"></i>
-        <span class="title">
-        Log Out </span>
-        <span class="selected">
-        </span>
-        
+          <i class="icon-logout"></i>
+          <span class="title">Log Out</span>
+          <span class="selected">
+        </span>        
         </a>
         <ul class="sub-menu">
           <li>
