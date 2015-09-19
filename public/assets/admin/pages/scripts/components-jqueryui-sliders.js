@@ -50,9 +50,9 @@ var ComponentsjQueryUISliders = function () {
             $("#slider-range-max").slider({
                 isRTL: Metronic.isRTL(),
                 range: "max",
-                min: 0.5,
+                min: 0,
                 max: 15,
-                value:0.5,
+                step: 0.5,
                 slide: function (event, ui) {
                     $("#slider-range-max-amount").text(ui.value);
                 }
