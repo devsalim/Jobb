@@ -32,9 +32,9 @@
 										</span>
 									</div>
 									<div class="post-social-icon-bar">
-										<i class="fa fa-facebook-square post-social-icon" ></i>
-										<i class="fa fa-google-plus-square post-social-icon"></i>
-										<i class="fa fa-linkedin-square post-social-icon" ></i>
+										<i class="fa fa-facebook post-social-icon" ></i>
+										<i class="fa fa-google-plus post-social-icon"></i>
+										<i class="fa fa-linkedin post-social-icon" ></i>
 										<!-- <a href="javascript:;" data-original-title="facebook" class="social-icon social-icon-circle social-icon-color facebook">
 										</a>
 										<a href="javascript:;" data-original-title="Goole Plus" class="social-icon social-icon-circle social-icon-color googleplus">
