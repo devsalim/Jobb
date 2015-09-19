@@ -8,6 +8,7 @@
 					<div class="col-md-11" style="">
 						<div class="timeline">
 
+						@if (count($posts) > 0)
 							@foreach($posts as $post)
 							<!-- TIMELINE ITEM -->
 							<div class="timeline-item">
@@ -34,6 +35,7 @@
 							</div>
 							<!-- END TIMELINE ITEM -->
 							 @endforeach
+						@endif
 
 						</div>
 					</div>			
