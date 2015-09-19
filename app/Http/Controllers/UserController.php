@@ -88,7 +88,7 @@ class UserController extends Controller {
 			$data->city = Input::get('city');
 			$data->linked_skill = Input::get('skill');
 			$data->save();
-			return redirect('/login');
+			return redirect('master');
 		}else{
 			return 'some error occured.'+Input::get('email');
 		}
