@@ -155,7 +155,7 @@
 						<span class="input-group-addon">
 						<i class="fa fa-university" style="color:darkcyan;"></i>
 						</span>
-						<select class="form-control" id="child_selection" value="{{ $user->branch }}" >
+						<select class="form-control" name="branch" id="child_selection" value="{{ $user->branch }}" >
 							<option value="">--Please Select--</option>
 						</select>
 					</div>
