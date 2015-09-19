@@ -6,10 +6,7 @@
     <div class="page-logo">
       <img src="{{ asset('/assets/logo-jobtip.png') }}" class="big-logo" />
       <img src="{{ asset('/assets/logo-small.png') }}" class="small-logo" />
-      <div class="menu-toggler sidebar-toggler">
-        <!-- DOC: Remove the above "hide" to enable the sidebar toggler button on header -->
-        <i class="fa fa-bars"></i>
-      </div>
+      
     </div>
     <!-- END LOGO -->
     <!-- BEGIN RESPONSIVE MENU TOGGLER -->
