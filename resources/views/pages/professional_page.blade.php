@@ -333,7 +333,6 @@
 		<!-- END FORM-->
 	</div>
 </div>
-		</div></div></div>
 <script src="{{ asset('/assets/Edubranch.js') }}"></script>
 
 <script>
