@@ -35,7 +35,8 @@ class PagesController extends Controller {
 	}
 
 	public function myPost(){
-		return view('pages.mypost');
+		$posts = Postjob::where('individual_id', '=', Auth::id())->get();
+		return view('pages.mypost', compact('posts'));
 	}
 
 	public function fillItLater(){

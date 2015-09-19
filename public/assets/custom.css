@@ -57,3 +57,29 @@
     list-style: none;
     padding-left: 0;
 }
+
+/* Post Icon */
+.post-icon-bar{
+    background-color: #eee;
+    padding: 5px 15px 5px 15px;
+    margin: 15px -19px -19px;
+    border-radius: 0 0 4px 4px !important;
+}
+
+.post-icon{
+    font-size: 20px;
+    margin: 5px;
+}
+
+.post-social-icon-bar{
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 35px;
+    padding: 8px 0;
+
+}
+.post-social-icon{
+    font-size: 24px !important;
+    margin: 8px 5px;
+}

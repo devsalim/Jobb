@@ -31,8 +31,30 @@
 										{{ $post->post_title }}, Role: {{ $post->role }}<br>at {{ $post->post_compname }}, City: {{ $post->city }}<br>Exp: {{ $post->min_exp}} Years Pay Scale: {{ $post->min_sal }}<br>Details: {{ $post->job_detail }}
 										</span>
 									</div>
+									<div class="post-social-icon-bar">
+										<i class="fa fa-facebook-square post-social-icon" ></i>
+										<i class="fa fa-google-plus-square post-social-icon"></i>
+										<i class="fa fa-linkedin-square post-social-icon" ></i>
+										<!-- <a href="javascript:;" data-original-title="facebook" class="social-icon social-icon-circle social-icon-color facebook">
+										</a>
+										<a href="javascript:;" data-original-title="Goole Plus" class="social-icon social-icon-circle social-icon-color googleplus">
+										</a>
+										<a href="javascript:;" data-original-title="linkedin" class="social-icon social-icon-circle social-icon-color linkedin">
+										</a> -->
+
+									</div>
+									<div class="post-icon-bar">
+									<i class="icon-star post-icon" ></i>
+									<i class="icon-like post-icon"></i>
+									<i class="glyphicon glyphicon-ok post-icon" ></i>
+									<i class="icon-user-follow post-icon" ></i>
+									<i class="icon-call-end post-icon" ></i>
+									<i class="icon-action-redo post-icon" ></i>
+									</div>
 								</div>
+
 							</div>
+
 							<!-- END TIMELINE ITEM -->
 							 @endforeach
 						@endif
