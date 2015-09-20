@@ -13,13 +13,6 @@ use App\Http\Requests\CreateCorpRequest;
 
 class CorporateController extends Controller {
 
-	public function __construct()
-	{
-	    $this->beforeFilter(function() {
-	        if(Auth::user()->identifier != 2) return redirect('master');
-	    });
-	}
-
 	/**
 	 * Display a listing of the resource.
 	 *

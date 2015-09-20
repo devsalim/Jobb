@@ -13,7 +13,9 @@ class JobController extends Controller {
 	public function __construct()
 	{
 	    $this->beforeFilter(function() {
-	        if(!Auth::check()) return redirect('master');
+	    	if(!Auth::check()){
+	        	return redirect('login');
+	        }
 	    });
 	}
 
