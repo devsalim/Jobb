@@ -1,4 +1,4 @@
-<!-- BEGIN SIDEBAR1 -->
+BEGIN SIDEBAR1 -->
 <div class="page-sidebar-wrapper">
   <!-- DOC: Set data-auto-scroll="false" to disable the sidebar from auto scrolling/focusing -->
   <!-- DOC: Change data-auto-speed="200" to adjust the sub menu slide up/down speed -->
@@ -262,4 +262,4 @@ float: none;margin:18px auto;width:60%;height: 60%;-webkit-border-radius: 50% !i
     <!-- END SIDEBAR MENU1 -->
   </div>
 </div>
-<!-- END SIDEBAR1 -->
+<!-- END SIDEBAR1
