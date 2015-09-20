@@ -3,6 +3,7 @@
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+use DB;
 use Auth;
 use App\Induser;
 use App\User;
