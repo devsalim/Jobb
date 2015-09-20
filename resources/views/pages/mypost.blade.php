@@ -7,7 +7,6 @@
 					<div class="" style=""></div>
 					<div class="col-md-11" style="">
 						<div class="timeline">
-
 						@if (count($posts) > 0)
 							@foreach($posts as $post)
 							<!-- TIMELINE ITEM -->
@@ -35,8 +34,30 @@
 							</div>
 							<!-- END TIMELINE ITEM -->
 							 @endforeach
+							 @else
+							 <div class="timeline-item">
+								<div class="timeline-badge">
+									<img class="timeline-badge-userpic" src="../../assets/admin/pages/media/users/avatar80_1.jpg">
+								</div>
+								<div class="timeline-body">
+									<div class="timeline-body-arrow">
+									</div>
+									<div class="timeline-body-head">
+										<div class="timeline-body-head-caption">
+											<a href="javascript:;" class="timeline-body-title font-blue-madison"></a>
+											<span class="timeline-body-time font-grey-cascade">
+											</span>
+										</div>
+									</div>
+									<div class="timeline-body-content">
+										<span class="font-grey-cascade">
+										Please Go to job post or skills to post
+										</span>
+									</div>
+								</div>
+							</div>
 						@endif
-
+						
 						</div>
 					</div>			
 					<!-- END TIMELINE ITEM -->
