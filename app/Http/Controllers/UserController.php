@@ -13,6 +13,13 @@ use App\Http\Requests\CreateUserRequest;
 
 class UserController extends Controller {
 
+	public function __construct()
+	{
+	    $this->beforeFilter(function() {
+	        if(Auth::user()->identifier != 1) return redirect('master'); // home
+	    });
+	}
+
 	/**
 	 * Display a listing of the resource.
 	 *

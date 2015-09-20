@@ -10,6 +10,13 @@ use Auth;
 
 class JobController extends Controller {
 
+	public function __construct()
+	{
+	    $this->beforeFilter(function() {
+	        if(!Auth::check()) return redirect('master');
+	    });
+	}
+
 	/**
 	 * Display a listing of the resource.
 	 *

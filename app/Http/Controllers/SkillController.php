@@ -4,8 +4,16 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
+use Auth;
 
 class SkillController extends Controller {
+
+	public function __construct()
+	{
+	    $this->beforeFilter(function() {
+	        if(Auth::user()->identifier != 1) return redirect('master');
+	    });
+	}
 
 	/**
 	 * Display a listing of the resource.
