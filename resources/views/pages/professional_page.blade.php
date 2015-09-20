@@ -19,18 +19,6 @@
 				<div class="row">
 					<div class="" style=""></div>
 					<div class="col-md-8" style="">
-						<div class="row-md-10" style=" margin-bottom: 20px;">
-							<div class="profile-userpic user-image" style="margin-top: 20px;">
-								<div class="hover-image">
-									<h3 class="form-title" style="font-size: 14px;margin-left: 33px;">
-										<a class="" style="color: white;text-decoration: blink; font-size:11px;" id="ajax-demo" data-toggle="modal">
-											Upload Image 
-										</a>
-									</h3>
-								</div>
-							</div>	<!-- ajax -->
-							<div id="ajax-modal" class="modal fade" tabindex="-1"></div>
-						</div>
 						<div class="row-md-10">
 							@if (count($errors) > 0)
 							<div class="alert alert-danger">
