@@ -8,7 +8,7 @@
 			<a href="" class="remove"></a>
 		</div>
 	</div>
-	<div class="portlet-body form" style="width: 70%;">
+	<div class="portlet-body form" style="width: 71%;">
 		<!-- BEGIN FORM-->
 		<form action="{{ url('job/store') }}" method="post" class="horizontal-form">
 			<input type="hidden" name="_token" value="{{ csrf_token() }}">

@@ -331,7 +331,6 @@
 			</div>
 		</div></div></div>
 <script src="{{ asset('/assets/Edubranch.js') }}"></script>
-
 <script>
     jQuery(document).ready(function() {       
     // initiate layout and plugins

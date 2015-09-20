@@ -32,9 +32,9 @@
 										</span>
 									</div>
 									<div class="post-social-icon-bar">
-										<i class="fa fa-facebook post-social-icon" ></i>
-										<i class="fa fa-google-plus post-social-icon"></i>
-										<i class="fa fa-linkedin post-social-icon" ></i>
+										<a><i class="fa fa-facebook post-social-icon" ></i></a>
+										<a><i class="fa fa-google-plus post-social-icon"></i></a>
+										<a><i class="fa fa-linkedin post-social-icon" ></i></a>
 										<!-- <a href="javascript:;" data-original-title="facebook" class="social-icon social-icon-circle social-icon-color facebook">
 										</a>
 										<a href="javascript:;" data-original-title="Goole Plus" class="social-icon social-icon-circle social-icon-color googleplus">
@@ -44,12 +44,12 @@
 
 									</div>
 									<div class="post-icon-bar">
-									<i class="icon-star post-icon" ></i>
-									<i class="icon-like post-icon"></i>
-									<i class="glyphicon glyphicon-ok post-icon" ></i>
-									<i class="icon-user-follow post-icon" ></i>
-									<i class="icon-call-end post-icon" ></i>
-									<i class="icon-action-redo post-icon" ></i>
+									<a><i class="icon-star post-icon" ></i></a>
+									<a><i class="icon-like post-icon"></i></a>
+									<a><i class="glyphicon glyphicon-ok post-icon" ></i></a>
+									<a><i class="icon-user-follow post-icon" ></i></a>
+									<a><i class="icon-call-end post-icon" ></i></a>
+									<a><i class="icon-action-redo post-icon" ></i></a>
 									</div>
 								</div>
 

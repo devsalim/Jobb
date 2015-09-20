@@ -4,7 +4,7 @@ var ComponentsjQueryUISliders = function () {
     return {
         //main function to initiate the module
         init: function () {
-            // basic
+            /*basic
             $(".slider-basic").slider(); // basic sliders
 
              // vertical range sliders
@@ -44,9 +44,10 @@ var ComponentsjQueryUISliders = function () {
             });
 
             $("#slider-range-amount").text("$" + $("#slider-range").slider("values", 0) + " - $" + $("#slider-range").slider("values", 1));
-
+            */
+            
             //range max
-
+            
             $("#slider-range-max").slider({
                 isRTL: Metronic.isRTL(),
                 range: "max",
@@ -60,7 +61,7 @@ var ComponentsjQueryUISliders = function () {
 
             $("#slider-range-max-amount").text($("#slider-range-max").slider("value"));
 
-            // range min
+            /*range min
             $("#slider-range-min").slider({
                 isRTL: Metronic.isRTL(),
                 range: "min",
@@ -100,7 +101,7 @@ var ComponentsjQueryUISliders = function () {
             });
 
             $("#slider-range-vertical-amount").text("$" + $("#slider-range-vertical").slider("values", 0) + " - $" + $("#slider-range-vertical").slider("values", 1));
-
+*/
         }
 
     };
