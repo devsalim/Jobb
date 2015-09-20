@@ -19,9 +19,7 @@ class CreateCorpusersTable extends Migration {
             $table->string('firm_name');
             $table->string('firm_email_id')->nullable();
             $table->string('firm_mobile_no')->nullable();
-            $table->string('firm_password');
             $table->string('logo_status')->nullable();
-            $table->string('logo_link')->nullable();
             $table->string('active_profile')->nullable();
             $table->string('verified')->nullable();
             $table->string('about_firm')->nullable();
@@ -32,7 +30,6 @@ class CreateCorpusersTable extends Migration {
             $table->string('website_url')->nullable();
             $table->string('firm_phone')->nullable();
             $table->string('industry')->nullable();
-            $table->string('forgot_pwd_count')->nullable();
             $table->string('role')->nullable();
             $table->string('state')->nullable();
             $table->string('city')->nullable();

@@ -16,8 +16,7 @@ class CreatePostactivitiesTable extends Migration {
 		{
 			$table->increments('id');
 			$table->integer('post_id')->unsigned();
-            $table->integer('induser_id')->unsigned();
-            $table->integer('corpuser_id')->unsigned();
+            $table->integer('user_id')->unsigned();
             $table->string('interest');
             $table->string('Contact_view_status');
             $table->string('Contact_view_DtTime');
@@ -25,8 +24,7 @@ class CreatePostactivitiesTable extends Migration {
             $table->string('Pin_post_status');
             $table->string('Pin_post_dtTime');
             $table->foreign('post_id')->references('id')->on('postjobs');
-            $table->foreign('induser_id')->references('id')->on('indusers');
-            $table->foreign('corpuser_id')->references('id')->on('corpusers');
+            $table->foreign('user_id')->references('id')->on('corpusers');
 			$table->timestamps();
 		});
 	}

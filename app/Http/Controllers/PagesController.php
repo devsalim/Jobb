@@ -25,7 +25,14 @@ class PagesController extends Controller {
 	}
 
 	public function master(){
-	    $user = Induser::where('id', '=', Auth::id())->first();
+		if(Auth::user()->identifier == 1){
+			$user = Induser::where('id', '=', Auth::id())->first();
+		}else if(Auth::user()->identifier == 2){
+			$user = Corpuser::where('id', '=', Auth::id())->first();
+		}else{
+			return redirect('login');
+		}
+	    
 		return View('pages.master', compact('user'));
 	}
 
@@ -40,7 +47,7 @@ class PagesController extends Controller {
 	}
 
 	public function fillItLater(){
-		return redirect('/login');
+		return redirect('login');
 	}
 
 }

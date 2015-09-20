@@ -15,7 +15,8 @@ float: none;margin:18px auto;width:60%;height: 60%;-webkit-border-radius: 50% !i
             <h3 class="form-title" style="font-size: 14px;text-align:center;margin-top: -25px;">City: California</h3>
           @else
             <h3 class="form-title" style="font-size: 20px;text-align:center;">
-              {{ Auth::user()->fname }} {{ Auth::user()->lname }}
+              {{ $user->fname }} {{ $user->lname }} 
+              {{ $user->firm_name }}
             </h3>
             <h3 class="form-title" style="font-size: 14px;text-align:center;margin-top: -25px;">
               {{ $user->working_at }}
@@ -46,6 +47,7 @@ float: none;margin:18px auto;width:60%;height: 60%;-webkit-border-radius: 50% !i
         </span>
         </a>
       </li>
+
       <li >
         <a class="ajaxify" href="job/create">
         <i class=" icon-note"></i>
@@ -55,6 +57,7 @@ float: none;margin:18px auto;width:60%;height: 60%;-webkit-border-radius: 50% !i
         </span>
         </a>
       </li>
+      @if (Auth::user()->identifier == 1)
       <li >
         <a class="ajaxify" href="skill/create">
         <i class=" icon-note"></i>
@@ -73,6 +76,8 @@ float: none;margin:18px auto;width:60%;height: 60%;-webkit-border-radius: 50% !i
         </span>
         </a>
       </li>
+      @endif
+      @if (Auth::user()->identifier == 2)
       <li >
         <a class="ajaxify" href="corporate/create">
         <i class=" icon-note"></i>
@@ -82,7 +87,7 @@ float: none;margin:18px auto;width:60%;height: 60%;-webkit-border-radius: 50% !i
         </span>
         </a>
       </li>
-      
+      @endif
       <li>
         <a href="javascript:;">
         <i class="fa fa-chain (alias)"></i>

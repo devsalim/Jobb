@@ -3,8 +3,10 @@
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+use DB;
 use Auth;
 use App\Corpuser;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use App\Http\Requests\CreateCorpRequest;
@@ -39,9 +41,30 @@ class CorporateController extends Controller {
 	 */
 	public function store(CreateCorpRequest $request)
 	{
-		$request['firm_password'] = bcrypt($request['firm_password']);
-		Corpuser::create($request->all());
-		return redirect('/master');
+		DB::beginTransaction();
+		try{
+			$corpUser = new Corpuser();
+			$corpUser->firm_name = $request['firm_name'];
+			$corpUser->firm_email_id = $request['firm_email_id'];
+			$corpUser->firm_type = $request['firm_type'];
+			$corpUser->save();
+
+			$user = new User();
+			$user->name = $request['firm_name'];
+			$user->email = $request['firm_email_id'];
+			$user->password = bcrypt($request['firm_password']);
+			$user->identifier = 2;
+
+			$corpUser->user()->save($user);
+		}catch(\Exception $e)
+		{
+		   DB::rollback();
+		   throw $e;
+		}
+
+		DB::commit();
+
+		return redirect('login');
 	}
 
 	/**

@@ -16,10 +16,16 @@ class CreateUsersTable extends Migration {
 		{
 			$table->increments('id');
 			$table->string('name');
-			$table->string('email')->unique();
+			$table->string('email');
+			$table->string('mobile');
 			$table->string('password', 60);
+			$table->unsignedInteger('corpuser_id')->nullable();
+			$table->unsignedInteger('induser_id')->nullable();
+			$table->unsignedInteger('identifier');
 			$table->rememberToken();
-			$table->timestamps();
+			$table->timestamps();			
+			$table->foreign('corpuser_id')->references('id')->on('corpusers');
+			$table->foreign('induser_id')->references('id')->on('indusers');
 		});
 	}
 
