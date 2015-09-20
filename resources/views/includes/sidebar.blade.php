@@ -247,4 +247,4 @@ float: none;margin:18px auto;width:60%;height: 60%;-webkit-border-radius: 50% !i
     <!-- END SIDEBAR MENU1 -->
   </div>
 </div>
-<!-- END SIDEBAR1
+<!-- END SIDEBAR1-->
