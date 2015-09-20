@@ -12,7 +12,7 @@ use Auth;
 class PagesController extends Controller {
 
 	public function index(){
-		return View('pages.index');
+		return view('pages.index');
 	}
 
 	public function about(){
@@ -21,19 +21,24 @@ class PagesController extends Controller {
 	}
 
 	public function login(){
-		return view('pages.login');
+		if (Auth::check()) {
+			return redirect('master');
+		}else{
+			return view('pages.login');
+		}
 	}
 
 	public function master(){
-		if(Auth::user()->identifier == 1){
-			$user = Induser::where('id', '=', Auth::id())->first();
-		}else if(Auth::user()->identifier == 2){
-			$user = Corpuser::where('id', '=', Auth::id())->first();
+		if (Auth::check()) {
+			if(Auth::user()->identifier == 1){
+				$user = Induser::where('id', '=', Auth::id())->first();
+			}else if(Auth::user()->identifier == 2){
+				$user = Corpuser::where('id', '=', Auth::id())->first();
+			}
+			return view('pages.master', compact('user'));
 		}else{
 			return redirect('login');
 		}
-	    
-		return View('pages.master', compact('user'));
 	}
 
 	public function home(){
