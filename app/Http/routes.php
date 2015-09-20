@@ -20,12 +20,13 @@ Route::group(array('before' => 'auth'), function(){
 
 	Route::get('individual', 'UserController@index');
 	Route::get('individual/create', 'UserController@create');
-	Route::post('individual/update', 'UserController@update');
+	Route::post('individual/update/{id}', 'UserController@update');
 	Route::post('individual/basicupdate', 'UserController@basicUpdate');
 
 	Route::get('corporate', 'CorporateController@index');
 	Route::get('corporate/create', 'CorporateController@create');
-	Route::post('corporate/update', 'CorporateController@update');
+	Route::post('corporate/update/{id}', 'CorporateController@update');
+	Route::post('corporate/basicupdate', 'CorporateController@basicUpdate');
 
 	Route::get('job', 'JobController@index');
 	Route::get('job/create', 'JobController@create');

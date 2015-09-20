@@ -119,7 +119,8 @@
 	</div>
 	<div class="portlet-body form">
 		<!-- BEGIN FORM-->
-		<form action="{{ url('/individual/update') }}" class="horizontal-form" method="post">
+		<form action="{{ url('/individual/update', Auth::user()->induser_id) }}" class="horizontal-form" method="post">
+			<input type="hidden" name="_token" value="{{ csrf_token() }}">
 			<div class="form-body">
 				<div class="row">
 					<div class="" style=""></div>
@@ -138,18 +139,18 @@
 											<option value="BArch">B.Arch</option>
 											<option value="BCA">BCA</option>
 											<option value="BBA">BBA</option>
-											<option >B.Com</option>
-											<option >B.Ed</option>
-											<option >BDS</option>
-											<option >BHM</option>
-											<option >B.Pharma</option>
+											<option value="B.Com">B.Com</option>
+											<option value="B.Ed">B.Ed</option>
+											<option value="BDS">BDS</option>
+											<option value="BHM">BHM</option>
+											<option value="B.Pharma">B.Pharma</option>
 											<option value="btech">B.Tech/B.E.</option>
-											<option >LLB</option>
-											<option >MBBS</option>
-											<option >Diploma</option>
-											<option >BVSC</option>
-											<option >10+2</option>
-											<option >10</option>
+											<option value="LLB">LLB</option>
+											<option value="MBBS">MBBS</option>
+											<option value="Diploma">Diploma</option>
+											<option value="BVSC">BVSC</option>
+											<option value="10+2">10+2</option>
+											<option value="10">10</option>
 										</select>
 									</div>
 								</div>
@@ -178,7 +179,7 @@
 										<span class="input-group-addon">
 											<i class="fa fa-university " style="color:darkcyan;"></i>
 										</span>
-										<select class="form-control" value="{{ $user->prof_category }}" >
+										<select class="form-control" name="prof_category" value="{{ $user->prof_category }}" >
 											<optgroup label="Accounting">
 												<option value="Accounts/Finance/Tax">Accounts/Finance/Tax</option>
 												<option value="Agent">Agent</option>
@@ -214,7 +215,21 @@
 										<span class="input-group-addon">
 											<i class="fa fa-university" style="color:darkcyan;"></i>
 										</span>
-										<input type="text" class="form-control" value="{{ $user->working_at }}" placeholder="City">
+										<input type="text" class="form-control" value="{{ $user->working_at }}" name="working_at">
+									</div>
+								</div>
+							</div>
+							<!--/span-->
+						</div>
+						<div class="row-md-10">
+							<div class="col-md-6">
+								<div class="form-group">
+									<label>Role</label>
+									<div class="input-group">
+										<span class="input-group-addon">
+											<i class="fa fa-university" style="color:darkcyan;"></i>
+										</span>
+										<input type="text" class="form-control" value="{{ $user->role }}" name="role">
 									</div>
 								</div>
 							</div>
@@ -227,7 +242,7 @@
 									<div id="slider-range-max" class="slider bg-purple"></div>
 									<div class="slider-value">
 										 Experience: <span id="slider-range-max-amount">{{ $user->experience }}</span>
-										<input type="hidden" class="min-exp">
+										<input type="hidden" name="experience" class="min-exp">
 									</div>
 								</div>
 							</div>
@@ -240,7 +255,7 @@
 										<span class="input-group-addon">
 											<i class="fa fa-map-marker" style="color:darkcyan;"></i>
 										</span>
-										<input type="text" class="form-control" value="{{ $user->city }}" placeholder="City">
+										<input type="text" name="city" class="form-control" value="{{ $user->city }}" placeholder="City">
 									</div>
 								</div>
 							</div>
@@ -252,7 +267,7 @@
 										<span class="input-group-addon">
 										<i class="fa fa-map-marker" style="color:darkcyan;"></i>
 										</span>
-										<select class="form-control" value="{{ $user->state }}">
+										<select class="form-control" name="state" value="{{ $user->state }}">
 											<option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
 											<option value="Andhra Pradesh">Andhra Pradesh</option>
 											<option value="Arunachal Pradesh">Arunachal Pradesh</option>
@@ -296,7 +311,7 @@
 							<div class="col-md-12">
 								<div class="form-group">
 									<label>Key Skills</label>
-									<input type="hidden" id="select2_sample5" class="form-control select2" value="{{ $user->linked_skill }}">
+									<input type="hidden" name="linked_skill" id="select2_sample5" class="form-control select2" value="{{ $user->linked_skill }}">
 								</div>
 							</div>
 							<!--/span-->
@@ -312,7 +327,7 @@
 												<i class="icon-paper-clip" style="color: white;"></i>
 												<span class="fileinput-new">Select File </span> 
 												<span class="fileinput-exists">Upload New Resume </span>
-												<input type="file" name="...">
+												<input type="file" name="resume">
 											</span>
 											<br>
 											<span class="fileinput-new">only pdf. & word format</span>

@@ -10,8 +10,8 @@
           <img src="../../assets/admin/pages/media/profile/profile_user.jpg" class="img-responsive" alt="" style="
 float: none;margin:18px auto;width:60%;height: 60%;-webkit-border-radius: 50% !important;-moz-border-radius: 50% !important;border-radius: 50% !important;">
             <h3 class="form-title" style="font-size: 20px;text-align:center;">
-                {{ $user->fname }} {{ $user->lname }}
-                {{ $user->firm_name }}
+              {{ $user->fname }} {{ $user->lname }}
+              {{ $user->firm_name }}
             </h3>
             <h3 class="form-title" style="font-size: 14px;text-align:center;margin-top: -25px;">
               {{ $user->working_at }}

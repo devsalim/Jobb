@@ -100,17 +100,19 @@ class UserController extends Controller {
 	 */
 	public function update($id)
 	{
-		$data = Induser::where('id', '=', Auth::id())->first();
+		$data = Induser::where('id', '=', $id)->first();
 		if($data != null){
 			$data->education = Input::get('education');
 			$data->branch = Input::get('branch');
-			$data->prof_category = Input::get('functional');
+			$data->prof_category = Input::get('prof_category');
 			$data->experience = Input::get('experience');
 			$data->role = Input::get('role');
 			$data->working_at = Input::get('working_at');
 			$data->state = Input::get('state');
 			$data->city = Input::get('city');
-			$data->linked_skill = Input::get('skill');
+			$data->linked_skill = Input::get('linked_skill');
+			$data->profile_pic = Input::get('profile_pic');
+			$data->resume = Input::get('resume');
 			$data->save();
 			return redirect('master');
 		}else{
@@ -130,7 +132,7 @@ class UserController extends Controller {
 	}
 
 	public function basicUpdate(){
-		$data = Induser::where('id', '=', Auth::id())->first();
+		$data = Induser::where('id', '=', Auth::user()->induser_id)->first();
 		if($data != null){
 			$data->fname = Input::get('fname');
 			$data->lname = Input::get('lname');
