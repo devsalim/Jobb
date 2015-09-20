@@ -43,6 +43,7 @@
 									<a><i class="icon-user-follow post-icon" ></i></a>
 									<a><i class="icon-call-end post-icon" ></i></a>
 									<a><i class="icon-action-redo post-icon" ></i></a>
+									<div class="post-type">{{ $post->post_type }}</div>
 									</div>
 								</div>
 

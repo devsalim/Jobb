@@ -46,7 +46,13 @@ class SkillController extends Controller {
 	 */
 	public function store()
 	{
-		//
+		if(Auth::user()->identifier == 1)
+			$request['individual_id'] = Auth::user()->induser_id;
+		else
+			$request['corporate_id'] = Auth::user()->corpuser_id;
+		$request['post_type'] = 'skill';
+		Postjob::create($request->all());
+		return redirect()->intended("master");
 	}
 
 	/**

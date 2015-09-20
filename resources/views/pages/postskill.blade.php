@@ -11,8 +11,18 @@
 	</div>
 	<div class="portlet-body form" style="width: 71%;">
 		<!-- BEGIN FORM-->
-		<form action="{{ url('job/store') }}" method="post" class="horizontal-form">
+		<form action="{{ url('skill/store') }}" method="post" class="horizontal-form">
 			<input type="hidden" name="_token" value="{{ csrf_token() }}">
+			@if (count($errors) > 0)
+				<div class="alert alert-danger">
+					<ul>
+						@foreach ($errors->all() as $error)
+							<li>{{ $error }}</li>
+						@endforeach
+					</ul>
+				</div>
+			@endif
+			<input type="hidden" name="post_type">
 			<div class="form-body">
 				<div class="row">
 					<div class="col-md-12">

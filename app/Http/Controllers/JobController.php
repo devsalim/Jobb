@@ -46,7 +46,11 @@ class JobController extends Controller {
 	 */
 	public function store(CreatePostjobRequest $request)
 	{
-		$request['individual_id'] = Auth::id();
+		if(Auth::user()->identifier == 1)
+			$request['individual_id'] = Auth::user()->induser_id;
+		else
+			$request['corporate_id'] = Auth::user()->corpuser_id;
+		$request['post_type'] = 'job';
 		Postjob::create($request->all());
 		return redirect()->intended("master");
 		

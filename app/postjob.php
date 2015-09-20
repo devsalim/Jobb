@@ -5,6 +5,7 @@ use Illuminate\Database\Eloquent\Model;
 class postjob extends Model {
 
 	protected $fillable =  ['post_title', 
+							'post_type',
 							'post_compname', 
 							'prof_category', 
 							'role', 

@@ -49,11 +49,12 @@
 											<a href="javascript:;" class="timeline-body-title font-blue-madison"></a>
 											<span class="timeline-body-time font-grey-cascade">
 											</span>
+											You haven't posted anything yet. Goto Skill or Job section to post anything.
 										</div>
 									</div>
 									<div class="timeline-body-content">
 										<span class="font-grey-cascade">
-										Please Go to job post or skills to post
+											
 										</span>
 									</div>
 								</div>

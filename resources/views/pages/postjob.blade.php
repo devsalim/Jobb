@@ -22,6 +22,7 @@
 					</ul>
 				</div>
 			@endif
+			<input type="hidden" name="post_type">
 			<div class="form-body">
 				<div class="row">
 					<div class="col-md-12">

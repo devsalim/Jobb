@@ -106,3 +106,20 @@
 .post-social-icon-bar a.linkedin{
     background-color: #0077b5;
 }
+.post-type {
+    float: right;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    padding: 3px;
+    background-color: #67DACF;
+    font-size: 15px;
+    text-transform: capitalize;
+    font-family: sans-serif;
+    font-weight: bold;
+    color: #FFF;
+    border-radius: 15px;
+    width: 65px;
+    text-align: center;
+    margin: 5px;
+}
