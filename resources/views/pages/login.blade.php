@@ -1,6 +1,3 @@
-@extends('login')
-
-@section('content')
 
 <!-- BEGIN LOGIN -->
 <div class="content" style="background: url(assets/admin/pages/img/bg-white-lock.png) repeat;box-shadow: 0px 7px 28px 14px;">
@@ -467,4 +464,3 @@
 	</form>
 </div>
 <!-- END LOGIN -->
-@stop
