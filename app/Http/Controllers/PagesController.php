@@ -31,9 +31,9 @@ class PagesController extends Controller {
 	public function master(){
 		if (Auth::check()) {
 			if(Auth::user()->identifier == 1){
-				$user = Induser::where('id', '=', Auth::id())->first();
+				$user = Induser::where('id', '=', Auth::user()->induser_id)->first();
 			}else if(Auth::user()->identifier == 2){
-				$user = Corpuser::where('id', '=', Auth::id())->first();
+				$user = Corpuser::where('id', '=', Auth::user()->corpuser_id)->first();
 			}
 			return view('pages.master', compact('user'));
 		}else{

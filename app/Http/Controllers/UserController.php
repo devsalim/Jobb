@@ -30,7 +30,7 @@ class UserController extends Controller {
 	 */
 	public function create()
 	{
-		$user = Induser::where('id', '=', Auth::id())->first();
+		$user = Induser::where('id', '=', Auth::user()->induser_id)->first();
 		return view('pages.professional_page', compact('user'));
 	}
 
@@ -112,9 +112,9 @@ class UserController extends Controller {
 			$data->city = Input::get('city');
 			$data->linked_skill = Input::get('skill');
 			$data->save();
-			return redirect('/login');
+			return redirect('master');
 		}else{
-			return 'some error occured.'+Input::get('email');
+			return 'some error occured.';
 		}
 	}
 

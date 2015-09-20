@@ -11,7 +11,11 @@ class SkillController extends Controller {
 	public function __construct()
 	{
 	    $this->beforeFilter(function() {
-	        if(Auth::user()->identifier != 1) return redirect('master');
+	    	if(Auth::check()){
+	        	if(Auth::user()->identifier != 1) return redirect('master');
+	        } else{
+	        	return redirect('login');
+	        }
 	    });
 	}
 

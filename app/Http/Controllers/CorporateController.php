@@ -30,7 +30,7 @@ class CorporateController extends Controller {
 	 */
 	public function create()
 	{
-		$user = Corpuser::where('id', '=', Auth::id())->first();
+		$user = Corpuser::where('id', '=', Auth::user()->corpuser_id)->first();
 		return view('pages.firm_details', compact('user'));
 	}
 

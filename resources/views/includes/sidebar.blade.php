@@ -9,27 +9,16 @@
         <div class="">
           <img src="../../assets/admin/pages/media/profile/profile_user.jpg" class="img-responsive" alt="" style="
 float: none;margin:18px auto;width:60%;height: 60%;-webkit-border-radius: 50% !important;-moz-border-radius: 50% !important;border-radius: 50% !important;">
-          @if (Auth::guest())
-            <h3 class="form-title" style="font-size: 20px;text-align:center;">John Cena</h3>
-            <h3 class="form-title" style="font-size: 14px;text-align:center;margin-top: -25px;">ABC Company</h3>
-            <h3 class="form-title" style="font-size: 14px;text-align:center;margin-top: -25px;">City: California</h3>
-          @else
             <h3 class="form-title" style="font-size: 20px;text-align:center;">
-              @if (Auth::user()->identifier == 1)
-                {{ $user->fname }} {{ $user->lname }} 
-              @endif
-              @if (Auth::user()->identifier == 2)
+                {{ $user->fname }} {{ $user->lname }}
                 {{ $user->firm_name }}
-              @endif
             </h3>
             <h3 class="form-title" style="font-size: 14px;text-align:center;margin-top: -25px;">
               {{ $user->working_at }}
             </h3>
             <h3 class="form-title" style="font-size: 14px;text-align:center;margin-top: -25px;">
               {{ $user->city }}, {{ $user->state }} 
-            </h3>
-          @endif
-          
+            </h3>          
         </div>
       </li>
       <li class="start">
