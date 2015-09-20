@@ -15,16 +15,19 @@ float: none;margin:18px auto;width:60%;height: 60%;-webkit-border-radius: 50% !i
             <h3 class="form-title" style="font-size: 14px;text-align:center;margin-top: -25px;">City: California</h3>
           @else
             <h3 class="form-title" style="font-size: 20px;text-align:center;">
-              {{ $user->fname }} {{ $user->lname }} 
-              {{ $user->firm_name }}
+              @if (Auth::user()->identifier == 1)
+                {{ $user->fname }} {{ $user->lname }} 
+              @endif
+              @if (Auth::user()->identifier == 2)
+                {{ $user->firm_name }}
+              @endif
             </h3>
             <h3 class="form-title" style="font-size: 14px;text-align:center;margin-top: -25px;">
               {{ $user->working_at }}
             </h3>
             <h3 class="form-title" style="font-size: 14px;text-align:center;margin-top: -25px;">
               {{ $user->city }}, {{ $user->state }} 
-            </h3>             
-            
+            </h3>
           @endif
           
         </div>
