@@ -239,24 +239,6 @@ float: none;margin:18px auto;width:60%;height: 60%;-webkit-border-radius: 50% !i
           <span class="selected">
         </span>        
         </a>
-        <ul class="sub-menu">
-          <li>
-            <a class="ajaxify" href="layout_ajax_content_2.html">
-            Ajax Link Sample 1 </a>
-          </li>
-          <li>
-            <a class="ajaxify" href="layout_ajax_content_3.html">
-            Ajax Link Sample 2 </a>
-          </li>
-          <li>
-            <a class="ajaxify" href="layout_ajax_content_2.html">
-            Ajax Link Sample 3 </a>
-          </li>
-          <li>
-            <a class="ajaxify" href="layout_ajax_content_3.html">
-            Ajax Link Sample 4 </a>
-          </li>
-        </ul>
       </li>
     </ul>
     <!-- END SIDEBAR MENU1 -->

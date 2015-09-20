@@ -71,15 +71,38 @@
     margin: 5px;
 }
 
-.post-social-icon-bar{
+.post-social-icon-bar {
     position: absolute;
     right: 0;
     top: 0;
-    width: 35px;
-    padding: 8px 0;
+    width: 50px;
+    padding: 5px;
 }
 
 .post-social-icon{
     font-size: 20px !important;
     margin: 8px 5px;
+}
+
+.post-social-icon-bar a {
+    margin: 5px;
+    background-color: #EEE;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    float: left;
+    text-align: center;
+    color: white;
+}
+
+.post-social-icon-bar a.facebook {
+    background-color: #3b5998;
+}
+
+.post-social-icon-bar a.google-plus{
+    background-color: #dc4e41;
+}
+
+.post-social-icon-bar a.linkedin{
+    background-color: #0077b5;
 }
