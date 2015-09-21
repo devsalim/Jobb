@@ -23,7 +23,10 @@ class CreatePostjobRequest extends Request {
 	{
 		return [
 			'post_title'	=>	'required'
-			
+			'post_compname'	=>  'required'
+			'city'	        =>  'required'
+			'min_exp'       =>  'required'
+			'max_exp'       =>  'required'
 		];
 	}
 

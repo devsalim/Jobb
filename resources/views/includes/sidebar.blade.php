@@ -196,7 +196,7 @@
             </a>
           </li>
           <li>
-            <a class="ajaxify" href="feedback.html">
+            <a class="ajaxify" href="feedback/create">
               <i class="icon-star"></i>&nbsp;Feedback
             </a>
           </li>
