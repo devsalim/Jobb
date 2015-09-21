@@ -198,8 +198,8 @@
 				<div class="row">
 					<div class="col-md-6">
 						<div class="form-group">
-							<label >Key Skills</label>
-							<input id="tags_1" name="linked_skill" type="text" class="form-control tags" value="foo,bar,baz,roffle"/>
+							<label>Key Skills</label>
+							<input type="hidden" name="linked_skill" id="select2_sample5" class="form-control select2" value="">
 						</div>
 					</div>
 					<!--/span-->
@@ -290,6 +290,7 @@ jQuery(document).ready(function() {
    	Metronic.init(); // init metronic core components
 	Layout.init(); // init current layout
 	Demo.init(); // init demo features
+    ComponentsDropdowns.init();
     ComponentsIonSliders.init();
     ComponentsEditors.init();
 });   

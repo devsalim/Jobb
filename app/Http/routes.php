@@ -38,6 +38,16 @@ Route::group(array('before' => 'auth'), function(){
 	Route::post('skill/store', 'SkillController@store');
 	Route::post('skill/update', 'SkillController@update');
 
+	Route::get('invitefriend', 'InvitefriendController@index');
+	Route::get('invitefriend/create', 'InvitefriendController@create');
+	Route::post('invitefriend/store', 'InvitefriendController@store');
+	Route::post('invitefriend/update', 'InvitefriendController@update');
+
+	Route::get('creategroup', 'CreategroupController@index');
+	Route::get('creategroup/create', 'CreategroupController@create');
+	Route::post('creategroup/store', 'CreategroupController@store');
+	Route::post('creategroup/update', 'CreategroupController@update');
+
 });
 
 Route::get('fillitlater', 'PagesController@fillItLater');

@@ -22,7 +22,7 @@
 									<div class="timeline-body-head">
 										<div class="timeline-body-head-caption">
 											<a href="javascript:;" class="timeline-body-title font-blue-madison">{{ $post->post_compname }} {{ $post->post_title }}</a>
-											<span class="timeline-body-time font-grey-cascade">Posted Job At 
+											<span class="timeline-body-time font-grey-cascade">Posted {{ $post->post_type}} At 
 												{{ date('F d, Y', strtotime($post->created_at)) }}
 											</span>
 										</div>

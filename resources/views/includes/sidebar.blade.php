@@ -87,28 +87,11 @@ float: none;margin:18px auto;width:60%;height: 60%;-webkit-border-radius: 50% !i
         Connections</span>
         <span class="selected">
         </span>
-        
         </a>
         <ul class="sub-menu">
           <li>
-            <a class="ajaxify" href="postjobupdate.html">
-            Post Jobs</a>
-          </li>
-          <li>
-            <a class="ajaxify" href="invitefriend.html">
+            <a class="ajaxify" href="invitefriend/create">
             Invite Friends </a>
-          </li>
-          <li>
-            <a class="ajaxify" href="creategroup.html">
-            Create Group</a>
-          </li>
-          <li>
-            <a class="ajaxify" href="professional_page.html">
-            Professional Page </a>
-          </li>
-          <li>
-            <a class="ajaxify" href="firm_detailsupdate.html">
-            Firm Details </a>
           </li>
         </ul>
       </li>
@@ -123,20 +106,8 @@ float: none;margin:18px auto;width:60%;height: 60%;-webkit-border-radius: 50% !i
         </a>
         <ul class="sub-menu">
           <li>
-            <a class="ajaxify" href="layout_ajax_content_2.html">
-            Ajax Link Sample 1 </a>
-          </li>
-          <li>
-            <a class="ajaxify" href="layout_ajax_content_3.html">
-            Ajax Link Sample 2 </a>
-          </li>
-          <li>
-            <a class="ajaxify" href="layout_ajax_content_2.html">
-            Ajax Link Sample 3 </a>
-          </li>
-          <li>
-            <a class="ajaxify" href="layout_ajax_content_3.html">
-            Ajax Link Sample 4 </a>
+            <a class="ajaxify" href="creategroup/create">
+            Create Group</a>
           </li>
         </ul>
       </li>

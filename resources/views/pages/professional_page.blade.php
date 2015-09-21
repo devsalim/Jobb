@@ -184,9 +184,7 @@
 												<option value="IT Software - Other">IT Software - Other</option>
 												<option value="IT Software - System Programming">IT Software - System Programming</option>
 												<option value="IT Software - Telecom Software">IT Software - Telecom Software</option>
-												<option value="IT Software - Application Programming">
-													IT Software - Application Programming
-												</option>
+												<option value="IT Software - Application Programming">IT Software - Application Programming</option>
 												<option value="IT Software - DBA/Datawarehousing">IT Software - DBA/Datawarehousing</option>
 												<option value="IT Software - E-Commerce">IT Software - E-Commerce</option>
 												<option value="IT Software - ERP/CRM">IT Software - ERP/CRM</option>

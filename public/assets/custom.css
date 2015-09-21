@@ -118,7 +118,7 @@
     font-family: sans-serif;
     font-weight: bold;
     color: #FFF;
-    border-radius: 15px;
+    border-radius: 15px !important;
     width: 65px;
     text-align: center;
     margin: 5px;

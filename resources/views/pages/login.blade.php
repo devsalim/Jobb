@@ -1,3 +1,6 @@
+@extends('login')
+
+@section('content')
 
 <!-- BEGIN LOGIN -->
 <div class="content" style="background: url(assets/admin/pages/img/bg-white-lock.png) repeat;box-shadow: 0px 7px 28px 14px;">
@@ -41,7 +44,7 @@
 								</a>
 							</div>
 							<div class="col-md-4 col-xs-4 " style="padding-left:2px;">
-								<a class="btn btn-lg btn-twitter btn-block" style="background: #00aced;color: white;">
+								<a class="btn btn-lg btn-linkedin btn-block" style="background: #00aced;color: white;">
 									<i class="fa fa fa-linkedin"></i><span class="hidden-xs">&nbsp;Linkedin</span>
 								</a>
 							</div>
@@ -464,3 +467,4 @@
 	</form>
 </div>
 <!-- END LOGIN -->
+@stop

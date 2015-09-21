@@ -2,19 +2,17 @@
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+
 use Illuminate\Http\Request;
-use App\Postjob;
-use App\Http\Requests\CreatePostjobRequest;
+use App\Http\Requests\CreateInvitefriendRequest;
 use Auth;
 
-class SkillController extends Controller {
+class InvitefriendController extends Controller {
 
 	public function __construct()
 	{
 	    $this->beforeFilter(function() {
-	    	if(Auth::check()){
-	        	if(Auth::user()->identifier != 1) return redirect('master');
-	        } else{
+	    	if(!Auth::check()){
 	        	return redirect('login');
 	        }
 	    });
@@ -37,7 +35,7 @@ class SkillController extends Controller {
 	 */
 	public function create()
 	{
-		return view('pages.postskill');
+		return view('pages.invitefriend');
 	}
 
 	/**
@@ -45,15 +43,10 @@ class SkillController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function store(CreatePostjobRequest $request)
+	public function store(CreateInvitefriendRequest $request)
 	{
-		if(Auth::user()->identifier == 1)
-			$request['individual_id'] = Auth::user()->induser_id;
-		else
-			$request['corporate_id'] = Auth::user()->corpuser_id;
-		$request['post_type'] = 'skill';
-		Postjob::create($request->all());
-		return redirect()->intended("master");
+		
+		
 	}
 
 	/**
