@@ -6,19 +6,27 @@
     <!-- BEGIN SIDEBAR MENU1 -->
     <ul class="page-sidebar-menu page-sidebar-menu-compact page-sidebar-menu-hover-submenu" data-slide-speed="200"  data-auto-scroll="false" data-slide-speed="200">
       <li >
-        <div class="">
-          <img src="../../assets/admin/pages/media/profile/profile_user.jpg" class="img-responsive" alt="" style="
-float: none;margin:18px auto;width:60%;height: 60%;-webkit-border-radius: 50% !important;-moz-border-radius: 50% !important;border-radius: 50% !important;">
-            <h3 class="form-title" style="font-size: 20px;text-align:center;">
-              {{ $user->fname }} {{ $user->lname }}
-              {{ $user->firm_name }}
-            </h3>
-            <h3 class="form-title" style="font-size: 14px;text-align:center;margin-top: -25px;">
-              {{ $user->working_at }}
-            </h3>
-            <h3 class="form-title" style="font-size: 14px;text-align:center;margin-top: -25px;">
-              {{ $user->city }}, {{ $user->state }} 
-            </h3>          
+        <div class="user-short-detail-container">
+          <div class="profile-userpic user-image">
+            <a id="ajax-demo" href="#portlet-config" data-toggle="modal" class="config">    
+              @if( $user->profile_pic == null )
+                <div class="hover-image">Add</div>
+              @else
+                <div class="hover-image">Change</div>
+                <img src="/img/profile/{{ $user->profile_pic }}">
+              @endif
+            </a>
+          </div>
+          <h3 class="form-title user-name">
+            {{ $user->fname }} {{ $user->lname }}
+            {{ $user->firm_name }}
+          </h3>
+          <h3 class="form-title user-company">
+            {{ $user->working_at }}
+          </h3>
+          <h3 class="form-title user-location">
+            {{ $user->city }}, {{ $user->state }} 
+          </h3>          
         </div>
       </li>
       <li class="start">

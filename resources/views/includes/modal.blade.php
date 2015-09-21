@@ -2,17 +2,19 @@
 <div class="modal fade" id="portlet-config" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
+      {!! Form::open(array('url' => 'user/imgUpload', 'files'=> true)) !!}
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-        <h4 class="modal-title">Modal title</h4>
+        <h4 class="modal-title">Add profile image</h4>
       </div>
-      <div class="modal-body">
-         Widget settings form goes here
+      <div class="modal-body">       
+        {!! Form::file('profile_pic') !!}
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn blue">Save changes</button>
-        <button type="button" class="btn default" data-dismiss="modal">Close</button>
+      <div class="modal-footer">        
+        {!! Form::submit('upload',['class'=>'btn btn-info']) !!}
+        <button type="button" class="btn default" data-dismiss="modal">Cancel</button>
       </div>
+      {!!Form::close() !!}
     </div>
     <!-- /.modal-content -->
   </div>

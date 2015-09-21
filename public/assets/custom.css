@@ -9,27 +9,32 @@
     overflow: hidden;
     width: 136px;
     height: 136px;
-    border-radius: 50% !important ;
+    border-radius: 50% !important;
     margin: auto;
-	border: 1px solid darkcyan;
-    background: url("images/couple.png") !important;
+    background: #fff url("images/couple.png") !important;
+    background-size: 100%;
+    text-align: center;
+    cursor: pointer;
 }
 .hover-image {
     position: absolute;
     left: 0;
     top: 0;
     width: 100%;
-    background: url("images/couple.png") rgba(0, 0, 0, 0.48);
+    background: rgba(0, 0, 0, 0.5);
     height: 100%;
-}
-.hover-image h3 {
-    margin-top: 70%;
+    padding: 45% 0;
 }
  .user-images:hover .hover-images{
         display: block;
 }
 .hover-images{
   display: none;
+}
+.user-image a{
+    color: white;
+    text-decoration: blink; 
+    font-size:14px;
 }
 .profile-userpics {
     position: relative;
@@ -122,4 +127,37 @@
     width: 65px;
     text-align: center;
     margin: 5px;
+}
+
+/* user short detail section in sidebar */
+.user-short-detail-container{
+    text-align: center;
+    color: #EEE;
+}
+
+.user-short-detail-container h3{
+    margin: 0;
+}
+
+.user-short-detail-container .user-name{
+    font-size: 20px;
+    color: #EEE;
+    padding: 3px 4px;
+    margin: 8px 0 0;
+}
+
+.user-short-detail-container .user-company{
+    font-size: 14px;
+    padding: 2px 4px;
+}
+
+.user-short-detail-container .user-location{
+    font-size: 14px;
+    font-size: 14px;
+    padding: 2px 4px;
+    margin-bottom: 15px;
+}
+
+.user-short-detail-container .user-image{
+    margin-top: 25px;
 }

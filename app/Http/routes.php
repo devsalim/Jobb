@@ -48,6 +48,8 @@ Route::group(array('before' => 'auth'), function(){
 	Route::post('creategroup/store', 'CreategroupController@store');
 	Route::post('creategroup/update', 'CreategroupController@update');
 
+	Route::post('user/imgUpload', 'UserController@imgUpload');	
+
 });
 
 Route::get('fillitlater', 'PagesController@fillItLater');

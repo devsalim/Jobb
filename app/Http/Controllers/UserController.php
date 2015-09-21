@@ -5,11 +5,13 @@ use App\Http\Controllers\Controller;
 
 use DB;
 use Auth;
+use Image;
 use App\Induser;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use App\Http\Requests\CreateUserRequest;
+use App\Http\Requests\CreateImgUploadRequest;
 
 class UserController extends Controller {
 
@@ -102,6 +104,16 @@ class UserController extends Controller {
 	{
 		$data = Induser::where('id', '=', $id)->first();
 		if($data != null){
+			if(Input::file('resume') != null){
+				if(Input::file('resume')->isValid()) {
+					$destinationPath = 'resume/';
+					$extension = Input::file('resume')->getClientOriginalExtension();
+					$fileName = rand(11111,99999).'.'.$extension;
+					$path = $destinationPath.$fileName;
+					Input::file('resume')->move($destinationPath, $fileName);
+				}			
+				$data->resume = $fileName;
+			}
 			$data->education = Input::get('education');
 			$data->branch = Input::get('branch');
 			$data->prof_category = Input::get('prof_category');
@@ -111,8 +123,6 @@ class UserController extends Controller {
 			$data->state = Input::get('state');
 			$data->city = Input::get('city');
 			$data->linked_skill = Input::get('linked_skill');
-			$data->profile_pic = Input::get('profile_pic');
-			$data->resume = Input::get('resume');
 			$data->save();
 			return redirect('master');
 		}else{
@@ -139,8 +149,27 @@ class UserController extends Controller {
 			$data->email = Input::get('email');
 			$data->mobile = Input::get('mobile');
 			$data->save();
-			return redirect('/master');
+			return redirect('master');
 		}
+	}
+
+	public function imgUpload(){
+		if(Input::file('profile_pic')->isValid()) {
+			$oldProfilePic = Induser::where('id', '=', Auth::user()->induser_id)->pluck('profile_pic');
+			$destinationPath = 'img/profile/';
+			$extension = Input::file('profile_pic')->getClientOriginalExtension();
+			$fileName = rand(11111,99999).'.'.$extension;
+			$path = $destinationPath.$fileName;
+			Input::file('profile_pic')->move($destinationPath, $fileName);
+			Image::make($path)->resize(200, 200)->save($path);
+			Induser::where('id', '=', Auth::user()->induser_id)->update(['profile_pic' => $fileName]);
+
+			if($oldProfilePic != null){
+				\File::delete($destinationPath.$oldProfilePic);
+			}
+
+			return redirect('master');
+	    }
 	}
 
 }

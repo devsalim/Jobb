@@ -107,7 +107,7 @@
 	</div>
 	<div class="portlet-body form">
 		<!-- BEGIN FORM-->
-		<form action="{{ url('/individual/update', Auth::user()->induser_id) }}" class="horizontal-form" method="post">
+		<form action="{{ url('/individual/update', Auth::user()->induser_id) }}" class="horizontal-form" method="post" enctype="multipart/form-data">
 			<input type="hidden" name="_token" value="{{ csrf_token() }}">
 			<div class="form-body">
 				<div class="row">
