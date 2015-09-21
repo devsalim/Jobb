@@ -20,8 +20,8 @@
 						<div class="portlet light" style="background-color: transparent;">
 							<div class="row social">
 								<div class="col-md-4 col-xs-4 " style="padding-right:2px;">
-								<a  class="btn btn-lg btn-facebook btn-block" href="" style="background: #3b5998;color: white;border-radius: 25px !important;height: 35px;">
-								<i class="fa fa-facebook "></i><span class="hidden-xs" style="font-size:14px"> &nbsp;Facebook</span></a>	
+									<a  class="btn btn-lg btn-facebook btn-block" href="" style="background: #3b5998;color: white;border-radius: 25px !important;height: 35px;">
+									<i class="fa fa-facebook "></i><span class="hidden-xs" style="font-size:14px"> &nbsp;Facebook</span></a>	
 								</div>
 								<div class="col-md-4 col-xs-4 " style="padding-left:2px;padding-right:2px;">
 									  <a  class="btn btn-lg btn-google btn-block" href="" style="background: #c32f10;color: white;border-radius: 25px !important;height: 35px;">

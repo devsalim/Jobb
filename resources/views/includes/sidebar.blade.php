@@ -188,7 +188,7 @@ float: none;margin:18px auto;width:60%;height: 60%;-webkit-border-radius: 50% !i
             </a>
           </li>
           <li>
-            <a class="ajaxify" href="feedback.html">
+            <a class="ajaxify" href="feedback/create">
               <i class="icon-star"></i>&nbsp;Feedback
             </a>
           </li>

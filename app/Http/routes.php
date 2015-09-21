@@ -48,6 +48,11 @@ Route::group(array('before' => 'auth'), function(){
 	Route::post('creategroup/store', 'CreategroupController@store');
 	Route::post('creategroup/update', 'CreategroupController@update');
 
+	Route::get('feedback', 'FeedbackController@index');
+	Route::get('feedback/create', 'FeedbackController@create');
+	Route::post('feedback/store', 'FeedbackController@store');
+	Route::post('feedback/update', 'FeedbackController@update');
+
 });
 
 Route::get('fillitlater', 'PagesController@fillItLater');
