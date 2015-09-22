@@ -4,10 +4,13 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
-use App\Http\Requests\CreateInvitefriendRequest;
+use App\Http\Requests\CreateConnectionsRequest;
+use Illuminate\Support\Facades\Input;
+use App\Induser;
+
 use Auth;
 
-class InvitefriendController extends Controller {
+class ConnectionsController extends Controller {
 
 	public function __construct()
 	{
@@ -35,7 +38,7 @@ class InvitefriendController extends Controller {
 	 */
 	public function create()
 	{
-		return view('pages.invitefriend');
+		return view('pages.connections');
 	}
 
 	/**
@@ -43,7 +46,7 @@ class InvitefriendController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function store(CreateInvitefriendRequest $request)
+	public function store()
 	{
 		
 		
@@ -93,4 +96,15 @@ class InvitefriendController extends Controller {
 		//
 	}
 
+	public function searchConnections()
+	{
+		
+		$email = Input::get('keywords');
+		$users= Induser::where('email', '=', $email)->get();
+		// return View::make('pages.searchUsers')->('users',$users);
+		return view('pages.searchUsers', compact('users'));	
+
+		 // return $users;
+		 
+	}
 }

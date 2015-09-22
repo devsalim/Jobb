@@ -38,10 +38,10 @@ Route::group(array('before' => 'auth'), function(){
 	Route::post('skill/store', 'SkillController@store');
 	Route::post('skill/update', 'SkillController@update');
 
-	Route::get('invitefriend', 'InvitefriendController@index');
-	Route::get('invitefriend/create', 'InvitefriendController@create');
-	Route::post('invitefriend/store', 'InvitefriendController@store');
-	Route::post('invitefriend/update', 'InvitefriendController@update');
+	Route::get('connections', 'ConnectionsController@index');
+	Route::get('connections/create', 'ConnectionsController@create');
+	Route::post('connections/store', 'ConnectionsController@store');
+	Route::post('connections/update', 'ConnectionsController@update');
 
 	Route::get('creategroup', 'CreategroupController@index');
 	Route::get('creategroup/create', 'CreategroupController@create');
@@ -55,6 +55,7 @@ Route::group(array('before' => 'auth'), function(){
 	Route::post('feedback/store', 'FeedbackController@store');
 	Route::post('feedback/update', 'FeedbackController@update');
 
+	Route::post('searchConnections', 'ConnectionsController@searchConnections');	
 });
 
 Route::get('fillitlater', 'PagesController@fillItLater');

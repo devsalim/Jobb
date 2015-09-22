@@ -3,8 +3,8 @@
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Postjob;
-use App\Http\Requests\CreatePostjobRequest;
+// use App\Postjob;
+// use App\Http\Requests\CreatePostjobRequest;
 use Auth;
 
 class SkillController extends Controller {
@@ -45,7 +45,7 @@ class SkillController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function store(CreatePostjobRequest $request)
+	public function store()
 	{
 		if(Auth::user()->identifier == 1)
 			$request['individual_id'] = Auth::user()->induser_id;

@@ -98,7 +98,7 @@
         </a>
         <ul class="sub-menu">
           <li>
-            <a class="ajaxify" href="invitefriend/create">
+            <a class="ajaxify" href="connections/create">
             Invite Friends </a>
           </li>
         </ul>

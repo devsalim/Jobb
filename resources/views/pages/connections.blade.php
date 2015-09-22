@@ -13,7 +13,8 @@
 	</div>
 	<div class="portlet-body form" style="width: 70%;">
 		<!-- BEGIN FORM-->
-		<form action="" class="horizontal-form" method="post">
+		<form action="searchConnections" class="horizontal-form" method="post">
+			<input type="hidden" name="_token" value="{{ csrf_token() }}">
 			<div class="form-body">
 				<div class="row">
 					<div class="col-md-8" style="">
@@ -36,7 +37,11 @@
 						<div class="form-group">					
 							<div class="input-icon right">
 								<i class="fa fa-search" style="color: darkcyan;"></i>
-								<input type="text" class="form-control input-circle" placeholder="Search" style="border: 1px solid darkcyan;">
+								<input type="text" name="keywords" id="search-input" onkeydown="down()" onkeyup="up()" class="form-control input-circle" placeholder="Search" style="border: 1px solid darkcyan;">
+								<input type="submit" value="search">
+							</div>
+							<div class="col-md-5" id="search-results">
+
 							</div>
 						</div>					
 						<div class="form-group form-md-line-input" style="margin-left: -11px;">
@@ -71,7 +76,33 @@
 	</div>
 </div>
 									
+<script type="text/javascript">
 
+var timer;
+
+function up()
+{
+	timer=setTimeout(function()
+		{
+			var keywords = $('#search-input').val();
+			if(keywords.length>0)
+			{
+				$.post('http://jobtip.dev/searchConnections', {keywords: keywords}, function(markup)
+				{
+					$('#search-results').html(markup);
+				});
+			}
+		}, 500);
+	alert("Nahi chala");
+}
+
+function down()
+{
+	clearTimeout(timer);
+}
+
+
+</script>
 
 
 
