@@ -42,7 +42,7 @@ class PagesController extends Controller {
 	}
 
 	public function home(){
-		$posts = Postjob::all();
+		$posts = Postjob::orderBy('id', 'desc')->get();
 		return view('pages.home', compact('posts'));
 	}
 

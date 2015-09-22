@@ -38,36 +38,10 @@
 							<div class="input-icon right">
 								<i class="fa fa-search" style="color: darkcyan;"></i>
 								<input type="text" name="keywords" id="search-input" onkeydown="down()" onkeyup="up()" class="form-control input-circle" placeholder="Search" style="border: 1px solid darkcyan;">
-								<input type="submit" value="search">
-							</div>
-							<div class="col-md-5" id="search-results">
-
-							</div>
-						</div>					
-						<div class="form-group form-md-line-input" style="margin-left: -11px;">
-							<div class="input-group">
-								<div class="input-group-control">
-									<label class="col-md-6 control-label" for="form_control_1" >vickyvishalcse@gmail.com</label>
-								</div>
-								<span class="input-group-btn btn-right">
-									<button type="button" class="btn green-haze dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-									<i class="fa fa-check" style="font-size: 12px;background-color: white;color: black;border-radius: 10px;width: 20px;height: 20px;padding-top: 3px;"></i>&nbsp;Add 
-									</button>
-								</span>
-							</div>
+							</div>	
 						</div>
-						<div class="form-group form-md-line-input" style="margin-left: -11px;">
-							<div class="input-group">
-								<div class="input-group-control">
-									<label class="col-md-6 control-label" for="form_control_1" style="font-size: 18px;">Vicky Vishal</label>
-								</div>
-								<span class="input-group-btn btn-right">
-									<button type="button" class="btn green-haze dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-										<i class="glyphicon glyphicon-trash"style="padding-right: 1px;font-size: 12px;background-color: white;color: black;border-radius: 10px;width: 20px;height: 20px;padding-top: 3px;" ></i>&nbsp;Remove
-									</button>
-								</span>
-							</div>
-						</div>		
+						<div class="col-md-12" id="search-results">
+						</div>			
 					</div>
 				</div>
 			</div>
@@ -77,6 +51,11 @@
 </div>
 									
 <script type="text/javascript">
+$.ajaxSetup({
+	headers: {
+		'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+	        }
+});
 
 var timer;
 
@@ -93,18 +72,10 @@ function up()
 				});
 			}
 		}, 500);
-	alert("Nahi chala");
 }
 
 function down()
 {
 	clearTimeout(timer);
 }
-
-
 </script>
-
-
-
-
-
