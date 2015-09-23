@@ -2085,7 +2085,7 @@ Page content
   background-color: #fff;
 }
 .page-container-bg-solid .page-content {
-  background: transparent;
+  background: white;
 }
 .page-full-width .page-content {
   margin-left: 0px !important;
@@ -2099,7 +2099,7 @@ Page content
     width: 100%;
   }
   .page-content-wrapper .page-content {
-    margin-left: 175px;
+    margin-left: 195px;
     margin-top: 0px;
     min-height: 600px;
     padding: 25px 20px 10px 20px;

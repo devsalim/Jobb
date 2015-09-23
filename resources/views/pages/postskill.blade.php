@@ -1,7 +1,7 @@
 
 <div class="portlet light">
 	<div class="portlet-title">									
-		<label style="font-size: 19px;text-align: center;margin: auto;width: 75%;border-bottom:2px solid darkred;">Do you like to Post your Skill?<br>Post Skill for FREE!!</label>									
+		<label style="font-size: 19px;text-align: center;margin: auto;width: 75%;border-bottom:2px solid darkred;">Do you like to Post your Skill?<br>Post Skill for FREE!!</label>										
 		<div class="tools">
 			<a href="" class="collapse"></a>
 			<a href="#portlet-config" data-toggle="modal" class="config"></a>
@@ -9,7 +9,7 @@
 			<a href="" class="remove"></a>
 		</div>
 	</div>
-	<div class="portlet-body form" style="width: 71%;">
+	<div class="portlet-body form" style="width: 80%;">
 		<!-- BEGIN FORM-->
 		<form action="{{ url('skill/store') }}" method="post" class="horizontal-form">
 			<input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -25,18 +25,24 @@
 			<input type="hidden" name="post_type">
 			<div class="form-body">
 				<div class="row">
-					<div class="col-md-12">
+					<div class="col-md-2"></div>
+					<div class="col-md-7">
 						<div class="form-group">
-						
-							<label>Skill Title</label>
-								
-							<div class="input-group">
-							
-					<span class="input-group-addon">
-					<i class="fa fa-user" style="color:darkcyan;"></i>
-					</span>
-					<input type="text" name="post_title" class="form-control" placeholder="Job Title">
+							<label>You Can Tag Friends</label>
+							<input type="hidden" name="linked_skill" id="select2_sample7" class="form-control select2" value="All">
+						</div>
+					</div>
 				</div>
+				<div class="row">
+					<div class="col-md-12">
+						<div class="form-group">			
+							<label>Skill Title</label>			
+							<div class="input-group">
+								<span class="input-group-addon">
+								<i class="fa fa-user" style="color:darkcyan;"></i>
+								</span>
+								<input type="text" name="post_title" class="form-control" placeholder="Job Title">
+							</div>
 						</div>
 					</div>
 				</div>
@@ -173,8 +179,6 @@
 					<!--/span-->
 					<div class="col-md-6">
 						<div class="form-group">
-							
-							
 							<label class=" control-label"><input type="checkbox">&nbsp;Salary (<i class="fa fa-rupee (alias)"></i>/Month)</label>
 							<div class="">
 								<input id="range_7" type="text"  value=""/>
@@ -208,7 +212,7 @@
 							<label>Post Duration</label>
 							<div class="input-group">
 									<span class="input-group-addon">
-									<i class="fa fa-university"></i>
+									<i class="icon-clock" style=" color: darkcyan;"></i>
 									</span>
 									<select class="form-control" name="post_duration">	
 										<option value="3">3 Days</option>

@@ -1,8 +1,8 @@
-<div class="portlet light bordered">
+<div class="portlet light bordered" style="border: 1px solid #e1e1e1 !important;">
 	<div class="portlet-title">
 		<div class="caption">
 			<i class=""></i>
-			<span class="caption-subject font-blue-hoki bold uppercase">Profile Detail</span>
+			<span class="caption-subject font-blue-hoki bold uppercase">Profile Details</span>
 		</div>
 		<div class="tools">
 			<a href="" class="collapse"></a>
@@ -92,7 +92,7 @@
 	</div>
 </div>
 
-<div class="portlet light bordered">
+<div class="portlet light bordered" style="border: 1px solid #e1e1e1 !important;">
 	<div class="portlet-title">
 		<div class="caption">
 			<i class=""></i>
@@ -228,7 +228,7 @@
 									<div id="slider-range-max" class="slider bg-purple"></div>
 									<div class="slider-value">
 										 Experience: <span id="slider-range-max-amount">{{ $user->experience }}</span>
-										<input type="hidden" name="experience" class="min-exp">
+										<input type="hidden" name="experience" class="exp">
 									</div>
 								</div>
 							</div>

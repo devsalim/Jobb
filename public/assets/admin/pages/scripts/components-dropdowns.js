@@ -51,7 +51,10 @@ var ComponentsDropdowns = function () {
         $("#select2_sample5").select2({
             tags: ["red", "green", "blue", "yellow", "pink"]
         });
-
+        //Tag for post job
+         $("#select2_sample7").select2({
+            tags: ["red", "green", "blue", "yellow", "pink"]
+        });
 
         function movieFormatResult(movie) {
             var markup = "<table class='movie-result'><tr>";

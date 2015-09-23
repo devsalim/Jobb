@@ -128,48 +128,48 @@
 			<!-- /.col-md-6 -->
 		</div>
 
-					@if (count($errors) > 0)
-						<div class="alert alert-danger">
-							<ul>
-								@foreach ($errors->all() as $error)
-									<li>{{ $error }}</li>
-								@endforeach
-							</ul>
-						</div>
-					@endif
-					<input type="hidden" name="_token" value="{{ csrf_token() }}">
-					<div class="form-group">
-						<div class="input-icon right">
-							<i class="fa"></i>
-							<div class="input-group margin-top-10">
-								<span class="input-group-addon"><i class="icon-envelope"></i></span>	
-								<input type="email" name="email" class="form-control" value="{{ old('email') }}" placeholder="Email Id">
-							</div>
-						</div>
+			@if (count($errors) > 0)
+				<div class="alert alert-danger">
+					<ul>
+						@foreach ($errors->all() as $error)
+							<li>{{ $error }}</li>
+						@endforeach
+					</ul>
+				</div>
+			@endif
+			<input type="hidden" name="_token" value="{{ csrf_token() }}">
+			<div class="form-group">
+				<div class="input-icon right">
+					<i class="fa"></i>
+					<div class="input-group margin-top-10">
+						<span class="input-group-addon"><i class="icon-envelope"></i></span>	
+						<input type="email" name="email" class="form-control" value="{{ old('email') }}" placeholder="Email Id">
 					</div>
-					<div class="form-group">
-						<div class="input-icon right">
-							<i class="fa"></i>
-							<div class="input-group margin-top-15">
-								<span class="input-group-addon"><i class="icon-lock-open"></i></span>
-								<input type="password" name="password" class="form-control" placeholder="Password">
-							</div>
-						</div>
-					</div>										
-					<div class="form-actions" style="margin-top: 14px;border-bottom: 0px;">																
-						<div class="form-group" style="margin-left: -4px; margin-bottom: -15px;">
-							<div class="input-group">
-								<label style="font-size: 13px;">
-								<input type="checkbox" name="remember">Remember Me</label>
-							</div>
-						</div>
-						<br><br>
-						<button type="submit" class="btn btn-default pull-right" style="margin-left: 0px; ">
-						Login <i class="m-icon-swapright"></i>
-						</button>
-						<a href="javascript:;" id="forget-password-corp" class="forget-password" style="font-size: 14px;/* color: gray; */text-decoration: initial;">Forgot Password ?
-						</a>
-					</div>			
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="input-icon right">
+					<i class="fa"></i>
+					<div class="input-group margin-top-15">
+						<span class="input-group-addon"><i class="icon-lock-open"></i></span>
+						<input type="password" name="password" class="form-control" placeholder="Password">
+					</div>
+				</div>
+			</div>										
+			<div class="form-actions" style="margin-top: 14px;border-bottom: 0px;">																
+				<div class="form-group" style="margin-left: -4px; margin-bottom: -15px;">
+					<div class="input-group">
+						<label style="font-size: 13px;">
+						<input type="checkbox" name="remember">Remember Me</label>
+					</div>
+				</div>
+				<br><br>
+				<button type="submit" class="btn btn-default pull-right" style="margin-left: 0px; ">
+				Login <i class="m-icon-swapright"></i>
+				</button>
+				<a href="javascript:;" id="forget-password-corp" class="forget-password" style="font-size: 14px;/* color: gray; */text-decoration: initial;">Forgot Password ?
+				</a>
+			</div>			
 			<div class="create-account" style="margin-top: 20px;background-color: darksalmon;" >
 				<p style="color:black;">
 					Not A Member?&nbsp;&nbsp;<a href="javascript:;" id="register-btn-corp" class="uppercase" style="color: floralwhite;font-size: 15px;font-weight: 600;"> Register Now&nbsp;!</a> 
@@ -227,7 +227,6 @@
 			</div>
 			<!-- /.col-md-6 -->
 		</div>
-		
 		<div class="login-options" >
 			<div class="row social">
 				<div class="col-md-4 col-xs-4 " style="padding-right:2px;">
@@ -280,7 +279,7 @@
 					<span class="input-group-addon">
 						<i class="icon-envelope"></i>
 					</span>	
-					<input type="email" pattern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?" name="email" class="form-control" placeholder="Email Id or Mobile No" value="{{ old('email') }}" />
+					<input type="email" pattern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?" name="email" class="form-control" placeholder="Email Id" value="{{ old('email') }}" />
 				</div>
 			</div>
 		</div>
@@ -305,8 +304,7 @@
 					<input type="password" id="register_password" name="password" class="form-control" placeholder="Password">
 				</div>
 			</div>
-		</div>
-				
+		</div>			
 		<div class="form-group">
 			<div class="input-icon right">
 				<i class="fa"></i>
@@ -317,26 +315,13 @@
 					<input type="password" name="rpassword" class="form-control" placeholder="Re-Type Password">
 				</div>
 			</div>
-		</div>
-
-		<div class="profile-userpic user-image" style="margin-top: 20px;">
-		
-			
-		<div class="hover-image"><h3 class="form-title" style="font-size: 14px;"><a class="" style="color: white;text-decoration: blink; font-size:11px;" id="ajax-demo" data-toggle="modal">Upload Image </a></h3></div>
-		</div>
-
-		<!-- ajax -->
-		<div id="ajax-modal" class="modal fade" tabindex="-1"></div>				
-												
+		</div>														
 		<div class="form-group margin-top-20 margin-bottom-20">
 			<label class="check" style="font-size: 13px;">
-			<input type="checkbox" name="tnc"/> I agree to the <a href="javascript:;">
-			Terms of Service </a>
-			& <a href="javascript:;">
-			Privacy Policy </a>
+				<input type="checkbox" name="tnc"/> I agree to the 
+				<a href="javascript:;">Terms of Service </a>& <a href="javascript:;">Privacy Policy </a>
 			</label>
-			<div id="register_tnc_error">
-			</div>
+			<div id="register_tnc_error"></div>
 		</div>									
 		<div class="form-actions">
 			<label id="register-back-btn" style="margin-left: 39px;cursor: pointer;">Back</label>
@@ -345,11 +330,9 @@
 			</button>
 		</div>
 	</form>
-	<!-- END REGISTRATION FORM -->
+	<!-- END INDIVIDUAL REGISTRATION FORM -->
 	
-	<!-- Start Upload Profile FORM -->	
-	<!-- END Upload Profile FORM -->
-	
+	<!-- Start CORPORATE REGISTRATION FORM -->
 	<form class="register-corporate-form" action="{{ url('/corporate/store') }}" method="post">
 		<input type="hidden" name="_token" value="{{ csrf_token() }}">
 		<div class="login-option" style=" margin-right: 26px;">
@@ -416,50 +399,37 @@
 					</div>
 				</div>
 			</div>
-
-				<div class="form-group">
-					<div class="col-md-4"></div>
-					<label class="control-label col-md-6" style="">Firm Type</label>
-					<div class="col-md-12">
-							<div class="md-radio-inline" style="margin-left:22px;">
-								<div class="md-radio">
-									<input type="radio" id="radio6" name="firm_type" value="company" class="md-radiobtn">
-									<label for="radio6" style="">
-									<span></span>
-									<span class="check"></span>
-									<span class="box"></span>
-									Company </label>
-								</div>
-								<div class="md-radio">
-									<input type="radio" id="radio7" name="firm_type" value="consultancy" class="md-radiobtn" >
-									<label for="radio7" style="">
-									<span></span>
-									<span class="check"></span>
-									<span class="box"></span>
-									Consultancy </label>
-								</div>
-							</div>	
-							<div id="radio_error"></div>					<!-- /input-group -->
-					</div>
-					
+			<div class="form-group">
+				<div class="col-md-4"></div>
+				<label class="control-label col-md-6" style="">Firm Type</label>
+				<div class="col-md-12">
+					<div class="md-radio-inline" style="margin-left:22px;">
+						<div class="md-radio">
+							<input type="radio" id="radio6" name="firm_type" value="company" class="md-radiobtn">
+							<label for="radio6" style="">
+							<span></span>
+							<span class="check"></span>
+							<span class="box"></span>
+							Company </label>
+						</div>
+						<div class="md-radio">
+							<input type="radio" id="radio7" name="firm_type" value="consultancy" class="md-radiobtn" >
+							<label for="radio7" style="">
+							<span></span>
+							<span class="check"></span>
+							<span class="box"></span>
+							Consultancy </label>
+						</div>
+					</div>						<!-- /input-group -->
 				</div>
-
-			
-			<div class="profile-userpic user-image" style="margin-top: 20px;">
-				<div class="hover-image">
-					<h3 class="form-title" style="font-size: 14px;">
-						<a class="" style="color: white;text-decoration: blink; font-size:11px;" id="ajax-demo" data-toggle="modal">Upload Image </a>
-					</h3>
-				</div>
-			</div>	
+			</div>
 			<div class="form-group margin-top-20 margin-bottom-20">
 				<label class="check" style="font-size: 13px;">
-					<input type="checkbox" name="ctnc"/> I agree to the <a href="javascript:;">Terms of Service </a>
-					& <a href="javascript:;">Privacy Policy </a>
+					<input type="checkbox" name="ctnc"/> I agree to the
+					 <a href="javascript:;">Terms of Service </a>& <a href="javascript:;">Privacy Policy </a>
 				</label>
 				<div id="register_ctnc_error"></div>
 			</div>
-		
 			<label id="register-back-btn3" style="margin-left: 39px;cursor: pointer;">Back</label>
 			<button type="submit" class="btn btn-default pull-right">
 				Submit&nbsp;<i class="m-icon-swapright"></i>

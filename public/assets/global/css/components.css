@@ -4963,7 +4963,7 @@ Portlets
   background-color: #fff;
 }
 .portlet.light.bordered {
-  border: 1px solid #e1e1e1 !important;
+  border: 0px solid #e1e1e1 !important;
 }
 .portlet.light.bordered > .portlet-title {
   border-bottom: 1px solid #eee;

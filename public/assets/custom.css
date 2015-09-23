@@ -161,3 +161,9 @@
 .user-short-detail-container .user-image{
     margin-top: 25px;
 }
+
+/* page border */
+
+.content-border{
+    border: 1px solid #e1e1e1 !important;
+}

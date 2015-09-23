@@ -29,7 +29,7 @@
 									</div>
 									<div class="timeline-body-content">
 										<span class="font-grey-cascade">
-										{{ $post->post_title }}, Role: {{ $post->role }}<br>at {{ $post->post_compname }}, City: {{ $post->city }}<br>Exp: {{ $post->min_exp}} Years Pay Scale: {{ $post->min_sal }}<br>Details: {{ $post->job_detail }}
+										{{ $post->post_title }}, Role: {{ $post->role }}<br>at {{ $post->post_compname }}, City: {{ $post->city }}<br>Exp: {{ $post->min_exp}}-{{ $post->max_exp}} Years Pay Scale:&nbsp;<i class="fa fa-rupee (alias)"></i> {{ $post->min_sal }}-{{ $post->max_sal }}<br>Details: {{ $post->job_detail }}
 										</span>
 									</div>
 								</div>
@@ -49,7 +49,7 @@
 											<a href="javascript:;" class="timeline-body-title font-blue-madison"></a>
 											<span class="timeline-body-time font-grey-cascade">
 											</span>
-											You haven't posted anything yet. Goto Skill or Job section to post anything.
+											<i class="fa fa-frown-o"></i>&nbsp;!!&nbsp;&nbsp;You haven't posted anything yet. Goto Skill or Job section to post anything.
 										</div>
 									</div>
 									<div class="timeline-body-content">

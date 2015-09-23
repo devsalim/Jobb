@@ -1,7 +1,7 @@
 
 <div class="portlet light">
 	<div class="portlet-title">									
-		<label style="font-size: 19px;text-align: center;margin: auto;width: 75%;border-bottom:2px solid darkred;">Do you know about any job opening?<br>Post Job information for FREE!!</label>									
+		<label style="font-size: 19px;text-align: center;margin: auto;width: 75%;border-bottom:2px solid darkred;">Do you know about any job opening?<br>Post Job information for FREE!!</label>										
 		<div class="tools">
 			<a href="" class="collapse"></a>
 			<a href="#portlet-config" data-toggle="modal" class="config"></a>
@@ -9,7 +9,7 @@
 			<a href="" class="remove"></a>
 		</div>
 	</div>
-	<div class="portlet-body form" style="width: 71%;">
+	<div class="portlet-body form" style="width: 80%;">
 		<!-- BEGIN FORM-->
 		<form action="{{ url('job/store') }}" method="post" class="horizontal-form">
 			<input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -24,6 +24,15 @@
 			@endif
 			<input type="hidden" name="post_type">
 			<div class="form-body">
+				<div class="row">
+					<div class="col-md-2"></div>
+					<div class="col-md-7">
+						<div class="form-group">
+							<label>You Can Tag Friends</label>
+							<input type="hidden" name="linked_skill" id="select2_sample7" class="form-control select2" value="All">
+						</div>
+					</div>
+				</div>
 				<div class="row">
 					<div class="col-md-12">
 						<div class="form-group">
@@ -214,7 +223,7 @@
 							<label>Post Duration</label>
 							<div class="input-group">
 									<span class="input-group-addon">
-									<i class="icon-clock"></i>
+									<i class="icon-clock" style=" color: darkcyan;"></i>
 									</span>
 									<select name="post_duration" class="form-control" >						
 										<option value="3">3 Days</option>
