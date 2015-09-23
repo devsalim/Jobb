@@ -14,7 +14,7 @@
 							<!-- TIMELINE ITEM -->
 							<div class="timeline-item">
 								<div class="timeline-badge">
-									<img class="timeline-badge-userpic" src="/img/profile/{{ $post->user->profile_pic }}">
+									<img class="timeline-badge-userpic" src="/img/profile/{{ $post->user->profile_pic }}" title="{{ $post->user->fname }}">
 								</div>
 								<div class="timeline-body">
 									<div class="timeline-body-arrow">

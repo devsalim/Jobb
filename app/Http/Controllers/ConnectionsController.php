@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\CreateConnectionsRequest;
 use Illuminate\Support\Facades\Input;
 use App\Induser;
-
+use App\Connections;
 use Auth;
 
 class ConnectionsController extends Controller {
@@ -38,7 +38,8 @@ class ConnectionsController extends Controller {
 	 */
 	public function create()
 	{
-		return view('pages.connections');
+		$connections=Connections::where('user_id', '=', Auth::id())->with('user')->get();
+		return view('pages.connections', compact('connections'));
 	}
 
 	/**
@@ -93,7 +94,18 @@ class ConnectionsController extends Controller {
 	 */
 	public function destroy($id)
 	{
-		//
+		$connections = Connections::findOrFail($id);
+		$connections->delete();
+		return redirect('master');
+	}
+
+	public function inviteFriend($id)
+	{
+		$connections = new Connections();
+		$connections->user_id=Auth::id();
+		$connections->connection_user_id=$id;
+		$connections->save();
+		return redirect('master');
 	}
 
 	public function searchConnections()
@@ -107,4 +119,6 @@ class ConnectionsController extends Controller {
 		 // return $users;
 		 
 	}
+
+
 }
