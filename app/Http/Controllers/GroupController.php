@@ -2,11 +2,11 @@
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-
+use App\Group;
 use Illuminate\Http\Request;
 use Auth;
 
-class CreategroupController extends Controller {
+class GroupController extends Controller {
 
 	public function __construct()
 	{
@@ -24,7 +24,8 @@ class CreategroupController extends Controller {
 	 */
 	public function index()
 	{
-		//
+		$groups = Group::where('admin_id', '=', Auth::id())->get();
+		return view('pages.group', compact('groups'));
 	}
 
 	/**
@@ -34,7 +35,7 @@ class CreategroupController extends Controller {
 	 */
 	public function create()
 	{
-		return view('pages.creategroup');
+		return view('pages.group');
 	}
 
 	/**
@@ -42,10 +43,13 @@ class CreategroupController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function store()
+	public function store(Request $request)
 	{
-		
-		
+		$group = new Group();
+		$group->group_name = $request['group_name'];
+		$group->admin_id =  Auth::user()->id;
+		$group->save();
+		return redirect('master');	
 	}
 
 	/**

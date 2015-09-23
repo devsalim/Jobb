@@ -13,7 +13,8 @@
 	</div>
 	<div class="portlet-body form" style="width: 70%;">
 		<!-- BEGIN FORM-->
-		<form action="" class="horizontal-form" method="post">
+		<form action="{{ url('/group/store') }}" class="horizontal-form" method="post">
+			<input type="hidden" name="_token" value="{{ csrf_token() }}">
 			<div class="form-body">
 				<div class="row">
 					<div class="col-md-8" style="">
@@ -21,10 +22,10 @@
 							<div class="input-group">
 								<div class="input-icon">
 									<i class="fa fa-lock fa-fw"></i>
-									<input id="" class="form-control" type="text" name="" placeholder="Create Group"/>
+									<input id="" class="form-control" type="text" name="group_name" placeholder="Create Group"/>
 								</div>
 								<span class="input-group-btn">
-									<button id="" class="btn btn-success" type="button" style=" margin-right: 15px;"><i class="fa fa-arrow-left fa-fw"/></i>Create</button>
+									<button id="" class="btn btn-success" type="submit" style=" margin-right: 15px;"><i class="fa fa-arrow-left fa-fw"/></i>Create</button>
 									<button id="" class="btn default" type="button">Cancel</button>
 								</span>
 							</div>
@@ -34,11 +35,13 @@
 								<i class="fa fa-search" style="color: darkcyan;"></i>
 								<input type="text" class="form-control input-circle" placeholder="Search" style="border: 1px solid darkcyan;">
 							</div>
-						</div>					
+						</div>
+						@if(count($groups)>0)
+						@foreach($groups as $group)					
 						<div class="form-group form-md-line-input" style="margin-left: -11px;">
 							<div class="input-group">
 								<div class="input-group-control">
-									<label class="col-md-6 control-label" for="form_control_1" >vickyvishalcse@gmail.com</label>
+									<label class="col-md-6 control-label" for="form_control_1" >{{$group->group_name}}</label>
 								</div>
 								<span class="input-group-btn btn-right">
 									<button type="button" class="btn green-haze dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
@@ -47,18 +50,8 @@
 								</span>
 							</div>
 						</div>
-						<div class="form-group form-md-line-input" style="margin-left: -11px;">
-							<div class="input-group">
-								<div class="input-group-control">
-									<label class="col-md-6 control-label" for="form_control_1" style="font-size: 18px;">Vicky Vishal</label>
-								</div>
-								<span class="input-group-btn btn-right">
-									<button type="button" class="btn green-haze dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-										<i class="glyphicon glyphicon-trash"style="padding-right: 1px;font-size: 12px;background-color: white;color: black;border-radius: 10px;width: 20px;height: 20px;padding-top: 3px;" ></i>&nbsp;Remove
-									</button>
-								</span>
-							</div>
-						</div>		
+						@endforeach
+						@end
 					</div>
 				</div>
 			</div>

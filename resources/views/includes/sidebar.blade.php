@@ -71,7 +71,25 @@
         <a class="ajaxify" href="individual/create">
         <i class=" icon-note"></i>
         <span class="title">
-        Professional Page</span>
+        Profile</span>
+        <span class="selected">
+        </span>
+        </a>
+      </li>
+      <li>
+        <a class="ajaxify" href="connections/create">
+        <i class=" icon-note"></i>
+        <span class="title">
+        Connections</span>
+        <span class="selected">
+        </span>
+        </a>
+      </li>
+      <li>
+        <a class="ajaxify" href="group/create">
+        <i class=" icon-note"></i>
+        <span class="title">
+        Groups</span>
         <span class="selected">
         </span>
         </a>
@@ -88,37 +106,6 @@
         </a>
       </li>
       @endif
-      <li>
-        <a href="javascript:;">
-        <i class="fa fa-chain (alias)"></i>
-        <span class="title">
-        Connections</span>
-        <span class="selected">
-        </span>
-        </a>
-        <ul class="sub-menu">
-          <li>
-            <a class="ajaxify" href="connections/create">
-            Invite Friends </a>
-          </li>
-        </ul>
-      </li>
-      <li>
-        <a href="javascript:;">
-        <i class="icon-magnet"></i>
-        <span class="title">
-        Groups </span>
-        <span class="selected">
-        </span>
-        
-        </a>
-        <ul class="sub-menu">
-          <li>
-            <a class="ajaxify" href="creategroup/create">
-            Create Group</a>
-          </li>
-        </ul>
-      </li>
       <li>
         <a href="javascript:;">
         <i class="icon-eye"></i>

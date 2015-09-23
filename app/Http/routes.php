@@ -43,10 +43,10 @@ Route::group(array('before' => 'auth'), function(){
 	Route::post('connections/store', 'ConnectionsController@store');
 	Route::post('connections/update', 'ConnectionsController@update');
 
-	Route::get('creategroup', 'CreategroupController@index');
-	Route::get('creategroup/create', 'CreategroupController@create');
-	Route::post('creategroup/store', 'CreategroupController@store');
-	Route::post('creategroup/update', 'CreategroupController@update');
+	Route::get('group', 'GroupController@index');
+	Route::get('group/create', 'GroupController@create');
+	Route::post('group/store', 'GroupController@store');
+	Route::post('group/update', 'GroupController@update');
 
 	Route::post('user/imgUpload', 'UserController@imgUpload');	
 
