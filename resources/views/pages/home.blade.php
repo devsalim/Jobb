@@ -20,15 +20,28 @@
 									</div>
 									<div class="timeline-body-head">
 										<div class="timeline-body-head-caption">
-											<a href="javascript:;" class="timeline-body-title font-blue-madison">{{ $post->post_compname }} {{ $post->post_title }}</a>
-											<span class="timeline-body-time font-grey-cascade">Posted {{ $post->post_type}} At 
+											<a href="javascript:;" class="timeline-body-title font-blue-madison">
+												@if($post->post_type == 'skill')	
+													{{ $post->post_title }}
+												@elseif($post->post_type == 'job')
+													{{ $post->post_compname }} 
+												@endif
+											</a>
+
+											<span class="timeline-body-time font-grey-cascade">Posted {{ $post->post_type }} At 
 												{{ date('F d, Y', strtotime($post->created_at)) }}
 											</span>
 										</div>
 									</div>
 									<div class="timeline-body-content">
 										<span class="font-grey-cascade">
-										{{ $post->post_title }}, Role: {{ $post->role }}<br>at {{ $post->post_compname }}, City: {{ $post->city }}<br>Exp: {{ $post->min_exp}}-{{ $post->max_exp}} Years Pay Scale:&nbsp;<i class="fa fa-rupee (alias)"></i> {{ $post->min_sal }}-{{ $post->max_sal }}<br>Details: {{ $post->job_detail }}
+										{{ $post->post_title }}, Role: {{ $post->role }}<br>									
+										@if($post->post_type == 'job')
+											at {{ $post->post_compname }} ,
+										@endif 
+										City: {{ $post->city }}<br>
+
+										Exp: {{ $post->min_exp}}-{{ $post->max_exp}} Years Pay Scale:&nbsp;<i class="fa fa-rupee (alias)"></i> {{ $post->min_sal }}-{{ $post->max_sal }}<br>Details: {{ $post->job_detail }}
 										</span>
 									</div>
 									<div class="post-social-icon-bar">
