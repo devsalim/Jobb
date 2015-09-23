@@ -12,12 +12,13 @@
 		</div>
 	</div>
 	<div class="portlet-body form" style="width: 70%;">
-		<!-- BEGIN FORM-->
-		<form action="{{ url('/group/store') }}" class="horizontal-form" method="post">
-			<input type="hidden" name="_token" value="{{ csrf_token() }}">
+		
 			<div class="form-body">
 				<div class="row">
 					<div class="col-md-8" style="">
+						<!-- BEGIN FORM-->
+		<form action="{{ url('/group/store') }}" class="horizontal-form" method="post">
+			<input type="hidden" name="_token" value="{{ csrf_token() }}">
 						<div class="form-group">
 							<div class="input-group">
 								<div class="input-icon">
@@ -30,6 +31,8 @@
 								</span>
 							</div>
 						</div>
+		</form>
+		<!-- END FORM-->
 						<div class="form-group">					
 							<div class="input-icon right">
 								<i class="fa fa-search" style="color: darkcyan;"></i>
@@ -41,28 +44,23 @@
 						<div class="form-group form-md-line-input" style="margin-left: -11px;">
 							<div class="input-group">
 								<div class="input-group-control">
-									<label class="col-md-6 control-label" for="form_control_1" >{{$group->group_name}}</label>
+									<label class="col-md-6 control-label" for="form_control_1" >{{ $group->group_name }}</label>
 								</div>
 								<span class="input-group-btn btn-right">
-									<button type="button" class="btn green-haze dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-									<i class="fa fa-check" style="font-size: 12px;background-color: white;color: black;border-radius: 10px;width: 20px;height: 20px;padding-top: 3px;"></i>&nbsp;Add 
-									</button>
+									<form action="{{ url('/group/destroy', $group->id) }}" method="post">
+										<input type="hidden" name="_token" value="{{ csrf_token() }}">
+										<button type="submit" class="btn green-haze">
+										<i class="fa fa-check" style="font-size: 12px;background-color: white;color: black;border-radius: 10px;width: 20px;height: 20px;padding-top: 3px;"></i>&nbsp;Remove
+										</button>
+									</form>
 								</span>
 							</div>
 						</div>
 						@endforeach
-						@end
+						@endif
 					</div>
 				</div>
 			</div>
-		</form>
-		<!-- END FORM-->
+		
 	</div>
 </div>
-									
-
-
-
-
-
-

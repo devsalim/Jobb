@@ -24,9 +24,11 @@
           <h3 class="form-title user-company">
             {{ $user->working_at }}
           </h3>
+          @if($user->city!=null || $user->state!=null)
           <h3 class="form-title user-location">
             {{ $user->city }}, {{ $user->state }} 
-          </h3>          
+          </h3>
+          @endif          
         </div>
       </li>
       <li class="start">
@@ -78,7 +80,7 @@
       </li>
       <li>
         <a class="ajaxify" href="connections/create">
-        <i class=" icon-note"></i>
+        <i class="glyphicon glyphicon-link"></i>
         <span class="title">
         Connections</span>
         <span class="selected">

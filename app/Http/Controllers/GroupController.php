@@ -1,9 +1,8 @@
 <?php namespace App\Http\Controllers;
-
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\Group;
 use Illuminate\Http\Request;
+use App\Group;
 use Auth;
 
 class GroupController extends Controller {
@@ -24,8 +23,7 @@ class GroupController extends Controller {
 	 */
 	public function index()
 	{
-		$groups = Group::where('admin_id', '=', Auth::id())->get();
-		return view('pages.group', compact('groups'));
+
 	}
 
 	/**
@@ -35,7 +33,8 @@ class GroupController extends Controller {
 	 */
 	public function create()
 	{
-		return view('pages.group');
+		$groups = Group::where('admin_id', '=', Auth::id())->get();
+		return view('pages.group', compact('groups'));
 	}
 
 	/**
@@ -93,7 +92,9 @@ class GroupController extends Controller {
 	 */
 	public function destroy($id)
 	{
-		//
+		$group = Group::findOrFail($id);
+		$group->delete();
+		return redirect('master');
 	}
 
 }

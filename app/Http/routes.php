@@ -47,6 +47,7 @@ Route::group(array('before' => 'auth'), function(){
 	Route::get('group/create', 'GroupController@create');
 	Route::post('group/store', 'GroupController@store');
 	Route::post('group/update', 'GroupController@update');
+	Route::post('group/destroy/{id}', 'GroupController@destroy');
 
 	Route::post('user/imgUpload', 'UserController@imgUpload');	
 
