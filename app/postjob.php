@@ -24,4 +24,8 @@ class postjob extends Model {
 							'corporate_id'
 						   ];
 
+	public function user(){
+		return $this->hasOne('App\Induser', 'id', 'individual_id');
+	}
+
 }

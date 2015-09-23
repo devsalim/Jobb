@@ -42,12 +42,12 @@ class PagesController extends Controller {
 	}
 
 	public function home(){
-		$posts = Postjob::orderBy('id', 'desc')->get();
+		$posts = Postjob::orderBy('id', 'desc')->with('user')->get();
 		return view('pages.home', compact('posts'));
 	}
 
 	public function myPost(){
-		$posts = Postjob::where('individual_id', '=', Auth::id())->get();
+		$posts = Postjob::where('individual_id', '=', Auth::id())->orderBy('id', 'desc')->with('user')->get();
 		return view('pages.mypost', compact('posts'));
 	}
 
