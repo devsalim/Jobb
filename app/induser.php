@@ -7,7 +7,7 @@ class induser extends Model {
 	protected $fillable = ['fname', 'lname', 'email', 'mobile', 'password'];
 
 	public function user(){
-		return $this->hasOne('app\user', 'id');
+		return $this->hasOne('app\user', 'induser_id', 'id');
 	}
 
 }
