@@ -114,7 +114,7 @@ class UserController extends Controller {
 				}			
 				$data->resume = $fileName;
 			}
-			$data->education = Input::except('education');
+			$data->education = Input::get('education');
 			$data->branch = Input::get('branch');
 			$data->prof_category = Input::get('prof_category');
 			$data->experience = Input::get('experience');

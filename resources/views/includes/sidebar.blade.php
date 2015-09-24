@@ -9,11 +9,16 @@
         <div class="user-short-detail-container">
           <div class="profile-userpic user-image">
             <a id="ajax-demo" href="#portlet-config" data-toggle="modal" class="config">    
-              @if( $user->profile_pic == null )
+              @if( $user->profile_pic == null && $user->induser_id != null)
                 <div class="hover-image">Add</div>
-              @else
+              @elseif($user->profile_pic != null)
                 <div class="hover-image"><i class="glyphicon glyphicon-edit"></i>Change</div>
                 <img src="/img/profile/{{ $user->profile_pic }}">
+              @elseif( $user->logo_status == null && $user->corpuser_id != null)
+                <div class="hover-image">Add</div>
+              @elseif($user->logo_status != null)
+                <div class="hover-image"><i class="glyphicon glyphicon-edit"></i>Change</div>
+                <img src="/img/profile/{{ $user->logo_status }}">
               @endif
             </a>
           </div>

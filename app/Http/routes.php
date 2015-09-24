@@ -52,6 +52,7 @@ Route::group(array('before' => 'auth'), function(){
 	Route::post('group/destroy/{id}', 'GroupController@destroy');
 
 	Route::post('user/imgUpload', 'UserController@imgUpload');	
+	Route::post('corporate/imgUpload', 'CorporateController@imgUpload');	
 
 	Route::get('feedback', 'FeedbackController@index');
 	Route::get('feedback/create', 'FeedbackController@create');

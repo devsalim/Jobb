@@ -2,7 +2,12 @@
 <div class="modal fade" id="portlet-config" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
+      @if(Auth::user()->induser_id !=null)
       {!! Form::open(array('url' => 'user/imgUpload', 'files'=> true)) !!}
+      @elseif(Auth::user()->corpuser_id !=null)
+      {!! Form::open(array('url' => 'corporate/imgUpload', 'files'=> true)) !!}
+      @endif
+
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
         <h4 class="modal-title">Add profile image</h4>

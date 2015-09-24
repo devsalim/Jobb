@@ -1,5 +1,3 @@
-
-
 <div class="portlet light bordered">										
 	<div class="portlet-body form">
 		<!-- BEGIN FORM-->

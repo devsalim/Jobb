@@ -5,11 +5,13 @@ use App\Http\Controllers\Controller;
 
 use DB;
 use Auth;
+use Image;
 use App\Corpuser;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use App\Http\Requests\CreateCorpRequest;
+use App\Http\Requests\CreateImgUploadRequest;
 
 class CorporateController extends Controller {
 
@@ -135,6 +137,25 @@ class CorporateController extends Controller {
 			$data->save();
 			return redirect('/master');
 		}
+	}
+
+	public function imgUpload(){
+		if(Input::file('profile_pic')->isValid()) {
+			$oldProfilePic = Corpuser::where('id', '=', Auth::user()->corpuser_id)->pluck('logo_status');
+			$destinationPath = 'img/profile/';
+			$extension = Input::file('profile_pic')->getClientOriginalExtension();
+			$fileName = rand(11111,99999).'.'.$extension;
+			$path = $destinationPath.$fileName;
+			Input::file('profile_pic')->move($destinationPath, $fileName);
+			Image::make($path)->resize(200, 200)->save($path);
+			Corpuser::where('id', '=', Auth::user()->corpuser_id)->update(['logo_status' => $fileName]);
+
+			if($oldProfilePic != null){
+				\File::delete($destinationPath.$oldProfilePic);
+			}
+
+			return redirect('master');
+	    }
 	}
 
 }
