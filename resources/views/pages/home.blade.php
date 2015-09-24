@@ -13,7 +13,11 @@
 							<!-- TIMELINE ITEM -->
 							<div class="timeline-item">
 								<div class="timeline-badge">
-									<img class="timeline-badge-userpic" src="/img/profile/{{ $post->user->profile_pic }}" title="{{ $post->user->fname }}">
+									@if($post->induser != null)
+									<img class="timeline-badge-userpic" src="/img/profile/{{ $post->induser->profile_pic }}" title="{{ $post->induser->fname }}">
+									@elseif($post->corpuser != null)
+									<img class="timeline-badge-userpic" src="/img/profile/{{ $post->corpuser->logo_status }}" title="{{ $post->corpuser->firm_name }}">
+									@endif
 								</div>
 								<div class="timeline-body">
 									<div class="timeline-body-arrow">
