@@ -7,7 +7,6 @@
 					<div class="" style=""></div>
 					<div class="col-md-11" style="">
 						<div class="timeline">
-
 						@if (count($posts) > 0)
 							@foreach($posts as $post)
 							<!-- TIMELINE ITEM -->
@@ -31,7 +30,6 @@
 													{{ $post->post_compname }} 
 												@endif
 											</a>
-
 											<span class="timeline-body-time font-grey-cascade">Posted {{ $post->post_type }} At 
 												{{ date('F d, Y', strtotime($post->created_at)) }}
 											</span>
@@ -69,7 +67,6 @@
 							<!-- END TIMELINE ITEM -->
 							 @endforeach
 						@endif
-
 						</div>
 					</div>			
 					<!-- END TIMELINE ITEM -->
