@@ -75,21 +75,3 @@
 		<!-- END FORM-->
 	</div>
 </div>
-
-<script>
-// $(document).scroll(function(){  
-//     if ($(window).scrollTop() + $(window).height() == $(document).height())  
-//          { // Reached page bottom. make an ajax call  
-          
-//                 $.ajax({  
-//                     url: 'http://jobtip.dev/master', //targeted URL   
-//                     method: 'post',  
-//             dataType:'html',  
-//                     success: function(data){  
-//             $(".wrapRows").append(data); //append the response  
-                         
-//                     }  
-//                 });  
-//     }  
-// });  
-// </script>

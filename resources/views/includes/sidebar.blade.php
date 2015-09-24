@@ -12,7 +12,7 @@
               @if( $user->profile_pic == null )
                 <div class="hover-image">Add</div>
               @else
-                <div class="hover-image">Change</div>
+                <div class="hover-image"><i class="glyphicon glyphicon-edit"></i>Change</div>
                 <img src="/img/profile/{{ $user->profile_pic }}">
               @endif
             </a>
