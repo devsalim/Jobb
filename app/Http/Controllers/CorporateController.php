@@ -110,7 +110,7 @@ class CorporateController extends Controller {
 		$data->website_url = Input::get('website_url');
 		$data->linked_skill = Input::get('linked_skill');
 		$data->save();
-		return redirect('/login');
+		return redirect('login');
 		}else{
 		return 'some error occured.'+Input::get('email');
 		}
@@ -135,7 +135,7 @@ class CorporateController extends Controller {
 			$data->firm_email_id = Input::get('firm_email_id');
 			$data->firm_phone = Input::get('firm_phone');
 			$data->save();
-			return redirect('/master');
+			return redirect('master');
 		}
 	}
 

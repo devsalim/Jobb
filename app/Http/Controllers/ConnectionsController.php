@@ -38,10 +38,10 @@ class ConnectionsController extends Controller {
 	 */
 	public function create()
 	{
-		$connections=Connections::where('user_id', '=', Auth::user()->induser_id)->orWhere('connection_user_id', '=', Auth::user()->corpuser_id)->with('user')->get();
-		$connectionRequest=Connections::where('connection_user_id', '=', Auth::user()->induser_id)->Where('status', '=', '0')->with('user')->get();
+		$connections=Connections::where('user_id', '=', Auth::user()->induser_id)->orWhere('connection_user_id', '=', Auth::user()->induser_id)->with('user', 'connectiondetail')->get();
+		$connectionRequest=Connections::where('connection_user_id', '=', Auth::user()->induser_id)->Where('status', '=', '0')->with('connectiondetail')->get();
 		return view('pages.connections', compact('connections', 'connectionRequest'));
-		// return $connectionRequest;
+		// return $connections;
 	}
 
 	/**
@@ -104,7 +104,7 @@ class ConnectionsController extends Controller {
 	public function inviteFriend($id)
 	{
 		$connections = new Connections();
-		$connections->user_id=Auth::id();
+		$connections->user_id=Auth::user()->induser_id;
 		$connections->connection_user_id=$id;
 		$connections->save();
 		return redirect('master');
@@ -112,15 +112,19 @@ class ConnectionsController extends Controller {
 
 	public function searchConnections()
 	{
-		
 		$email = Input::get('keywords');
 		$users= Induser::where('email', '=', $email)->get();
-		// return View::make('pages.searchUsers')->('users',$users);
 		return view('pages.searchUsers', compact('users'));	
-
-		 // return $users;
-		 
 	}
 
+	public function response($id)
+	{
+		if(Input::get('action') == 'accept'){
+			Connections::where('id', '=', $id)->update(['status' => 1]);
+		}elseif(Input::get('action') == 'reject'){
+			Connections::where('id', '=', $id)->update(['status' => 2]);
+		}
+		return redirect('master');
+	}
 
 }

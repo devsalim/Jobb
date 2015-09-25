@@ -51,20 +51,26 @@
 						<div class="form-group form-md-line-input" style="margin-left: -11px;">
 							<div class="input-group">
 								<div class="input-group-control">
-									<label class="col-md-6 control-label" for="form_control_1" >{{ $connection->user->fname }}</label>
+									<label class="col-md-6 control-label" for="form_control_1" >
+									@if(Auth::user()->induser_id == $connection->user_id)
+									{{ $connection->user->fname }} {{ $connection->user->lname }}
+									@elseif(Auth::user()->induser_id == $connection->connection_user_id && $connection->status == 1)
+									{{ $connection->connectiondetail->fname}} {{ $connection->connectiondetail->lname}}
+									@endif
+									</label>
 								</div>
 								<span class="input-group-btn btn-right">
-									@if($connection->status==0)
+									@if($connection->status==0 && $connection->status == 1)
 									<form action="{{ url('/connections/destroy', $connection->id) }}" method="post">
 										<input type="hidden" name="_token" value="{{ csrf_token() }}">
-										<div class="btn green-haze">
-										<i class="fa fa-check" style="font-size: 12px;background-color: white;color: black;border-radius: 10px;width: 20px;height: 20px;padding-top: 3px;"></i>&nbsp;Pending
+										<div class="btn btn-warning">
+											<i class="fa fa-exclamation" style="font-size: 12px;background-color: white;color: black;border-radius: 10px;width: 20px;height: 20px;padding-top: 3px;"></i>&nbsp;Pending
 										</div>
-										<button type="submit" class="btn green-haze">
-										<i class="fa fa-check" style="font-size: 12px;background-color: white;color: black;border-radius: 10px;width: 20px;height: 20px;padding-top: 3px;"></i>&nbsp;Cancel
+										<button type="submit" class="btn btn-danger">
+											<i class="fa fa-remove" style="font-size: 12px;background-color: white;color: black;border-radius: 10px;width: 20px;height: 20px;padding-top: 3px;"></i>&nbsp;Cancel
 										</button>
 									</form>
-									@elseif($connection->status==1)
+									@elseif($connection->status==1 )
 									<form action="{{ url('/connections/destroy', $connection->id) }}" method="post">
 										<input type="hidden" name="_token" value="{{ csrf_token() }}">
 										<button type="submit" class="btn green-haze">
@@ -88,18 +94,18 @@
 								<div class="input-group">
 									<div class="input-group-control">
 										<label class="col-md-12 control-label" for="form_control_1" >
-											{{ $conreq->user->fname }} {{ $conreq->user->lname }}
+											{{ $conreq->connectiondetail->fname }} {{ $conreq->connectiondetail->lname }}
 										</label>
 									</div>
 									<span class="input-group-btn btn-right">
 										@if($conreq->status==0)
-										<form action="{{ url('/connections/request', $conreq->id) }}" method="post">
+										<form action="{{ url('/connections/response', $conreq->id) }}" method="post">
 											<input type="hidden" name="_token" value="{{ csrf_token() }}">
-											<div class="btn green-haze">
-											<i class="fa fa-check" style="font-size: 12px;background-color: white;color: black;border-radius: 10px;width: 20px;height: 20px;padding-top: 3px;"></i>&nbsp;Accept
-											</div>
-											<button type="submit" class="btn green-haze">
-											<i class="fa fa-check" style="font-size: 12px;background-color: white;color: black;border-radius: 10px;width: 20px;height: 20px;padding-top: 3px;"></i>&nbsp;Reject
+											<button type="submit" name="action" value="accept" class="btn btn-success">
+												<i class="fa fa-check"  style="font-size: 12px;background-color: white;color: black;border-radius: 10px;width: 20px;height: 20px;padding-top: 3px;"></i>&nbsp;Accept
+											</button>
+											<button type="submit" name="action" value="reject" class="btn btn-danger">
+												<i class="fa fa-remove" style="font-size: 12px;background-color: white;color: black;border-radius: 10px;width: 20px;height: 20px;padding-top: 3px;"></i>&nbsp;Reject
 											</button>
 										</form>
 										@endif

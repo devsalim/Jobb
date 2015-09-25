@@ -44,6 +44,7 @@ Route::group(array('before' => 'auth'), function(){
 	Route::post('connections/update', 'ConnectionsController@update');
 	Route::post('connections/inviteFriend/{id}', 'ConnectionsController@inviteFriend');
 	Route::post('connections/destroy/{id}', 'ConnectionsController@destroy');
+	Route::post('connections/response/{id}', 'ConnectionsController@response');
 	
 	Route::get('group', 'GroupController@index');
 	Route::get('group/create', 'GroupController@create');
