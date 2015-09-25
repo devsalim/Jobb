@@ -38,8 +38,10 @@ class ConnectionsController extends Controller {
 	 */
 	public function create()
 	{
-		$connections=Connections::where('user_id', '=', Auth::id())->with('user')->get();
-		return view('pages.connections', compact('connections'));
+		$connections=Connections::where('user_id', '=', Auth::user()->induser_id)->orWhere('connection_user_id', '=', Auth::user()->corpuser_id)->with('user')->get();
+		$connectionRequest=Connections::where('connection_user_id', '=', Auth::user()->induser_id)->Where('status', '=', '0')->with('user')->get();
+		return view('pages.connections', compact('connections', 'connectionRequest'));
+		// return $connectionRequest;
 	}
 
 	/**

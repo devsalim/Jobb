@@ -8,7 +8,7 @@
       <li >
         <div class="user-short-detail-container">
           <div class="profile-userpic user-image">
-            <a id="ajax-demo" href="#portlet-config" data-toggle="modal" class="config">
+            <a id="ajax-demo" href="#profile-pic" data-toggle="modal" class="config">
                 @if($user->profile_pic == null && $user->fname != null)
                   <div class="hover-image">Add</div>
                 @endif

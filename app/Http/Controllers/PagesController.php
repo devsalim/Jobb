@@ -44,7 +44,6 @@ class PagesController extends Controller {
 	public function home(){
 		$posts = Postjob::orderBy('id', 'desc')->with('indUser', 'corpUser')->get();
 		return view('pages.home', compact('posts'));
-		// return $posts;
 	}
 
 	public function myPost(){
