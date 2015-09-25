@@ -303,9 +303,10 @@
 							<!--/span-->
 						</div>
 						<div class="row-md-10">
+							<div class="col-md-6"><label>Resume:&nbsp;{{ $user->resume }}</label></div>
 							<div class="col-md-12">
 								<div class="form-group" style="">
-									<label class="control-label">Upload Resume</label>&nbsp;
+									<label class="control-label">Upload Updated Resume</label>&nbsp;
 									<label style="font-size:12px;font-weight: 400;">(Optional)</label>
 									<div class="">
 										<div class="fileinput fileinput-new" data-provides="fileinput">
