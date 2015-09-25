@@ -50,13 +50,11 @@ class PagesController extends Controller {
 	public function myPost(){
 		if (Auth::check()) {
 			if(Auth::user()->identifier == 1){
-				$posts = Postjob::with('induser')->where('individual_id', '=', Auth::id())->orderBy('id', 'desc')->get();
+				$posts = Postjob::with('induser')->where('individual_id', '=', Auth::user()->induser_id)->orderBy('id', 'desc')->get();
 			}else if(Auth::user()->identifier == 2){
-				$posts = Postjob::with('corpuser')->where('corporate_id', '=', Auth::id())->orderBy('id', 'desc')->get();
+				$posts = Postjob::with('corpuser')->where('corporate_id', '=', Auth::user()->corpuser_id)->orderBy('id', 'desc')->get();
 			}
 			return view('pages.mypost', compact('posts'));
-			// return $posts;
-			// return Auth::user()->identifier;
 		}else{
 			return redirect('login');
 		}	
