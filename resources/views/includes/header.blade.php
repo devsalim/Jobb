@@ -322,11 +322,6 @@
           
           <!-- END USER LOGIN DROPDOWN -->
         </ul>
-
-        @if (Auth::guest())
-      @else
-          <a href="{{ url('/auth/logout') }}" class="btn btn-sm btn-danger pull-right" style="text-decoration: none;margin: 5px 0 0;border-radius: 4px !important;">Logout</a>
-      @endif
         
       </div>
       <div class="btn-group hide">

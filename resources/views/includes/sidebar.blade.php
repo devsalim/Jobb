@@ -200,14 +200,17 @@
           
         </ul>
       </li>
-      <li class="last">
-        <a href="javascript:;">
-          <i class="icon-logout"></i>
-          <span class="title">Log Out</span>
-          <span class="selected">
-        </span>        
-        </a>
-      </li>
+      @if (Auth::guest())
+      @else
+          <li class="last">
+            <a href="{{ url('/auth/logout') }}">
+              <i class="icon-logout"></i>
+              <span class="title">Log Out</span>
+              <span class="selected">
+            </span>        
+            </a>
+          </li>
+      @endif
     </ul>
     <!-- END SIDEBAR MENU1 -->
   </div>
