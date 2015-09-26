@@ -290,7 +290,7 @@
 					<span class="input-group-addon">
 						<i class="icon-call-end"></i>
 					</span>
-					<input type="number" name="mobile" max-length="10" class="form-control" placeholder="Mobile No" value="{{ old('mobile') }}"/>
+					<input type="text" name="mobile" maxlength="10" class="form-control" placeholder="Mobile No" value="{{ old('mobile') }}"/>
 				</div>
 			</div>
 		</div>
