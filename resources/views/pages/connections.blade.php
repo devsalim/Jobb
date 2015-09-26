@@ -60,7 +60,7 @@
 									</label>
 								</div>
 								<span class="input-group-btn btn-right">
-									@if($connection->status==0 && $connection->status == 1)
+									@if($connection->status==0 && Auth::user()->induser_id == $connection->user_id)
 									<form action="{{ url('/connections/destroy', $connection->id) }}" method="post">
 										<input type="hidden" name="_token" value="{{ csrf_token() }}">
 										<div class="btn btn-warning">
