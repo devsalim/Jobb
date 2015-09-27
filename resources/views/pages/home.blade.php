@@ -36,7 +36,7 @@
 													{{ $post->post_compname }} 
 												@endif
 											</a>
-											<span class="timeline-body-time font-grey-cascade">Posted {{ $post->post_type }} At 
+											<span class="timeline-body-time font-grey-cascade">Posted at 
 												{{ date('F d, Y', strtotime($post->created_at)) }}&nbsp;&nbsp;<i class="icon-pin"></i>
 											</span>
 										</div>
