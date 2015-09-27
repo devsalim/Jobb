@@ -8,7 +8,7 @@
 		<form action="#" class="horizontal-form">
 			<div class="form-body">
 				<div class="row">
-					<div class="col-md-11" style="">
+					<div class="col-md-12" style="">
 						<div class="timeline">
 						@if (count($posts) > 0)
 							@foreach($posts as $post)
@@ -45,13 +45,27 @@
 
 										<span class="font-grey-cascade">
 											@if($post->post_type == 'skill')	
-											<div style="font-weight: 600;color: black;font-size: 16px;">{{ $post->post_title }} </div>
+											<div style="font-weight: 600;color: black;font-size: 14px;">{{ $post->post_title }} </div>
 										@elseif($post->post_type == 'job')
-											 <div style="font-weight: 600;color: black;font-size: 16px;">{{ $post->post_title }}<div> <h4 style="margin: 0 0 4px 0;"><small>Required at</small> {{ $post->post_compname }}</h4></div>  </div>
-										@endif					 							
-										<i class="icon-badge"></i>&nbsp;: {{ $post->role }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="glyphicon glyphicon-map-marker"></i>&nbsp;: {{ $post->city }}<br>
+											 <div style="font-weight: 600;color: black;font-size: 14px;">{{ $post->post_title }}<div> <h4 style="margin: 0 0 4px 0;"><small>Required at</small> {{ $post->post_compname }}</h4></div>  </div>
+										@endif
 
-										<i class="icon-briefcase"></i>&nbsp;: {{ $post->min_exp}}-{{ $post->max_exp}} Years &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-rupee (alias)"></i>&nbsp;:&nbsp; {{ $post->min_sal }}-{{ $post->max_sal }}/Hours<br>Description: {{ $post->job_detail }}
+										<div class="row">
+											<div class="col-md-3 col-sm-3 col-xs-12">
+												<i class="icon-badge"></i>&nbsp;: {{ $post->role }}
+											</div>
+											<div class="col-md-3 col-sm-3 col-xs-12">
+												<i class="glyphicon glyphicon-map-marker"></i>&nbsp;: {{ $post->city }}
+											</div>
+											<div class="col-md-3 col-sm-3 col-xs-12">
+												<i class="icon-briefcase"></i>&nbsp;: {{ $post->min_exp}}-{{ $post->max_exp}} Years
+											</div>
+											<div class="col-md-3 col-sm-3 col-xs-12">
+												<i class="fa fa-rupee (alias)"></i>&nbsp;:&nbsp; {{ $post->min_sal }}-{{ $post->max_sal }}/Hours
+											</div>
+										</div>
+										
+										Description: {{ $post->job_detail }}
 										</span>
 									</div>
 											
