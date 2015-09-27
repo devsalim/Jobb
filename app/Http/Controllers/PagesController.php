@@ -22,38 +22,35 @@ class PagesController extends Controller {
 
 	public function login(){
 		if (Auth::check()) {
-			return redirect('master');
+			return redirect('/home');
 		}else{
 			return view('pages.login');
 		}
 	}
 
-	public function master(){
-		if (Auth::check()) {
-			if(Auth::user()->identifier == 1){
-				$user = Induser::where('id', '=', Auth::user()->induser_id)->first();
-			}else if(Auth::user()->identifier == 2){
-				$user = Corpuser::where('id', '=', Auth::user()->corpuser_id)->first();
-			}
-			return view('pages.master', compact('user'));
-		}else{
-			return redirect('login');
-		}
-	}
+	// public function master(){
+	// 	if (Auth::check()) {
+	// 		return view('pages.master');
+	// 	}else{
+	// 		return redirect('login');
+	// 	}
+	// }
 
 	public function home(){
+		$title = 'home';
 		$posts = Postjob::orderBy('id', 'desc')->with('indUser', 'corpUser')->get();
-		return view('pages.home', compact('posts'));
+		return view('pages.home', compact('posts', 'title'));
 	}
 
 	public function myPost(){
 		if (Auth::check()) {
+			$title = 'mypost';
 			if(Auth::user()->identifier == 1){
 				$posts = Postjob::with('induser')->where('individual_id', '=', Auth::user()->induser_id)->orderBy('id', 'desc')->get();
 			}else if(Auth::user()->identifier == 2){
 				$posts = Postjob::with('corpuser')->where('corporate_id', '=', Auth::user()->corpuser_id)->orderBy('id', 'desc')->get();
 			}
-			return view('pages.mypost', compact('posts'));
+			return view('pages.mypost', compact('posts', 'title'));
 		}else{
 			return redirect('login');
 		}	

@@ -13,7 +13,7 @@ class SkillController extends Controller {
 	{
 	    $this->beforeFilter(function() {
 	    	if(Auth::check()){
-	        	if(Auth::user()->identifier != 1) return redirect('master');
+	        	if(Auth::user()->identifier != 1) return redirect('/home');
 	        } else{
 	        	return redirect('login');
 	        }
@@ -37,7 +37,8 @@ class SkillController extends Controller {
 	 */
 	public function create()
 	{
-		return view('pages.postskill');
+		$title = 'skill';
+		return view('pages.postskill', compact('title'));
 	}
 
 	/**
@@ -53,7 +54,7 @@ class SkillController extends Controller {
 			$request['corporate_id'] = Auth::user()->corpuser_id;
 		$request['post_type'] = 'skill';
 		Postjob::create($request->all());
-		return redirect()->intended("master");
+		return redirect("/skill/create");
 	}
 
 	/**

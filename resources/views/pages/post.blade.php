@@ -188,11 +188,11 @@
 									</div></div>
 
 					
-				<script>
-        jQuery(document).ready(function() {    
-           Metronic.init(); // init metronic core components
-Layout.init(); // init current layout
-Demo.init(); // init demo features
-           TableAjax.init();
-        });
-    </script>
+<script>
+jQuery(document).ready(function() {    
+  	Metronic.init(); // init metronic core components
+	Layout.init(); // init current layout
+	Demo.init(); // init demo features
+    TableAjax.init();
+});
+</script>

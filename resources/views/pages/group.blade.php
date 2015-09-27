@@ -1,3 +1,7 @@
+@extends('master')
+
+@section('content')
+
 <div class="portlet light bordered">
 	<div class="portlet-title">
 		<div class="caption">
@@ -64,3 +68,5 @@
 		
 	</div>
 </div>
+
+@stop

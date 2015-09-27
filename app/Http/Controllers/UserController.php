@@ -32,8 +32,9 @@ class UserController extends Controller {
 	 */
 	public function create()
 	{
+		$title = 'profile';
 		$user = Induser::where('id', '=', Auth::user()->induser_id)->first();
-		return view('pages.professional_page', compact('user'));
+		return view('pages.professional_page', compact('user', 'title'));
 	}
 
 	/**
@@ -68,7 +69,7 @@ class UserController extends Controller {
 
 		DB::commit();
 
-		return redirect()->intended("login");
+		return redirect('/login');
 	}
 
 	/**
@@ -79,8 +80,7 @@ class UserController extends Controller {
 	 */
 	public function show($id)
 	{
-		$user = Induser::findOrFail(Auth::id());
-		return view('pages.master', compact('user'));
+		return view('pages.professional_page');
 	}
 
 	/**
@@ -124,7 +124,7 @@ class UserController extends Controller {
 			$data->city = Input::get('city');
 			$data->linked_skill = Input::get('linked_skill');
 			$data->save();
-			return redirect('master');
+			return redirect('/individual/create');
 		}else{
 			return 'some error occured.';
 		}
@@ -149,7 +149,7 @@ class UserController extends Controller {
 			$data->email = Input::get('email');
 			$data->mobile = Input::get('mobile');
 			$data->save();
-			return redirect('master');
+			return redirect('/individual/create');
 		}
 	}
 
@@ -167,8 +167,7 @@ class UserController extends Controller {
 			if($oldProfilePic != null){
 				\File::delete($destinationPath.$oldProfilePic);
 			}
-
-			return redirect('master');
+			return redirect('/home');
 	    }
 	}
 

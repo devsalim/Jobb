@@ -1,3 +1,6 @@
+@extends('master')
+
+@section('content')
 
 <div class="portlet light">
 	<div class="portlet-title">									
@@ -215,6 +218,7 @@
 						<div class="form-group">
 							<label>Key Skills</label>
 							<input type="hidden" name="linked_skill" id="select2_sample5" class="form-control select2" value="">
+							{{-- {!! Form::select('linked_skill[]', $skill, null, ['class'=>'form-control', 'multiple']) !!} --}}
 						</div>
 					</div>
 					<!--/span-->
@@ -230,7 +234,7 @@
 										<option value="7">7 Days</option>
 										<option value="15">15 Days</option>
 										<option value="30">30 Days</option>
-										</select>
+									</select>
 								</div>
 						</div>
 					</div>
@@ -299,12 +303,12 @@
 	</div>
 </div>
 
+@stop
+
+
+@section('javascript')
 <script>
-	jQuery(document).ready(function() {       
-	   // initiate layout and plugins
-	   	Metronic.init(); // init metronic core components
-		Layout.init(); // init current layout
-		Demo.init(); // init demo features
+	jQuery(document).ready(function() { 
 	    ComponentsIonSliders.init();
 	    ComponentsDropdowns.init();
 	    ComponentsEditors.init();
@@ -321,3 +325,4 @@
         });
     });
 </script>
+@stop

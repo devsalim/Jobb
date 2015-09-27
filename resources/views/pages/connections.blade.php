@@ -1,3 +1,7 @@
+@extends('master')
+
+@section('content')
+
 <div class="portlet light bordered">
 	<div class="portlet-title">
 		<div class="caption">
@@ -44,6 +48,39 @@
 						</form>
 						<!-- END FORM-->
 						</div>
+
+						@if(count($connectionRequest)>0)
+						<div class="col-md-12">
+							<h3>New Connection Request</h3>
+							<div>
+								
+								@foreach($connectionRequest as $conreq)					
+								<div class="form-group form-md-line-input" style="margin-left: -11px;">
+									<div class="input-group">
+										<div class="input-group-control">
+											<label class="col-md-12 control-label" for="form_control_1" >
+												{{ $conreq->connectiondetail->fname }} {{ $conreq->connectiondetail->lname }}
+											</label>
+										</div>
+										<span class="input-group-btn btn-right">
+											@if($conreq->status==0)
+											<form action="{{ url('/connections/response', $conreq->id) }}" method="post">
+												<input type="hidden" name="_token" value="{{ csrf_token() }}">
+												<button type="submit" name="action" value="accept" class="btn btn-success">
+													<i class="fa fa-check"  style="font-size: 12px;background-color: white;color: black;border-radius: 10px;width: 20px;height: 20px;padding-top: 3px;"></i>&nbsp;Accept
+												</button>
+												<button type="submit" name="action" value="reject" class="btn btn-danger">
+													<i class="fa fa-remove" style="font-size: 12px;background-color: white;color: black;border-radius: 10px;width: 20px;height: 20px;padding-top: 3px;"></i>&nbsp;Reject
+												</button>
+											</form>
+											@endif
+										</span>
+									</div>
+								</div>
+								@endforeach					
+							</div>
+						</div>					
+						@endif		
 						
 						<div class="col-md-12" id="search-results">
 						@if(count($connections)>0)
@@ -85,48 +122,16 @@
 						@endif
 						</div>			
 					</div>
-					<div class="col-md-5" style="">
-						<h3>New Connection Request</h3>
-						<div>
-							@if(count($connectionRequest)>0)
-							@foreach($connectionRequest as $conreq)					
-							<div class="form-group form-md-line-input" style="margin-left: -11px;">
-								<div class="input-group">
-									<div class="input-group-control">
-										<label class="col-md-12 control-label" for="form_control_1" >
-											{{ $conreq->connectiondetail->fname }} {{ $conreq->connectiondetail->lname }}
-										</label>
-									</div>
-									<span class="input-group-btn btn-right">
-										@if($conreq->status==0)
-										<form action="{{ url('/connections/response', $conreq->id) }}" method="post">
-											<input type="hidden" name="_token" value="{{ csrf_token() }}">
-											<button type="submit" name="action" value="accept" class="btn btn-success">
-												<i class="fa fa-check"  style="font-size: 12px;background-color: white;color: black;border-radius: 10px;width: 20px;height: 20px;padding-top: 3px;"></i>&nbsp;Accept
-											</button>
-											<button type="submit" name="action" value="reject" class="btn btn-danger">
-												<i class="fa fa-remove" style="font-size: 12px;background-color: white;color: black;border-radius: 10px;width: 20px;height: 20px;padding-top: 3px;"></i>&nbsp;Reject
-											</button>
-										</form>
-										@endif
-									</span>
-								</div>
-							</div>
-							@endforeach
-							@endif							
-					</div>
-
-
-
-
-					</div>
+					
 				</div>
 			</div>
 		
 	</div>
 </div>
 									
-<script type="text/javascript">
+@stop
+
+@section('javascript')<script type="text/javascript">
 $.ajaxSetup({
 	headers: {
 		'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -134,7 +139,6 @@ $.ajaxSetup({
 });
 
 var timer;
-
 function up()
 {
 	timer=setTimeout(function()
@@ -155,3 +159,4 @@ function down()
 	clearTimeout(timer);
 }
 </script>
+@stop

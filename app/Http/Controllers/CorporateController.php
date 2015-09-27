@@ -32,8 +32,9 @@ class CorporateController extends Controller {
 	 */
 	public function create()
 	{
+		$title = 'profile';
 		$user = Corpuser::where('id', '=', Auth::user()->corpuser_id)->first();
-		return view('pages.firm_details', compact('user'));
+		return view('pages.firm_details', compact('user', 'title'));
 	}
 
 	/**
@@ -66,7 +67,7 @@ class CorporateController extends Controller {
 
 		DB::commit();
 
-		return redirect('login');
+		return redirect('/login');
 	}
 
 	/**
@@ -110,7 +111,7 @@ class CorporateController extends Controller {
 		$data->website_url = Input::get('website_url');
 		$data->linked_skill = Input::get('linked_skill');
 		$data->save();
-		return redirect('login');
+		return redirect('/login');
 		}else{
 		return 'some error occured.'+Input::get('email');
 		}
@@ -135,7 +136,7 @@ class CorporateController extends Controller {
 			$data->firm_email_id = Input::get('firm_email_id');
 			$data->firm_phone = Input::get('firm_phone');
 			$data->save();
-			return redirect('master');
+			return redirect('/corporate/create');
 		}
 	}
 
@@ -154,7 +155,7 @@ class CorporateController extends Controller {
 				\File::delete($destinationPath.$oldProfilePic);
 			}
 
-			return redirect('master');
+			return redirect('/home');
 	    }
 	}
 

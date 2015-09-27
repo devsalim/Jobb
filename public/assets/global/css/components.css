@@ -3538,7 +3538,7 @@ select.input-sm {
   min-width: 39px;
 }
 .input-group .input-group-addon > i {
-  color: white;
+  color: darkcyan;
 }
 
 /* Input spinner */

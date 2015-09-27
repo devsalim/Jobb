@@ -11,7 +11,7 @@ class GroupController extends Controller {
 	{
 	    $this->beforeFilter(function() {
 	    	if(!Auth::check()){
-	        	return redirect('login');
+	        	return redirect('/login');
 	        }
 	    });
 	}
@@ -33,8 +33,9 @@ class GroupController extends Controller {
 	 */
 	public function create()
 	{
+		$title = 'group';
 		$groups = Group::where('admin_id', '=', Auth::id())->get();
-		return view('pages.group', compact('groups'));
+		return view('pages.group', compact('groups', 'title'));
 	}
 
 	/**
@@ -48,7 +49,7 @@ class GroupController extends Controller {
 		$group->group_name = $request['group_name'];
 		$group->admin_id =  Auth::user()->id;
 		$group->save();
-		return redirect('master');	
+		return redirect('/group/create');	
 	}
 
 	/**
@@ -94,7 +95,7 @@ class GroupController extends Controller {
 	{
 		$group = Group::findOrFail($id);
 		$group->delete();
-		return redirect('master');
+		return redirect('/group/create');
 	}
 
 }

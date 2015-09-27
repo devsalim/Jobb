@@ -1,3 +1,7 @@
+@extends('master')
+
+@section('content')
+
 <div class="portlet light bordered">
 	<div class="portlet-title">
 		<div class="caption">
@@ -287,12 +291,13 @@
 		<!-- END FORM-->
 	</div>
 </div>
+
+@stop
+
+@section('javascript')
 <script>
-jQuery(document).ready(function() {       
-	// initiate layout and plugins
-	Metronic.init(); // init metronic core components
-	Layout.init(); // init current layout
-	Demo.init(); // init demo features
-	ComponentsDropdowns.init();
-});   
+	jQuery(document).ready(function() {
+	    ComponentsDropdowns.init();
+	});   
 </script>
+@stop

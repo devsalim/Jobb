@@ -345,10 +345,21 @@
           
         </ul>
       </div>
+      
       <div class="btn-group" style="margin: 3px 5px;">
         <button type="button" class="btn btn-circle green-haze dropdown-toggle" data-toggle="dropdown">
-        <span class="hidden-sm hidden-xs">Post&nbsp;</span>
+        <span class="hidden-sm hidden-xs">Post&nbsp;</span>&nbsp;<i class="fa fa-angle-down"></i>
         </button>
+        <ul class="dropdown-menu" role="menu">
+          <li>
+            <a href="/job/create">
+            <i class="icon-user"></i> Job</a>
+          </li>
+          <li>
+            <a href="/skill/create">
+            <i class="icon-basket"></i> Skill</a>
+          </li>
+        </ul>
       </div>
 
       </div>

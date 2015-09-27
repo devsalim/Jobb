@@ -39,8 +39,8 @@
           @endif          
         </div>
       </li>
-      <li class="start">
-        <a class="ajaxify start" href="home">
+      <li class="@if($title == 'home'){{'active'}}@endif">
+        <a class="" href="/home">
         <i class=" icon-note"></i>
         <span class="title">
         Home</span>
@@ -48,8 +48,8 @@
         </span>
         </a>
       </li>
-      <li class="">
-        <a class="ajaxify" href="mypost">
+      <li class="@if($title == 'mypost'){{'active'}}@endif">
+        <a class="" href="/mypost">
         <i class=" icon-note"></i>
         <span class="title">
         My Post</span>
@@ -58,8 +58,8 @@
         </a>
       </li>
 
-      <li >
-        <a class="ajaxify" href="job/create">
+      <li class="@if($title == 'job'){{'active'}}@endif">
+        <a class="" href="/job/create">
         <i class=" icon-note"></i>
         <span class="title">
         Post Job</span>
@@ -68,8 +68,8 @@
         </a>
       </li>
       @if (Auth::user()->identifier == 1)
-      <li >
-        <a class="ajaxify" href="skill/create">
+      <li class="@if($title == 'skill'){{'active'}}@endif">
+        <a class="" href="/skill/create">
         <i class=" icon-note"></i>
         <span class="title">
         Post Skill</span>
@@ -77,8 +77,8 @@
         </span>
         </a>
       </li>
-      <li >
-        <a class="ajaxify" href="individual/create">
+      <li class="@if($title == 'profile'){{'active'}}@endif">
+        <a class="" href="/individual/create">
         <i class=" icon-note"></i>
         <span class="title">
         Profile</span>
@@ -86,8 +86,8 @@
         </span>
         </a>
       </li>
-      <li>
-        <a class="ajaxify" href="connections/create">
+      <li class="@if($title == 'connections'){{'active'}}@endif">
+        <a class="" href="/connections/create">
         <i class="glyphicon glyphicon-link"></i>
         <span class="title">
         Connections</span>
@@ -95,8 +95,8 @@
         </span>
         </a>
       </li>
-      <li>
-        <a class="ajaxify" href="group/create">
+      <li class="@if($title == 'group'){{'active'}}@endif">
+        <a class="" href="/group/create">
         <i class=" icon-note"></i>
         <span class="title">
         Groups</span>
@@ -106,11 +106,11 @@
       </li>
       @endif
       @if (Auth::user()->identifier == 2)
-      <li >
-        <a class="ajaxify" href="corporate/create">
+      <li class="@if($title == 'profile'){{'active'}}@endif">
+        <a class="" href="/corporate/create">
         <i class=" icon-note"></i>
         <span class="title">
-        Firm Update</span>
+        Profile</span>
         <span class="selected">
         </span>
         </a>

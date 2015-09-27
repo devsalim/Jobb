@@ -1,3 +1,6 @@
+@extends('master')
+
+@section('content')
 
 <div class="portlet light">
 	<div class="portlet-title">									
@@ -288,14 +291,15 @@
 	</div>
 </div>
 
+@stop
+
+
+@section('javascript')
 <script>
-jQuery(document).ready(function() {       
-    // initiate layout and plugins
-   	Metronic.init(); // init metronic core components
-	Layout.init(); // init current layout
-	Demo.init(); // init demo features
-    ComponentsDropdowns.init();
-    ComponentsIonSliders.init();
-    ComponentsEditors.init();
-});   
+	jQuery(document).ready(function() { 
+	    ComponentsIonSliders.init();
+	    ComponentsDropdowns.init();
+	    ComponentsEditors.init();
+	});   
 </script>
+@stop

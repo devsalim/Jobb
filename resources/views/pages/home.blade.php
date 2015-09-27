@@ -1,3 +1,7 @@
+@extends('master')
+
+@section('content')
+
 <div class="portlet light bordered">										
 	<div class="portlet-body form">
 		<!-- BEGIN FORM-->
@@ -76,3 +80,5 @@
 		<!-- END FORM-->
 	</div>
 </div>
+
+@stop

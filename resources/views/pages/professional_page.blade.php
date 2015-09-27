@@ -1,3 +1,7 @@
+@extends('master')
+
+@section('content')
+
 <div class="portlet light bordered" style="border: 1px solid #e1e1e1 !important;">
 	<div class="portlet-title">
 		<div class="caption">
@@ -34,7 +38,7 @@
 									<label>First Name</label>
 									<div class="input-group">
 										<span class="input-group-addon">
-											<i class="glyphicon glyphicon-font" style="color:darkcyan;"></i>
+											<i class="glyphicon glyphicon-font"></i>
 										</span>
 										<input type="text" name="fname" class="form-control" placeholder="First Name" value="{{ $user->fname }}">
 									</div>
@@ -46,7 +50,7 @@
 									<label>Last Name</label>
 									<div class="input-group">
 										<span class="input-group-addon">
-											<i class="glyphicon glyphicon-font" style="color:darkcyan;"></i>
+											<i class="glyphicon glyphicon-font"></i>
 										</span>
 										<input type="text" name="lname" class="form-control" value="{{ $user->lname }}" placeholder="Last Name">
 									</div>
@@ -60,7 +64,7 @@
 									<label>Mobile No</label>
 									<div class="input-group">
 										<span class="input-group-addon">
-											<i class="icon-call-end" style="color:darkcyan;"></i>
+											<i class="icon-call-end"></i>
 										</span>
 										<input type="text" name="mobile" class="form-control" placeholder="Mobile No" value="{{ $user->mobile }}">
 									</div>
@@ -72,7 +76,7 @@
 									<label>Email Id</label>								
 									<div class="input-group">
 										<span class="input-group-addon">
-											<i class="icon-envelope" style="color:darkcyan;"></i>
+											<i class="icon-envelope"></i>
 										</span>
 										<input type="text" name="email" class="form-control" placeholder="Email Id" value="{{ $user->email }}">
 									</div>
@@ -149,7 +153,7 @@
 									<label>Branch</label>
 									<div class="input-group">
 										<span class="input-group-addon">
-										<i class="fa fa-university" style="color:darkcyan;"></i>
+										<i class="fa fa-university"></i>
 										</span>
 										<select class="form-control" name="branch" id="child_selection" value="{{ $user->branch }}" >
 											<option value="">--Please Select--</option>
@@ -165,7 +169,7 @@
 									<label>Job Category</label>
 									<div class="input-group">
 										<span class="input-group-addon">
-											<i class="fa fa-university " style="color:darkcyan;"></i>
+											<i class="fa fa-university"></i>
 										</span>
 										<select class="form-control" name="prof_category" value="{{ $user->prof_category }}" >
 											<optgroup label="Accounting">
@@ -199,7 +203,7 @@
 									<label>Working At</label>
 									<div class="input-group">
 										<span class="input-group-addon">
-											<i class="fa fa-university" style="color:darkcyan;"></i>
+											<i class="fa fa-university"></i>
 										</span>
 										<input type="text" class="form-control" value="{{ $user->working_at }}" name="working_at">
 									</div>
@@ -213,7 +217,7 @@
 									<label>Role</label>
 									<div class="input-group">
 										<span class="input-group-addon">
-											<i class="fa fa-university" style="color:darkcyan;"></i>
+											<i class="fa fa-university"></i>
 										</span>
 										<input type="text" class="form-control" value="{{ $user->role }}" name="role">
 									</div>
@@ -239,7 +243,7 @@
 									<label>City</label>									
 									<div class="input-group">
 										<span class="input-group-addon">
-											<i class="fa fa-map-marker" style="color:darkcyan;"></i>
+											<i class="fa fa-map-marker"></i>
 										</span>
 										<input type="text" name="city" class="form-control" value="{{ $user->city }}" placeholder="City">
 									</div>
@@ -251,7 +255,7 @@
 									<label>State</label>
 									<div class="input-group">
 										<span class="input-group-addon">
-										<i class="fa fa-map-marker" style="color:darkcyan;"></i>
+										<i class="fa fa-map-marker"></i>
 										</span>
 										<select class="form-control" name="state" value="{{ $user->state }}">
 											<option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
@@ -329,7 +333,7 @@
 					</div>
 				</div>
 				<div class="form-actions ">
-					<button type="submit" class="btn blue"><i class="fa fa-check"></i> Save</button>
+					<button type="submit" name="individual" value="Save" class="btn blue"><i class="fa fa-check"></i> Save</button>
 					<button type="button" class="btn default">Cancel</button>
 				</div>
 			</div>
@@ -337,14 +341,16 @@
 		<!-- END FORM-->
 	</div>
 </div>
+
+@stop
+
+
+@section('javascript')
 <script src="{{ asset('/assets/Edubranch.js') }}"></script>
 <script>
-jQuery(document).ready(function() {       
-    // initiate layout and plugins
-    Metronic.init(); // init metronic core components
-	Layout.init(); // init current layout
-	Demo.init(); // init demo features
-    ComponentsDropdowns.init();
-   	ComponentsjQueryUISliders.init();
-});
+	jQuery(document).ready(function() { 
+	    ComponentsDropdowns.init();
+   		ComponentsjQueryUISliders.init();
+	});   
 </script>
+@stop

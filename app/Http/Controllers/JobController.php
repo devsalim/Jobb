@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 use App\Postjob;
+use App\Skills;
 use App\Http\Requests\CreatePostjobRequest;
 use Auth;
 
@@ -36,7 +37,8 @@ class JobController extends Controller {
 	 */
 	public function create()
 	{
-		return view('pages.postjob');
+		$title = 'job';
+		return view('pages.postjob', compact('title'));
 	}
 
 	/**
@@ -52,7 +54,7 @@ class JobController extends Controller {
 			$request['corporate_id'] = Auth::user()->corpuser_id;
 		$request['post_type'] = 'job';
 		Postjob::create($request->all());
-		return redirect()->intended("master");
+		return redirect("/job/create");
 		
 	}
 

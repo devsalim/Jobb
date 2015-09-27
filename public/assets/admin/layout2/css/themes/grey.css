@@ -440,4 +440,5 @@ body {
 
 body.page-boxed {
   background-color: #c8cdca;
+  background-attachment: fixed;
 }

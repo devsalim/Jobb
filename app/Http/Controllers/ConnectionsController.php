@@ -38,9 +38,10 @@ class ConnectionsController extends Controller {
 	 */
 	public function create()
 	{
+		$title = 'connections';
 		$connections=Connections::where('user_id', '=', Auth::user()->induser_id)->orWhere('connection_user_id', '=', Auth::user()->induser_id)->with('user', 'connectiondetail')->get();
 		$connectionRequest=Connections::where('connection_user_id', '=', Auth::user()->induser_id)->Where('status', '=', '0')->with('connectiondetail')->get();
-		return view('pages.connections', compact('connections', 'connectionRequest'));
+		return view('pages.connections', compact('connections', 'connectionRequest', 'title'));
 		// return $connections;
 	}
 
@@ -98,7 +99,7 @@ class ConnectionsController extends Controller {
 	{
 		$connections = Connections::findOrFail($id);
 		$connections->delete();
-		return redirect('master');
+		return redirect('/connections/create');
 	}
 
 	public function inviteFriend($id)
@@ -107,7 +108,7 @@ class ConnectionsController extends Controller {
 		$connections->user_id=Auth::user()->induser_id;
 		$connections->connection_user_id=$id;
 		$connections->save();
-		return redirect('master');
+		return redirect('/connections/create');
 	}
 
 	public function searchConnections()
@@ -124,7 +125,7 @@ class ConnectionsController extends Controller {
 		}elseif(Input::get('action') == 'reject'){
 			Connections::where('id', '=', $id)->update(['status' => 2]);
 		}
-		return redirect('master');
+		return redirect('/connections/create');
 	}
 
 }
