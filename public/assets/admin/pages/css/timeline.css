@@ -68,7 +68,7 @@ New Timeline
 
 .timeline-body {
   position: relative;
-  padding: 20px;
+  padding: 15px;
   margin-top: 20px;
   margin-left: 110px;
   background-color: #f5f6fa;
@@ -130,7 +130,7 @@ New Timeline
 
 .timeline-body-content {
   font-size: 14px;
-  margin-top: 35px;
+  margin-top: 24px;
 }
 
 .timeline-body-img {

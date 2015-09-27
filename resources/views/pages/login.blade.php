@@ -50,7 +50,7 @@
 							</div>
 						</div>
 					</div>
-					<h2 class="decorated" style="  margin-top: 24px; margin-bottom: 18px;margin-left: 24px;  margin-right: 24px; color:whitesmoke;">
+					<h2 class="decorated" style="margin: 18px; color:whitesmoke;">
 						<span style="font-size: 13px;">OR</span>
 					</h2>
 
@@ -246,7 +246,7 @@
 				</div>
 			</div>
 		</div>
-		<h2 class="decorated" style="margin-top: 20px; margin-bottom: 20px;margin-left: 24px;  margin-right: 24px; color:whitesmoke;">
+		<h2 class="decorated" style="margin:18px; color:whitesmoke;">
 			<span style="font-size: 13px;">OR</span>
 		</h2>
 											
