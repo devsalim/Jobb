@@ -9,7 +9,7 @@
 			</div>
 			<span class="input-group-btn btn-right">
 				<button type="submit" class="btn green-haze" >
-				<i class="fa fa-check" style="font-size: 12px;background-color: white;color: black;border-radius: 10px;width: 20px;height: 20px;padding-top: 3px;"></i>&nbsp;Add 
+				<i class="glyphicon glyphicon-plus-sign" style="font-size: 12px;background-color: white;color: black;border-radius: 10px;width: 20px;height: 20px;padding-top: 3px;"></i> 
 				</button>
 			</span>
 		</div>
