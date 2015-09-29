@@ -57,26 +57,7 @@
         </span>
         </a>
       </li>
-
-      <li class="@if($title == 'job'){{'active'}}@endif">
-        <a class="" href="/job/create">
-        <i class=" icon-note"></i>
-        <span class="title">
-        Post Job</span>
-        <span class="selected">
-        </span>
-        </a>
-      </li>
       @if (Auth::user()->identifier == 1)
-      <li class="@if($title == 'skill'){{'active'}}@endif">
-        <a class="" href="/skill/create">
-        <i class=" icon-note"></i>
-        <span class="title">
-        Post Skill</span>
-        <span class="selected">
-        </span>
-        </a>
-      </li>
       <li class="@if($title == 'profile'){{'active'}}@endif">
         <a class="" href="/individual/create">
         <i class=" icon-note"></i>

@@ -355,10 +355,12 @@
             <a href="/job/create">
             <i class="icon-user"></i> Job</a>
           </li>
+           @if (Auth::user()->identifier == 1)
           <li>
             <a href="/skill/create">
             <i class="icon-basket"></i> Skill</a>
           </li>
+          @endif
         </ul>
       </div>
 

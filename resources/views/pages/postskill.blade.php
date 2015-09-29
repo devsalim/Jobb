@@ -168,9 +168,7 @@
 				<div class="row-md-2"></div>
 				<div class="row">
 					<div class="col-md-6">
-						<div class="form-group">
-							
-							
+						<div class="form-group">	
 							<label class=" control-label">Experience (in Years)</label>
 							<div class="">
 								<input id="range_1" type="text"  value=""/>
@@ -182,8 +180,15 @@
 					<!--/span-->
 					<div class="col-md-6">
 						<div class="form-group">
-							<label class=" control-label"><input type="checkbox">&nbsp;Salary (<i class="fa fa-rupee (alias)"></i>/Month)</label>
-							<div class="">
+							<label class=" control-label"><input type="checkbox" id="hide-check">&nbsp;Salary <i class="fa fa-rupee (alias)"></i>/
+								<select style="border-top: 0px;border-left: 0;border-right: 0;">
+									<option>Hour</option>
+									<option>Day</option>
+									<option>Week</option>
+									<option>Month</option>
+								</select>
+							</label>
+							<div id="hide-sal" class="">
 								<input id="range_7" type="text"  value=""/>
 								<input type="hidden" name="min_sal" class="min-sal">
 								<input type="hidden" name="max_sal" class="max-sal">
@@ -301,5 +306,16 @@
 	    ComponentsDropdowns.init();
 	    ComponentsEditors.init();
 	});   
+</script>
+<script type="text/javascript">
+    $(function () {
+        $("#hide-check").click(function () {
+            if ($(this).is(":checked")) {
+                $("#hide-sal").show();
+            } else {
+                $("#hide-sal").hide();
+            }
+        });
+    });
 </script>
 @stop
