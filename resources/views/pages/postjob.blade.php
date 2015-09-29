@@ -32,7 +32,8 @@
 					<div class="col-md-7">
 						<div class="form-group">
 							<label>You Can Tag Friends</label>
-							<input type="hidden" name="linked_skill" id="select2_sample7" class="form-control select2" value="All">
+							{{-- <input type="hidden" name="tag_friends" id="select2_sample7" class="form-control select2" value="All"> --}}
+							{!! Form::select('connections[]', $connections, null, ['id'=>'connections', 'class'=>'form-control', 'multiple']) !!}
 						</div>
 					</div>
 				</div>
@@ -222,8 +223,8 @@
 					<div class="col-md-6">
 						<div class="form-group">
 							<label>Key Skills</label>
-							<input type="hidden" name="linked_skill" id="select2_sample5" class="form-control select2" value="">
-							{{-- {!! Form::select('linked_skill[]', $skill, null, ['class'=>'form-control', 'multiple']) !!} --}}
+							{{-- <input type="hidden" name="linked_skill" id="select2_sample5" class="form-control select2" value=""> --}}
+							{!! Form::select('skill_list[]', $skills, null, ['id'=>'skill-list', 'class'=>'form-control', 'multiple']) !!}
 						</div>
 					</div>
 					<!--/span-->
@@ -329,5 +330,8 @@
             }
         });
     });
+
+    $('#skill-list').select2();
+    $('#connections').select2();
 </script>
 @stop

@@ -565,7 +565,7 @@ Page Header
     width: 195px;
   }
   .page-boxed .page-header.navbar .top-menu .navbar-nav {
-    margin-right: 733px;
+    /*margin-right: 733px;*/
   }
 
   /* Sidebar closed & logo hidden */
