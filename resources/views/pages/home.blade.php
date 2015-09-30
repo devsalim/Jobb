@@ -25,8 +25,7 @@
 									<a class="icon-userpic"><i class="fa fa-bank (alias)"></i></a>
 									@endif
 								</div>
-								<div class="timeline-body" style="margin: 10px 0 0 100px;">
-									<div class="timeline-body-arrow"></div>
+								<div class="timeline-body" style="">
 									<div class="timeline-body-head">
 										<div class="timeline-body-head-caption">
 											<a>
@@ -65,21 +64,21 @@
 										</div>
 									</div>		
 									<div class="post-job-skill-bar">
-										<div class="post-job-skill-type"><a class="post-type-class">{{ $post->post_type }}</a></div>
+										<div class="post-job-type"><a class="post-type-class">{{ $post->post_type }}</a></div>
 									</div>
 								</div>
-								<div class="portlet-body">
+								<div class="portlet-body" style="margin: 0 -6px;">
 								<div class="panel-group accordion" id="accordion{{$var}}">
 									<div class="panel panel-default" style=" position: relative;">
 										<div class="panel-heading">
 											<h4 class="panel-title">
 											<a class="accordion-toggle accordion-toggle-styled" 
-											data-toggle="collapse" data-parent="#accordion{{$var}}" href="#collapse_{{$var}}_{{$var}}" style="font-size: 15px;font-weight: 600;">
+											data-toggle="collapse" data-parent="#accordion{{$var}}" href="#collapse_{{$var}}_{{$var}}"  style="font-size: 15px;font-weight: 600;">
 											Description: </a>	
 											</h4>
 										</div>
 										<div id="collapse_{{$var}}_{{$var}}" class="panel-collapse collapse">
-											<div class="panel-body" style="border-top: 0;padding: 4px 15px;text-align:justify;">
+											<div class="panel-body" style="border-top: 0;padding: 4px 15px;">
 												<div class="skill-display">Job Id&nbsp;:{{ $post->id }} </div>
 												{{ $post->job_detail }}
 												
@@ -103,15 +102,15 @@
 										</div>
 										<div class="post-icon-bar">
 											<button type="button"  class="post-icon" style="background-color:transparent;border:0;font-size:12px;">
-											 <i class="glyphicon glyphicon-thumbs-up" style="font-size:20px;color: darkmagenta;"></i><span class="badge-like"> 7 </span>
+											 <i class="icon-like" style="font-size:24px;color: darkmagenta;"></i><span class="badge-like">100 </span>
 											</button>
 											@if($post->post_type == 'job')
 											<button type="button" class="post-icon" style="background-color:transparent;border:0;font-size:12px;padding: 0px 0px 0px 12px;">
-											 <i class="glyphicon glyphicon-ok-circle" style="font-size:20px;color: #4FBF4F;"></i>&nbsp;Apply
+											 <i class="glyphicon glyphicon-ok-circle" onclick="window.location='{{ $post->website_redirect_url }}';" style="font-size:24px;color: #4FBF4F;"></i>&nbsp;Apply
 											</button>
 											@endif
 											<button type="button" id="hide-social" class="post-icon" style="background-color:transparent;border:0;font-size:12px;">
-											 <i class="glyphicon glyphicon-share" style="font-size:20px;color: tomato;"></i>&nbsp;Share
+											 <i class="glyphicon glyphicon-share" style="font-size:24px;color: tomato;"></i>&nbsp;Share
 											</button>
 											<div id="show-social" class="post-social-icon-bar ">
 												<a href="/" class="facebook"><i class="fa fa-facebook post-social-icon" ></i></a>
@@ -123,15 +122,16 @@
 								</div>
 							</div>
 							</div>
+
 							<?php $var++; ?>
 						 @endforeach
 						@endif
 							<!-- END TIMELINE ITEM -->
 						</div>
-					</div>			
+					</div>	
+							
 					<!-- END TIMELINE ITEM -->
 				</div>
-			</div>
 		</form>
 		<!-- END FORM-->
 	</div>
@@ -139,14 +139,14 @@
 @stop
 
 @section('javascript')
+
 <script type="text/javascript">
-	$("#show-social").hide(); 
-     $(document).ready(function() {
-        $("#hide-social").on('click',function () {
-          $("#show-social").show();
-        else 
-          $("#show-social").hide(); 
-        });
-    });
+	jQuery('#show-social').hide();
+	jQuery(document).ready(function(){
+	    jQuery('#hide-social').on('click', function(event) {        
+	    jQuery('#show-social').toggle('show');
+	    });
+	});
 </script>
+
 @stop

@@ -67,7 +67,7 @@
 .post-icon-bar{
     background-color: #eee;
     padding: 5px 10px 5px 0px;
-    margin: 1px -1px -10px;
+    margin: 1px -1px -21px;
     border-radius: 0 0 4px 4px !important;
     border: 1px solid lightgrey;
     position: relative;
@@ -77,8 +77,8 @@
     
 }
 
-.post-job-skill-type {
-        float: right;
+.post-job-type {
+    float: right;
     position: absolute;
     right: 0;
     top: 0;
@@ -89,20 +89,56 @@
     font-family: sans-serif;
     font-weight: bold;
     color: #FFF;
-    /* border-radius: 15px !important; */
+    /*border-radius: 20px !important;*/
     width: 65px;
     text-align: center;
-    margin: -36px -21px 0px 16px;
+    margin: -47px -28px 0px 16px;
    -webkit-transform: rotate(-45deg);
+   -ms-transform: rotate(-45deg); /* IE 9 */
+    transform: rotate(-45deg);
     border-top: 44px solid transparent;
     border-bottom: 44px solid transparent;
     border-left: 44px solid #67DACF;
 }
 
+.job{
+border-left: 44px solid #67DACF;
+}
+
+.skill{
+border-left: 44px solid red; 
+}
+
+.post-skill-type {
+    float: right;
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding: 3px;
+    /* background-color: #67DACF; */
+    font-size: 15px;
+    text-transform: capitalize;
+    font-family: sans-serif;
+    font-weight: bold;
+    color: #FFF;
+    /*border-radius: 20px !important;*/
+    width: 65px;
+    text-align: center;
+    margin: -47px -28px 0px 16px;
+   -webkit-transform: rotate(-45deg);
+   -ms-transform: rotate(-45deg); /* IE 9 */
+    transform: rotate(-45deg);
+    border-top: 44px solid transparent;
+    border-bottom: 44px solid transparent;
+    border-left: 44px solid red;
+}
+
 .post-type-class{
     position: absolute;
-    -webkit-transform: rotate(86deg);
-    margin: -10px -50px;
+    -webkit-transform: rotate(89deg);
+    -ms-transform: rotate(89deg); /* IE 9 */
+    transform: rotate(89deg);
+    margin: -10px -54px;
     color: white;
     font-size: 16px;
 }
@@ -117,7 +153,7 @@
     float: right;
     bottom: 2px;
     /* right: 260px; */
-    position: relative;
+    position: ;
 }
 
 .post-social-icon{
@@ -209,17 +245,16 @@
 
 
 .badge-like{
-
-        width: 13px;
-    height: 13px;
+    width: 18px;
+    height: 18px;
     background-color: rebeccapurple;
     border-radius: 10px !important;
     position: absolute;
     margin: 5px 0px 0px -5px;
     color: white;
-    font-size: 9px;
+    font-size: 10px;
     text-align: center;
-    line-height: 1.5;
+    line-height: 1.8;
 }
 
 .badge-like-add{
@@ -301,5 +336,5 @@
     position: relative;
     padding: 0px 5px 0px 5px;
     box-shadow: 4px 4px 4px rgb(222, 222, 222);
-    border-radius: 4px !important;
+    border-radius: 6px !important;
 }

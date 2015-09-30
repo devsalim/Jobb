@@ -12,7 +12,7 @@
 			<a href="" class="remove"></a>
 		</div>
 	</div>
-	<div class="portlet-body form" style="width: 80%;">
+	<div class="portlet-body form" style="width: 75%;">
 		<!-- BEGIN FORM-->
 		<form action="{{ url('job/store') }}" method="post" class="horizontal-form">
 			<input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -75,7 +75,7 @@
 							<span class="input-group-addon">
 							<i class="fa fa-university " style="color:darkcyan;"></i>
 							</span>
-							<select class="bs-select form-control" name="prof_category">
+							<select class="form-control" name="prof_category">
 								<optgroup label="Accounting">
 								<option value="Accounts/Finance/Tax">Accounts/Finance/Tax</option>
 								<option value="Agent">Agent</option>
@@ -213,6 +213,54 @@
 				</div>
 				<!--/row-->
 				<div class="row">
+					<div class="col-md-6">
+						<div class="form-group">
+							<label>Employment Type</label>
+							<div class="input-group">
+								<span class="input-group-addon">
+									<i class="icon-hourglass" style="color:darkcyan;"></i>
+								</span>
+								<select name="time_for" class="form-control" >
+									<option value="Full Time">Full Time</option>
+									<option value="Part Time">Part Time</option>
+									<option value="Freelancer">Freelancer</option>
+								</select>
+							</div>
+						</div>
+					</div>
+					<!--/span-->
+					<div class="col-md-6">
+						<div class="form-group">
+							<label>Education</label>
+							<div class="input-group">
+								<span class="input-group-addon">
+									<i class="fa fa-university"></i>
+								</span>
+								<select class="form-control" name="education" value="">
+									<option value="BA">B.A</option>
+									<option value="BArch">B.Arch</option>
+									<option value="BCA">BCA</option>
+									<option value="BBA">BBA</option>
+									<option value="B.Com">B.Com</option>
+									<option value="B.Ed">B.Ed</option>
+									<option value="BDS">BDS</option>
+									<option value="BHM">BHM</option>
+									<option value="B.Pharma">B.Pharma</option>
+									<option value="btech">B.Tech/B.E.</option>
+									<option value="LLB">LLB</option>
+									<option value="MBBS">MBBS</option>
+									<option value="Diploma">Diploma</option>
+									<option value="BVSC">BVSC</option>
+									<option value="10+2">10+2</option>
+									<option value="10">10</option>
+								</select>
+							</div>
+						</div>
+					</div>
+					<!--/span-->
+				</div>
+				<!--/row-->
+				<div class="row">
 					<div class="form-group">
 						<label style="padding-left: 15px;">Job Details</label>
 						<div class="col-md-12" style=" padding-bottom: 10px;">
@@ -243,6 +291,21 @@
 										<option value="30">30 Days</option>
 									</select>
 								</div>
+						</div>
+					</div>
+					<!--/span-->
+				</div>
+				<!--/row-->
+				<div class="row">
+					<div class="col-md-12">
+						<div class="form-group">
+							<label>Website</label>
+							<div class="input-group">
+								<span class="input-group-addon">
+									<i class="icon-info"style="color:darkcyan;"></i>
+								</span>
+								<input type="url" name="website_redirect_url" pattern="https?://.+" class="form-control" value="" placeholder="Apply Address if any">
+							</div>
 						</div>
 					</div>
 					<!--/span-->
