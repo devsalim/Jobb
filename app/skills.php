@@ -6,4 +6,8 @@ class skills extends Model {
 
 	//
 
+	public function posts(){
+		return $this->belongsToMany('App\Postjob');
+	}
+
 }

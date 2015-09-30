@@ -34,4 +34,20 @@ class postjob extends Model {
 	public function corpUser(){
 		return $this->hasOne('App\Corpuser', 'id', 'corporate_id');
 	}
+
+	public function skills(){
+		return $this->belongsToMany('App\Skills')->withTimestamps();
+	}
+
+	public function getSkillListAttribute(){
+		return $this-skills()->lists('id');
+	}
+
+	// public function skills(){
+	// 	return $this->belongsToMany('App\Skills')->withTimestamps();
+	// }
+
+	// public function getSkillListAttribute(){
+	// 	return $this->skills->lists('id');
+	// }
 }

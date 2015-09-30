@@ -8,6 +8,7 @@ use App\Postjob;
 use App\Skills;
 use App\Http\Requests\CreatePostjobRequest;
 use Auth;
+use App\Connections;
 
 class JobController extends Controller {
 
@@ -38,7 +39,12 @@ class JobController extends Controller {
 	public function create()
 	{
 		$title = 'job';
-		return view('pages.postjob', compact('title'));
+		$skills = Skills::lists('name', 'id');
+		$connections=Connections::where('user_id', '=', Auth::user()->induser_id)
+								->orWhere('connection_user_id', '=', Auth::user()->induser_id)
+								->with('user')
+								->get();
+		return view('pages.postjob', compact('title', 'skills', 'connections'));
 	}
 
 	/**
@@ -53,7 +59,12 @@ class JobController extends Controller {
 		else
 			$request['corporate_id'] = Auth::user()->corpuser_id;
 		$request['post_type'] = 'job';
-		Postjob::create($request->all());
+		$skillIds = $request['skill_list'];
+		// $request['skill_list'] = implode(', ', $request['skill_list']);
+
+		$post = Postjob::create($request->all());
+		$post->skills()->attach($skillIds);
+
 		return redirect("/job/create");
 		
 	}
