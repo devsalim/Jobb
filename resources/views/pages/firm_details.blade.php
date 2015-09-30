@@ -246,7 +246,7 @@
 										<span class="input-group-addon">
 											<i class="icon-info"style="color:darkcyan;"></i>
 										</span>
-										<input type="text" name="website_url" class="form-control" value="{{ $user->website_url }}" placeholder="Company Website">
+										<input type="url" name="website_url" class="form-control" value="{{ $user->website_url }}" placeholder="Company Website">
 									</div>
 								</div>
 							</div>

@@ -35,6 +35,9 @@ class CreatePostjobsTable extends Migration {
             $table->string('role')->nullable();
             $table->string('state')->nullable();
             $table->string('city')->nullable();
+            $table->string('time_for')->nullable();
+            $table->string('education')->nullable();
+            $table->string('website_redirect_url')->nullable();
             $table->foreign('individual_id')->references('id')->on('indusers');
             $table->foreign('corporate_id')->references('id')->on('corpusers');
 			$table->timestamps();
