@@ -40,10 +40,7 @@ class JobController extends Controller {
 	{
 		$title = 'job';
 		$skills = Skills::lists('name', 'id');
-		$connections=Connections::where('user_id', '=', Auth::user()->induser_id)
-								->orWhere('connection_user_id', '=', Auth::user()->induser_id)
-								->with('user')
-								->get();
+		$connections=Auth::user()->induser->friends->lists('fname', 'id');
 		return view('pages.postjob', compact('title', 'skills', 'connections'));
 	}
 

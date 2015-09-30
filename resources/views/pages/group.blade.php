@@ -48,7 +48,9 @@
 						<div class="form-group form-md-line-input" style="margin-left: -11px;">
 							<div class="input-group">
 								<div class="input-group-control">
-									<label class="col-md-6 control-label" for="form_control_1" >{{ $group->group_name }}</label>
+									<label class="col-md-6 control-label" for="form_control_1" >
+										<a href="/group/{{ $group->id }}">{{ $group->group_name }}</a>
+									</label>
 								</div>
 								<span class="input-group-btn btn-right">
 									<form action="{{ url('/group/destroy', $group->id) }}" method="post">

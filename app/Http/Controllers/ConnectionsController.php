@@ -39,10 +39,7 @@ class ConnectionsController extends Controller {
 	public function create()
 	{
 		$title = 'connections';
-		$connections=Connections::where('user_id', '=', Auth::user()->induser_id)->orWhere('connection_user_id', '=', Auth::user()->induser_id)->with('user', 'connectiondetail')->get();
-		$connectionRequest=Connections::where('connection_user_id', '=', Auth::user()->induser_id)->Where('status', '=', '0')->with('connectiondetail')->get();
-		return view('pages.connections', compact('connections', 'connectionRequest', 'title'));
-		// return $connections;
+		return view('pages.connections', compact('title', 'usersWithFriends'));
 	}
 
 	/**

@@ -83,7 +83,13 @@
 												<div class="skill-display">Job Id&nbsp;:{{ $post->id }} </div>
 												{{ $post->job_detail }}
 												
-												<div class="skill-display">Skills&nbsp;:<br> </div>{{ $post->linked_skill }}
+												<div class="skill-display">Skills&nbsp;:<br> </div>
+												<ul>
+												@foreach($post->skills as $skill)
+													<li>{{$skill->name}}</li>
+												@endforeach
+												</ul>
+
 												<div class="skill-display">Contact&nbsp;:<br> </div> 
 												<div class="row">
 													<div class="col-md-4 col-sm-4 col-xs-12">

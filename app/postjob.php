@@ -40,11 +40,4 @@ class postjob extends Model {
 		return $this-skills()->lists('id');
 	}
 
-	// public function skills(){
-	// 	return $this->belongsToMany('App\Skills')->withTimestamps();
-	// }
-
-	// public function getSkillListAttribute(){
-	// 	return $this->skills->lists('id');
-	// }
 }

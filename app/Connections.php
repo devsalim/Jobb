@@ -11,4 +11,5 @@ class Connections extends Model {
 	public function connectionDetail(){
 		return $this->hasOne('App\Induser', 'id', 'user_id');
 	}
+
 }
