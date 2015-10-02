@@ -576,5 +576,19 @@ $('#corporate-login-btn').on('click',function(event){
   }); 
 });
 
+$('#individual-login').bind('keydown', function(e){         
+    if (e.which == 13){
+       $('#individual-login-btn').trigger('click'); 
+       return false;  
+   }     
+});
+
+$('#corporate-login').bind('keydown', function(e){         
+    if (e.which == 13){
+       $('#corporate-login-btn').trigger('click'); 
+       return false;  
+   }     
+});
+
 </script>
 @stop

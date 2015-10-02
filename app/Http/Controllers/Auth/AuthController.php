@@ -44,22 +44,29 @@ class AuthController extends Controller {
 		$field = filter_var($request->input('email'), FILTER_VALIDATE_EMAIL) ? 'email' : 'mobile';
     	$request->merge([$field => $request->input('email')]);
 
-    	if ($this->auth->attempt($request->only($field, 'password')))
-	    {
-	        // return redirect()->intended($this->redirectPath());
-	        return $this->redirectPath();
-	    }
+		if($request->ajax()){
+			if ($this->auth->attempt($request->only($field, 'password')))
+		    {
+		        // return redirect()->intended($this->redirectPath());
+		        return $this->redirectPath();
+		    }
+		    return $this->loginPath();
+		}else{
+			if ($this->auth->attempt($request->only($field, 'password')))
+		    {
+		        return redirect()->intended($this->redirectPath());
+		    }
+		    return redirect($this->loginPath())
+					->withInput($request->only('email', 'remember'))
+					->withErrors([
+						'email' => $this->getFailedLoginMessage(),
+					]);
+		}
 
-		$this->validate($request, [
+    	$this->validate($request, [
 			'email' => 'required', 'password' => 'required',
 		]);
 
-		// return redirect($this->loginPath())
-		// 			->withInput($request->only('email', 'remember'))
-		// 			->withErrors([
-		// 				'email' => $this->getFailedLoginMessage(),
-		// 			]);
-		return $this->loginPath();
 	}
 
 

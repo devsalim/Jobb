@@ -147,16 +147,20 @@ input:focus:-ms-input-placeholder { color:transparent !important; } /* IE 10+ */
 <script src="{{ asset('/assets/global/plugins/icheck/icheck.min.js') }}"></script>
 <script src="{{ asset('/assets/admin/pages/scripts/ui-extended-modals.js') }}"></script>
 <!-- END PAGE LEVEL SCRIPTS -->
+
+@yield('javascript')
+
 <script>
 jQuery(document).ready(function() {
   Metronic.init(); // init metronic core components
   Layout.init(); // init current layout
   Login.init();
   Demo.init(); // init demo features
+  UIExtendedModals.init();
+  FormValidation.init();
 });
 </script>
 <!-- END JAVASCRIPTS -->
-@yield('javascript')
 </body>
 <!-- END BODY -->
 </html>
