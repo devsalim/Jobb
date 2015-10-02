@@ -21,8 +21,8 @@ class AuthController extends Controller {
 
 	use AuthenticatesAndRegistersUsers;
 
-	protected $redirectTo = '/home';
-	protected $loginPath  = '/login';
+	protected $redirectTo = 'home';
+	protected $loginPath  = 'login';
 
 	/**
 	 * Create a new authentication controller instance.
@@ -46,18 +46,20 @@ class AuthController extends Controller {
 
     	if ($this->auth->attempt($request->only($field, 'password')))
 	    {
-	        return redirect()->intended($this->redirectPath());
+	        // return redirect()->intended($this->redirectPath());
+	        return $this->redirectPath();
 	    }
 
 		$this->validate($request, [
 			'email' => 'required', 'password' => 'required',
 		]);
 
-		return redirect($this->loginPath())
-					->withInput($request->only('email', 'remember'))
-					->withErrors([
-						'email' => $this->getFailedLoginMessage(),
-					]);
+		// return redirect($this->loginPath())
+		// 			->withInput($request->only('email', 'remember'))
+		// 			->withErrors([
+		// 				'email' => $this->getFailedLoginMessage(),
+		// 			]);
+		return $this->loginPath();
 	}
 
 

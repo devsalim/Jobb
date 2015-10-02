@@ -39,7 +39,7 @@ class ConnectionsController extends Controller {
 	public function create()
 	{
 		$title = 'connections';
-		return view('pages.connections', compact('title', 'usersWithFriends'));
+		return view('pages.connections', compact('title'));
 	}
 
 	/**
@@ -111,7 +111,9 @@ class ConnectionsController extends Controller {
 	public function searchConnections()
 	{
 		$email = Input::get('keywords');
-		$users= Induser::where('email', '=', $email)->get();
+		$users = Induser::where('email', '=', $email)
+					    ->where('id', '<>', Auth::user()->induser_id)
+					    ->get();
 		return view('pages.searchUsers', compact('users'));	
 	}
 

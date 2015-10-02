@@ -13,6 +13,8 @@
 <meta http-equiv="Content-type" content="text/html; charset=utf-8">
 <meta content="" name="description"/>
 <meta content="" name="author"/>
+<!-- csrf_token -->
+<meta name="csrf-token" content="{{ csrf_token() }}" />
 <!-- BEGIN GLOBAL MANDATORY STYLES -->
 <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css"/>
 <link href="{{ asset('/assets/global/plugins/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css"/>
@@ -151,12 +153,10 @@ jQuery(document).ready(function() {
   Layout.init(); // init current layout
   Login.init();
   Demo.init(); // init demo features
-  UIExtendedModals.init();
-  FormValidation.init();
 });
 </script>
 <!-- END JAVASCRIPTS -->
-
+@yield('javascript')
 </body>
 <!-- END BODY -->
 </html>

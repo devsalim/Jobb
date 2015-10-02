@@ -160,7 +160,8 @@
 									
 @stop
 
-@section('javascript')<script type="text/javascript">
+@section('javascript')
+<script type="text/javascript">
 $.ajaxSetup({
 	headers: {
 		'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
