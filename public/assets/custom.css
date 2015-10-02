@@ -65,7 +65,6 @@
 
 /* Post Icon */
 .post-icon-bar{
-    background-color: #eee;
     padding: 5px 10px 5px 0px;
     margin: 1px -1px -21px;
     border-radius: 0 0 4px 4px !important;
@@ -77,13 +76,12 @@
     
 }
 
-.post-job-type {
+.job{
     float: right;
     position: absolute;
     right: 0;
     top: 0;
     padding: 3px;
-    /* background-color: #67DACF; */
     font-size: 15px;
     text-transform: capitalize;
     font-family: sans-serif;
@@ -101,21 +99,12 @@
     border-left: 44px solid #67DACF;
 }
 
-.job{
-border-left: 44px solid #67DACF;
-}
-
 .skill{
-border-left: 44px solid red; 
-}
-
-.post-skill-type {
     float: right;
     position: absolute;
     right: 0;
     top: 0;
     padding: 3px;
-    /* background-color: #67DACF; */
     font-size: 15px;
     text-transform: capitalize;
     font-family: sans-serif;
@@ -130,7 +119,20 @@ border-left: 44px solid red;
     transform: rotate(-45deg);
     border-top: 44px solid transparent;
     border-bottom: 44px solid transparent;
-    border-left: 44px solid red;
+    border-left: 44px solid skyblue; 
+}
+
+.post-job{
+background-color:#67DACF; 
+}
+
+.post-skill{
+background-color:skyblue; 
+}
+
+
+.post-skill-type {
+    
 }
 
 .post-type-class{

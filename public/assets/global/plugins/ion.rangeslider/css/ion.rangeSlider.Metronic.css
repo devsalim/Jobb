@@ -15,7 +15,7 @@
 }
 
 .irs-diapason {
-    background: #ffb848;
+    background-color: darkmagenta;
 }
 
 .irs {
@@ -42,13 +42,12 @@
 }
 
 .irs-slider {
-    width: 13px;
+    width: 24px;
     height: 24px;
     top: 17px;
-    border:1px solid #fefefe;
-    background:#777;
-
-    border-radius: 3px;
+    border: 1px solid #fefefe;
+    background: deepskyblue;
+    border-radius: 12px !important;
 }
 #irs-active-slider, .irs-slider:hover {
     

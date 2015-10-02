@@ -22,7 +22,13 @@ class CreatePostjobRequest extends Request {
 	public function rules()
 	{
 		return [
-			'post_title'	=>	'required'
+			'post_title'	=>	'required',
+			'post_compname'	=>	'required',
+			'email_id'		=>  'email',
+			'alt_emailid'	=>	'email|unique:indusers|unique:corpusers',
+			'phone'			=>	'numeric',
+			'alt_phone'		=> 	'numeric'
+
 		];
 	}
 

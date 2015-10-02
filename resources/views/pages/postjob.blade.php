@@ -50,8 +50,8 @@
 						</div>
 					</div>
 				</div>
-				<div class="row-md-3"></div>
-				<div class="row-md-2"></div>
+				<!-- <div class="row-md-3"></div>
+				<div class="row-md-2"></div> -->
 				<div class="row">
 					<div class="col-md-12">
 						<div class="form-group">
@@ -183,7 +183,8 @@
 				<div class="row">
 					<div class="col-md-6">
 						<div class="form-group">							
-							<label class=" control-label">Experience (in Years)</label>
+							<label class=" control-label">Experience </label>&nbsp;: <input type="text" disabled style="width: 20px;background:transparent;border:0" name="min_exp" class="min-exp">-
+							<input type="text" style="width: 14px;margin:0 4px;background:transparent;border:0" disabled name="max_exp" class="max-exp">Years
 							<div class="">
 								<input id="range_1" type="text"  value=""/>
 								<input type="hidden" name="min_exp" class="min-exp">
@@ -194,16 +195,20 @@
 					<!--/span-->
 					<div class="col-md-6">
 						<div class="form-group">							
-							<label class=" control-label"><input type="checkbox" id="hide-check">&nbsp;Salary <i class="fa fa-rupee (alias)"></i>/
-								<select style="border-top: 0px;border-left: 0;border-right: 0;">
-									<option>Hour</option>
-									<option>Day</option>
-									<option>Week</option>
-									<option>Month</option>
+							<label class=" control-label"><input type="checkbox" id="hide-check">&nbsp;Salary 
+							</label>&nbsp;:<select style="border-top: 0px;border-left: 0;border-right: 0;">									
+									<option value="Monthly">Monthly</option>
+									<option value="Weekly">Weekly</option>
+									<option value="Daily">Daily</option>
+									<option value="Hourly">Hourly</option>
+									<option value="Per Visit">Per Visit</option>	
 								</select>
-							</label>
+							 <i class="fa fa-rupee (alias)"></i>&nbsp;<input type="text" disabled style="width: 30px;margin:0 6px;background:transparent;border:0" name="min_sal" class="min-sal">-
+							<input type="text" style="width:40px;margin:0 4px;background:transparent;border:0" disabled name="max_sal" class="max-sal">&nbsp;
+							
 							<div id="hide-sal" class="">
 								<input id="range_7" type="text"  value=""/>
+								<!-- <label name="min_sal" class="min-sal"></label> -->
 								<input type="hidden" name="min_sal" class="min-sal">
 								<input type="hidden" name="max_sal" class="max-sal">
 							</div>
@@ -311,6 +316,7 @@
 					<!--/span-->
 				</div>
 				<!--/row-->
+
 				<div class="row">
 					<div class="col-md-6">
 						<div class="form-group">

@@ -75,12 +75,12 @@ var ComponentsIonSliders = function () {
             });
             $("#range_7").ionRangeSlider({
                 min: 5000,
-                max: 100000,
+                max: 50000,
                 from: 5000,
                 to: 10000,
                 type: 'double',
-                step: 1,
-                postfix: "",
+                step: 5000,
+                postfix: "+",
                 prettify: false,
                 hasGrid: true,
                 onLoad: function (data) {

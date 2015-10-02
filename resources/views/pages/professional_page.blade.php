@@ -205,6 +205,7 @@
 										<span class="input-group-addon">
 											<i class="fa fa-university"></i>
 										</span>
+										
 										<input type="text" class="form-control" value="{{ $user->working_at }}" name="working_at">
 									</div>
 								</div>
@@ -224,6 +225,33 @@
 								</div>
 							</div>
 							<!--/span-->
+							<div class="col-md-6">
+								<div class="form-group">
+									<label>Experience</label>
+									<div class="input-group">
+										<span class="input-group-addon">
+											<i class="fa fa-university"></i>
+										</span>
+										<select class="form-control" name="prof_category" value="{{ $user->experience }}" >
+											<option value="1">1</option>
+											<option value="2">2</option>
+											<option value="3">3</option>
+											<option value="4">4</option>
+											<option value="5">5</option>
+											<option value="6">6</option>
+											<option value="7">7</option>
+											<option value="8">8</option>
+											<option value="9">9</option>
+											<option value="10">10</option>
+											<option value="11">11</option>
+											<option value="12">12</option>
+											<option value="13">13</option>
+											<option value="14">14</option>
+											<option value="15">15</option>
+										</select>
+									</div>
+								</div>
+							</div>
 						</div>
 						<div class="row-md-10">
 							<div class="col-md-12">
