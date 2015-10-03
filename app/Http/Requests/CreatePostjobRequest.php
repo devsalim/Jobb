@@ -23,10 +23,11 @@ class CreatePostjobRequest extends Request {
 	{
 		return [
 			'post_title'	=>	'required',
-			'post_compname'	=>	'required',
-			'email_id'		=>  'email',
-			'alt_emailid'	=>	'email|unique:indusers|unique:corpusers',
-			'phone'			=>	'numeric',
+			'role'			=>	'required',
+			'prof_category'	=>	'required',
+			'city'			=>	'required',
+			'time_for'		=>	'required',
+			'alt_emailid'	=>	'email',
 			'alt_phone'		=> 	'numeric'
 
 		];
