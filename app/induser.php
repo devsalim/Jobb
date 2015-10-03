@@ -49,7 +49,7 @@ class induser extends Model {
 
 	public function groups() 
     {
-        return $this->belongsToMany('App\Group');
+        return $this->belongsToMany('App\Group', 'groups_users', 'user_id', 'group_id')->withPivot('id');
     }
 
 

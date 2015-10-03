@@ -77,7 +77,7 @@
         </a>
       </li>
       <li class="@if($title == 'group'){{'active'}}@endif">
-        <a class="" href="/group/create">
+        <a class="" href="/group">
         <i class=" icon-note"></i>
         <span class="title">
         Groups</span>

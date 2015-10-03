@@ -8,8 +8,7 @@ class Group extends Model {
 
 	public function users()
     {
-        return $this->belongsToMany('App\Induser', 'groups_users', 'group_id', 'user_id')
-    			    ->withPivot('id');
+        return $this->belongsToMany('App\Induser', 'groups_users', 'group_id', 'user_id')->withPivot('id');
     }
 
 }

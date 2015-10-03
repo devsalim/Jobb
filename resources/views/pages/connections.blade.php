@@ -60,7 +60,22 @@
 												<div class="input-group">
 													<div class="input-group-control">
 														<label class="col-md-12 control-label" for="form_control_1" >
-															{{ $conreq->fname }} {{ $conreq->lname }}
+
+														<ul class="media-list">
+														  <li class="media">
+														    <div class="media-left">
+														      <a href="#">
+														        <img class="media-object" src="/img/profile/{{ $conreq->profile_pic }}" alt="..." style="width:65px">
+														      </a>
+														    </div>
+														    <div class="media-body">
+														      <h4 class="media-heading">{{ $conreq->fname }} {{ $conreq->lname }}</h4>
+														     {{ $conreq->working_at }}<br>
+															 {{ $conreq->city }}, {{ $conreq->state }}
+														    </div>
+														  </li>
+														</ul>
+
 														</label>
 													</div>
 
@@ -91,16 +106,29 @@
 										<div class="form-group form-md-line-input" style="margin-left: -11px;">
 											<div class="input-group">
 												<div class="input-group-control">
-													<label class="col-md-6 control-label" for="form_control_1" >
-													{{ $connection->fname }} {{ $connection->lname }}
+													<label class="col-md-12 control-label" for="form_control_1" >
+													<ul class="media-list">
+														  <li class="media">
+														    <div class="media-left">
+														      <a href="#">
+														        <img class="media-object" src="/img/profile/{{ $connection->profile_pic }}" alt="..." style="width:65px">
+														      </a>
+														    </div>
+														    <div class="media-body">
+														      <h4 class="media-heading">{{ $connection->fname }} {{ $connection->lname }}</h4>
+														     {{ $connection->working_at }}<br>
+													{{ $connection->city }}, {{ $connection->state }}
+														    </div>
+														  </li>
+														</ul>
 													</label>
 												</div>
 													
 												<span class="input-group-btn btn-right">
 													<form action="{{ url('/connections/destroy', $connection->pivot->id) }}" method="post">
 														<input type="hidden" name="_token" value="{{ csrf_token() }}">
-														<button type="submit" class="btn green-haze">
-														<i class="fa fa-check" style="font-size: 12px;background-color: white;color: black;border-radius: 10px;width: 20px;height: 20px;padding-top: 3px;"></i>&nbsp;Remove
+														<button type="submit" class="btn btn-danger">
+														<i class="glyphicon glyphicon-trash" style="font-size: 12px;background-color: white;color: black;border-radius: 10px;width: 20px;height: 20px;padding-top: 3px;"></i>
 														</button>
 													</form>
 													
@@ -121,8 +149,23 @@
 									<div class="form-group form-md-line-input" style="margin-left: -11px;">
 										<div class="input-group">
 											<div class="input-group-control">
-												<label class="col-md-6 control-label" for="form_control_1" >
-												{{ $pendingconnection->fname }} {{ $pendingconnection->lname }}
+												<label class="col-md-12 control-label" for="form_control_1" >
+													<ul class="media-list">
+													  <li class="media">
+													    <div class="media-left">
+													      <a href="#">
+													        <img class="media-object" src="/img/profile/{{ $pendingconnection->profile_pic }}" alt="..." style="width:65px">
+													      </a>
+													    </div>
+													    <div class="media-body">
+													      <h4 class="media-heading">
+													      	{{ $pendingconnection->fname }} {{ $pendingconnection->lname }}
+													      </h4>
+													     	{{ $pendingconnection->working_at }}<br>
+														 	{{ $pendingconnection->city }}, {{ $pendingconnection->state }}
+													    </div>
+													  </li>
+													</ul>
 												</label>
 											</div>
 											<span class="input-group-btn btn-right">

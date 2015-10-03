@@ -340,3 +340,27 @@ background-color:skyblue;
     box-shadow: 4px 4px 4px rgb(222, 222, 222);
     border-radius: 6px !important;
 }
+
+
+
+.media-body, .media-left, .media-right {
+    display: table;
+    float: left;
+}
+.media-body {
+    width: auto;
+    font-weight: normal;
+}
+
+.media-body-left {
+    float: left;
+    min-width: 200px;
+}
+.media-body-right {
+    float: left;
+    min-width: 80px;
+}
+
+.select2-container-multi .select2-choices {
+    padding: 0 5px 0 0;
+}
