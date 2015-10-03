@@ -1,7 +1,13 @@
 @extends('master')
 
 @section('content')
-
+<!-- <select>
+	<option>Red</option>
+	<option>red</option>
+	<option>red</option>
+	<option>red</option>
+	<option>red</option>
+</select>	 -->
 <div class="portlet light bordered">										
 	<div class="portlet-body form">
 		<!-- BEGIN FORM-->
@@ -17,11 +23,11 @@
 							<div class="timeline-item time-item">
 								<div class="timeline-badge" style="margin: 10px 0px;">
 									@if($post->induser != null)
-									<img class="timeline-badge-userpic" src="/img/profile/{{ $post->induser->profile_pic }}" title="{{ $post->induser->fname }}">
-									<a class="icon-userpic"><i class=" icon-users"></i></a>
+									<img class="timeline-badge-userpic userpic-box" src="/img/profile/{{ $post->induser->profile_pic }}" title="{{ $post->induser->fname }}">
+									<a class="icon-userpic"><i class="glyphicon glyphicon-user"></i></a>
 									@elseif($post->corpuser != null)
-									<img class="timeline-badge-userpic" src="/img/profile/{{ $post->corpuser->logo_status }}" title="{{ $post->corpuser->firm_name }}">
-									<a class="icon-userpic"><i class="fa fa-bank (alias)"></i></a>
+									<img class="timeline-badge-userpic userpic-box" src="/img/profile/{{ $post->corpuser->logo_status }}" title="{{ $post->corpuser->firm_name }}">
+									<a class="icon-userpic"><i class="fa fa-institution (alias)" style="padding: 0px 5px;"></i></a>
 									@endif
 								</div>
 								<div class="timeline-body" style="">
@@ -34,8 +40,8 @@
 													{{ $post->post_compname }} 
 												@endif
 											</a>
-											<span class="timeline-body-time font-grey-cascade">Posted {{ $post->post_type }} At 
-												{{ date('M d, Y', strtotime($post->created_at)) }}&nbsp;&nbsp;<i class="icon-pin"></i>
+											<span class="timeline-body-time font-grey-cascade">Posted at 
+												{{ date('M d, Y', strtotime($post->created_at)) }}
 											</span>
 										</div>
 									</div>
@@ -64,23 +70,26 @@
 									</div>		
 									<div class="post-job-skill-bar">
 										<div class="{{ $post->post_type }}"><a class="post-type-class">{{ $post->post_type }}</a></div>
+										
+										<a href="javascript:;" class="btn btn-icon-only pin-bar btn-circle green"><i class="icon-pin" style="font-size: 20px;"></i></a>
+										
 									</div>
 								</div>
-								<div class="portlet-body" style="margin: 0 -6px;">
-								<div class="panel-group accordion" id="accordion{{$var}}">
+								<div class="portlet-body" style="margin: 0 -5px;">
+								<div class="panel-group accordion" id="accordion{{$var}}" style="margin-bottom: 0;">
 									<div class="panel panel-default" style=" position: relative;">
 										<div class="panel-heading">
 											<h4 class="panel-title">
 											<a class="accordion-toggle accordion-toggle-styled" 
 											data-toggle="collapse" data-parent="#accordion{{$var}}" href="#collapse_{{$var}}_{{$var}}"  style="font-size: 15px;font-weight: 600;">
-											Description: </a>	
+											Description:</a>	
 											</h4>
 										</div>
 										<div id="collapse_{{$var}}_{{$var}}" class="panel-collapse collapse">
 											<div class="panel-body" style="border-top: 0;padding: 4px 15px;">
-												<div class="skill-display">Job Id&nbsp;:{{ $post->id }} </div>
-												{{ $post->job_detail }}
 												
+												{{ $post->job_detail }}
+												<div class="skill-display">Reference Id&nbsp;: </div>
 												<div class="skill-display">Skills&nbsp;:<br> </div>
 												<ul>
 												@foreach($post->skills as $skill)
@@ -90,31 +99,54 @@
 
 												<div class="skill-display">Contact&nbsp;:<br> </div> 
 												<div class="row">
-													<div class="col-md-4 col-sm-4 col-xs-12">
+													<div class="col-md-8 col-sm-8 col-xs-12">
 														<i class="glyphicon glyphicon-envelope" style="color: #13B8D4;font-size: 16px;"></i>&nbsp;: {{ $post->email_id }}
-													</div>
-													<div class="col-md-4 col-sm-4 col-xs-12">
-														<i class="glyphicon glyphicon-earphone" style="color: green;font-size: 16px;"></i>&nbsp;: {{ $post->phone }}
+														@if($post->alt_emailid != null)
+														 OR {{ $post->alt_emailid }}
+														 @endif
+													</div>									
+												</div>
+												<div class="row">
+													<div class="col-md-8 col-sm-8 col-xs-12">
+														<i class="glyphicon glyphicon-earphone" style="color: green;font-size: 16px;"></i>&nbsp;:{{ $post->phone }}
+														@if($post->alt_phone != null)
+														 OR {{ $post->alt_phone }}
+														 @endif 
 													</div>
 												</div>
+												<div class="skill-display">Post Id&nbsp;: {{ $post->id }} </div> 
 											</div>
 										</div>
 										<div class="post-{{ $post->post_type }} post-icon-bar">
-											<button type="button"  class="post-icon" style="background-color:transparent;border:0;font-size:12px;">
-											 <i class="icon-like" style="font-size:24px;color: darkmagenta;"></i><span class="badge-like">100 </span>
-											</button>
+											<div class="btn-group dropup like-bar">
+												<button class="btn dropdown-toggle" type="button" data-toggle="dropdown" style="border-radius: 25px !important; height: 40px;background-color: burlywood;">
+												<i class="icon-like" ></i>
+												</button>
+												<span class="badge-like">100 </span>
+											</div>
+											
 											@if($post->post_type == 'job')
-											<button type="button" class="post-icon" style="background-color:transparent;border:0;font-size:12px;padding: 0px 0px 0px 12px;">
-											 <i class="glyphicon glyphicon-ok-circle" onclick="window.location='{{ $post->website_redirect_url }}';" style="font-size:24px;color: darkslateblue;"></i>&nbsp;Apply
-											</button>
+											<button type="button" class="btn btn-success" style=" margin: 0px auto;float:none;background-color: #61b3de;display:table;"><i class="icon-arrow-right" style="font-size:22px;vertical-align:middle;"></i>&nbsp;<span style="font-weight:600;vertical-align:middle">Apply</span></button>
+											
+											@elseif($post->post_type == 'skill')
+											<button type="button" class="btn btn-success" style=" margin: 0px auto;float:none;background-color: #70b29c;display:table;"><i class="icon-arrow-right" style="font-size:22px;vertical-align:middle;"></i>&nbsp;<span style="font-weight:600;vertical-align:middle">Contact</span></button>
 											@endif
-											<button type="button" id="hide-social" class="post-icon" style="background-color:transparent;border:0;font-size:12px;">
-											 <i class="glyphicon glyphicon-share" style="font-size:24px;color: tomato;"></i>&nbsp;Share
-											</button>
-											<div id="show-social" class="post-social-icon-bar ">
-												<a href="/" class="facebook"><i class="fa fa-facebook post-social-icon" ></i></a>
-												<a href="/" class="google-plus"><i class="fa fa-google-plus post-social-icon"></i></a>
-												<a href="/" class="linkedin"><i class="fa fa-linkedin post-social-icon" ></i></a>
+											<span class="span-share">Share</span>
+											<div class="btn-group dropup share-bar">
+												<button class="btn green dropdown-toggle" type="button" data-toggle="dropdown" style="border-radius: 25px !important; height: 40px;background-color:tomato;">
+												<i class="icon-share"></i>
+												</button>
+												<ul class="dropdown-menu pull-right" role="menu" style="min-width:0;box-shadow:0 0 !important">
+													<li style="background-color: #3b5998;">
+														<a href="/" class="facebook"><i class="fa fa-facebook post-social-icon" ></i></a>
+													</li>
+													<li style="background-color: #c32f10;">
+														<a href="/" class="google-plus"><i class="fa fa-google-plus post-social-icon"></i></a>
+													</li>
+													<li style="background-color: #00aced;">
+														<a href="/" class="linkedin"><i class="fa fa-linkedin post-social-icon" ></i></a>
+													</li>
+												</ul>
 											</div>
 										</div>
 									</div>
