@@ -80,7 +80,7 @@ var ComponentsIonSliders = function () {
                 to: 10000,
                 type: 'double',
                 step: 5000,
-                postfix: "+",
+                postfix: "",
                 prettify: false,
                 hasGrid: true,
                 onLoad: function (data) {

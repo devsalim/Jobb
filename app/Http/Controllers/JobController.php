@@ -60,7 +60,7 @@ class JobController extends Controller {
 		// $request['skill_list'] = implode(', ', $request['skill_list']);
 
 		$post = Postjob::create($request->all());
-		$post->skills()->attach($skillIds);
+		$post->skills()->attach($skillIds); 
 
 		return redirect("/job/create");
 		

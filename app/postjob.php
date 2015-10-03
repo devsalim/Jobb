@@ -22,7 +22,9 @@ class postjob extends Model {
 							'education', 
 							'website_redirect_url', 
 							'email_id',
+							'alt_emailid',
 							'phone',
+							'alt_phone',
 							'individual_id',
 							'corporate_id'
 						   ];

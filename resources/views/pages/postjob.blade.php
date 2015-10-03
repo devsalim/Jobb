@@ -53,14 +53,25 @@
 				<!-- <div class="row-md-3"></div>
 				<div class="row-md-2"></div> -->
 				<div class="row">
-					<div class="col-md-12">
+					<div class="col-md-6">
 						<div class="form-group">
 							<label>Company Name</label>
 							<div class="input-group">
 								<span class="input-group-addon">
 									<i class="fa fa-user" style="color:darkcyan;"></i>
 								</span>
-								<input type="text" name="post_compname" class="form-control" placeholder="Job Title">
+								<input type="text" name="post_compname" class="form-control" placeholder="Company Name">
+							</div>
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="form-group">
+							<label>Reference Id</label>
+							<div class="input-group">
+								<span class="input-group-addon">
+									<i class="fa fa-user" style="color:darkcyan;"></i>
+								</span>
+								<input type="text" name="reference Id" class="form-control" placeholder="Reference Id">
 							</div>
 						</div>
 					</div>
@@ -274,7 +285,7 @@
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-md-6">
+					<div class="col-md-3">
 						<div class="form-group">
 							<label>Key Skills</label>
 							{{-- <input type="hidden" name="linked_skill" id="select2_sample5" class="form-control select2" value=""> --}}
@@ -283,6 +294,25 @@
 					</div>
 					<!--/span-->
 					<div class="col-md-6">
+						
+					</div>
+					<!--/span-->
+				</div>
+				<!--/row-->
+				<div class="row">
+					<div class="col-md-8">
+						<div class="form-group">
+							<label style="margin-left: -5px;"><input id="hide-apply" type="checkbox"></label><label>&nbsp;Apply On Company Website</label>
+							<div id="show-apply" class="input-group">
+								<span class="input-group-addon">
+									<i class="icon-info"style="color:darkcyan;"></i>
+								</span>
+								<input type="text" name="website_redirect_url" class="form-control" value="" placeholder="http://">
+							</div>
+						</div>
+					</div>
+					<!--/span-->
+					<div class="col-md-4">
 						<div class="form-group">
 							<label>Post Duration</label>
 							<div class="input-group">
@@ -301,21 +331,6 @@
 					<!--/span-->
 				</div>
 				<!--/row-->
-				<div class="row">
-					<div class="col-md-12">
-						<div class="form-group">
-							<label>Website</label>
-							<div class="input-group">
-								<span class="input-group-addon">
-									<i class="icon-info"style="color:darkcyan;"></i>
-								</span>
-								<input type="url" name="website_redirect_url" pattern="https?://.+" class="form-control" value="" placeholder="Apply Address if any">
-							</div>
-						</div>
-					</div>
-					<!--/span-->
-				</div>
-				<!--/row-->
 
 				<div class="row">
 					<div class="col-md-6">
@@ -325,7 +340,10 @@
 							<span class="input-group-addon">
 							<i class="icon-envelope" style="color:darkcyan;"></i>
 							</span>
-							<input type="text" name="email_id" class="form-control" placeholder="">
+							<input type="text" disabled name="email_id" value="{{ Auth::user()->email }}" class="form-control" placeholder="">
+							<span class="input-group-addon" style="width: 55px;">
+								Public
+							</span>
 							</div>
 						</div>
 					</div>
@@ -351,7 +369,10 @@
 							<span class="input-group-addon">
 							<i class="icon-call-end" style="color:darkcyan;"></i>
 							</span>
-							<input type="phone" name="phone" class="form-control" placeholder="">
+							<input type="phone" disabled name="phone" value="{{ Auth::user()->mobile }}"  class="form-control" placeholder="">
+							<span class="input-group-addon" style="width: 55px;">
+								Private
+							</span>
 							</div>
 						</div>
 					</div>
@@ -379,16 +400,23 @@
 	</div>
 </div>
 
+
+
 @stop
 
 
 @section('javascript')
 <script>
-	jQuery(document).ready(function() { 
-	    ComponentsIonSliders.init();
-	    ComponentsDropdowns.init();
-	    ComponentsEditors.init();
-	});   
+jQuery(document).ready(function() {       
+	// initiate layout and plugins
+	Metronic.init(); // init metronic core components
+	Layout.init(); // init current layout
+	Demo.init(); // init demo features
+	FormWizard.init();
+    ComponentsIonSliders.init();
+    ComponentsDropdowns.init();
+    ComponentsEditors.init();
+});   
 </script>
 <script type="text/javascript">
     $(function () {
@@ -403,5 +431,16 @@
 
     $('#skill-list').select2();
     $('#connections').select2();
+</script>
+<script type="text/javascript">
+	 $(function () {
+        $("#hide-apply").click(function () {
+            if ($(this).is(":checked")) {
+                $("#show-apply").show();
+            } else {
+                $("#show-apply").hide();
+            }
+        });
+    });
 </script>
 @stop
