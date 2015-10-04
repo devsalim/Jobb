@@ -1,7 +1,7 @@
 @extends('master')
 
 @section('content')
-<div class="portlet light bordered" style="border: none !important;">										
+<div class="portlet light bordered" style="border: none !important;background:transparent">										
 	<div class="portlet-body form">
 		<!-- BEGIN FORM-->
 		<form action="#" class="horizontal-form">

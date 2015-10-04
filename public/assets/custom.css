@@ -436,3 +436,6 @@ background-color:white;
 .portlet.light.bordered {
     border: 1px solid #e1e1e1 !important;
 }
+.portlet.light {
+    background-color: white;
+}

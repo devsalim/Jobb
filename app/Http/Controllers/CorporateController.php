@@ -111,9 +111,9 @@ class CorporateController extends Controller {
 		$data->website_url = Input::get('website_url');
 		$data->linked_skill = Input::get('linked_skill');
 		$data->save();
-		return redirect('/login');
+		return redirect('/corporate/create');
 		}else{
-		return 'some error occured.'+Input::get('email');
+			return 'some error occured.'+Input::get('email');
 		}
 	}
 
