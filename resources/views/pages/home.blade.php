@@ -8,7 +8,7 @@
 	<option>red</option>
 	<option>red</option>
 </select>	 -->
-<div class="portlet light bordered">										
+<div class="portlet light bordered" style="border: none !important;">										
 	<div class="portlet-body form">
 		<!-- BEGIN FORM-->
 		<form action="#" class="horizontal-form">
@@ -191,6 +191,7 @@
 				 @endforeach
 				@endif
 				</div>
+			</div>
 		</form>
 		<!-- END FORM-->
 	</div>

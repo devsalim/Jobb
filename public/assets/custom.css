@@ -65,10 +65,10 @@
 }
 
 /* Post Icon */
-.post-icon-bar{
+.post-icon-bar {
     padding: 5px 10px 5px 0px;
     border-radius: 0 0 4px 4px !important;
-    border: 1px solid lightgrey;
+    border-top: 1px solid lightgrey;
     position: relative;
     height: 45px;
 }
@@ -332,14 +332,14 @@ background-color:white;
     padding: 4px 8px;
 }
 
-.time-item{
+.time-item {
     border: 1px solid #61b3de;
-    margin: 6px 0px 10px -11px;
+    margin: 0 0 10px 0;
     position: relative;
     padding: 0px 5px 0px 5px;
     box-shadow: 4px 4px 4px rgb(222, 222, 222);
     border-radius: 6px !important;
-<<<<<<< HEAD
+    background-color: white;
 }
 
 
@@ -364,7 +364,6 @@ background-color:white;
 
 .select2-container-multi .select2-choices {
     padding: 0 5px 0 0;
-=======
     background: white;
 }
 
@@ -421,5 +420,19 @@ background-color:white;
     border-radius: 20px !important;
     color: black;
     box-shadow: 1px 1px black;
->>>>>>> 0aee55b06c1b02901f538105c286f10fb95a3368
+}
+.media-left img {
+    width: 60px;
+    height: 60px;
+    background-color: #EBEBEB;
+    border: 1px solid #ddd;
+    padding: 3px;
+}
+
+.portlet {
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+.portlet.light.bordered {
+    border: 1px solid #e1e1e1 !important;
 }

@@ -7,7 +7,7 @@
 	  <li class="media">
 	    <div class="media-left">
 	      <a href="#">
-	        <img class="media-object" src="/img/profile/{{ $user->profile_pic }}" alt="..." style="width:65px">
+	        <img class="media-object" src="@if($user->profile_pic != null){{ '/img/profile/'.$user->profile_pic }}@else{{'/assets/images/couple.png'}}@endif" alt="DP" style="width:60px">
 	      </a>
 	    </div>
 	    <div class="media-body">
@@ -16,14 +16,15 @@
 		     	{{ $user->working_at }}<br>
 			 	{{ $user->city }}, {{ $user->state }}
 			</div>
+			@if($user->id != Auth::user()->induser_id)
 		 	<div class="media-body-right">
 		 		<span class="input-group-btn btn-right">
-					<button type="submit" class="btn green-haze" >
+					<button type="submit" class="btn btn-success" >
 					<i class="glyphicon glyphicon-plus-sign" style="font-size: 12px;background-color: white;color: black;border-radius: 10px;width: 20px;height: 20px;padding-top: 3px;"></i> 
 					</button>
 				</span>
 		 	</div>
-
+		 	@endif
 	    </div>
 	  </li>
 </form>

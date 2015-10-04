@@ -38,15 +38,15 @@
 						</div>
 						
 						<div class="form-group  col-md-12 clearfix">	
-						<!-- BEGIN FORM-->
-						<form action="searchConnections" class="horizontal-form" method="post">
-							<input type="hidden" name="_token" value="{{ csrf_token() }}">				
-							<div class="input-icon right">
-								<i class="fa fa-search" style="color: darkcyan;"></i>
-								<input type="text" name="keywords" id="search-input" onkeydown="down()" onkeyup="up()" class="form-control input-circle" placeholder="Search" style="border: 1px solid darkcyan;">
-							</div>	
-						</form>
-						<!-- END FORM-->
+							<!-- BEGIN FORM-->
+							<form action="searchConnections" class="horizontal-form" method="post">
+								<input type="hidden" name="_token" value="{{ csrf_token() }}">				
+								<div class="input-icon right">
+									<i class="fa fa-search" style="color: darkcyan;"></i>
+									<input type="text" name="keywords" id="search-input" onkeydown="down()" onkeyup="up()" class="form-control input-circle" placeholder="Search" style="border: 1px solid darkcyan;">
+								</div>	
+							</form>
+							<!-- END FORM-->
 						</div>
 
 						<div class="col-md-12" id="search-results"></div>
@@ -54,32 +54,26 @@
 							@if(count(Auth::user()->induser->friendOf) > 0)
 								<div class="col-md-12">
 									<h3>New Connection Request</h3>
+									<ul class="media-list">
 									@foreach(Auth::user()->induser->friendOf as $conreq)
-										@if($conreq->pivot->status == 0)				
-											<div class="form-group form-md-line-input" style="margin-left: -11px;">
-												<div class="input-group">
-													<div class="input-group-control">
-														<label class="col-md-12 control-label" for="form_control_1" >
-
-														<ul class="media-list">
-														  <li class="media">
-														    <div class="media-left">
-														      <a href="#">
-														        <img class="media-object" src="/img/profile/{{ $conreq->profile_pic }}" alt="..." style="width:65px">
-														      </a>
-														    </div>
-														    <div class="media-body">
-														      <h4 class="media-heading">{{ $conreq->fname }} {{ $conreq->lname }}</h4>
-														     {{ $conreq->working_at }}<br>
-															 {{ $conreq->city }}, {{ $conreq->state }}
-														    </div>
-														  </li>
-														</ul>
-
-														</label>
-													</div>
-
-													<span class="input-group-btn btn-right">
+										@if($conreq->pivot->status == 0)														
+										  <li class="media">
+										    <div class="media-left">
+										      <a href="#">
+										        <img class="media-object" src="@if($conreq->profile_pic != null){{ '/img/profile/'.$conreq->profile_pic }}@else{{'/assets/images/couple.png'}}@endif" alt="DP" style="width:60px">
+										      </a>
+										    </div>
+										    <div class="media-body">
+										    	<div class="media-body-left">
+										    		 <h4 class="media-heading">
+										    		 	{{ $conreq->fname }} {{ $conreq->lname }}
+										    		 </h4>
+												     {{ $conreq->working_at }}<br>
+													 {{ $conreq->city }}, {{ $conreq->state }}
+										    	</div>
+										    	
+										    	<div class="media-body-right">
+										    		<span class="input-group-btn btn-right">
 														<form action="{{ url('/connections/response', $conreq->pivot->id) }}" method="post">
 															<input type="hidden" name="_token" value="{{ csrf_token() }}">
 															<button type="submit" name="action" value="accept" class="btn btn-success">
@@ -90,114 +84,105 @@
 															</button>
 														</form>
 													</span>
-												</div>
-											</div>
+										    	</div>
+											</div>														     
+										  </li>
 										@endif
-									@endforeach					
+									@endforeach		
+									</ul>			
 								</div>					
 							@endif		
 
 						
 							@if(count(Auth::user()->induser->friends) > 0)	
-							<div class="col-md-12">					
-								<h3>Connected</h3>
-								@foreach(Auth::user()->induser->friends as $connection)
-									@if($connection->pivot->status == 1)					
-										<div class="form-group form-md-line-input" style="margin-left: -11px;">
-											<div class="input-group">
-												<div class="input-group-control">
-													<label class="col-md-12 control-label" for="form_control_1" >
-													<ul class="media-list">
-														  <li class="media">
-														    <div class="media-left">
-														      <a href="#">
-														        <img class="media-object" src="/img/profile/{{ $connection->profile_pic }}" alt="..." style="width:65px">
-														      </a>
-														    </div>
-														    <div class="media-body">
-														      <h4 class="media-heading">{{ $connection->fname }} {{ $connection->lname }}</h4>
-														     {{ $connection->working_at }}<br>
-													{{ $connection->city }}, {{ $connection->state }}
-														    </div>
-														  </li>
-														</ul>
-													</label>
-												</div>
-													
-												<span class="input-group-btn btn-right">
-													<form action="{{ url('/connections/destroy', $connection->pivot->id) }}" method="post">
-														<input type="hidden" name="_token" value="{{ csrf_token() }}">
-														<button type="submit" class="btn btn-danger">
-														<i class="glyphicon glyphicon-trash" style="font-size: 12px;background-color: white;color: black;border-radius: 10px;width: 20px;height: 20px;padding-top: 3px;"></i>
-														</button>
-													</form>
-													
-												</span>
-											</div>
-										</div>
-									@endif
-								@endforeach
-							</div>	
+								<div class="col-md-12">					
+									<h3>Connected</h3>
+									<ul class="media-list">
+									@foreach(Auth::user()->induser->friends as $connection)
+										@if($connection->pivot->status == 1)													
+										  <li class="media">
+										    <div class="media-left">
+										      <a href="#">
+										        <img class="media-object" 
+										        src="@if($connection->profile_pic != null){{ '/img/profile/'.$connection->profile_pic }}@else{{'/assets/images/couple.png'}}@endif" 
+										      alt="DP" style="width:60px">
+										      </a>
+										    </div>
+										    <div class="media-body">
+										    	<div class="media-body-left">
+										    		 <h4 class="media-heading">
+												      	{{ $connection->fname }} {{ $connection->lname }}
+												      </h4>
+												     	{{ $connection->working_at }}<br>
+														{{ $connection->city }}, {{ $connection->state }}
+										    	</div>
+										    	<div class="media-body-right">
+										    		<span class="input-group-btn btn-right">
+														<form action="{{ url('/connections/destroy', $connection->pivot->id) }}" method="post">
+															<input type="hidden" name="_token" value="{{ csrf_token() }}">
+															<button type="submit" class="btn btn-danger">
+															<i class="glyphicon glyphicon-trash" style="font-size: 12px;background-color: white;color: black;border-radius: 10px;width: 20px;height: 20px;padding-top: 3px;"></i>
+															</button>
+														</form>													
+													</span>
+										    	</div>
+										     
+										    </div>
+										  </li>
+										@endif
+									@endforeach
+									</ul>
+								</div>	
 							@endif
 
 						
 							@if(count(Auth::user()->induser->friendsOfMine) > 0)
-							<div class="col-md-12">
-								<h3>Pending Request</h3>
-								@foreach(Auth::user()->induser->friendsOfMine as $pendingconnection)
-									@if($pendingconnection->pivot->status == 0)						
-									<div class="form-group form-md-line-input" style="margin-left: -11px;">
-										<div class="input-group">
-											<div class="input-group-control">
-												<label class="col-md-12 control-label" for="form_control_1" >
-													<ul class="media-list">
-													  <li class="media">
-													    <div class="media-left">
-													      <a href="#">
-													        <img class="media-object" src="/img/profile/{{ $pendingconnection->profile_pic }}" alt="..." style="width:65px">
-													      </a>
-													    </div>
-													    <div class="media-body">
-													      <h4 class="media-heading">
-													      	{{ $pendingconnection->fname }} {{ $pendingconnection->lname }}
-													      </h4>
-													     	{{ $pendingconnection->working_at }}<br>
-														 	{{ $pendingconnection->city }}, {{ $pendingconnection->state }}
-													    </div>
-													  </li>
-													</ul>
-												</label>
-											</div>
-											<span class="input-group-btn btn-right">
-												
-												<form action="{{ url('/connections/destroy', $pendingconnection->pivot->id) }}" method="post">
-													<input type="hidden" name="_token" value="{{ csrf_token() }}">
-													<div class="btn btn-warning">
-														<i class="icon - glyphicon glyphicon-question-sign" style="font-size: 12px;background-color: white;color: black;border-radius: 10px;width: 20px;height: 20px;padding-top: 3px;"></i>
-													</div>
-													<button type="submit" class="btn btn-danger">
-														<i class="fa fa-remove" style="font-size: 12px;background-color: white;color: black;border-radius: 10px;width: 20px;height: 20px;padding-top: 3px;"></i>
-													</button>
-												</form>
-												
-											</span>
-										</div>
-									</div>
-									@endif
-								@endforeach
-							</div>
-							@endif
+								<div class="col-md-12">
+									<h3>Pending Request</h3>								
+									<ul class="media-list">
+									@foreach(Auth::user()->induser->friendsOfMine as $pendingconnection)
+										@if($pendingconnection->pivot->status == 0)	
+										  <li class="media">
+										    <div class="media-left">
+										      <a href="#">								     									      	
+										        <img class="media-object" src="@if($pendingconnection->profile_pic != null){{ '/img/profile/'.$pendingconnection->profile_pic }}@else{{'/assets/images/couple.png'}}@endif" alt="DP" style="width:60px">
+										      </a>
+										    </div>
+										    <div class="media-body">
+										    	<div class="media-body-left">
+											      <h4 class="media-heading">
+											      	{{ $pendingconnection->fname }} {{ $pendingconnection->lname }}
+											      </h4>
+											     	{{ $pendingconnection->working_at }}<br>
+												 	{{ $pendingconnection->city }}, {{ $pendingconnection->state }}
+											 	</div>
+											 	<div class="media-body-right">
+											 		<span class="input-group-btn btn-right">
+									
+														<form action="{{ url('/connections/destroy', $pendingconnection->pivot->id) }}" method="post">
+															<input type="hidden" name="_token" value="{{ csrf_token() }}">
+															<div class="btn btn-warning">
+																<i class="icon - glyphicon glyphicon-question-sign" style="font-size: 12px;background-color: white;color: black;border-radius: 10px;width: 20px;height: 20px;padding-top: 3px;"></i>
+															</div>
+															<button type="submit" class="btn btn-danger">
+																<i class="fa fa-remove" style="font-size: 12px;background-color: white;color: black;border-radius: 10px;width: 20px;height: 20px;padding-top: 3px;"></i>
+															</button>
+														</form>
+														
+													</span>
+											 	</div>
+										    </div>
+										  </li>
+										@endif
+									@endforeach
+									</ul>
+								</div>
+							@endif	
 						
-
-				
-						
-						
-						</div>			
-					</div>
-					
+					</div>			
 				</div>
+					
 			</div>
-		
 	</div>
 </div>
 									

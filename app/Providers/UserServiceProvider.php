@@ -20,7 +20,7 @@ class UserServiceProvider extends ServiceProvider {
 			}else if(Auth::user()->identifier == 2){
 				$user = Corpuser::where('id', '=', Auth::user()->corpuser_id)->first();
 			}
-			$view->with('user', $user);
+			$view->with('session_user', $user);
 		});
 	}
 
