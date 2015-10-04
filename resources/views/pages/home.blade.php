@@ -1,13 +1,6 @@
 @extends('master')
 
 @section('content')
-<!-- <select>
-	<option>Red</option>
-	<option>red</option>
-	<option>red</option>
-	<option>red</option>
-	<option>red</option>
-</select>	 -->
 <div class="portlet light bordered" style="border: none !important;">										
 	<div class="portlet-body form">
 		<!-- BEGIN FORM-->

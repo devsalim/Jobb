@@ -27,16 +27,20 @@
 			@endif
 			<input type="hidden" name="post_type">
 			<div class="form-body">
+				@if(Auth::user()->identifier == 1)
 				<div class="row">
 					<div class="col-md-2"></div>
 					<div class="col-md-7">
 						<div class="form-group">
 							<label>You Can Tag Friends</label>
 							{{-- <input type="hidden" name="tag_friends" id="select2_sample7" class="form-control select2" value="All"> --}}
+							
 							{!! Form::select('connections[]', $connections, null, ['id'=>'connections', 'class'=>'form-control', 'multiple']) !!}
+							
 						</div>
 					</div>
 				</div>
+				@endif
 				<div class="row">
 					<div class="col-md-12">
 						<div class="form-group">

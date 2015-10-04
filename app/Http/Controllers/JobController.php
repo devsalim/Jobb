@@ -40,8 +40,12 @@ class JobController extends Controller {
 	{
 		$title = 'job';
 		$skills = Skills::lists('name', 'id');
-		$connections=Auth::user()->induser->friends->lists('fname', 'id');
-		return view('pages.postjob', compact('title', 'skills', 'connections'));
+		if(Auth::user()->identifier == 1){
+			$connections=Auth::user()->induser->friends->lists('fname', 'id');
+			return view('pages.postjob', compact('title', 'skills', 'connections'));
+		}else{
+			return view('pages.postjob', compact('title', 'skills'));
+		}
 	}
 
 	/**
