@@ -63,7 +63,10 @@ Route::group(array('before' => 'auth'), function(){
 	Route::post('feedback/store', 'FeedbackController@store');
 	Route::post('feedback/update', 'FeedbackController@update');
 
-	Route::post('searchConnections', 'ConnectionsController@searchConnections');	
+	Route::post('searchConnections', 'ConnectionsController@searchConnections');
+
+	Route::get('individual_view', 'ViewpageController@index');
+	Route::get('individual_view/create', 'ViewpageController@create');	
 });
 
 Route::get('fillitlater', 'PagesController@fillItLater');

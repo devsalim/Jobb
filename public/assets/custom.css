@@ -396,3 +396,9 @@ background-color:white;
     color: black;
     box-shadow: 1px 1px black;
 }
+
+/* View Page */
+
+.view-page{
+    padding-top: 2px;
+}

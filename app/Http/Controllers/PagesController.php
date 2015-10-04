@@ -37,9 +37,13 @@ class PagesController extends Controller {
 	// }
 
 	public function home(){
-		$title = 'home';
-		$posts = Postjob::orderBy('id', 'desc')->with('indUser', 'corpUser')->get();
-		return view('pages.home', compact('posts', 'title'));
+		if (Auth::check()) {
+			$title = 'home';
+			$posts = Postjob::orderBy('id', 'desc')->with('indUser', 'corpUser')->get();
+			return view('pages.home', compact('posts', 'title'));
+		}else{
+			return redirect('login');
+		}	
 	}
 
 	public function myPost(){

@@ -2,7 +2,7 @@
 
 @section('content')
 
-<div class="portlet light">
+<div class="portlet light col-md-9" style="border: 1px solid gainsboro;">
 	<div class="portlet-title">									
 		<label style="font-size: 19px;text-align: center;margin: auto;width: 75%;border-bottom:2px solid darkred;">Do you like to Post your Skill?<br>Post Skill for FREE!!</label>										
 		<div class="tools">
@@ -12,7 +12,7 @@
 			<a href="" class="remove"></a>
 		</div>
 	</div>
-	<div class="portlet-body form" style="width: 80%;">
+	<div class="portlet-body form">
 		<!-- BEGIN FORM-->
 		<form action="{{ url('skill/store') }}" method="post" class="horizontal-form">
 			<input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -256,21 +256,41 @@
 				</div>
 				
 				<div class="row">
-					<div class="col-md-6">
+					<div class="col-md-3">
 						<div class="form-group">
 							<label>Key Skills</label>
-							<input type="hidden" name="linked_skill" id="select2_sample5" class="form-control select2" value="">
+							 <input type="hidden" name="linked_skill" id="select2_sample5" class="form-control select2" value="">
+							
 						</div>
 					</div>
 					<!--/span-->
 					<div class="col-md-6">
+						
+					</div>
+					<!--/span-->
+				</div>
+				<!--/row-->
+				<div class="row">
+					<div class="col-md-8">
+						<div class="form-group">
+							<label style="margin-left: -5px;"><input id="hide-apply" type="checkbox"></label><label>&nbsp;Apply On Company Website</label>
+							<div id="show-apply" class="input-group">
+								<span class="input-group-addon">
+									<i class="icon-info"style="color:darkcyan;"></i>
+								</span>
+								<input type="text" name="website_redirect_url" class="form-control" value="" placeholder="http://">
+							</div>
+						</div>
+					</div>
+					<!--/span-->
+					<div class="col-md-4">
 						<div class="form-group">
 							<label>Post Duration</label>
 							<div class="input-group">
 									<span class="input-group-addon">
 									<i class="icon-clock" style=" color: darkcyan;"></i>
 									</span>
-									<select class="form-control" name="post_duration">	
+									<select name="post_duration" class="form-control" >						
 										<option value="3">3 Days</option>
 										<option value="7">7 Days</option>
 										<option value="15">15 Days</option>
@@ -282,6 +302,7 @@
 					<!--/span-->
 				</div>
 				<!--/row-->
+
 				<div class="row">
 					<div class="col-md-6">
 						<div class="form-group">
@@ -290,7 +311,10 @@
 							<span class="input-group-addon">
 							<i class="icon-envelope" style="color:darkcyan;"></i>
 							</span>
-							<input type="text" name="email_id" class="form-control" placeholder="">
+							<input type="text" disabled name="email_id" value="{{ Auth::user()->email }}" class="form-control" placeholder="">
+							<span class="input-group-addon" style="width: 55px;">
+								Public
+							</span>
 							</div>
 						</div>
 					</div>
@@ -316,7 +340,10 @@
 							<span class="input-group-addon">
 							<i class="icon-call-end" style="color:darkcyan;"></i>
 							</span>
-							<input type="phone" name="phone" class="form-control" placeholder="">
+							<input type="phone" disabled name="phone" value="{{ Auth::user()->mobile }}"  class="form-control" placeholder="">
+							<span class="input-group-addon" style="width: 55px;">
+								Private
+							</span>
 							</div>
 						</div>
 					</div>
