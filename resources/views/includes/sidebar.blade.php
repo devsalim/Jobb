@@ -9,32 +9,32 @@
         <div class="user-short-detail-container">
           <div class="profile-userpic user-image">
             <a id="ajax-demo" href="#profile-pic" data-toggle="modal" class="config">
-                @if($user->profile_pic == null && $user->fname != null)
+                @if($session_user->profile_pic == null && $session_user->fname != null)
                   <div class="hover-image">Add</div>
                 @endif
-                @if($user->logo_status == null && $user->firm_name != null)
+                @if($session_user->logo_status == null && $session_user->firm_name != null)
                   <div class="hover-image">Add</div>
                 @endif
-                @if($user->logo_status != null)
-                  <img src="/img/profile/{{ $user->logo_status }}">
+                @if($session_user->logo_status != null)
+                  <img src="/img/profile/{{ $session_user->logo_status }}">
                   <div class="hover-image"><i class="glyphicon glyphicon-edit"></i>Change</div>
                 @endif       
-                @if($user->profile_pic != null)
-                  <img src="/img/profile/{{ $user->profile_pic }}">
+                @if($session_user->profile_pic != null)
+                  <img src="/img/profile/{{ $session_user->profile_pic }}">
                   <div class="hover-image"><i class="glyphicon glyphicon-edit"></i>Change</div>
                 @endif
             </a>
           </div>
           <h3 class="form-title user-name">
-            {{ $user->fname }} {{ $user->lname }}
-            {{ $user->firm_name }}
+            {{ $session_user->fname }} {{ $session_user->lname }}
+            {{ $session_user->firm_name }}
           </h3>
           <h3 class="form-title user-company">
-            {{ $user->working_at }}
+            {{ $session_user->working_at }}
           </h3>
-          @if($user->city!=null || $user->state!=null)
+          @if($session_user->city!=null || $session_user->state!=null)
           <h3 class="form-title user-location">
-            {{ $user->city }}, {{ $user->state }} 
+            {{ $session_user->city }}, {{ $session_user->state }} 
           </h3>
           @endif          
         </div>
@@ -77,7 +77,7 @@
         </a>
       </li>
       <li class="@if($title == 'group'){{'active'}}@endif">
-        <a class="" href="/group/create">
+        <a class="" href="/group">
         <i class=" icon-note"></i>
         <span class="title">
         Groups</span>

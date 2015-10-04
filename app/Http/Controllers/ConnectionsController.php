@@ -112,6 +112,9 @@ class ConnectionsController extends Controller {
 	{
 		$email = Input::get('keywords');
 		$users = Induser::where('email', '=', $email)
+						->orWhere('fname', 'like', '%'.$email.'%')
+						->orWhere('lname', 'like', '%'.$email.'%')
+						->orWhere('working_at', 'like', '%'.$email.'%')
 					    ->where('id', '<>', Auth::user()->induser_id)
 					    ->get();
 		return view('pages.searchUsers', compact('users'));	

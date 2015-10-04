@@ -6,7 +6,7 @@
 	<div class="portlet-title">
 		<div class="caption">
 			<i class=""></i>
-			<span class="caption-subject font-blue-hoki bold uppercase">Group: {{$group->group_name}}</span>
+			<span class="caption-subject font-blue-hoki bold uppercase">Group: {{$users->first()->group_name}}</span>
 		</div>
 		<div class="tools">
 			<a href="" class="collapse"></a>
@@ -15,53 +15,72 @@
 			<a href="" class="remove"></a>
 		</div>
 	</div>
-	<div class="portlet-body form" style="width: 50%;">
+	<div class="portlet-body form">
+		<div class="row">
+		<div class="col-md-7" style="">
 		<!-- BEGIN FORM-->
-		<form action="{{ url('group/adduser') }}" method="post" class="horizontal-form">
+		<form action="{{ url('group/adduser') }}" class="horizontal-form" method="post">
 			<input type="hidden" name="_token" value="{{ csrf_token() }}">
-			<div class="form-body">
-				<div class="row">
-					<div class="col-md-12">
-						<div class="form-group">
-							<label>Add members</label>
-							<input type="hidden" name="id" value="{{$group->id}}" />
+				<div class="form-group">
+					<div class="input-group">
+						<div class="input-icon">
+							<input type="hidden" name="id" value="{{$users->first()->group_id}}" />
 							{!! Form::select('users[]', $connections, null, ['id'=>'connections', 'class'=>'form-control', 'multiple']) !!}
 						</div>
-						<button type="submit" class="btn blue"><i class="fa fa-check"></i> Add</button>
+						<span class="input-group-btn">
+							<button id="" class="btn btn-success" type="submit" style=" margin-right: 15px;"><i class="fa fa-arrow-left fa-fw"/></i>Add Members</button>
+							<a href="{{url('/group/')}}" id="" class="btn default" type="button">Cancel</a>
+						</span>
 					</div>
 				</div>
-			</div>
-			
 		</form>
-		
-			<div class="form-body">
-				<div class="row">
-					<div class="col-md-8" style="">
-						<h4>List of members</h4><br/>
-						@foreach($group->users as $user)
-							<div class="form-group form-md-line-input" style="margin-left: -11px;">
-								<div class="input-group">
-									<div class="input-group-control">
-										<label class="col-md-6 control-label" for="form_control_1" >{{$user->fname}}</label>
-									</div>
-
-									<span class="input-group-btn btn-right">
-										<form action="{{ url('/group/deleteuser') }}" method="post">
-											<input type="hidden" name="_token" value="{{ csrf_token() }}">
-											<input type="hidden" name="id" value="{{$user->pivot->id}}">
-											<input type="hidden" name="groupid" value="{{$group->id}}">
-											<button type="submit" class="btn green-haze">
-											<i class="fa fa-check" style="font-size: 12px;background-color: white;color: black;border-radius: 10px;width: 20px;height: 20px;padding-top: 3px;"></i>&nbsp;Remove
-											</button>
-										</form>								
-									</span>
-								</div>
-							</div>
-						@endforeach
-						
-					</div>
+		<!-- END FORM-->
+		</div>
+		</div>
+		<div class="form-body">
+			<div class="row">
+				<div class="col-md-12" style="">
+					<h4>List of members</h4><br/>
+					<ul class="media-list">
+					@foreach($users as $user)							
+						  <li class="media">
+						    <div class="media-left">
+						      <a href="#">
+						        <img class="media-object" src="/img/profile/{{ $user->profile_pic }}" alt="..." style="width:60px;padding: 3px;border: 1px solid #ddd;">
+						      </a>
+						    </div>
+						    <div class="media-body" style="font-weight:300">
+						    <div class="media-body-left">
+						      <h4 class="media-heading" style="margin-bottom:0;font-weight:300;margin-bottom:0">
+						      	{{ $user->fname }} {{ $user->lname }}
+							      @if($user->id == $user->admin_id)
+							      	<span class="btn btn-xs btn-warning" style="border-radius:25px !important;margin:0 10px">
+							      		Admin
+							      	</span>
+							      @endif
+						      </h4>
+						     {{ $user->working_at }}<br>
+							 {{ $user->city }}, {{ $user->state }}
+							 </div>
+							 <div class="media-body-right">
+							 	<span class="input-group-btn btn-right">
+								<form action="{{ url('/group/deleteuser') }}" method="post">
+									<input type="hidden" name="_token" value="{{ csrf_token() }}">
+									<input type="hidden" name="id" value="{{$user->groups_users_id}}">
+									<input type="hidden" name="groupid" value="{{$user->group_id}}">
+									<button type="submit" class="btn btn-danger">
+									<i class="glyphicon glyphicon-trash" style="font-size: 12px;background-color: white;color: black;border-radius: 10px;width: 20px;height: 20px;padding-top: 3px;"></i>
+									</button>
+								</form>								
+							</span>								 	
+							 </div>
+						    </div>
+						  </li>								
+					@endforeach
+					</ul>
 				</div>
 			</div>
+		</div>
 		
 	</div>
 </div>

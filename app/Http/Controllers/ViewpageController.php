@@ -2,20 +2,21 @@
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-
 use Illuminate\Http\Request;
 use App\Postjob;
-use App\Skills;
-use App\Http\Requests\CreatePostjobRequest;
+use App\Http\Requests\CreatePostskillRequest;
 use Auth;
-use App\Connections;
+use App\Induser;
+use App\User;
 
-class JobController extends Controller {
+class ViewpageController extends Controller {
 
 	public function __construct()
 	{
 	    $this->beforeFilter(function() {
-	    	if(!Auth::check()){
+	    	if(Auth::check()){
+	        	if(Auth::user()->identifier != 1) return redirect('/home');
+	        } else{
 	        	return redirect('login');
 	        }
 	    });
@@ -38,14 +39,9 @@ class JobController extends Controller {
 	 */
 	public function create()
 	{
-		$title = 'job';
-		$skills = Skills::lists('name', 'id');
-		if(Auth::user()->identifier == 1){
-			$connections=Auth::user()->induser->friends->lists('fname', 'id');
-			return view('pages.postjob', compact('title', 'skills', 'connections'));
-		}else{
-			return view('pages.postjob', compact('title', 'skills'));
-		}
+		$title = 'indview';
+		$user = Induser::where('id', '=', Auth::user()->induser_id)->first();
+		return view('pages.profile_indview', compact('user', 'title'));
 	}
 
 	/**
@@ -53,21 +49,9 @@ class JobController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function store(CreatePostjobRequest $request)
+	public function store(CreatePostskillRequest $request)
 	{
-		if(Auth::user()->identifier == 1)
-			$request['individual_id'] = Auth::user()->induser_id;
-		else
-			$request['corporate_id'] = Auth::user()->corpuser_id;
-		$request['post_type'] = 'job';
-		$skillIds = $request['skill_list'];
-		// $request['skill_list'] = implode(', ', $request['skill_list']);
 
-		$post = Postjob::create($request->all());
-		$post->skills()->attach($skillIds); 
-
-		return redirect("/job/create");
-		
 	}
 
 	/**

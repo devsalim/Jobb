@@ -24,7 +24,7 @@ class CreatePostactivitiesTable extends Migration {
             $table->string('Pin_post_status');
             $table->string('Pin_post_dtTime');
             $table->foreign('post_id')->references('id')->on('postjobs');
-            $table->foreign('user_id')->references('id')->on('corpusers');
+            $table->foreign('user_id')->references('id')->on('users');
 			$table->timestamps();
 		});
 	}
