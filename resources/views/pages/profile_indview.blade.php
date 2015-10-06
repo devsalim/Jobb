@@ -2,7 +2,7 @@
 
 @section('content')
 
-<div class="portlet light bordered">
+<div class="portlet light bordered" style="border:1px solid grey !important; ">
 	<div class="portlet-title">
 		<div class="caption">
 			<i class="icon-equalizer font-green-haze"></i>
@@ -98,7 +98,7 @@
 </div>
 
 
-<div class="portlet light bordered">
+<div class="portlet light bordered" style="border:1px solid grey !important; ">
 	<div class="portlet-title">
 		<div class="caption">
 			<i class="icon-equalizer font-green-haze"></i>

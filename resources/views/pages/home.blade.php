@@ -46,7 +46,7 @@
 											 <div style="font-weight: 600;color: black;font-size: 16px;">{{ $post->post_title }}<div> <h4 style="margin: 0 0 4px 0;"><small>Required at</small> {{ $post->post_compname }}</h4></div>  </div>
 										@endif					 							
 										</span>
-											<div class="row">
+										<div class="row">
 											<div class="col-md-4 col-sm-4 col-xs-12">
 												<i class="icon-badge"></i>&nbsp;: {{ $post->role }}
 											</div>
@@ -64,7 +64,7 @@
 									<div class="post-job-skill-bar">
 										<div class="{{ $post->post_type }}"><a class="post-type-class">{{ $post->post_type }}</a></div>
 										
-										<a href="javascript:;" class="btn btn-icon-only pin-bar btn-circle green"><i class="icon-pin" style="font-size: 20px;"></i></a>
+										<a href="javascript:;" class="btn btn-icon-only pin-bar btn-circle green"><i class="icon-pin" style="font-size: 20px;color:black;"></i></a>
 										
 									</div>
 								</div>
@@ -75,38 +75,55 @@
 											<h4 class="panel-title">
 											<a class="accordion-toggle accordion-toggle-styled" 
 											data-toggle="collapse" data-parent="#accordion{{$var}}" href="#collapse_{{$var}}_{{$var}}"  style="font-size: 15px;font-weight: 600;">
-											Description:</a>	
+											Details:</a>	
 											</h4>
 										</div>
 										<div id="collapse_{{$var}}_{{$var}}" class="panel-collapse collapse">
 											<div class="panel-body" style="border-top: 0;padding: 4px 15px;">
-												
-												{{ $post->job_detail }}
-												<div class="skill-display">Reference Id&nbsp;: </div>
-												<div class="skill-display">Skills&nbsp;:<br> </div>
-												<ul>
-												@foreach($post->skills as $skill)
-													<li>{{$skill->name}}</li>
-												@endforeach
-												</ul>
-
-												<div class="skill-display">Contact&nbsp;:<br> </div> 
+												<div class="skill-display">Description&nbsp;: </div>
 												<div class="row">
-													<div class="col-md-8 col-sm-8 col-xs-12">
-														<i class="glyphicon glyphicon-envelope" style="color: #13B8D4;font-size: 16px;"></i>&nbsp;: {{ $post->email_id }}
-														@if($post->alt_emailid != null)
-														 OR {{ $post->alt_emailid }}
-														 @endif
-													</div>									
-												</div>
-												<div class="row">
-													<div class="col-md-8 col-sm-8 col-xs-12">
-														<i class="glyphicon glyphicon-earphone" style="color: green;font-size: 16px;"></i>&nbsp;:{{ $post->phone }}
-														@if($post->alt_phone != null)
-														 OR {{ $post->alt_phone }}
-														 @endif 
+													<div class="col-md-1"></div>
+													<div class="col-md-11">
+														{{ $post->job_detail }}
 													</div>
 												</div>
+												
+												<div class="skill-display">Reference Id&nbsp;: </div>
+												<div class="skill-display">Education & skills&nbsp;:<br> </div>
+												<div class="row">
+													<div class="col-md-1"></div>
+													<div class="col-md-11">
+														Education: {{ $post->education }}
+													</div>
+													<div class="col-md-1"></div>
+													<div class="col-md-11">
+														Job Category: {{ $post->prof_category }}
+													</div>
+													<div class="col-md-1"></div>
+													<div class="col-md-11">
+														Skills: @foreach($post->skills as $skill)
+																{{$skill->name}}
+															@endforeach
+													</div>
+												</div>	
+												<div class="skill-display">Contact&nbsp;:<br> </div> 
+												<ul>
+
+													<li>
+														<i class="glyphicon glyphicon-envelope" style="color: #13B8D4;font-size: 16px;"></i>&nbsp;: {{ $post->email_id }}
+														@if($post->alt_emailid != null)
+														OR {{ $post->alt_emailid }}
+														@endif
+													</li>
+												</ul>
+												<ul>
+													<li>
+														<i class="glyphicon glyphicon-earphone" style="color: green;font-size: 16px;"></i>&nbsp;: {{ $post->phone }}
+														@if($post->alt_phone != null)
+														OR {{ $post->alt_phone }}
+														@endif
+													</li>
+												</ul>
 												<div class="skill-display">Post Id&nbsp;: {{ $post->id }} </div> 
 											</div>
 										</div>

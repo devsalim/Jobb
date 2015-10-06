@@ -251,7 +251,10 @@
 								<span class="input-group-addon">
 									<i class="fa fa-university"></i>
 								</span>
-								<select class="form-control" name="education" value="">
+								<select class="bs-select form-control" name="education" multiple>
+									<option value="Any Diploma">Any Diploma</option>
+									<option value="Any Graduate">Any Graduate</option>
+									<option value="Any Post Graduate">Any Post Graduate</option>
 									<option value="BA">B.A</option>
 									<option value="BArch">B.Arch</option>
 									<option value="BCA">BCA</option>
@@ -302,7 +305,7 @@
 					<div class="col-md-8">
 						<div class="form-group">
 							<label style="margin-left: -5px;"><input id="hide-apply" type="checkbox"></label><label>&nbsp;Apply On Company Website</label>
-							<div id="show-apply" class="input-group">
+							<div id="" class="input-group show-apply">
 								<span class="input-group-addon">
 									<i class="icon-info"style="color:darkcyan;"></i>
 								</span>
@@ -330,65 +333,66 @@
 					<!--/span-->
 				</div>
 				<!--/row-->
-
-				<div class="row">
-					<div class="col-md-6">
-						<div class="form-group">
-							<label>Email Id (Registered)</label>
-							<div class="input-group">
-							<span class="input-group-addon">
-							<i class="icon-envelope" style="color:darkcyan;"></i>
-							</span>
-							<input type="text" disabled name="email_id" value="{{ Auth::user()->email }}" class="form-control" placeholder="">
-							<span class="input-group-addon" style="width: 55px;">
-								Public
-							</span>
+				<div class="show-apply">
+					<div class="row">
+						<div class="col-md-6">
+							<div class="form-group">
+								<label>Email Id (Registered)</label>
+								<div class="input-group">
+								<span class="input-group-addon">
+								<i class="icon-envelope" style="color:darkcyan;"></i>
+								</span>
+								<input type="text" disabled name="email_id" value="{{ Auth::user()->email }}" class="form-control" placeholder="">
+								<span class="input-group-addon" style="width: 55px;">
+									Public
+								</span>
+								</div>
 							</div>
 						</div>
-					</div>
-					<!--/span-->
-					<div class="col-md-6">
-						<div class="form-group">
-							<label>Alternate Email Id (Optional)</label>
-							<div class="input-group">
-							<span class="input-group-addon">
-							<i class="icon-envelope" style="color:darkcyan;"></i>
-							</span>
-							<input type="text" name="alt_emailid" class="form-control" placeholder="Email Id">
+						<!--/span-->
+						<div class="col-md-6">
+							<div class="form-group">
+								<label>Phone No (Registered)</label>
+								<div class="input-group">
+								<span class="input-group-addon">
+								<i class="icon-call-end" style="color:darkcyan;"></i>
+								</span>
+								<input type="phone" disabled name="phone" value="{{ Auth::user()->mobile }}"  class="form-control" placeholder="">
+								<span class="input-group-addon" style="width: 55px;">
+									Private
+								</span>
+								</div>
 							</div>
 						</div>
+						<!--/span-->
 					</div>
-					<!--/span-->
-				</div>
-				<div class="row">
-					<div class="col-md-6">
-						<div class="form-group">
-							<label>Phone No (Registered)</label>
-							<div class="input-group">
-							<span class="input-group-addon">
-							<i class="icon-call-end" style="color:darkcyan;"></i>
-							</span>
-							<input type="phone" disabled name="phone" value="{{ Auth::user()->mobile }}"  class="form-control" placeholder="">
-							<span class="input-group-addon" style="width: 55px;">
-								Private
-							</span>
+					<div class="row">
+						<div class="col-md-6">
+							<div class="form-group">
+								<label>Alternate Email Id (Optional)</label>
+								<div class="input-group">
+								<span class="input-group-addon">
+								<i class="icon-envelope" style="color:darkcyan;"></i>
+								</span>
+								<input type="text" name="alt_emailid" class="form-control" placeholder="Email Id">
+								</div>
 							</div>
 						</div>
-					</div>
-					<!--/span-->
-					<div class="col-md-6">
-						<div class="form-group">
-							<label>Alternate Phone No (Optional)</label>
-							<div class="input-group">
-							<span class="input-group-addon">
-							<i class="icon-call-end" style="color:darkcyan;"></i>
-							</span>
-							<input type="text" name="alt_phone" class="form-control" placeholder="Phone No">
+						<!--/span-->
+						<div class="col-md-6">
+							<div class="form-group">
+								<label>Alternate Phone No (Optional)</label>
+								<div class="input-group">
+								<span class="input-group-addon">
+								<i class="icon-call-end" style="color:darkcyan;"></i>
+								</span>
+								<input type="text" name="alt_phone" class="form-control" placeholder="Phone No">
+								</div>
 							</div>
 						</div>
+						<!--/span-->
 					</div>
-					<!--/span-->
-				</div>
+				</div>	
 			</div>
 			<div class="form-actions">
 				<button type="button" class="btn default">Cancel</button>
@@ -440,9 +444,11 @@ Demo.init(); // init demo features
 	 $(function () {
         $("#hide-apply").click(function () {
             if ($(this).is(":checked")) {
-                $("#show-apply").show();
+                $(".show-apply").show();
+                 
             } else {
-                $("#show-apply").hide();
+                $(".show-apply").hide();
+                
             }
         });
     });
