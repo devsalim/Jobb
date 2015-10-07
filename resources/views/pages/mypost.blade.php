@@ -3,192 +3,341 @@
 @section('content')
 <div class="portlet light bordered" style="border: none !important;background:transparent">										
 	<div class="portlet-body form">
-			<div class="form-body">
-				<div class="row">
-					@if (count($posts) > 0)
-						<?php $var = 1; ?>
-						@foreach($posts as $post)	
-					<div class="col-md-9" style="">												
-							<div class="timeline" >
-							<!-- TIMELINE ITEM -->
-							<div class="timeline-item time-item">
-								<div class="timeline-badge" style="margin: 10px 0px;">
-									@if($post->induser != null)
-									<img class="timeline-badge-userpic userpic-box" src="/img/profile/{{ $post->induser->profile_pic }}" title="{{ $post->induser->fname }}">
-									<a class="icon-userpic"><i class="glyphicon glyphicon-user"></i></a>
-									@elseif($post->corpuser != null)
-									<img class="timeline-badge-userpic userpic-box" src="/img/profile/{{ $post->corpuser->logo_status }}" title="{{ $post->corpuser->firm_name }}">
-									<a class="icon-userpic"><i class="fa fa-institution (alias)" style="padding: 0px 5px;"></i></a>
-									@endif
-								</div>
-								<div class="timeline-body" style="">
-									<div class="timeline-body-head">
-										<div class="timeline-body-head-caption">
-											<a>
-												@if($post->induser != null && Auth::user()->induser_id)	
-												<a class="user-link"><i class="glyphicon glyphicon-link"></i></a>&nbsp;<a style="padding: 0px 0px 0px 23px;">{{ $post->induser->fname }} {{ $post->induser->lname }}</a>
-												@elseif($post->corpuser != null)
-													{{ $post->post_compname }} 
-												@endif
-											</a>
-											<span class="timeline-body-time font-grey-cascade">Posted at 
-												{{ date('M d, Y', strtotime($post->created_at)) }}
-											</span>
-										</div>
-									</div>
-									<div class="timeline-body-content">
-										<span class="font-grey-cascade">
-											@if($post->post_type == 'skill')	
-											<div style="font-weight: 600;color: black;font-size: 16px;">{{ $post->post_title }} </div>
-										@elseif($post->post_type == 'job')
-											 <div style="font-weight: 600;color: black;font-size: 16px;">{{ $post->post_title }}<div> <h4 style="margin: 0 0 4px 0;"><small>Required at</small> {{ $post->post_compname }}</h4></div>  </div>
-										@endif					 							
+		<div class="form-body">
+			<div class="row">
+				@if (count($posts) > 0)
+				<?php $var = 1; ?>
+				@foreach($posts as $post)	
+				<div class="col-md-9" style="">												
+					<div class="timeline" >
+						<!-- TIMELINE ITEM -->
+						<div class="timeline-item time-item">
+							<div class="timeline-body" style="margin-left: 0;">
+								<div class="timeline-body-head">
+									<div class="timeline-body-head-caption">
+										<a>	
+											Post Id:&nbsp;<a style="">{{ $post->id }}</a>
+										</a>
+										<span class="timeline-body-time font-grey-cascade">Posted at 
+											{{ date('M d, Y', strtotime($post->created_at)) }}
 										</span>
-											<div class="row">
-											<div class="col-md-4 col-sm-4 col-xs-12">
-												<i class="icon-badge"></i>&nbsp;: {{ $post->role }}
-											</div>
-											<div class="col-md-4 col-sm-4 col-xs-12">
-												<i class="glyphicon glyphicon-map-marker"></i>&nbsp;: {{ $post->city }}
-											</div>
-											<div class="col-md-4 col-sm-4 col-xs-12">
-												<i class="icon-briefcase"></i>&nbsp;: {{ $post->min_exp}}-{{ $post->max_exp}} Years
-											</div>
-											<div class="col-md-4 col-sm-4 col-xs-12">
-												<i class="fa fa-rupee (alias)"></i>&nbsp;:&nbsp; {{ $post->min_sal }}-{{ $post->max_sal }}/Hours
-											</div>
-										</div>
-									</div>		
-									<div class="post-job-skill-bar">
-										<div class="{{ $post->post_type }}"><a class="post-type-class">{{ $post->post_type }}</a></div>
-										
-										<a href="javascript:;" class="btn btn-icon-only pin-bar btn-circle green"><i class="icon-pin" style="font-size: 20px;"></i></a>
-										
 									</div>
 								</div>
-								<div class="portlet-body" style="margin: 0 -5px;">
+								<div class="timeline-body-content">
+									<span class="font-grey-cascade">
+										@if($post->post_type == 'skill')	
+										<div style="font-weight: 600;color: black;font-size: 16px;">{{ $post->post_title }} </div>
+									@elseif($post->post_type == 'job')
+										 <div style="font-weight: 600;color: black;font-size: 16px;">{{ $post->post_title }}<div> <h4 style="margin: 0 0 4px 0;"><small>Required at</small> {{ $post->post_compname }}</h4></div>  </div>
+									@endif					 							
+									</span>
+									<div class="row">
+										<div class="col-md-3 col-sm-3 col-xs-8">
+											<i class="icon-badge"></i>&nbsp;: {{ $post->role }}
+										</div>
+										<div class="col-md-3 col-sm-3 col-xs-8">
+											<i class="glyphicon glyphicon-map-marker"></i>&nbsp;: {{ $post->city }}
+										</div>
+										<div class="col-md-3 col-sm-3 col-xs-8">
+											<i class="icon-briefcase"></i>&nbsp;: {{ $post->min_exp}}-{{ $post->max_exp}} Years
+										</div>
+										<div class="col-md-3 col-sm-3 col-xs-8">
+											<i class="fa fa-rupee (alias)"></i>&nbsp;:&nbsp; {{ $post->min_sal }}-{{ $post->max_sal }}/Hours
+										</div>
+									</div>
+								</div>		
+								<div class="post-job-skill-bar">
+									<div class="{{ $post->post_type }}"><a class="post-type-class">{{ $post->post_type }}</a></div>
+								</div>
+							</div>
+							<div class="portlet-body" style="margin: 0 -5px;">
 								<div class="panel-group accordion" id="accordion{{$var}}" style="margin-bottom: 0;">
 									<div class="panel panel-default" style=" position: relative;">
 										<div class="panel-heading">
 											<h4 class="panel-title">
 											<a class="accordion-toggle accordion-toggle-styled" 
 											data-toggle="collapse" data-parent="#accordion{{$var}}" href="#collapse_{{$var}}_{{$var}}"  style="font-size: 15px;font-weight: 600;">
-											Description:</a>	
+											Details:</a>	
 											</h4>
 										</div>
 										<div id="collapse_{{$var}}_{{$var}}" class="panel-collapse collapse">
-											<div class="panel-body" style="border-top: 0;padding: 4px 15px;">
-												
-												{{ $post->job_detail }}
-												<div class="skill-display">Reference Id&nbsp;: </div>
-												<div class="skill-display">Skills&nbsp;:<br> </div>
+											<div class="panel-body" style="border-top: 1px solid lightgrey !important;padding: 4px 15px;">
+												<div class="skill-display">Description&nbsp;: </div>
 												<ul>
-												@foreach($post->skills as $skill)
-													<li>{{$skill->name}}</li>
-												@endforeach
+													<li>{{ $post->job_detail }}</li>
 												</ul>
+												<div class="skill-display">Reference Id&nbsp;: </div>
+												<div class="skill-display">Education & skills&nbsp;:<br> </div>
+												<ul>
+
+													<li>Education: {{ $post->education }}</li>
+												</ul>
+												<ul>
+													<li>Job Category: {{ $post->prof_category }}</li>
+												</ul>
+												<ul>
+													<li>Skills:</li>
+														<ol>
+															@foreach($post->skills as $skill)
+																{{$skill->name}}
+															@endforeach
+														</ol>
+												
+												</ul>
+												
 
 												<div class="skill-display">Contact&nbsp;:<br> </div> 
-												<div class="row">
-													<div class="col-md-8 col-sm-8 col-xs-12">
+												<ul>
+
+													<li>
 														<i class="glyphicon glyphicon-envelope" style="color: #13B8D4;font-size: 16px;"></i>&nbsp;: {{ $post->email_id }}
 														@if($post->alt_emailid != null)
-														 OR {{ $post->alt_emailid }}
-														 @endif
-													</div>									
-												</div>
-												<div class="row">
-													<div class="col-md-8 col-sm-8 col-xs-12">
-														<i class="glyphicon glyphicon-earphone" style="color: green;font-size: 16px;"></i>&nbsp;:{{ $post->phone }}
+
+														OR {{ $post->alt_emailid }}
+														@endif
+
+													</li>
+												</ul>
+												<ul>
+													<li>
+														<i class="glyphicon glyphicon-earphone" style="color: green;font-size: 16px;"></i>&nbsp;: {{ $post->phone }}
 														@if($post->alt_phone != null)
-														 OR {{ $post->alt_phone }}
-														 @endif 
-													</div>
-												</div>
-												<div class="skill-display">Post Id&nbsp;: {{ $post->id }} </div> 
-											</div>
-										</div>
-										<div class="post-{{ $post->post_type }} post-icon-bar">
-											<div class="btn-group dropup like-bar">
-												<form action="/job/like" method="post" id="post-{{$post->id}}" data-id="{{$post->id}}" style="float:left">						
-													<input type="hidden" name="_token" value="{{ csrf_token() }}">
-													<input type="hidden" name="like" value="{{ $post->id }}">
-													<button class="btn like-btn" id="like-btn-{{$post->id}}" type="button" style="border-radius: 25px !important; height: 40px;background-color: burlywood;">
-													<i class="icon-like" ></i>
-													</button>
-												</form>
-												<span class="badge-like" id="like-count-{{ $post->id }}">0</span>
-											</div>
-											
-											@if($post->post_type == 'job')
-												<button type="button" class="btn btn-success" style=" margin: 0px auto;float:none;background-color: #61b3de;display:table;"><i class="icon-arrow-right" style="font-size:22px;vertical-align:middle;"></i>&nbsp;<span style="font-weight:600;vertical-align:middle">Apply</span></button>
-											
-											@elseif($post->post_type == 'skill')
-												<button type="button" class="btn btn-success" style=" margin: 0px auto;float:none;background-color: #70b29c;display:table;"><i class="icon-arrow-right" style="font-size:22px;vertical-align:middle;"></i>&nbsp;<span style="font-weight:600;vertical-align:middle">Contact</span></button>
-											@endif
-											<span class="span-share">Share</span>
-											<div class="btn-group dropup share-bar">
-												<button class="btn green dropdown-toggle" type="button" data-toggle="dropdown" style="border-radius: 25px !important; height: 40px;background-color:tomato;">
-												<i class="icon-share"></i>
-												</button>
-												<ul class="dropdown-menu pull-right" role="menu" style="min-width:0;box-shadow:0 0 !important">
-													<li style="background-color: #3b5998;">
-														<a href="/" class="facebook"><i class="fa fa-facebook post-social-icon" ></i></a>
-													</li>
-													<li style="background-color: #c32f10;">
-														<a href="/" class="google-plus"><i class="fa fa-google-plus post-social-icon"></i></a>
-													</li>
-													<li style="background-color: #00aced;">
-														<a href="/" class="linkedin"><i class="fa fa-linkedin post-social-icon" ></i></a>
+														OR {{ $post->alt_phone }}
+														@endif
 													</li>
 												</ul>
 											</div>
-										</div>
+										</div>								
 									</div>
 								</div>
 							</div>
-							</div>
-
-							<!-- END TIMELINE ITEM -->
-						</div>
-					</div>	
-					<div class="col-md-3">
-						<div class="portlet box red-sunglo">
 							<div class="portlet-title">
-								<div class="caption">
-									<i class="fa fa-gift"></i>Unordered Lists
-								</div>
 								<div class="tools">
-									<a href="javascript:;" class="collapse">
-									</a>
+									<a href="javascript:;" class="collapse"></a>
+									<a href="#portlet-config" data-toggle="modal" class="config"></a>
 								</div>
 							</div>
 							<div class="portlet-body">
-								<ul>
-									<li>
-										 Lorem ipsum dolor sit amet
-									</li>
-									<li>
-										 Consectetur adipiscing elit
-									</li>
-									<li>
-										 Integer molestie lorem at massa
-									</li>
-									<li>
-										 Facilisis in pretium nisl aliquet
-									</li>									
-								</ul>
+								<div class="tabbable-custom nav-justified">
+									<ul class="nav nav-tabs nav-justified">
+										<li class="active">
+											<a href="#tab_1_1_1" data-toggle="tab">Thanks & Share </a>
+										</li>
+										<li>
+											<a href="#tab_1_1_2" data-toggle="tab">Contact </a>
+										</li>									
+									</ul>
+									<div class="tab-content">
+										<div class="tab-pane active" id="tab_1_1_1">
+											<div class="portlet light">
+													<div class="portlet-title">
+														<div class="caption">
+															<i class="fa fa-gift font-green-sharp"></i>
+															<span class="caption-subject font-green-sharp bold ">Thanks Recieved:</span>
+															<span class="caption-helper">100</span>&nbsp;&nbsp;
+															<span class="caption-subject font-green-sharp bold ">Post Shared:</span>
+															<span class="caption-helper">110</span>
+														</div>
+													</div>
+
+												<div class="portlet-body">
+													<div class="table-container">
+														<div class="table-actions-wrapper">
+															<span>
+															</span>
+															<select class="table-group-action-input form-control input-inline input-small input-sm">
+																<option value="">Select...</option>
+																<option value="Cancel">Cancel</option>
+																<option value="Cancel">Hold</option>
+																<option value="Cancel">On Hold</option>
+																<option value="Close">Close</option>
+															</select>
+															<button class="btn btn-sm yellow table-group-action-submit"><i class="fa fa-check"></i> Submit</button>
+														</div>
+														<table class="table table-striped table-bordered table-hover" id="datatable_ajax">
+														<thead>
+														<tr role="row" class="heading">
+															<th width="2%">
+																No.
+															</th>
+															<th width="5%">
+																 User
+															</th>
+															<th width="10%">
+																 Activity
+															</th>
+															<th width="15%">
+																 Date & Time
+															</th>
+															
+														</tr>
+														<tr role="row" class="filter">
+															<td>
+																<input type="text" class="form-control form-filter input-sm" name="order_id">
+															</td>
+															<td>
+																<input type="text" class="form-control form-filter input-sm" name="order_id">
+															</td>
+															<td>
+																<input type="text" class="form-control form-filter input-sm" name="order_id">
+															</td>
+															<td>
+																<div class="input-group date date-picker margin-bottom-5" data-date-format="dd/mm/yyyy">
+																	<input type="text" class="form-control form-filter input-sm" readonly name="order_date_from" placeholder="From">
+																	<span class="input-group-btn">
+																	<button class="btn btn-sm default" type="button"><i class="fa fa-calendar"></i></button>
+																	</span>
+																</div>
+																<div class="input-group date date-picker" data-date-format="dd/mm/yyyy">
+																	<input type="text" class="form-control form-filter input-sm" readonly name="order_date_to" placeholder="To">
+																	<span class="input-group-btn">
+																	<button class="btn btn-sm default" type="button"><i class="fa fa-calendar"></i></button>
+																	</span>
+																</div>
+															</td>
+															
+														</tr>
+														</thead>
+														<tbody>
+														</tbody>
+														</table>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="tab-pane" id="tab_1_1_2">
+											<div class="portlet light">
+												<div class="portlet-title">
+													<div class="caption">
+														<i class="fa fa-gift font-green-sharp"></i>
+														<span class="caption-subject font-green-sharp bold uppercase">Contact Viewed:</span>
+														<span class="caption-helper">100</span>
+													</div>		
+												</div>
+
+												<div class="portlet-body">
+													<div class="table-container">
+														<div class="table-actions-wrapper">
+															<span>
+															</span>
+															<select class="table-group-action-input form-control input-inline input-small input-sm">
+																<option value="">Select...</option>
+																<option value="Cancel">Cancel</option>
+																<option value="Cancel">Hold</option>
+																<option value="Cancel">On Hold</option>
+																<option value="Close">Close</option>
+															</select>
+															<button class="btn btn-sm yellow table-group-action-submit"><i class="fa fa-check"></i> Submit</button>
+														</div>
+														<table class="table table-striped table-bordered table-hover" id="datatable_ajax">
+														<thead>
+														<tr role="row" class="heading">
+															<th width="2%">
+																No.
+															</th>
+															<th width="5%">
+																 User
+															</th>
+															<th width="10%">
+																 User Type
+															</th>
+															<th width="10%">
+																 Role
+															</th>
+															<th width="15%">
+																 Date & Time
+															</th>
+															<th width="15%">
+																 Resume
+															</th>
+															
+														</tr>
+														<tr role="row" class="filter">
+															<td>
+																<input type="text" class="form-control form-filter input-sm" name="order_id">
+															</td>
+															<td>
+																<input type="text" class="form-control form-filter input-sm" name="order_id">
+															</td>
+															<td>
+																<input type="text" class="form-control form-filter input-sm" name="order_id">
+															</td>
+															<td>
+																<input type="text" class="form-control form-filter input-sm" name="order_id">
+															</td>
+															<td>
+																<div class="input-group date date-picker margin-bottom-5" data-date-format="dd/mm/yyyy">
+																	<input type="text" class="form-control form-filter input-sm" readonly name="order_date_from" placeholder="From">
+																	<span class="input-group-btn">
+																	<button class="btn btn-sm default" type="button"><i class="fa fa-calendar"></i></button>
+																	</span>
+																</div>
+																<div class="input-group date date-picker" data-date-format="dd/mm/yyyy">
+																	<input type="text" class="form-control form-filter input-sm" readonly name="order_date_to" placeholder="To">
+																	<span class="input-group-btn">
+																	<button class="btn btn-sm default" type="button"><i class="fa fa-calendar"></i></button>
+																	</span>
+																</div>
+															</td>
+															<td>
+																<input type="text" class="form-control form-filter input-sm" name="order_id">
+															</td>
+														</tr>
+														</thead>
+														<tbody>
+														</tbody>
+														</table>
+													</div>
+												</div>
+											</div>
+										</div>
+										
+									</div>
+								</div>
 							</div>
 						</div>
-					</div>	
-					<!-- END TIMELINE ITEM -->
-					<?php $var++; ?>
-				 @endforeach
+						<!-- END TIMELINE ITEM -->
+					</div>
+				</div>	
+				<div class="col-md-3">
+					<div class="portlet box red-sunglo">
+						<div class="portlet-title">
+							<div class="caption">
+								<i class="fa fa-gift"></i>Unordered Lists
+							</div>
+							<div class="tools">
+								<a href="javascript:;" class="collapse">
+								</a>
+							</div>
+						</div>
+						<div class="portlet-body">
+							<ul>
+								<li>
+									 Lorem ipsum dolor sit amet
+								</li>
+								<li>
+									 Consectetur adipiscing elit
+								</li>
+								<li>
+									 Integer molestie lorem at massa
+								</li>
+								<li>
+									 Facilisis in pretium nisl aliquet
+								</li>									
+							</ul>
+						</div>
+					</div>
+
+				</div>	
+				<!-- END TIMELINE ITEM -->
+				<?php $var++; ?>
+			 	@endforeach
 				@endif
-				</div>
 			</div>
+		</div>
 	</div>
 </div>
+
 @stop
 
 @section('javascript')

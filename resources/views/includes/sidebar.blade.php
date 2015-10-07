@@ -97,6 +97,15 @@
         </a>
       </li>
       @endif
+      <li class="@if($title == 'indview'){{'active'}}@endif">
+        <a class="" href="/individual_view/create">
+        <i class=" icon-note"></i>
+        <span class="title">
+        Profile</span>
+        <span class="selected">
+        </span>
+        </a>
+      </li>
       <li>
         <a href="javascript:;">
         <i class="icon-eye"></i>

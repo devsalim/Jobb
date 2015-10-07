@@ -35,7 +35,7 @@ class PagesController extends Controller {
 			return view('pages.home', compact('posts', 'title'));
 		}else{
 			return redirect('login');
-		}
+		}	
 	}
 
 	public function myPost(){

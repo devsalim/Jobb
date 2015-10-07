@@ -4960,7 +4960,7 @@ Portlets
 /* Light Portlet */
 .portlet.light {
   padding: 12px 20px 15px 20px;
-  background-color: transparent;
+  background-color: white;
 }
 .portlet.light.bordered {
   border: 0px solid #e1e1e1 !important;

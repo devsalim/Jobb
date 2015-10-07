@@ -65,10 +65,10 @@
 }
 
 /* Post Icon */
-.post-icon-bar {
+.post-icon-bar{
     padding: 5px 10px 5px 0px;
     border-radius: 0 0 4px 4px !important;
-    border-top: 1px solid lightgrey;
+    border: 1px solid lightgrey;
     position: relative;
     height: 45px;
 }
@@ -332,46 +332,22 @@ background-color:white;
     padding: 4px 8px;
 }
 
-.time-item {
+.time-item{
     border: 1px solid #61b3de;
-    margin: 0 0 10px 0;
+    margin: 6px 0px 10px -11px;
     position: relative;
     padding: 0px 5px 0px 5px;
     box-shadow: 4px 4px 4px rgb(222, 222, 222);
     border-radius: 6px !important;
-    background-color: white;
-}
-
-
-
-.media-body, .media-left, .media-right {
-    display: table;
-    float: left;
-}
-.media-body {
-    width: auto;
-    font-weight: normal;
-}
-
-.media-body-left {
-    float: left;
-    min-width: 200px;
-}
-.media-body-right {
-    float: left;
-    min-width: 80px;
-}
-
-.select2-container-multi .select2-choices {
-    padding: 0 5px 0 0;
     background: white;
 }
 
 .pin-bar{
     float: right;
-    top: 16px;
+    top: 80px;
     position: absolute;
     right: 26px;
+    background-color: lightgrey !important;
     border-radius: 20px !important;
     box-shadow: 1px 1px black;
 }
@@ -419,21 +395,13 @@ background-color:white;
     color: black;
     box-shadow: 1px 1px black;
 }
-.media-left img {
-    width: 60px;
-    height: 60px;
-    background-color: #EBEBEB;
-    border: 1px solid #ddd;
-    padding: 3px;
+
+/* View Page */
+
+.view-page{
+    padding-top: 2px;
 }
 
-.portlet {
-    margin-top: 0;
-    margin-bottom: 10px;
-}
-.portlet.light.bordered {
-    border: 1px solid #e1e1e1 !important;
-}
-.portlet.light {
-    background-color: white;
+ul{
+    list-style: none;
 }
