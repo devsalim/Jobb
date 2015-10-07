@@ -139,9 +139,8 @@ class GroupController extends Controller {
 							   'groups.admin_id',
 							   'groups_users.id as groups_users_id'
 							]);		
-		$connections=Auth::user()->induser->friends->lists('fname', 'id');
+		$connections = Auth::user()->induser->friends->lists('fname', 'id');
 		return view('pages.groupDetail', compact('users', 'title', 'connections'));
-					// return $users;
 	}
 
 	public function addUser(Request $request){

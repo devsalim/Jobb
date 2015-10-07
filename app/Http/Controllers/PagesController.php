@@ -28,14 +28,6 @@ class PagesController extends Controller {
 		}
 	}
 
-	// public function master(){
-	// 	if (Auth::check()) {
-	// 		return view('pages.master');
-	// 	}else{
-	// 		return redirect('login');
-	// 	}
-	// }
-
 	public function home(){
 		if (Auth::check()) {
 			$title = 'home';

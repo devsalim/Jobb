@@ -3,8 +3,6 @@
 @section('content')
 <div class="portlet light bordered" style="border: none !important;background:transparent">										
 	<div class="portlet-body form">
-		<!-- BEGIN FORM-->
-		<form action="#" class="horizontal-form">
 			<div class="form-body">
 				<div class="row">
 					@if (count($posts) > 0)
@@ -62,9 +60,17 @@
 										</div>
 									</div>		
 									<div class="post-job-skill-bar">
-										<div class="{{ $post->post_type }}"><a class="post-type-class">{{ $post->post_type }}</a></div>
+										<div class="{{ $post->post_type }}">
+											<a class="post-type-class">{{ $post->post_type }}</a>
+										</div>
 										
-										<a href="javascript:;" class="btn btn-icon-only pin-bar btn-circle green"><i class="icon-pin" style="font-size: 20px;"></i></a>
+										<form action="/job/fav" method="post" id="post-fav-{{$post->id}}" data-id="{{$post->id}}">						
+											<input type="hidden" name="_token" value="{{ csrf_token() }}">
+											<input type="hidden" name="fav_post" value="{{ $post->id }}">
+											<button class="fav-btn btn btn-icon-only pin-bar btn-circle" id="fav-btn-{{$post->id}}" type="button">
+											<i class="icon-pin" style="font-size: 20px;"></i>
+											</button>
+										</form>
 										
 									</div>
 								</div>
@@ -112,17 +118,21 @@
 										</div>
 										<div class="post-{{ $post->post_type }} post-icon-bar">
 											<div class="btn-group dropup like-bar">
-												<button class="btn dropdown-toggle" type="button" data-toggle="dropdown" style="border-radius: 25px !important; height: 40px;background-color: burlywood;">
-												<i class="icon-like" ></i>
-												</button>
-												<span class="badge-like">100 </span>
+												<form action="/job/like" method="post" id="post-{{$post->id}}" data-id="{{$post->id}}" style="float:left">						
+													<input type="hidden" name="_token" value="{{ csrf_token() }}">
+													<input type="hidden" name="like" value="{{ $post->id }}">
+													<button class="btn like-btn" id="like-btn-{{$post->id}}" type="button" style="border-radius: 25px !important; height: 40px;background-color: burlywood;">
+													<i class="icon-like" ></i>
+													</button>
+												</form>
+												<span class="badge-like" id="like-count-{{ $post->id }}">0</span>
 											</div>
 											
 											@if($post->post_type == 'job')
-											<button type="button" class="btn btn-success" style=" margin: 0px auto;float:none;background-color: #61b3de;display:table;"><i class="icon-arrow-right" style="font-size:22px;vertical-align:middle;"></i>&nbsp;<span style="font-weight:600;vertical-align:middle">Apply</span></button>
+												<button type="button" class="btn btn-success" style=" margin: 0px auto;float:none;background-color: #61b3de;display:table;"><i class="icon-arrow-right" style="font-size:22px;vertical-align:middle;"></i>&nbsp;<span style="font-weight:600;vertical-align:middle">Apply</span></button>
 											
 											@elseif($post->post_type == 'skill')
-											<button type="button" class="btn btn-success" style=" margin: 0px auto;float:none;background-color: #70b29c;display:table;"><i class="icon-arrow-right" style="font-size:22px;vertical-align:middle;"></i>&nbsp;<span style="font-weight:600;vertical-align:middle">Contact</span></button>
+												<button type="button" class="btn btn-success" style=" margin: 0px auto;float:none;background-color: #70b29c;display:table;"><i class="icon-arrow-right" style="font-size:22px;vertical-align:middle;"></i>&nbsp;<span style="font-weight:600;vertical-align:middle">Contact</span></button>
 											@endif
 											<span class="span-share">Share</span>
 											<div class="btn-group dropup share-bar">
@@ -185,8 +195,6 @@
 				@endif
 				</div>
 			</div>
-		</form>
-		<!-- END FORM-->
 	</div>
 </div>
 @stop
@@ -200,6 +208,72 @@
 	    jQuery('#show-social').toggle('show');
 	    });
 	});
+
+$(document).ready(function(){
+  $('.like-btn').on('click',function(event){  	    
+  	event.preventDefault();
+  	var post_id = $(this).parent().data('id');
+
+  	var formData = $('#post-'+post_id).serialize(); 
+    var formAction = $('#post-'+post_id).attr('action');
+
+	$count = $('#like-count-'+post_id).text();
+    $.ajaxSetup({
+		headers: {
+			'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+		}
+	});
+
+    $.ajax({
+      url: formAction,
+      type: "post",
+      data: formData,
+      cache : false,
+      success: function(data){
+        if(data > $count){
+ 			$('#like-count-'+post_id).text(data);
+ 			$('#like-btn-'+post_id).css({'background-color':'lightgreen'});
+        }else if(data < $count){
+ 			$('#like-count-'+post_id).text(data);
+ 			$('#like-btn-'+post_id).css({'background-color':'burlywood'});
+        }
+      }
+    }); 
+    return false;
+  }); 
+
+  $('.fav-btn').on('click',function(event){  	    
+  	event.preventDefault();
+  	var post_id = $(this).parent().data('id');
+
+  	var formData = $('#post-fav-'+post_id).serialize(); 
+    var formAction = $('#post-fav-'+post_id).attr('action');
+
+    $.ajaxSetup({
+		headers: {
+			'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+		}
+	});
+
+    $.ajax({
+      url: formAction,
+      type: "post",
+      data: formData,
+      cache : false,
+      success: function(data){
+        if(data == "favourite"){
+        	$('#fav-btn-'+post_id).removeClass('btn-success');
+ 			$('#fav-btn-'+post_id).addClass('btn-warning');
+        }else if(data == 'unfavourite'){
+ 			$('#fav-btn-'+post_id).removeClass('btn-warning');
+ 			$('#fav-btn-'+post_id).addClass('btn-success');
+        }
+      }
+    }); 
+    return false;
+  }); 
+});
+
 </script>
 
 @stop

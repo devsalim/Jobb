@@ -32,6 +32,8 @@ Route::group(array('before' => 'auth'), function(){
 	Route::get('job/create', 'JobController@create');
 	Route::post('job/store', 'JobController@store');
 	Route::post('job/update', 'JobController@update');
+	Route::post('job/like', 'JobController@postLike');
+	Route::post('job/fav', 'JobController@postFav');
 
 	Route::get('skill', 'SkillController@index');
 	Route::get('skill/create', 'SkillController@create');

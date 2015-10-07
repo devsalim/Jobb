@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Eloquent\Model;
 
-class users_friends extends Model {
+class Users_friends extends Model {
 
 	//
 

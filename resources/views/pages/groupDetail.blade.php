@@ -60,7 +60,7 @@
 							      @endif
 						      </h4>
 						     {{ $user->working_at }}<br>
-							 {{ $user->city }}, {{ $user->state }}
+							 {{ $user->city }} {{ $user->state }}
 							 </div>
 							 <div class="media-body-right">
 							 	<span class="input-group-btn btn-right">

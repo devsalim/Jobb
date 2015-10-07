@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Eloquent\Model;
 
-class postjob extends Model {
+class Postjob extends Model {
 
 	protected $fillable =  ['post_title', 
 							'post_type',
@@ -43,6 +43,10 @@ class postjob extends Model {
 
 	public function getSkillListAttribute(){
 		return $this-skills()->lists('id');
+	}
+
+	public function postActivity(){
+		return $this->belongsToMany('App\Postactivity', 'postjobs', 'post_id', 'id')->withTimestamps();
 	}
 
 }
