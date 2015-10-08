@@ -46,7 +46,7 @@ class Postjob extends Model {
 	}
 
 	public function postActivity(){
-		return $this->belongsToMany('App\Postactivity', 'postjobs', 'post_id', 'id')->withTimestamps();
+		return $this->hasMany('App\Postactivity', 'post_id', 'id');
 	}
 
 }

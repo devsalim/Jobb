@@ -31,8 +31,9 @@ class PagesController extends Controller {
 	public function home(){
 		if (Auth::check()) {
 			$title = 'home';
-			$posts = Postjob::orderBy('id', 'desc')->with('indUser', 'corpUser')->get();
+			$posts = Postjob::orderBy('id', 'desc')->with('indUser', 'corpUser', 'postActivity')->get();
 			return view('pages.home', compact('posts', 'title'));
+			// return $posts;
 		}else{
 			return redirect('login');
 		}	

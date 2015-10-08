@@ -142,7 +142,10 @@
 													<i class="icon-like" ></i>
 													</button>
 												</form>
-												<span class="badge-like" id="like-count-{{ $post->id }}">0</span>
+												<span class="badge-like" id="like-count-{{ $post->id }}">
+												{{ $post->postactivity->sum('thanks') }} 
+												{{-- {{ $post->postactivity->where('user_id', Auth::user()->induser_id)->sum('thanks') }} --}}
+												</span>
 											</div>
 											
 											@if($post->post_type == 'job')
@@ -249,10 +252,10 @@ $(document).ready(function(){
       success: function(data){
         if(data > $count){
  			$('#like-count-'+post_id).text(data);
- 			$('#like-btn-'+post_id).css({'background-color':'lightgreen'});
+ 			// $('#like-btn-'+post_id).css({'background-color':'lightgreen'});
         }else if(data < $count){
  			$('#like-count-'+post_id).text(data);
- 			$('#like-btn-'+post_id).css({'background-color':'burlywood'});
+ 			// $('#like-btn-'+post_id).css({'background-color':'burlywood'});
         }
       }
     }); 

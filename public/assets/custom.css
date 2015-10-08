@@ -404,3 +404,32 @@ background-color:white;
 ul{
     list-style: none;
 }
+
+.media-body, .media-left, .media-right {
+    display: table;
+    float: left;
+}
+.media-body {
+    width: auto;
+    font-weight: normal;
+}
+
+.media-body-left {
+    float: left;
+    min-width: 200px;
+}
+.media-body-right {
+    float: left;
+    min-width: 80px;
+}
+.media-left img {
+    width: 60px;
+    height: 60px;
+    background-color: #EBEBEB;
+    border: 1px solid #ddd;
+    padding: 3px;
+}
+.select2-container-multi .select2-choices {
+    padding: 0 5px 0 0;
+    background: white;
+}
