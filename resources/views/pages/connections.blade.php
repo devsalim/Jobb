@@ -6,7 +6,7 @@
 	<div class="portlet-title">
 		<div class="caption">
 			<i class=""></i>
-			<span class="caption-subject font-blue-hoki bold uppercase">Connections</span>
+			<span class="caption-subject font-blue-hoki bold uppercase">Links</span>
 		</div>
 		<div class="tools">
 			<a href="" class="collapse"></a>

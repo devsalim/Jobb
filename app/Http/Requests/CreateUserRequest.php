@@ -25,7 +25,7 @@ class CreateUserRequest extends Request {
 			'fname'		=>	'required',
 			'lname'		=>	'required',
 			'email'		=>	'required_without:mobile|email|unique:indusers',
-			'mobile'	=>	'required_without:email|unique:indusers|numeric|min:10|max:10',
+			'mobile'	=>	'required_without:email|unique:indusers|numeric|min:10',
 			'password'	=>	'required|min:6|max:15'
 		];
 	}

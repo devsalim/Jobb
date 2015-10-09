@@ -30,11 +30,11 @@
             {{ $session_user->firm_name }}
           </h3>
           <h3 class="form-title user-company">
-            {{ $session_user->working_at }}
+          {{ $session_user->role }} @ {{ $session_user->working_at }}
           </h3>
-          @if($session_user->city!=null || $session_user->state!=null)
+          @if($session_user->city!=null)
           <h3 class="form-title user-location">
-            {{ $session_user->city }}, {{ $session_user->state }} 
+            {{ $session_user->city }}
           </h3>
           @endif          
         </div>
@@ -69,9 +69,9 @@
       </li>
       <li class="@if($title == 'connections'){{'active'}}@endif">
         <a class="" href="/connections/create">
-        <i class="glyphicon glyphicon-link"></i>
+        <i class="icon-link"></i>
         <span class="title">
-        Connections</span>
+        Links</span>
         <span class="selected">
         </span>
         </a>

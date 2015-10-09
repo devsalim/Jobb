@@ -207,7 +207,11 @@
 	<!-- END FORGOT PASSWORD FORM -->
 	
 	<!-- BEGIN REGISTRATION FORM -->
-	<form class="register-form" id="myindividual" action="{{ url('/individual/store') }}" method="post" id="individual-register">
+
+	<div id="ind-msg-reg-box" style="display:none">
+		<div id="ind-reg-msg"></div>
+	</div>
+	<form class="register-form" id="individual-register" action="{{ url('/individual/store') }}" method="post" id="individual-register">
 		<input type="hidden" name="_token" value="{{ csrf_token() }}">
 		<div class="login-option" style=" margin-right: 10px;padding-bottom:6px;">
 			<h3 class="form-title" style="margin-top: 4px;margin-bottom: 16px;color:khaki;font-size: 27px;text-shadow: 0px 1px 1px blue;">
@@ -339,7 +343,7 @@
 		</div>									
 		<div class="form-actions">
 			<label id="register-back-btn" style="margin-left: 39px;cursor: pointer;">Back</label>
-			<button type="submit" id="submit1" class="btn btn-default pull-right">
+			<button type="submit" id="individual-register-btn" class="btn btn-default pull-right">
 			Submit&nbsp;<i class="m-icon-swapright"></i>
 			</button>
 		</div>
@@ -347,6 +351,9 @@
 	<!-- END INDIVIDUAL REGISTRATION FORM -->
 	
 	<!-- Start CORPORATE REGISTRATION FORM -->
+	<div id="copr-msg-reg-box" style="display:none">
+		<div id="corp-reg-msg"></div>
+	</div>
 	<form class="register-corporate-form" action="{{ url('/corporate/store') }}" method="post" id="corporate-register">
 		<input type="hidden" name="_token" value="{{ csrf_token() }}">
 		<div class="login-option" style=" margin-right: 26px;">
@@ -453,7 +460,7 @@
 			<div id="register_ctnc_error"></div>
 		</div>
 		<label id="register-back-btn3" style="margin-left: 39px;cursor: pointer;">Back</label>
-		<button type="submit" class="btn btn-default pull-right">
+		<button type="submit" id="corporate-register-btn" class="btn btn-default pull-right">
 			Submit&nbsp;<i class="m-icon-swapright"></i>
 		</button>
 	</form>
@@ -574,6 +581,100 @@ $('#corporate-login-btn').on('click',function(event){
     }); 
     return false;
   }); 
+	
+$('#individual-register-btn').on('click',function(event){  	    
+  	event.preventDefault();
+
+  	loader('show');
+
+  	var formData = $('#individual-register').serialize(); // form data as string
+    var formAction = $('#individual-register').attr('action'); // form handler url
+
+    $.ajaxSetup({
+		headers: {
+			'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+		}
+	});
+
+    $.ajax({
+      url: formAction,
+      type: "post",
+      data: formData,
+      cache : false,
+      success: function(data){
+	    loader('hide');
+        if(data == 'login'){
+        	$('#ind-msg-reg-box').removeClass('alert alert-danger');
+        	$('#ind-msg-reg-box').addClass('alert alert-success').fadeIn(1000, function(){
+        		$(this).show();
+        	});
+        	$('#ind-reg-msg').text('Registration successful');
+        	
+        }else{
+        	$('#ind-msg-reg-box').removeClass('alert alert-success');
+        	$('#ind-msg-reg-box').addClass('alert alert-danger').fadeIn(1000, function(){
+        		$(this).show();
+        	});
+        	$('#ind-reg-msg').text('Some errors occured during Registration!');
+        }
+      },
+      error: function(data) {
+      	loader('hide');
+      	$('#ind-msg-reg-box').addClass('alert alert-danger').fadeIn(1000, function(){
+        		$(this).show();
+    	});
+    	$('#ind-reg-msg').text('Some error occured !');
+      }
+    }); 
+    return false;
+  });
+
+$('#corporate-register-btn').on('click',function(event){  	    
+  	event.preventDefault();
+
+  	loader('show');
+
+  	var formData = $('#corporate-register').serialize(); // form data as string
+    var formAction = $('#corporate-register').attr('action'); // form handler url
+
+    $.ajaxSetup({
+		headers: {
+			'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+		}
+	});
+
+    $.ajax({
+      url: formAction,
+      type: "post",
+      data: formData,
+      cache : false,
+      success: function(data){
+	    loader('hide');
+        if(data == 'login'){
+        	$('#corp-msg-reg-box').removeClass('alert alert-success');
+        	$('#corp-msg-reg-box').addClass('alert alert-danger').fadeIn(1000, function(){
+        		$(this).show();
+        	});
+        	$('#corp-reg-msg').text('Invalid user');
+        }else{
+        	$('#corp-msg-reg-box').removeClass('alert alert-danger');
+        	$('#corp-msg-reg-box').addClass('alert alert-success').fadeIn(1000, function(){
+        		$(this).show();
+        	});
+        	$('#corp-reg-msg').text('Registration success');
+        	redirect(data);
+        }
+      },
+      error: function(data) {
+      	loader('hide');
+      	$('#corp-msg-reg-box').addClass('alert alert-danger').fadeIn(1000, function(){
+        		$(this).show();
+    	});
+    	$('#corp-reg-msg').text('Some error occured !');
+      }
+    }); 
+    return false;
+  });
 });
 
 $('#individual-login').bind('keydown', function(e){         

@@ -45,3 +45,5 @@ Temporary Items
 # private files
 .env
 /vendor
+*.jpg
+*.docx

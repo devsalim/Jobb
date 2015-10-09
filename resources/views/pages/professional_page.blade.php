@@ -10,9 +10,6 @@
 		</div>
 		<div class="tools">
 			<a href="" class="collapse"></a>
-			<a href="#portlet-config" data-toggle="modal" class="config"></a>
-			<a href="" class="reload"></a>
-			<a href="" class="remove"></a>
 		</div>
 	</div>
 	<div class="portlet-body form">
@@ -68,6 +65,9 @@
 										</span>
 										<input type="text" name="mobile" class="form-control" placeholder="Mobile No" value="{{ $user->mobile }}">
 									</div>
+									<a href="javascript:;" class="btn btn-xs" style="height: 22px;border-radius: 12px !important;background-color: #cb5a5e;color:white;">
+										<i class="glyphicon glyphicon-question-sign" style="font-size: 15px;line-height: 1.3;"></i> Verify 
+										</a> 
 								</div>
 							</div>
 							<!--/span-->
@@ -78,8 +78,11 @@
 										<span class="input-group-addon">
 											<i class="icon-envelope"></i>
 										</span>
-										<input type="text" name="email" class="form-control" placeholder="Email Id" value="{{ $user->email }}">
+										<input type="text" disabled name="email" class="form-control" placeholder="Email Id" value="{{ $user->email }}">
 									</div>
+									<a href="javascript:;" class="btn btn-xs" style="height: 22px;border-radius: 12px !important;background-color: #1EC71E;color:white;">
+										<i class="glyphicon glyphicon-ok-circle" style="font-size: 15px;line-height: 1.3;"></i> Verified 
+										</a> 
 								</div>
 							</div>
 							<!--/span-->
@@ -104,9 +107,6 @@
 		</div>
 		<div class="tools">
 			<a href="" class="collapse"></a>
-			<a href="#portlet-config" data-toggle="modal" class="config"></a>
-			<a href="" class="reload"></a>
-			<a href="" class="remove"></a>
 		</div>		
 	</div>
 	<div class="portlet-body form">
@@ -118,12 +118,26 @@
 					<div class="" style=""></div>
 					<div class="col-md-8" style="">
 						<div class="row-md-10">
+							<div class="col-md-12">
+								<div class="form-group">
+									<label>About Me:</label>
+									<div class="input-group">
+										<span class="input-group-addon">
+											<i class="icon-note" style="color:darkcyan;"></i>
+										</span>
+										<textarea name="about_individual" class="form-control autosizeme" rows="3">{{ $user->about_individual }}</textarea>
+									</div>
+								</div>
+							</div>
+							<!--/span-->
+						</div>		
+						<div class="row-md-10">
 							<div class="col-md-6">
 								<div class="form-group">
 									<label>Education</label>
 									<div class="input-group">
 										<span class="input-group-addon">
-											<i class="fa fa-university"></i>
+											<i class="icon-graduation"></i>
 										</span>
 										<select class="form-control" name="education" id="parent_selection" value="{{ $user->education }}">
 											<option value="">--Please Select--</option>
@@ -153,7 +167,7 @@
 									<label>Branch</label>
 									<div class="input-group">
 										<span class="input-group-addon">
-										<i class="fa fa-university"></i>
+										<i class="icon-graduation"></i>
 										</span>
 										<select class="form-control" name="branch" id="child_selection" value="{{ $user->branch }}" >
 											<option value="">--Please Select--</option>
@@ -164,12 +178,55 @@
 							<!--/span-->
 						</div>						
 						<div class="row-md-10">
+							
+							<div class="col-md-6">
+								<div class="form-group">
+									<label>Working at</label>
+									<div class="input-group">
+										<span class="input-group-addon">
+											<i class="fa fa-university"></i>
+										</span>
+										
+										<input type="text" class="form-control" value="{{ $user->working_at }}" name="working_at">
+									</div>
+								</div>
+							</div>
+							<!--/span-->
+							<div class="col-md-6">
+								<div class="form-group">
+									<label>Experience</label>
+									<div class="input-group">
+										<span class="input-group-addon">
+											<i class=" icon-briefcase"></i>
+										</span>
+										<select class="form-control" name="experience" value="{{ $user->experience }}" >
+											<option value="1">1</option>
+											<option value="2">2</option>
+											<option value="3">3</option>
+											<option value="4">4</option>
+											<option value="5">5</option>
+											<option value="6">6</option>
+											<option value="7">7</option>
+											<option value="8">8</option>
+											<option value="9">9</option>
+											<option value="10">10</option>
+											<option value="11">11</option>
+											<option value="12">12</option>
+											<option value="13">13</option>
+											<option value="14">14</option>
+											<option value="15">15</option>
+										</select>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row-md-10">
 							<div class="col-md-6">
 								<div class="form-group">
 									<label>Job Category</label>
 									<div class="input-group">
 										<span class="input-group-addon">
-											<i class="fa fa-university"></i>
+											<i class="fa fa-cubes"></i>
 										</span>
 										<select class="form-control" name="prof_category" value="{{ $user->prof_category }}" >
 											<optgroup label="Accounting">
@@ -200,71 +257,18 @@
 							<!--/span-->
 							<div class="col-md-6">
 								<div class="form-group">
-									<label>Working At</label>
-									<div class="input-group">
-										<span class="input-group-addon">
-											<i class="fa fa-university"></i>
-										</span>
-										
-										<input type="text" class="form-control" value="{{ $user->working_at }}" name="working_at">
-									</div>
-								</div>
-							</div>
-							<!--/span-->
-						</div>
-						<div class="row-md-10">
-							<div class="col-md-6">
-								<div class="form-group">
 									<label>Role</label>
 									<div class="input-group">
 										<span class="input-group-addon">
-											<i class="fa fa-university"></i>
+											<i class="fa fa-cube"></i>
 										</span>
 										<input type="text" class="form-control" value="{{ $user->role }}" name="role">
 									</div>
 								</div>
 							</div>
 							<!--/span-->
-							<div class="col-md-6">
-								<div class="form-group">
-									<label>Experience</label>
-									<div class="input-group">
-										<span class="input-group-addon">
-											<i class="fa fa-university"></i>
-										</span>
-										<select class="form-control" name="prof_category" value="{{ $user->experience }}" >
-											<option value="1">1</option>
-											<option value="2">2</option>
-											<option value="3">3</option>
-											<option value="4">4</option>
-											<option value="5">5</option>
-											<option value="6">6</option>
-											<option value="7">7</option>
-											<option value="8">8</option>
-											<option value="9">9</option>
-											<option value="10">10</option>
-											<option value="11">11</option>
-											<option value="12">12</option>
-											<option value="13">13</option>
-											<option value="14">14</option>
-											<option value="15">15</option>
-										</select>
-									</div>
-								</div>
-							</div>
 						</div>
-						<div class="row-md-10">
-							<div class="col-md-12">
-								<div class="form-group">								
-									<label>Experience</label>
-									<div id="slider-range-max" class="slider bg-purple"></div>
-									<div class="slider-value">
-										 Experience: <span id="slider-range-max-amount">{{ $user->experience }}</span>
-										<input type="hidden" name="experience" class="exp">
-									</div>
-								</div>
-							</div>
-						</div>
+						
 						<div class="row-md-10">
 							<div class="col-md-6">
 								<div class="form-group">
@@ -334,22 +338,22 @@
 							</div>
 							<!--/span-->
 						</div>
+
 						<div class="row-md-10">
-							<div class="col-md-6"><label>Resume:&nbsp;{{ $user->resume }}</label></div>
 							<div class="col-md-12">
 								<div class="form-group" style="">
-									<label class="control-label">Upload Updated Resume</label>&nbsp;
-									<label style="font-size:12px;font-weight: 400;">(Optional)</label>
+									<label class="control-label">Upload Resume <small style="font-weight: 400; font-size: 13px;">(Optional) only pdf or word format</small></label>&nbsp;
+									
 									<div class="">
 										<div class="fileinput fileinput-new" data-provides="fileinput">
-											<span class="btn btn-default btn-file" style=" background-color: #3598dc;  color: white;">
+											<span class="btn btn-default btn-file" style=" background-color: #44b6ae;  color: white;">
 												<i class="icon-paper-clip" style="color: white;"></i>
 												<span class="fileinput-new">Select File </span> 
 												<span class="fileinput-exists">Upload New Resume </span>
 												<input type="file" name="resume">
 											</span>
 											<br>
-											<span class="fileinput-new">only pdf. & word format</span>
+											<span class="fileinput-new"></span>
 											<span class="fileinput-filename"></span>&nbsp; 
 											<a href="javascript:;" class="close fileinput-exists" data-dismiss="fileinput"></a>
 										</div>
@@ -361,7 +365,7 @@
 					</div>
 				</div>
 				<div class="form-actions ">
-					<button type="submit" name="individual" value="Save" class="btn blue"><i class="fa fa-check"></i> Save</button>
+					<button type="submit" name="individual" value="Save" class="btn blue"><i class="fa fa-check"></i> Update</button>
 					<button type="button" class="btn default">Cancel</button>
 				</div>
 			</div>
@@ -377,8 +381,9 @@
 <script src="{{ asset('/assets/Edubranch.js') }}"></script>
 <script>
 	jQuery(document).ready(function() { 
+	    ComponentsIonSliders.init();
 	    ComponentsDropdowns.init();
-   		ComponentsjQueryUISliders.init();
+	    ComponentsEditors.init();
 	});   
 </script>
 @stop

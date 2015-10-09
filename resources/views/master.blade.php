@@ -63,7 +63,8 @@
 <link href="{{ asset('/assets/custom.css') }}" rel="stylesheet"/>
 <!-- END PAGE LEVEL STYLES -->
 <link href="{{ asset('assets/global/plugins/jquery-ui/jquery-ui.min.css') }}" rel="stylesheet"/>
-
+<!-- <link href="/assets/admin/pages/css/profile.css" rel="stylesheet" type="text/css"/> -->
+<link href="/assets/admin/pages/css/tasks.css" rel="stylesheet" type="text/css"/>
 @yield('css')
 
 <style type="css/text" rel="stylesheet">

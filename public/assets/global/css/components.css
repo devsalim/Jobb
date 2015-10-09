@@ -2683,16 +2683,16 @@ Dropdown Menu
   min-width: 175px;
   position: absolute;
   top: 100%;
-  left: 0;
+  left: -110px;
   z-index: 1000;
   display: none;
   float: left;
   list-style: none;
   text-shadow: none;
   padding: 0px;
-  background-color: #ffffff;
+  background-color: #eaedf2;
   margin: 10px  0px 0px 0px;
-  box-shadow: 5px 5px rgba(102, 102, 102, 0.1);
+  /*box-shadow: 5px 5px rgba(102, 102, 102, 0.1);*/
   border: 1px solid #eee;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   -webkit-border-radius: 4px;
@@ -2734,7 +2734,7 @@ Dropdown Menu
 .dropdown-menu .active > a:hover {
   text-decoration: none;
   background-image: none;
-  background-color: #f6f6f6;
+  background-color: transparent;
   color: #555;
   filter: none;
 }
@@ -4497,7 +4497,7 @@ Customized Bootstrap Panels
 }
 .panel-default > .panel-heading {
   color: #333333;
-  background-color: #f9f9f9;
+  background-color: #EFEFEF;
   border-color: #e0e0e0;
 }
 .panel-default > .panel-heading + .panel-collapse .panel-body {
@@ -6824,7 +6824,7 @@ Blue Default
 }
 
 .portlet.box.blue {
-  border: 1px solid #60aee4;
+ /* border: 1px solid #60aee4;*/
   border-top: 0;
 }
 .portlet.box.blue > .portlet-title {

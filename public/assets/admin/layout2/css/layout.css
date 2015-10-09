@@ -240,8 +240,8 @@ Page Header
 .page-header.navbar .top-menu .navbar-nav > li.dropdown > .dropdown-toggle > .badge {
   font-family: "Open Sans", sans-serif;
   position: absolute;
-  top: 17px;
-  right: 9px;
+  top: 0px;
+  right: 0px;
   font-weight: 300;
   padding: 3px 6px;
 }
@@ -258,8 +258,9 @@ Page Header
 }
 .page-header.navbar .top-menu .navbar-nav > li.dropdown .dropdown-menu:before {
   position: absolute;
-  top: -7px;
-  right: 9px;
+  top: -12px;
+  right: 130px;
+  left: 128px;
   display: inline-block !important;
   border-right: 7px solid transparent;
   border-bottom: 7px solid #eee;

@@ -52,10 +52,10 @@ Page Header
   border-bottom-color: #eaedf2;
 }
 .page-header.navbar .top-menu .navbar-nav > li.dropdown-extended .dropdown-menu > li.external {
-  background: #eaedf2;
+  background: rgb(216, 216, 216);
 }
 .page-header.navbar .top-menu .navbar-nav > li.dropdown-extended .dropdown-menu > li.external > h3 {
-  color: #62878f;
+  color:#A02600;
 }
 .page-header.navbar .top-menu .navbar-nav > li.dropdown-extended .dropdown-menu > li.external > a {
   color: #5b9bd1;
@@ -65,8 +65,8 @@ Page Header
   text-decoration: none;
 }
 .page-header.navbar .top-menu .navbar-nav > li.dropdown-extended .dropdown-menu .dropdown-menu-list > li > a {
-  border-bottom: 1px solid #EFF2F6 !important;
-  color: #888888;
+  border-bottom: 1px solid lightgrey !important;
+  color: black;
 }
 .page-header.navbar .top-menu .navbar-nav > li.dropdown-extended .dropdown-menu .dropdown-menu-list > li > a:hover {
   background: #f8f9fa;
@@ -85,7 +85,7 @@ Page Header
   border-color: transparent transparent transparent #14B9D6;
 }
 .page-header.navbar .top-menu .navbar-nav > li.dropdown-inbox .dropdown-menu .dropdown-menu-list .subject .from {
-  color: #5b9bd1;
+  color: #00569E;
 }
 .page-header.navbar .top-menu .navbar-nav > li.dropdown-tasks .dropdown-menu .dropdown-menu-list .progress {
   background-color: #dfe2e9;

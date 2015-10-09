@@ -44,6 +44,33 @@ class CorporateController extends Controller {
 	 */
 	public function store(CreateCorpRequest $request)
 	{
+		if($request->ajax()){
+		DB::beginTransaction();
+		try{
+			$corpUser = new Corpuser();
+			$corpUser->firm_name = $request['firm_name'];
+			$corpUser->firm_email_id = $request['firm_email_id'];
+			$corpUser->firm_type = $request['firm_type'];
+			$corpUser->save();
+
+			$user = new User();
+			$user->name = $request['firm_name'];
+			$user->email = $request['firm_email_id'];
+			$user->password = bcrypt($request['firm_password']);
+			$user->identifier = 2;
+
+			$corpUser->user()->save($user);
+		}catch(\Exception $e)
+		{
+		   DB::rollback();
+		   throw $e;
+		}
+
+		DB::commit();
+
+		return 'login';
+	}else
+	{
 		DB::beginTransaction();
 		try{
 			$corpUser = new Corpuser();
@@ -68,6 +95,7 @@ class CorporateController extends Controller {
 		DB::commit();
 
 		return redirect('/login');
+	}
 	}
 
 	/**

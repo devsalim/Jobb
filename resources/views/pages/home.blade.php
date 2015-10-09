@@ -28,7 +28,7 @@
 										<div class="timeline-body-head-caption">
 											<a>
 												@if($post->induser != null && Auth::user()->induser_id)	
-												<a class="user-link"><i class="glyphicon glyphicon-link"></i></a>&nbsp;<a style="padding: 0px 0px 0px 23px;">{{ $post->induser->fname }} {{ $post->induser->lname }}</a>
+												<a class="user-link"><i class="icon-link"></i></a>&nbsp;<a style="padding: 0px 0px 0px 23px;font-size: 15px;text-decoration:none;">{{ $post->induser->fname }} {{ $post->induser->lname }}</a>
 												@elseif($post->corpuser != null)
 													{{ $post->post_compname }} 
 												@endif
@@ -88,7 +88,7 @@
 													</div>
 												</div>
 												
-												<div class="skill-display">Reference Id&nbsp;: </div>
+												<div class="skill-display">Reference Id&nbsp;: {{ $post->reference_id }} </div>
 												<div class="skill-display">Education & skills&nbsp;:<br> </div>
 												<div class="row">
 													<div class="col-md-1"></div>
@@ -129,34 +129,35 @@
 										</div>
 										<div class="post-{{ $post->post_type }} post-icon-bar">
 											<div class="btn-group dropup like-bar">
-												<button class="btn dropdown-toggle" type="button" data-toggle="dropdown" style="border-radius: 25px !important; height: 40px;background-color: burlywood;">
-												<i class="icon-like" ></i>
+												<button class="btn dropdown-toggle" type="button" data-toggle="dropdown" style="background-color: transparent;padding: 13px 50px 10px 10px;">
+													<i class="icon-like" style="font-size: 23px;color: tomato;"></i><span class="badge-like">1000 </span>
 												</button>
-												<span class="badge-like">100 </span>
 											</div>
 											
 											@if($post->post_type == 'job')
-											<button type="button" class="btn btn-success" style=" margin: 0px auto;float:none;background-color: #61b3de;display:table;"><i class="icon-arrow-right" style="font-size:22px;vertical-align:middle;"></i>&nbsp;<span style="font-weight:600;vertical-align:middle">Apply</span></button>
+											<button type="button" class="btn btn-success apply-contact-btn"><span style="font-weight:600;vertical-align:middle">Apply</span></button>
 											
 											@elseif($post->post_type == 'skill')
-											<button type="button" class="btn btn-success" style=" margin: 0px auto;float:none;background-color: #70b29c;display:table;"><i class="icon-arrow-right" style="font-size:22px;vertical-align:middle;"></i>&nbsp;<span style="font-weight:600;vertical-align:middle">Contact</span></button>
+											<button type="button" class="btn btn-success apply-contact-btn"><span style="font-weight:600;vertical-align:middle">Contact</span></button>
 											@endif
-											<span class="span-share">Share</span>
+											
 											<div class="btn-group dropup share-bar">
-												<button class="btn green dropdown-toggle" type="button" data-toggle="dropdown" style="border-radius: 25px !important; height: 40px;background-color:tomato;">
-												<i class="icon-share"></i>
-												</button>
-												<ul class="dropdown-menu pull-right" role="menu" style="min-width:0;box-shadow:0 0 !important">
-													<li style="background-color: #3b5998;">
-														<a href="/" class="facebook"><i class="fa fa-facebook post-social-icon" ></i></a>
-													</li>
-													<li style="background-color: #c32f10;">
-														<a href="/" class="google-plus"><i class="fa fa-google-plus post-social-icon"></i></a>
-													</li>
-													<li style="background-color: #00aced;">
-														<a href="/" class="linkedin"><i class="fa fa-linkedin post-social-icon" ></i></a>
-													</li>
-												</ul>
+												<div class="btn-group dropup">
+													<button class="btn dropdown-toggle" type="button" data-toggle="dropdown" style="background-color: transparent;border-left: 1px solid lightgray;padding: 18px 20px 7px 8px;">
+													<i class="fa fa-share-square-o" style="font-size: 23px;color: tomato;"></i><span class="badge-share">1000 </span>
+													</button>
+													<ul class="dropdown-menu pull-right" role="menu" style="min-width:0;box-shadow:0 0 !important">
+														<li style="background-color: #3b5998;">
+															<a href="/" class="facebook"><i class="fa fa-facebook post-social-icon" ></i></a>
+														</li>
+														<li style="background-color: #c32f10;">
+															<a href="/" class="google-plus"><i class="fa fa-google-plus post-social-icon"></i></a>
+														</li>
+														<li style="background-color: #00aced;">
+															<a href="/" class="linkedin"><i class="fa fa-linkedin post-social-icon" ></i></a>
+														</li>
+													</ul>
+												</div>
 											</div>
 										</div>
 									</div>

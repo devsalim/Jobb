@@ -33,6 +33,7 @@ class CreateIndusersTable extends Migration {
             $table->string('role')->nullable();
             $table->string('city')->nullable();
             $table->string('state')->nullable();
+            $table->string('about_individual')->nullable();
    		$table->timestamps();
 		});
 	}

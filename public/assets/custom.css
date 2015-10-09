@@ -15,7 +15,7 @@
     background-size: 100%;
     text-align: center;
     cursor: pointer;
-    box-shadow: 2px 0px black;
+    box-shadow: 0px 3px 5px lightgrey;
 }
 .hover-image {
     position: absolute;
@@ -68,7 +68,7 @@
 .post-icon-bar{
     padding: 5px 10px 5px 0px;
     border-radius: 0 0 4px 4px !important;
-    border: 1px solid lightgrey;
+    border-top: 1px solid lightgrey;
     position: relative;
     height: 45px;
 }
@@ -250,12 +250,26 @@ background-color:white;
 
 .badge-like{
     position: absolute;
-    margin: 7px 1px 0px 8px;
     color: darkmagenta;
     font-size: 14px;
     text-align: center;
     line-height: 1.8;
     font-weight: 600;
+    float: left;
+    bottom: 8px;
+    left: 35px;
+}
+
+.badge-share{
+    position: absolute;
+    color: darkmagenta;
+    font-size: 14px;
+    text-align: center;
+    line-height: 1.8;
+    font-weight: 600;
+    float: right;
+    bottom: 8px;
+    left: 33px;
 }
 
 .badge-like-add{
@@ -326,10 +340,10 @@ background-color:white;
     font-size: 14px;
     font-weight: 600;
     text-transform: capitalize;
-    background-color: #f9f9f9;
+    background-color: whitesmoke;
     height: 30px;
     margin: 8px 0px 8px -1px;
-    padding: 4px 8px;
+    padding: 4px 3px;
 }
 
 .time-item{
@@ -353,17 +367,6 @@ background-color:white;
     box-shadow: 1px 1px black;
 }
 
-.post-job-skill-bar a:active {
-    float: right;
-    top: 16px;
-    position: absolute;
-    right: 26px;
-    background-color: burleywood !important;
-    border-radius: 20px !important;
-    color: black;
-    box-shadow: 1px 1px black;
-}
-
 .userpic-box{
     border: 1px darkgrey solid;
     box-shadow: 2px 0px darkgrey;
@@ -371,9 +374,9 @@ background-color:white;
 
 .share-bar{
     float: right;
-    right: 50px;
+    right: 35px;
     position: absolute;
-    top: 2px;
+    top: 0px;
     text-align: center;
     line-height: 1.6;
 }
@@ -388,21 +391,44 @@ background-color:white;
 
 .like-bar{
     float: left;
-    top: 2px;
     position: absolute;
-    left: 8px;
-    background-color: burlywood !important;
-    border-radius: 20px !important;
-    color: black;
-    box-shadow: 1px 1px black;
+    bottom: 0;
+    border-right: 1px solid lightgray;
 }
 
 /* View Page */
 
 .view-page{
     padding-top: 2px;
+    font-size: 14px;
 }
 
 ul{
     list-style: none;
+}
+
+/* usertitle in view page */
+.usertitle-profile{
+    float: none;
+    display: table;
+    margin: 10px auto;
+    text-align: center;
+}
+
+.profile-list{
+    border: 1px solid grey !important;
+    height: 45px;
+    width: 82px;
+    line-height: 1.6;
+    border-radius: 5px !important;
+    margin: 0 2px;
+}
+
+.apply-contact-btn{
+    margin: 0px auto;
+    float:none;
+    background-color: #61b3de;
+    display:table;
+    box-shadow: 0 3px 5px gray;
+    padding: 5px 30px;
 }

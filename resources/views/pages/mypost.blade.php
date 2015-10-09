@@ -108,11 +108,9 @@
 												</ul>
 											</div>
 										</div>
-										
-									
+									</div>
 								</div>
 							</div>
-						</div>
 						<div class="portlet-title">
 								<div class="tools">
 									<a href="javascript:;" class="collapse">
@@ -122,15 +120,15 @@
 								</div>
 							</div>
 							<div class="portlet-body">
-								<div class="tabbable-custom nav-justified">
-									<ul class="nav nav-tabs nav-justified">
+								<div class="tabbable-custom nav-justified" >
+									<ul class="nav nav-tabs nav-justified" style="padding-left:0;">
 										<li class="active">
 											<a href="#tab_1_1_1" data-toggle="tab">
 											Thanks & Share </a>
 										</li>
 										<li>
 											<a href="#tab_1_1_2" data-toggle="tab">
-											Contact </a>
+											Applied </a>
 										</li>
 										
 									</ul>
@@ -148,67 +146,39 @@
 														</div>
 
 													<div class="portlet-body">
-														<div class="table-container">
-															<div class="table-actions-wrapper">
-																<span>
-																</span>
-																<select class="table-group-action-input form-control input-inline input-small input-sm">
-																	<option value="">Select...</option>
-																	<option value="Cancel">Cancel</option>
-																	<option value="Cancel">Hold</option>
-																	<option value="Cancel">On Hold</option>
-																	<option value="Close">Close</option>
-																</select>
-																<button class="btn btn-sm yellow table-group-action-submit"><i class="fa fa-check"></i> Submit</button>
-															</div>
-															<table class="table table-striped table-bordered table-hover" id="datatable_ajax">
-															<thead>
-															<tr role="row" class="heading">
-																<th width="2%">
-																	No.
-																</th>
-																<th width="5%">
-																	 User
-																</th>
-																<th width="10%">
-																	 Activity
-																</th>
-																<th width="15%">
-																	 Date & Time
-																</th>
-																
-															</tr>
-															<tr role="row" class="filter">
-																<td>
-																	<input type="text" class="form-control form-filter input-sm" name="order_id">
-																</td>
-																<td>
-																	<input type="text" class="form-control form-filter input-sm" name="order_id">
-																</td>
-																<td>
-																	<input type="text" class="form-control form-filter input-sm" name="order_id">
-																</td>
-																<td>
-																	<div class="input-group date date-picker margin-bottom-5" data-date-format="dd/mm/yyyy">
-																		<input type="text" class="form-control form-filter input-sm" readonly name="order_date_from" placeholder="From">
-																		<span class="input-group-btn">
-																		<button class="btn btn-sm default" type="button"><i class="fa fa-calendar"></i></button>
-																		</span>
-																	</div>
-																	<div class="input-group date date-picker" data-date-format="dd/mm/yyyy">
-																		<input type="text" class="form-control form-filter input-sm" readonly name="order_date_to" placeholder="To">
-																		<span class="input-group-btn">
-																		<button class="btn btn-sm default" type="button"><i class="fa fa-calendar"></i></button>
-																		</span>
-																	</div>
-																</td>
-																
-															</tr>
-															</thead>
-															<tbody>
-															</tbody>
-															</table>
-														</div>
+														<ul class="dropdown-menu-list scroller"  data-handle-color="#637283">
+										                  <li style="font-size:15px;">
+										                    <!-- <a href="" > -->
+										                    <span class="photo">
+										                    <img src="{{ asset('/assets/admin/layout3/img/avatar2.jpg') }}" class="img-circle" alt="">
+										                    </span>
+										                    <span class="subject">
+										                    <span class="from" style="font-weight:600;color:darkcyan;">
+										                   Deepika </span>
+										                    <span class="time"> </span>
+										                    </span>
+										                    <span class="message">
+										                    has thanked this post <i class=" icon-clock"></i> Oct 06,2015 13:04 PM </span>
+										                    <!-- </a> -->
+										                  </li>
+										                  <li>
+										                  </li>
+										                  <li style="font-size:15px;">
+										                   <!--  <a href="" > -->
+										                    <span class="photo">
+										                    <img src="{{ asset('/assets/admin/layout3/img/avatar3.jpg') }}" class="img-circle" alt="">
+										                    </span>
+										                    <span class="subject">
+										                    <span class="from" style="font-weight:600;color:darkcyan;">
+										                    Deepak Gupta </span>
+										                    <span class="time"> </span>
+										                    </span>
+										                    <span class="message">
+										                    has shared this post via <a href="/" class="facebook" style="background-color: #3b5998;"><i class="fa fa-facebook post-social-icon"></i></a> <i class=" icon-clock"></i> Oct 05,2015 13:04 PM  </span>
+										                   <!--  </a> -->
+										                  </li>
+										                  
+										                </ul>
 													</div>
 												</div>
 										</div>
@@ -223,78 +193,40 @@
 													</div>
 
 													<div class="portlet-body">
-														<div class="table-container">
-															<div class="table-actions-wrapper">
-																<span>
-																</span>
-																<select class="table-group-action-input form-control input-inline input-small input-sm">
-																	<option value="">Select...</option>
-																	<option value="Cancel">Cancel</option>
-																	<option value="Cancel">Hold</option>
-																	<option value="Cancel">On Hold</option>
-																	<option value="Close">Close</option>
-																</select>
-																<button class="btn btn-sm yellow table-group-action-submit"><i class="fa fa-check"></i> Submit</button>
-															</div>
-															<table class="table table-striped table-bordered table-hover" id="datatable_ajax">
-															<thead>
-															<tr role="row" class="heading">
-																<th width="2%">
-																	No.
-																</th>
-																<th width="5%">
-																	 User
-																</th>
-																<th width="10%">
-																	 User Type
-																</th>
-																<th width="10%">
-																	 Role
-																</th>
-																<th width="15%">
-																	 Date & Time
-																</th>
-																<th width="15%">
-																	 Resume
-																</th>
-																
-															</tr>
-															<tr role="row" class="filter">
-																<td>
-																	<input type="text" class="form-control form-filter input-sm" name="order_id">
-																</td>
-																<td>
-																	<input type="text" class="form-control form-filter input-sm" name="order_id">
-																</td>
-																<td>
-																	<input type="text" class="form-control form-filter input-sm" name="order_id">
-																</td>
-																<td>
-																	<input type="text" class="form-control form-filter input-sm" name="order_id">
-																</td>
-																<td>
-																	<div class="input-group date date-picker margin-bottom-5" data-date-format="dd/mm/yyyy">
-																		<input type="text" class="form-control form-filter input-sm" readonly name="order_date_from" placeholder="From">
-																		<span class="input-group-btn">
-																		<button class="btn btn-sm default" type="button"><i class="fa fa-calendar"></i></button>
-																		</span>
-																	</div>
-																	<div class="input-group date date-picker" data-date-format="dd/mm/yyyy">
-																		<input type="text" class="form-control form-filter input-sm" readonly name="order_date_to" placeholder="To">
-																		<span class="input-group-btn">
-																		<button class="btn btn-sm default" type="button"><i class="fa fa-calendar"></i></button>
-																		</span>
-																	</div>
-																</td>
-																<td>
-																	<input type="text" class="form-control form-filter input-sm" name="order_id">
-																</td>
-															</tr>
-															</thead>
-															<tbody>
-															</tbody>
-															</table>
-														</div>
+														
+														<ul class="dropdown-menu-list scroller" style="height: 275px;" data-handle-color="#637283">
+										                  <li style="font-size:15px;">
+										                    <!-- <a href="" > -->
+										                    <span class="photo">
+										                    <img src="{{ asset('/assets/admin/layout3/img/avatar2.jpg') }}" class="img-circle" alt="">
+										                    </span>
+										                    <span class="subject">
+										                    <span class="from" style="font-weight:600;color:darkcyan;">
+										                   Priyanka </span>
+										                    <span class="time"> </span>
+										                    </span>
+										                    <span class="message">
+										                    has applied for this post <i class=" icon-clock"></i> Oct 06,2015 13:04 PM </span>
+										                    <!-- </a> -->
+										                  </li>
+										                  <li>
+										                  </li>
+										                  <li style="font-size:15px;">
+										                   <!--  <a href="" > -->
+										                    <span class="photo">
+										                    <img src="{{ asset('/assets/admin/layout3/img/avatar3.jpg') }}" class="img-circle" alt="">
+										                    </span>
+										                    <span class="subject">
+										                    <span class="from" style="font-weight:600;color:darkcyan;">
+										                    Deepak Gupta </span>
+										                    <span class="time"> </span>
+										                    </span>
+										                    <span class="message">
+										                    has applied for this post <i class=" icon-clock"></i> Oct 05,2015 13:04 PM  </span>
+										                   <!--  </a> -->
+										                  </li>
+										                  
+										                </ul>
 													</div>
 												</div>
 										</div>
@@ -305,39 +237,12 @@
 					</div>
 							<!-- END TIMELINE ITEM -->
 				</div>
-			</div>	
-		<div class="col-md-3">
-			<div class="portlet box red-sunglo">
-				<div class="portlet-title">
-					<div class="caption">
-						<i class="fa fa-gift"></i>Unordered Lists
-					</div>
-					<div class="tools">
-						<a href="javascript:;" class="collapse">
-						</a>
-					</div>
-				</div>
-				<div class="portlet-body">
-					<ul>
-						<li>
-							 Lorem ipsum dolor sit amet
-						</li>
-						<li>
-							 Consectetur adipiscing elit
-						</li>
-						<li>
-							 Integer molestie lorem at massa
-						</li>
-						<li>
-							 Facilisis in pretium nisl aliquet
-						</li>									
-					</ul>
-				</div>
-			</div>
-		</div>	
+			</div>		
 					<!-- END TIMELINE ITEM -->
 		<?php $var++; ?>
 	 @endforeach
+	 @else
+	 You haven't Post Anything!!
 	@endif
 	</div>
 </div>
@@ -349,7 +254,6 @@
 @stop
 
 @section('javascript')
-
 <script type="text/javascript">
 	jQuery('#show-social').hide();
 	jQuery(document).ready(function(){ 
@@ -358,5 +262,4 @@
 	    });
 	});
 </script>
-
 @stop

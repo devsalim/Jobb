@@ -98,4 +98,10 @@ class ViewpageController extends Controller {
 		//
 	}
 
+	public function edit_view()
+	{
+		$title = 'indprofile_edit';
+		$user = Induser::where('id', '=', Auth::user()->induser_id)->first();
+		return view('pages.professional_page', compact('user', 'title'));
+	}
 }

@@ -66,7 +66,8 @@ Route::group(array('before' => 'auth'), function(){
 	Route::post('searchConnections', 'ConnectionsController@searchConnections');
 
 	Route::get('individual_view', 'ViewpageController@index');
-	Route::get('individual_view/create', 'ViewpageController@create');	
+	Route::get('individual_view/create', 'ViewpageController@create');
+	Route::get('individual/edit_view', 'ViewpageController@edit_view');	
 });
 
 Route::get('fillitlater', 'PagesController@fillItLater');

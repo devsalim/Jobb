@@ -44,7 +44,37 @@ class UserController extends Controller {
 	 */
 	public function store(CreateUserRequest $request)
 	{
+		if($request->ajax()){
 		DB::beginTransaction();
+		try{
+			$indUser = new Induser();
+			$indUser->fname = $request['fname'];
+			$indUser->lname = $request['lname'];
+			$indUser->email = $request['email'];
+			$indUser->mobile = $request['mobile'];
+			$indUser->save();
+
+			$user = new User();
+			$user->name = $request['fname'].' '.$request['lname'];
+			$user->email = $request['email'];
+			$user->mobile = $request['mobile'];
+			$user->password = bcrypt($request['password']);
+			$user->identifier = 1;
+
+			$indUser->user()->save($user);
+		}catch(\Exception $e)
+		{
+		   DB::rollback();
+		   throw $e;
+		}
+		
+		DB::commit();
+
+		return 'login';
+		}
+		else
+		{
+			DB::beginTransaction();
 		try{
 			$indUser = new Induser();
 			$indUser->fname = $request['fname'];
@@ -70,6 +100,7 @@ class UserController extends Controller {
 		DB::commit();
 
 		return redirect('/login');
+		}
 	}
 
 	/**
@@ -123,6 +154,7 @@ class UserController extends Controller {
 			$data->state = Input::get('state');
 			$data->city = Input::get('city');
 			$data->linked_skill = Input::get('linked_skill');
+			$data->about_individual = Input::get('about_individual');
 			$data->save();
 			return redirect('/individual/create');
 		}else{
@@ -171,4 +203,5 @@ class UserController extends Controller {
 	    }
 	}
 
+		
 }
