@@ -2,8 +2,8 @@
 
 use Illuminate\Database\Eloquent\Model;
 
-class postactivity extends Model {
+class Postactivity extends Model {
 
-	//
+
 
 }

@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Eloquent\Model;
 
-class postjob_skills extends Model {
+class Postjob_skills extends Model {
 
 	//
 

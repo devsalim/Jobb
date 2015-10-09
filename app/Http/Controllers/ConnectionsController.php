@@ -110,12 +110,15 @@ class ConnectionsController extends Controller {
 
 	public function searchConnections()
 	{
-		$email = Input::get('keywords');
-		$users = Induser::where('email', '=', $email)
-						->orWhere('fname', 'like', '%'.$email.'%')
-						->orWhere('lname', 'like', '%'.$email.'%')
-						->orWhere('working_at', 'like', '%'.$email.'%')
-					    ->where('id', '<>', Auth::user()->induser_id)
+		$keywords = Input::get('keywords');
+		$users = Induser::where('email', 'like', '%'.$keywords.'%')
+						->where('id', '<>', Auth::user()->induser_id)
+						->orWhere('fname', 'like', '%'.$keywords.'%')
+						->where('id', '<>', Auth::user()->induser_id)
+						->orWhere('lname', 'like', '%'.$keywords.'%')
+						->where('id', '<>', Auth::user()->induser_id)
+						->orWhere('working_at', 'like', '%'.$keywords.'%')
+						->where('id', '<>', Auth::user()->induser_id)
 					    ->get();
 		return view('pages.searchUsers', compact('users'));	
 	}

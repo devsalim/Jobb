@@ -69,7 +69,7 @@
 										    		 	{{ $conreq->fname }} {{ $conreq->lname }}
 										    		 </h4>
 												     {{ $conreq->working_at }}<br>
-													 {{ $conreq->city }}, {{ $conreq->state }}
+													 {{ $conreq->city }} {{ $conreq->state }}
 										    	</div>
 										    	
 										    	<div class="media-body-right">
@@ -114,7 +114,7 @@
 												      	{{ $connection->fname }} {{ $connection->lname }}
 												      </h4>
 												     	{{ $connection->working_at }}<br>
-														{{ $connection->city }}, {{ $connection->state }}
+														{{ $connection->city }} {{ $connection->state }}
 										    	</div>
 										    	<div class="media-body-right">
 										    		<span class="input-group-btn btn-right">
@@ -154,7 +154,7 @@
 											      	{{ $pendingconnection->fname }} {{ $pendingconnection->lname }}
 											      </h4>
 											     	{{ $pendingconnection->working_at }}<br>
-												 	{{ $pendingconnection->city }}, {{ $pendingconnection->state }}
+												 	{{ $pendingconnection->city }} {{ $pendingconnection->state }}
 											 	</div>
 											 	<div class="media-body-right">
 											 		<span class="input-group-btn btn-right">

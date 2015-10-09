@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Eloquent\Model;
 
-class groups_users extends Model {
+class Groups_users extends Model {
 
 	//
 

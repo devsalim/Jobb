@@ -9,6 +9,7 @@ use App\Skills;
 use App\Http\Requests\CreatePostjobRequest;
 use Auth;
 use App\Connections;
+use App\Postactivity;
 
 class JobController extends Controller {
 
@@ -112,6 +113,56 @@ class JobController extends Controller {
 	public function destroy($id)
 	{
 		//
+	}
+
+
+	public function postLike(Request $request){
+		$like = Postactivity::where('post_id', '=', $request['like'])
+							->where('user_id', '=', Auth::user()->id)
+							->first();
+		if($like == null){
+			$like = new Postactivity();
+			$like->post_id = $request['like'];
+			$like->user_id = Auth::user()->id;
+			$like->thanks = 1;
+			$like->save();
+			$likeCount = Postactivity::where('post_id', '=', $request['like'])->sum('thanks');
+			return $likeCount;
+		}elseif($like != null && $like->thanks == 0){
+			$like->thanks = 1;
+			$like->save();
+			$likeCount = Postactivity::where('post_id', '=', $request['like'])->sum('thanks');
+			return $likeCount;
+		}elseif($like != null && $like->thanks == 1){
+			$like->thanks = 0;
+			$like->save();
+			$likeCount = Postactivity::where('post_id', '=', $request['like'])->sum('thanks');
+			return $likeCount;
+		}
+
+	}
+
+	public function postFav(Request $request){
+		$fav = Postactivity::where('post_id', '=', $request['fav_post'])
+							->where('user_id', '=', Auth::user()->id)
+							->first();
+		if($fav == null){
+			$fav = new Postactivity();
+			$fav->post_id = $request['fav_post'];
+			$fav->user_id = Auth::user()->id;
+			$fav->fav_post = 1;
+			$fav->save();
+			return "favourite";
+		}elseif($fav != null && $fav->fav_post == 0){
+			$fav->fav_post = 1;
+			$fav->save();
+			return "favourite";
+		}elseif($fav != null && $fav->fav_post == 1){
+			$fav->fav_post = 0;
+			$fav->save();
+			return "unfavourite";
+		}
+
 	}
 
 }

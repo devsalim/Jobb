@@ -360,10 +360,8 @@ background-color:white;
     float: right;
     top: 80px;
     position: absolute;
-    right: 5px;
-    background-color: lightgrey !important;
+    right: 26px;
     border-radius: 20px !important;
-    color: black;
     box-shadow: 1px 1px black;
 }
 
@@ -407,6 +405,7 @@ ul{
     list-style: none;
 }
 
+<<<<<<< HEAD
 /* usertitle in view page */
 .usertitle-profile{
     float: none;
@@ -431,4 +430,33 @@ ul{
     display:table;
     box-shadow: 0 3px 5px gray;
     padding: 5px 30px;
+=======
+.media-body, .media-left, .media-right {
+    display: table;
+    float: left;
+}
+.media-body {
+    width: auto;
+    font-weight: normal;
+}
+
+.media-body-left {
+    float: left;
+    min-width: 200px;
+}
+.media-body-right {
+    float: left;
+    min-width: 80px;
+}
+.media-left img {
+    width: 60px;
+    height: 60px;
+    background-color: #EBEBEB;
+    border: 1px solid #ddd;
+    padding: 3px;
+}
+.select2-container-multi .select2-choices {
+    padding: 0 5px 0 0;
+    background: white;
+>>>>>>> 732ff36bdbb2cac5c5b9fa08fd0bd98624b270ec
 }
