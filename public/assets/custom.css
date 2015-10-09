@@ -395,7 +395,6 @@ background-color:white;
 }
 
 /* View Page */
-
 .view-page{
     padding-top: 2px;
     font-size: 14px;
@@ -405,7 +404,7 @@ ul{
     list-style: none;
 }
 
-<<<<<<< HEAD
+
 /* usertitle in view page */
 .usertitle-profile{
     float: none;
@@ -430,7 +429,8 @@ ul{
     display:table;
     box-shadow: 0 3px 5px gray;
     padding: 5px 30px;
-=======
+}
+
 .media-body, .media-left, .media-right {
     display: table;
     float: left;
@@ -458,5 +458,4 @@ ul{
 .select2-container-multi .select2-choices {
     padding: 0 5px 0 0;
     background: white;
->>>>>>> 732ff36bdbb2cac5c5b9fa08fd0bd98624b270ec
 }
