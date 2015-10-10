@@ -258,9 +258,9 @@ Page Header
 }
 .page-header.navbar .top-menu .navbar-nav > li.dropdown .dropdown-menu:before {
   position: absolute;
-  top: -12px;
+ /* top: -12px;
   right: 130px;
-  left: 128px;
+  left: 128px;*/
   display: inline-block !important;
   border-right: 7px solid transparent;
   border-bottom: 7px solid #eee;

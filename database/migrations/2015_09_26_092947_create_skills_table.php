@@ -7,6 +7,7 @@ class CreateSkillsTable extends Migration {
 
 	/**
 	 * Run the migrations.
+	 *	Default value of status is 1 under-development change is to 0 while launch.
 	 *
 	 * @return void
 	 */
@@ -16,6 +17,7 @@ class CreateSkillsTable extends Migration {
 		{
 			$table->increments('id');
 			$table->string('name');
+			$table->integer('status')->default(1);
 			$table->timestamps();
 		});
 	}

@@ -236,11 +236,10 @@
 													<!--/span-->
 													<div class="col-md-5">
 														<div class="form-group">							
-															<label class=" control-label">Experience </label>&nbsp;: <input type="text" disabled style="width: 20px;background:transparent;border:0" name="min_exp" class="min-exp">-
-															<input type="text" style="width: 14px;margin:0 4px;background:transparent;border:0" disabled name="max_exp" class="max-exp">Years
+															<label class=" control-label">Experience </label>&nbsp;: <input type="text" style="width: 20px;background:transparent;border:0" name="min_exp" class="min-exp">-
+															<input type="text" style="width: 14px;margin:0 4px;background:transparent;border:0" name="max_exp" class="max-exp">Years
 															<div class="">
-																<input id="range_1" type="text" name="range_1" value=""/>
-																<!-- <input id="range_1" type="text"  value=""/> -->
+																<input id="range_1" type="text"  value=""/>
 																<!-- <input type="hidden" name="min_exp" class="min-exp">
 																<input type="hidden" name="max_exp" class="max-exp"> -->
 															</div>
@@ -251,15 +250,15 @@
 													<div class="col-md-5">
 														<div class="form-group">							
 															<label class=" control-label"><input type="checkbox" id="hide-check">&nbsp;Salary 
-															</label>&nbsp;:<select style="border-top: 0px;border-left: 0;border-right: 0;">									
+															</label>&nbsp;:<select name="salary-type" style="border-top: 0px;border-left: 0;border-right: 0;">									
 																	<option value="Monthly">Monthly</option>
 																	<option value="Weekly">Weekly</option>
 																	<option value="Daily">Daily</option>
 																	<option value="Hourly">Hourly</option>
 																	<option value="Per Visit">Per Visit</option>	
 																</select>
-															 <i class="fa fa-rupee (alias)"></i>&nbsp;<input type="text" disabled style="width: 30px;margin:0 6px;background:transparent;border:0" name="min_sal" class="min-sal">-
-															<input type="text" style="width:40px;margin:0 4px;background:transparent;border:0" disabled name="max_sal" class="max-sal">&nbsp;
+															 <i class="fa fa-rupee (alias)"></i>&nbsp;<input type="text" style="width: 30px;margin:0 6px;background:transparent;border:0" name="min_sal" class="min-sal">-
+															<input type="text" style="width:40px;margin:0 4px;background:transparent;border:0" name="max_sal" class="max-sal">&nbsp;
 															
 															<div id="hide-sal" class="">
 																<input id="range_7" type="text"  value=""/>
@@ -304,7 +303,7 @@
 															</div>
 														</div>
 													</div>
-													<div class="col-md-12">
+													<div class="col-md-5">
 														<div class="form-group">
 															<label style="margin-left: -5px;"><input id="hide-apply" type="checkbox"></label><label>&nbsp;Apply On Company Website</label>
 															<div id="" class="input-group show-apply">
@@ -315,6 +314,19 @@
 															</div>
 														</div>
 													</div>
+													<div class="col-md-2"></div>
+													<div class="col-md-5">
+														<div class="form-group">
+															<label>Contact Person</label>
+															<div class="input-group">
+															<span class="input-group-addon">
+															<i class="icon-call-end" style="color:darkcyan;"></i>
+															</span>
+															<input type="text" name="contact_person" class="form-control" placeholder="Contact Person">
+															</div>
+														</div>
+													</div>
+														<!--/span-->
 													<div class="show-apply-email">
 															<div class="col-md-5">
 																<div class="form-group">
@@ -324,7 +336,7 @@
 																	<i class="icon-envelope" style="color:darkcyan;"></i>
 																	
 																	</span>
-																	<input type="text" disabled name="email_id" value="{{ Auth::user()->email }}" class="form-control" placeholder="">
+																	<input type="text" name="email_id" value="{{ Auth::user()->email }}" class="form-control" placeholder="">
 																	<span class="input-group-addon" style="width: 55px;">
 																		Public
 																	</span>
@@ -340,7 +352,7 @@
 																	<span class="input-group-addon">
 																	<i class="icon-call-end" style="color:darkcyan;"></i>
 																	</span>
-																	<input type="text" disabled name="phone" value="{{ Auth::user()->mobile }}"  class="form-control" placeholder="">
+																	<input type="text" name="phone" value="{{ Auth::user()->mobile }}"  class="form-control" placeholder="">
 																	<span class="input-group-addon" style="width: 55px;">
 																		Private
 																	</span>
@@ -400,7 +412,6 @@
 															<div class="portlet light bordered" style="border: none !important;background:transparent">										
 																<div class="portlet-body form">
 																	<!-- BEGIN FORM-->
-																	<form action="#" class="horizontal-form">
 																		<div class="form-body">
 																			<div class="row">																				
 																				<div class="col-md-12" style="">												
@@ -417,7 +428,7 @@
 																										
 																											<i class="icon-pointer"></i>&nbsp;: <p class="form-control-static" data-display="city"></p>
 																										
-																											<i class="icon-briefcase"></i>&nbsp;: <p class="form-control-static" data-display="min-exp"></p>
+																										<br><i class="icon-briefcase"></i>&nbsp;: <p class="form-control-static" data-display="min_exp"></p>-<p class="form-control-static" data-display="max_exp"></p> Years
 																										
 																										
 																									
@@ -438,51 +449,31 @@
 																									</div>
 																									<div id="collapse_{{$var}}_{{$var}}" class="panel-collapse collapse">
 																										<div class="panel-body" style="border-top: 0;padding: 4px 15px;">
-																											<div class="skill-display">Role&nbsp;: </div>
+
+																											Education Required: <p class="form-control-static" data-display="education"></p><br>
+																											Role: <p class="form-control-static" data-display="role"></p><br>
+																											Job Category: <p class="form-control-static" data-display="prof_category"></p><br>
+																											Skill: <p class="form-control-static" data-display="linked_skill"></p><br>
+																											Salary (<i class="fa fa-rupee (alias)"></i>): <p class="form-control-static" data-display="min_sal"></p>-<p class="form-control-static" data-display="max_sal"></p> <p class="form-control-static" data-display="salary-type"></p><br>
+																											Description:
 																											<div class="row">
-																												<div class="col-md-6 col-sm-4 col-xs-12">
-																													<i class="icon-badge"></i>&nbsp;:<p class="form-control-static" data-display="prof_category"></p>  <p class="form-control-static" data-display="role"></p> 
-																												</div>
-																												<div class="col-md-6 col-sm-4 col-xs-12">
-																													<i class="fa fa-rupee (alias)"></i>&nbsp;:&nbsp;<p class="form-control-static" data-display="min-sal"></p>
-																												</div>
-																											</div>
-																											<div class="skill-display">Description&nbsp;: </div>
-																											
-																											<div class="row">
-																												
 																												<div class="col-md-11">
 																													<p class="form-control-static" data-display="job_detail"></p>
 																												</div>
 																											</div>
-																											
-																											<div >Reference Id &nbsp;: <a class="form-control-static" data-display="reference_id"></a></div>
-
-																											<div class="skill-display">Education & skills&nbsp;:<br> </div>
-																											<div class="row">
-																												
-																												<div class="col-md-11">
-																													Education: <p class="form-control-static" data-display="education"></p>
-																												</div>
-																												
-																												<div class="col-md-11">
-																													Job Category: <p class="form-control-static" data-display="prof_category"></p>
-																												</div>
-																												
-																												<div class="col-md-11">
-																													Skill: <p class="form-control-static" data-display="linked_skill"></p>
-																												</div>
-																											</div>	
-																											<div class="skill-display">Contact Details&nbsp;:<br> </div> 
-											
-																													<i class="glyphicon glyphicon-envelope" style="color: #13B8D4;font-size: 16px;"></i>&nbsp;:<p class="form-control-static" data-display="email_id"></p>
-																													 <p class="form-control-static" data-display="alt_emailid"></p>
-																												
-																												<br>
-																													<i class="glyphicon glyphicon-earphone" style="color: green;font-size: 16px;"></i>&nbsp;:<p class="form-control-static" data-display="phone"></p>
-																													 <p class="form-control-static" data-display="alt_phone"></p>
-																												
+																											<div >Reference Id: <a class="form-control-static" data-display="reference_id"></a></div>
+																											<div >Post Duration: <a class="form-control-static" data-display="post_duration"></a></div>
+																											<div class="skill-display">Contact Details:<br> </div>
+																											Company Website: <p class="form-control-static" data-display="website_redirect_url"></p><br>
+																											Contact Person: <p class="form-control-static" data-display="contact_person"></p><br>
+ 
+																												<i class="glyphicon glyphicon-envelope" style="color: #13B8D4;font-size: 16px;"></i>&nbsp;:<p class="form-control-static" data-display="email_id"></p>
+																												 <p class="form-control-static" data-display="alt_emailid"></p>
+																											<br>
+																												<i class="glyphicon glyphicon-earphone" style="color: green;font-size: 16px;"></i>&nbsp;:<p class="form-control-static" data-display="phone"></p>
+																												 <p class="form-control-static" data-display="alt_phone"></p>
 																											<div class="skill-display">Post Id&nbsp;:  </div> 
+
 																										</div>
 																									</div>
 																									
@@ -499,7 +490,7 @@
 																			
 																			</div>
 																		</div>
-																	</form>
+																	
 																	<!-- END FORM-->
 																</div>
 </div>															<?php $var++; ?>
@@ -617,9 +608,10 @@
 													<a href="javascript:;" class="btn blue button-next">
 													Continue <i class="m-icon-swapright m-icon-white"></i>
 													</a>
-													<a href="javascript:;" class="btn green button-submit">
+													<!-- <a href="javascript:;" class="btn green ">
 													Submit <i class="m-icon-swapright m-icon-white"></i>
-													</a>
+													</a> -->
+													<button type="submit" class=" btn button-submit">Submit</button>
 												</div>
 											</div>
 										</div>

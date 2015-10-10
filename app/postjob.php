@@ -26,6 +26,8 @@ class Postjob extends Model {
 							'phone',
 							'alt_phone',
 							'individual_id',
+							'reference_id',
+							'contact_person',
 							'corporate_id'
 						   ];
 

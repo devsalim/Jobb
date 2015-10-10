@@ -208,9 +208,7 @@
 	
 	<!-- BEGIN REGISTRATION FORM -->
 
-	<div id="ind-msg-reg-box" style="display:none">
-		<div id="ind-reg-msg"></div>
-	</div>
+	
 	<form class="register-form" id="individual-register" action="{{ url('/individual/store') }}" method="post" id="individual-register">
 		<input type="hidden" name="_token" value="{{ csrf_token() }}">
 		<div class="login-option" style=" margin-right: 10px;padding-bottom:6px;">
@@ -267,7 +265,10 @@
 					@endforeach
 				</ul>
 			</div>
-		@endif									
+		@endif	
+		<div id="ind-msg-reg-box" style="display:none">
+			<div id="ind-reg-msg"></div>
+		</div>								
 		<div class="form-group">
 			<div class="input-icon right">
 				<i class="fa"></i>
@@ -335,8 +336,8 @@
 			</div>
 		</div>														
 		<div class="form-group margin-top-20 margin-bottom-20">
-			<label class="check" style="font-size: 13px;">
-				<input type="checkbox" name="tnc"/> I agree to the 
+			<label style="font-size: 13px;">
+				<input type="checkbox" id="t-n-c" name="tnc"/> I agree to the 
 				<a href="javascript:;">Terms of Service </a>& <a href="javascript:;">Privacy Policy </a>
 			</label>
 			<div id="register_tnc_error"></div>
@@ -351,9 +352,7 @@
 	<!-- END INDIVIDUAL REGISTRATION FORM -->
 	
 	<!-- Start CORPORATE REGISTRATION FORM -->
-	<div id="copr-msg-reg-box" style="display:none">
-		<div id="corp-reg-msg"></div>
-	</div>
+	
 	<form class="register-corporate-form" action="{{ url('/corporate/store') }}" method="post" id="corporate-register">
 		<input type="hidden" name="_token" value="{{ csrf_token() }}">
 		<div class="login-option" style=" margin-right: 26px;">
@@ -384,6 +383,9 @@
 				</ul>
 			</div>
 		@endif
+		<div id="copr-msg-reg-box" style="display:none">
+			<div id="corp-reg-msg"></div>
+		</div>
 		<div class="form-group">
 			<div class="input-icon right">
 				<i class="fa"></i>
@@ -608,6 +610,8 @@ $('#individual-register-btn').on('click',function(event){
         	$('#ind-msg-reg-box').addClass('alert alert-success').fadeIn(1000, function(){
         		$(this).show();
         	});
+        	$('#individual-register')[0].reset();
+        	$('#t-n-c').attr('checked', false); // Unchecks it
         	$('#ind-reg-msg').text('Registration successful');
         	
         }else{

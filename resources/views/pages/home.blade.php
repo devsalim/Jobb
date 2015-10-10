@@ -134,10 +134,10 @@
 													</div>
 												</div>
 												<div class="post-{{ $post->post_type }} post-icon-bar">
-													<form action="/job/like" method="post" id="post-{{$post->id}}" data-id="{{$post->id}}" style="float:left">						
+													<form action="/job/like" method="post" id="post-{{$post->id}}" data-id="{{$post->id}}">						
 														<input type="hidden" name="_token" value="{{ csrf_token() }}">
 														<input type="hidden" name="like" value="{{ $post->id }}">
-														<button class="btn like-btn" id="like-btn-{{$post->id}}" type="button" style="background-color: transparent;padding: 13px 50px 10px 10px;">
+														<button class="btn like-btn" id="like-btn-{{$post->id}}" type="button" style="background-color: transparent;">
 														<i class="icon-like" style="font-size: 23px;color: tomato;"></i>
 														</button>
 													</form>
@@ -147,12 +147,7 @@
 													</span>
 												
 													
-												@if($post->post_type == 'job')
-													<button type="button" class="btn btn-success apply-contact-btn"><span style="font-weight:600;vertical-align:middle">Apply</span></button>
-												
-												@elseif($post->post_type == 'skill')
-													<button type="button" class="btn btn-success apply-contact-btn"><span style="font-weight:600;vertical-align:middle">Contact</span></button>
-												@endif
+												<button type="button" class="btn blue btn-sm apply-contact-btn">Apply</button>
 												
 												<div class="btn-group dropup share-bar">
 													<div class="btn-group dropup">

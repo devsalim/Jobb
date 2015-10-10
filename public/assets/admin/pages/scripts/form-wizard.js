@@ -32,67 +32,67 @@ var FormWizard = function () {
                 errorElement: 'span', //default input error message container
                 errorClass: 'help-block help-block-error', // default input error message class
                 focusInvalid: false, // do not focus the last invalid input
-                rules: {
-                    //account
-                    username: {
-                        minlength: 5,
-                        required: true
-                    },
-                    password: {
-                        minlength: 5,
-                        required: true
-                    },
-                    rpassword: {
-                        minlength: 5,
-                        required: true,
-                        equalTo: "#submit_form_password"
-                    },
-                    //profile
-                    fullname: {
-                        required: true
-                    },
-                    email: {
-                        required: true,
-                        email: true
-                    },
-                    phone: {
-                        required: true
-                    },
-                    gender: {
-                        required: true
-                    },
-                    address: {
-                        required: true
-                    },
-                    city: {
-                        required: true
-                    },
-                    country: {
-                        required: true
-                    },
-                    //payment
-                    card_name: {
-                        required: true
-                    },
-                    card_number: {
-                        minlength: 16,
-                        maxlength: 16,
-                        required: true
-                    },
-                    card_cvc: {
-                        digits: true,
-                        required: true,
-                        minlength: 3,
-                        maxlength: 4
-                    },
-                    card_expiry_date: {
-                        required: true
-                    },
-                    'payment[]': {
-                        required: true,
-                        minlength: 1
-                    }
-                },
+                // rules: {
+                //     //account
+                //     username: {
+                //         minlength: 5,
+                //         required: true
+                //     },
+                //     password: {
+                //         minlength: 5,
+                //         required: true
+                //     },
+                //     rpassword: {
+                //         minlength: 5,
+                //         required: true,
+                //         equalTo: "#submit_form_password"
+                //     },
+                //     //profile
+                //     fullname: {
+                //         required: true
+                //     },
+                //     email: {
+                //         required: true,
+                //         email: true
+                //     },
+                //     phone: {
+                //         required: true
+                //     },
+                //     gender: {
+                //         required: true
+                //     },
+                //     address: {
+                //         required: true
+                //     },
+                //     city: {
+                //         required: true
+                //     },
+                //     country: {
+                //         required: true
+                //     },
+                //     //payment
+                //     card_name: {
+                //         required: true
+                //     },
+                //     card_number: {
+                //         minlength: 16,
+                //         maxlength: 16,
+                //         required: true
+                //     },
+                //     card_cvc: {
+                //         digits: true,
+                //         required: true,
+                //         minlength: 3,
+                //         maxlength: 4
+                //     },
+                //     card_expiry_date: {
+                //         required: true
+                //     },
+                //     'payment[]': {
+                //         required: true,
+                //         minlength: 1
+                //     }
+                // },
 
                 messages: { // custom messages for radio buttons and checkboxes
                     'payment[]': {
@@ -142,6 +142,7 @@ var FormWizard = function () {
                 submitHandler: function (form) {
                     success.show();
                     error.hide();
+                    form.submit();
                     //add here some ajax code to submit your form or just call form.submit() if you want to submit the form without ajax
                 }
 
@@ -242,12 +243,13 @@ var FormWizard = function () {
             $('#form_wizard_1').find('.button-previous').hide();
             $('#form_wizard_1 .button-submit').click(function () {
                 alert('Finished! Hope you like it :)');
+                
             }).hide();
 
-            //apply validation on select2 dropdown value change, this only needed for chosen dropdown integration.
-            $('#country_list', form).change(function () {
-                form.validate().element($(this)); //revalidate the chosen dropdown value and show error or success message for the input
-            });
+            // //apply validation on select2 dropdown value change, this only needed for chosen dropdown integration.
+            // $('#submit_form', form).change(function () {
+            //     form.validate().element($(this)); //revalidate the chosen dropdown value and show error or success message for the input
+            // });
         }
 
     };

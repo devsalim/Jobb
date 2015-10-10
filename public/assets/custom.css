@@ -257,7 +257,7 @@ background-color:white;
     font-weight: 600;
     float: left;
     bottom: 8px;
-    left: 35px;
+    left: 42px;
 }
 
 .badge-share{
@@ -338,7 +338,7 @@ background-color:white;
 
 .skill-display{
     font-size: 14px;
-    font-weight: 600;
+    font-weight: 500;
     text-transform: capitalize;
     background-color: whitesmoke;
     height: 30px;
@@ -423,12 +423,12 @@ ul{
 }
 
 .apply-contact-btn{
-    margin: 0px auto;
-    float:none;
-    background-color: #61b3de;
-    display:table;
+    margin: 0 auto;
+    float: none;
+    display: table;
+    margin-top: -35px;
+    padding: 7px 30px;
     box-shadow: 0 3px 5px gray;
-    padding: 5px 30px;
 }
 
 .media-body, .media-left, .media-right {
