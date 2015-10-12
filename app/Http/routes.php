@@ -28,12 +28,16 @@ Route::group(array('before' => 'auth'), function(){
 	Route::post('corporate/update/{id}', 'CorporateController@update');
 	Route::post('corporate/basicupdate', 'CorporateController@basicUpdate');
 
+
+	Route::get('job/skillSearch', 'JobController@skillSearch');
 	Route::get('job', 'JobController@index');
 	Route::get('job/create', 'JobController@create');
 	Route::post('job/store', 'JobController@store');
 	Route::post('job/update', 'JobController@update');
 	Route::post('job/like', 'JobController@postLike');
 	Route::post('job/fav', 'JobController@postFav');
+	Route::post('job/apply', 'JobController@postApply');
+	Route::post('job/contact', 'JobController@postContact');
 
 	Route::get('skill', 'SkillController@index');
 	Route::get('skill/create', 'SkillController@create');
@@ -71,8 +75,6 @@ Route::group(array('before' => 'auth'), function(){
 	Route::get('individual_view/create', 'ViewpageController@create');
 	Route::get('individual/edit_view', 'ViewpageController@edit_view');	
 
-	Route::post('job_skill/like', 'JobController@job_skillLike');
 });
 
-Route::get('fillitlater', 'PagesController@fillItLater');
 

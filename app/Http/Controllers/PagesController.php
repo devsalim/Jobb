@@ -43,7 +43,7 @@ class PagesController extends Controller {
 		if (Auth::check()) {
 			$title = 'mypost';
 			if(Auth::user()->identifier == 1){
-				$posts = Postjob::with('induser')->where('individual_id', '=', Auth::user()->induser_id)->orderBy('id', 'desc')->get();
+				$posts = Postjob::with('induser', 'postActivity', 'postactivity.user')->where('individual_id', '=', Auth::user()->induser_id)->orderBy('id', 'desc')->get();
 			}else if(Auth::user()->identifier == 2){
 				$posts = Postjob::with('corpuser')->where('corporate_id', '=', Auth::user()->corpuser_id)->orderBy('id', 'desc')->get();
 			}

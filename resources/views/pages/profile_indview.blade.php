@@ -37,8 +37,8 @@
 							<div>
 								 Links
 							</div>
-							<span class="badge badge-danger" style="background-color: #26a69a;">
-							2 </span>
+							<span class="badge badge-danger  @if($links > 0) show @else hide @endif" style="background-color: #26a69a;">
+							{{$links}} </span>
 						</a>
 					</div>
 					<div class="col-md-4 col-sm-4 col-xs-4">
@@ -47,8 +47,8 @@
 							<div>
 								 Thanks
 							</div>
-							<span class="badge badge-danger" style="background-color: #3598dc;">
-							100 </span>
+							<span class="badge badge-danger  @if($thanks > 0) show @else hide @endif" style="background-color: #3598dc;">
+							{{$thanks}}</span>
 						</a>
 					</div>
 					<div class="col-md-4 col-sm-4 col-xs-4">
@@ -57,8 +57,8 @@
 							<div>
 								 Posts
 							</div>
-							<span class="badge badge-danger">
-							50 </span>
+							<span class="badge badge-danger  @if($posts > 0) show @else hide @endif">
+							{{$posts}} </span>
 						</a>
 					</div>
 				</div>

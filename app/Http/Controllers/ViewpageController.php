@@ -7,6 +7,8 @@ use App\Postjob;
 use App\Http\Requests\CreatePostskillRequest;
 use Auth;
 use App\Induser;
+use App\Postactivity;
+use App\Connections;
 use App\User;
 
 class ViewpageController extends Controller {
@@ -41,7 +43,10 @@ class ViewpageController extends Controller {
 	{
 		$title = 'indview';
 		$user = Induser::where('id', '=', Auth::user()->induser_id)->first();
-		return view('pages.profile_indview', compact('user', 'title'));
+		$thanks = Postactivity::where('user_id', '=', Auth::user()->induser_id)->sum('thanks');
+		$posts = Postjob::where('individual_id', '=', Auth::user()->induser_id)->count('id');
+		$links = Connections::where('user_id', '=', Auth::user()->induser_id)->orWhere('connection_user_id', '=', Auth::user()->induser_id)->count('id');
+		return view('pages.profile_indview', compact('user', 'thanks', 'posts', 'links', 'title'));
 	}
 
 	/**
@@ -102,6 +107,7 @@ class ViewpageController extends Controller {
 	{
 		$title = 'indprofile_edit';
 		$user = Induser::where('id', '=', Auth::user()->induser_id)->first();
+
 		return view('pages.professional_page', compact('user', 'title'));
 	}
 }

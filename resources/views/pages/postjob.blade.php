@@ -363,6 +363,189 @@
 													
 														
 															<i class="icon-pointer"></i>&nbsp;: <p class="form-control-static" data-display="city"></p>
+													<div class="col-md-5">
+														<div class="form-group">
+															<label>Job Category</label>
+															<div class="input-group">
+															<span class="input-group-addon">
+															<i class="fa fa-university " style="color:darkcyan;"></i>
+															</span>
+															<select class="form-control" name="prof_category">
+																<optgroup label="Accounting">
+																<option value="Accounts/Finance/Tax">Accounts/Finance/Tax</option>
+																<option value="Agent">Agent</option>
+																<option value="Analytics & Business Intelligence">Analytics & Business Intelligence</option>
+																</optgroup>
+																<optgroup label="IT Field">
+																<option value="HR/Administration/IR">HR/Administration/IR</option>
+																<option value="IT Software - Client Server">IT Software - Client Server</option>
+																<option value="IT Software - Mainframe">IT Software - Mainframe</option>
+																<option value="IT Software - Middleware">IT Software - Middleware</option>
+																<option value="IT Software - Mobile">IT Software - Mobile</option>
+																<option value="IT Software - Other">IT Software - Other</option>
+																<option value="IT Software - System Programming">IT Software - System Programming</option>
+																<option value="IT Software - Telecom Software">IT Software - Telecom Software</option>
+																<option value="IT Software - Application Programming">IT Software - Application Programming</option>
+																<option value="IT Software - DBA/Datawarehousing">IT Software - DBA/Datawarehousing</option>
+																<option value="IT Software - E-Commerce">IT Software - E-Commerce</option>
+																<option value="IT Software - ERP/CRM">IT Software - ERP/CRM</option>
+																</optgroup>
+															</select>
+														</div>
+														</div>
+													</div>
+													<!--/span-->
+													<div class="col-md-2"></div>
+													<div class="col-md-5">
+														<div class="form-group">
+															<label>Job Role</label>
+															<div class="input-group">
+																<span class="input-group-addon">
+																	<i class="fa fa-university" style="color:darkcyan;"></i>
+																</span>
+																<select name="role" class="form-control" >
+																	<option value="Web Developer">Web Developer</option>
+																	<option value="Software Developer">Software Developer</option>
+																</select>
+															</div>
+														</div>
+													</div>
+													<div class="col-md-5">
+														<div class="form-group">
+															<label>Key Skills</label>
+														      <input type="text" id="skill" name="skill" class="form-control" placeholder="Search for skill...">
+															<!--{!! Form::select('skill_list[]', $skills, null, ['id'=>'skill-list', 'class'=>'form-control', 'multiple']) !!}-->
+														</div>
+													</div>
+													<!--/span-->
+													<div class="col-md-2">
+														<div class="form-group" style="display:table;">
+															<label>&nbsp;</label>
+															<div class="input-group" style="text-align:center;">
+														        <button class="btn btn-success" type="button">Add</button>
+														    </div>
+														</div>
+													</div>
+													<div class="col-md-5">
+														<div class="form-group">
+															<label>&nbsp;</label>
+														     <input type="text" id="linked_skill" name="linked_skill" 
+														     		class="form-control select2"
+														     		placeholder="List of skills to be added">
+														</div>
+													</div>
+													
+												</div>
+												<div class="tab-pane" id="tab2">
+													<div class="col-md-5">
+														<div class="form-group">
+															<label>Company Name</label>
+															<div class="input-group">
+																<span class="input-group-addon">
+																	<i class="fa fa-user" style="color:darkcyan;"></i>
+																</span>
+																<input type="text" name="post_compname" class="form-control" placeholder="Company Name">
+															</div>
+														</div>
+													</div>
+													<div class="col-md-2"></div>
+													<div class="col-md-5">
+														<div class="form-group">
+															<label>Reference Id</label>
+															<div class="input-group">
+																<span class="input-group-addon">
+																	<i class="fa fa-user" style="color:darkcyan;"></i>
+																</span>
+																<input type="text" name="reference_id" class="form-control" placeholder="Reference Id">
+															</div>
+														</div>
+													</div>
+													<div class="col-md-5">
+														<div class="form-group">
+															<label> Required Education</label>
+															<div class="input-group">
+																<span class="input-group-addon">
+																	<i class="fa fa-university"></i>
+																</span>
+																<select class="bs-select form-control" name="education" multiple>
+																	<option value="Any Diploma">Any Diploma</option>
+																	<option value="Any Graduate">Any Graduate</option>
+																	<option value="Any Post Graduate">Any Post Graduate</option>
+																	<option value="BA">B.A</option>
+																	<option value="BArch">B.Arch</option>
+																	<option value="BCA">BCA</option>
+																	<option value="BBA">BBA</option>
+																	<option value="B.Com">B.Com</option>
+																	<option value="B.Ed">B.Ed</option>
+																	<option value="BDS">BDS</option>
+																	<option value="BHM">BHM</option>
+																	<option value="B.Pharma">B.Pharma</option>
+																	<option value="btech">B.Tech/B.E.</option>
+																	<option value="LLB">LLB</option>
+																	<option value="MBBS">MBBS</option>
+																	<option value="Diploma">Diploma</option>
+																	<option value="BVSC">BVSC</option>
+																	<option value="10+2">10+2</option>
+																	<option value="10">10</option>
+																</select>
+															</div>
+														</div>
+													</div>
+													<!--/span-->
+													<div class="col-md-2"></div>
+													<div class="col-md-5">
+														<div class="form-group">
+															<label>Employment Type</label>
+															<div class="input-group">
+																<span class="input-group-addon">
+																	<i class="icon-hourglass" style="color:darkcyan;"></i>
+																</span>
+																<select name="time_for" class="form-control" >
+																	<option value="Full Time">Full Time</option>
+																	<option value="Part Time">Part Time</option>
+																	<option value="Freelancer">Freelancer</option>
+																</select>
+															</div>
+														</div>
+													</div>
+													<!--/span-->
+													<div class="col-md-5">
+														<div class="form-group">							
+															<label class=" control-label">Experience </label>&nbsp;: <input type="text" style="width: 20px;background:transparent;border:0" name="min_exp" class="min-exp">-
+															<input type="text" style="width: 14px;margin:0 4px;background:transparent;border:0" name="max_exp" class="max-exp">Years
+															<div class="">
+																<input id="range_1" type="text"  value=""/>
+																<!-- <input type="hidden" name="min_exp" class="min-exp">
+																<input type="hidden" name="max_exp" class="max-exp"> -->
+															</div>
+														</div>
+													</div>
+													<!--/span-->
+													<div class="col-md-2"></div>
+													<div class="col-md-5">
+														<div class="form-group">							
+															<label class=" control-label"><input type="checkbox" id="hide-check">&nbsp;Salary 
+															</label>&nbsp;:<select name="salary-type" style="border-top: 0px;border-left: 0;border-right: 0;">									
+																	<option value="Monthly">Monthly</option>
+																	<option value="Weekly">Weekly</option>
+																	<option value="Daily">Daily</option>
+																	<option value="Hourly">Hourly</option>
+																	<option value="Per Visit">Per Visit</option>	
+																</select>
+															 <i class="fa fa-rupee (alias)"></i>&nbsp;<input type="text" style="width: 30px;margin:0 6px;background:transparent;border:0" name="min_sal" class="min-sal">-
+															<input type="text" style="width:40px;margin:0 4px;background:transparent;border:0" name="max_sal" class="max-sal">&nbsp;
+															
+															<div id="hide-sal" class="">
+																<input id="range_7" type="text"  value=""/>
+																<!-- <label name="min_sal" class="min-sal"></label> -->
+																<!-- <input type="hidden" name="min_sal" class="min-sal">
+																<input type="hidden" name="max_sal" class="max-sal"> -->
+															</div>
+														</div>
+													</div>
+													<!--/span-->
+													<div class="form-group">
+
 														
 														<br><i class="icon-briefcase"></i>&nbsp;: <p class="form-control-static" data-display="min_exp"></p>-<p class="form-control-static" data-display="max_exp"></p> Years
 														
@@ -524,7 +707,10 @@ Demo.init(); // init demo features  // set current page
         });
     });
 
-    $('#skill-list').select2();
+//     $('#skill-list').select2();
+//     $('#linked-skill').select2({
+//   tags: true
+// });
     $('#connections').select2();
 </script>
 <script type="text/javascript">
@@ -540,5 +726,50 @@ Demo.init(); // init demo features  // set current page
             }
         });
     });
+
+	 $(function(){
+
+	 	function split( val ) {
+	      return val.split( /,\s*/ );
+	    }
+	    function extractLast( term ) {
+	      return split( term ).pop();
+	    }
+
+		$( "#skill" )
+		.bind( "keydown", function( event ) {
+			if ( event.keyCode === $.ui.keyCode.TAB && $( this ).autocomplete( "instance" ).menu.active ) {
+			  event.preventDefault();
+			}
+		})
+		.autocomplete({
+			source: function( request, response ) {
+				$.getJSON( "/job/skillSearch", {
+					term: extractLast( request.term )
+				}, response );
+			},
+			search: function() {
+				var term = extractLast( this.value );
+				if ( term.length < 2 ) {
+					return false;
+				}
+			},
+			focus: function() {
+				return false;
+			},
+			select: function(event, ui) {
+				var terms = split( $('#linked_skill').val() );
+				// remove the current input
+				terms.pop();
+				// add the selected item
+				terms.push( ui.item.value );
+				// add placeholder to get the comma-and-space at the end
+				terms.push( "" );
+				$('#linked_skill').val(terms.join( ", " ));
+				$(this).val("");
+				return false;
+			}
+		});
+	});
 </script>
 @stop

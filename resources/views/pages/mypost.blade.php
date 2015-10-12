@@ -197,166 +197,155 @@
 								</div>
 							</div>
 							<div class="portlet box">
-							<div class="portlet-body">
+								<div class="portlet-body">
 								<div class="tabbable-custom ">
 									<ul class="nav nav-tabs" style="padding-left:0;">
 										<li class="active">
-											<a href="#tab_{{$var}}_1" data-toggle="tab">
-											Thanks & Share</a>
+											
+											<a href="#tab_1_{{ $post->id }}_1" data-toggle="tab">Thanks & Share </a>
 										</li>
-										@if($post->post_type == 'skill')
-										<li>
-											<a href="#tab_{{$var}}_2" data-toggle="tab">
-											Contacted </a>
-										</li>
-										@endif
 										@if($post->post_type == 'job')
 										<li>
-											<a href="#tab_{{$var}}_3" data-toggle="tab">
-											Applied </a>
+											
+											<a href="#tab_1_{{ $post->id }}_2" data-toggle="tab">Applied </a>
+										</li>
+										@endif
+										@if($post->post_type == 'skill')
+										<li>
+											<a href="#tab_1_{{ $post->id }}_3" data-toggle="tab">Contacted</a>
 										</li>
 										@endif
 									</ul>
 									<div class="tab-content">
-										<div class="tab-pane active" id="tab_{{$var}}_1">
+										<div class="tab-pane active" id="tab_1_{{ $post->id }}_1">
 											<div class="portlet light">
 												<div class="portlet-title">
 													<div class="caption">
 														<i class="fa fa-gift font-green-sharp"></i>
 														<span class="caption-subject font-green-sharp bold ">Thanks Recieved:</span>
-														<span class="caption-helper">100</span>&nbsp;&nbsp;
-														<span class="caption-subject font-green-sharp bold ">Post Shared:</span>
-														<span class="caption-helper">110</span>
+														<span class="caption-helper">
+															<?php $i=0; ?>
+															@foreach($post->postactivity as $pa)
+													  			@if($pa->thanks == 1) <?php $i++; ?> @endif
+													  		@endforeach
+													  		<?php echo $i; ?>
+														</span>
 													</div>
 												</div>
 
 												<div class="portlet-body">
-													<ul class="dropdown-menu-list scroller"  data-handle-color="#637283">
-									                  <li style="font-size:15px;">
-									                    <!-- <a href="" > -->
-									                    <span class="photo">
-									                    <img src="{{ asset('/assets/admin/layout3/img/avatar2.jpg') }}" class="img-circle" alt="">
-									                    </span>
-									                    <span class="subject">
-									                    <span class="from" style="font-weight:600;color:darkcyan;">
-									                   Deepika </span>
-									                    <span class="time"> </span>
-									                    </span>
-									                    <span class="message">
-									                    has thanked this post <i class=" icon-clock"></i> Oct 06,2015 13:04 PM </span>
-									                    <!-- </a> -->
-									                  </li>
-									                  <li></li>
-									                  <li style="font-size:15px;">
-									                   <!--  <a href="" > -->
-									                    <span class="photo">
-									                    <img src="{{ asset('/assets/admin/layout3/img/avatar3.jpg') }}" class="img-circle" alt="">
-									                    </span>
-									                    <span class="subject">
-									                    <span class="from" style="font-weight:600;color:darkcyan;">
-									                    Deepak Gupta </span>
-									                    <span class="time"> </span>
-									                    </span>
-									                    <span class="message">
-									                    has shared this post via <a href="/" class="facebook" style="background-color: #3b5998;"><i class="fa fa-facebook post-social-icon"></i></a> <i class=" icon-clock"></i> Oct 05,2015 13:04 PM  </span>
-									                   <!--  </a> -->
-									                  </li>										                  
+													<ul data-handle-color="#637283">
+													 @foreach($post->postactivity as $pa)
+													  	@if($pa->thanks == 1)
+									                 	<li style="font-size:15px;">
+										                    <span class="photo">
+										                    	<img src="@if($pa->user->profile_pic != null){{ '/img/profile/'.$pa->user->profile_pic }}@else{{'/assets/images/couple.png'}}@endif" 
+										                    		 width="45" height="45" 
+										                    		 class="img-circle">
+										                    </span>
+										                    <span class="subject">
+											                    <span class="from" style="font-weight:600;color:darkcyan;">
+											                    	{{$pa->user->fname}} {{$pa->user->lname}}
+											                   	</span>
+											                    <span class="time"> </span>
+										                    </span>
+										                    <span class="message">
+										                    	has thanked this post <i class=" icon-clock"></i>
+										                    	{{$pa->thanks_dtTime}}
+										                    </span>
+									                   	</li>
+									                   	@endif									                 
+									                  @endforeach							                  
 									                </ul>
 												</div>
 											</div>
 										</div>
-										<div class="tab-pane" id="tab_{{$var}}_2">
+										
+										
+
+										<div class="tab-pane" id="tab_1_{{ $post->id }}_2">
 											<div class="portlet light">
 												<div class="portlet-title">
 													<div class="caption">
 														<i class="fa fa-gift font-green-sharp"></i>
-														<span class="caption-subject font-green-sharp bold uppercase">Contact Viewed:</span>
-														<span class="caption-helper">100</span>
+														<span class="caption-subject font-green-sharp bold uppercase">Application received:</span>
+														<span class="caption-helper">
+															<?php $i=0; ?>
+															@foreach($post->postactivity as $pa)
+													  			@if($pa->apply == 1) <?php $i++; ?> @endif
+													  		@endforeach
+													  		<?php echo $i; ?>
+														</span>
 													</div>		
 												</div>
 
-												<div class="portlet-body">													
-													<ul class="dropdown-menu-list scroller" data-handle-color="#637283">
-									                  <li style="font-size:15px;">
-									                    <!-- <a href="" > -->
-									                    <span class="photo">
-									                    <img src="{{ asset('/assets/admin/layout3/img/avatar2.jpg') }}" class="img-circle" alt="">
-									                    </span>
-									                    <span class="subject">
-									                    <span class="from" style="font-weight:600;color:darkcyan;">
-									                   Priyanka </span>
-									                    <span class="time"> </span>
-									                    </span>
-									                    <span class="message">
-									                    has contacted you <i class=" icon-clock"></i> Oct 06,2015 13:04 PM </span>
-									                    <!-- </a> -->
-									                  </li>
-									                  <li>
-									                  </li>
-									                  <li style="font-size:15px;">
-									                   <!--  <a href="" > -->
-									                    <span class="photo">
-									                    <img src="{{ asset('/assets/admin/layout3/img/avatar3.jpg') }}" class="img-circle" alt="">
-									                    </span>
-									                    <span class="subject">
-									                    <span class="from" style="font-weight:600;color:darkcyan;">
-									                    Deepak Gupta </span>
-									                    <span class="time"> </span>
-									                    </span>
-									                    <span class="message">
-									                    has contacted you <i class=" icon-clock"></i> Oct 05,2015 13:04 PM  </span>
-									                   <!--  </a> -->
-									                  </li>									                  
+												<div class="portlet-body">										
+													<ul data-handle-color="#637283">
+
+									                  @foreach($post->postactivity as $pa)
+													  	@if($pa->apply == 1)
+									                 	<li style="font-size:15px;">
+										                    <span class="photo">
+										                    	<img src="@if($pa->user->profile_pic != null){{ '/img/profile/'.$pa->user->profile_pic }}@else{{'/assets/images/couple.png'}}@endif" 
+										                    		 width="45" height="45" 
+										                    		 class="img-circle">
+										                    </span>
+										                    <span class="subject">
+											                    <span class="from" style="font-weight:600;color:darkcyan;">
+											                    	{{$pa->user->fname}} {{$pa->user->lname}}
+											                   	</span>
+											                    <span class="time"> </span>
+										                    </span>
+										                    <span class="message">
+										                    	has applied for this post <i class=" icon-clock"></i>
+										                    	{{$pa->apply_dtTime}}
+										                    </span>
+									                   	</li>
+									                   	@endif									                 
+									                  @endforeach									                  
 									                </ul>											
 												</div>
 
 											</div>
 										</div>
-										<div class="tab-pane" id="tab_{{$var}}_3">
+										<div class="tab-pane" id="tab_1_{{ $post->id }}_3">
 											<div class="portlet light">
 												<div class="portlet-title">
 													<div class="caption">
 														<i class="fa fa-gift font-green-sharp"></i>
-														<span class="caption-subject font-green-sharp bold uppercase">Applied:</span>
+														<span class="caption-subject font-green-sharp bold uppercase">Contacted:</span>
 														<span class="caption-helper">100</span>
 													</div>		
 												</div>
 
 												<div class="portlet-body">													
 													<ul class="dropdown-menu-list scroller" data-handle-color="#637283">
-									                  <li style="font-size:15px;">
-									                    <!-- <a href="" > -->
-									                    <span class="photo">
-									                    <img src="{{ asset('/assets/admin/layout3/img/avatar2.jpg') }}" class="img-circle" alt="">
-									                    </span>
-									                    <span class="subject">
-									                    <span class="from" style="font-weight:600;color:darkcyan;">
-									                   Priyanka </span>
-									                    <span class="time"> </span>
-									                    </span>
-									                    <span class="message">
-									                    has applied for this post <i class=" icon-clock"></i> Oct 06,2015 13:04 PM </span>
-									                    <!-- </a> -->
-									                  </li>
-									                  <li>
-									                  </li>
-									                  <li style="font-size:15px;">
-									                   <!--  <a href="" > -->
-									                    <span class="photo">
-									                    <img src="{{ asset('/assets/admin/layout3/img/avatar3.jpg') }}" class="img-circle" alt="">
-									                    </span>
-									                    <span class="subject">
-									                    <span class="from" style="font-weight:600;color:darkcyan;">
-									                    Deepak Gupta </span>
-									                    <span class="time"> </span>
-									                    </span>
-									                    <span class="message">
-									                    has applied for this post <i class=" icon-clock"></i> Oct 05,2015 13:04 PM  </span>
-									                   <!--  </a> -->
-									                  </li>									                  
+									                  				                  
+													<ul data-handle-color="#637283">
+									                  @foreach($post->postactivity as $pa)
+													  	@if($pa->contact_view == 1)
+									                 	<li style="font-size:15px;">
+										                    <span class="photo">
+										                    	<img src="@if($pa->user->profile_pic != null){{ '/img/profile/'.$pa->user->profile_pic }}@else{{'/assets/images/couple.png'}}@endif" 
+										                    		 width="45" height="45" 
+										                    		 class="img-circle">
+										                    </span>
+										                    <span class="subject">
+											                    <span class="from" style="font-weight:600;color:darkcyan;">
+											                    	{{$pa->user->fname}} {{$pa->user->lname}}
+											                   	</span>
+											                    <span class="time"> </span>
+										                    </span>
+										                    <span class="message">
+										                    	has contacted for this post <i class=" icon-clock"></i>
+										                    	{{$pa->contact_view_dtTime}}
+										                    </span>
+									                   	</li>
+									                   	@endif									                 
+									                  @endforeach									                  
 									                </ul>											
 												</div>
-
+												</div>
 											</div>
 										</div>
 									</div>
@@ -364,11 +353,11 @@
 							</div>
 						</div>
 							
-						</div>
+						<!-- </div> -->
 						<!-- END TIMELINE ITEM -->
 					
+					</div>
 				</div>
-</div>
 			
 				<div class="col-md-3">
 					<div class="portlet box red-sunglo">

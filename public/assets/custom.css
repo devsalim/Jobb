@@ -561,3 +561,10 @@ ul{
     border-radius: 15px;
 }
 
+.show{
+    display: block;
+}
+
+.hide{
+    display: none;
+}

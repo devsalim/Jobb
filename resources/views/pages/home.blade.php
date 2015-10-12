@@ -71,25 +71,19 @@
 											<div class="{{ $post->post_type }}">
 												<a class="post-type-class">{{ $post->post_type }}</a>
 											</div>
-											
-											<form action="/job/fav" method="post" id="post-fav-{{$post->id}}" data-id="{{$post->id}}">						
+											@if(Auth::user()->id != $post->individual_id )
+											<form action="/job/fav" method="post" id="post-fav-{{$post->id}}" data-id="{{$post->id}}">
 												<input type="hidden" name="_token" value="{{ csrf_token() }}">
 												<input type="hidden" name="fav_post" value="{{ $post->id }}">
-												@if($post->post_type == 'job' && Auth::user()->id != $post->individual_id )
-												<button class="fav-btn btn btn-icon-only pin-bar btn-circle" id="fav-btn-{{$post->id}}" type="button">
-												<i class="icon-pin" style="font-size: 20px;"></i>
-												
-												{{ $post->postactivity->sum('fav_post') }} 
-													{{-- {{ $post->postactivity->where('user_id', Auth::user()->induser_id)->sum('fav_post') }} --}}
-												
-												</button>
-												@elseif(Auth::user()->id != $post->individual_id)
-												<button class="fav-btn btn btn-icon-only pin-skill-bar btn-circle" id="fav-btn-{{$post->id}}" type="button">
-												<i class="icon-pin" style="font-size: 20px;"></i>
-												
-												{{ $post->postactivity->sum('fav_post') }} 
-													{{-- {{ $post->postactivity->where('user_id', Auth::user()->induser_id)->sum('fav_post') }} --}}
-												
+
+												<button class="fav-btn btn btn-icon-only pin-bar btn-circle 
+														@if(!$post->postactivity->where('user_id', Auth::user()->induser_id)->isEmpty())
+														@if($post->postactivity->where('user_id', Auth::user()->induser_id)->first()->fav_post == 1) 
+															{{'btn-warning'}} 
+														@endif
+														@endif" 
+														id="fav-btn-{{$post->id}}" type="button">
+													<i class="icon-pin" style="font-size: 20px;"></i>
 												</button>
 												@endif
 											</form>
@@ -178,6 +172,12 @@
 																
 																	{{ $post->contact_person }}
 																
+															<div class="col-md-1"></div>
+															<div class="col-md-11">
+																Skills: {{ $post->linked_skill }}
+															<!--	@foreach($post->skills as $skill)
+																		{{$skill->name}}
+																	@endforeach -->
 															</div>
 															@endif
 
@@ -241,7 +241,7 @@
 													</div>
 												</div>
 												<div class="post-{{ $post->post_type }} post-icon-bar">
-													<form action="/job/like" method="post" id="post-{{$post->id}}" data-id="{{$post->id}}">						
+													<form action="/job/like" method="post" id="post-like-{{$post->id}}" data-id="{{$post->id}}">						
 														<input type="hidden" name="_token" value="{{ csrf_token() }}">
 														<input type="hidden" name="like" value="{{ $post->id }}">
 														<button class="btn like-btn"  type="button" style="background-color: transparent;">
@@ -253,12 +253,54 @@
 													{{ $post->postactivity->sum('thanks') }} 
 													{{-- {{ $post->postactivity->where('user_id', Auth::user()->induser_id)->sum('thanks') }} --}}
 													</span>
-													
-												@if($post->post_type == 'job')	
-												<button type="button" class="btn blue btn-sm apply-contact-btn">Apply</button>
+
+										@if(count($post->postactivity) > 0 && $post->post_type == 'job' && Auth::user()->id != $post->individual_id)		
+											@if($post->postactivity->where('user_id', Auth::user()->induser_id)->isEmpty())
+												<form action="/job/apply" method="post" id="post-apply-{{$post->id}}" data-id="{{$post->id}}">	
+													<input type="hidden" name="_token" value="{{ csrf_token() }}">
+													<input type="hidden" name="apply" value="{{ $post->id }}">
+													<button class="btn apply-btn blue btn-sm apply-contact-btn" 
+															id="apply-btn-{{$post->id}}" type="button">Apply
+													</button>
+												</form>	
+											@elseif($post->postactivity->where('user_id', Auth::user()->induser_id)->first()->apply == 1) 
+												<button type="button" class="btn btn-sm blue apply-contact-btn" disabled="true">
+													Applied
+												</button>
 												@else
-												<button type="button" class="btn green btn-sm apply-contact-btn">Contact</button>
-												@endif
+											<form action="/job/apply" method="post" id="post-apply-{{$post->id}}" data-id="{{$post->id}}">	
+												<input type="hidden" name="_token" value="{{ csrf_token() }}">
+												<input type="hidden" name="apply" value="{{ $post->id }}">
+												<button class="btn apply-btn blue btn-sm apply-contact-btn" 
+														id="apply-btn-{{$post->id}}" type="button">Apply
+												</button>
+											</form>							
+											@endif	
+										@endif	
+										@if(count($post->postactivity) > 0 && $post->post_type == 'skill' && Auth::user()->id != $post->individual_id)		
+											@if($post->postactivity->where('user_id', Auth::user()->induser_id)->isEmpty())
+												<form action="/job/contact" method="post" id="post-contact-{{$post->id}}" data-id="{{$post->id}}">	
+													<input type="hidden" name="_token" value="{{ csrf_token() }}">
+													<input type="hidden" name="contact" value="{{ $post->id }}">
+													<button class="btn contact-btn blue btn-sm apply-contact-btn" 
+															id="contact-btn-{{$post->id}}" type="button">Contact
+													</button>
+												</form>	
+											@elseif($post->postactivity->where('user_id', Auth::user()->induser_id)->first()->contact_view == 1) 
+												<button type="button" class="btn btn-sm green apply-contact-btn" disabled="true">
+													Contacted
+												</button>
+												@else
+											<form action="/job/contact" method="post" id="post-contact-{{$post->id}}" data-id="{{$post->id}}">	
+												<input type="hidden" name="_token" value="{{ csrf_token() }}">
+												<input type="hidden" name="contact" value="{{ $post->id }}">
+												<button class="btn contact-btn green btn-sm apply-contact-btn" 
+														id="contact-btn-{{$post->id}}" type="button">Contact
+												</button>
+											</form>							
+											@endif	
+										@endif										
+
 												<div class="btn-group dropup share-bar">
 													<div class="btn-group dropup">
 														<button class="btn dropdown-toggle" type="button" data-toggle="dropdown" style="background-color: transparent;border-left: 1px solid lightgray;padding: 18px 20px 7px 8px;">
@@ -340,8 +382,8 @@ $(document).ready(function(){
   	event.preventDefault();
   	var post_id = $(this).parent().data('id');
 
-  	var formData = $('#post-'+post_id).serialize(); 
-    var formAction = $('#post-'+post_id).attr('action');
+  	var formData = $('#post-like-'+post_id).serialize(); 
+    var formAction = $('#post-like-'+post_id).attr('action');
 
 	$count = $('#like-count-'+post_id).text();
     $.ajaxSetup({
@@ -374,6 +416,46 @@ $(document).ready(function(){
 
   	var formData = $('#post-fav-'+post_id).serialize(); 
     var formAction = $('#post-fav-'+post_id).attr('action');
+    $count = $('#myfavcount').text();
+    $.ajaxSetup({
+		headers: {
+			'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+		}
+	});
+
+    $.ajax({
+      url: formAction,
+      type: "post",
+      data: formData,
+      cache : false,
+      success: function(data){
+        if(data > $count){
+ 			$('#fav-btn-'+post_id).addClass('btn-warning');
+ 			$('#myfavcount').text(data);
+ 			$('#myfavcount').removeClass('hide');
+ 			$('#myfavcount').addClass('show');
+        }else if(data < $count){
+ 			$('#fav-btn-'+post_id).removeClass('btn-warning');
+ 			$('#myfavcount').text(data);
+ 			if(data < $count && data == 0){
+			$('#myfavcount').removeClass('show');
+			$('#myfavcount').addClass('hide');
+ 			}
+        }
+        else if(data == 0){
+        	$('#myfavcount').addClass('hide');
+        }
+      }
+    }); 
+    return false;
+  }); 
+
+$('.apply-btn').on('click',function(event){  	    
+  	event.preventDefault();
+  	var post_id = $(this).parent().data('id');
+
+  	var formData = $('#post-apply-'+post_id).serialize(); 
+    var formAction = $('#post-apply-'+post_id).attr('action');
 
     $.ajaxSetup({
 		headers: {
@@ -387,19 +469,44 @@ $(document).ready(function(){
       data: formData,
       cache : false,
       success: function(data){
-        if(data == "favourite"){
-        	$('#fav-btn-'+post_id).removeClass('');
- 			$('#fav-btn-'+post_id).addClass('btn-warning');
-        }else if(data == 'unfavourite'){
- 			$('#fav-btn-'+post_id).removeClass('btn-warning');
- 			$('#fav-btn-'+post_id).addClass('');
+        if(data == "applied"){
+        	$('#apply-btn-'+post_id).prop('disabled', true);
+ 			$('#apply-btn-'+post_id).text('Applied');
         }
       }
     }); 
     return false;
-  }); 
-});
+  });
+	
+	$('.contact-btn').on('click',function(event){  	    
+  	event.preventDefault();
+  	var post_id = $(this).parent().data('id');
 
+  	var formData = $('#post-contact-'+post_id).serialize(); 
+    var formAction = $('#post-contact-'+post_id).attr('action');
+
+    $.ajaxSetup({
+		headers: {
+			'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+		}
+	});
+
+    $.ajax({
+      url: formAction,
+      type: "post",
+      data: formData,
+      cache : false,
+      success: function(data){
+        if(data == "contacted"){
+        	$('#contact-btn-'+post_id).prop('disabled', true);
+ 			$('#contact-btn-'+post_id).text('Contacted');
+        }
+      }
+    }); 
+    return false;
+  });
+
+});
 </script>
 
 @stop
