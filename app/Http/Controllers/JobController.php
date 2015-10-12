@@ -10,6 +10,9 @@ use App\Http\Requests\CreatePostjobRequest;
 use Auth;
 use App\Connections;
 use App\Postactivity;
+use Input;
+use DB;
+use Response;
 
 class JobController extends Controller {
 
@@ -118,12 +121,12 @@ class JobController extends Controller {
 
 	public function postLike(Request $request){
 		$like = Postactivity::where('post_id', '=', $request['like'])
-							->where('user_id', '=', Auth::user()->id)
+							->where('user_id', '=', Auth::user()->induser_id)
 							->first();
 		if($like == null){
 			$like = new Postactivity();
 			$like->post_id = $request['like'];
-			$like->user_id = Auth::user()->id;
+			$like->user_id = Auth::user()->induser_id;
 			$like->thanks = 1;
 			$like->save();
 			$likeCount = Postactivity::where('post_id', '=', $request['like'])->sum('thanks');
@@ -144,12 +147,12 @@ class JobController extends Controller {
 
 	public function postFav(Request $request){
 		$fav = Postactivity::where('post_id', '=', $request['fav_post'])
-							->where('user_id', '=', Auth::user()->id)
+							->where('user_id', '=', Auth::user()->induser_id)
 							->first();
 		if($fav == null){
 			$fav = new Postactivity();
 			$fav->post_id = $request['fav_post'];
-			$fav->user_id = Auth::user()->id;
+			$fav->user_id = Auth::user()->induser_id;
 			$fav->fav_post = 1;
 			$fav->save();
 			return "favourite";
@@ -163,6 +166,47 @@ class JobController extends Controller {
 			return "unfavourite";
 		}
 
+	}
+
+	public function postApply(Request $request){
+		$apply = Postactivity::where('post_id', '=', $request['apply'])
+							->where('user_id', '=', Auth::user()->induser_id)
+							->first();
+		if($apply == null){
+			$apply = new Postactivity();
+			$apply->post_id = $request['apply'];
+			$apply->user_id = Auth::user()->induser_id;
+			$apply->apply = 1;
+			$apply->save();
+			return "applied";
+		}elseif($apply != null && $apply->apply == 0){
+			$apply->apply = 1;
+			$apply->save();
+			return "applied";
+		}
+
+	}
+
+	public function skillSearch(){
+		$term = Input::get('term');
+		
+		$results = array();
+		
+		$queries = DB::table('skills')
+			->where('name', 'LIKE', '%'.$term.'%')
+			->take(5)->get();
+		
+		foreach ($queries as $query){
+		    $results[] = [ 'id' => $query->id, 'value' => $query->name ];
+		}
+		return Response::json($results);
+	}
+
+	public function addNewSkills(){
+		if($request->ajax()){
+			Skills::create(Input::get('skill'));
+			
+		}
 	}
 
 }

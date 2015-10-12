@@ -149,17 +149,31 @@
 															</div>
 														</div>
 													</div>
-													<div class="col-md-3">
+													<div class="col-md-5">
 														<div class="form-group">
 															<label>Key Skills</label>
-															{{-- <input type="hidden" name="linked_skill" id="select2_sample5" class="form-control select2" value=""> --}}
-															{!! Form::select('skill_list[]', $skills, null, ['id'=>'skill-list', 'class'=>'form-control', 'multiple']) !!}
+														      <input type="text" id="skill" name="skill" class="form-control" placeholder="Search for skill...">
+															<!--{!! Form::select('skill_list[]', $skills, null, ['id'=>'skill-list', 'class'=>'form-control', 'multiple']) !!}-->
 														</div>
 													</div>
 													<!--/span-->
-													<div class="form-group">
-														
+													<div class="col-md-2">
+														<div class="form-group" style="display:table;">
+															<label>&nbsp;</label>
+															<div class="input-group" style="text-align:center;">
+														        <button class="btn btn-success" type="button">Add</button>
+														    </div>
+														</div>
 													</div>
+													<div class="col-md-5">
+														<div class="form-group">
+															<label>&nbsp;</label>
+														     <input type="text" id="linked_skill" name="linked_skill" 
+														     		class="form-control select2"
+														     		placeholder="List of skills to be added">
+														</div>
+													</div>
+													
 												</div>
 												<div class="tab-pane" id="tab2">
 													<div class="col-md-5">
@@ -664,6 +678,9 @@ Demo.init(); // init demo features  // set current page
     });
 
     $('#skill-list').select2();
+    $('#linked-skill').select2({
+  tags: true
+});
     $('#connections').select2();
 </script>
 <script type="text/javascript">
@@ -679,5 +696,50 @@ Demo.init(); // init demo features  // set current page
             }
         });
     });
+
+	 $(function(){
+
+	 	function split( val ) {
+	      return val.split( /,\s*/ );
+	    }
+	    function extractLast( term ) {
+	      return split( term ).pop();
+	    }
+
+		$( "#skill" )
+		.bind( "keydown", function( event ) {
+			if ( event.keyCode === $.ui.keyCode.TAB && $( this ).autocomplete( "instance" ).menu.active ) {
+			  event.preventDefault();
+			}
+		})
+		.autocomplete({
+			source: function( request, response ) {
+				$.getJSON( "/job/skillSearch", {
+					term: extractLast( request.term )
+				}, response );
+			},
+			search: function() {
+				var term = extractLast( this.value );
+				if ( term.length < 2 ) {
+					return false;
+				}
+			},
+			focus: function() {
+				return false;
+			},
+			select: function(event, ui) {
+				var terms = split( $('#linked_skill').val() );
+				// remove the current input
+				terms.pop();
+				// add the selected item
+				terms.push( ui.item.value );
+				// add placeholder to get the comma-and-space at the end
+				terms.push( "" );
+				$('#linked_skill').val(terms.join( ", " ));
+				$(this).val("");
+				return false;
+			}
+		});
+	});
 </script>
 @stop

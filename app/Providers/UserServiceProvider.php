@@ -4,6 +4,7 @@ use Illuminate\Support\ServiceProvider;
 use Auth;
 use App\Induser;
 use App\Corpuser;
+use App\Postactivity;
 
 class UserServiceProvider extends ServiceProvider {
 
@@ -21,6 +22,29 @@ class UserServiceProvider extends ServiceProvider {
 				$user = Corpuser::where('id', '=', Auth::user()->corpuser_id)->first();
 			}
 			$view->with('session_user', $user);
+		});
+
+		view()->composer('includes.header', function($view){
+			if(Auth::user()->identifier == 1){
+				$applications = Postactivity::with('user', 'post')
+											->join('postjobs', 'postjobs.id', '=', 'postactivities.post_id')
+											->where('postjobs.individual_id', '=', Auth::user()->induser_id)
+											->where('postactivities.apply', '=', 1)
+											->orderBy('postactivities.id', 'desc')
+											->get(['postactivities.id', 'postactivities.apply', 'postactivities.apply_dtTime', 'postactivities.user_id', 'postactivities.post_id']);
+				$thanks = Postactivity::with('user', 'post')
+								      ->join('postjobs', 'postjobs.id', '=', 'postactivities.post_id')
+									  ->where('postjobs.individual_id', '=', Auth::user()->induser_id)
+									  ->where('postactivities.thanks', '=', 1)
+								      ->orderBy('postactivities.id', 'desc')
+								      ->get(['postactivities.id', 'postactivities.thanks', 'postactivities.thanks_dtTime', 'postactivities.user_id', 'postactivities.post_id']);
+				$favourites = Postactivity::with('user')
+									      ->where('fav_post', '=', 1)
+									      ->where('user_id', '=', Auth::user()->induser_id)
+									      ->orderBy('id', 'desc')
+								          ->get(['id', 'fav_post', 'fav_post_dtTime', 'user_id', 'post_id']);
+			}
+			$view->with('applications', $applications)->with('thanks', $thanks)->with('favourites', $favourites);
 		});
 	}
 

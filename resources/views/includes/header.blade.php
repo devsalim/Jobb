@@ -25,8 +25,7 @@
           <li class="dropdown dropdown-extended dropdown-inbox" id="header_inbox_bar">
             <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"  data-close-others="true">
             <i class="icon-bulb"></i>
-            <span class="badge badge-default">
-            2</span>
+            <span class="badge badge-default">{{count($applications)}}</span>
             </a>
             <ul class="dropdown-menu">
               <li class="external">
@@ -35,63 +34,22 @@
               </li>
               <li>
                 <ul class="dropdown-menu-list scroller" style="height: 275px;" data-handle-color="#637283">
+                  @foreach($applications as $application)
                   <li>
                     <a href="inbox.html?a=view">
                     <span class="photo">
-                    <img src="{{ asset('/assets/admin/layout3/img/avatar2.jpg') }}" class="img-circle" alt="">
+                    <img src="@if($application->user->profile_pic != null){{ '/img/profile/'.$application->user->profile_pic }}@else{{'/assets/images/couple.png'}}@endif" class="img-circle" width="40" height="40">
                     </span>
                     <span class="subject">
                     <span class="from">
-                    Priyanka </span>
-                    <span class="time">Just Now </span>
+                    {{$application->user->fname}} </span>
+                    <span class="time">{{$application->apply_dtTime}}</span>
                     </span>
                     <span class="message">
-                    has applied your Job Post Id:6 </span>
+                    has applied your Job Post Id: {{$application->post_id}} </span>
                     </a>
                   </li>
-                  <li>
-                    <a href="inbox.html?a=view">
-                    <span class="photo">
-                    <img src="{{ asset('/assets/admin/layout3/img/avatar3.jpg') }}" class="img-circle" alt="">
-                    </span>
-                    <span class="subject">
-                    <span class="from">
-                    Deepak Gupta </span>
-                    <span class="time">16 mins </span>
-                    </span>
-                    <span class="message">
-                    has shared your Skill Post via <i class="fa fa-facebook-square" style="color: #5b9bd1;font-size: 17px;"></i> </span>
-                    </a>
-                  </li>
-                 
-                  <li>
-                    <a href="inbox.html?a=view">
-                    <span class="photo">
-                    <img src="{{ asset('/assets/admin/layout3/img/avatar2.jpg') }}" class="img-circle" alt="">
-                    </span>
-                    <span class="subject">
-                    <span class="from">
-                    Lisa Wong </span>
-                    <span class="time">40 mins </span>
-                    </span>
-                    <span class="message">
-                    Vivamus sed auctor 40% nibh congue nibh... </span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="inbox.html?a=view">
-                    <span class="photo">
-                    <img src="{{ asset('/assets/admin/layout3/img/avatar3.jpg') }}" class="img-circle" alt="">
-                    </span>
-                    <span class="subject">
-                    <span class="from">
-                    Richard Doe </span>
-                    <span class="time">46 mins </span>
-                    </span>
-                    <span class="message">
-                    Vivamus sed congue nibh auctor nibh congue nibh. auctor nibh auctor nibh... </span>
-                    </a>
-                  </li>
+                 @endforeach
                 </ul>
               </li>
             </ul>
@@ -102,8 +60,7 @@
           <li class="dropdown dropdown-extended dropdown-inbox" id="header_inbox_bar">
             <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"  data-close-others="true">
             <i class="icon-like"></i>
-            <span class="badge badge-default">
-            2</span>
+            <span class="badge badge-default">{{count($thanks)}}</span>
             </a>
             <ul class="dropdown-menu">
               <li class="external">
@@ -112,76 +69,22 @@
               </li>
               <li>
                 <ul class="dropdown-menu-list scroller" style="height: 275px;" data-handle-color="#637283">
+                  @foreach($thanks as $thank)
                   <li>
                     <a href="inbox.html?a=view">
                     <span class="photo">
-                    <img src="{{ asset('/assets/admin/layout3/img/avatar2.jpg') }}" class="img-circle" alt="">
+                    <img src="@if($thank->user->profile_pic != null){{ '/img/profile/'.$thank->user->profile_pic }}@else{{'/assets/images/couple.png'}}@endif" class="img-circle" width="40" height="40">
                     </span>
                     <span class="subject">
                     <span class="from">
-                    Priyanka </span>
-                    <span class="time">Just Now </span>
+                    {{$thank->user->fname}} </span>
+                    <span class="time">{{$thank->thanks_dtTime}}</span>
                     </span>
                     <span class="message">
-                    has applied for this post </span>
+                    has thanked for Job Post Id: {{$thank->post_id}} </span>
                     </a>
                   </li>
-                  <li>
-                    <a href="inbox.html?a=view">
-                    <span class="photo">
-                    <img src="{{ asset('/assets/admin/layout3/img/avatar3.jpg') }}" class="img-circle" alt="">
-                    </span>
-                    <span class="subject">
-                    <span class="from">
-                    Deepak Gupta </span>
-                    <span class="time">16 mins </span>
-                    </span>
-                    <span class="message">
-                    has shared this post via <i class="fa fa-facebook-square" style="color: #5b9bd1;font-size: 17px;"></i> </span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="inbox.html?a=view">
-                    <span class="photo">
-                    <img src="{{ asset('/assets/admin/layout3/img/avatar1.jpg') }}" class="img-circle" alt="">
-                    </span>
-                    <span class="subject">
-                    <span class="from">
-                    Vicky Vishal </span>
-                    <span class="time">2 hrs </span>
-                    </span>
-                    <span class="message">
-                    has thanked your Job Post ID:4 </span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="inbox.html?a=view">
-                    <span class="photo">
-                    <img src="{{ asset('/assets/admin/layout3/img/avatar2.jpg') }}" class="img-circle" alt="">
-                    </span>
-                    <span class="subject">
-                    <span class="from">
-                    Lisa Wong </span>
-                    <span class="time">40 mins </span>
-                    </span>
-                    <span class="message">
-                    Vivamus sed auctor 40% nibh congue nibh... </span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="inbox.html?a=view">
-                    <span class="photo">
-                    <img src="{{ asset('/assets/admin/layout3/img/avatar3.jpg') }}" class="img-circle" alt="">
-                    </span>
-                    <span class="subject">
-                    <span class="from">
-                    Richard Doe </span>
-                    <span class="time">46 mins </span>
-                    </span>
-                    <span class="message">
-                    Vivamus sed congue nibh auctor nibh congue nibh. auctor nibh auctor nibh... </span>
-                    </a>
-                  </li>
+                  @endforeach
                 </ul>
               </li>
             </ul>
@@ -191,11 +94,9 @@
           <!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
           <li class="dropdown dropdown-extended dropdown-tasks" id="header_task_bar">
             <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"  data-close-others="true">
-            <i class="icon-pin"></i>
-            <span class="badge badge-default" style="right: -14px;">
-            3 </span>
-            </a>
-           
+              <i class="icon-pin"></i>
+              <span class="badge badge-default" style="right: -14px;">{{count($favourites)}}</span>
+            </a>            
           </li>
           <!-- END TODO DROPDOWN -->
           <!-- BEGIN USER LOGIN DROPDOWN -->
