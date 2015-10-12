@@ -33,7 +33,8 @@ class GroupController extends Controller {
 					->orWhere('groups.admin_id', '=', Auth::user()->induser_id)
 					->groupBy('groups.id')
 					->get(['groups.id', 'groups.group_name']);
-		return view('pages.group', compact('groups', 'title'));
+		$connections = Auth::user()->induser->friends->lists('fname', 'id');
+		return view('pages.group', compact('groups', 'connections', 'title'));
 	}
 
 	/**
@@ -57,7 +58,8 @@ class GroupController extends Controller {
 							   'groups.id As group_id',
 							   'groups.group_name',
 							   'groups.admin_id'
-							]);		
+							]);	
+
 		return view('pages.group_create', compact('groups', 'title', 'users'));
 	}
 
