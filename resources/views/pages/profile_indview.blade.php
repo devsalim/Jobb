@@ -125,8 +125,12 @@
 						<div class="form-group">
 							<label class="control-label col-md-4 col-xs-6">Education:</label>
 							<div class="col-md-6 col-xs-6">
-								<p class="form-control-static view-page">
-									<span class="text-capitalize">{{ $user->education }} in {{ $user->branch }}</span>
+								<p class="form-control-static view-page text-capitalize">
+									@if($user->education != null)
+									{{ $user->education }} in {{ $user->branch }}
+									@else
+									--
+									@endif
 								</p>
 							</div>
 						</div>
@@ -137,7 +141,11 @@
 							<label class="control-label col-md-4 col-xs-6">Experience:</label>
 							<div class="col-md-6 col-xs-6">
 								<p class="form-control-static view-page">
+									@if($user->experience != null)
 									 {{ $user->experience }} Years
+									 @else
+									 --
+									 @endif
 								</p>
 							</div>
 						</div>

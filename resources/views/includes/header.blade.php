@@ -4,7 +4,7 @@
   <div class="page-header-inner container">
     <!-- BEGIN LOGO -->
     <div class="page-logo">
-      <img src="{{ asset('/assets/logo-jobtip.png') }}" class="big-logo" />
+      <img src="{{ asset('/assets/jobtip-new.png') }}" class="big-logo" />
       <img src="{{ asset('/assets/logo-small.png') }}" class="small-logo" />
       
     </div>
@@ -22,6 +22,7 @@
         <ul class="nav navbar-nav ">
           <!-- BEGIN NOTIFICATION DROPDOWN -->
           <!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
+          
           <li class="dropdown dropdown-extended dropdown-inbox" id="header_inbox_bar">
             <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"  data-close-others="true">
             <i class="icon-bulb"></i>
@@ -229,7 +230,7 @@
       
       <div class="btn-group" style="margin: 3px 5px;">
         <button type="button" class="btn btn-circle green-haze dropdown-toggle" data-toggle="dropdown">
-        <span class="hidden-sm hidden-xs">Post&nbsp;</span>&nbsp;<i class="fa fa-angle-down"></i>
+        <span class="hidden-sm hidden-xs">Post</span> <i class="fa fa-angle-down"></i>
         </button>
         <ul class="dropdown-menu" role="menu">
           <li>

@@ -4271,6 +4271,7 @@ Customized Bootstrap Modal
 }
 .modal .modal-dialog {
   z-index: 10051;
+  margin: 100px auto;
 }
 .modal > .loading {
   position: absolute;

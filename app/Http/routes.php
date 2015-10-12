@@ -70,6 +70,8 @@ Route::group(array('before' => 'auth'), function(){
 	Route::get('individual_view', 'ViewpageController@index');
 	Route::get('individual_view/create', 'ViewpageController@create');
 	Route::get('individual/edit_view', 'ViewpageController@edit_view');	
+
+	Route::post('job_skill/like', 'JobController@job_skillLike');
 });
 
 Route::get('fillitlater', 'PagesController@fillItLater');

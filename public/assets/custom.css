@@ -100,6 +100,12 @@
     border-left: 44px solid #61b3de;
 }
 
+.job a:hover{
+    text-decoration: none;
+    color:white;
+    cursor: context-menu;
+}
+
 .skill{
     float: right;
     position: absolute;
@@ -121,6 +127,12 @@
     border-top: 44px solid transparent;
     border-bottom: 44px solid transparent;
     border-left: 44px solid #70b29c; 
+}
+
+.skill a:hover{
+    text-decoration: none;
+    color:white;
+    cursor: context-menu;
 }
 
 .post-job{
@@ -145,6 +157,8 @@ background-color:white;
     color: white;
     font-size: 16px;
 }
+
+
 
 .post-icon{
     font-size: 20px;
@@ -250,11 +264,11 @@ background-color:white;
 
 .badge-like{
     position: absolute;
-    color: darkmagenta;
+    color: darkslategray;
     font-size: 14px;
     text-align: center;
     line-height: 1.8;
-    font-weight: 600;
+    font-weight: 500;
     float: left;
     bottom: 8px;
     left: 42px;
@@ -262,11 +276,11 @@ background-color:white;
 
 .badge-share{
     position: absolute;
-    color: darkmagenta;
+    color: darkslategray;
     font-size: 14px;
     text-align: center;
     line-height: 1.8;
-    font-weight: 600;
+    font-weight: 500;
     float: right;
     bottom: 8px;
     left: 33px;
@@ -327,13 +341,22 @@ background-color:white;
 
 .user-link{
     position: absolute;
-    width: 20px;
-    height: 20px;
-    color: white;
-    background-color: rebeccapurple;
-    border-radius: 10px !important;
+    width: 25px;
+    height: 25px;
+    background-color: lightgray;
+    border-radius: 12px !important;
     text-align: center;
-    line-height: 1.6;
+    line-height: 2;
+}
+
+.user-link-click{
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    background-color: coral;
+    border-radius: 12px !important;
+    text-align: center;
+    line-height: 2;
 }
 
 .skill-display{
@@ -358,16 +381,25 @@ background-color:white;
 
 .pin-bar{
     float: right;
-    top: 80px;
+    top: 86px;
     position: absolute;
-    right: 26px;
+    right: 0px;
+    border-radius: 20px !important;
+    box-shadow: 1px 1px black;
+}
+
+.pin-skill-bar{
+    float: right;
+    top: 74px;
+    position: absolute;
+    right: 0px;
     border-radius: 20px !important;
     box-shadow: 1px 1px black;
 }
 
 .userpic-box{
     border: 1px darkgrey solid;
-    box-shadow: 2px 0px darkgrey;
+    /*box-shadow: 2px 0px darkgrey;*/
 }
 
 .share-bar{
@@ -429,6 +461,7 @@ ul{
     margin-top: -35px;
     padding: 7px 30px;
     box-shadow: 0 3px 5px gray;
+    border-radius: 7px !important;
 }
 
 .media-body, .media-left, .media-right {
@@ -459,3 +492,72 @@ ul{
     padding: 0 5px 0 0;
     background: white;
 }
+
+.detail-label{
+    font-size: 14px;
+    /*font-weight: 500;*/
+}
+
+.thanks-icon{
+    font-size: 23px !important;
+    color: lightslategray;
+}
+
+.extend-expire{
+    font-size: 17px;
+    font-weight: 600;
+    text-decoration: none;
+    border: 1px solid;
+    border-radius: 5px !important;
+}
+
+.tabular{
+    width: 30px;
+    height: 30px;
+    background-color: rebeccapurple;
+    border-radius: 15px !important;
+    line-height: 2;
+    text-align: center;
+}
+
+.stepwizard-step p {
+    margin-top: 10px;
+}
+.stepwizard-row {
+    display: table-row;
+}
+.stepwizard {
+    display: table;
+    width: 100%;
+    position: relative;
+    margin-left: 0px;
+}
+.stepwizard-step button[disabled] {
+    opacity: 1 !important;
+    filter: alpha(opacity=100) !important;
+}
+.stepwizard-row:before {
+    top: 14px;
+    bottom: 0;
+    position: absolute;
+    content: " ";
+    width: 77%;
+    height: 1px;
+    background-color: #ccc;
+    z-order: 0;
+}
+.stepwizard-step {
+    display: table-cell;
+    /*text-align: center;*/
+    position: relative;
+}
+.btn-circle {
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    padding: 6px 0;
+    font-size: 12px;
+    line-height: 1.428571429;
+    border-radius: 15px;
+}
+

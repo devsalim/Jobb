@@ -1,7 +1,7 @@
 @extends('master')
 
 @section('content')
-
+<?php $selected = 'selected'; ?> 
 <div class="portlet light bordered" style="border: 1px solid #e1e1e1 !important;">
 	<div class="portlet-title">
 		<div class="caption">
@@ -139,18 +139,19 @@
 										<span class="input-group-addon">
 											<i class="icon-graduation"></i>
 										</span>
-										<select class="form-control" name="education" id="parent_selection" value="{{ $user->education }}">
+										
+										<select class="form-control" name="education" id="parent_selection" >
 											<option value="">--Please Select--</option>
-											<option value="BA">B.A</option>
-											<option value="BArch">B.Arch</option>
-											<option value="BCA">BCA</option>
-											<option value="BBA">BBA</option>
-											<option value="B.Com">B.Com</option>
-											<option value="B.Ed">B.Ed</option>
+											<option @if($user->education=="BA") {{ $selected }} @endif value="BA">B.A</option>
+											<option @if($user->education=="BArch") {{ $selected }} @endif value="BArch">B.Arch</option>
+											<option @if($user->education=="BCA") {{ $selected }} @endif value="BCA">BCA</option>
+											<option @if($user->education=="BBA") {{ $selected }} @endif value="BBA">BBA</option>
+											<option @if($user->education=="B.Com") {{ $selected }} @endif value="B.Com">B.Com</option>
+											<option @if($user->education=="B.Ed") {{ $selected }} @endif value="B.Ed">B.Ed</option>
 											<option value="BDS">BDS</option>
 											<option value="BHM">BHM</option>
 											<option value="B.Pharma">B.Pharma</option>
-											<option value="btech">B.Tech/B.E.</option>
+											<option @if($user->education=="btech") {{ $selected }} @endif value="btech">B.Tech/B.E.</option>
 											<option value="LLB">LLB</option>
 											<option value="MBBS">MBBS</option>
 											<option value="Diploma">Diploma</option>
@@ -158,6 +159,7 @@
 											<option value="10+2">10+2</option>
 											<option value="10">10</option>
 										</select>
+										
 									</div>
 								</div>
 							</div>
@@ -169,8 +171,9 @@
 										<span class="input-group-addon">
 										<i class="icon-graduation"></i>
 										</span>
-										<select class="form-control" name="branch" id="child_selection" value="{{ $user->branch }}" >
+										<select class="form-control" name="branch" id="child_selection" >
 											<option value="">--Please Select--</option>
+											<option @if($user->branch) {{ $selected }} @endif value="">--Please Select--</option>
 										</select>
 									</div>
 								</div>

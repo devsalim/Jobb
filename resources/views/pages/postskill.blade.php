@@ -8,22 +8,7 @@
 <div class="row">
 		<div class="col-md-9">
 						<div class="portlet box blue" id="form_wizard_1">
-							<div class="portlet-title">
-								<div class="caption">
-									<i class="fa fa-gift"></i> Post Skill - <span class="step-title">
-									Step 1 of 4 </span>
-								</div>
-								<div class="tools hidden-xs">
-									<a href="javascript:;" class="collapse">
-									</a>
-									<a href="#portlet-config" data-toggle="modal" class="config">
-									</a>
-									<a href="javascript:;" class="reload">
-									</a>
-									<a href="javascript:;" class="remove">
-									</a>
-								</div>
-							</div>
+							
 							<div class="portlet-body form">
 								<!-- <form action="#" class="form-horizontal"  method="POST"> -->
 								<form action="{{ url('skill/store') }}" method="post" id="submit_form" class="form-horizontal">
@@ -36,7 +21,7 @@
 													<!-- <span class="number">
 													1 </span> -->
 													<span class="desc">
-													<i class="fa fa-check"></i> Skill Details </span>
+													<i class="fa fa-check"></i>Skills </span>
 													</a>
 												</li>
 												<li>
@@ -44,7 +29,7 @@
 													<!-- <span class="number">
 													2 </span> -->
 													<span class="desc">
-													<i class="fa fa-check"></i> Education Details </span>
+													<i class="fa fa-check"></i>Education </span>
 													</a>
 												</li>
 												<li>
@@ -52,7 +37,7 @@
 													<!-- <span class="number">
 													3 </span> -->
 													<span class="desc">
-													<i class="fa fa-check"></i> Location </span>
+													<i class="fa fa-check"></i>Location </span>
 													</a>
 												</li>
 												<li>
@@ -60,7 +45,7 @@
 													<!-- <span class="number">
 													4 </span> -->
 													<span class="desc">
-													<i class="fa fa-check"></i> Confirm </span>
+													<i class="fa fa-check"></i>Confirm </span>
 													</a>
 												</li>
 											</ul>
@@ -110,7 +95,7 @@
 													
 													<div class="col-md-5">
 														<div class="form-group">
-															<label>Job Category</label>
+															<label>Skill Category</label>
 															<div class="input-group">
 															<span class="input-group-addon">
 															<i class="fa fa-university " style="color:darkcyan;"></i>
@@ -143,7 +128,7 @@
 													<div class="col-md-2"></div>
 													<div class="col-md-5">
 														<div class="form-group">
-															<label>Job Role</label>
+															<label>Role</label>
 															<div class="input-group">
 																<span class="input-group-addon">
 																	<i class="fa fa-university" style="color:darkcyan;"></i>
@@ -220,12 +205,12 @@
 													<!--/span-->
 													<div class="col-md-5">
 														<div class="form-group">							
-															<label class=" control-label">Experience </label>&nbsp;: <input type="text" disabled style="width: 20px;background:transparent;border:0" name="min_exp" class="min-exp">-
-															<input type="text" style="width: 14px;margin:0 4px;background:transparent;border:0" disabled name="max_exp" class="max-exp">Years
+															<label class=" control-label">Experience </label>&nbsp;: <input type="text" style="width: 20px;background:transparent;border:0" name="min_exp" class="min-exp">-
+															<input type="text" style="width: 14px;margin:0 4px;background:transparent;border:0" name="max_exp" class="max-exp">Years
 															<div class="">
 																<input id="range_1" type="text"  value=""/>
-																<input type="hidden" name="min_exp" class="min-exp">
-																<input type="hidden" name="max_exp" class="max-exp">
+																<!-- <input type="hidden" name="min_exp" class="min-exp">
+																<input type="hidden" name="max_exp" class="max-exp"> -->
 															</div>
 														</div>
 													</div>
@@ -234,21 +219,21 @@
 													<div class="col-md-5">
 														<div class="form-group">							
 															<label class=" control-label"><input type="checkbox" id="hide-check">&nbsp;Salary 
-															</label>&nbsp;:<select style="border-top: 0px;border-left: 0;border-right: 0;">									
+															</label>&nbsp;:<select name="salary_type" style="border-top: 0px;border-left: 0;border-right: 0;">									
 																	<option value="Monthly">Monthly</option>
 																	<option value="Weekly">Weekly</option>
 																	<option value="Daily">Daily</option>
 																	<option value="Hourly">Hourly</option>
 																	<option value="Per Visit">Per Visit</option>	
 																</select>
-															 <i class="fa fa-rupee (alias)"></i>&nbsp;<input type="text" disabled style="width: 30px;margin:0 6px;background:transparent;border:0" name="min_sal" class="min-sal">-
-															<input type="text" style="width:40px;margin:0 4px;background:transparent;border:0" disabled name="max_sal" class="max-sal">&nbsp;
+															 <i class="fa fa-rupee (alias)"></i>&nbsp;<input type="text" style="width: 30px;margin:0 6px;background:transparent;border:0" name="min_sal" class="min-sal">-
+															<input type="text" style="width:40px;margin:0 4px;background:transparent;border:0" name="max_sal" class="max-sal">&nbsp;
 															
 															<div id="hide-sal" class="">
 																<input id="range_7" type="text"  value=""/>
 																<!-- <label name="min_sal" class="min-sal"></label> -->
-																<input type="hidden" name="min_sal" class="min-sal">
-																<input type="hidden" name="max_sal" class="max-sal">
+																<!-- <input type="hidden" name="min_sal" class="min-sal">
+																<input type="hidden" name="max_sal" class="max-sal"> -->
 															</div>
 														</div>
 													</div>
@@ -296,7 +281,7 @@
 																	<span class="input-group-addon">
 																	<i class="icon-envelope" style="color:darkcyan;"></i>
 																	</span>
-																	<input type="text" disabled name="email_id" value="{{ Auth::user()->email }}" class="form-control" placeholder="">
+																	<input type="text" name="email_id" value="{{ Auth::user()->email }}" class="form-control" placeholder="">
 																	<span class="input-group-addon" style="width: 55px;">
 																		Public
 																	</span>
@@ -312,7 +297,7 @@
 																	<span class="input-group-addon">
 																	<i class="icon-call-end" style="color:darkcyan;"></i>
 																	</span>
-																	<input type="phone" disabled name="phone" value="{{ Auth::user()->mobile }}"  class="form-control" placeholder="">
+																	<input type="text" name="phone" value="{{ Auth::user()->mobile }}"  class="form-control" placeholder="">
 																	<span class="input-group-addon" style="width: 55px;">
 																		Private
 																	</span>
@@ -353,91 +338,90 @@
 													</div>
 												</div>
 												<div class="tab-pane" id="tab4">
-													<h3 class="block">Confirm your Post</h3>
-													<input type="hidden" name="post_type">
-															
-													<div class="form-group">
-														<label class="control-label col-md-6 col-sm-6 col-xs-12">Skill Title:</label>
-														<div class="col-md-6 col-sm-6 col-xs-12">
-															<p class="form-control-static" data-display="post_title">
-															</p>
-														</div>
-													</div>
-													<div class="form-group">
-														<label class="control-label col-md-6 col-sm-6 col-xs-12">Skill Details:</label>
-														<div class="col-md-6 col-sm-6 col-xs-12">
-															<p class="form-control-static" data-display="job_detail">
-															</p>
-														</div>
-													</div>
-													
-													<div class="form-group">
-														<label class="control-label col-md-6 col-sm-6 col-xs-12">Professional Category:</label>
-														<div class="col-md-6 col-sm-6 col-xs-12">
-															<p class="form-control-static" data-display="prof_category">
-															</p>
-														</div>
-													</div>
-													<div class="form-group">
-														<label class="control-label col-md-6 col-sm-6 col-xs-12">Role:</label>
-														<div class="col-md-6 col-sm-6 col-xs-12">
-															<p class="form-control-static" data-display="role">
-															</p>
-														</div>
-													</div>
-													<div class="form-group">
-														<label class="control-label col-md-6 col-sm-6 col-xs-12">Key Skills:</label>
-														<div class="col-md-6 col-sm-6 col-xs-12">
-															<p class="form-control-static" data-display="linked_skill">
-															</p>
-														</div>
-													</div>
-													<h4 class="form-section"></h4>
-													
-													<div class="form-group">
-														<label class="control-label col-md-6 col-sm-6 col-xs-12">Qualification:</label>
-														<div class="col-md-6 col-sm-6 col-xs-12">
-															<p class="form-control-static" data-display="education">
-															</p>
-														</div>
-													</div>
-													<div class="form-group">
-														<label class="control-label col-md-6 col-sm-6 col-xs-12">Employment Type:</label>
-														<div class="col-md-6 col-sm-6 col-xs-12">
-															<p class="form-control-static" data-display="time_for">
-															</p>
-														</div>
-													</div>
-													<div class="form-group">
-														<label class="control-label col-md-6 col-sm-6 col-xs-12">Experience:</label>
-														<div class="col-md-6 col-sm-6 col-xs-12">
-															<p class="form-control-static" data-display="min_exp" data-display="max_exp">
-															</p>
-														</div>
-													</div>
-													
-													<div class="form-group">
-														<label class="control-label col-md-6 col-sm-6 col-xs-12">Salary:</label>
-														<div class="col-md-6 col-sm-6 col-xs-12">
-															<p class="form-control-static" data-display="min_sal" data-display="max_sal">
-															</p>
-														</div>
-													</div>
-													<h4 class="form-section"></h4>
-													<div class="form-group">
-														<label class="control-label col-md-6 col-sm-6 col-xs-12">Job Location:</label>
-														<div class="col-md-6 col-sm-6 col-xs-12">
-															<p class="form-control-static" data-display="city">
-															</p>
-														</div>
-													</div>
-													<div class="form-group">
-														<label class="control-label col-md-6 col-sm-6 col-xs-12">Post Duration:</label>
-														<div class="col-md-6 col-sm-6 col-xs-12">
-															<p class="form-control-static" data-display="post_duration">
-															</p>
-														</div>
-													</div>
+													<?php $var = 1; ?>
+															<div class="portlet light bordered" style="border: none !important;background:transparent">										
+																<div class="portlet-body form">
+																	<!-- BEGIN FORM-->
+																		<div class="form-body">
+																			<div class="row">																				
+																				<div class="col-md-12" style="">												
+																						<div class="timeline" style="margin: 0 -25px;">
+																						<!-- TIMELINE ITEM -->
+																						<div class="timeline-item time-item" style="margin: -30px 0px 0px 0px;">
+																							<div class="timeline-body" style="margin-left: 0;">
+																								<div class="timeline-body-content" style="margin-top: -25px;">
+																									<!-- <span class="font-grey-cascade"> -->
+																										<div style="font-weight: 600;color: black;font-size: 16px;"><p class="form-control-static" data-display="post_title"></p>  </div>
+																										 <div><div> <h4 style="margin: 0 0 4px 0;"> <p class="form-control-static" data-display="post_compname"></p> </h4></div>  </div>		 							
+																									<!-- </span> -->
+																									
+																										
+																											<i class="icon-pointer"></i>&nbsp;: <p class="form-control-static" data-display="city"></p>
+																										
+																										<br><i class="icon-briefcase"></i>&nbsp;: <p class="form-control-static" data-display="min_exp"></p>-<p class="form-control-static" data-display="max_exp"></p> Years
+																										
+																										
+																									
+																								</div>		
+																								<div class="post-job-skill-bar">
+																									<div class="Skill"><a class="post-type-class">Skill</a></div>
+																								</div>
+																							</div>
+																							<div class="portlet-body" style="margin: 0 -5px;">
+																							<div class="panel-group accordion" id="accordion{{$var}}" style="margin-bottom: 0;">
+																								<div class="panel panel-default" style=" position: relative;">
+																									<div class="panel-heading">
+																										<h4 class="panel-title">
+																										<a class="accordion-toggle accordion-toggle-styled" 
+																										data-toggle="collapse" data-parent="#accordion{{$var}}" href="#collapse_{{$var}}_{{$var}}"  style="font-size: 15px;font-weight: 600;">
+																										Details:</a>	
+																										</h4>
+																									</div>
+																									<div id="collapse_{{$var}}_{{$var}}" class="panel-collapse collapse">
+																										<div class="panel-body" style="border-top: 0;padding: 4px 15px;">
+
+																											Education : <p class="form-control-static" data-display="education"></p><br>
+																											Role : <p class="form-control-static" data-display="role"></p><br>
+																											Skill Category : <p class="form-control-static" data-display="prof_category"></p><br>
+																											Skill : <p class="form-control-static" data-display="linked_skill"></p><br>
+																											Salary (<i class="fa fa-rupee (alias)"></i>): <p class="form-control-static" data-display="min_sal"></p>-<p class="form-control-static" data-display="max_sal"></p> <p class="form-control-static" data-display="salary-type"></p><br>
+																											About Me :
+																											<div class="row">
+																												<div class="col-md-11">
+																													<p class="form-control-static" data-display="job_detail"></p>
+																												</div>
+																											</div>
+																											
+																											<div class="skill-display">Contact Details:<br> </div>
+
+																												<i class="glyphicon glyphicon-envelope" style="color: #13B8D4;font-size: 16px;"></i>&nbsp;:<p class="form-control-static" data-display="email_id"></p>
+																												 <p class="form-control-static" data-display="alt_emailid"></p>
+																											<br>
+																												<i class="glyphicon glyphicon-earphone" style="color: green;font-size: 16px;"></i>&nbsp;:<p class="form-control-static" data-display="phone"></p>
+																												 <p class="form-control-static" data-display="alt_phone"></p>
+																											<div class="skill-display">Post Id&nbsp;:  </div> 
+
+																										</div>
+																									</div>
+																									
+																								</div>
+																							</div>
+																						</div>
+																						</div>
+
+																						<!-- END TIMELINE ITEM -->
+																					</div>
+																				</div>	
+																				
+																				<!-- END TIMELINE ITEM -->
+																			
+																			</div>
+																		</div>
+																	
+																	<!-- END FORM-->
+																</div>
+															</div>	
+														<?php $var++; ?>
 													
 													
 												</div>
@@ -451,9 +435,7 @@
 													<a href="javascript:;" class="btn blue button-next">
 													Continue <i class="m-icon-swapright m-icon-white"></i>
 													</a>
-													<a href="javascript:;" class="btn green button-submit">
-													Submit <i class="m-icon-swapright m-icon-white"></i>
-													</a>
+													<button type="submit" class=" btn blue button-submit">Submit</button>
 												</div>
 											</div>
 										</div>

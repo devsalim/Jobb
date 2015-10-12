@@ -13,24 +13,29 @@
 								<!-- TIMELINE ITEM -->
 								<div class="timeline-item time-item">
 									<div class="timeline-badge" style="margin: 10px 0px;">
-										@if($post->induser != null)
+										@if($post->induser != null && !empty($post->induser->profile_pic))
 										<img class="timeline-badge-userpic userpic-box" src="/img/profile/{{ $post->induser->profile_pic }}" title="{{ $post->induser->fname }}">
 										<a class="icon-userpic"><i class="glyphicon glyphicon-user"></i></a>
-										@elseif($post->corpuser != null)
+										@elseif($post->corpuser != null && !empty($post->corpuser->logo_status))
 										<img class="timeline-badge-userpic userpic-box" src="/img/profile/{{ $post->corpuser->logo_status }}" title="{{ $post->corpuser->firm_name }}">
 										<a class="icon-userpic"><i class="fa fa-institution (alias)" style="padding: 0px 5px;"></i></a>
+										@elseif(empty($post->corpuser->logo_status) && $post->corpuser != null)
+										<img class="timeline-badge-userpic userpic-box" src="/assets/images/couple.png">
+										<a class="icon-userpic"><i class="fa fa-institution (alias)" style="padding: 0px 5px;"></i></a>
+										@elseif(empty($post->induser->profile_pic) && $post->induser != null)
+										<img class="timeline-badge-userpic userpic-box" src="/assets/images/ab.png">
+										<a class="icon-userpic"><i class="glyphicon glyphicon-user" style="padding: 0px 5px;"></i></a>
 										@endif
 									</div>
 									<div class="timeline-body" style="">
 										<div class="timeline-body-head">
 											<div class="timeline-body-head-caption">
-												<a>
-													@if($post->induser != null && Auth::user()->induser_id)	
-													<a class="user-link"><i class="icon-link"></i></a>&nbsp;<a style="padding: 0px 0px 0px 23px;font-size: 15px;text-decoration:none;">{{ $post->induser->fname }} {{ $post->induser->lname }}</a>
-													@elseif($post->corpuser != null)
-														{{ $post->post_compname }} 
-													@endif
-												</a>
+												
+												@if($post->post_type == 'job')
+												<a class="user-link"><i class="fa fa-unlink (alias)" style="color:lightslategray;"></i></a><a style="padding: 0px 0px 0px 32px;font-size: 15px;text-decoration:none;font-weight:600;">{{ $post->induser->fname }} {{ $post->induser->lname }}</a>
+												@else
+												<a class="user-link-click"><i class="fa fa-link" style="color:white;"></i></a><a style="padding: 0px 0px 0px 32px;font-size: 15px;text-decoration:none;font-weight:600;">{{ $post->induser->fname }} {{ $post->induser->lname }}</a>
+												@endif
 												<span class="timeline-body-time font-grey-cascade">Posted at 
 													{{ date('M d, Y', strtotime($post->created_at)) }}
 												</span>
@@ -41,22 +46,25 @@
 												@if($post->post_type == 'skill')	
 												<div style="font-weight: 600;color: black;font-size: 16px;">{{ $post->post_title }} </div>
 											@elseif($post->post_type == 'job')
-												 <div style="font-weight: 600;color: black;font-size: 16px;">{{ $post->post_title }}<div> <h4 style="margin: 0 0 4px 0;"><small>Required at</small> {{ $post->post_compname }}</h4></div>  </div>
-											@endif					 							
+												 <div style="font-weight: 600;color: black;font-size: 16px;">{{ $post->post_title }}  </div>
+											@endif	
+											@if($post->post_compname != null)
+											<div><h4 style="margin: 0 0 4px 0;"><small>Required at</small> {{ $post->post_compname }}</h4></div>
+											@endif				 							
 											</span>
 											<div class="row">
-												<div class="col-md-4 col-sm-4 col-xs-12">
+												<!-- <div class="col-md-4 col-sm-4 col-xs-12">
 													<i class="icon-badge"></i>&nbsp;: {{ $post->role }}
-												</div>
+												</div> -->
 												<div class="col-md-4 col-sm-4 col-xs-12">
 													<i class="glyphicon glyphicon-map-marker"></i>&nbsp;: {{ $post->city }}
 												</div>
 												<div class="col-md-4 col-sm-4 col-xs-12">
 													<i class="icon-briefcase"></i>&nbsp;: {{ $post->min_exp}}-{{ $post->max_exp}} Years
 												</div>
-												<div class="col-md-4 col-sm-4 col-xs-12">
+												<!-- <div class="col-md-4 col-sm-4 col-xs-12">
 													<i class="fa fa-rupee (alias)"></i>&nbsp;:&nbsp; {{ $post->min_sal }}-{{ $post->max_sal }}/Hours
-												</div>
+												</div> -->
 											</div>
 										</div>		
 										<div class="post-job-skill-bar">
@@ -67,9 +75,23 @@
 											<form action="/job/fav" method="post" id="post-fav-{{$post->id}}" data-id="{{$post->id}}">						
 												<input type="hidden" name="_token" value="{{ csrf_token() }}">
 												<input type="hidden" name="fav_post" value="{{ $post->id }}">
+												@if($post->post_type == 'job' && Auth::user()->id != $post->individual_id )
 												<button class="fav-btn btn btn-icon-only pin-bar btn-circle" id="fav-btn-{{$post->id}}" type="button">
 												<i class="icon-pin" style="font-size: 20px;"></i>
+												
+												{{ $post->postactivity->sum('fav_post') }} 
+													{{-- {{ $post->postactivity->where('user_id', Auth::user()->induser_id)->sum('fav_post') }} --}}
+												
 												</button>
+												@elseif(Auth::user()->id != $post->individual_id)
+												<button class="fav-btn btn btn-icon-only pin-skill-bar btn-circle" id="fav-btn-{{$post->id}}" type="button">
+												<i class="icon-pin" style="font-size: 20px;"></i>
+												
+												{{ $post->postactivity->sum('fav_post') }} 
+													{{-- {{ $post->postactivity->where('user_id', Auth::user()->induser_id)->sum('fav_post') }} --}}
+												
+												</button>
+												@endif
 											</form>
 											
 										</div>
@@ -81,55 +103,140 @@
 													<h4 class="panel-title">
 													<a class="accordion-toggle accordion-toggle-styled" 
 													data-toggle="collapse" data-parent="#accordion{{$var}}" href="#collapse_{{$var}}_{{$var}}"  style="font-size: 15px;font-weight: 600;">
-													Details:</a>	
+													Details: </a>	
 													</h4>
 												</div>
 												<div id="collapse_{{$var}}_{{$var}}" class="panel-collapse collapse">
 													<div class="panel-body" style="border-top: 0;padding: 4px 15px;">
-														<div class="skill-display">Description&nbsp;: </div>
+														
 														<div class="row">
-															<div class="col-md-1"></div>
-															<div class="col-md-11">
-																{{ $post->job_detail }}
+															<div class="col-md-12 col-sm-12 col-xs-12">
+																
+																	<label class="detail-label">Education Required :</label>
+																
+																	{{ $post->education }}
+																 
+															</div>
+															<div class="col-md-12 col-sm-12 col-xs-12">
+																
+																	<label class="detail-label">Role :</label>
+																
+																	{{ $post->role }}
+																
+															</div>
+															<div class="col-md-12 col-sm-12 col-xs-12">
+																
+																	<label class="detail-label">Job Category :</label>
+																
+																	{{ $post->prof_category }}
+																 
+															</div>
+															<div class="col-md-12 col-sm-12 col-xs-12">
+																
+																	<label class="detail-label">Skills :</label>
+																
+																	@foreach($post->skills as $skill)
+																		{{$skill->name}},
+																	@endforeach
+																 
+															</div>
+															<div class="col-md-12 col-sm-12 col-xs-12">
+																
+																	<label class="detail-label">Salary (<i class="fa fa-rupee (alias)"></i>):</label>
+																
+																	{{ $post->min_sal }}-{{ $post->max_sal }} {{ $post->salary_type }}
+																 
 															</div>
 														</div>
 														
-														<div class="skill-display">Reference Id&nbsp;: {{ $post->reference_id }} </div>
-														<div class="skill-display">Education & skills&nbsp;:<br> </div>
+														<div class="skill-display">Description : </div>
+														{{ $post->job_detail }}
+														
+														@if($post->post_type == 'job')
+														<div class="skill-display">Reference Id&nbsp;: {{ $post->reference_id }} </div>	
+														@endif
+														<div class="skill-display">Contact Details : </div> 
 														<div class="row">
-															<div class="col-md-1"></div>
-															<div class="col-md-11">
-																Education: {{ $post->education }}
+															@if($post->post_type == 'job' && $post->website_redirect_url != null)
+															<div class="col-md-12 col-sm-12 col-xs-12">
+																<label class="detail-label">Apply on Company Website: Yes</label>
 															</div>
-															<div class="col-md-1"></div>
-															<div class="col-md-11">
-																Job Category: {{ $post->prof_category }}
+															@endif
+															@if($post->post_type == 'job' && $post->website_redirect_url != null)
+															<div class="col-md-12 col-sm-12 col-xs-12">
+																
+																	<label class="detail-label"><i class="glyphicon glyphicon-globe" style="color: deepskyblue;"></i> :</label>
+																{{ $post->website_redirect_url }}
+																	
+																
 															</div>
-															<div class="col-md-1"></div>
-															<div class="col-md-11">
-																Skills: @foreach($post->skills as $skill)
-																		{{$skill->name}}
-																	@endforeach
+															@endif
+															@if($post->website_redirect_url == null && $post->contact_person != null)
+															<div class="col-md-12 col-sm-12 col-xs-12">
+																
+																	<label class="detail-label"><i class="glyphicon glyphicon-user"></i> :</label>
+																
+																	{{ $post->contact_person }}
+																
 															</div>
-														</div>	
-														<div class="skill-display">Contact&nbsp;:<br> </div> 
-														<ul>
+															@endif
 
-															<li>
-																<i class="glyphicon glyphicon-envelope" style="color: #13B8D4;font-size: 16px;"></i>&nbsp;: {{ $post->email_id }}
-																@if($post->alt_emailid != null)
-																OR {{ $post->alt_emailid }}
-																@endif
-															</li>
-														</ul>
-														<ul>
-															<li>
-																<i class="glyphicon glyphicon-earphone" style="color: green;font-size: 16px;"></i>&nbsp;: {{ $post->phone }}
-																@if($post->alt_phone != null)
-																OR {{ $post->alt_phone }}
-																@endif
-															</li>
-														</ul>
+															@if($post->email_id != null && $post->alt_emailid != null && $post->website_redirect_url == null)
+															<div class="col-md-12 col-sm-12 col-xs-12">
+																
+																	<label class="detail-label"><i class="glyphicon glyphicon-envelope"></i> :</label>
+																
+																	
+																	{{ $post->email_id }} - {{ $post->alt_emailid }}
+																
+															</div>	
+															
+															@elseif($post->email_id != null && $post->alt_emailid == null && $post->website_redirect_url == null)
+															<div class="col-md-12 col-sm-12 col-xs-12">
+																
+																	<label class="detail-label"><i class="glyphicon glyphicon-envelope"></i> :</label>
+																
+																	
+																	{{ $post->email_id }}
+																
+															</div>
+															@elseif($post->email_id == null && $post->alt_emailid != null && $post->website_redirect_url == null)
+															<div class="col-md-12 col-sm-12 col-xs-12">
+																
+																	<label class="detail-label"><i class="glyphicon glyphicon-envelope"></i> :</label>
+																
+																		{{ $post->alt_emailid }}
+																 
+															</div>	
+															@endif	
+															@if($post->phone != null && $post->alt_phone != null && $post->website_redirect_url == null)
+															<div class="col-md-12 col-sm-12 col-xs-12">
+																
+																	<label class="detail-label"><i class="glyphicon glyphicon-earphone"></i> :</label>
+																
+																	
+																	{{ $post->phone }} - {{ $post->alt_phone }}
+																 
+															</div>	
+															@elseif($post->phone != null && $post->alt_phone == null && $post->website_redirect_url == null)
+															<div class="col-md-12 col-sm-12 col-xs-12">
+																
+																	<label class="detail-label"><i class="glyphicon glyphicon-earphone"></i> :</label>
+																
+																	
+																	{{ $post->phone }}
+																
+															</div>
+															@elseif($post->phone == null && $post->alt_phone != null && $post->website_redirect_url == null)
+															<div class="col-md-12 col-sm-12 col-xs-12">
+																
+																	<label class="detail-label"><i class="glyphicon glyphicon-earphone"></i> :</label>
+																
+																		{{ $post->alt_phone }}
+																
+															</div>	
+															@endif											
+														</div>
 														<div class="skill-display">Post Id&nbsp;: {{ $post->id }} </div> 
 													</div>
 												</div>
@@ -137,22 +244,25 @@
 													<form action="/job/like" method="post" id="post-{{$post->id}}" data-id="{{$post->id}}">						
 														<input type="hidden" name="_token" value="{{ csrf_token() }}">
 														<input type="hidden" name="like" value="{{ $post->id }}">
-														<button class="btn like-btn" id="like-btn-{{$post->id}}" type="button" style="background-color: transparent;">
-														<i class="icon-like" style="font-size: 23px;color: tomato;"></i>
+														<button class="btn like-btn"  type="button" style="background-color: transparent;">
+														<i class="fa fa-thumbs-up thanks-icon" id="like-{{$post->id}}"></i>
 														</button>
 													</form>
+													
 													<span class="badge-like" id="like-count-{{ $post->id }}">
 													{{ $post->postactivity->sum('thanks') }} 
 													{{-- {{ $post->postactivity->where('user_id', Auth::user()->induser_id)->sum('thanks') }} --}}
 													</span>
-												
 													
+												@if($post->post_type == 'job')	
 												<button type="button" class="btn blue btn-sm apply-contact-btn">Apply</button>
-												
+												@else
+												<button type="button" class="btn green btn-sm apply-contact-btn">Contact</button>
+												@endif
 												<div class="btn-group dropup share-bar">
 													<div class="btn-group dropup">
 														<button class="btn dropdown-toggle" type="button" data-toggle="dropdown" style="background-color: transparent;border-left: 1px solid lightgray;padding: 18px 20px 7px 8px;">
-														<i class="fa fa-share-square-o" style="font-size: 23px;color: tomato;"></i><span class="badge-share">1000 </span>
+														<i class="fa fa-share-square-o" style="font-size: 23px;color: darkslateblue;"></i><span class="badge-share">1000 </span>
 														</button>
 														<ul class="dropdown-menu pull-right" role="menu" style="min-width:0;box-shadow:0 0 !important">
 															<li style="background-color: #3b5998;">
@@ -248,10 +358,10 @@ $(document).ready(function(){
       success: function(data){
         if(data > $count){
  			$('#like-count-'+post_id).text(data);
- 			// $('#like-btn-'+post_id).css({'background-color':'lightgreen'});
+ 			$('#like-'+post_id).css({'color':'burlywood'});
         }else if(data < $count){
  			$('#like-count-'+post_id).text(data);
- 			// $('#like-btn-'+post_id).css({'background-color':'burlywood'});
+ 			$('#like-'+post_id).css({'color':'lightslategray'});
         }
       }
     }); 
@@ -278,11 +388,11 @@ $(document).ready(function(){
       cache : false,
       success: function(data){
         if(data == "favourite"){
-        	$('#fav-btn-'+post_id).removeClass('btn-success');
+        	$('#fav-btn-'+post_id).removeClass('');
  			$('#fav-btn-'+post_id).addClass('btn-warning');
         }else if(data == 'unfavourite'){
  			$('#fav-btn-'+post_id).removeClass('btn-warning');
- 			$('#fav-btn-'+post_id).addClass('btn-success');
+ 			$('#fav-btn-'+post_id).addClass('');
         }
       }
     }); 

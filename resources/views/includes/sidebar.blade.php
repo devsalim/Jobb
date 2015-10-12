@@ -29,9 +29,11 @@
             {{ $session_user->fname }} {{ $session_user->lname }}
             {{ $session_user->firm_name }}
           </h3>
+          @if($session_user->role!=null)
           <h3 class="form-title user-company">
           {{ $session_user->role }} @ {{ $session_user->working_at }}
           </h3>
+          @endif
           @if($session_user->city!=null)
           <h3 class="form-title user-location">
             {{ $session_user->city }}

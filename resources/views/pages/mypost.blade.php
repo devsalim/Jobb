@@ -24,6 +24,9 @@
 									</div>
 								</div>
 								<div class="timeline-body-content">
+									<div class="post-job-skill-bar">
+										<div class="{{ $post->post_type }}"><a class="post-type-class">{{ $post->post_type }}</a></div>
+									</div>
 									<span class="font-grey-cascade">
 										@if($post->post_type == 'skill')	
 										<div style="font-weight: 600;color: black;font-size: 16px;">{{ $post->post_title }} </div>
@@ -31,24 +34,44 @@
 										 <div style="font-weight: 600;color: black;font-size: 16px;">{{ $post->post_title }}<div> <h4 style="margin: 0 0 4px 0;"><small>Required at</small> {{ $post->post_compname }}</h4></div>  </div>
 									@endif					 							
 									</span>
-									<div class="row">
-										<div class="col-md-3 col-sm-3 col-xs-8">
-											<i class="icon-badge"></i>&nbsp;: {{ $post->role }}
-										</div>
-										<div class="col-md-3 col-sm-3 col-xs-8">
+									<div class="row" style="margin-top: 15px;">
+										<div class="col-md-3 col-sm-3 col-xs-6">
 											<i class="glyphicon glyphicon-map-marker"></i>&nbsp;: {{ $post->city }}
 										</div>
-										<div class="col-md-3 col-sm-3 col-xs-8">
-											<i class="icon-briefcase"></i>&nbsp;: {{ $post->min_exp}}-{{ $post->max_exp}} Years
+										<div class="col-md-3 col-sm-3 col-xs-6">
+											<i class="glyphicon glyphicon-briefcase"></i>&nbsp;: {{ $post->min_exp}}-{{ $post->max_exp}} Years
 										</div>
-										<div class="col-md-3 col-sm-3 col-xs-8">
-											<i class="fa fa-rupee (alias)"></i>&nbsp;:&nbsp; {{ $post->min_sal }}-{{ $post->max_sal }}/Hours
+									</div>
+									<div class="row" style="margin-top: 15px;">
+										<div class="col-md-6 col-sm-3 col-xs-12">
+											<div class="">Post Expires in: {{ $post->post_duration }} days  <a href="javascript:;" class="btn btn-sm extend-expire">
+											  Extend</a></div>
+										</div>
+										<div class="col-md-3 col-sm-3 col-xs-12">
+											<a class="btn btn-sm red extend-expire" data-toggle="modal" href="#small">Expire</a>
+											<div class="modal fade bs-modal-sm" id="small" tabindex="-1" role="dialog" aria-hidden="true">
+												<div class="modal-dialog modal-sm">
+													<div class="modal-content">
+														<div class="modal-header">
+															<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+															<h4 class="modal-title"><i class="glyphicon glyphicon-exclamation-sign" style="font-size: 16px;color: firebrick;"></i> Are you sure</h4>
+														</div>
+														<div class="modal-body">
+															 You want to expire this post?
+														</div>
+														<div class="modal-footer">
+															<button type="button" class="btn default" data-dismiss="modal">No</button>
+															<button type="button" class="btn blue">Yes</button>
+														</div>
+													</div>
+													<!-- /.modal-content -->
+												</div>
+												<!-- /.modal-dialog -->
+											</div>
+											<!-- /.modal -->
 										</div>
 									</div>
 								</div>		
-								<div class="post-job-skill-bar">
-									<div class="{{ $post->post_type }}"><a class="post-type-class">{{ $post->post_type }}</a></div>
-								</div>
 							</div>
 							<div class="portlet-body" style="margin: 0 -5px;">
 								<div class="panel-group accordion" id="accordion{{$var}}" style="margin-bottom: 0;">
@@ -57,82 +80,145 @@
 											<h4 class="panel-title">
 											<a class="accordion-toggle accordion-toggle-styled" 
 											data-toggle="collapse" data-parent="#accordion{{$var}}" href="#collapse_{{$var}}_{{$var}}"  style="font-size: 15px;font-weight: 600;">
-											Details:</a>	
+											Details :</a>	
 											</h4>
 										</div>
 										<div id="collapse_{{$var}}_{{$var}}" class="panel-collapse collapse">
-											<div class="panel-body" style="border-top: 1px solid lightgrey !important;padding: 4px 15px;">
-												<div class="skill-display">Description&nbsp;: </div>
-												<ul>
-													<li>{{ $post->job_detail }}</li>
-												</ul>
-												<div class="skill-display">Reference Id&nbsp;: </div>
-												<div class="skill-display">Education & skills&nbsp;:<br> </div>
-												<ul>
+											<div class="panel-body" style="border-top: 0;padding: 4px 15px;">
+												<div class="row">
+													<div class="col-md-12 col-sm-12 col-xs-12">														
+														<label class="detail-label">Education Required :</label>														
+														{{ $post->education }}														 
+													</div>
+													<div class="col-md-12 col-sm-12 col-xs-12">				
+														<label class="detail-label">Role :</label>
+														{{ $post->role }}	
+													</div>
+													<div class="col-md-12 col-sm-12 col-xs-12">
+														<label class="detail-label">Job Category :</label>
+														{{ $post->prof_category }}
+													</div>
+													<div class="col-md-12 col-sm-12 col-xs-12">
+														<label class="detail-label">Skills :</label>														
+														@foreach($post->skills as $skill)
+															{{$skill->name}},
+														@endforeach												 
+													</div>
+													<div class="col-md-12 col-sm-12 col-xs-12">														
+														<label class="detail-label">Salary (<i class="fa fa-rupee (alias)"></i>):</label>														
+														{{ $post->min_sal }}-{{ $post->max_sal }} {{ $post->salary_type }} 
+													</div>
+												</div>
+												<div class="skill-display">Description : </div>
+												{{ $post->job_detail }}
+												@if($post->post_type == 'job')
+												<div class="skill-display">Reference Id : {{ $post->reference_id }} </div>
+												@endif	
+												<div class="skill-display">Post Duration : {{ $post->post_duration }} </div>
+														<div class="skill-display">Contact Details : </div> 
+														<div class="row">
+															@if($post->post_type == 'job' && $post->website_redirect_url != null)
+															<div class="col-md-12 col-sm-12 col-xs-12">
+																	<label class="detail-label"><i class="glyphicon glyphicon-globe" style="color: deepskyblue;"></i> :</label>
+																	{{ $post->website_redirect_url }}
+															</div>
+															@endif
+															@if($post->website_redirect_url == null && $post->contact_person !=null)
+															<div class="col-md-12 col-sm-12 col-xs-12">
+																
+																	<label class="detail-label"><i class="glyphicon glyphicon-user"></i> :</label>
+																
+																	{{ $post->contact_person }}
+																
+															</div>
+															@endif
 
-													<li>Education: {{ $post->education }}</li>
-												</ul>
-												<ul>
-													<li>Job Category: {{ $post->prof_category }}</li>
-												</ul>
-												<ul>
-													<li>Skills:</li>
-														<ol>
-															@foreach($post->skills as $skill)
-																{{$skill->name}}
-															@endforeach
-														</ol>
-												
-												</ul>
-												
-
-												<div class="skill-display">Contact&nbsp;:<br> </div> 
-												<ul>
-
-													<li>
-														<i class="glyphicon glyphicon-envelope" style="color: #13B8D4;font-size: 16px;"></i>&nbsp;: {{ $post->email_id }}
-														@if($post->alt_emailid != null)
-
-														OR {{ $post->alt_emailid }}
-														@endif
-
-													</li>
-												</ul>
-												<ul>
-													<li>
-														<i class="glyphicon glyphicon-earphone" style="color: green;font-size: 16px;"></i>&nbsp;: {{ $post->phone }}
-														@if($post->alt_phone != null)
-														OR {{ $post->alt_phone }}
-														@endif
-													</li>
-												</ul>
+															@if($post->email_id != null && $post->alt_emailid != null && $post->website_redirect_url == null)
+															<div class="col-md-12 col-sm-12 col-xs-12">
+																
+																	<label class="detail-label"><i class="glyphicon glyphicon-envelope"></i> :</label>
+																
+																	
+																	{{ $post->email_id }} - {{ $post->alt_emailid }}
+																
+															</div>	
+															
+															@elseif($post->email_id != null && $post->alt_emailid == null && $post->website_redirect_url == null)
+															<div class="col-md-12 col-sm-12 col-xs-12">
+																
+																	<label class="detail-label"><i class="glyphicon glyphicon-envelope"></i> :</label>
+																
+																	
+																	{{ $post->email_id }}
+																
+															</div>
+															@elseif($post->email_id == null && $post->alt_emailid != null && $post->website_redirect_url == null)
+															<div class="col-md-12 col-sm-12 col-xs-12">
+																
+																	<label class="detail-label"><i class="glyphicon glyphicon-envelope"></i> :</label>
+																
+																		{{ $post->alt_emailid }}
+																 
+															</div>	
+															@endif	
+															@if($post->phone != null && $post->alt_phone != null && $post->website_redirect_url == null)
+															<div class="col-md-12 col-sm-12 col-xs-12">
+																
+																	<label class="detail-label"><i class="glyphicon glyphicon-earphone"></i> :</label>
+																
+																	
+																	{{ $post->phone }} - {{ $post->alt_phone }}
+																 
+															</div>	
+															@elseif($post->phone != null && $post->alt_phone == null && $post->website_redirect_url == null)
+															<div class="col-md-12 col-sm-12 col-xs-12">
+																
+																	<label class="detail-label"><i class="glyphicon glyphicon-earphone"></i> :</label>
+																
+																	
+																	{{ $post->phone }}
+																
+															</div>
+															@elseif($post->phone == null && $post->alt_phone != null && $post->website_redirect_url == null)
+															<div class="col-md-12 col-sm-12 col-xs-12">
+																
+																	<label class="detail-label"><i class="glyphicon glyphicon-earphone"></i> :</label>
+																
+																		{{ $post->alt_phone }}
+																
+															</div>	
+															@endif											
+														</div>
+												<div class="skill-display">Post Id : {{ $post->id }} </div> 
 											</div>
 
 										</div>								
 									</div>
 								</div>
 							</div>
-							<div class="portlet-title">
-								<div class="tools">
-									<a href="javascript:;" class="collapse"></a>
-									<a href="#portlet-config" data-toggle="modal" class="config"></a>
-								</div>
-							</div>
+							<div class="portlet box">
 							<div class="portlet-body">
-								<div class="tabbable-custom nav-justified" >
-									<ul class="nav nav-tabs nav-justified" style="padding-left:0;">
+								<div class="tabbable-custom ">
+									<ul class="nav nav-tabs" style="padding-left:0;">
 										<li class="active">
-											<a href="#tab_1_1_1" data-toggle="tab">Thanks & Share </a>
+											<a href="#tab_{{$var}}_1" data-toggle="tab">
+											Thanks & Share</a>
 										</li>
+										@if($post->post_type == 'skill')
 										<li>
-											<a href="#tab_1_1_2" data-toggle="tab">Applied </a>
+											<a href="#tab_{{$var}}_2" data-toggle="tab">
+											Contacted </a>
 										</li>
+										@endif
+										@if($post->post_type == 'job')
 										<li>
-											<a href="#tab_1_1_2" data-toggle="tab">Contact </a>
-										</li>	
+											<a href="#tab_{{$var}}_3" data-toggle="tab">
+											Applied </a>
+										</li>
+										@endif
 									</ul>
 									<div class="tab-content">
-										<div class="tab-pane active" id="tab_1_1_1">
+										<div class="tab-pane active" id="tab_{{$var}}_1">
 											<div class="portlet light">
 												<div class="portlet-title">
 													<div class="caption">
@@ -178,9 +264,8 @@
 									                </ul>
 												</div>
 											</div>
-
 										</div>
-										<div class="tab-pane" id="tab_1_1_2">
+										<div class="tab-pane" id="tab_{{$var}}_2">
 											<div class="portlet light">
 												<div class="portlet-title">
 													<div class="caption">
@@ -191,7 +276,54 @@
 												</div>
 
 												<div class="portlet-body">													
-													<ul class="dropdown-menu-list scroller" style="height: 275px;" data-handle-color="#637283">
+													<ul class="dropdown-menu-list scroller" data-handle-color="#637283">
+									                  <li style="font-size:15px;">
+									                    <!-- <a href="" > -->
+									                    <span class="photo">
+									                    <img src="{{ asset('/assets/admin/layout3/img/avatar2.jpg') }}" class="img-circle" alt="">
+									                    </span>
+									                    <span class="subject">
+									                    <span class="from" style="font-weight:600;color:darkcyan;">
+									                   Priyanka </span>
+									                    <span class="time"> </span>
+									                    </span>
+									                    <span class="message">
+									                    has contacted you <i class=" icon-clock"></i> Oct 06,2015 13:04 PM </span>
+									                    <!-- </a> -->
+									                  </li>
+									                  <li>
+									                  </li>
+									                  <li style="font-size:15px;">
+									                   <!--  <a href="" > -->
+									                    <span class="photo">
+									                    <img src="{{ asset('/assets/admin/layout3/img/avatar3.jpg') }}" class="img-circle" alt="">
+									                    </span>
+									                    <span class="subject">
+									                    <span class="from" style="font-weight:600;color:darkcyan;">
+									                    Deepak Gupta </span>
+									                    <span class="time"> </span>
+									                    </span>
+									                    <span class="message">
+									                    has contacted you <i class=" icon-clock"></i> Oct 05,2015 13:04 PM  </span>
+									                   <!--  </a> -->
+									                  </li>									                  
+									                </ul>											
+												</div>
+
+											</div>
+										</div>
+										<div class="tab-pane" id="tab_{{$var}}_3">
+											<div class="portlet light">
+												<div class="portlet-title">
+													<div class="caption">
+														<i class="fa fa-gift font-green-sharp"></i>
+														<span class="caption-subject font-green-sharp bold uppercase">Applied:</span>
+														<span class="caption-helper">100</span>
+													</div>		
+												</div>
+
+												<div class="portlet-body">													
+													<ul class="dropdown-menu-list scroller" data-handle-color="#637283">
 									                  <li style="font-size:15px;">
 									                    <!-- <a href="" > -->
 									                    <span class="photo">
@@ -227,9 +359,11 @@
 
 											</div>
 										</div>
-									</div>										
+									</div>
 								</div>
 							</div>
+						</div>
+							
 						</div>
 						<!-- END TIMELINE ITEM -->
 					

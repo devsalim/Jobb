@@ -37,10 +37,13 @@ class CreatePostjobsTable extends Migration {
             $table->string('city')->nullable();
             $table->string('time_for')->nullable();
             $table->string('education')->nullable();
+            //$table->string('website_redirect')->default(0); Company webiste check box for Yes or No
             $table->string('website_redirect_url')->nullable();
             $table->string('salary_type')->nullable();
             $table->string('reference_id')->nullable();
             $table->string('contact_person')->nullable();
+            // $table->string('post_expire')->default(0); Post Expire Button column
+            // $table->string('post_expire_Dt')->nullable();
             $table->foreign('individual_id')->references('id')->on('indusers');
             $table->foreign('corporate_id')->references('id')->on('corpusers');
 			$table->timestamps();
