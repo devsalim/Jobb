@@ -4,12 +4,12 @@
 
 <div class="portlet light bordered">
 	<div class="portlet-title">
-		<div class="caption">
+		<!-- <div class="caption">
 			<i class=""></i>
 			<span class="caption-subject font-blue-hoki bold uppercase">Groups</span>
-		</div>
+		</div> -->
 		<a id="ajax-demo" href="#creat-group" data-toggle="modal" class="config">
-			<span class="btn btn-info btn-sm" style="margin: 5px 20px;border-radius: 25px !important;">Create Group</span>
+			<span class="btn blue btn-sm">Create Group</span>
 		</a> 
 
 		<div class="tools">
@@ -26,7 +26,7 @@
 					<div class="col-md-7" style="">
 
 					<!-- BEGIN FORM-->
-					<form action="{{ url('/group/store') }}" class="horizontal-form" method="post">
+					<!-- <form action="{{ url('/group/store') }}" class="horizontal-form" method="post">
 						<input type="hidden" name="_token" value="{{ csrf_token() }}">
 							<div class="form-group">
 								<div class="input-group">
@@ -40,7 +40,7 @@
 									</span>
 								</div>
 							</div>
-					</form>
+					</form> -->
 					<!-- END FORM-->
 
 						<div class="form-group">					

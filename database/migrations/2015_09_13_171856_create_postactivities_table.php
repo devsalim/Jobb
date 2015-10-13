@@ -18,13 +18,13 @@ class CreatePostactivitiesTable extends Migration {
 			$table->integer('post_id')->unsigned();
             $table->integer('user_id')->unsigned();
             $table->string('thanks');
-            $table->string('thanks_dtTime');
+            $table->dateTime('thanks_dtTime');
             $table->string('contact_view');
-            $table->string('contact_view_dtTime');
+            $table->dateTime('contact_view_dtTime');
             $table->string('fav_post');
-            $table->string('fav_post_dtTime');
+            $table->dateTime('fav_post_dtTime');
             $table->string('apply');
-            $table->string('apply_dtTime');
+            $table->dateTime('apply_dtTime');
             $table->foreign('post_id')->references('id')->on('postjobs');
             $table->foreign('user_id')->references('id')->on('users');
 			$table->timestamps();

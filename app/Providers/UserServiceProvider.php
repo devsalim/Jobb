@@ -24,7 +24,7 @@ class UserServiceProvider extends ServiceProvider {
 			$view->with('session_user', $user);
 		});
 
-		view()->composer('includes.header', function($view){
+		view()->composer('*', function($view){
 			if(Auth::user()->identifier == 1){
 				$applications = Postactivity::with('user', 'post')
 											->join('postjobs', 'postjobs.id', '=', 'postactivities.post_id')
@@ -44,7 +44,7 @@ class UserServiceProvider extends ServiceProvider {
 									      ->orderBy('id', 'desc')
 								          ->get(['id', 'fav_post', 'fav_post_dtTime', 'user_id', 'post_id']);
 			}
-			$view->with('applications', $applications)->with('thanks', $thanks)->with('favourites', $favourites);
+			$view->with('applications', $applications)->with('thanks', $thanks)->with('favourites', $favourites);	
 		});
 	}
 
