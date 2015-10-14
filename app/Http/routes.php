@@ -38,6 +38,7 @@ Route::group(array('before' => 'auth'), function(){
 	Route::post('job/fav', 'JobController@postFav');
 	Route::post('job/apply', 'JobController@postApply');
 	Route::post('job/contact', 'JobController@postContact');
+	Route::post('job/extend', 'JobController@postExtend');
 
 	Route::get('skill', 'SkillController@index');
 	Route::get('skill/create', 'SkillController@create');

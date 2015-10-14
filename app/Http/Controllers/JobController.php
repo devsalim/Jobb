@@ -241,4 +241,37 @@ class JobController extends Controller {
 		}
 	}
 
+	public function postExtend(Request $request){
+		$post = Postjob::findOrFail($request['post_id']);
+		if($post != null && $post->post_duration_extend == 0){
+			$post->post_duration = $post->post_duration + $request['post_duration'];
+			$post->post_duration_extend = 1;
+			$post->save();
+			$newDate = $post->created_at->modify('+'.$post->post_duration.' day');
+			return redirect('/mypost#extend-job-expiry-'.$request['post_id'])
+					->withErrors([
+						'errors' => 'Duration extended successfully. Post will expire on '.$newDate,
+					]);
+		}else if($post != null && $post->post_duration_extend == 1){
+			return redirect('/mypost#extend-job-expiry-'.$request['post_id'])
+					->withErrors([
+						'post_duration' => 'Duration cannot be extended. You have already extended once.',
+					]);
+		}
+
+	}
+
+	public function postExpire(Request $request){
+		$post = Postjob::findOrFail($request['post_id']);
+		if($post != null && $post->post_duration_extend == 0){
+			$post->post_duration = $post->post_duration + $request['post_duration'];
+			$post->post_duration_extend = 1;
+			$post->save();
+			return redirect('/mypost#extend-job-expiry-'.$request['post_id'])
+					->withErrors([
+						'errors' => 'Duration extended successfully. Post will expire in '.$post->post_duration,
+					]);
+		}
+	}
+
 }

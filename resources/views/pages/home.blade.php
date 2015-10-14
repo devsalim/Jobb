@@ -237,7 +237,16 @@
 															</div>	
 															@endif											
 														</div>
-														<div class="skill-display">Post Id&nbsp;: {{ $post->id }} </div> 
+														<div class="skill-display">Post Id&nbsp;: {{ $post->id }} </div>
+
+														 <div class="skill-display">Job expires on:   
+														 <?php 
+														 		$strNew = '+'.$post->post_duration.' day';
+														 		$strOld = $post->created_at;
+														 		$fresh = $strOld->modify($strNew);
+														  ?>
+														 <span class="btn-danger" style="padding: 2px 8px;font-size: 12px;border-radius: 20px !important;">{{$fresh->format("d M Y")}}</span>
+														 </div>
 													</div>
 												</div>
 												<div class="post-{{ $post->post_type }} post-icon-bar">
