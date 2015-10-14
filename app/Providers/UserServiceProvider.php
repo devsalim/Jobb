@@ -24,7 +24,7 @@ class UserServiceProvider extends ServiceProvider {
 			$view->with('session_user', $user);
 		});
 
-		view()->composer('*', function($view){
+		view()->composer('includes.header', function($view){
 			if(Auth::user()->identifier == 1){
 				$applications = Postactivity::with('user', 'post')
 											->join('postjobs', 'postjobs.id', '=', 'postactivities.post_id')

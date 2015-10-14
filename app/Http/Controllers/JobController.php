@@ -128,16 +128,19 @@ class JobController extends Controller {
 			$like->post_id = $request['like'];
 			$like->user_id = Auth::user()->induser_id;
 			$like->thanks = 1;
+			$like->thanks_dtTime = new \DateTime();
 			$like->save();
 			$likeCount = Postactivity::where('post_id', '=', $request['like'])->sum('thanks');
 			return $likeCount;
 		}elseif($like != null && $like->thanks == 0){
 			$like->thanks = 1;
+			$like->thanks_dtTime = new \DateTime();
 			$like->save();
 			$likeCount = Postactivity::where('post_id', '=', $request['like'])->sum('thanks');
 			return $likeCount;
 		}elseif($like != null && $like->thanks == 1){
 			$like->thanks = 0;
+			$like->thanks_dtTime = new \DateTime();
 			$like->save();
 			$likeCount = Postactivity::where('post_id', '=', $request['like'])->sum('thanks');
 			return $likeCount;
