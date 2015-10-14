@@ -27,12 +27,10 @@ class GroupController extends Controller {
 	public function index()
 	{
 		$title = 'group';
-		$groups = Group::with('users')
-					->join('groups_users', 'groups_users.group_id', '=', 'groups.id')
-					->where('groups_users.user_id', '=', Auth::user()->induser_id)
-					->orWhere('groups.admin_id', '=', Auth::user()->induser_id)
-					->groupBy('groups.id')
-					->get(['groups.id', 'groups.group_name']);
+		$groups = Group::leftjoin('groups_users', 'groups_users.group_id', '=', 'groups.id')					
+						->where('groups.admin_id', '=', Auth::user()->induser_id)
+						->orWhere('groups_users.user_id', '=', Auth::user()->induser_id)
+						->get(['groups.id', 'groups.group_name', 'groups.admin_id']);
 		return view('pages.group', compact('groups', 'title'));
 	}
 
@@ -72,7 +70,7 @@ class GroupController extends Controller {
 		$group->group_name = $request['group_name'];
 		$group->admin_id =  Auth::user()->id;
 		$group->save();
-		return redirect('/group/create');	
+		return redirect('/group');	
 	}
 
 	/**
@@ -124,9 +122,9 @@ class GroupController extends Controller {
 	public function detail($id)
 	{		
 		$title = 'group';
-		$users = Induser::join('groups_users', 'groups_users.user_id', '=', 'indusers.id')
-						->join('groups', 'groups.id', '=', 'groups_users.group_id')
+		$users = Induser::leftjoin('groups_users', 'groups_users.user_id', '=', 'indusers.id')
 						->where('groups_users.group_id', '=', $id)
+						->orWhereNull('groups_users.group_id')
 						->get(['indusers.id', 
 							   'indusers.fname', 
 							   'indusers.lname', 
@@ -134,13 +132,13 @@ class GroupController extends Controller {
 							   'indusers.city', 
 							   'indusers.state', 
 							   'indusers.profile_pic',
-							   'groups.id As group_id',
-							   'groups.group_name',
-							   'groups.admin_id',
-							   'groups_users.id as groups_users_id'
+							   'groups_users.id as groups_users_id',
+							   'groups_users.group_id'
 							]);		
 		$connections = Auth::user()->induser->friends->lists('fname', 'id');
-		return view('pages.groupDetail', compact('users', 'title', 'connections'));
+		$group = Group::findOrFail($id);
+		return view('pages.groupDetail', compact('users', 'title', 'connections', 'group'));
+		// return $users;
 	}
 
 	public function addUser(Request $request){

@@ -78,7 +78,7 @@
 									<div class="panel panel-default" style=" position: relative;">
 										<div class="panel-heading">
 											<h4 class="panel-title">
-											<a class="accordion-toggle accordion-toggle-styled" 
+											<a class="accordion-toggle accordion-toggle-styled collapsed" 
 											data-toggle="collapse" data-parent="#accordion{{$var}}" href="#collapse_{{$var}}_{{$var}}"  style="font-size: 15px;font-weight: 600;">
 											Details :</a>	
 											</h4>

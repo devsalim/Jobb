@@ -31,12 +31,14 @@ class UserServiceProvider extends ServiceProvider {
 											->where('postjobs.individual_id', '=', Auth::user()->induser_id)
 											->where('postactivities.apply', '=', 1)
 											->orderBy('postactivities.id', 'desc')
+											->take(5)
 											->get(['postactivities.id', 'postactivities.apply', 'postactivities.apply_dtTime', 'postactivities.user_id', 'postactivities.post_id']);
 				$thanks = Postactivity::with('user', 'post')
 								      ->join('postjobs', 'postjobs.id', '=', 'postactivities.post_id')
 									  ->where('postjobs.individual_id', '=', Auth::user()->induser_id)
 									  ->where('postactivities.thanks', '=', 1)
 								      ->orderBy('postactivities.id', 'desc')
+								      ->take(5)
 								      ->get(['postactivities.id', 'postactivities.thanks', 'postactivities.thanks_dtTime', 'postactivities.user_id', 'postactivities.post_id']);
 				$favourites = Postactivity::with('user')
 									      ->where('fav_post', '=', 1)

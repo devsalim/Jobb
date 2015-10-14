@@ -128,16 +128,19 @@ class JobController extends Controller {
 			$like->post_id = $request['like'];
 			$like->user_id = Auth::user()->induser_id;
 			$like->thanks = 1;
+			$like->thanks_dtTime = new \DateTime();
 			$like->save();
 			$likeCount = Postactivity::where('post_id', '=', $request['like'])->sum('thanks');
 			return $likeCount;
 		}elseif($like != null && $like->thanks == 0){
 			$like->thanks = 1;
+			$like->thanks_dtTime = new \DateTime();
 			$like->save();
 			$likeCount = Postactivity::where('post_id', '=', $request['like'])->sum('thanks');
 			return $likeCount;
 		}elseif($like != null && $like->thanks == 1){
 			$like->thanks = 0;
+			$like->thanks_dtTime = new \DateTime();
 			$like->save();
 			$likeCount = Postactivity::where('post_id', '=', $request['like'])->sum('thanks');
 			return $likeCount;
@@ -154,16 +157,19 @@ class JobController extends Controller {
 			$fav->post_id = $request['fav_post'];
 			$fav->user_id = Auth::user()->induser_id;
 			$fav->fav_post = 1;
+			$fav->fav_post_dtTime = new \DateTime();
 			$fav->save();
 			$favCount = Postactivity::where('user_id', '=', Auth::user()->induser_id)->sum('fav_post');
 			return $favCount;
 		}elseif($fav != null && $fav->fav_post == 0){
 			$fav->fav_post = 1;
+			$fav->fav_post_dtTime = new \DateTime();
 			$fav->save();
 			$favCount = Postactivity::where('user_id', '=', Auth::user()->induser_id)->sum('fav_post');
 			return $favCount;
 		}elseif($fav != null && $fav->fav_post == 1){
 			$fav->fav_post = 0;
+			$fav->fav_post_dtTime = new \DateTime();
 			$fav->save();
 			$favCount = Postactivity::where('user_id', '=', Auth::user()->induser_id)->sum('fav_post');
 			return $favCount;
@@ -180,10 +186,12 @@ class JobController extends Controller {
 			$apply->post_id = $request['apply'];
 			$apply->user_id = Auth::user()->induser_id;
 			$apply->apply = 1;
+			$apply->apply_dtTime = new \DateTime();
 			$apply->save();
 			return "applied";
 		}elseif($apply != null && $apply->apply == 0){
 			$apply->apply = 1;
+			$apply->apply_dtTime = new \DateTime();
 			$apply->save();
 			return "applied";
 		}
@@ -199,10 +207,12 @@ class JobController extends Controller {
 			$contact->post_id = $request['contact'];
 			$contact->user_id = Auth::user()->induser_id;
 			$contact->contact_view = 1;
+			$contact->contact_view_dtTime = new \DateTime();
 			$contact->save();
 			return "contacted";
 		}elseif($contact != null && $contact->contact_view == 0){
 			$contact->contact_view = 1;
+			$contact->contact_view_dtTime = new \DateTime();
 			$contact->save();
 			return "contacted";
 		}

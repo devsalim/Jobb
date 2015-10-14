@@ -8,9 +8,9 @@
 			<i class=""></i>
 			<span class="caption-subject font-blue-hoki bold uppercase">Groups</span>
 		</div>
-		{{-- <a href="{{ url('/group/create') }}">
+		<a href="{{ url('/group/create') }}">
 			<span class="btn btn-info btn-sm" style="margin: 5px 20px;border-radius: 25px !important;">Create Group</span>
-		</a> --}}
+		</a>
 		<div class="tools">
 			<a href="" class="collapse"></a>
 			<a href="#portlet-config" data-toggle="modal" class="config"></a>
@@ -25,7 +25,7 @@
 					<div class="col-md-7" style="">
 
 					<!-- BEGIN FORM-->
-					<form action="{{ url('/group/store') }}" class="horizontal-form" method="post">
+					<!--<form action="{{ url('/group/store') }}" class="horizontal-form" method="post">
 						<input type="hidden" name="_token" value="{{ csrf_token() }}">
 							<div class="form-group">
 								<div class="input-group">
@@ -39,7 +39,7 @@
 									</span>
 								</div>
 							</div>
-					</form>
+					</form>-->
 					<!-- END FORM-->
 
 						<div class="form-group">					

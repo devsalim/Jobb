@@ -14,7 +14,7 @@
 	    	<div class="media-body-left">
 		      <h4 class="media-heading">{{ $user->fname }} {{ $user->lname }}</h4>
 		     	{{ $user->working_at }}<br>
-			 	{{ $user->city }}, {{ $user->state }}
+			 	{{ $user->city }} {{ $user->state }}
 			</div>
 			@if($user->id != Auth::user()->induser_id)
 		 	<div class="media-body-right">
