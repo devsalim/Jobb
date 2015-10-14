@@ -46,7 +46,7 @@ class UserServiceProvider extends ServiceProvider {
 									      ->orderBy('id', 'desc')
 								          ->get(['id', 'fav_post', 'fav_post_dtTime', 'user_id', 'post_id']);
 			}
-			$view->with('applications', $applications)->with('thanks', $thanks)->with('favourites', $favourites);
+			$view->with('applications', $applications)->with('thanks', $thanks)->with('favourites', $favourites);	
 		});
 	}
 

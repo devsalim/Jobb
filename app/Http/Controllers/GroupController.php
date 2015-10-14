@@ -31,7 +31,9 @@ class GroupController extends Controller {
 						->where('groups.admin_id', '=', Auth::user()->induser_id)
 						->orWhere('groups_users.user_id', '=', Auth::user()->induser_id)
 						->get(['groups.id', 'groups.group_name', 'groups.admin_id']);
-		return view('pages.group', compact('groups', 'title'));
+
+		$connections = Auth::user()->induser->friends->lists('fname', 'id');
+		return view('pages.group', compact('groups', 'connections', 'title'));
 	}
 
 	/**
@@ -55,7 +57,8 @@ class GroupController extends Controller {
 							   'groups.id As group_id',
 							   'groups.group_name',
 							   'groups.admin_id'
-							]);		
+							]);	
+
 		return view('pages.group_create', compact('groups', 'title', 'users'));
 	}
 

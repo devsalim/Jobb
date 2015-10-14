@@ -70,7 +70,7 @@
     border-radius: 0 0 4px 4px !important;
     border-top: 1px solid lightgrey;
     position: relative;
-    height: 45px;
+    height: 38px;
 }
 
 .post-job-skill-bar{
@@ -406,7 +406,7 @@ background-color:white;
     float: right;
     right: 35px;
     position: absolute;
-    top: 0px;
+    top:-5px;
     text-align: center;
     line-height: 1.6;
 }
@@ -458,10 +458,11 @@ ul{
     margin: 0 auto;
     float: none;
     display: table;
-    margin-top: -35px;
-    padding: 7px 30px;
+    margin-top: -39px;
+    padding: 8px 30px;
     box-shadow: 0 3px 5px gray;
-    border-radius: 7px !important;
+    border-radius: 5px !important;
+    font-size: 14px;
 }
 
 .media-body, .media-left, .media-right {
@@ -567,4 +568,9 @@ ul{
 
 .hide{
     display: none;
+}
+
+.nav-pills>li.active>a, .nav-pills>li.active>a:focus, .nav-pills>li.active>a:hover{
+    color: #2CC185;
+    background-color: transparent;
 }

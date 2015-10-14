@@ -65,6 +65,8 @@
 <link href="{{ asset('assets/global/plugins/jquery-ui/jquery-ui.min.css') }}" rel="stylesheet"/>
 <!-- <link href="/assets/admin/pages/css/profile.css" rel="stylesheet" type="text/css"/> -->
 <link href="/assets/admin/pages/css/tasks.css" rel="stylesheet" type="text/css"/>
+<!-- <link rel="stylesheet" type="text/css" href="/assets/css/normalize.css" /> -->
+    
 @yield('css')
 
 <style type="css/text" rel="stylesheet">

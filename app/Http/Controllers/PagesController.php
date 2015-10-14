@@ -58,6 +58,10 @@ class PagesController extends Controller {
 		return redirect('login');
 	}
 
+	public function notification(){
+		$title = 'notify_view';
+		return view('pages.notification_view', compact('user', 'title'));
+	}
 	
-
+	
 }

@@ -1,122 +1,120 @@
 @extends('master')
 
 @section('content')
-																			
-	
-@section('css')
-<link rel="stylesheet" type="text/css" href="/assets/css/demo.css" />
-    <link rel="stylesheet" type="text/css" href="/assets/css/tabs.css" />
-    <link rel="stylesheet" type="text/css" href="/assets/css/tabstyles.css" />
-  @stop								
+									
 <label style="font-size: 19px;text-align: center;width: 60%;border-bottom:1px solid darkred;">POST JOB</label>										
+	
 
-<div class="col-md-9">
-<div class="" id="form_wizard">	
-<section>
-	<form action="{{ url('job/store') }}" method="post" id="submit_form" class="form-horizontal">
+<div class="row">
+		<div class="col-md-9" style="margin-top:15px;">
+			<div class="col-md-1"></div>
+		<div class="col-md-11">	
+      <div class="stepwizard col-md-offset-3">
+    <div class="stepwizard-row setup-panel">
+          <div class="stepwizard-step">
+        <a href="#step-1" type="button" class="btn btn-primary btn-circle">1</a>
+        <p>Step 1</p>
+      </div>
+          <div class="stepwizard-step">
+        <a href="#step-2" type="button" class="btn btn-default btn-circle" disabled="disabled">2</a>
+        <p>Step 2</p>
+      </div>
+          <div class="stepwizard-step">
+        <a href="#step-3" type="button" class="btn btn-default btn-circle" disabled="disabled">3</a>
+        <p>Step 3</p>
+      </div>
+       <div class="stepwizard-step">
+        <a href="#step-4" type="button" class="btn btn-default btn-circle" disabled="disabled">4</a>
+        <p>Step 4</p>
+      </div>
+        </div>
+  </div>
+  </div>
+      <form action="{{ url('job/store') }}" method="post" id="submit_form" class="form-horizontal">
 		<input type="hidden" name="_token" value="{{ csrf_token() }}">
-	<div class="tabs tabs-style-linetriangle">
-		<nav>
-			<ul class="steps" role="tablist">
-				<li><a href="#section-linetriangle-1" data-toggle="tab" class="step"><span>Job Details</span></a></li>
-				<li><a href="#section-linetriangle-2" data-toggle="tab" class="step"><span>Education Details</span></a></li>
-				<li><a href="#section-linetriangle-3" data-toggle="tab" class="step"><span>Location</span></a></li>
-				<li><a href="#section-linetriangle-4" data-toggle="tab" class="step"><span>Submit</span></a></li>
-			</ul>
-		</nav>
+    <div class="row setup-content" id="step-1">
+    	 <div class="col-md-12">
+          <div class="col-md-12">
+			<div class="form-group">
+				<label>Job Title</label>
+				<div class="input-group">
+					<span class="input-group-addon"><i class="fa fa-user" style="color:darkcyan;"></i></span>
+					<input type="text" name="post_title" class="form-control" placeholder="Job Title">
+				</div>
+			</div>
+		</div>
+		<div class="col-md-12">
+			<div class="form-group">
+				<label>Job Details</label>
+				<div class="" style=" padding-bottom: 10px;">
+					<textarea name="job_detail" class="wysihtml5 form-control" rows="6"></textarea>
+				</div>
+			</div>
+		</div>
 		
-		<div class="tab-content" style="margin: 20px 0px;">
-			<section class="tab-pane active" id="section-linetriangle-1">
-
-			<div class="col-md-12">
-				<div class="form-group ">
-					<label class="col-md-12">Job Title</label>
-					<div class="input-group">
-						<span class="input-group-addon"><i class="fa fa-user" style="color:darkcyan;"></i></span>
-						<input type="text" name="post_title" class="form-control" placeholder="Job Title">
-					</div>
-				</div>
+		<div class="col-md-5">
+			<div class="form-group">
+				<label>Job Category</label>
+				<div class="input-group">
+				<span class="input-group-addon">
+				<i class="fa fa-university " style="color:darkcyan;"></i>
+				</span>
+				<select class="form-control" name="prof_category">
+					<optgroup label="Accounting">
+					<option value="Accounts/Finance/Tax">Accounts/Finance/Tax</option>
+					<option value="Agent">Agent</option>
+					<option value="Analytics & Business Intelligence">Analytics & Business Intelligence</option>
+					</optgroup>
+					<optgroup label="IT Field">
+					<option value="HR/Administration/IR">HR/Administration/IR</option>
+					<option value="IT Software - Client Server">IT Software - Client Server</option>
+					<option value="IT Software - Mainframe">IT Software - Mainframe</option>
+					<option value="IT Software - Middleware">IT Software - Middleware</option>
+					<option value="IT Software - Mobile">IT Software - Mobile</option>
+					<option value="IT Software - Other">IT Software - Other</option>
+					<option value="IT Software - System Programming">IT Software - System Programming</option>
+					<option value="IT Software - Telecom Software">IT Software - Telecom Software</option>
+					<option value="IT Software - Application Programming">IT Software - Application Programming</option>
+					<option value="IT Software - DBA/Datawarehousing">IT Software - DBA/Datawarehousing</option>
+					<option value="IT Software - E-Commerce">IT Software - E-Commerce</option>
+					<option value="IT Software - ERP/CRM">IT Software - ERP/CRM</option>
+					</optgroup>
+				</select>
 			</div>
-			<div class="col-md-12">
-				<div class="form-group">
-					<label>Job Details</label>
-					<div class="" style=" padding-bottom: 10px;">
-						<textarea name="job_detail" class="form-control autosizeme" rows="3"></textarea>
-					</div>
-				</div>
 			</div>
-			
-			<div class="col-md-5">
-				<div class="form-group">
-					<label>Job Category</label>
-					<div class="input-group">
+		</div>
+		<!--/span-->
+		<div class="col-md-2"></div>
+		<div class="col-md-5">
+			<div class="form-group">
+				<label>Job Role</label>
+				<div class="input-group">
 					<span class="input-group-addon">
-					<i class="fa fa-university " style="color:darkcyan;"></i>
+						<i class="fa fa-university" style="color:darkcyan;"></i>
 					</span>
-					<select class="form-control" name="prof_category">
-						<optgroup label="Accounting">
-						<option value="Accounts/Finance/Tax">Accounts/Finance/Tax</option>
-						<option value="Agent">Agent</option>
-						<option value="Analytics & Business Intelligence">Analytics & Business Intelligence</option>
-						</optgroup>
-						<optgroup label="IT Field">
-						<option value="HR/Administration/IR">HR/Administration/IR</option>
-						<option value="IT Software - Client Server">IT Software - Client Server</option>
-						<option value="IT Software - Mainframe">IT Software - Mainframe</option>
-						<option value="IT Software - Middleware">IT Software - Middleware</option>
-						<option value="IT Software - Mobile">IT Software - Mobile</option>
-						<option value="IT Software - Other">IT Software - Other</option>
-						<option value="IT Software - System Programming">IT Software - System Programming</option>
-						<option value="IT Software - Telecom Software">IT Software - Telecom Software</option>
-						<option value="IT Software - Application Programming">IT Software - Application Programming</option>
-						<option value="IT Software - DBA/Datawarehousing">IT Software - DBA/Datawarehousing</option>
-						<option value="IT Software - E-Commerce">IT Software - E-Commerce</option>
-						<option value="IT Software - ERP/CRM">IT Software - ERP/CRM</option>
-						</optgroup>
+					<select name="role" class="form-control" >
+						<option value="Web Developer">Web Developer</option>
+						<option value="Software Developer">Software Developer</option>
 					</select>
 				</div>
-				</div>
 			</div>
-			<!--/span-->
-			<div class="col-md-2"></div>
-			<div class="col-md-5">
-				<div class="form-group">
-					<label>Job Role</label>
-					<div class="input-group">
-						<span class="input-group-addon">
-							<i class="fa fa-university" style="color:darkcyan;"></i>
-						</span>
-						<select name="role" class="form-control" >
-							<option value="Web Developer">Web Developer</option>
-							<option value="Software Developer">Software Developer</option>
-						</select>
-					</div>
-				</div>
+		</div>
+		<div class="col-md-12">
+			<div class="form-group">
+				<label>Key Skills</label>
+				{{-- <input type="hidden" name="linked_skill" id="select2_sample5" class="form-control select2" value=""> --}}
+				{!! Form::select('skill_list[]', $skills, null, ['id'=>'skill-list', 'class'=>'form-control', 'multiple']) !!}
 			</div>
-			<div class="col-md-5">
-				<div class="form-group">
-					<div class="input-group">
-						<div class="input-icon">
-							 <input type="text" id="skill" name="skill" class="form-control" placeholder="Search for skill...">
-						</div>
-						<span class="input-group-btn">
-							<button id="" class="btn btn-success" type="submit" style=" margin-right: 15px;"><i class="fa fa-arrow-left fa-fw"/></i>Add</button>	
-						</span>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-2"></div>
-			<div class="col-md-5">
-				<div class="form-group">
-				     <input type="text" id="linked_skill" name="linked_skill" 
-				     		class="form-control select2"
-				     		placeholder="List of skills to be added">
-				</div>
-			</div>
-
-			</section>
-			<section class="tab-pane" id="section-linetriangle-2">
-
+		</div>
+		<!--/span-->
+		<div class="col-md-12">
+		<button class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Continue</button>
+        </div>
+        </div>
+        </div>
+    <div class="row setup-content" id="step-2">
+          <!-- <div class="col-xs-6 col-md-offset-3"> -->
+        <div class="col-md-12">
              <div class="col-md-5">
 				<div class="form-group">
 					<label>Company Name</label>
@@ -227,14 +225,14 @@
 			<div class="form-group">
 				
 			</div>
-             
-            
+              <button class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Next</button>
+            </div>
       <!-- </div> -->
-
-			</section>
-			<section class="tab-pane" id="section-linetriangle-3">
-
-				<div class="col-md-5">
+        </div>
+    <div class="row setup-content" id="step-3">
+          <!-- <div class="col-xs-6 col-md-offset-3"> -->
+        <div class="col-md-12">
+              <div class="col-md-5">
 				<div class="form-group">
 					<label>Job Location</label>
 					
@@ -275,7 +273,7 @@
 				</div>
 			</div>
 			<div class="col-md-2"></div>
-			<div class="col-md-5 show-apply-email">
+			<div class="col-md-5">
 				<div class="form-group">
 					<label>Contact Person</label>
 					<div class="input-group">
@@ -297,6 +295,9 @@
 							
 							</span>
 							<input type="text" name="email_id" value="{{ Auth::user()->email }}" class="form-control" placeholder="">
+							<span class="input-group-addon" style="width: 55px;">
+								Public
+							</span>
 							</div>
 						</div>
 					</div>
@@ -310,18 +311,41 @@
 							<i class="icon-call-end" style="color:darkcyan;"></i>
 							</span>
 							<input type="text" name="phone" value="{{ Auth::user()->mobile }}"  class="form-control" placeholder="">
-							
+							<span class="input-group-addon" style="width: 55px;">
+								Private
+							</span>
 							</div>
 						</div>
 					</div>
 					<!--/span-->
 				
 			</div>
-
-			</section>
-			<section class="tab-pane" id="section-linetriangle-4">
-				<?php $var = 1; ?>
-				<div class="portlet light bordered" style="border: none !important;background:transparent">										
+			<div class="form-group">
+			
+			</div>
+              <button class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Next</button>
+           <!--  </div> -->
+      </div>
+        </div>
+        <div class="row setup-content" id="step-4">
+          <!-- <div class="col-xs-6 col-md-offset-3"> -->
+        <div class="col-md-12">
+              <input type="hidden" name="post_type">
+			<div class="form-body">
+				@if(Auth::user()->induser)
+				<div class="row" style="margin-top: -20px;">	
+					<div class="col-md-12">
+						<div class="form-group">
+							<label>Who can see this Post</label>
+							{{-- <input type="hidden" name="tag_friends" id="select2_sample7" class="form-control select2" value="All"> --}}
+							{!! Form::select('connections[]', $connections, null, ['id'=>'connections', 'class'=>'form-control', 'multiple']) !!}
+						</div>
+					</div>
+				</div>
+				@endif				
+			</div>
+			<?php $var = 1; ?>
+			<div class="portlet light bordered" style="border: none !important;background:transparent">										
 				<div class="portlet-body form">
 					<!-- BEGIN FORM-->
 						<div class="form-body">
@@ -339,15 +363,12 @@
 													
 														
 															<i class="icon-pointer"></i>&nbsp;: <p class="form-control-static" data-display="city"></p>
-													
-													
-
 														
 														<br><i class="icon-briefcase"></i>&nbsp;: <p class="form-control-static" data-display="min_exp"></p>-<p class="form-control-static" data-display="max_exp"></p> Years
 														
 														
 													
-													
+												</div>		
 												<div class="post-job-skill-bar">
 													<div class="job"><a class="post-type-class">Job</a></div>
 												</div>
@@ -357,7 +378,7 @@
 												<div class="panel panel-default" style=" position: relative;">
 													<div class="panel-heading">
 														<h4 class="panel-title">
-														<a class="accordion-toggle accordion-toggle-styled collapsed" 
+														<a class="accordion-toggle accordion-toggle-styled" 
 														data-toggle="collapse" data-parent="#accordion{{$var}}" href="#collapse_{{$var}}_{{$var}}"  style="font-size: 15px;font-weight: 600;">
 														Details:</a>	
 														</h4>
@@ -410,53 +431,17 @@
 				</div>
 			</div>	
 		<?php $var++; ?>
+             <button type="submit" class=" btn success button-submit">Submit</button>
             </div>
-
-			</section>
-		</div>
-	<!-- /content -->
-	</div><!-- /tabs -->
-	<div class="form-actions">
-		<div class="row">
-			<div class="col-md-offset-3 col-md-9">
-				<a href="javascript:;" class="btn default button-previous">
-				<i class="m-icon-swapleft"></i> Back </a>
-				<a href="javascript:;" class="btn blue button-next">
-				Continue <i class="m-icon-swapright m-icon-white"></i>
-				</a>
-				<button type="submit" class=" btn blue button-submit">Submit</button>
-			</div>
-		</div>
-	</div>
-	</form>
-</section>
+      <!-- </div> -->
+        </div>
+  </form>	
 </div>
 </div>
 @stop
 
 
 @section('javascript')
-<script src="/assets/modernizr.custom.js"></script>
-<script src="/assets/cbpFWTabs.js"></script>
-<script src="/assets/postjobval.js"></script>
-<script>
-	(function() {
-
-		[].slice.call( document.querySelectorAll( '.tabs' ) ).forEach( function( el ) {
-			new CBPFWTabs( el );
-		});
-
-	})();
-</script>
-<script>
-jQuery(document).ready(function() {       
-   // initiate layout and plugins
-//    Metronic.init(); // init metronic core components
-// Layout.init(); // init current layout
-// Demo.init(); // init demo features
-   FormWizard.init();
-});
-</script>
 <!-- new test code -->
 <script type="text/javascript">
   $(document).ready(function () {
@@ -464,7 +449,6 @@ jQuery(document).ready(function() {
 		  allWells = $('.setup-content'),
 		  allNextBtn = $('.nextBtn');
 
-  
   allWells.hide();
 
   navListItems.click(function (e) {
@@ -504,7 +488,15 @@ jQuery(document).ready(function() {
 });
   </script>
   <!-- new test code end -->
-
+<script>
+jQuery(document).ready(function() {       
+   // initiate layout and plugins
+   Metronic.init(); // init metronic core components
+Layout.init(); // init current layout
+Demo.init(); // init demo features
+   FormWizard.init();
+});
+</script>
 <script>
 jQuery(document).ready(function() {       
    // initiate layout and plugins
@@ -523,7 +515,6 @@ Demo.init(); // init demo features  // set current page
 </script>
 <script type="text/javascript">
     $(function () {
-    	 $("#hide-sal").hide();
         $("#hide-check").click(function () {
             if ($(this).is(":checked")) {
                 $("#hide-sal").show();
@@ -533,15 +524,11 @@ Demo.init(); // init demo features  // set current page
         });
     });
 
-//     $('#skill-list').select2();
-//     $('#linked-skill').select2({
-//   tags: true
-// });
+    $('#skill-list').select2();
     $('#connections').select2();
 </script>
 <script type="text/javascript">
 	 $(function () {
-	 	$(".show-apply").hide();
         $("#hide-apply").click(function () {
             if ($(this).is(":checked")) {
                 $(".show-apply").show();
@@ -553,50 +540,5 @@ Demo.init(); // init demo features  // set current page
             }
         });
     });
-
-	 $(function(){
-
-	 	function split( val ) {
-	      return val.split( /,\s*/ );
-	    }
-	    function extractLast( term ) {
-	      return split( term ).pop();
-	    }
-
-		$( "#skill" )
-		.bind( "keydown", function( event ) {
-			if ( event.keyCode === $.ui.keyCode.TAB && $( this ).autocomplete( "instance" ).menu.active ) {
-			  event.preventDefault();
-			}
-		})
-		.autocomplete({
-			source: function( request, response ) {
-				$.getJSON( "/job/skillSearch", {
-					term: extractLast( request.term )
-				}, response );
-			},
-			search: function() {
-				var term = extractLast( this.value );
-				if ( term.length < 2 ) {
-					return false;
-				}
-			},
-			focus: function() {
-				return false;
-			},
-			select: function(event, ui) {
-				var terms = split( $('#linked_skill').val() );
-				// remove the current input
-				terms.pop();
-				// add the selected item
-				terms.push( ui.item.value );
-				// add placeholder to get the comma-and-space at the end
-				terms.push( "" );
-				$('#linked_skill').val(terms.join( ", " ));
-				$(this).val("");
-				return false;
-			}
-		});
-	});
 </script>
 @stop
