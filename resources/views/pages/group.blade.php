@@ -66,7 +66,7 @@
 						</div>
 						@endforeach
 						@else
-						<div class="col-md-12">					
+						<!-- <div class="col-md-12">					
 									<h3>Networking</h3>
 									<ul class="media-list">
 																						
@@ -91,8 +91,8 @@
 										    		<span class="input-group-btn btn-right">
 														<form action="" method="post">
 															<input type="hidden" name="_token" value="{{ csrf_token() }}">
-															<button type="submit" class="btn btn-danger">
-															<i class="glyphicon glyphicon-trash" style="font-size: 12px;background-color: white;color: black;border-radius: 10px;width: 20px;height: 20px;padding-top: 3px;"></i>
+															<button type="submit" class="btn yellow">
+															<i class="glyphicon glyphicon-edit" style="font-size: 12px;background-color: white;color: black;border-radius: 10px;width: 20px;height: 20px;padding-top: 3px;"></i>
 															</button>
 															<button type="submit" class="btn btn-danger">
 															<i class="glyphicon glyphicon-trash" style="font-size: 12px;background-color: white;color: black;border-radius: 10px;width: 20px;height: 20px;padding-top: 3px;"></i>
@@ -105,7 +105,7 @@
 										  </li>
 										
 									</ul>
-								</div>
+								</div> -->
 						@endif
 					</div>
 				</div>

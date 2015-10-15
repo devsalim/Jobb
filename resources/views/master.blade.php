@@ -61,6 +61,7 @@
 <link href="{{ asset('/assets/global/plugins/ion.rangeslider/css/ion.rangeSlider.css') }}" rel="stylesheet"/>
 <link href="{{ asset('/assets/global/plugins/ion.rangeslider/css/ion.rangeSlider.Metronic.css') }}" rel="stylesheet"/>
 <link href="{{ asset('/assets/custom.css') }}" rel="stylesheet"/>
+<link href="{{ asset('/assets/custom_new.css') }}" rel="stylesheet"/>
 <!-- END PAGE LEVEL STYLES -->
 <link href="{{ asset('assets/global/plugins/jquery-ui/jquery-ui.min.css') }}" rel="stylesheet"/>
 <!-- <link href="/assets/admin/pages/css/profile.css" rel="stylesheet" type="text/css"/> -->

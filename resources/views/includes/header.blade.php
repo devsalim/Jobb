@@ -17,7 +17,14 @@
     <!-- BEGIN PAGE ACTIONS -->
     <!-- DOC: Remove "hide" class to enable the page header actions -->
     <div class="page-actions ">
-    
+      <!-- <form class="search-form search-form-expanded" action="extra_search.html" method="GET">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search..." name="query">
+          <span class="input-group-btn">
+          <a href="javascript:;" class="btn submit"><i class="icon-magnifier"></i></a>
+          </span>
+        </div>
+      </form> -->
       <div class="top-menu">
         <ul class="nav navbar-nav ">
           <!-- BEGIN NOTIFICATION DROPDOWN -->
@@ -90,6 +97,7 @@
               </li>
             </ul>
           </li>
+         
           <!-- END INBOX DROPDOWN -->
           <!-- BEGIN TODO DROPDOWN -->
           <!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
@@ -101,6 +109,9 @@
               
             </a>            
           </li>
+           <!-- <li class="dropdown dropdown-extended dropdown-inbox" id="header_inbox_bar">
+            
+          </li> -->
           <!-- END TODO DROPDOWN -->
           <!-- BEGIN USER LOGIN DROPDOWN -->
           <!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
@@ -109,29 +120,15 @@
         </ul>
         
       </div>
-      <div class="btn-group hide">
-        <button type="button" class="btn btn-circle red-pink dropdown-toggle" data-toggle="dropdown">
-        <span class="hidden-sm hidden-xs">New&nbsp;</span>&nbsp;<i class="fa fa-angle-down"></i>
-        </button>
-        <ul class="dropdown-menu" role="menu">
-          <li>
-            <a class="ajaxify" href="postjobupdate">
-            <i class="icon-user"></i> Job</a>
-          </li>
-          <li>
-            <a href="javascript:;">
-            <i class="icon-present"></i>Skills <span class="badge badge-success">4</span>
-            </a>
-          </li>
-          <li>
-            <a href="javascript:;">
-            <i class="icon-basket"></i> Services </a>
-          </li>
-          
-        </ul>
-      </div>
-      
-      <div class="btn-group" style="margin: 3px 5px;">
+      <form class="search-form search-form-expanded" action="extra_search.html" method="GET">
+              <div class="input-group">
+                <input type="text" class="form-control" placeholder="Search..." name="query">
+                <span class="input-group-btn">
+                <a href="javascript:;" class="btn submit"><i class="icon-magnifier"></i></a>
+                </span>
+              </div>
+            </form>
+      <div class="btn-group" style="margin: 0px 17px;">
         <button type="button" class="btn btn-circle green-haze dropdown-toggle" data-toggle="dropdown">
         <span class="hidden-sm hidden-xs">Post</span> <i class="fa fa-angle-down"></i>
         </button>
@@ -148,7 +145,7 @@
           @endif
         </ul>
       </div>
-
+      
       </div>
     <!-- END PAGE ACTIONS -->
     <!-- BEGIN PAGE TOP -->

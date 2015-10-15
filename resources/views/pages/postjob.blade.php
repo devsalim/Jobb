@@ -8,24 +8,25 @@
     <link rel="stylesheet" type="text/css" href="/assets/css/tabs.css" />
     <link rel="stylesheet" type="text/css" href="/assets/css/tabstyles.css" />
   @stop								
-<label style="font-size: 19px;text-align: center;width: 60%;border-bottom:1px solid darkred;">POST JOB</label>										
 
-<div class="col-md-9">
+
+<div class="col-md-9" style="padding-left: 0px;">
+	<label style="font-size: 19px;text-align: center;width: 100%;border-bottom:1px solid darkred;">Post Job Details</label>										
 <div class="" id="form_wizard">	
 <section>
 	<form action="{{ url('job/store') }}" method="post" id="submit_form" class="form-horizontal">
 		<input type="hidden" name="_token" value="{{ csrf_token() }}">
 	<div class="tabs tabs-style-linetriangle">
 		<nav>
-			<ul class="steps" role="tablist">
-				<li><a href="#section-linetriangle-1" data-toggle="tab" class="step"><span>Job Details</span></a></li>
-				<li><a href="#section-linetriangle-2" data-toggle="tab" class="step"><span>Education Details</span></a></li>
-				<li><a href="#section-linetriangle-3" data-toggle="tab" class="step"><span>Location</span></a></li>
+			<ul role="tablist">
+				<li><a href="#section-linetriangle-1" data-toggle="tab" class="step"><span>Job</span></a></li>
+				<li><a href="#section-linetriangle-2" data-toggle="tab" class="step"><span>Skills</span></a></li>
+				<li><a href="#section-linetriangle-3" data-toggle="tab" class="step"><span>Contact</span></a></li>
 				<li><a href="#section-linetriangle-4" data-toggle="tab" class="step"><span>Submit</span></a></li>
 			</ul>
 		</nav>
 		
-		<div class="tab-content" style="margin: 20px 0px;">
+		<div class="content-wrap tab-content" style="margin: 20px 0px;">
 			<section class="tab-pane active" id="section-linetriangle-1">
 
 			<div class="col-md-12">
@@ -95,30 +96,6 @@
 			</div>
 			<div class="col-md-5">
 				<div class="form-group">
-					<div class="input-group">
-						<div class="input-icon">
-							 <input type="text" id="skill" name="skill" class="form-control" placeholder="Search for skill...">
-						</div>
-						<span class="input-group-btn">
-							<button id="" class="btn btn-success" type="submit" style=" margin-right: 15px;"><i class="fa fa-arrow-left fa-fw"/></i>Add</button>	
-						</span>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-2"></div>
-			<div class="col-md-5">
-				<div class="form-group">
-				     <input type="text" id="linked_skill" name="linked_skill" 
-				     		class="form-control select2"
-				     		placeholder="List of skills to be added">
-				</div>
-			</div>
-
-			</section>
-			<section class="tab-pane" id="section-linetriangle-2">
-
-             <div class="col-md-5">
-				<div class="form-group">
 					<label>Company Name</label>
 					<div class="input-group">
 						<span class="input-group-addon">
@@ -140,6 +117,30 @@
 					</div>
 				</div>
 			</div>
+
+			</section>
+			<section class="tab-pane" id="section-linetriangle-2">
+				<div class="col-md-5">
+				<div class="form-group">
+					<div class="input-group">
+						<div class="input-icon">
+							 <input type="text" id="skill" name="skill" class="form-control" placeholder="Search for skill...">
+						</div>
+						<span class="input-group-btn">
+							<button id="" class="btn btn-success" type="submit" style=" margin-right: 15px;"><i class="fa fa-arrow-left fa-fw"/></i>Add</button>	
+						</span>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-2"></div>
+			<div class="col-md-5">
+				<div class="form-group">
+				     <input type="text" id="linked_skill" name="linked_skill" 
+				     		class="form-control select2"
+				     		placeholder="List of skills to be added">
+				</div>
+			</div>
+             
 			<div class="col-md-5">
 				<div class="form-group">
 					<label> Required Education</label>
@@ -195,8 +196,8 @@
 					<input type="text" style="width: 14px;margin:0 4px;background:transparent;border:0" name="max_exp" class="max-exp">Years
 					<div class="">
 						<input id="range_1" type="text"  value=""/>
-						<!-- <input type="hidden" name="min_exp" class="min-exp">
-						<input type="hidden" name="max_exp" class="max-exp"> -->
+						<input type="hidden" name="min_exp" class="min-exp">
+						<input type="hidden" name="max_exp" class="max-exp">
 					</div>
 				</div>
 			</div>
@@ -204,22 +205,22 @@
 			<div class="col-md-2"></div>
 			<div class="col-md-5">
 				<div class="form-group">							
-					<label class=" control-label"><input type="checkbox" id="hide-check">&nbsp;Salary 
-					</label>&nbsp;:<select name="salary-type" style="border-top: 0px;border-left: 0;border-right: 0;">									
+					<label class=" control-label"><input type="checkbox" id="hide-check">&nbsp;Salary </label>&nbsp;:
+					<select name="salary-type" style="border-top: 0px;border-left: 0;border-right: 0;">									
 							<option value="Monthly">Monthly</option>
 							<option value="Weekly">Weekly</option>
 							<option value="Daily">Daily</option>
 							<option value="Hourly">Hourly</option>
 							<option value="Per Visit">Per Visit</option>	
 						</select>
-					 <i class="fa fa-rupee (alias)"></i>&nbsp;<input type="text" style="width: 30px;margin:0 6px;background:transparent;border:0" name="min_sal" class="min-sal">-
-					<input type="text" style="width:40px;margin:0 4px;background:transparent;border:0" name="max_sal" class="max-sal">&nbsp;
+					 <i class="fa fa-rupee (alias)"></i>&nbsp;<!-- <input type="text" style="width: 30px;margin:0 6px;background:transparent;border:0" name="min_sal" class="min-sal">-
+					<input type="text" style="width:40px;margin:0 4px;background:transparent;border:0" name="max_sal" class="max-sal">&nbsp; -->
 					
 					<div id="hide-sal" class="">
 						<input id="range_7" type="text"  value=""/>
 						<!-- <label name="min_sal" class="min-sal"></label> -->
-						<!-- <input type="hidden" name="min_sal" class="min-sal">
-						<input type="hidden" name="max_sal" class="max-sal"> -->
+						<input type="hidden" name="min_sal" class="min-sal">
+						<input type="hidden" name="max_sal" class="max-sal">
 					</div>
 				</div>
 			</div>
@@ -321,7 +322,7 @@
 			</section>
 			<section class="tab-pane" id="section-linetriangle-4">
 				<?php $var = 1; ?>
-				<div class="portlet light bordered" style="border: none !important;background:transparent">										
+				<div class="portlet light bordered" style="padding: 12px 25px 15px 25px;">										
 				<div class="portlet-body form">
 					<!-- BEGIN FORM-->
 						<div class="form-body">
@@ -338,12 +339,7 @@
 													<!-- </span> -->
 													
 														
-															<i class="icon-pointer"></i>&nbsp;: <p class="form-control-static" data-display="city"></p>
-													
-													
-
-														
-														<br><i class="icon-briefcase"></i>&nbsp;: <p class="form-control-static" data-display="min_exp"></p>-<p class="form-control-static" data-display="max_exp"></p> Years
+															<i class="icon-pointer"></i>&nbsp;: <p class="form-control-static" data-display="city"></p><i class="icon-briefcase"></i>&nbsp;: <p class="form-control-static" data-display="min_exp"></p>-<p class="form-control-static" data-display="max_exp"></p> Years
 														
 														
 													
