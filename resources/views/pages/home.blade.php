@@ -95,8 +95,8 @@
 											<div class="panel panel-default" style=" position: relative;">
 												<div class="panel-heading">
 													<h4 class="panel-title">
-													<a class="accordion-toggle accordion-toggle-styled" 
-													data-toggle="collapse" data-parent="#accordion{{$var}}" href="#collapse_{{$var}}_{{$var}}"  style="font-size: 15px;font-weight: 600;">
+													<a class="accordion-toggle accordion-toggle-styled collapsed" 
+													data-toggle="collapse" data-parent="#accordion{{$var}}" href="#collapse_{{$var}}_{{$var}}"  style="font-size: 15px;font-weight: 600;" >
 													Details: </a>	
 													</h4>
 												</div>
@@ -231,7 +231,16 @@
 															</div>	
 															@endif											
 														</div>
-														<div class="skill-display">Post Id&nbsp;: {{ $post->id }} </div> 
+														<div class="skill-display">Post Id&nbsp;: {{ $post->id }} </div>
+
+														 <div class="skill-display">Job expires on:   
+														 <?php 
+														 		$strNew = '+'.$post->post_duration.' day';
+														 		$strOld = $post->created_at;
+														 		$fresh = $strOld->modify($strNew);
+														  ?>
+														 <span class="btn-danger" style="padding: 2px 8px;font-size: 12px;border-radius: 20px !important;">{{$fresh->format("d M Y")}}</span>
+														 </div>
 													</div>
 												</div>
 												<div class="post-{{ $post->post_type }} post-icon-bar">

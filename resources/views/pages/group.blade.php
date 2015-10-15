@@ -7,12 +7,24 @@
 		<!-- <div class="caption">
 			<i class=""></i>
 			<span class="caption-subject font-blue-hoki bold uppercase">Groups</span>
+
+		</div>
+		<a href="{{ url('/group/create') }}">
+			<span class="btn btn-info btn-sm" style="margin: 5px 20px;border-radius: 25px !important;">Create Group</span>
+		</a>
+		<div class="tools">
+			<a href="" class="collapse"></a>
+			<a href="#portlet-config" data-toggle="modal" class="config"></a>
+			<a href="" class="reload"></a>
+			<a href="" class="remove"></a>
+		</div>
+
 		</div> -->
 		<a id="ajax-demo" href="#creat-group" data-toggle="modal" class="config" style="text-decoration: none;">
 			<i class="icon-plus" style="font-size:22px;color: salmon;"></i> 
 		</a> 
 		<label style="font-size: 16px;">Create New Group</label>
-		
+
 	</div>
 	<div class="portlet-body form">
 		
@@ -21,7 +33,9 @@
 					<div class="col-md-7" style="">
 
 					<!-- BEGIN FORM-->
+
 					<!-- <form action="{{ url('/group/store') }}" class="horizontal-form" method="post">
+
 						<input type="hidden" name="_token" value="{{ csrf_token() }}">
 							<div class="form-group">
 								<div class="input-group">
@@ -35,7 +49,9 @@
 									</span>
 								</div>
 							</div>
-					</form> -->
+
+					</form>-->
+
 					<!-- END FORM-->
 
 						<div class="form-group">					
@@ -116,34 +132,34 @@
 
 <!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
 <div class="modal fade" id="creat-group" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-    	<form action="{{ url('/group/store') }}" class="horizontal-form" method="post">
-						<input type="hidden" name="_token" value="{{ csrf_token() }}">
-     <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-        <h4 class="modal-title">New Group</h4>
-      </div>
-      <div class="modal-body">
-      <div class="form-group">
-          <div class="input-group">
-          <span class="input-group-addon">
-          <i class="icon-call-end" style="color:darkcyan;"></i>
-          </span>
-          <input type="text" name="group_name" class="form-control" placeholder="Create Group">
-          </div>
-        </div>
-      {!! Form::select('users[]', $connections, null, ['id'=>'connections', 'class'=>'form-control select2', 'multiple']) !!}
-      </div>
-      <div class="modal-footer">
-        <button type="submit" class="btn btn-success">Create</button>
-        <button type="button" class="btn default" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-</form>
-    <!-- /.modal-content -->
-  </div>
-  <!-- /.modal-dialog -->
+  	<div class="modal-dialog">
+	    <div class="modal-content">
+	    	<form action="{{ url('/group/store') }}" class="horizontal-form" method="post">
+				<input type="hidden" name="_token" value="{{ csrf_token() }}">
+		     	<div class="modal-header">
+			        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+			        <h4 class="modal-title">New Group</h4>
+			     </div>
+				<div class="modal-body">
+					<div class="form-group">
+						<div class="input-group">
+							<span class="input-group-addon">
+								<i class="icon-call-end" style="color:darkcyan;"></i>
+							</span>
+							<input type="text" name="group_name" class="form-control" placeholder="Create Group">
+						</div>
+					</div>
+	      			{!! Form::select('users[]', $connections, null, ['id'=>'connections', 'class'=>'form-control select2', 'multiple']) !!}
+	     		</div>
+				<div class="modal-footer">
+					<button type="submit" class="btn btn-success">Create</button>
+					<button type="button" class="btn default" data-dismiss="modal">Close</button>
+				</div>
+			</form>
+		</div>
+	    <!-- /.modal-content -->
+ 	</div>
+  	<!-- /.modal-dialog -->
 </div>
 <!-- /.modal -->
 <!-- END SAMPLE PORTLET CONFIGURATION MODAL FORM-->

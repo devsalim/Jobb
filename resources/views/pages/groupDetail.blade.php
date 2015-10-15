@@ -6,7 +6,7 @@
 	<div class="portlet-title">
 		<div class="caption">
 			<i class=""></i>
-			<span class="caption-subject font-blue-hoki bold uppercase">Group: {{$users->first()->group_name}}</span>
+			<span class="caption-subject font-blue-hoki bold uppercase">Group: {{$group->group_name}}</span>
 		</div>
 		<div class="tools">
 			<a href="" class="collapse"></a>
@@ -24,7 +24,7 @@
 				<div class="form-group">
 					<div class="input-group">
 						<div class="input-icon">
-							<input type="hidden" name="id" value="{{$users->first()->group_id}}" />
+							<input type="hidden" name="id" value="{{$group->id}}" />
 							{!! Form::select('users[]', $connections, null, ['id'=>'connections', 'class'=>'form-control', 'multiple']) !!}
 						</div>
 						<span class="input-group-btn">
@@ -42,6 +42,7 @@
 				<div class="col-md-12" style="">
 					<h4>List of members</h4><br/>
 					<ul class="media-list">
+					@if(count($users) > 0)
 					@foreach($users as $user)							
 						  <li class="media">
 						    <div class="media-left">
@@ -64,6 +65,7 @@
 							 </div>
 							 <div class="media-body-right">
 							 	<span class="input-group-btn btn-right">
+							 	@if($group->id = $user->group_id)
 								<form action="{{ url('/group/deleteuser') }}" method="post">
 									<input type="hidden" name="_token" value="{{ csrf_token() }}">
 									<input type="hidden" name="id" value="{{$user->groups_users_id}}">
@@ -71,12 +73,16 @@
 									<button type="submit" class="btn btn-danger">
 									<i class="glyphicon glyphicon-trash" style="font-size: 12px;background-color: white;color: black;border-radius: 10px;width: 20px;height: 20px;padding-top: 3px;"></i>
 									</button>
-								</form>								
+								</form>
+								@endif								
 							</span>								 	
 							 </div>
 						    </div>
 						  </li>								
 					@endforeach
+					@else
+					<li>No user</li>
+					@endif
 					</ul>
 				</div>
 			</div>

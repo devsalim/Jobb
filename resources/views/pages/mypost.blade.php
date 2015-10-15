@@ -44,8 +44,9 @@
 									</div>
 									<div class="row" style="margin-top: 15px;">
 										<div class="col-md-6 col-sm-3 col-xs-12">
-											<div class="">Post Expires in: {{ $post->post_duration }} days  <a href="javascript:;" class="btn btn-sm extend-expire">
-											  Extend</a></div>
+											<div class="">Post Expires in: {{ $post->post_duration }} days  
+												<a href="#extend-job-expiry-{{ $post->id }}" data-toggle="modal" class="btn btn-sm extend-expire">Extend</a>
+											</div>
 										</div>
 										<div class="col-md-3 col-sm-3 col-xs-12">
 											<a class="btn btn-sm red extend-expire" data-toggle="modal" href="#small">Expire</a>
@@ -78,7 +79,7 @@
 									<div class="panel panel-default" style=" position: relative;">
 										<div class="panel-heading">
 											<h4 class="panel-title">
-											<a class="accordion-toggle accordion-toggle-styled" 
+											<a class="accordion-toggle accordion-toggle-styled collapsed" 
 											data-toggle="collapse" data-parent="#accordion{{$var}}" href="#collapse_{{$var}}_{{$var}}"  style="font-size: 15px;font-weight: 600;">
 											Details :</a>	
 											</h4>
@@ -390,6 +391,57 @@
 
 				</div>	
 				<!-- END TIMELINE ITEM -->
+
+<!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+<div class="modal fade" id="extend-job-expiry-{{ $post->id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+    	<form action="{{ url('/job/extend') }}" class="horizontal-form" method="post">
+			<input type="hidden" name="_token" value="{{ csrf_token() }}">
+			<input type="hidden" name="post_id" value="{{ $post->id }}">
+		     <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+		        <h4 class="modal-title">Extend Post expiry date</h4>
+		      </div>
+		      <div class="modal-body">
+		      		@if (count($errors) > 0)
+						<div class="alert alert-danger">
+							<ul>
+								@foreach ($errors->all() as $error)
+									<li>{{ $error }}</li>
+								@endforeach
+							</ul>
+						</div>
+					@endif
+					<div class="form-group">
+						<label>Post Duration</label>
+						<div class="input-group">
+							<span class="input-group-addon">
+							<i class="icon-clock" style=" color: darkcyan;"></i>
+							</span>
+							<select name="post_duration" class="form-control" >						
+								<option value="3">3 Days</option>
+								<option value="7">7 Days</option>
+								<option value="15">15 Days</option>
+								<option value="30">30 Days</option>
+							</select>
+						</div>
+				</div>
+		      </div>
+		      <div class="modal-footer">
+		        <button type="submit" class="btn btn-success">Update</button>
+		        <button type="button" class="btn default" data-dismiss="modal">Close</button>
+		      </div>
+		</form>
+	</div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+
+
+
 			 <?php $var++; ?>
 	 @endforeach
 	 @else
@@ -399,6 +451,7 @@
 		</div>
 	</div>
 </div>
+
 
 @stop
 
