@@ -533,3 +533,7 @@ ul{
     color: #2CC185;
     background-color: transparent;
 }
+
+.selectpicker {
+    max-width: 256px;
+}

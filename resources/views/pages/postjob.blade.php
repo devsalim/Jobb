@@ -122,14 +122,15 @@
 			<section class="tab-pane" id="section-linetriangle-2">
 				<div class="col-md-5">
 				<div class="form-group">
+					<form action="{{ url('job/newskill') }}" id="newskillfrm" method="post">					
+					<input type="hidden" name="_token" value="{{ csrf_token() }}">
 					<div class="input-group">
-						<div class="input-icon">
-							 <input type="text" id="skill" name="skill" class="form-control" placeholder="Search for skill...">
-						</div>
+						<input type="text" name="name" id="newskill" class="form-control" placeholder="Search for skill...">
 						<span class="input-group-btn">
-							<button id="" class="btn btn-success" type="submit" style=" margin-right: 15px;"><i class="fa fa-arrow-left fa-fw"/></i>Add</button>	
+							<button id="add-new-skill" class="btn btn-success" type="button"><i class="fa fa-arrow-left fa-fw"/></i>Add</button>	
 						</span>
 					</div>
+					</form>
 				</div>
 			</div>
 			<div class="col-md-2"></div>
@@ -503,23 +504,18 @@ jQuery(document).ready(function() {
 
 <script>
 jQuery(document).ready(function() {       
-   // initiate layout and plugins
-   Metronic.init(); // init metronic core components
-Layout.init(); // init current layout
-Demo.init(); // init demo features  // set current page
-   ComponentsIonSliders.init();
-});
-</script>
-<script>
-	jQuery(document).ready(function() { 
-	    
-	    ComponentsDropdowns.init();
-	    ComponentsEditors.init();
-	});   
+	// initiate layout and plugins
+	Metronic.init(); // init metronic core components
+	Layout.init(); // init current layout
+	Demo.init(); // init demo features  // set current page
+	ComponentsIonSliders.init();    
+	ComponentsDropdowns.init();
+	ComponentsEditors.init();
+});   
 </script>
 <script type="text/javascript">
     $(function () {
-    	 $("#hide-sal").hide();
+    	$("#hide-sal").hide();
         $("#hide-check").click(function () {
             if ($(this).is(":checked")) {
                 $("#hide-sal").show();
@@ -559,7 +555,7 @@ Demo.init(); // init demo features  // set current page
 	      return split( term ).pop();
 	    }
 
-		$( "#skill" )
+		$( "#newskill" )
 		.bind( "keydown", function( event ) {
 			if ( event.keyCode === $.ui.keyCode.TAB && $( this ).autocomplete( "instance" ).menu.active ) {
 			  event.preventDefault();
@@ -594,5 +590,36 @@ Demo.init(); // init demo features  // set current page
 			}
 		});
 	});
+
+
+$(document).ready(function(){
+	$('#add-new-skill').on('click',function(event){  	    
+	  	event.preventDefault();
+	  	var formData = $('#newskill').serialize(); 
+	    $.ajaxSetup({
+			headers: {
+				'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+			}
+		});
+	    $.ajax({
+	      url: "{{ url('job/newskill') }}",
+	      type: "POST",
+	      data: formData,
+	      cache : false,
+	      success: function(data){
+	        if(data == 'added'){
+	        	$newSkill = $('#newskill').val();
+	        	$selectedSkill = $('#linked_skill').val();
+	        	$('#linked_skill').val($selectedSkill+""+$newSkill+", ");
+	        	$('#newskill').val("");
+	        }
+	      },
+	      error: function(data) {
+	      	alert('some error occured...');
+	      }
+	    }); 
+	    return false;
+	  });
+});
 </script>
 @stop

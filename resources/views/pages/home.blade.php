@@ -142,13 +142,25 @@
 																 
 															</div>
 														</div>
-														
+														<?php 
+													 		$strNew = '+'.$post->post_duration.' day';
+													 		$strOld = $post->created_at;
+													 		$fresh = $strOld->modify($strNew);
+
+													 		$currentDate = new \DateTime();
+													 		$expiryDate = new \DateTime($fresh);
+													 		$difference = $currentDate->diff($expiryDate);
+													 		$remainingDays = $difference->format('%d');
+													  	?>
+
 														<div class="skill-display">Description : </div>
 														{{ $post->job_detail }}
 														
 														@if($post->post_type == 'job')
 														<div class="skill-display">Reference Id&nbsp;: {{ $post->reference_id }} </div>	
 														@endif
+
+														@if($remainingDays > 0)
 														<div class="skill-display">Contact Details : </div> 
 														<div class="row">
 															@if($post->post_type == 'job' && $post->website_redirect_url != null)
@@ -231,16 +243,18 @@
 															</div>	
 															@endif											
 														</div>
+														@endif
 														<div class="skill-display">Post Id&nbsp;: {{ $post->id }} </div>
 
-														 <div class="skill-display">Job expires on:   
-														 <?php 
-														 		$strNew = '+'.$post->post_duration.' day';
-														 		$strOld = $post->created_at;
-														 		$fresh = $strOld->modify($strNew);
-														  ?>
-														 <span class="btn-danger" style="padding: 2px 8px;font-size: 12px;border-radius: 20px !important;">{{$fresh->format("d M Y")}}</span>
-														 </div>
+														@if($remainingDays > 0)
+															 <div class="skill-display">Job expires on: 										 
+															 <span class="btn-success" style="padding: 2px 8px;font-size: 12px;border-radius: 20px !important;">{{$fresh->format("d M Y")}}</span>
+															 </div>
+														 @else
+															 <div class="skill-display">Job expired on: 										 
+															 <span class="btn-danger" style="padding: 2px 8px;font-size: 12px;border-radius: 20px !important;">{{$fresh->format("d M Y")}}</span>
+															 </div>
+														@endif
 													</div>
 												</div>
 												<div class="post-{{ $post->post_type }} post-icon-bar">

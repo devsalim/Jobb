@@ -49,8 +49,10 @@
 											</div>
 										</div>
 										<div class="col-md-3 col-sm-3 col-xs-12">
-											<a class="btn btn-sm red extend-expire" data-toggle="modal" href="#small">Expire</a>
-											<div class="modal fade bs-modal-sm" id="small" tabindex="-1" role="dialog" aria-hidden="true">
+											<a class="btn btn-sm red extend-expire" data-toggle="modal" href="#expire">
+												Expire
+											</a>
+											<div class="modal fade bs-modal-sm" id="expire" tabindex="-1" role="dialog" aria-hidden="true">
 												<div class="modal-dialog modal-sm">
 													<div class="modal-content">
 														<div class="modal-header">
@@ -58,11 +60,15 @@
 															<h4 class="modal-title"><i class="glyphicon glyphicon-exclamation-sign" style="font-size: 16px;color: firebrick;"></i> Are you sure</h4>
 														</div>
 														<div class="modal-body">
-															 You want to expire this post?
+															 Do you want to expire this post?
 														</div>
-														<div class="modal-footer">
-															<button type="button" class="btn default" data-dismiss="modal">No</button>
-															<button type="button" class="btn blue">Yes</button>
+														<div class="modal-footer">		
+															<form action="{{ url('job/expire') }}" method="post">				
+																<input type="hidden" name="_token" value="{{ csrf_token() }}">
+																<input type="hidden" name="post_id" value="{{$post->id}}">					
+																<button type="submit" class="btn blue">Yes</button>
+																<button type="button" class="btn default" data-dismiss="modal">No</button>
+															</form>															
 														</div>
 													</div>
 													<!-- /.modal-content -->

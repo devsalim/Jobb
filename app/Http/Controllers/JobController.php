@@ -225,8 +225,9 @@ class JobController extends Controller {
 		$results = array();
 		
 		$queries = DB::table('skills')
-			->where('name', 'LIKE', '%'.$term.'%')
-			->take(5)->get();
+					 ->where('name', 'LIKE', '%'.$term.'%')
+					 ->where('status', '=', 1)
+					 ->take(5)->get();
 		
 		foreach ($queries as $query){
 		    $results[] = [ 'id' => $query->id, 'value' => $query->name ];
@@ -234,9 +235,10 @@ class JobController extends Controller {
 		return Response::json($results);
 	}
 
-	public function addNewSkills(){
+	public function addNewSkills(Request $request){
 		if($request->ajax()){
-			Skills::create(Input::get('skill'));	
+			Skills::create($request->all());
+			return 'added';
 		}
 	}
 
@@ -262,14 +264,16 @@ class JobController extends Controller {
 
 	public function postExpire(Request $request){
 		$post = Postjob::findOrFail($request['post_id']);
-		if($post != null && $post->post_duration_extend == 0){
-			$post->post_duration = $post->post_duration + $request['post_duration'];
-			$post->post_duration_extend = 1;
+		if($post != null){
+
+			$createdDate = new \DateTime($post->created_at);
+			$currentDate = new \DateTime();
+
+			$difference = $currentDate->diff($createdDate);
+
+			$post->post_duration = $difference->format('%d');
 			$post->save();
-			return redirect('/mypost#extend-job-expiry-'.$request['post_id'])
-					->withErrors([
-						'errors' => 'Duration extended successfully. Post will expire in '.$post->post_duration,
-					]);
+			return redirect('/mypost');
 		}
 	}
 
