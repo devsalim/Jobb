@@ -144,7 +144,7 @@ Page Header
   background: #4d5b69;
 }
 .page-header.navbar .search-form {
-  background: #fff;
+  background: lightblue;
 }
 .page-header.navbar .search-form .input-group .form-control {
   color: #7f96ac;

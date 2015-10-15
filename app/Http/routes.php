@@ -78,6 +78,7 @@ Route::group(array('before' => 'auth'), function(){
 	Route::get('notification_view', 'PagesController@notification');
 	Route::get('notification_view/notification', 'PagesController@notification');
 	Route::get('notification_view/notificationThanks', 'PagesController@notificationThanks');
+	
 });
 
 

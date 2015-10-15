@@ -229,8 +229,7 @@ class JobController extends Controller {
 
 	public function addNewSkills(){
 		if($request->ajax()){
-			Skills::create(Input::get('skill'));
-			
+			Skills::create(Input::get('skill'));	
 		}
 	}
 

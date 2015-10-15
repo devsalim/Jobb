@@ -13,11 +13,11 @@
 
 .tabs {
 	position: relative;
-	overflow: hidden;
-	margin: 0 auto;
-	width: 100%;
-	font-weight: 300;
-	font-size: 1.25em;
+    /* overflow: hidden; */
+    margin: 0px 7px;
+    width: 100%;
+    font-weight: 300;
+    font-size: 1.25em;
 }
 
 /* Nav */
