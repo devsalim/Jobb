@@ -324,6 +324,7 @@ jQuery(document).ready(function() {
    Demo.init(); // init demo features
 });
 </script>
+
 @yield('javascript')
 
 <!-- END JAVASCRIPTS -->

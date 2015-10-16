@@ -212,8 +212,8 @@
   </div>
 </div>
 <!-- END SIDEBAR1-->
-<script>
-$(function () {
+<script type="text/javascript">
+$(function() {
         $(".toggle-disp").click(function () {
                 $(".nav-disp").show();   
         });
