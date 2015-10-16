@@ -249,7 +249,7 @@ class JobController extends Controller {
 			$post->post_duration_extend = 1;
 			$post->save();
 			$newDate = $post->created_at->modify('+'.$post->post_duration.' day');
-			return redirect('/mypost#extend-job-expiry-'.$request['post_id'])
+			return redirect('/mypost')
 					->withErrors([
 						'errors' => 'Duration extended successfully. Post will expire on '.$newDate,
 					]);
