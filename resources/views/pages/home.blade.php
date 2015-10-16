@@ -269,6 +269,7 @@
 														@endif
 													</div>
 												</div>
+												@if($remainingDays > 0)
 												<div class="post-{{ $post->post_type }} post-icon-bar">
 													<form action="/job/like" method="post" id="post-{{$post->id}}" data-id="{{$post->id}}">						
 														<input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -348,6 +349,13 @@
 													</div>
 												</div>
 											</div>
+											@else
+											<div class="post-job post-icon-bar">
+												<button type="button" class="btn btn-sm bg-grey-steel expire-btn" disabled="true">
+															Expired
+														</button>
+											</div>
+											@endif
 											</div>
 										</div>
 									</div>

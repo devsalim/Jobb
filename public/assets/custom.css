@@ -465,6 +465,17 @@ ul{
     font-size: 14px;
 }
 
+.expire-btn{
+    margin: 0 auto;
+    float: none;
+    display: table;
+    margin-top: -4px;
+    padding: 8px 30px;
+    box-shadow: 0 3px 5px gray;
+    border-radius: 5px !important;
+    font-size: 14px;
+}
+
 .media-body, .media-left, .media-right {
     display: table;
     float: left;
