@@ -161,10 +161,14 @@
 
 													 		$currentDate = new \DateTime();
 													 		$expiryDate = new \DateTime($fresh);
-													 		$difference = $currentDate->diff($expiryDate);
-													 		$remainingDays = $difference->format('%d');
+													 		// $difference = $expiryDate->diff($currentDate);
+													 		// $remainingDays = $difference->format('%d');
+													 		if($currentDate >= $fresh){
+													 			$expired = 1;
+													 		}else{
+													 			$expired = 0;
+													 		}
 													  	?>
-
 														<div class="skill-display">Description : </div>
 														{{ $post->job_detail }}
 														
@@ -172,7 +176,7 @@
 														<div class="skill-display">Reference Id&nbsp;: {{ $post->reference_id }} </div>	
 														@endif
 
-														@if($remainingDays > 0)
+														@if($expired != 1)
 														<div class="skill-display">Contact Details : </div> 
 														<div class="row">
 															@if($post->post_type == 'job' && $post->website_redirect_url != null)
@@ -258,7 +262,7 @@
 														@endif
 														<div class="skill-display">Post Id&nbsp;: {{ $post->id }} </div>
 
-														@if($remainingDays > 0)
+														@if($expired != 1)
 															 <div class="skill-display">Post expires on: 										 
 															 <span class="btn-success" style="padding: 2px 8px;font-size: 12px;border-radius: 20px !important;">{{$fresh->format("d M Y")}}</span>
 															 </div>
@@ -269,7 +273,7 @@
 														@endif
 													</div>
 												</div>
-												@if($remainingDays > 0)
+												@if($expired != 1)
 												<div class="post-{{ $post->post_type }} post-icon-bar">
 													<form action="/job/like" method="post" id="post-{{$post->id}}" data-id="{{$post->id}}">						
 														<input type="hidden" name="_token" value="{{ csrf_token() }}">

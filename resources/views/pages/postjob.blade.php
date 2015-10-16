@@ -537,8 +537,7 @@ jQuery(document).ready(function() {
         $("#hide-apply").click(function () {
             if ($(this).is(":checked")) {
                 $(".show-apply").show();
-                $(".show-apply-email").hide();
-                 
+                $(".show-apply-email").hide();                 
             } else {
                 $(".show-apply-email").show();
                 $(".show-apply").hide();
@@ -551,6 +550,7 @@ jQuery(document).ready(function() {
 	 	function split( val ) {
 	      return val.split( /,\s*/ );
 	    }
+
 	    function extractLast( term ) {
 	      return split( term ).pop();
 	    }
@@ -595,31 +595,36 @@ jQuery(document).ready(function() {
 $(document).ready(function(){
 	$('#add-new-skill').on('click',function(event){  	    
 	  	event.preventDefault();
-	  	var formData = $('#newskill').serialize(); 
-	    $.ajaxSetup({
-			headers: {
-				'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-			}
-		});
-	    $.ajax({
-	      url: "{{ url('job/newskill') }}",
-	      type: "POST",
-	      data: formData,
-	      cache : false,
-	      success: function(data){
-	        if(data == 'added'){
-	        	$newSkill = $('#newskill').val();
-	        	$selectedSkill = $('#linked_skill').val();
-	        	$('#linked_skill').val($selectedSkill+""+$newSkill+", ");
-	        	$('#newskill').val("");
-	        }
-	      },
-	      error: function(data) {
-	      	alert('some error occured...');
-	      }
-	    }); 
-	    return false;
-	  });
+	  	if (!$('#newskill').val()) {
+	  		alert('Please enter some skill to add.');
+	  		return false;
+	  	}else{
+		  	var formData = $('#newskill').serialize(); 
+		    $.ajaxSetup({
+				headers: {
+					'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+				}
+			});
+		    $.ajax({
+		      url: "{{ url('job/newskill') }}",
+		      type: "POST",
+		      data: formData,
+		      cache : false,
+		      success: function(data){
+		        if(data == 'added'){
+		        	$newSkill = $('#newskill').val();
+		        	$selectedSkill = $('#linked_skill').val();
+		        	$('#linked_skill').val($selectedSkill+""+$newSkill+", ");
+		        	$('#newskill').val("");
+		        }
+		      },
+		      error: function(data) {
+		      	alert('some error occured...');
+		      }
+		    }); 
+		    return false;
+		}
+	});
 });
 </script>
 @stop
