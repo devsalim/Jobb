@@ -1,5 +1,5 @@
 <!-- BEGIN HEADER -->
-<div class="page-header navbar navbar-fixed-top">
+<div class="page-header navbar navbar-fixed-top nav-disp" id="nav-display">
   <!-- BEGIN HEADER INNER -->
   <div class="page-header-inner container">
     <!-- BEGIN LOGO -->
@@ -10,7 +10,7 @@
     </div>
     <!-- END LOGO -->
     <!-- BEGIN RESPONSIVE MENU TOGGLER -->
-    <a href="javascript:;" class="menu-toggler responsive-toggler" data-toggle="collapse" data-target=".navbar-collapse">
+    <a href="javascript:;" class="menu-toggler responsive-toggler toggle-display" data-toggle="collapse" data-target=".navbar-collapse">
       <i class="fa fa-bars"></i>
     </a>
     <!-- END RESPONSIVE MENU TOGGLER -->
@@ -32,8 +32,8 @@
           
           <li class="dropdown dropdown-extended dropdown-inbox" id="header_inbox_bar">
             <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"  data-close-others="true">
-            <i class="icon-bulb"></i>
-            <span class="badge badge-default @if(count($applications) > 0) show @else hide @endif">{{count($applications)}}</span>
+            <i class="icon-bulb icon-color"></i>
+            <span class="badge badge-default @if(count($applications) > 0) show @else hide @endif" style="background-color: darkorchid !important;">{{count($applications)}}</span>
             </a>
             <ul class="dropdown-menu">
               <li class="external">
@@ -67,8 +67,8 @@
           <!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
           <li class="dropdown dropdown-extended dropdown-inbox" id="header_inbox_bar">
             <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"  data-close-others="true">
-            <i class="icon-like"></i>
-            <span class="badge badge-default  @if(count($thanks) > 0) show @else hide @endif">{{count($thanks)}}</span>
+            <i class="icon-like icon-color"></i>
+            <span class="badge badge-default  @if(count($thanks) > 0) show @else hide @endif" style="background-color:lightcoral !important;">{{count($thanks)}}</span>
             </a>
             <ul class="dropdown-menu">
               <li class="external">
@@ -103,7 +103,7 @@
           <!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
           <li class="dropdown dropdown-extended dropdown-tasks" id="header_task_bar">
             <a href="/notification_view" class="dropdown-toggle @if($title == 'notify_view'){{'active'}}@endif" data-toggle="dropdown"  data-close-others="true">
-              <i class="icon-pin"></i>
+              <i class="icon-pin icon-color"></i>
               
               <span class="badge badge-default @if(count($favourites) > 0) show @else hide @endif" id="myfavcount" style="right: -14px;">{{count($favourites)}}</span>
               
@@ -121,7 +121,7 @@
         
       </div>
       <form class="search-form search-form-expanded" action="extra_search.html" method="GET">
-              <div class="input-group">
+              <div class="input-group search-input-box">
                 <input type="text" class="form-control" placeholder="Search..." name="query">
                 <span class="input-group-btn">
                 <a href="javascript:;" class="btn submit"><i class="icon-magnifier"></i></a>
@@ -163,3 +163,11 @@
   <!-- END HEADER INNER -->
 </div>
 <!-- END HEADER -->
+
+<script type="text/javascript">
+$(function () {
+        $('.toggle-display').click(function () {
+                $('#nav-display').hide();   
+        });
+    });
+</script>

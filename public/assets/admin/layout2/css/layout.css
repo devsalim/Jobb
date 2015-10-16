@@ -67,8 +67,8 @@ Page Header
   border: 0px;
   padding: 0px;
   box-shadow: none;
-  height: 68px;
-  min-height: 68px;
+  height: 55px;
+  min-height: 55px;
   filter: none;
   background-image: none;
   /* Fixed header */
@@ -88,7 +88,7 @@ Page Header
   float: left;
   display: block;
   width: 195px;
-  height: 68px;
+  height: 55px;
   padding-left: 10px;
   padding-right: 15px;
 }
@@ -111,7 +111,7 @@ Page Header
   padding-top: 12px;
 }
 .page-header.navbar .page-top {
-  height: 68px;
+  height: 55px;
   background: #BAC0B6;
 }
 .page-header.navbar .search-form {
@@ -122,6 +122,7 @@ Page Header
   position: relative;
   float: right;
   transition: all 0.6s;
+  height: 55px;
 }
 .page-header.navbar .search-form .input-group .form-control {
   height: 68px;
@@ -129,6 +130,7 @@ Page Header
   background: transparent !important;
   font-size: 14px;
   padding-left: 0;
+  padding-top: 22px;
   margin-left: 12px;
   text-indent: -150000px;
 }
@@ -143,7 +145,7 @@ Page Header
     padding: 0;
     width: 68px;
     background: none;
-    margin-top: 0px;
+    margin-top: 20px;
     display: block;
 }
 .page-header.navbar .search-form .input-group .input-group-btn .btn.submit > i {
@@ -687,6 +689,7 @@ Page Header
     position: absolute;
     width: auto !important;
     margin: -14px 0px 0 !important;
+    background-color:whitesmoke;
   }
   .page-header.navbar .top-menu .navbar-nav > li.dropdown-extended > .dropdown-menu {
     max-width: 245px;
@@ -750,7 +753,7 @@ Page Header
   }
   .page-header.navbar .page-top {
     display: block;
-    height: 68px;
+    height: 55px;
   }
 }
 /***
@@ -1958,7 +1961,9 @@ Page sidebar
   /* Page sidebar */
   .page-sidebar,
   .page-sidebar.in {
-    margin: 10px 10px 10px 10px !important;
+    
+    margin: -14px 0px 10px 0px !important;
+    padding: 0;
   }
   .page-header-fixed.page-header-fixed-mobile .page-sidebar, .page-header-fixed.page-header-fixed-mobile
   .page-sidebar.in {
@@ -2519,7 +2524,7 @@ Page Loading
   .big-logo {
     display: block;
     width: 170px;
-    margin-top: 14px;
+    margin-top: 2px;
     margin-right: 0;
     float: left;
   }

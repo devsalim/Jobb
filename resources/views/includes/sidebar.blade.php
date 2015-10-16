@@ -2,7 +2,11 @@
 <div class="page-sidebar-wrapper">
   <!-- DOC: Set data-auto-scroll="false" to disable the sidebar from auto scrolling/focusing -->
   <!-- DOC: Change data-auto-speed="200" to adjust the sub menu slide up/down speed -->
+
   <div class="page-sidebar navbar-collapse collapse">
+   <a href="javascript:;" class="menu-toggler responsive-toggler toggle-disp" data-toggle="collapse" data-target=".navbar-collapse">
+      <i class="fa fa-bars" style="font-size: 18px;"></i>
+    </a>
     <!-- BEGIN SIDEBAR MENU1 -->
     <ul class="page-sidebar-menu page-sidebar-menu-compact page-sidebar-menu-hover-submenu" data-slide-speed="200"  data-auto-scroll="false" data-slide-speed="200">
       <li >
@@ -54,7 +58,7 @@
         <a class="" href="/mypost">
         <i class=" icon-note"></i>
         <span class="title">
-        My Post</span>
+        My Activity</span>
         <span class="selected">
         </span>
         </a>
@@ -208,3 +212,10 @@
   </div>
 </div>
 <!-- END SIDEBAR1-->
+<script>
+$(function () {
+        $(".toggle-disp").click(function () {
+                $(".nav-disp").show();   
+        });
+    });
+</script>

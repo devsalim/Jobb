@@ -53,26 +53,30 @@
 					</form>-->
 
 					<!-- END FORM-->
-
-						<div class="form-group">					
+						
+						<div class="form-group ">					
 							<div class="input-icon right">
 								<i class="fa fa-search" style="color: darkcyan;"></i>
 								<input type="text" class="form-control input-circle" placeholder="Search" style="border: 1px solid darkcyan;">
 							</div>
 						</div>
+					
 						@if(count($groups)>0)
 						@foreach($groups as $group)
-						<div class="form-group form-md-line-input">
+						<div class="form-group form-md-line-input ">
 							<div class="input-group">
 								<div class="input-group-control">
-									<label class="col-md-6 control-label" for="form_control_1" >
-										<a href="/group/{{ $group->id }}">{{ $group->group_name }}</a><br/>
-										<span style="font-size:12px;font-weight:normal">Members: {{count($group->users)}}</span>
+									<label class="col-md-10 control-label" for="form_control_1" >
+										<a href="/group/{{ $group->id }}">{{ $group->group_name }}</a>: {{count($group->users)}} <span style="font-weight:400;font-size:13px;">Members</span> <br/>
+										<span>Created by: {{ Auth::user()->induser->fname }} {{ Auth::user()->induser->lname }}</span><span style="font-size:12px;font-weight:normal"> </span>, <span>Total Post: 5</span>
 									</label>
 								</div>
 								<span class="input-group-btn btn-right">
 									<form action="{{ url('/group/destroy', $group->id) }}" method="post">
 										<input type="hidden" name="_token" value="{{ csrf_token() }}">
+										<button type="submit" class="btn yellow">
+											<i class="glyphicon glyphicon-edit" style="font-size: 12px;background-color: white;color: black;border-radius: 10px;width: 20px;height: 20px;padding-top: 3px;"></i>
+											</button>
 										<button type="submit" class="btn btn-danger">
 										<i class="glyphicon glyphicon-trash" style="font-size: 12px;background-color: white;color: black;border-radius: 10px;width: 20px;height: 20px;padding-top: 3px;"></i>
 										</button>

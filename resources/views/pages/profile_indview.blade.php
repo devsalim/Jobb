@@ -209,7 +209,7 @@
 				<!--/row-->
 				
 				<div class="row">
-					<div class="col-md-12 col-sm-6 col-xs-12">
+					<div class="col-md-6 col-sm-6 col-xs-12">
 						<div class="form-group">
 							<label class="control-label col-md-6 col-xs-6">Key Skills:</label>
 							<div class="col-md-6 col-xs-6">

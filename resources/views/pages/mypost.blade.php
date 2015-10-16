@@ -1,10 +1,34 @@
 @extends('master')
 
 @section('content')
-<div class="portlet light bordered" style="border: none !important;background:transparent">										
-	<div class="portlet-body form">
-		<div class="form-body">
-			<div class="row">
+
+<div class="portlet box blue">
+	<div class="portlet-title">
+		<div class="caption">
+			<i class="icon-trophy"></i>My Activity
+		</div>
+		<div class="tools">
+			<a href="javascript:;" class="collapse">
+			</a>
+			<a href="#portlet-config" data-toggle="modal" class="config">
+			</a>
+		</div>
+	</div>
+	<div class="portlet-body">
+		<div class="tabbable-custom">
+			<ul class="nav nav-tabs" style="padding-left: 0;">
+				<li class="active">
+					<a href="#tab_5_1" class="label-new" data-toggle="tab">
+					My Posts </a>
+				</li>
+				<li>
+					<a href="#tab_5_2" class="label-new" data-toggle="tab">
+					My Updates </a>
+				</li>
+			</ul>
+			<div class="tab-content">
+				<div class="tab-pane active" id="tab_5_1">
+					<div class="row">
 				@if (count($posts) > 0)
 				<?php $var = 1; ?>
 				@foreach($posts as $post)	
@@ -42,9 +66,20 @@
 											<i class="glyphicon glyphicon-briefcase"></i>&nbsp;: {{ $post->min_exp}}-{{ $post->max_exp}} Years
 										</div>
 									</div>
+									<?php 
+								 		$strNew = '+'.$post->post_duration.' day';
+								 		$strOld = $post->created_at;
+								 		$fresh = $strOld->modify($strNew);
+
+								 		$currentDate = new \DateTime();
+								 		$expiryDate = new \DateTime($fresh);
+								 		$difference = $currentDate->diff($expiryDate);
+								 		$remainingDays = $difference->format('%d');
+								 		$remainingHours = $difference->format('%h');
+								  	?>
 									<div class="row" style="margin-top: 15px;">
 										<div class="col-md-6 col-sm-3 col-xs-12">
-											<div class="">Post Expires in: {{ $post->post_duration }} days  
+											<div class="">Post Expires in: {{ $remainingDays }} days {{ $remainingHours }} Hours
 												<a href="#extend-job-expiry-{{ $post->id }}" data-toggle="modal" class="btn btn-sm extend-expire">Extend</a>
 											</div>
 										</div>
@@ -207,19 +242,19 @@
 								<div class="portlet-body">
 								<div class="tabbable-custom ">
 									<ul class="nav nav-tabs" style="padding-left:0;">
-										<li class="active">
+										<li class="active ">
 											
-											<a href="#tab_1_{{ $post->id }}_1" data-toggle="tab">Thanks & Share </a>
+											<a href="#tab_1_{{ $post->id }}_1" class="label-new" data-toggle="tab">Thanks & Share </a>
 										</li>
 										@if($post->post_type == 'job')
 										<li>
 											
-											<a href="#tab_1_{{ $post->id }}_2" data-toggle="tab">Applied </a>
+											<a href="#tab_1_{{ $post->id }}_2" class="label-new" data-toggle="tab">Applied </a>
 										</li>
 										@endif
 										@if($post->post_type == 'skill')
 										<li>
-											<a href="#tab_1_{{ $post->id }}_3" data-toggle="tab">Contacted</a>
+											<a href="#tab_1_{{ $post->id }}_3" class="label-new" data-toggle="tab">Contacted</a>
 										</li>
 										@endif
 									</ul>
@@ -407,7 +442,7 @@
 			<input type="hidden" name="post_id" value="{{ $post->id }}">
 		     <div class="modal-header">
 		        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-		        <h4 class="modal-title">Extend Post expiry date</h4>
+		        <h4 class="modal-title">Extend Post Validity</h4>
 		      </div>
 		      <div class="modal-body">
 		      		@if (count($errors) > 0)
@@ -454,10 +489,14 @@
 	 You haven't Post Anything!!
 	@endif
 			</div>
+				</div>
+				<div class="tab-pane" id="tab_5_2">
+					
+				</div>
+			</div>
 		</div>
 	</div>
 </div>
-
 
 @stop
 
@@ -503,6 +542,21 @@ $(document).ready(function(){
     return false;
   }); 
 });
+
+</script>
+<script>
+$('.content').slideUp(400);//reset panels
+
+$('.panel').click(function() {//open
+   var takeID = $(this).attr('id');//takes id from clicked ele
+   $('#'+takeID+'C').slideDown(400);
+                             //show's clicked ele's id macthed div = 1second
+});
+$('span').click(function() {//close
+   var takeID = $(this).attr('id').replace('Close','');
+   //strip close from id = 1second
+    $('#'+takeID+'C').slideUp(400);//hide clicked close button's panel
+});​
 
 </script>
 @stop

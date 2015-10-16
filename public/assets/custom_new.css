@@ -1,0 +1,22 @@
+.label-new{
+	font-size: 14px !important;
+}
+
+.search-input-box{
+	margin-top: -15px;
+    border-bottom: 1px solid grey;
+}
+
+.icon-color{
+	color:grey !important;
+}
+
+
+@media (max-width: 767px){
+.toggle-disp{
+	float: right;
+    right: 20px;
+    top: 30px;
+    position: absolute;
+}
+}

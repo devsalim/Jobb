@@ -371,7 +371,7 @@ background-color:white;
 
 .time-item{
     border: 1px solid #61b3de;
-    margin: 6px 0px 10px -11px;
+    margin: 6px 0px 10px 0px;
     position: relative;
     padding: 0px 5px 0px 5px;
     box-shadow: 4px 4px 4px rgb(222, 222, 222);

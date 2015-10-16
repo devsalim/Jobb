@@ -144,7 +144,7 @@ Page Header
   background: #4d5b69;
 }
 .page-header.navbar .search-form {
-  background: lightblue;
+  background: transparent;
 }
 .page-header.navbar .search-form .input-group .form-control {
   color: #7f96ac;
@@ -416,7 +416,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3c3d2f', end
 @media (max-width: 767px) {
   /* 767px */
   .page-header.navbar {
-    background: #fb5f61;
+    background: white;
     /* Top menu */
   }
   .page-header.navbar .top-menu .navbar-nav > li.dropdown > .dropdown-toggle:hover {

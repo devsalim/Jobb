@@ -29,19 +29,8 @@
 									</div>
 									<div class="timeline-body" style="">
 										<div class="timeline-body-head">
-											@if(Auth::user()->id == $post->individual_id || Auth::user()->id == $post->corporate_id)
 											<div class="timeline-body-head-caption">
-												@if($post->post_type == 'job')
-												<a class="user-link"><i class="fa fa-unlink (alias)" style="color:lightslategray;"></i></a><a style="padding: 0px 0px 0px 32px;font-size: 15px;text-decoration:none;font-weight:600;">You have</a>
-												@else
-												<a class="user-link-click"><i class="fa fa-link" style="color:white;"></i></a><a style="padding: 0px 0px 0px 32px;font-size: 15px;text-decoration:none;font-weight:600;">You have</a>
-												@endif
-												<span class="timeline-body-time font-grey-cascade">Posted at 
-													{{ date('M d, Y', strtotime($post->created_at)) }}
-												</span>
-											</div>
-											@else
-											<div class="timeline-body-head-caption">
+												
 												@if($post->post_type == 'job')
 												<a class="user-link"><i class="fa fa-unlink (alias)" style="color:lightslategray;"></i></a><a style="padding: 0px 0px 0px 32px;font-size: 15px;text-decoration:none;font-weight:600;">{{ $post->induser->fname }} {{ $post->induser->lname }}</a>
 												@else
@@ -51,7 +40,6 @@
 													{{ date('M d, Y', strtotime($post->created_at)) }}
 												</span>
 											</div>
-											@endif
 										</div>
 										<div class="timeline-body-content">
 											<span class="font-grey-cascade">
@@ -107,8 +95,8 @@
 											<div class="panel panel-default" style=" position: relative;">
 												<div class="panel-heading">
 													<h4 class="panel-title">
-													<a class="accordion-toggle accordion-toggle-styled collapsed" 
-													data-toggle="collapse" data-parent="#accordion{{$var}}" href="#collapse_{{$var}}_{{$var}}"  style="font-size: 15px;font-weight: 600;" >
+													<a class="accordion-toggle accordion-toggle-styled" 
+													data-toggle="collapse" data-parent="#accordion{{$var}}" href="#collapse_{{$var}}_{{$var}}"  style="font-size: 15px;font-weight: 600;">
 													Details: </a>	
 													</h4>
 												</div>
@@ -154,25 +142,13 @@
 																 
 															</div>
 														</div>
-														<?php 
-													 		$strNew = '+'.$post->post_duration.' day';
-													 		$strOld = $post->created_at;
-													 		$fresh = $strOld->modify($strNew);
-
-													 		$currentDate = new \DateTime();
-													 		$expiryDate = new \DateTime($fresh);
-													 		$difference = $currentDate->diff($expiryDate);
-													 		$remainingDays = $difference->format('%d');
-													  	?>
-
+														
 														<div class="skill-display">Description : </div>
 														{{ $post->job_detail }}
 														
 														@if($post->post_type == 'job')
 														<div class="skill-display">Reference Id&nbsp;: {{ $post->reference_id }} </div>	
 														@endif
-
-														@if($remainingDays > 0)
 														<div class="skill-display">Contact Details : </div> 
 														<div class="row">
 															@if($post->post_type == 'job' && $post->website_redirect_url != null)
@@ -196,6 +172,12 @@
 																
 																	{{ $post->contact_person }}
 																
+															<div class="col-md-1"></div>
+															<div class="col-md-11">
+																Skills: {{ $post->linked_skill }}
+															<!--	@foreach($post->skills as $skill)
+																		{{$skill->name}}
+																	@endforeach -->
 															</div>
 															@endif
 
@@ -255,22 +237,11 @@
 															</div>	
 															@endif											
 														</div>
-														@endif
-														<div class="skill-display">Post Id&nbsp;: {{ $post->id }} </div>
-
-														@if($remainingDays > 0)
-															 <div class="skill-display">Post expires on: 										 
-															 <span class="btn-success" style="padding: 2px 8px;font-size: 12px;border-radius: 20px !important;">{{$fresh->format("d M Y")}}</span>
-															 </div>
-														 @else
-															 <div class="skill-display">Post expired on: 										 
-															 <span class="btn-danger" style="padding: 2px 8px;font-size: 12px;border-radius: 20px !important;">{{$fresh->format("d M Y")}}</span>
-															 </div>
-														@endif
+														<div class="skill-display">Post Id&nbsp;: {{ $post->id }} </div> 
 													</div>
 												</div>
 												<div class="post-{{ $post->post_type }} post-icon-bar">
-													<form action="/job/like" method="post" id="post-{{$post->id}}" data-id="{{$post->id}}">						
+													<form action="/job/like" method="post" id="post-like-{{$post->id}}" data-id="{{$post->id}}">						
 														<input type="hidden" name="_token" value="{{ csrf_token() }}">
 														<input type="hidden" name="like" value="{{ $post->id }}">
 														<button class="btn like-btn"  type="button" style="background-color: transparent;">
@@ -282,57 +253,58 @@
 													{{ $post->postactivity->sum('thanks') }} 
 													{{-- {{ $post->postactivity->where('user_id', Auth::user()->induser_id)->sum('thanks') }} --}}
 													</span>
-													
-														@if(count($post->postactivity) > 0 && $post->post_type == 'job' && Auth::user()->id != $post->individual_id)		
-													@if($post->postactivity->where('user_id', Auth::user()->induser_id)->isEmpty())
-														<form action="/job/apply" method="post" id="post-apply-{{$post->id}}" data-id="{{$post->id}}">	
-															<input type="hidden" name="_token" value="{{ csrf_token() }}">
-															<input type="hidden" name="apply" value="{{ $post->id }}">
-															<button class="btn apply-btn blue btn-sm apply-contact-btn" 
-																	id="apply-btn-{{$post->id}}" type="button">Apply
-															</button>
-														</form>	
-													@elseif($post->postactivity->where('user_id', Auth::user()->induser_id)->first()->apply == 1) 
-														<button type="button" class="btn btn-sm bg-grey-steel apply-contact-btn" disabled="true">
-															Applied
-														</button>
-														@else
-													<form action="/job/apply" method="post" id="post-apply-{{$post->id}}" data-id="{{$post->id}}">	
-														<input type="hidden" name="_token" value="{{ csrf_token() }}">
-														<input type="hidden" name="apply" value="{{ $post->id }}">
-														<button class="btn apply-btn blue btn-sm apply-contact-btn" 
-																id="apply-btn-{{$post->id}}" type="button">Apply
-														</button>
-													</form>							
-													@endif	
-												@endif	
-												@if(count($post->postactivity) > 0 && $post->post_type == 'skill' && Auth::user()->id != $post->individual_id)		
-													@if($post->postactivity->where('user_id', Auth::user()->induser_id)->isEmpty())
-														<form action="/job/contact" method="post" id="post-contact-{{$post->id}}" data-id="{{$post->id}}">	
-															<input type="hidden" name="_token" value="{{ csrf_token() }}">
-															<input type="hidden" name="contact" value="{{ $post->id }}">
-															<button class="btn contact-btn blue btn-sm apply-contact-btn" 
-																	id="contact-btn-{{$post->id}}" type="button">Contact
-															</button>
-														</form>	
-													@elseif($post->postactivity->where('user_id', Auth::user()->induser_id)->first()->contact_view == 1) 
-														<button type="button" class="btn btn-sm bg-grey-steel apply-contact-btn" disabled="true">
-															<i class="glyphicon glyphicon-ok"></i> Contacted
-														</button>
-														@else
-													<form action="/job/contact" method="post" id="post-contact-{{$post->id}}" data-id="{{$post->id}}">	
-														<input type="hidden" name="_token" value="{{ csrf_token() }}">
-														<input type="hidden" name="contact" value="{{ $post->id }}">
-														<button class="btn contact-btn green btn-sm apply-contact-btn" 
-																id="contact-btn-{{$post->id}}" type="button">Contact
-														</button>
-													</form>							
-													@endif	
-												@endif
+
+										@if(count($post->postactivity) > 0 && $post->post_type == 'job' && Auth::user()->id != $post->individual_id)		
+											@if($post->postactivity->where('user_id', Auth::user()->induser_id)->isEmpty())
+												<form action="/job/apply" method="post" id="post-apply-{{$post->id}}" data-id="{{$post->id}}">	
+													<input type="hidden" name="_token" value="{{ csrf_token() }}">
+													<input type="hidden" name="apply" value="{{ $post->id }}">
+													<button class="btn apply-btn blue btn-sm apply-contact-btn" 
+															id="apply-btn-{{$post->id}}" type="button">Apply
+													</button>
+												</form>	
+											@elseif($post->postactivity->where('user_id', Auth::user()->induser_id)->first()->apply == 1) 
+												<button type="button" class="btn btn-sm blue apply-contact-btn" disabled="true">
+													Applied
+												</button>
+												@else
+											<form action="/job/apply" method="post" id="post-apply-{{$post->id}}" data-id="{{$post->id}}">	
+												<input type="hidden" name="_token" value="{{ csrf_token() }}">
+												<input type="hidden" name="apply" value="{{ $post->id }}">
+												<button class="btn apply-btn blue btn-sm apply-contact-btn" 
+														id="apply-btn-{{$post->id}}" type="button">Apply
+												</button>
+											</form>							
+											@endif	
+										@endif	
+										@if(count($post->postactivity) > 0 && $post->post_type == 'skill' && Auth::user()->id != $post->individual_id)		
+											@if($post->postactivity->where('user_id', Auth::user()->induser_id)->isEmpty())
+												<form action="/job/contact" method="post" id="post-contact-{{$post->id}}" data-id="{{$post->id}}">	
+													<input type="hidden" name="_token" value="{{ csrf_token() }}">
+													<input type="hidden" name="contact" value="{{ $post->id }}">
+													<button class="btn contact-btn blue btn-sm apply-contact-btn" 
+															id="contact-btn-{{$post->id}}" type="button">Contact
+													</button>
+												</form>	
+											@elseif($post->postactivity->where('user_id', Auth::user()->induser_id)->first()->contact_view == 1) 
+												<button type="button" class="btn btn-sm green apply-contact-btn" disabled="true">
+													Contacted
+												</button>
+												@else
+											<form action="/job/contact" method="post" id="post-contact-{{$post->id}}" data-id="{{$post->id}}">	
+												<input type="hidden" name="_token" value="{{ csrf_token() }}">
+												<input type="hidden" name="contact" value="{{ $post->id }}">
+												<button class="btn contact-btn green btn-sm apply-contact-btn" 
+														id="contact-btn-{{$post->id}}" type="button">Contact
+												</button>
+											</form>							
+											@endif	
+										@endif										
+
 												<div class="btn-group dropup share-bar">
 													<div class="btn-group dropup">
-														<button class="btn dropdown-toggle" type="button" data-toggle="dropdown" style="background-color: transparent;padding: 18px 5px 7px 6px;">
-														<i class="fa fa-share-square-o" style="font-size: 23px;color: darkslateblue;"></i><span class="badge-share">1</span>
+														<button class="btn dropdown-toggle" type="button" data-toggle="dropdown" style="background-color: transparent;border-left: 1px solid lightgray;padding: 18px 20px 7px 8px;">
+														<i class="fa fa-share-square-o" style="font-size: 23px;color: darkslateblue;"></i><span class="badge-share">1000 </span>
 														</button>
 														<ul class="dropdown-menu pull-right" role="menu" style="min-width:0;box-shadow:0 0 !important">
 															<li style="background-color: #3b5998;">
