@@ -322,6 +322,13 @@ jQuery(document).ready(function() {
    Metronic.init(); // init metronic core components
    Layout.init(); // init current layout
    Demo.init(); // init demo features
+
+  $('.toggle-display').click(function () {
+        $('#nav-display').hide();   
+  });
+  $(".toggle-disp").click(function () {
+        $(".nav-disp").show();   
+  });
 });
 </script>
 @yield('javascript')
