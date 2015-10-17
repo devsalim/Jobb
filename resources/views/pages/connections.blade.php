@@ -77,11 +77,11 @@
 				</li>
 				<li>
 					<a href="#tab_5_2" class="label-new" data-toggle="tab">
-					Link Request </a>
+					Link Requests </a>
 				</li>
 				<li>
 					<a href="#tab_5_3" class="label-new" data-toggle="tab">
-					New Links </a>
+					Following </a>
 				</li>
 			</ul>
 			<div class="tab-content">
@@ -126,47 +126,6 @@
 			@endif
 				</div>
 				<div class="tab-pane" id="tab_5_2">
-					@if(count(Auth::user()->induser->friendsOfMine) > 0)								
-					<ul class="media-list">
-					@foreach(Auth::user()->induser->friendsOfMine as $pendingconnection)
-						@if($pendingconnection->pivot->status == 0)	
-						  <li class="media">
-						    <div class="media-left">
-						      <a href="#">								     									      	
-						        <img class="media-object" src="@if($pendingconnection->profile_pic != null){{ '/img/profile/'.$pendingconnection->profile_pic }}@else{{'/assets/images/couple.png'}}@endif" alt="DP" style="width:60px">
-						      </a>
-						    </div>
-						    <div class="media-body">
-						    	<div class="media-body-left">
-							      <h4 class="media-heading">
-							      	{{ $pendingconnection->fname }} {{ $pendingconnection->lname }}
-							      </h4>
-							     	{{ $pendingconnection->working_at }}<br>
-								 	{{ $pendingconnection->city }} {{ $pendingconnection->state }}
-							 	</div>
-							 	<div class="media-body-right">
-							 		<span class="input-group-btn btn-right">
-					
-										<form action="{{ url('/connections/destroy', $pendingconnection->pivot->id) }}" method="post">
-											<input type="hidden" name="_token" value="{{ csrf_token() }}">
-											<div class="btn btn-warning">
-												<i class="icon - glyphicon glyphicon-question-sign" style="font-size: 12px;background-color: white;color: black;border-radius: 10px;width: 20px;height: 20px;padding-top: 3px;"></i>
-											</div>
-											<button type="submit" class="btn btn-danger">
-												<i class="fa fa-remove" style="font-size: 12px;background-color: white;color: black;border-radius: 10px;width: 20px;height: 20px;padding-top: 3px;"></i>
-											</button>
-										</form>
-										
-									</span>
-							 	</div>
-						    </div>
-						  </li>
-						@endif
-					@endforeach
-					</ul>
-					@endif
-				</div>
-				<div class="tab-pane" id="tab_5_3">
 					@if(count(Auth::user()->induser->friendOf) > 0)
 						<ul class="media-list">
 						@foreach(Auth::user()->induser->friendOf as $conreq)
@@ -205,6 +164,9 @@
 						@endforeach		
 						</ul>									
 					@endif	
+				</div>
+				<div class="tab-pane" id="tab_5_3">
+					
 				</div>
 			</div>
 		</div>
