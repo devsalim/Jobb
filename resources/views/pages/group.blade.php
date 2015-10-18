@@ -150,10 +150,9 @@
 							<span class="input-group-addon">
 								<i class="icon-call-end" style="color:darkcyan;"></i>
 							</span>
-							<input type="text" name="group_name" class="form-control" placeholder="Create Group">
+							<input type="text" name="group_name" class="form-control" placeholder="Enter Group name">
 						</div>
-					</div>
-	      			{!! Form::select('users[]', $connections, null, ['id'=>'connections', 'class'=>'form-control select2', 'multiple']) !!}
+					</div>	      		
 	     		</div>
 				<div class="modal-footer">
 					<button type="submit" class="btn btn-success">Create</button>

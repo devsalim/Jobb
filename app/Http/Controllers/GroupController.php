@@ -7,6 +7,7 @@ use Auth;
 use Redirect;
 use App\Groups_users;
 use App\Induser;
+use DB;
 
 class GroupController extends Controller {
 
@@ -30,6 +31,7 @@ class GroupController extends Controller {
 		$groups = Group::leftjoin('groups_users', 'groups_users.group_id', '=', 'groups.id')					
 						->where('groups.admin_id', '=', Auth::user()->induser_id)
 						->orWhere('groups_users.user_id', '=', Auth::user()->induser_id)
+						->groupBy('groups.id')
 						->get(['groups.id', 'groups.group_name', 'groups.admin_id']);
 
 		$connections = Auth::user()->induser->friends->lists('fname', 'id');
@@ -125,9 +127,11 @@ class GroupController extends Controller {
 	public function detail($id)
 	{		
 		$title = 'group';
-		$users = Induser::leftjoin('groups_users', 'groups_users.user_id', '=', 'indusers.id')
+		$users = Induser::leftjoin('groups_users', 'indusers.id', '=', 'groups_users.user_id')
+						->leftjoin('groups', 'groups.admin_id', '=', 'indusers.id')
 						->where('groups_users.group_id', '=', $id)
-						->orWhereNull('groups_users.group_id')
+						->orWhere('groups.id', '=', $id)
+						->orderBy('groups.admin_id', 'desc')
 						->get(['indusers.id', 
 							   'indusers.fname', 
 							   'indusers.lname', 
@@ -136,18 +140,30 @@ class GroupController extends Controller {
 							   'indusers.state', 
 							   'indusers.profile_pic',
 							   'groups_users.id as groups_users_id',
-							   'groups_users.group_id'
+							   'groups_users.group_id',
+							   'groups.admin_id'
 							]);		
-		$connections = Auth::user()->induser->friends->lists('fname', 'id');
+		$connectionsList = Auth::user()->induser->friends->lists('fname','id');
+		$connections = DB::select('select id,fname,lname,working_at,city,state,profile_pic from indusers
+									where indusers.id in (
+									select connections.connection_user_id from connections
+									where connections.user_id=? and connections.status=1
+									and connections.connection_user_id not in (
+									select groups_users.user_id from groups_users
+									where groups_users.group_id=?
+									and groups_users.user_id in 
+									(select connections.connection_user_id from indusers, connections
+									where indusers.id = connections.user_id
+									and indusers.id = ?)))', [Auth::user()->induser_id, $id, Auth::user()->induser_id]);
+
 		$group = Group::findOrFail($id);
-		return view('pages.groupDetail', compact('users', 'title', 'connections', 'group'));
-		// return $users;
+		return view('pages.groupDetail', compact('users', 'title', 'connections', 'connectionsList', 'group'));
 	}
 
 	public function addUser(Request $request){
-		$group = Group::findOrFail($request['id']);
-		$group->users()->attach($request['users']);
-		return redirect('/group/'.$request['id']);
+		$group = Group::findOrFail($request['group_id']);
+		$group->users()->attach($request['user_id']);
+		return redirect('/group/'.$request['group_id']);
 	}
 
 	public function deleteUser(Request $request){
