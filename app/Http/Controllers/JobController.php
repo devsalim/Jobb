@@ -256,7 +256,7 @@ class JobController extends Controller {
 						'errors' => 'Duration extended successfully. Post will expire on '.$newDate,
 					]);
 		}else if($post != null && $post->post_duration_extend == 1){
-			return redirect('/mypost#extend-job-expiry-'.$request['post_id'])
+			return redirect('/mypost')
 					->withErrors([
 						'post_duration' => 'Duration cannot be extended. You have already extended once.',
 					]);

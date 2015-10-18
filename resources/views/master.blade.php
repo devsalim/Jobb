@@ -331,6 +331,7 @@ jQuery(document).ready(function() {
   });
 });
 </script>
+
 @yield('javascript')
 
 <!-- END JAVASCRIPTS -->

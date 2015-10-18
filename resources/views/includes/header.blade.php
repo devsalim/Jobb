@@ -130,7 +130,7 @@
             </form>
       <div class="btn-group" style="margin: 0px 17px;">
         <button type="button" class="btn btn-circle green-haze dropdown-toggle" data-toggle="dropdown">
-        <span class="hidden-sm hidden-xs">Post</span> <i class="fa fa-angle-down"></i>
+        <span class="">Post</span>
         </button>
         <ul class="dropdown-menu" role="menu">
           <li>
@@ -163,4 +163,3 @@
   <!-- END HEADER INNER -->
 </div>
 <!-- END HEADER -->
-
