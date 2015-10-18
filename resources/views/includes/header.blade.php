@@ -163,11 +163,3 @@
   <!-- END HEADER INNER -->
 </div>
 <!-- END HEADER -->
-
-<script type="text/javascript">
-$(function() {
-        $(".toggle-display").click(function () {
-                $("#nav-display").hide();   
-        });
-    });
-</script>

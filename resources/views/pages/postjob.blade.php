@@ -56,9 +56,9 @@
 					</span>
 					<select class="form-control" name="prof_category">
 						<optgroup label="Accounting">
-						<option value="Accounts/Finance/Tax">Accounts/Finance/Tax</option>
-						<option value="Agent">Agent</option>
-						<option value="Analytics & Business Intelligence">Analytics & Business Intelligence</option>
+							<option value="Accounts/Finance/Tax">Accounts/Finance/Tax</option>
+							<option value="Agent">Agent</option>
+							<option value="Analytics & Business Intelligence">Analytics & Business Intelligence</option>
 						</optgroup>
 						<optgroup label="IT Field">
 						<option value="HR/Administration/IR">HR/Administration/IR</option>
@@ -136,9 +136,11 @@
 			<div class="col-md-2"></div>
 			<div class="col-md-5">
 				<div class="form-group">
-				     <input type="text" id="linked_skill" name="linked_skill" 
+				    <input type="text" id="linked_skill" name="linked_skill" 
 				     		class="form-control select2"
 				     		placeholder="List of skills to be added">
+				    <input type="hidden" id="linked_skill_id" name="linked_skill_id" 
+				     		class="form-control">
 				</div>
 			</div>
              
@@ -438,28 +440,25 @@
 <script src="/assets/postjobval.js"></script>
 <script>
 	(function() {
-
 		[].slice.call( document.querySelectorAll( '.tabs' ) ).forEach( function( el ) {
 			new CBPFWTabs( el );
 		});
-
 	})();
 </script>
 <script>
 jQuery(document).ready(function() {       
-   // initiate layout and plugins
-//    Metronic.init(); // init metronic core components
-// Layout.init(); // init current layout
-// Demo.init(); // init demo features
-   FormWizard.init();
+	ComponentsIonSliders.init();    
+	ComponentsDropdowns.init();
+	ComponentsEditors.init();
+    FormWizard.init();
 });
 </script>
 <!-- new test code -->
 <script type="text/javascript">
   $(document).ready(function () {
-  var navListItems = $('div.setup-panel div a'),
-		  allWells = $('.setup-content'),
-		  allNextBtn = $('.nextBtn');
+	var navListItems = $('div.setup-panel div a'),
+		allWells = $('.setup-content'),
+		allNextBtn = $('.nextBtn');
 
   
   allWells.hide();
@@ -501,18 +500,6 @@ jQuery(document).ready(function() {
 });
   </script>
   <!-- new test code end -->
-
-<script>
-jQuery(document).ready(function() {       
-	// initiate layout and plugins
-	Metronic.init(); // init metronic core components
-	Layout.init(); // init current layout
-	Demo.init(); // init demo features  // set current page
-	ComponentsIonSliders.init();    
-	ComponentsDropdowns.init();
-	ComponentsEditors.init();
-});   
-</script>
 <script type="text/javascript">
     $(function () {
     	$("#hide-sal").hide();
@@ -537,7 +524,8 @@ jQuery(document).ready(function() {
         $("#hide-apply").click(function () {
             if ($(this).is(":checked")) {
                 $(".show-apply").show();
-                $(".show-apply-email").hide();                 
+                $(".show-apply-email").hide();
+                 
             } else {
                 $(".show-apply-email").show();
                 $(".show-apply").hide();
@@ -550,7 +538,6 @@ jQuery(document).ready(function() {
 	 	function split( val ) {
 	      return val.split( /,\s*/ );
 	    }
-
 	    function extractLast( term ) {
 	      return split( term ).pop();
 	    }
@@ -578,13 +565,18 @@ jQuery(document).ready(function() {
 			},
 			select: function(event, ui) {
 				var terms = split( $('#linked_skill').val() );
+				var termsId = split( $('#linked_skill_id').val() );
 				// remove the current input
 				terms.pop();
+				termsId.pop();
 				// add the selected item
 				terms.push( ui.item.value );
+				termsId.push( ui.item.id );
 				// add placeholder to get the comma-and-space at the end
 				terms.push( "" );
+				termsId.push( "" );
 				$('#linked_skill').val(terms.join( ", " ));
+				$('#linked_skill_id').val(termsId.join( ", " ));
 				$(this).val("");
 				return false;
 			}
@@ -597,7 +589,7 @@ $(document).ready(function(){
 	  	event.preventDefault();
 	  	if (!$('#newskill').val()) {
 	  		alert('Please enter some skill to add.');
-	  		return false;
+	  		// return false;
 	  	}else{
 		  	var formData = $('#newskill').serialize(); 
 		    $.ajaxSetup({
@@ -611,10 +603,13 @@ $(document).ready(function(){
 		      data: formData,
 		      cache : false,
 		      success: function(data){
-		        if(data == 'added'){
+		        if(data > 0){
 		        	$newSkill = $('#newskill').val();
+		        	$newSkillId = data;
 		        	$selectedSkill = $('#linked_skill').val();
+		        	$selectedSkillId = $('#linked_skill_id').val();
 		        	$('#linked_skill').val($selectedSkill+""+$newSkill+", ");
+		        	$('#linked_skill_id').val($selectedSkillId+""+$newSkillId+", ");
 		        	$('#newskill').val("");
 		        }
 		      },
