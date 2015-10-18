@@ -64,10 +64,13 @@
 											<i class="icon-call-end"></i>
 										</span>
 										<input type="text" name="mobile" class="form-control" placeholder="Mobile No" value="{{ $user->mobile }}">
+										<span class="input-group-addon">
+											<a><i class="fa fa-exclamation-circle" style="color: #cb5a5e;font-size: 16px;"></i></a>
+										</span>
+										<span class="input-group-addon">
+											<i class="fa fa-pencil"></i>
+										</span>
 									</div>
-									<a href="javascript:;" class="btn btn-xs" style="height: 22px;border-radius: 12px !important;background-color: #cb5a5e;color:white;">
-										<i class="glyphicon glyphicon-question-sign" style="font-size: 15px;line-height: 1.3;"></i> Verify 
-										</a> 
 								</div>
 							</div>
 							<!--/span-->
@@ -79,10 +82,13 @@
 											<i class="icon-envelope"></i>
 										</span>
 										<input type="text" disabled name="email" class="form-control" placeholder="Email Id" value="{{ $user->email }}">
+										<span class="input-group-addon">
+											<i class="glyphicon glyphicon-ok-circle" style="color: #1EC71E;font-size: 16px;"></i>
+										</span>
+										<span class="input-group-addon">
+											<i class="fa fa-pencil"></i>
+										</span>
 									</div>
-									<a href="javascript:;" class="btn btn-xs" style="height: 22px;border-radius: 12px !important;background-color: #1EC71E;color:white;">
-										<i class="glyphicon glyphicon-ok-circle" style="font-size: 15px;line-height: 1.3;"></i> Verified 
-										</a> 
 								</div>
 							</div>
 							<!--/span-->

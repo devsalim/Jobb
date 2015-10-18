@@ -3719,7 +3719,7 @@ Custom icon buttons
   text-decoration: none;
   border-color: #999;
   color: #444;
-  text-shadow: 0 1px 0px white;
+  /*text-shadow: 0 1px 0px white;*/
   -webkit-transition: all 0.3s ease;
   -moz-transition: all 0.3s ease;
   -ms-transition: all 0.3s ease;
@@ -6237,7 +6237,7 @@ Custom tabs
   /* below tabs */
 }
 .tabbable-custom > .nav-tabs {
-  border: none;
+ /* border: none;*/
   margin: 0px;
 }
 .tabbable-custom > .nav-tabs > li {
@@ -6282,7 +6282,7 @@ Custom tabs
 }
 .tabbable-custom > .tab-content {
   background-color: #fff;
-  border: 1px solid #ddd;
+  /*border: 1px solid #ddd;*/
   padding: 10px;
   -webkit-border-radius: 0 0 4px 4px;
   -moz-border-radius: 0 0 4px 4px;
@@ -6825,7 +6825,7 @@ Blue Default
 }
 
 .portlet.box.blue {
- /* border: 1px solid #60aee4;*/
+  border: 1px solid #60aee4;
   border-top: 0;
 }
 .portlet.box.blue > .portlet-title {

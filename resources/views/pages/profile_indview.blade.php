@@ -6,7 +6,7 @@
 		<!-- BEGIN PROFILE SIDEBAR -->
 		<div class="profile-sidebar">
 			<!-- PORTLET MAIN -->
-			<div class="portlet light profile-sidebar-portlet" style="background-color:whitesmoke;padding: 12px 20px 0px 20px;border-radius: 5px !important;">
+			<div class="portlet light profile-sidebar-portlet portlet-light-bar">
 				<!-- SIDEBAR USERPIC -->
 				<div class="profile-userpic">
 					<img src="/img/profile/{{ $user->profile_pic }}">
@@ -25,14 +25,8 @@
 				</div>
 				<!-- END SIDEBAR USER TITLE -->
 				<div class="row list-separated profile-stat" style="text-align:center;margin: 13px 0 0px -17px;">
-					<div class="col-md-4 col-sm-4 col-xs-4">
-						<!-- <div class="uppercase profile-stat-title">
-							 37
-						</div>
-						<div class="uppercase profile-stat-text">
-							 Links
-						</div> -->
-						<a href="javascript:;" class="icon-btn">
+					<div class="col-md-4 col-sm-4 col-xs-4 @if($title == 'connections'){{'active'}}@endif">
+						<a href="/connections/create" class="icon-btn">
 							<i class="icon-link"></i>
 							<div>
 								 Links
@@ -41,8 +35,8 @@
 							{{$links}} </span>
 						</a>
 					</div>
-					<div class="col-md-4 col-sm-4 col-xs-4">
-						<a href="javascript:;" class="icon-btn">
+					<div class="col-md-4 col-sm-4 col-xs-4 @if($title == 'thanks_view'){{'active'}}@endif">
+						<a href="/individual/thanks_view" class="icon-btn">
 							<i class="icon-like"></i>
 							<div>
 								 Thanks
@@ -51,8 +45,8 @@
 							{{$thanks}}</span>
 						</a>
 					</div>
-					<div class="col-md-4 col-sm-4 col-xs-4">
-						<a href="javascript:;" class="icon-btn">
+					<div class="col-md-4 col-sm-4 col-xs-4 @if($title == 'mypost'){{'active'}}@endif">
+						<a href="/mypost" class="icon-btn">
 							<i class="icon-note"></i>
 							<div>
 								 Posts
@@ -77,11 +71,13 @@
 			<span class="caption-subject font-green-haze bold uppercase">Profile Summary</span>
 			<span class="caption-helper"></span>
 		</div>
+		@if(Auth::user()->id == $user->id)
 		<div class="tools @if($title == 'indprofile_edit'){{'active'}}@endif">
 			<a href="/individual/edit_view" class="btn btn-xs blue" style="height: 20px;">
 			<i class="fa fa-edit"></i> Edit 
 			</a>
 		</div>
+		@endif
 	</div>
 	<div class="portlet-body form">
 		<!-- BEGIN FORM-->
@@ -255,9 +251,7 @@
 							<label class="control-label col-md-4 col-xs-12">Email Id:</label>
 							<div class="col-md-8 col-xs-12">
 								<p class="form-control-static view-page">
-									{{ $user->email }} <a href="javascript:;" class="btn btn-xs" style="height: 22px;border-radius: 12px !important;background-color: #1EC71E;color:white;">
-										<i class="glyphicon glyphicon-ok-circle" style="font-size: 15px;line-height: 1.3;"></i> Verified 
-										</a> 
+									{{ $user->email }} <i class="glyphicon glyphicon-ok-circle" style="color: #1EC71E;font-size: 16px;"></i>
 								</p>
 							</div>
 						</div>
@@ -268,9 +262,7 @@
 							<label class="control-label col-md-4 col-xs-12">Mobile:</label>
 							<div class="col-md-6 col-xs-12">
 								<p class="form-control-static view-page">
-									{{ $user->mobile }} <a href="javascript:;" class="btn btn-xs" style="height: 22px;border-radius: 12px !important;background-color: #cb5a5e;color:white;">
-										<i class="glyphicon glyphicon-question-sign" style="font-size: 15px;line-height: 1.3;"></i> Verify 
-										</a> 
+									{{ $user->mobile }} <i class="fa fa-exclamation-circle" style="color: #cb5a5e;font-size: 16px;"></i>
 								</p>
 							</div>
 						</div>

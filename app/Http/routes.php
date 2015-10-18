@@ -76,7 +76,10 @@ Route::group(array('before' => 'auth'), function(){
 
 	Route::get('individual_view', 'ViewpageController@index');
 	Route::get('individual_view/create', 'ViewpageController@create');
-	Route::get('individual/edit_view', 'ViewpageController@edit_view');	
+	Route::get('individual/edit_view', 'ViewpageController@edit_view');
+	// Route::get('individual/links_view', 'ViewpageController@links_view');
+	Route::get('individual/thanks_view', 'ViewpageController@thanks_view');	
+	// Route::get('individual/posts_view', 'ViewpageController@posts_view');	
 
 	Route::get('notification_view', 'PagesController@notification');
 	Route::get('notification_view/notification', 'PagesController@notification');

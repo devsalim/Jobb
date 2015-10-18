@@ -12,7 +12,7 @@
 
 <div class="col-md-9" style="padding-left: 0px;">
 	<label style="font-size: 19px;text-align: center;width: 100%;border-bottom:1px solid darkred;">Post Job Details</label>										
-<div class="" id="form_wizard">	
+<div class="" id="form_wizard_1">	
 <section>
 	<form action="{{ url('job/store') }}" method="post" id="submit_form" class="form-horizontal">
 		<input type="hidden" name="_token" value="{{ csrf_token() }}">

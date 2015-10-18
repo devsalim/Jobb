@@ -486,12 +486,15 @@ ul{
 }
 
 .media-body-left {
-    float: left;
-    min-width: 200px;
+   float: left;
+    min-width: 250px;
+    padding-bottom: 5px;
+    margin: 10px;
 }
 .media-body-right {
     float: left;
     min-width: 80px;
+    margin: 10px;
 }
 .media-left img {
     width: 60px;
@@ -499,6 +502,7 @@ ul{
     background-color: #EBEBEB;
     border: 1px solid #ddd;
     padding: 3px;
+    border-radius: 30px !important;
 }
 .select2-container-multi .select2-choices {
     padding: 0 5px 0 0;

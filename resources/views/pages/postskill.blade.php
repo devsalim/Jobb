@@ -3,10 +3,11 @@
 @section('content')
 
 								
-<label style="font-size: 19px;text-align: center;margin: auto;width: 75%;border-bottom:2px solid darkred;">Do you like to Post your Skill?<br>Post Skill for FREE!!</label>										
+
 	
 <div class="row">
 		<div class="col-md-9">
+			<label style="font-size: 19px;text-align: center;width:100%;border-bottom:2px solid darkred;">Do you like to Post your Skill?<br>Post Skill for FREE!!</label>	
 						<div class="portlet box blue" id="form_wizard_1">
 							
 							<div class="portlet-body form">
@@ -88,7 +89,7 @@
 														<div class="form-group">
 															<label>Skill Details</label>
 															<div class="" style=" padding-bottom: 10px;">
-																<textarea name="job_detail" class="wysihtml5 form-control" rows="6"></textarea>
+																<textarea name="job_detail" class="form-control" rows="6"></textarea>
 															</div>
 														</div>
 													</div>

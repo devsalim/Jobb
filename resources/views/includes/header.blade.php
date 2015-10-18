@@ -65,7 +65,7 @@
           <!-- END NOTIFICATION DROPDOWN -->
           <!-- BEGIN INBOX DROPDOWN -->
           <!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
-          <li class="dropdown dropdown-extended dropdown-inbox" id="header_inbox_bar">
+          <li class="dropdown dropdown-extended dropdown-inbox thank-fav-icon" id="header_inbox_bar">
             <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"  data-close-others="true">
             <i class="icon-like icon-color"></i>
             <span class="badge badge-default  @if(count($thanks) > 0) show @else hide @endif" style="background-color:lightcoral !important;">{{count($thanks)}}</span>
@@ -101,7 +101,7 @@
           <!-- END INBOX DROPDOWN -->
           <!-- BEGIN TODO DROPDOWN -->
           <!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
-          <li class="dropdown dropdown-extended dropdown-tasks" id="header_task_bar">
+          <li class="dropdown dropdown-extended dropdown-tasks thank-fav-icon" id="header_task_bar">
             <a href="/notification_view" class="dropdown-toggle @if($title == 'notify_view'){{'active'}}@endif" data-toggle="dropdown"  data-close-others="true">
               <i class="icon-pin icon-color"></i>
               

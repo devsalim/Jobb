@@ -8,8 +8,32 @@
       <i class="fa fa-bars" style="font-size: 18px;"></i>
     </a>
   </div>
+   <div class="row  nav-thank-fav" id="nav-than-fav">
+      <div class="col-md-4 col-sm-4 col-xs-4">
+        <a href="/individual/thanks_view" class="icon-btn" style="border: 0 !important;background-color: transparent !important;min-width:55px !important;">
+          <i class="icon-like" style="color: white"></i>
+          <div style="color: whitesmoke;">
+             Thanks
+          </div>
+          <span class="badge badge-danger  " style="background-color: #3598dc;right:8px !important;">
+          3</span>
+        </a>
+      </div>
+      <div class="col-md-4 col-sm-4 col-xs-4">
+        <a href="/connections/create" class="icon-btn" style="border: 0 !important;background-color: transparent !important;">
+          <i class="icon-pin" style="color:yellow"></i>
+          <div style="color: whitesmoke;">
+             Favourite
+          </div>
+          <span class="badge badge-danger" style="background-color: #26a69a;right:15px !important;">
+         2 </span>
+        </a>
+      </div>
+    </div>
     <!-- BEGIN SIDEBAR MENU1 -->
-    <ul class="page-sidebar-menu page-sidebar-menu-compact page-sidebar-menu-hover-submenu" data-slide-speed="200"  data-auto-scroll="false" data-slide-speed="200">
+    <ul class="page-sidebar-menu page-sidebar-menu-compact page-sidebar-menu-hover-submenu thank-fav-icon-disp" data-slide-speed="200"  data-auto-scroll="false" data-slide-speed="200">
+      
+          <!-- BEGIN USER LOGIN DROPDOWN -->
       <li >
         <div class="user-short-detail-container">
           <div class="profile-userpic user-image">
@@ -43,7 +67,8 @@
           <h3 class="form-title user-location">
             {{ $session_user->city }}
           </h3>
-          @endif          
+          @endif 
+
         </div>
       </li>
       <li class="@if($title == 'home'){{'active'}}@endif">

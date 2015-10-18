@@ -32,9 +32,9 @@
 											@if(Auth::user()->id == $post->individual_id || Auth::user()->id == $post->corporate_id)
 											<div class="timeline-body-head-caption">
 												@if($post->post_type == 'job')
-												<a class="user-link"><i class="fa fa-unlink (alias)" style="color:lightslategray;"></i></a><a style="padding: 0px 0px 0px 32px;font-size: 15px;text-decoration:none;font-weight:600;">You have</a>
+												<a class="user-link"><i class="fa fa-unlink (alias)" style="color:lightslategray;"></i></a><a class="link-label">You have</a>
 												@else
-												<a class="user-link-click"><i class="fa fa-link" style="color:white;"></i></a><a style="padding: 0px 0px 0px 32px;font-size: 15px;text-decoration:none;font-weight:600;">You have</a>
+												<a class="user-link-click"><i class="fa fa-link" style="color:white;"></i></a><a class="link-label">You have</a>
 												@endif
 												<span class="timeline-body-time font-grey-cascade">Posted at 
 													{{ date('M d, Y', strtotime($post->created_at)) }}
@@ -336,8 +336,8 @@
 												@endif
 												<div class="btn-group dropup share-bar">
 													<div class="btn-group dropup">
-														<button class="btn dropdown-toggle" type="button" data-toggle="dropdown" style="background-color: transparent;padding: 18px 5px 7px 6px;">
-														<i class="fa fa-share-square-o" style="font-size: 23px;color: darkslateblue;"></i><span class="badge-share">1</span>
+														<button class="btn dropdown-toggle" type="button" data-toggle="dropdown" style="background-color: transparent;padding: 18px 20px 7px 6px;">
+														<i class="fa fa-share-square-o" style="font-size: 23px;color: darkslateblue;"></i><span class="badge-share">132</span>
 														</button>
 														<ul class="dropdown-menu pull-right" role="menu" style="min-width:0;box-shadow:0 0 !important">
 															<li style="background-color: #3b5998;">
@@ -351,7 +351,9 @@
 															</li>
 														</ul>
 													</div>
+
 												</div>
+												<div class="report"><i class="fa fa-warning (alias)" style="color:red;"></i></div>
 											</div>
 											@else
 											<div class="post-job post-icon-bar">
