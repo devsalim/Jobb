@@ -552,3 +552,17 @@ ul{
 .selectpicker {
     max-width: 256px;
 }
+
+@media (max-width: 767px){
+    .nav-justified>li {
+        display: block;
+        width: 24%;
+        float: left;
+    }
+    .nav{
+        padding-left: 0;
+    }
+    .form-wizard .steps > li > a {
+        text-align: center;
+    }
+}
