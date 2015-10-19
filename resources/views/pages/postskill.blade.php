@@ -430,7 +430,7 @@
 										</div>
 										<div class="form-actions">
 											<div class="row">
-												<div class="col-md-offset-3 col-md-9">
+												<div class="col-md-offset-3" style="margin:auto;display:table">
 													<a href="javascript:;" class="btn default button-previous">
 													<i class="m-icon-swapleft"></i> Back </a>
 													<a href="javascript:;" class="btn blue button-next">
