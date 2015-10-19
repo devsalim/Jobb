@@ -288,8 +288,9 @@
 													{{-- {{ $post->postactivity->where('user_id', Auth::user()->induser_id)->sum('thanks') }} --}}
 													</span>
 													
-			@if($post->post_type == 'job' && Auth::user()->induser_id != $post->individual_id)		
-												@if($post->postactivity->where('user_id', Auth::user()->induser_id)->isEmpty())
+														@if($post->post_type == 'job' && Auth::user()->id != $post->individual_id)		
+													@if($post->postactivity->where('user_id', Auth::user()->induser_id)->isEmpty())
+
 														<form action="/job/apply" method="post" id="post-apply-{{$post->id}}" data-id="{{$post->id}}">	
 															<input type="hidden" name="_token" value="{{ csrf_token() }}">
 															<input type="hidden" name="apply" value="{{ $post->id }}">
@@ -311,7 +312,7 @@
 													</form>							
 													@endif	
 												@endif	
-												@if(count($post->postactivity) > 0 && $post->post_type == 'skill' && Auth::user()->id != $post->individual_id)		
+												@if($post->post_type == 'skill' && Auth::user()->id != $post->individual_id)		
 													@if($post->postactivity->where('user_id', Auth::user()->induser_id)->isEmpty())
 														<form action="/job/contact" method="post" id="post-contact-{{$post->id}}" data-id="{{$post->id}}">	
 															<input type="hidden" name="_token" value="{{ csrf_token() }}">

@@ -1,5 +1,4 @@
 @extends('master')
-
 @section('css')
 <link rel="stylesheet" type="text/css" href="/assets/css/demo.css" />
 <link rel="stylesheet" type="text/css" href="/assets/css/tabs.css" />
@@ -7,6 +6,10 @@
 @stop	
 
 @section('content')					
+
+@section('content')
+																			
+	
 
 
 <div class="col-md-9" style="padding-left: 0px;">
@@ -120,8 +123,9 @@
 			</section>
 			<section class="tab-pane" id="section-linetriangle-2">
 				<div class="col-md-5">
-				<div class="form-group">					
-					<input type="hidden" name="_token" value="{{ csrf_token() }}">
+				<div class="form-group">
+					<!-- <form action="{{ url('job/newskill') }}" id="newskillfrm" method="post">					
+					<input type="hidden" name="_token" value="{{ csrf_token() }}"> -->
 					<div class="input-group">
 						<input type="text" name="name" id="newskill" class="form-control" placeholder="Search for skill...">
 						<span class="input-group-btn">
@@ -450,9 +454,6 @@ jQuery(document).ready(function() {
     FormWizard.init();
 });
 </script>
-<!-- new test code -->
-
-  <!-- new test code end -->
 <script type="text/javascript">
     $(function () {
     	$("#hide-sal").hide();

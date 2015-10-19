@@ -47,3 +47,9 @@ Temporary Items
 /vendor
 *.jpg
 *.docx
+resources/views/pages/home1.blade.php
+resources/views/pages/home2.blade.php
+resources/views/pages/Test.blade.php
+*.php
+resources/views/pages/Test.blade.php
+resources/views/pages/postskill.blade.php
