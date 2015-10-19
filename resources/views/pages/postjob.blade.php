@@ -129,7 +129,7 @@
 					<div class="input-group">
 						<input type="text" name="name" id="newskill" class="form-control" placeholder="Search for skill...">
 						<span class="input-group-btn">
-							<button id="add-new-skill" class="btn btn-success" type="button"><i class="icon-plus"></i> Add <i class="fa fa-arrow-right fa-fw"/></i></button>	
+							<button id="add-new-skill" class="btn btn-success" type="button"><i class="icon-plus"></i> Add</button>	
 						</span>
 					</div>
 				</div>

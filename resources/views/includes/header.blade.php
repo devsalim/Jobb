@@ -128,6 +128,14 @@
                 </span>
               </div>
             </form>
+            <!-- <form class="search-form" action="extra_search.html" method="GET">
+        <div class="input-group">
+          <input type="text" class="form-control input-sm" placeholder="Search..." name="query">
+          <span class="input-group-btn">
+          <a href="javascript:;" class="btn submit"><i class="icon-magnifier"></i></a>
+          </span>
+        </div>
+      </form> -->
       <div class="btn-group" style="margin: 0px 17px;">
         <button type="button" class="btn btn-circle green-haze dropdown-toggle" data-toggle="dropdown">
         <span class="">Post</span>
