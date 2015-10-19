@@ -34,8 +34,8 @@ class GroupController extends Controller {
 						->groupBy('groups.id')
 						->get(['groups.id', 'groups.group_name', 'groups.admin_id']);
 
-		$connections = Auth::user()->induser->friends->lists('fname', 'id');
-		return view('pages.group', compact('groups', 'connections', 'title'));
+		// $connections = Auth::user()->induser->friends->lists('fname', 'id');
+		return view('pages.group', compact('groups', 'title'));
 	}
 
 	/**
@@ -73,7 +73,7 @@ class GroupController extends Controller {
 	{
 		$group = new Group();
 		$group->group_name = $request['group_name'];
-		$group->admin_id =  Auth::user()->id;
+		$group->admin_id =  Auth::user()->induser_id;
 		$group->save();
 		return redirect('/group');	
 	}

@@ -66,8 +66,7 @@ class JobController extends Controller {
 		$request['post_type'] = 'job';
 
 		$skillIds = explode(',', $request['linked_skill_id']);
-
-		// $request['skill_list'] = implode(', ', $request['skill_list']);
+		unset ($skillIds[count($skillIds)-1]);
 
 		$post = Postjob::create($request->all());
 		$post->skills()->attach($skillIds); 
@@ -239,7 +238,7 @@ class JobController extends Controller {
 
 	public function addNewSkills(Request $request){
 		if($request->ajax()){
-			$skill = Skills::create($request->all());
+			$skill = Skills::create(['name' => $request['name']]);
 			return $skill->id;
 		}
 	}

@@ -71,31 +71,31 @@ var FormWizard = function () {
                 // set wizard title
                 //$('.step-title', $('#form_wizard')).text('Step ' + (index + 1) + ' of ' + total);
                 // set done steps
-                jQuery('li', $('#form_wizard')).removeClass("done");
+                jQuery('li', $('#form_wizard_1')).removeClass("done");
                 var li_list = navigation.find('li');
                 for (var i = 0; i < index; i++) {
                     jQuery(li_list[i]).addClass("done");
                 }
 
                 if (current == 1) {
-                    $('#form_wizard').find('.button-previous').hide();
+                    $('#form_wizard_1').find('.button-previous').hide();
                 } else {
-                    $('#form_wizard').find('.button-previous').show();
+                    $('#form_wizard_1').find('.button-previous').show();
                 }
 
                 if (current >= total) {
-                    $('#form_wizard').find('.button-next').hide();
-                    $('#form_wizard').find('.button-submit').show();
+                    $('#form_wizard_1').find('.button-next').hide();
+                    $('#form_wizard_1').find('.button-submit').show();
                     displayConfirm();
                 } else {
-                    $('#form_wizard').find('.button-next').show();
-                    $('#form_wizard').find('.button-submit').hide();
+                    $('#form_wizard_1').find('.button-next').show();
+                    $('#form_wizard_1').find('.button-submit').hide();
                 }
                 Metronic.scrollTo($('.page-title'));
             }
 
             // default form wizard
-            $('#form_wizard').bootstrapWizard({
+            $('#form_wizard_1').bootstrapWizard({
                 'nextSelector': '.button-next',
                 'previousSelector': '.button-previous',
                 onTabClick: function (tab, navigation, index, clickedIndex) {
@@ -131,8 +131,8 @@ var FormWizard = function () {
                 }
             });
 
-            $('#form_wizard').find('.button-previous').hide();
-            $('#form_wizard .button-submit').click(function () {
+            $('#form_wizard_1').find('.button-previous').hide();
+            $('#form_wizard_1 .button-submit').click(function () {
                 alert('Finished! Hope you like it :)');
                 
             }).hide();
