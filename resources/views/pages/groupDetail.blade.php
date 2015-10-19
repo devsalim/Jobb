@@ -78,8 +78,7 @@
 								</div>
 								<div class="media-body-right">
 								 	<span class="input-group-btn btn-right">
-									 	@if($group->admin_id == Auth::user()->induser_id && 
-									 		$group->admin_id != $user->id)
+									 	@if($user->admin_id == Auth::user()->induser_id)
 										<form action="{{ url('/group/deleteuser') }}" method="post">
 											<input type="hidden" name="_token" value="{{ csrf_token() }}">
 											<input type="hidden" name="id" value="{{$user->groups_users_id}}">
@@ -102,7 +101,8 @@
 				<div class="tab-pane" id="tab_5_2">
 					<ul class="media-list">
 					@if(count($connections) > 0)
-					@foreach($connections as $connection)							
+					@foreach($connections as $connection)	
+						@if($connection->id != $group->admin_id)						
 						  <li class="media">
 						    <div class="media-left">
 						      <a href="#">
@@ -130,7 +130,8 @@
 									</span>								 	
 								 </div>
 						    </div>
-						  </li>								
+						  </li>		
+						  @endif						
 					@endforeach
 					@else
 					<li>No user</li>

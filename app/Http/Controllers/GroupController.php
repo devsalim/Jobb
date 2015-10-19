@@ -129,9 +129,12 @@ class GroupController extends Controller {
 		$title = 'group';
 		$users = Induser::leftjoin('groups_users', 'indusers.id', '=', 'groups_users.user_id')
 						->leftjoin('groups', 'groups.admin_id', '=', 'indusers.id')
+						->join('groups as g', 'g.id', '=', 'groups_users.group_id')
 						->where('groups_users.group_id', '=', $id)
-						->orWhere('groups.id', '=', $id)
+						->where('g.id', '=', $id)
+						->whereNotNull('groups_users.group_id')
 						->orderBy('groups.admin_id', 'desc')
+						->groupBy('indusers.id')
 						->get(['indusers.id', 
 							   'indusers.fname', 
 							   'indusers.lname', 
@@ -141,23 +144,29 @@ class GroupController extends Controller {
 							   'indusers.profile_pic',
 							   'groups_users.id as groups_users_id',
 							   'groups_users.group_id',
-							   'groups.admin_id'
+							   'g.admin_id'
 							]);		
-		$connectionsList = Auth::user()->induser->friends->lists('fname','id');
+		// $connectionsList = Auth::user()->induser->friends->lists('fname','id');
 		$connections = DB::select('select id,fname,lname,working_at,city,state,profile_pic from indusers
 									where indusers.id in (
-									select connections.connection_user_id from connections
-									where connections.user_id=? and connections.status=1
-									and connections.connection_user_id not in (
-									select groups_users.user_id from groups_users
-									where groups_users.group_id=?
-									and groups_users.user_id in 
-									(select connections.connection_user_id from indusers, connections
-									where indusers.id = connections.user_id
-									and indusers.id = ?)))', [Auth::user()->induser_id, $id, Auth::user()->induser_id]);
+
+									select connections.user_id as id from connections
+									where connections.connection_user_id=?
+									 and connections.status=1 
+									 and connections.user_id not in (
+										select groups_users.user_id from groups_users
+										where groups_users.group_id=?)
+									union 
+									select connections.connection_user_id as id from connections
+									where connections.user_id=?
+									 and connections.status=1
+									 and connections.connection_user_id not in (
+										select groups_users.user_id from groups_users
+										where groups_users.group_id=?)
+								)', [Auth::user()->induser_id, $id, Auth::user()->induser_id, $id]);
 
 		$group = Group::findOrFail($id);
-		return view('pages.groupDetail', compact('users', 'title', 'connections', 'connectionsList', 'group'));
+		return view('pages.groupDetail', compact('users', 'title', 'connections', 'group'));
 	}
 
 	public function addUser(Request $request){
