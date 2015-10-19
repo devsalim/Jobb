@@ -1,9 +1,11 @@
 @extends('master')
 @section('css')
 <link rel="stylesheet" type="text/css" href="/assets/css/demo.css" />
-    <link rel="stylesheet" type="text/css" href="/assets/css/tabs.css" />
-    <link rel="stylesheet" type="text/css" href="/assets/css/tabstyles.css" />
-  @stop								
+<link rel="stylesheet" type="text/css" href="/assets/css/tabs.css" />
+<link rel="stylesheet" type="text/css" href="/assets/css/tabstyles.css" />
+@stop	
+
+@section('content')					
 
 @section('content')
 																			
@@ -130,7 +132,6 @@
 							<button id="add-new-skill" class="btn btn-success" type="button"><i class="icon-plus"></i> Add <i class="fa fa-arrow-right fa-fw"/></i></button>	
 						</span>
 					</div>
-					<!-- </form> -->
 				</div>
 			</div>
 			<div class="col-md-2"></div>
@@ -453,8 +454,6 @@ jQuery(document).ready(function() {
     FormWizard.init();
 });
 </script>
-<!-- new test code -->
-  <!-- new test code end -->
 <script type="text/javascript">
     $(function () {
     	$("#hide-sal").hide();
@@ -544,9 +543,9 @@ $(document).ready(function(){
 	  	event.preventDefault();
 	  	if (!$('#newskill').val()) {
 	  		alert('Please enter some skill to add.');
-	  		// return false;
+	  		return false;
 	  	}else{
-		  	var formData = $('#newskill').serialize(); 
+		  	var name = $('#newskill').val(); 
 		    $.ajaxSetup({
 				headers: {
 					'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -555,7 +554,7 @@ $(document).ready(function(){
 		    $.ajax({
 		      url: "{{ url('job/newskill') }}",
 		      type: "POST",
-		      data: formData,
+		      data: { name: name },
 		      cache : false,
 		      success: function(data){
 		        if(data > 0){

@@ -290,6 +290,7 @@
 													
 														@if($post->post_type == 'job' && Auth::user()->id != $post->individual_id)		
 													@if($post->postactivity->where('user_id', Auth::user()->induser_id)->isEmpty())
+
 														<form action="/job/apply" method="post" id="post-apply-{{$post->id}}" data-id="{{$post->id}}">	
 															<input type="hidden" name="_token" value="{{ csrf_token() }}">
 															<input type="hidden" name="apply" value="{{ $post->id }}">
@@ -420,6 +421,7 @@
 	});
 
 $(document).ready(function(){
+
   $('.like-btn').on('click',function(event){  	    
   	event.preventDefault();
   	var post_id = $(this).parent().data('id');
