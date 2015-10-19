@@ -1,13 +1,13 @@
 @extends('master')
-
-@section('content')
-																			
-	
 @section('css')
 <link rel="stylesheet" type="text/css" href="/assets/css/demo.css" />
     <link rel="stylesheet" type="text/css" href="/assets/css/tabs.css" />
     <link rel="stylesheet" type="text/css" href="/assets/css/tabstyles.css" />
   @stop								
+
+@section('content')
+																			
+	
 
 
 <div class="col-md-9" style="padding-left: 0px;">
@@ -122,15 +122,15 @@
 			<section class="tab-pane" id="section-linetriangle-2">
 				<div class="col-md-5">
 				<div class="form-group">
-					<form action="{{ url('job/newskill') }}" id="newskillfrm" method="post">					
-					<input type="hidden" name="_token" value="{{ csrf_token() }}">
+					<!-- <form action="{{ url('job/newskill') }}" id="newskillfrm" method="post">					
+					<input type="hidden" name="_token" value="{{ csrf_token() }}"> -->
 					<div class="input-group">
 						<input type="text" name="name" id="newskill" class="form-control" placeholder="Search for skill...">
 						<span class="input-group-btn">
 							<button id="add-new-skill" class="btn btn-success" type="button"><i class="icon-plus"></i> Add <i class="fa fa-arrow-right fa-fw"/></i></button>	
 						</span>
 					</div>
-					</form>
+					<!-- </form> -->
 				</div>
 			</div>
 			<div class="col-md-2"></div>
@@ -454,51 +454,6 @@ jQuery(document).ready(function() {
 });
 </script>
 <!-- new test code -->
-<script type="text/javascript">
-  $(document).ready(function () {
-	var navListItems = $('div.setup-panel div a'),
-		allWells = $('.setup-content'),
-		allNextBtn = $('.nextBtn');
-
-  
-  allWells.hide();
-
-  navListItems.click(function (e) {
-	  e.preventDefault();
-	  var $target = $($(this).attr('href')),
-			  $item = $(this);
-
-	  if (!$item.hasClass('disabled')) {
-		  navListItems.removeClass('btn-primary').addClass('btn-default');
-		  $item.addClass('btn-primary');
-		  allWells.hide();
-		  $target.show();
-		  $target.find('input:eq(0)').focus();
-	  }
-  });
-
-  allNextBtn.click(function(){
-	  var curStep = $(this).closest(".setup-content"),
-		  curStepBtn = curStep.attr("id"),
-		  nextStepWizard = $('div.setup-panel div a[href="#' + curStepBtn + '"]').parent().next().children("a"),
-		  curInputs = curStep.find("input[type='text'],input[type='url'],textarea[textarea]"),
-		  isValid = true;
-
-	  $(".form-group").removeClass("has-error");
-	  for(var i=0; i<curInputs.length; i++){
-		  if (!curInputs[i].validity.valid){
-			  isValid = false;
-			  $(curInputs[i]).closest(".form-group").addClass("has-error");
-		  }
-	  }
-
-	  if (isValid)
-		  nextStepWizard.removeAttr('disabled').trigger('click');
-  });
-
-  $('div.setup-panel div a.btn-primary').trigger('click');
-});
-  </script>
   <!-- new test code end -->
 <script type="text/javascript">
     $(function () {

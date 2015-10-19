@@ -73,7 +73,7 @@ class GroupController extends Controller {
 	{
 		$group = new Group();
 		$group->group_name = $request['group_name'];
-		$group->admin_id =  Auth::user()->id;
+		$group->admin_id =  Auth::user()->induser_id;
 		$group->save();
 		return redirect('/group');	
 	}

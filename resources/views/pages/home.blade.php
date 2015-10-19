@@ -275,7 +275,7 @@
 												</div>
 												@if($expired != 1)
 												<div class="post-{{ $post->post_type }} post-icon-bar">
-													<form action="/job/like" method="post" id="post-{{$post->id}}" data-id="{{$post->id}}">						
+													<form action="/job/like" method="post" id="post-like-{{$post->id}}" data-id="{{$post->id}}">						
 														<input type="hidden" name="_token" value="{{ csrf_token() }}">
 														<input type="hidden" name="like" value="{{ $post->id }}">
 														<button class="btn like-btn"  type="button" style="background-color: transparent;">
@@ -288,7 +288,7 @@
 													{{-- {{ $post->postactivity->where('user_id', Auth::user()->induser_id)->sum('thanks') }} --}}
 													</span>
 													
-														@if(count($post->postactivity) > 0 && $post->post_type == 'job' && Auth::user()->id != $post->individual_id)		
+														@if($post->post_type == 'job' && Auth::user()->id != $post->individual_id)		
 													@if($post->postactivity->where('user_id', Auth::user()->induser_id)->isEmpty())
 														<form action="/job/apply" method="post" id="post-apply-{{$post->id}}" data-id="{{$post->id}}">	
 															<input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -311,7 +311,7 @@
 													</form>							
 													@endif	
 												@endif	
-												@if(count($post->postactivity) > 0 && $post->post_type == 'skill' && Auth::user()->id != $post->individual_id)		
+												@if($post->post_type == 'skill' && Auth::user()->id != $post->individual_id)		
 													@if($post->postactivity->where('user_id', Auth::user()->induser_id)->isEmpty())
 														<form action="/job/contact" method="post" id="post-contact-{{$post->id}}" data-id="{{$post->id}}">	
 															<input type="hidden" name="_token" value="{{ csrf_token() }}">
