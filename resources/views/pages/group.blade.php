@@ -68,7 +68,7 @@
 								<div class="input-group-control">
 									<label class="col-md-10 control-label" for="form_control_1" >
 										<a href="/group/{{ $group->id }}">{{ $group->group_name }}</a>: {{count($group->users)}} <span style="font-weight:400;font-size:13px;">Members</span> <br/>
-										<span>Created by: {{ Auth::user()->induser->fname }} {{ Auth::user()->induser->lname }}</span><span style="font-size:12px;font-weight:normal"> </span>, <span>Total Post: 5</span>
+										<span>Created by: {{ $group->admin_id }}</span><span style="font-size:12px;font-weight:normal"> </span>, <span>Total Post: 5</span>
 									</label>
 								</div>
 								<span class="input-group-btn btn-right">

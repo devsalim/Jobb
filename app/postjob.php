@@ -15,6 +15,7 @@ class Postjob extends Model {
 							'max_exp', 
 							'min_sal', 
 							'max_sal', 
+							'salary_type',
 							'job_detail', 
 							'linked_skill', 
 							'post_duration',

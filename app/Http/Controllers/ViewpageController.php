@@ -126,20 +126,4 @@ class ViewpageController extends Controller {
 		return view('pages.notification_view', compact('user', 'title'));
 	}
 
-	// public function posts_view()
-	// {
-	// 	$title = 'posts_view';
-	// 	if (Auth::check()) {
-	// 		$title = 'mypost';
-	// 		if(Auth::user()->identifier == 1){
-	// 			$posts = Postjob::with('induser', 'postActivity', 'postactivity.user')->where('individual_id', '=', Auth::user()->induser_id)->orderBy('id', 'desc')->get();
-	// 		}else if(Auth::user()->identifier == 2){
-	// 			$posts = Postjob::with('corpuser')->where('corporate_id', '=', Auth::user()->corpuser_id)->orderBy('id', 'desc')->get();
-	// 		}
-	// 		return view('pages.mypost', compact('posts', 'title'));
-	// 	}else{
-	// 		return redirect('login');
-	// 	}	
-	// 	return view('pages.mypost', compact('user', 'title'));
-	// }
 }

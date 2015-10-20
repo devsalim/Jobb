@@ -37,7 +37,7 @@
             </a>
             <ul class="dropdown-menu">
               <li class="external">
-                <h3>You have <span class="bold">7 New</span> Messages</h3>
+                <h3>You have <span class="bold">{{count($applications)}}</span> Messages</h3>
                 <a class="@if($title == 'notify_view'){{'active'}}@endif" href="/notification_view" style="color: darkblue;">view all</a>
               </li>
               <li>
@@ -72,7 +72,7 @@
             </a>
             <ul class="dropdown-menu">
               <li class="external">
-                <h3>You have <span class="bold">7 New</span> Messages</h3>
+                <h3>You have <span class="bold">{{count($thanks)}}</span> Messages</h3>
                 <a class="@if($title == 'notify_view'){{'active'}}@endif" href="/notification_view" style="color: darkblue;">view all</a>
               </li>
               <li>

@@ -339,13 +339,28 @@
 							<!--/span-->
 						</div>
 						<div class="row-md-10">
-							<div class="col-md-12">
+							<div class="col-md-6">
 								<div class="form-group">
-									<label>Key Skills</label>
-									<input type="hidden" name="linked_skill" id="select2_sample5" class="form-control select2" value="{{ $user->linked_skill }}">
+									<!-- <form action="{{ url('job/newskill') }}" id="newskillfrm" method="post">					
+									<input type="hidden" name="_token" value="{{ csrf_token() }}"> -->
+									<div class="input-group">
+										<input type="text" name="name" id="newskill" class="form-control" placeholder="Search for skill...">
+										<span class="input-group-btn">
+											<button id="add-new-skill" class="btn btn-success" type="button"><i class="icon-plus"></i> Add</button>	
+										</span>
+									</div>
 								</div>
 							</div>
-							<!--/span-->
+							
+							<div class="col-md-6">
+								<div class="form-group">
+								    <input type="text" id="linked_skill" name="linked_skill" 
+								     		class="form-control select2"
+								     		placeholder="List of skills to be added">
+								    <input type="hidden" id="linked_skill_id" name="linked_skill_id" 
+								     		class="form-control">
+								</div>
+							</div>
 						</div>
 
 						<div class="row-md-10">
@@ -394,5 +409,95 @@
 	    ComponentsDropdowns.init();
 	    ComponentsEditors.init();
 	});   
+</script>
+<script type="text/javascript">
+	 $(function(){
+
+	 	function split( val ) {
+	      return val.split( /,\s*/ );
+	    }
+	    function extractLast( term ) {
+	      return split( term ).pop();
+	    }
+
+		$( "#newskill" )
+		.bind( "keydown", function( event ) {
+			if ( event.keyCode === $.ui.keyCode.TAB && $( this ).autocomplete( "instance" ).menu.active ) {
+			  event.preventDefault();
+			}
+		})
+		.autocomplete({
+			source: function( request, response ) {
+				$.getJSON( "/job/skillSearch", {
+					term: extractLast( request.term )
+				}, response );
+			},
+			search: function() {
+				var term = extractLast( this.value );
+				if ( term.length < 2 ) {
+					return false;
+				}
+			},
+			focus: function() {
+				return false;
+			},
+			select: function(event, ui) {
+				var terms = split( $('#linked_skill').val() );
+				var termsId = split( $('#linked_skill_id').val() );
+				// remove the current input
+				terms.pop();
+				termsId.pop();
+				// add the selected item
+				terms.push( ui.item.value );
+				termsId.push( ui.item.id );
+				// add placeholder to get the comma-and-space at the end
+				terms.push( "" );
+				termsId.push( "" );
+				$('#linked_skill').val(terms.join( ", " ));
+				$('#linked_skill_id').val(termsId.join( ", " ));
+				$(this).val("");
+				return false;
+			}
+		});
+	});
+
+
+$(document).ready(function(){
+	$('#add-new-skill').on('click',function(event){  	    
+	  	event.preventDefault();
+	  	if (!$('#newskill').val()) {
+	  		alert('Please enter some skill to add.');
+	  		return false;
+	  	}else{
+		  	var name = $('#newskill').val(); 
+		    $.ajaxSetup({
+				headers: {
+					'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+				}
+			});
+		    $.ajax({
+		      url: "{{ url('job/newskill') }}",
+		      type: "POST",
+		      data: { name: name },
+		      cache : false,
+		      success: function(data){
+		        if(data > 0){
+		        	$newSkill = $('#newskill').val();
+		        	$newSkillId = data;
+		        	$selectedSkill = $('#linked_skill').val();
+		        	$selectedSkillId = $('#linked_skill_id').val();
+		        	$('#linked_skill').val($selectedSkill+""+$newSkill+", ");
+		        	$('#linked_skill_id').val($selectedSkillId+""+$newSkillId+", ");
+		        	$('#newskill').val("");
+		        }
+		      },
+		      error: function(data) {
+		      	alert('some error occured...');
+		      }
+		    }); 
+		    return false;
+		}
+	});
+});
 </script>
 @stop
