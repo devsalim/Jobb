@@ -48,9 +48,8 @@
 <link rel="stylesheet" type="text/css" href="{{ asset('/assets/global/plugins/bootstrap-editable/bootstrap-editable/css/bootstrap-editable.css') }}"/>
 <link rel="stylesheet" type="text/css" href="{{ asset('/assets/global/plugins/bootstrap-editable/inputs-ext/address/address.css') }}"/>
 
-<script src="{{ asset('/assets/global/plugins/pace/pace.min.js') }}" type="text/javascript"></script>
-<link href="{{ asset('/assets/global/plugins/pace/themes/pace-theme-flash.css') }}" rel="stylesheet" type="text/css"/>
-<!-- END PAGE LEVEL STYLES -->
+<script src="../../assets/global/plugins/pace/pace.min.js" type="text/javascript"></script>
+<link href="../../assets/global/plugins/pace/themes/pace-theme-minimal.css" rel="stylesheet" type="text/css"/><!-- END PAGE LEVEL STYLES -->
 <!-- BEGIN THEME STYLES -->
 <link href="{{ asset('/assets/global/css/components.css') }}" id="style_components" rel="stylesheet" type="text/css"/>
 <link href="{{ asset('/assets/global/css/plugins.css') }}" rel="stylesheet" type="text/css"/>

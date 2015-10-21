@@ -67,7 +67,7 @@ class JobController extends Controller {
 
 		$skillIds = explode(',', $request['linked_skill_id']);
 		unset ($skillIds[count($skillIds)-1]);
-
+		$request['unique_id'] = "J".rand(111,999).rand(111,999);
 		$post = Postjob::create($request->all());
 		$post->skills()->attach($skillIds); 
 

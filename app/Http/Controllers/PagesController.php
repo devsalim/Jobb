@@ -7,6 +7,8 @@ use Request;
 use App\Induser;
 use App\Corpuser;
 use App\Postjob;
+use App\Postactivity;
+use App\Connections;
 use Auth;
 
 class PagesController extends Controller {
@@ -60,8 +62,37 @@ class PagesController extends Controller {
 
 	public function notification(){
 		$title = 'notify_view';
-		return view('pages.notification_view', compact('user', 'title'));
+		$user = Induser::where('id', '=', Auth::user()->induser_id)->first();
+		$applications = Postactivity::with('user', 'post')
+									->join('postjobs', 'postjobs.id', '=', 'postactivities.post_id')
+									->where('postjobs.individual_id', '=', Auth::user()->induser_id)
+									->where('postactivities.apply', '=', 1)
+									->orderBy('postactivities.id', 'desc')
+									->take(5)
+									->get(['postactivities.id', 'postactivities.apply', 'postactivities.apply_dtTime', 'postactivities.user_id', 'postactivities.post_id']);
+		$thanks = Postactivity::with('user', 'post')
+						      ->join('postjobs', 'postjobs.id', '=', 'postactivities.post_id')
+							  ->where('postjobs.individual_id', '=', Auth::user()->induser_id)
+							  ->where('postactivities.thanks', '=', 1)
+						      ->orderBy('postactivities.id', 'desc')
+						      ->take(5)
+						      ->get(['postactivities.id', 'postactivities.thanks', 'postactivities.thanks_dtTime', 'postactivities.user_id', 'postactivities.post_id']);
+		$favourites = Postactivity::with('user')
+							      ->where('fav_post', '=', 1)
+							      ->where('user_id', '=', Auth::user()->induser_id)
+							      ->orderBy('id', 'desc')
+						          ->get(['id', 'fav_post', 'fav_post_dtTime', 'user_id', 'post_id']);
+	
+		return view('pages.notification_view', compact('user', 'applications', 'thanks', 'favourites', 'title'));
 	}
 	
-	
+	public function profile($id)
+	{		
+		$title = 'profile';
+		$user = Induser::findOrFail($id);
+		$thanks = Postactivity::where('user_id', '=', $id)->sum('thanks');
+		$posts = Postjob::where('individual_id', '=', $id)->count('id');
+		$links = Connections::where('user_id', '=', $id)->orWhere('connection_user_id', '=', $id)->count('id');
+		return view('pages.profile_indview', compact('title','thanks','posts','links','user'));
+	}
 }

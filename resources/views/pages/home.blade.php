@@ -8,7 +8,7 @@
 					@if (count($posts) > 0)
 						<?php $var = 1; ?>
 						@foreach($posts as $post)	
-						<div class="col-md-9" style="">												
+						<div class="col-md-9">												
 							<div class="timeline" >
 								<!-- TIMELINE ITEM -->
 								<div class="timeline-item time-item">
@@ -32,9 +32,10 @@
 											@if(Auth::user()->id == $post->individual_id || Auth::user()->id == $post->corporate_id)
 											<div class="timeline-body-head-caption">
 												@if($post->post_type == 'job')
-												<a class="user-link"><i class="fa fa-unlink (alias)" style="color:lightslategray;"></i></a><a class="link-label">You have</a>
+												<a   class="user-link"><i class="fa fa-unlink (alias)" style="color:lightslategray;"></i></a><a href="/profile/{{$post->individual_id}}" class="link-label">You have</a>
 												@else
-												<a class="user-link-click"><i class="fa fa-link" style="color:white;"></i></a><a class="link-label">You have</a>
+												<a class="user-link-click"><i class="fa fa-link" style="color:white;"></i></a>
+												<a class="link-label">You have</a>
 												@endif
 												<span class="timeline-body-time font-grey-cascade">Posted at 
 													{{ date('M d, Y', strtotime($post->created_at)) }}
@@ -43,9 +44,10 @@
 											@else
 											<div class="timeline-body-head-caption">
 												@if($post->post_type == 'job')
-												<a class="user-link"><i class="fa fa-unlink (alias)" style="color:lightslategray;"></i></a><a style="padding: 0px 0px 0px 32px;font-size: 15px;text-decoration:none;font-weight:600;">{{ $post->induser->fname }} {{ $post->induser->lname }}</a>
+												<a href="/profile/{{$post->individual_id}}" class="user-link"><i class="fa fa-unlink (alias)" style="color:lightslategray;"></i></a><a href="/profile/{{$post->individual_id}}" style="padding: 0px 0px 0px 32px;font-size: 15px;text-decoration:none;font-weight:600;">{{ $post->induser->fname }} {{ $post->induser->lname }}</a>
 												@else
-												<a class="user-link-click"><i class="fa fa-link" style="color:white;"></i></a><a style="padding: 0px 0px 0px 32px;font-size: 15px;text-decoration:none;font-weight:600;">{{ $post->induser->fname }} {{ $post->induser->lname }}</a>
+												<a class="user-link-click"><i class="fa fa-link" style="color:white;"></i></a>
+												<a href="/profile/{{$post->individual_id}}" style="padding: 0px 0px 0px 32px;font-size: 15px;text-decoration:none;font-weight:600;">{{ $post->induser->fname }} {{ $post->induser->lname }}</a>
 												@endif
 												<span class="timeline-body-time font-grey-cascade">Posted at 
 													{{ date('M d, Y', strtotime($post->created_at)) }}
@@ -317,7 +319,7 @@
 														<form action="/job/contact" method="post" id="post-contact-{{$post->id}}" data-id="{{$post->id}}">	
 															<input type="hidden" name="_token" value="{{ csrf_token() }}">
 															<input type="hidden" name="contact" value="{{ $post->id }}">
-															<button class="btn contact-btn blue btn-sm apply-contact-btn" 
+															<button class="btn contact-btn green btn-sm apply-contact-btn" 
 																	id="contact-btn-{{$post->id}}" type="button">Contact
 															</button>
 														</form>	
@@ -387,15 +389,7 @@
 										<li>
 											 Lorem ipsum dolor sit amet
 										</li>
-										<li>
-											 Consectetur adipiscing elit
-										</li>
-										<li>
-											 Integer molestie lorem at massa
-										</li>
-										<li>
-											 Facilisis in pretium nisl aliquet
-										</li>									
+																	
 									</ul>
 								</div>
 							</div>

@@ -3,8 +3,8 @@
 @section('content')
 <div class="row">
 		<div class="col-md-9">
-			<label style="font-size: 19px;text-align: center;width:100%;border-bottom:2px solid darkred;">Do you like to Post your Skill?<br>Post Skill for FREE!!</label>	
-						<div class="portlet box blue" id="form_wizard_1">
+			<label style="font-size: 18px;text-align: center;width:100%;border-bottom:2px solid darkred;">Do you like to Post your Skill?<br>Post Skill for FREE!!</label>	
+						<div class="portlet box" id="form_wizard_1">
 							
 							<div class="portlet-body form">
 								<!-- <form action="#" class="form-horizontal"  method="POST"> -->
@@ -46,7 +46,7 @@
 													</a>
 												</li>
 											</ul>
-											<div id="bar" class="progress progress-striped" role="progressbar">
+											<div id="bar" class="progress progress-striped" role="progressbar" style="background-color: transparent;height: 10px;">
 												<div class="progress-bar progress-bar-success">
 												</div>
 											</div>
@@ -312,34 +312,7 @@
 																	</div>
 																</div>
 															</div>
-															<!--/span-->
-														
-														
-															<div class="col-md-5">
-																<div class="form-group">
-																	<label>Alternate Email Id (Optional)</label>
-																	<div class="input-group">
-																	<span class="input-group-addon">
-																	<i class="icon-envelope" style="color:darkcyan;"></i>
-																	</span>
-																	<input type="text" name="alt_emailid" class="form-control" placeholder="Email Id">
-																	</div>
-																</div>
-															</div>
-															<!--/span-->
-															<div class="col-md-2"></div>
-															<div class="col-md-5">
-																<div class="form-group">
-																	<label>Alternate Phone No (Optional)</label>
-																	<div class="input-group">
-																	<span class="input-group-addon">
-																	<i class="icon-call-end" style="color:darkcyan;"></i>
-																	</span>
-																	<input type="text" name="alt_phone" class="form-control" placeholder="Phone No">
-																	</div>
-																</div>
-															</div>
-															<!--/span-->
+															<!--/span-->	
 													</div>
 													<div class="form-group">
 													

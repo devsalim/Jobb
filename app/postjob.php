@@ -29,7 +29,8 @@ class Postjob extends Model {
 							'individual_id',
 							'reference_id',
 							'contact_person',
-							'corporate_id'
+							'corporate_id',
+							'unique_id'
 						   ];
 
 	public function indUser(){

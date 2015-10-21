@@ -4,7 +4,8 @@
 																			
 <div class="row">
 		<div class="col-md-9">
-		<div class="portlet box blue" id="form_wizard_1">
+			<label style="font-size: 18px;text-align: center;width:100%;border-bottom:2px solid darkred;">Do you like to Post Job?<br>Post Job for FREE!!</label>	
+		<div class="portlet box" id="form_wizard_1">
 			
 			<div class="portlet-body form">
 				<!-- <form action="#" class="form-horizontal"  method="POST"> -->
@@ -17,39 +18,36 @@
 								<li>
 									<a href="#tab1" data-toggle="tab" class="step">
 									<span class="desc">
-									<i class="fa fa-check"></i> Job </span>
+									Job </span>
 									</a>
 									
 								</li>
 								<li>
 									<a href="#tab2" data-toggle="tab" class="step">
-									<!-- <span class="number">
-									2 </span> -->
+									
 									<span class="desc">
-									<i class="fa fa-check"></i>Skills </span>
+									Skills </span>
 									</a>
-									<!-- <div class="tabular"><label>2</label></div> -->
+									
 								</li>
 								<li>
 									<a href="#tab3" data-toggle="tab" class="step active">
-									<!-- <span class="number">
-									3 </span> -->
+									
 									<span class="desc">
-									<i class="fa fa-check"></i> Contact</span>
+									 Contact</span>
 									</a>
-									<!-- <div class="tabular"><label>3</label></div> -->
+									
 								</li>
 								<li>
 									<a href="#tab4" data-toggle="tab" class="step">
-									<!-- <span class="number">
-									4 </span> -->
+									
 									<span class="desc">
-									<i class="fa fa-check"></i> Confirm </span>
+									 Confirm </span>
 									</a>
-									<!-- <div class="tabular"><label>4</label></div> -->
+									
 								</li>
 							</ul>
-							<div id="bar" class="progress progress-striped" role="progressbar" style="background-color: transparent;">
+							<div id="bar" class="progress progress-striped" role="progressbar" style="background-color: transparent;height: 10px;">
 								<!--  -->
 								<div class="progress-bar progress-bar-success">
 								</div>
@@ -74,6 +72,7 @@
 								</div>
 								<div class="tab-pane active" id="tab1">
 									<!-- <h3 class="block">Provide your account details</h3> -->
+									<input type="hidden" name="post_id" value"rand(11111,99999)">
 									<div class="col-md-12">
 										<div class="form-group">
 											<label>Job Title</label>

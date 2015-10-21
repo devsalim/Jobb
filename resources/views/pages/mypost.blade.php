@@ -24,7 +24,7 @@
 				<div class="tab-pane active" id="tab_5_1">
 					<div class="row">
 				@if (count($posts) > 0)
-				<?php $var = 1; ?>
+				
 				@foreach($posts as $post)	
 				<div class="col-md-9" style="">												
 					<div class="timeline" >
@@ -160,16 +160,16 @@
 								</div>		
 							</div>
 							<div class="portlet-body" style="margin: 0 -5px;">
-								<div class="panel-group accordion" id="accordion{{$var}}" style="margin-bottom: 0;">
+								<div class="panel-group accordion" id="accordion{{$post->id}}" style="margin-bottom: 0;">
 									<div class="panel panel-default" style=" position: relative;">
 										<div class="panel-heading">
 											<h4 class="panel-title">
 											<a class="accordion-toggle accordion-toggle-styled collapsed" 
-											data-toggle="collapse" data-parent="#accordion{{$var}}" href="#collapse_{{$var}}_{{$var}}"  style="font-size: 15px;font-weight: 600;">
+											data-toggle="collapse" data-parent="#accordion{{$post->id}}" href="#collapse_{{$post->id}}_{{$post->id}}"  style="font-size: 15px;font-weight: 600;">
 											Details :</a>	
 											</h4>
 										</div>
-										<div id="collapse_{{$var}}_{{$var}}" class="panel-collapse collapse">
+										<div id="collapse_{{$post->id}}_{{$post->id}}" class="panel-collapse collapse">
 											<div class="panel-body" style="border-top: 0;padding: 4px 15px;">
 												<div class="row">
 													<div class="col-md-12 col-sm-12 col-xs-12">														
@@ -283,16 +283,16 @@
 								</div>
 							</div>
 							<div class="portlet-body" style="margin: 0 -5px;">
-								<div class="panel-group accordion" id="accordion2" style="margin-bottom: 0;">
+								<div class="panel-group accordion" id="accordion2_{{$post->id}}" style="margin-bottom: 0;">
 									<div class="panel panel-default" style=" position: relative;">
 										<div class="panel-heading">
 											<h4 class="panel-title">
 											<a class="accordion-toggle accordion-toggle-styled collapsed" 
-											data-toggle="collapse" data-parent="#accordion2" href="#collapse_2_2"  style="font-size: 15px;font-weight: 600;">
+											data-toggle="collapse" data-parent="#accordion2_{{$post->id}}" href="#collapse2_{{$post->id}}_{{$post->id}}"  style="font-size: 15px;font-weight: 600;">
 											Post Activity :</a>	
 											</h4>
 										</div>
-										<div id="collapse_2_2" class="panel-collapse collapse">
+										<div id="collapse2_{{$post->id}}_{{$post->id}}" class="panel-collapse collapse">
 											<div class="panel-body" style="border-top: 0;padding: 4px 15px;">
 												
 												<div class="portlet box">
@@ -533,7 +533,7 @@
   <!-- /.modal-dialog -->
 </div>
 <!-- /.modal -->
-<?php $var++; ?>
+
 	 @endforeach
 	 @else
 	 You haven't Post Anything!!

@@ -43,7 +43,7 @@
                   <li>
                     <a href="inbox.html?a=view">
                     <span class="photo">
-                    <img src="@if($application->user->profile_pic != null){{ '/img/profile/'.$application->user->profile_pic }}@else{{'/assets/images/couple.png'}}@endif" class="img-circle" width="40" height="40">
+                    <img src="@if($application->user->profile_pic != null){{ '/img/profile/'.$application->user->profile_pic }}@else{{'/assets/images/ab.png'}}@endif" class="img-circle" width="40" height="40">
                     </span>
                     <span class="subject">
                     <span class="from">
@@ -56,7 +56,25 @@
                   </li>
                  @endforeach
                 </ul>
-				 Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. consectetur purus sit amet fermentum. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum.
+                <ul class="dropdown-menu-list scroller" style="height: 275px;" data-handle-color="#637283">
+                  @foreach($thanks as $thank)
+                  <li>
+                    <a href="inbox.html?a=view">
+                    <span class="photo">
+                    <img src="@if($application->user->profile_pic != null){{ '/img/profile/'.$application->user->profile_pic }}@else{{'/assets/images/ab.png'}}@endif" class="img-circle" width="40" height="40">
+                    </span>
+                    <span class="subject">
+                    <span class="from">
+                    {{$thank->user->fname}} </span>
+                    <span class="time">{{$thank->apply_dtTime}}</span>
+                    </span>
+                    <span class="message">
+                    has thanked your Job Post Id: {{$thank->post_id}} </span>
+                    </a>
+                  </li>
+                 @endforeach
+                </ul>
+				
 			</p>
 		</div>
 	</div>

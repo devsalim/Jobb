@@ -7,15 +7,15 @@
 .profile-userpic {
     position: relative;
     overflow: hidden;
-    width: 136px;
-    height: 136px;
+    width: 128px;
+    height: 128px;
     border-radius: 50% !important;
     margin: auto;
-    background: #fff url("images/couple.png") !important;
+    background: #fff url("images/ab.png") !important;
     background-size: 100%;
     text-align: center;
     cursor: pointer;
-    box-shadow: 0px 3px 5px lightgrey;
+    box-shadow: 0px 3px 3px lightgrey;
 }
 .hover-image {
     position: absolute;

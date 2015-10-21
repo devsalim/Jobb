@@ -580,7 +580,7 @@ Bootstrap Wizard
 }
 .form-wizard .steps > li > a.step > .desc {
   display: inline-block;
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 300;
 }
 .form-wizard .steps > li > a.step > .desc > i {
@@ -591,21 +591,23 @@ Bootstrap Wizard
   color: #fff;
 }
 .form-wizard .steps > li.active > a.step .desc {
-  color: #333;
+    color: orangered;
+    font-size: 17px;
+    font-weight: 500;
 }
 .form-wizard .steps > li.done > a.step .number {
   background-color: #dfba49;
   color: #fff;
 }
 .form-wizard .steps > li.done > a.step .desc {
-  color: #333;
+  color: #01b070;
 }
-.form-wizard .steps > li.done > a.step .desc i {
+/*.form-wizard .steps > li.done > a.step .desc i {
   font-size: 12px;
   font-weight: normal;
   color: #999;
   display: inline-block;
-}
+}*/
 
 @media (min-width: 768px) and (max-width: 1200px) {
   /* 768px & 1200px */

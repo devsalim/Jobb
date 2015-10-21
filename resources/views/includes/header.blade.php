@@ -4,8 +4,8 @@
   <div class="page-header-inner container">
     <!-- BEGIN LOGO -->
     <div class="page-logo">
-      <img src="{{ asset('/assets/jobtip-new.png') }}" class="big-logo" />
-      <img src="{{ asset('/assets/logo-small.png') }}" class="small-logo" />
+      <img src="{{ asset('/assets/new_big_logo.png') }}" class="big-logo" />
+      <img src="{{ asset('/assets/new_sm_logo.png') }}" class="small-logo" />
       
     </div>
     <!-- END LOGO -->

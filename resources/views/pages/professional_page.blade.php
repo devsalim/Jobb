@@ -208,22 +208,22 @@
 										<span class="input-group-addon">
 											<i class=" icon-briefcase"></i>
 										</span>
-										<select class="form-control" name="experience" value="{{ $user->experience }}" >
-											<option value="1">1</option>
-											<option value="2">2</option>
-											<option value="3">3</option>
-											<option value="4">4</option>
-											<option value="5">5</option>
-											<option value="6">6</option>
-											<option value="7">7</option>
-											<option value="8">8</option>
-											<option value="9">9</option>
-											<option value="10">10</option>
-											<option value="11">11</option>
-											<option value="12">12</option>
-											<option value="13">13</option>
-											<option value="14">14</option>
-											<option value="15">15</option>
+										<select class="form-control" name="experience" >
+											<option @if($user->experience=="1") {{ $selected }} @endif value="1">1</option>
+											<option @if($user->experience=="2") {{ $selected }} @endif value="2">2</option>
+											<option @if($user->experience=="3") {{ $selected }} @endif value="3">3</option>
+											<option @if($user->experience=="4") {{ $selected }} @endif value="4">4</option>
+											<option @if($user->experience=="5") {{ $selected }} @endif value="5">5</option>
+											<option @if($user->experience=="6") {{ $selected }} @endif value="6">6</option>
+											<option @if($user->experience=="7") {{ $selected }} @endif value="7">7</option>
+											<option @if($user->experience=="8") {{ $selected }} @endif value="8">8</option>
+											<option @if($user->experience=="9") {{ $selected }} @endif value="9">9</option>
+											<option @if($user->experience=="10") {{ $selected }} @endif value="10">10</option>
+											<option @if($user->experience=="11") {{ $selected }} @endif value="11">11</option>
+											<option @if($user->experience=="12") {{ $selected }} @endif value="12">12</option>
+											<option @if($user->experience=="13") {{ $selected }} @endif value="13">13</option>
+											<option @if($user->experience=="14") {{ $selected }} @endif value="14">14</option>
+											<option @if($user->experience=="15") {{ $selected }} @endif value="15">15</option>
 										</select>
 									</div>
 								</div>
@@ -341,6 +341,7 @@
 						<div class="row-md-10">
 							<div class="col-md-6">
 								<div class="form-group">
+									<label>Add Skill</label>
 									<!-- <form action="{{ url('job/newskill') }}" id="newskillfrm" method="post">					
 									<input type="hidden" name="_token" value="{{ csrf_token() }}"> -->
 									<div class="input-group">
@@ -354,7 +355,8 @@
 							
 							<div class="col-md-6">
 								<div class="form-group">
-								    <input type="text" id="linked_skill" name="linked_skill" 
+									<label>Added Skill</label>
+								    <input type="text" id="linked_skill" name="linked_skill" value="{{ $user->linked_skill }}"
 								     		class="form-control select2"
 								     		placeholder="List of skills to be added">
 								    <input type="hidden" id="linked_skill_id" name="linked_skill_id" 

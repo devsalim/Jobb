@@ -73,7 +73,7 @@
       </li>
       <li class="@if($title == 'home'){{'active'}}@endif">
         <a class="" href="/home">
-        <i class=" icon-note"></i>
+        <i class=" icon-home"></i>
         <span class="title">
         Home</span>
         <span class="selected">
@@ -110,7 +110,7 @@
       </li>
       <li class="@if($title == 'group'){{'active'}}@endif">
         <a class="" href="/group">
-        <i class=" icon-note"></i>
+        <i class="icon-users"></i>
         <span class="title">
         Groups</span>
         <span class="selected">
