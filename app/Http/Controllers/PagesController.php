@@ -92,7 +92,7 @@ class PagesController extends Controller {
 		$user = Induser::findOrFail($id);
 		$thanks = Postactivity::with('user', 'post')
 						      ->join('postjobs', 'postjobs.id', '=', 'postactivities.post_id')
-							  ->where('postjobs.individual_id', '=', Auth::user()->induser_id)
+							  ->where('postjobs.individual_id', '=', $id)
 							  ->where('postactivities.thanks', '=', 1)
 						      ->orderBy('postactivities.id', 'desc')
 						      ->sum('postactivities.thanks');
