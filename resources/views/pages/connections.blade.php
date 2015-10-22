@@ -213,7 +213,7 @@ function up()
 			var keywords = $('#search-input').val();
 			if(keywords.length>0)
 			{
-				$.post('http://jobtip.dev/searchConnections', {keywords: keywords}, function(markup)
+				$.post('/searchConnections', {keywords: keywords}, function(markup)
 				{
 					$('#search-results').html(markup);
 				});
