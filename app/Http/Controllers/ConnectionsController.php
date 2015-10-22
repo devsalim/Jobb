@@ -111,7 +111,7 @@ class ConnectionsController extends Controller {
 	public function searchConnections()
 	{
 		$keywords = Input::get('keywords');
-		$users = Induser::where('email', 'like', '%'.$keywords.'%')
+		$users = Induser::where('email', '=', $keywords)
 						->where('id', '<>', Auth::user()->induser_id)
 						->orWhere('fname', 'like', '%'.$keywords.'%')
 						->where('id', '<>', Auth::user()->induser_id)
@@ -120,7 +120,7 @@ class ConnectionsController extends Controller {
 						->orWhere('working_at', 'like', '%'.$keywords.'%')
 						->where('id', '<>', Auth::user()->induser_id)
 					    ->get();
-		return view('pages.searchUsers', compact('users'));	
+		return view('pages.searchUsers', compact('users'));
 	}
 
 	public function response($id)
