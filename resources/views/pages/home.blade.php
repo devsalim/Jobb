@@ -262,7 +262,7 @@
 															@endif											
 														</div>
 														@endif
-														<div class="skill-display">Post Id&nbsp;: {{ $post->id }} </div>
+														<div class="skill-display">Post Id&nbsp;: {{ $post->unique_id }} </div>
 
 														@if($expired != 1)
 															 <div class="skill-display">Post expires on: 										 

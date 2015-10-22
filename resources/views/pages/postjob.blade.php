@@ -436,14 +436,15 @@
 																							<div >Reference Id: <a class="form-control-static" data-display="reference_id"></a></div>
 																							<div >Post Duration: <a class="form-control-static" data-display="post_duration"></a></div>
 																							<div class="skill-display">Contact Details:<br> </div>
-																							Company Website: <p class="form-control-static" data-display="website_redirect_url"></p><br>
+																							<div class="show-apply">Apply on Company Website:<a> <p class="form-control-static" data-display="website_redirect_url"></p></a></div><br>
+																							<div id="con" class="show-apply-email">
 																							Contact Person: <p class="form-control-static" data-display="contact_person"></p><br>
 
 																								<i class="glyphicon glyphicon-envelope" style="color: #13B8D4;font-size: 16px;"></i>&nbsp;:<p class="form-control-static" data-display="email_id"></p>
-																								 <p class="form-control-static" data-display="alt_emailid"></p>
+																								 
 																							<br>
 																								<i class="glyphicon glyphicon-earphone" style="color: green;font-size: 16px;"></i>&nbsp;:<p class="form-control-static" data-display="phone"></p>
-																								 <p class="form-control-static" data-display="alt_phone"></p>
+																								</div> 
 																							<div class="skill-display">Post Id&nbsp;:  </div> 
 
 																						</div>

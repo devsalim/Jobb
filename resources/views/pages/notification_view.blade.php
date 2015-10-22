@@ -35,10 +35,10 @@
 		</ul>
 	</div>
 	<div class="portlet-body">
-		<div class="scroller" style="height:200px">
+		<div class="" >
 			<h4></h4>
 			<p>
-				<ul class="dropdown-menu-list scroller" style="height: 275px;" data-handle-color="#637283">
+				<ul class="" data-handle-color="#637283">
                   @foreach($applications as $application)
                   <li>
                     <a href="inbox.html?a=view">
@@ -51,12 +51,12 @@
                     <span class="time">{{$application->apply_dtTime}}</span>
                     </span>
                     <span class="message">
-                    has applied your Job Post Id: {{$application->post_id}} </span>
+                    has applied your Job Post Id: {{$application->unique_id}} </span>
                     </a>
                   </li>
                  @endforeach
                 </ul>
-                <ul class="dropdown-menu-list scroller" style="height: 275px;" data-handle-color="#637283">
+                <ul class="" data-handle-color="#637283">
                   @foreach($thanks as $thank)
                   <li>
                     <a href="inbox.html?a=view">
@@ -66,10 +66,10 @@
                     <span class="subject">
                     <span class="from">
                     {{$thank->user->fname}} </span>
-                    <span class="time">{{$thank->apply_dtTime}}</span>
+                    <span class="time">{{$thank->thanks_dtTime}}</span>
                     </span>
                     <span class="message">
-                    has thanked your Job Post Id: {{$thank->post_id}} </span>
+                    has thanked your Job Post Id: {{$thank->unique_id}} </span>
                     </a>
                   </li>
                  @endforeach

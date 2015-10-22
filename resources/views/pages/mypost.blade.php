@@ -275,7 +275,7 @@
 															</div>	
 															@endif											
 														</div>
-												<div class="skill-display">Post Id : {{ $post->id }} </div> 
+												<div class="skill-display">Post Id : {{ $post->unique_id }} </div> 
 											</div>
 
 										</div>								

@@ -54,7 +54,7 @@
                     <span class="time">{{$application->apply_dtTime}}</span>
                     </span>
                     <span class="message">
-                    has applied your Job Post Id: {{$application->post_id}} </span>
+                    has applied your Job Post Id: {{$application->unique_id}} </span>
                     </a>
                   </li>
                  @endforeach
@@ -89,7 +89,7 @@
                     <span class="time">{{$thank->thanks_dtTime}}</span>
                     </span>
                     <span class="message">
-                    has thanked for Job Post Id: {{$thank->post_id}} </span>
+                    has thanked for Job Post Id: {{$thank->unique_id}} </span>
                     </a>
                   </li>
                   @endforeach
@@ -102,7 +102,7 @@
           <!-- BEGIN TODO DROPDOWN -->
           <!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
           <li class="dropdown dropdown-extended dropdown-tasks thank-fav-icon" id="header_task_bar">
-            <a href="/notification_view" class="dropdown-toggle @if($title == 'notify_view'){{'active'}}@endif" data-toggle="dropdown"  data-close-others="true">
+            <a href="/notification_view" class="dropdown-toggle @if($title == 'notify_view'){{'active'}}@endif"  data-close-others="true">
               <i class="icon-pin icon-color"></i>
               
               <span class="badge badge-default @if(count($favourites) > 0) show @else hide @endif" id="myfavcount" style="right: -14px;">{{count($favourites)}}</span>

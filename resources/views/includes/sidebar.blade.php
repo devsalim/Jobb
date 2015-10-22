@@ -10,7 +10,7 @@
   </div>
    <div class="row  nav-thank-fav" id="nav-than-fav">
       <div class="col-md-4 col-sm-4 col-xs-4">
-        <a href="/individual/thanks_view" class="icon-btn" style="border: 0 !important;background-color: transparent !important;min-width:55px !important;">
+        <a href="/notification_view" class="icon-btn" style="border: 0 !important;background-color: transparent !important;min-width:55px !important;">
           <i class="icon-like" style="color: white"></i>
           <div style="color: whitesmoke;">
              Thanks
@@ -20,7 +20,7 @@
         </a>
       </div>
       <div class="col-md-4 col-sm-4 col-xs-4">
-        <a href="/connections/create" class="icon-btn" style="border: 0 !important;background-color: transparent !important;">
+        <a href="/home" class="icon-btn" style="border: 0 !important;background-color: transparent !important;">
           <i class="icon-pin" style="color:yellow"></i>
           <div style="color: whitesmoke;">
              Favourite
@@ -55,7 +55,8 @@
             </a>
           </div>
           <h3 class="form-title user-name">
-            {{ $session_user->fname }} {{ $session_user->lname }}
+           <a style="color: deepskyblue;text-decoration:none;" class="@if($title == 'indview'){{'active'}}@endif" href="/individual_view/create"> 
+            {{ $session_user->fname }} {{ $session_user->lname }} <i class="fa fa-edit (alias)"></i></a>
             {{ $session_user->firm_name }}
           </h3>
           @if($session_user->role!=null)
@@ -90,15 +91,6 @@
         </a>
       </li>
       @if (Auth::user()->identifier == 1)
-      <li class="@if($title == 'profile'){{'active'}}@endif">
-        <a class="" href="/individual/create">
-        <i class=" icon-note"></i>
-        <span class="title">
-        Profile</span>
-        <span class="selected">
-        </span>
-        </a>
-      </li>
       <li class="@if($title == 'connections'){{'active'}}@endif">
         <a class="" href="/connections/create">
         <i class="icon-link"></i>
@@ -129,15 +121,6 @@
         </a>
       </li>
       @endif
-      <li class="@if($title == 'indview'){{'active'}}@endif">
-        <a class="" href="/individual_view/create">
-        <i class=" icon-note"></i>
-        <span class="title">
-        Profile</span>
-        <span class="selected">
-        </span>
-        </a>
-      </li>
       <li>
         <a href="javascript:;">
         <i class="icon-eye"></i>

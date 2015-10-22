@@ -68,15 +68,15 @@ class PagesController extends Controller {
 									->where('postjobs.individual_id', '=', Auth::user()->induser_id)
 									->where('postactivities.apply', '=', 1)
 									->orderBy('postactivities.id', 'desc')
-									->take(5)
-									->get(['postactivities.id', 'postactivities.apply', 'postactivities.apply_dtTime', 'postactivities.user_id', 'postactivities.post_id']);
+									->take(25)
+									->get(['postactivities.id','postjobs.unique_id', 'postactivities.apply', 'postactivities.apply_dtTime', 'postactivities.user_id', 'postactivities.post_id']);
 		$thanks = Postactivity::with('user', 'post')
 						      ->join('postjobs', 'postjobs.id', '=', 'postactivities.post_id')
 							  ->where('postjobs.individual_id', '=', Auth::user()->induser_id)
 							  ->where('postactivities.thanks', '=', 1)
 						      ->orderBy('postactivities.id', 'desc')
-						      ->take(5)
-						      ->get(['postactivities.id', 'postactivities.thanks', 'postactivities.thanks_dtTime', 'postactivities.user_id', 'postactivities.post_id']);
+						      ->take(25)
+						      ->get(['postactivities.id','postjobs.unique_id', 'postactivities.thanks', 'postactivities.thanks_dtTime', 'postactivities.user_id', 'postactivities.post_id']);
 		$favourites = Postactivity::with('user')
 							      ->where('fav_post', '=', 1)
 							      ->where('user_id', '=', Auth::user()->induser_id)
@@ -90,7 +90,12 @@ class PagesController extends Controller {
 	{		
 		$title = 'profile';
 		$user = Induser::findOrFail($id);
-		$thanks = Postactivity::where('user_id', '=', $id)->sum('thanks');
+		$thanks = Postactivity::with('user', 'post')
+						      ->join('postjobs', 'postjobs.id', '=', 'postactivities.post_id')
+							  ->where('postjobs.individual_id', '=', $id)
+							  ->where('postactivities.thanks', '=', 1)
+						      ->orderBy('postactivities.id', 'desc')
+						      ->sum('thanks');
 		$posts = Postjob::where('individual_id', '=', $id)->count('id');
 		$links = Connections::where('user_id', '=', $id)->orWhere('connection_user_id', '=', $id)->count('id');
 		return view('pages.profile_indview', compact('title','thanks','posts','links','user'));

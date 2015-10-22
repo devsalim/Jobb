@@ -43,7 +43,12 @@ class ViewpageController extends Controller {
 	{
 		$title = 'indview';
 		$user = Induser::where('id', '=', Auth::user()->induser_id)->first();
-		$thanks = Postactivity::where('user_id', '=', Auth::user()->induser_id)->sum('thanks');
+		$thanks = Postactivity::with('user', 'post')
+						      ->join('postjobs', 'postjobs.id', '=', 'postactivities.post_id')
+							  ->where('postjobs.individual_id', '=', Auth::user()->induser_id)
+							  ->where('postactivities.thanks', '=', 1)
+						      ->orderBy('postactivities.id', 'desc')
+						      ->sum('thanks');
 		$posts = Postjob::where('individual_id', '=', Auth::user()->induser_id)->count('id');
 		$links = Connections::where('user_id', '=', Auth::user()->induser_id)->orWhere('connection_user_id', '=', Auth::user()->induser_id)->count('id');
 		return view('pages.profile_indview', compact('user', 'thanks', 'posts', 'links', 'title'));
@@ -123,6 +128,7 @@ class ViewpageController extends Controller {
 	{
 		$title = 'thanks_view';
 		$user = Induser::where('id', '=', Auth::user()->induser_id)->first();
+		
 		return view('pages.notification_view', compact('user', 'title'));
 	}
 
