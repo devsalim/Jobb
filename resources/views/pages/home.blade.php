@@ -369,7 +369,7 @@
 																<h4 class="modal-title">Report this Post</h4>
 																<div class="icheck-list">
 																	<label>
-																	<input type="checkbox" class="icheck" data-checkbox="icheckbox_line-grey" data-label="Report Abuse">
+																	<input type="checkbox" checked class="icheck" data-checkbox="icheckbox_line-grey" data-label="Report Abuse">
 																	</label>
 																	<label>
 																	<input type="checkbox" class="icheck" data-checkbox="icheckbox_line-grey" data-label="Spam">
@@ -379,6 +379,7 @@
 																	</label>
 																	<label>
 																</div>
+																<button type="submit" class="btn btn-warning">Submit</button>
 															</div>
 														</div>
 														<!-- /.modal-content -->
