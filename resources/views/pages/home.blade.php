@@ -32,7 +32,7 @@
 											@if(Auth::user()->id == $post->individual_id || Auth::user()->id == $post->corporate_id)
 											<div class="timeline-body-head-caption">
 												@if($post->post_type == 'job')
-												<a   class="user-link"><i class="fa fa-unlink (alias)" style="color:lightslategray;"></i></a><a href="/profile/{{$post->individual_id}}" class="link-label">You have</a>
+												<a   class="user-link"><i class="fa fa-unlink (alias)" style="color:lightslategray;"></i></a><a href="/profile/{{$post->individual_id or $post->corporate_id}}" class="link-label">You have</a>
 												@else
 												<a class="user-link-click"><i class="fa fa-link" style="color:white;"></i></a>
 												<a class="link-label">You have</a>
@@ -44,10 +44,15 @@
 											@else
 											<div class="timeline-body-head-caption">
 												@if($post->post_type == 'job')
-												<a href="/profile/{{$post->individual_id}}" class="user-link"><i class="fa fa-unlink (alias)" style="color:lightslategray;"></i></a><a href="/profile/{{$post->individual_id}}" style="padding: 0px 0px 0px 32px;font-size: 15px;text-decoration:none;font-weight:600;">{{ $post->induser->fname }} {{ $post->induser->lname }}</a>
+												<a href="/profile/{{$post->individual_id or $post->corporate_id}}" class="user-link"><i class="fa fa-unlink (alias)" style="color:lightslategray;"></i></a><a href="/profile/{{$post->individual_id or $post->corporate_id}}" style="padding: 0px 0px 0px 32px;font-size: 15px;text-decoration:none;font-weight:600;">
+												{{ $post->induser->fname  or $post->corpuser->firm_name}} 
+												{{ $post->induser->lname  or ''}}
+												</a>
 												@else
 												<a class="user-link-click"><i class="fa fa-link" style="color:white;"></i></a>
-												<a href="/profile/{{$post->individual_id}}" style="padding: 0px 0px 0px 32px;font-size: 15px;text-decoration:none;font-weight:600;">{{ $post->induser->fname }} {{ $post->induser->lname }}</a>
+												<a href="/profile/{{$post->individual_id}}" style="padding: 0px 0px 0px 32px;font-size: 15px;text-decoration:none;font-weight:600;">
+												{{ $post->induser->fname }} {{ $post->induser->lname }}
+												</a>
 												@endif
 												<span class="timeline-body-time font-grey-cascade">Posted at 
 													{{ date('M d, Y', strtotime($post->created_at)) }}
