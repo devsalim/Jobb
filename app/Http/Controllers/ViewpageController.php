@@ -48,7 +48,7 @@ class ViewpageController extends Controller {
 							  ->where('postjobs.individual_id', '=', Auth::user()->induser_id)
 							  ->where('postactivities.thanks', '=', 1)
 						      ->orderBy('postactivities.id', 'desc')
-						      ->sum('thanks');
+						      ->sum('postactivities.thanks');
 		$posts = Postjob::where('individual_id', '=', Auth::user()->induser_id)->count('id');
 		$links = Connections::where('user_id', '=', Auth::user()->induser_id)->orWhere('connection_user_id', '=', Auth::user()->induser_id)->count('id');
 		return view('pages.profile_indview', compact('user', 'thanks', 'posts', 'links', 'title'));

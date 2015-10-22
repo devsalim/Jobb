@@ -45,8 +45,24 @@ class UserServiceProvider extends ServiceProvider {
 									      ->where('user_id', '=', Auth::user()->induser_id)
 									      ->orderBy('id', 'desc')
 								          ->get(['id', 'fav_post', 'fav_post_dtTime', 'user_id', 'post_id']);
+				$thanksCount = Postactivity::with('user', 'post')
+								      ->join('postjobs', 'postjobs.id', '=', 'postactivities.post_id')
+									  ->where('postjobs.individual_id', '=', Auth::user()->induser_id)
+									  ->where('postactivities.thanks', '=', 1)
+								      ->orderBy('postactivities.id', 'desc')
+								      ->sum('postactivities.thanks');
+				$applicationsCount = Postactivity::with('user', 'post')
+											->join('postjobs', 'postjobs.id', '=', 'postactivities.post_id')
+											->where('postjobs.individual_id', '=', Auth::user()->induser_id)
+											->where('postactivities.apply', '=', 1)
+											->orderBy('postactivities.id', 'desc')
+											->sum('postactivities.apply');
 			}
-			$view->with('applications', $applications)->with('thanks', $thanks)->with('favourites', $favourites);	
+			$view->with('applications', $applications)
+			  	 ->with('thanks', $thanks)
+			  	 ->with('favourites', $favourites)
+			  	 ->with('thanksCount', $thanksCount)
+			  	 ->with('applicationsCount', $applicationsCount);	
 		});
 	}
 

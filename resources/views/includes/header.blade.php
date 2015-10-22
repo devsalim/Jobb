@@ -33,11 +33,11 @@
           <li class="dropdown dropdown-extended dropdown-inbox" id="header_inbox_bar">
             <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"  data-close-others="true">
             <i class="icon-bulb icon-color"></i>
-            <span class="badge badge-default @if(count($applications) > 0) show @else hide @endif" style="background-color: darkorchid !important;">{{count($applications)}}</span>
+            <span class="badge badge-default @if($applicationsCount > 0) show @else hide @endif" style="background-color: darkorchid !important;">{{$applicationsCount}}</span>
             </a>
             <ul class="dropdown-menu">
               <li class="external">
-                <h3>You have <span class="bold">{{count($applications)}}</span> Messages</h3>
+                <h3>You have <span class="bold">{{$applicationsCount}}</span> Messages</h3>
                 <a class="@if($title == 'notify_view'){{'active'}}@endif" href="/notification_view" style="color: darkblue;">view all</a>
               </li>
               <li>
@@ -68,11 +68,11 @@
           <li class="dropdown dropdown-extended dropdown-inbox thank-fav-icon" id="header_inbox_bar">
             <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"  data-close-others="true">
             <i class="icon-like icon-color"></i>
-            <span class="badge badge-default  @if(count($thanks) > 0) show @else hide @endif" style="background-color:lightcoral !important;">{{count($thanks)}}</span>
+            <span class="badge badge-default  @if($thanksCount > 0) show @else hide @endif" style="background-color:lightcoral !important;">{{$thanksCount}}</span>
             </a>
             <ul class="dropdown-menu">
               <li class="external">
-                <h3>You have <span class="bold">{{count($thanks)}}</span> Messages</h3>
+                <h3>You have <span class="bold">{{$thanksCount}}</span> Messages</h3>
                 <a class="@if($title == 'notify_view'){{'active'}}@endif" href="/notification_view" style="color: darkblue;">view all</a>
               </li>
               <li>
