@@ -106,7 +106,7 @@
 						  <li class="media">
 						    <div class="media-left">
 						      <a href="#">
-						        <img class="media-object" src="@if($user->profile_pic != null){{ '/img/profile/'.$user->profile_pic }}@else{{'/assets/images/ab.png'}}@endif" alt="..." style="width:60px;padding: 3px;border: 1px solid #ddd;">
+						        <img class="media-object" src="@if($connection->profile_pic != null){{ '/img/profile/'.$connection->profile_pic }}@else{{'/assets/images/ab.png'}}@endif" alt="..." style="width:60px;padding: 3px;border: 1px solid #ddd;">
 						      </a>
 						    </div>
 						    <div class="media-body" style="font-weight:300">

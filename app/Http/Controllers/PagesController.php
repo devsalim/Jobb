@@ -85,6 +85,19 @@ class PagesController extends Controller {
 	
 		return view('pages.notification_view', compact('user', 'applications', 'thanks', 'favourites', 'title'));
 	}
+
+	public function notify(){
+		$title = 'notification';
+		$user = Induser::where('id', '=', Auth::user()->induser_id)->first();		
+		$thanks = Postactivity::with('user', 'post')
+						      ->join('postjobs', 'postjobs.id', '=', 'postactivities.post_id')
+							  ->where('postjobs.individual_id', '=', Auth::user()->induser_id)
+							  ->where('postactivities.thanks', '=', 1)
+						      ->orderBy('postactivities.id', 'desc')
+						      ->take(25)
+						      ->get(['postactivities.id','postjobs.unique_id', 'postactivities.thanks', 'postactivities.thanks_dtTime', 'postactivities.user_id', 'postactivities.post_id']);
+		return view('pages.notification_view', compact('user', 'thanks', 'title'));
+	}
 	
 	public function profile($id)
 	{		

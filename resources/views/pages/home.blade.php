@@ -356,7 +356,36 @@
 													</div>
 
 												</div>
-												<div class="report"><i class="fa fa-warning (alias)" style="color:red;"></i></div>
+												@if(Auth::user()->id != $post->individual_id)
+												<div class="report"><a class="" data-toggle="modal" href="#basic">
+													<i class="fa fa-warning (alias)" style="color:red;"></i></a>
+												</div>
+												@endif
+												<div class="modal fade" id="basic" tabindex="-1" role="basic" aria-hidden="true">
+													<div class="modal-dialog" style="width: 250px;">
+														<div class="modal-content">
+															<div class="modal-header">
+																<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+																<h4 class="modal-title">Report this Post</h4>
+																<div class="icheck-list">
+																	<label>
+																	<input type="checkbox" class="icheck" data-checkbox="icheckbox_line-grey" data-label="Report Abuse">
+																	</label>
+																	<label>
+																	<input type="checkbox" class="icheck" data-checkbox="icheckbox_line-grey" data-label="Spam">
+																	</label>
+																	<label>
+																	<input type="checkbox" class="icheck" data-checkbox="icheckbox_line-grey" data-label="Hide this Post">
+																	</label>
+																	<label>
+																</div>
+															</div>
+														</div>
+														<!-- /.modal-content -->
+													</div>
+													<!-- /.modal-dialog -->
+							</div>
+							<!-- /.modal -->
 											</div>
 											@else
 											<div class="post-job post-icon-bar">
