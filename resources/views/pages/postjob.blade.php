@@ -174,7 +174,7 @@
 											<div class="input-group">
 												<input type="text" name="name" id="newskill" class="form-control" placeholder="Search for skill...">
 												<span class="input-group-btn">
-													<button id="add-new-skill" class="btn btn-success" type="button"><i class="icon-plus"></i> Add</button>	
+													<button id="add-new-skill" class="btn btn-success hide" type="button"><i class="icon-plus"></i> Add</button>	
 												</span>
 											</div>
 										</div>
@@ -556,9 +556,27 @@ jQuery(document).ready(function() {
 		})
 		.autocomplete({
 			source: function( request, response ) {
-				$.getJSON( "/job/skillSearch", {
-					term: extractLast( request.term )
-				}, response );
+				// $.getJSON( "/job/skillSearch", {
+				// 	term: extractLast( request.term )
+				// }, response );
+
+
+				$.ajax({
+					url: '/job/skillSearch',
+					dataType: "json",
+					data: { term: extractLast( request.term ) },
+					success: function(data) {
+					if (data.length === 0) {
+						$('#add-new-skill').removeClass('hide');
+						$('#add-new-skill').addClass('show');
+					}else{
+						$('#add-new-skill').removeClass('show');
+						$('#add-new-skill').addClass('hide');
+					}
+					response(data);
+					}
+				});
+
 			},
 			search: function() {
 				var term = extractLast( this.value );

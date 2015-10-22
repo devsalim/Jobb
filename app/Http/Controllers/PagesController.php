@@ -90,7 +90,12 @@ class PagesController extends Controller {
 	{		
 		$title = 'profile';
 		$user = Induser::findOrFail($id);
-		$thanks = Postactivity::where('user_id', '=', $id)->sum('thanks');
+		$thanks = Postactivity::with('user', 'post')
+						      ->join('postjobs', 'postjobs.id', '=', 'postactivities.post_id')
+							  ->where('postjobs.individual_id', '=', Auth::user()->induser_id)
+							  ->where('postactivities.thanks', '=', 1)
+						      ->orderBy('postactivities.id', 'desc')
+						      ->sum('postactivities.thanks');
 		$posts = Postjob::where('individual_id', '=', $id)->count('id');
 		$links = Connections::where('user_id', '=', $id)->orWhere('connection_user_id', '=', $id)->count('id');
 		return view('pages.profile_indview', compact('title','thanks','posts','links','user'));
