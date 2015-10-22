@@ -30,24 +30,38 @@
 									<div class="timeline-body" style="">
 										<div class="timeline-body-head">
 											@if(Auth::user()->id == $post->individual_id || Auth::user()->id == $post->corporate_id)
-											<div class="timeline-body-head-caption">
-												@if($post->post_type == 'job')
-												<a   class="user-link"><i class="fa fa-unlink (alias)" style="color:lightslategray;"></i></a><a href="/profile/{{$post->individual_id or $post->corporate_id}}" class="link-label">You have</a>
-												@else
-												<a class="user-link-click"><i class="fa fa-link" style="color:white;"></i></a>
-												<a class="link-label">You have</a>
-												@endif
-												<span class="timeline-body-time font-grey-cascade">Posted at 
-													{{ date('M d, Y', strtotime($post->created_at)) }}
-												</span>
-											</div>
+												<div class="timeline-body-head-caption">
+													@if($post->post_type == 'job')													
+														<a href="/profile/{{$post->individual_id or $post->corporate_id}}" class="link-label">
+															You have
+														</a>
+													@else													
+														<a href="/profile/{{$post->individual_id or $post->corporate_id}}" class="link-label">
+															You have
+														</a>
+													@endif
+													<span class="timeline-body-time font-grey-cascade">Posted at 
+														{{ date('M d, Y', strtotime($post->created_at)) }}
+													</span>
+												</div>
 											@else
 											<div class="timeline-body-head-caption">
 												@if($post->post_type == 'job')
-												<a href="/profile/{{$post->individual_id or $post->corporate_id}}" class="user-link"><i class="fa fa-unlink (alias)" style="color:lightslategray;"></i></a><a href="/profile/{{$post->individual_id or $post->corporate_id}}" style="padding: 0px 0px 0px 32px;font-size: 15px;text-decoration:none;font-weight:600;">
-												{{ $post->induser->fname  or $post->corpuser->firm_name}} 
-												{{ $post->induser->lname  or ''}}
-												</a>
+
+													@if($links->contains('id', $post->individual_id))
+													<a href="#links-follow" data-toggle="modal" class="user-link">
+														<i class="fa fa-link (alias)" style="color:salmon;"></i>
+													</a>
+													@else
+													<a href="#links-follow" data-toggle="modal" class="user-link">
+														<i class="fa fa-unlink (alias)" style="color:lightslategray;"></i>
+													</a>
+													@endif
+													
+													<a href="/profile/{{$post->individual_id or $post->corporate_id}}" style="padding: 0px 0px 0px 32px;font-size: 15px;text-decoration:none;font-weight:600;">
+														{{ $post->induser->fname  or $post->corpuser->firm_name}} 
+														{{ $post->induser->lname  or ''}}
+													</a>
 												@else
 												<a class="user-link-click"><i class="fa fa-link" style="color:white;"></i></a>
 												<a href="/profile/{{$post->individual_id}}" style="padding: 0px 0px 0px 32px;font-size: 15px;text-decoration:none;font-weight:600;">
@@ -432,6 +446,20 @@
 						<!-- END TIMELINE ITEM -->
 					<?php $var++; ?>
 				 @endforeach
+
+
+				<div class="modal fade bs-modal-sm" id="links-follow" tabindex="-1" role="dialog" aria-hidden="true">
+					<div class="modal-dialog modal-sm">
+						<div class="modal-content" id="links-follow">
+							Links Follow
+						</div>
+						<!-- /.modal-content -->
+					</div>
+					<!-- /.modal-dialog -->
+				</div>
+				<!-- /.modal -->
+
+
 				@endif
 				</div>
 			</div>
@@ -574,6 +602,35 @@ $('.apply-btn').on('click',function(event){
         	$('#contact-btn-'+post_id).prop('disabled', true);
  			$('#contact-btn-'+post_id).text('Contacted');
         }
+      }
+    }); 
+    return false;
+  });
+
+	// user-link
+	$('.user-link').on('click',function(event){  	    
+  	event.preventDefault();
+  	var post_id = $(this).parent().data('id');
+
+  	// var formData = $('#post-apply-'+post_id).serialize(); 
+   //  var formAction = $('#post-apply-'+post_id).attr('action');
+
+    $.ajaxSetup({
+		headers: {
+			'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+		}
+	});
+
+    $.ajax({
+      // url: formAction,
+      type: "post",
+      data: formData,
+      cache : false,
+      success: function(data){
+    //     if(data == "applied"){
+    //     	$('#apply-btn-'+post_id).prop('disabled', true);
+ 			// $('#apply-btn-'+post_id).text('Applied');
+    //     }
       }
     }); 
     return false;

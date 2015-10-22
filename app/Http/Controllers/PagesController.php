@@ -10,6 +10,7 @@ use App\Postjob;
 use App\Postactivity;
 use App\Connections;
 use Auth;
+use DB;
 
 class PagesController extends Controller {
 
@@ -34,7 +35,21 @@ class PagesController extends Controller {
 		if (Auth::check()) {
 			$title = 'home';
 			$posts = Postjob::orderBy('id', 'desc')->with('indUser', 'corpUser', 'postActivity')->get();
-			return view('pages.home', compact('posts', 'title'));
+
+			$links = DB::select('select id from indusers
+									where indusers.id in (
+											select connections.user_id as id from connections
+											where connections.connection_user_id=?
+											 and connections.status=1
+											union 
+											select connections.connection_user_id as id from connections
+											where connections.user_id=?
+											 and connections.status=1
+								)', [Auth::user()->induser_id, Auth::user()->induser_id]);
+
+			$links = collect($links);
+
+			return view('pages.home', compact('posts', 'title', 'links'));
 			// return $posts;
 		}else{
 			return redirect('login');
@@ -112,5 +127,12 @@ class PagesController extends Controller {
 		$posts = Postjob::where('individual_id', '=', $id)->count('id');
 		$links = Connections::where('user_id', '=', $id)->orWhere('connection_user_id', '=', $id)->count('id');
 		return view('pages.profile_indview', compact('title','thanks','posts','links','user'));
+	}
+
+	public function follow(){
+		$follow = new Follow();
+		$follow->corporate_id = $request['corporate_id'];
+		$follow->individual_id = $request['individual_id'];
+		$follow->save();
 	}
 }
