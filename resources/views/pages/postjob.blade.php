@@ -254,7 +254,7 @@
 									<div class="col-md-5">
 										<div class="form-group">							
 											<label class=" control-label"><input type="checkbox" id="hide-check">&nbsp;Salary 
-											</label>&nbsp;:<select name="salary-type" style="border-top: 0px;border-left: 0;border-right: 0;">									
+											</label>&nbsp;:<select name="salary_type" style="border-top: 0px;border-left: 0;border-right: 0;">									
 													<option value="Monthly">Monthly</option>
 													<option value="Weekly">Weekly</option>
 													<option value="Daily">Daily</option>

@@ -46,7 +46,8 @@
                   <li>
                     <a href="inbox.html?a=view">
                     <span class="photo">
-                    <img src="@if($application->user->profile_pic != null){{ '/img/profile/'.$application->user->profile_pic }}@else{{'/assets/images/couple.png'}}@endif" class="img-circle" width="40" height="40">
+                    <img src="@if($application->user->profile_pic != null){{ '/img/profile/'.$application->user->profile_pic }}@else{{'/assets/images/ab.png'}}@endif" class="img-circle" width="40" height="40">
+                    <div class="match"><i class="icon-speedometer"></i> 55%</div>
                     </span>
                     <span class="subject">
                     <span class="from">
@@ -54,7 +55,7 @@
                     <span class="time">{{$application->apply_dtTime}}</span>
                     </span>
                     <span class="message">
-                    has applied your Job Post Id: {{$application->unique_id}} </span>
+                    has applied your Job<br> Post Id: {{$application->unique_id}} </span>
                     </a>
                   </li>
                  @endforeach
@@ -81,7 +82,8 @@
                   <li>
                     <a href="inbox.html?a=view">
                     <span class="photo">
-                    <img src="@if($thank->user->profile_pic != null){{ '/img/profile/'.$thank->user->profile_pic }}@else{{'/assets/images/couple.png'}}@endif" class="img-circle" width="40" height="40">
+                    <img src="@if($thank->user->profile_pic != null){{ '/img/profile/'.$thank->user->profile_pic }}@else{{'/assets/images/ab.png'}}@endif" class="img-circle" width="40" height="40">
+                    <div class="match"><i class="icon-speedometer"></i> 55%</div>
                     </span>
                     <span class="subject">
                     <span class="from">
@@ -89,7 +91,7 @@
                     <span class="time">{{$thank->thanks_dtTime}}</span>
                     </span>
                     <span class="message">
-                    has thanked for Job Post Id: {{$thank->unique_id}} </span>
+                    has thanked for Job<br> Post Id: {{$thank->unique_id}} </span>
                     </a>
                   </li>
                   @endforeach

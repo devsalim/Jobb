@@ -4,9 +4,9 @@
 
 <div class="portlet light bordered col-md-7">
 	<div class="portlet-title">
-		<input action="action" type="button" class="btn btn-default btn-responsive" value="Back" onclick="history.go(-1);" />
+		<div class="back-btn"><input action="action" type="button" class="btn btn-default btn-responsive" value="Back" onclick="history.go(-1);" /></div>
 		<div class="caption links-title">
-			
+
 			<i class=""></i>
 			<span class="caption-subject font-blue-hoki bold uppercase">Group: {{$group->group_name}}</span>
 		</div>

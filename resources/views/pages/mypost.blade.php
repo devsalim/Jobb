@@ -293,34 +293,35 @@
 											</h4>
 										</div>
 										<div id="collapse2_{{$post->id}}_{{$post->id}}" class="panel-collapse collapse">
-											<div class="panel-body" style="border-top: 0;padding: 4px 15px;">
+											<div class="panel-body" style="border-top: 0;padding: 0;">
 												
 												<div class="portlet box">
-													<div class="portlet-body">
+													<div class="portlet-body" style="padding: 0px 3px;">
 													<div class="tabbable-custom ">
-														<ul class="nav nav-tabs" style="padding-left:5px;">
+														<ul class="nav nav-tabs" style="padding-left: 0px;">
 															
 															@if($post->post_type == 'job')
 															<li  class="active">	
-																<a href="#tab_1_{{ $post->id }}_1" class="label-new" data-toggle="tab">Applied </a>
+																<a href="#tab_1_{{ $post->id }}_1" class="label-new" data-toggle="tab" style="border-left: 0;">Applied </a>
 															</li>
 															@endif
 															@if($post->post_type == 'skill')
 															<li class="active">
-																<a href="#tab_1_{{ $post->id }}_2" class="label-new" data-toggle="tab">Contacted</a>
+																<a href="#tab_1_{{ $post->id }}_2" class="label-new" data-toggle="tab" style="border-left: 0;">Contacted</a>
 															</li>
 															@endif
 															<li>
-																<a href="#tab_1_{{ $post->id }}_3" class="label-new" data-toggle="tab">Thanks & Share </a>
+																<a href="#tab_1_{{ $post->id }}_3" class="label-new" data-toggle="tab" >Thanks & Share </a>
 															</li>
 														</ul>
-														<div class="tab-content">
+														<div class="tab-content" style="padding: 10px 0px;">
+															@if($post->post_type == 'job')
 															<div class="tab-pane active" id="tab_1_{{ $post->id }}_1">
-																<div class="portlet light">
+																<div class="portlet light" style="padding:0px; !important">
 																	<div class="portlet-title">
 																		<div class="caption">
 																			<i class="fa fa-gift font-green-sharp"></i>
-																			<span class="caption-subject font-green-sharp bold uppercase">Application received:</span>
+																			<span class="caption-subject font-green-sharp ap-th-con">Application Received:</span>
 																			<span class="caption-helper">
 																				<?php $i=0; ?>
 																				@foreach($post->postactivity as $pa)
@@ -332,26 +333,62 @@
 																	</div>
 
 																	<div class="portlet-body">										
-																		<ul data-handle-color="#637283">
+																		<ul data-handle-color="#637283" style="padding: 0">
 
 														                  @foreach($post->postactivity as $pa)
 																		  	@if($pa->apply == 1)
 														                 	<li style="font-size:15px;">
-															                    <span class="photo">
-															                    	<img src="@if($pa->user->profile_pic != null){{ '/img/profile/'.$pa->user->profile_pic }}@else{{'/assets/images/couple.png'}}@endif" 
+														                 		<!-- <div class="mypost-match"><i class="icon-speedometer"></i> 49%</div> -->
+															                    <span class="photo mypost-photo">
+															                    	<img src="@if($pa->user->profile_pic != null){{ '/img/profile/'.$pa->user->profile_pic }}@else{{'/assets/images/ab.png'}}@endif" 
 															                    		 width="45" height="45" 
 															                    		 class="img-circle">
+															                    		 
 															                    </span>
-															                    <span class="subject">
-																                    <span class="from" style="font-weight:600;color:darkcyan;">
-																                    	{{$pa->user->fname}} {{$pa->user->lname}}
-																                   	</span>
-																                    <span class="time"> </span>
-															                    </span>
-															                    <span class="message">
-															                    	has applied for this post <i class=" icon-clock"></i>
+															                    <span class="subject mypost-subject" >
+																                    <span class="from" >
+																                    	{{$pa->user->fname}} {{$pa->user->lname}} has applied for this post <i class=" icon-clock"></i>
 															                    	{{$pa->apply_dtTime}}
+																                   	</span>
+																                  <!--   <span class="time"> </span> -->
 															                    </span>
+															                   
+															                    <div class="row">
+																                    <div class="col-md-1"></div>
+															                        <div class="col-md-10">
+																                    	<div class="row">
+																	                    	<div class="col-md-2 col-sm-4 col-xs-4">
+																	                    		<a data-toggle="modal" href="#{{$post->id}}">
+																	                    			<i class="icon-speedometer"></i> 49%</a>
+																	                    	</div>
+																	                    	<div class="col-md-2 col-sm-4 col-xs-4">
+																	                    		Profile
+																	                    	</div>
+																	                    	<div class="col-md-2 col-sm-4 col-xs-4">
+																	                    		Contact
+																	                    	</div>
+																                    	</div>
+															                		</div>
+															               		</div>
+															               		<!-- Modal for Matching Percentage -->
+															               		<div class="modal fade" id="{{$post->id}}" tabindex="-1" role="basic" aria-hidden="true">
+																					<div class="modal-dialog">
+																						<div class="modal-content">
+																							<div class="modal-header">
+																								<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+																								<h4 class="modal-title">Matching Criteria</h4>
+																								Skills: CSS, PHP 34%<br>
+																								Education: B.tech 60%<br>
+																								Experience:2 Years 50%<br>
+																								City: Chennai 0%
+
+																							</div>
+																						</div>
+																						<!-- /.modal-content -->
+																					</div>
+																					<!-- /.modal-dialog -->
+																				</div>
+																				<!-- /.modal -->
 														                   	</li>
 														                   	@endif									                 
 														                  @endforeach									                  
@@ -360,51 +397,92 @@
 
 																</div>
 															</div>
+															@endif
+															@if($post->post_type == 'skill')
 															<div class="tab-pane active" id="tab_1_{{ $post->id }}_2">
-																<div class="portlet light">
+																<div class="portlet light" style="padding:0px; !important">
 																	<div class="portlet-title">
 																		<div class="caption">
 																			<i class="fa fa-gift font-green-sharp"></i>
-																			<span class="caption-subject font-green-sharp bold uppercase">Contacted:</span>
-																			<span class="caption-helper">100</span>
+																			<span class="caption-subject font-green-sharp ap-th-con">Contacted:</span>
+																			<span class="caption-helper">
+																				<?php $i=0; ?>
+																				@foreach($post->postactivity as $pa)
+																		  			@if($pa->contact_view == 1) <?php $i++; ?> @endif
+																		  		@endforeach
+																		  		<?php echo $i; ?></span>
 																		</div>		
 																	</div>
-
 																	<div class="portlet-body">													
-																		<ul class="dropdown-menu-list scroller" data-handle-color="#637283">
-														                  				                  
-																		<ul data-handle-color="#637283">
+																		<!-- <ul class="" data-handle-color="#637283"> 	 -->			                  
+																		<ul data-handle-color="#637283"  style="padding: 0">
 														                  @foreach($post->postactivity as $pa)
 																		  	@if($pa->contact_view == 1)
 														                 	<li style="font-size:15px;">
-															                    <span class="photo">
-															                    	<img src="@if($pa->user->profile_pic != null){{ '/img/profile/'.$pa->user->profile_pic }}@else{{'/assets/images/couple.png'}}@endif" 
+															                    <span class="photo mypost-photo">
+															                    	<img src="@if($pa->user->profile_pic != null){{ '/img/profile/'.$pa->user->profile_pic }}@else{{'/assets/images/ab.png'}}@endif" 
 															                    		 width="45" height="45" 
 															                    		 class="img-circle">
 															                    </span>
-															                    <span class="subject">
+															                    <span class="subject mypost-subject">
 																                    <span class="from" style="font-weight:600;color:darkcyan;">
-																                    	{{$pa->user->fname}} {{$pa->user->lname}}
+																                    	{{$pa->user->fname}} {{$pa->user->lname}} has contacted for this post <i class=" icon-clock"></i>
+															                    	{{$pa->contact_view_dtTime}}
 																                   	</span>
 																                    <span class="time"> </span>
 															                    </span>
 															                    <span class="message">
-															                    	has contacted for this post <i class=" icon-clock"></i>
-															                    	{{$pa->contact_view_dtTime}}
+															                    	
 															                    </span>
+															                    <div class="row">
+																                    <div class="col-md-1"></div>
+															                        <div class="col-md-10">
+																                    	<div class="row">
+																	                    	<div class="col-md-3 col-sm-4 col-xs-4">
+																	                    		<a data-toggle="modal" href="#{{$post->id}}"><i class="icon-speedometer"></i> 49%</a>
+																	                    	</div>
+																	                    	<div class="col-md-3 col-sm-4 col-xs-4">
+																	                    		Profile
+																	                    	</div>
+																	                    	<div class="col-md-3 col-sm-4 col-xs-4">
+																	                    		Contact
+																	                    	</div>
+																                    	</div>
+															                		</div>
+															               		</div>
+															               		<!-- Modal for Matching Percentage -->
+															               		<div class="modal fade" id="{{$post->id}}" tabindex="-1" role="basic" aria-hidden="true">
+																					<div class="modal-dialog">
+																						<div class="modal-content">
+																							<div class="modal-header">
+																								<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+																								<h4 class="modal-title">Matching Criteria</h4>
+																								Skills: CSS, PHP 55%<br>
+																								Education: B.tech 60%<br>
+																								Experience:2 Years 50%<br>
+																								City: Chennai 100%
+
+																							</div>
+																						</div>
+																						<!-- /.modal-content -->
+																					</div>
+																					<!-- /.modal-dialog -->
+																				</div>
+																				<!-- /.modal -->
 														                   	</li>
 														                   	@endif									                 
 														                  @endforeach									                  
 														                </ul>											
 																	</div>
-																	</div>
+																</div>
 															</div>
+															@endif
 															<div class="tab-pane" id="tab_1_{{ $post->id }}_3">
-																<div class="portlet light">
+																<div class="portlet light" style="padding:0px; !important">
 																	<div class="portlet-title">
 																		<div class="caption">
 																			<i class="fa fa-gift font-green-sharp"></i>
-																			<span class="caption-subject font-green-sharp bold ">Thanks Recieved:</span>
+																			<span class="caption-subject font-green-sharp ap-th-con">Thanks Recieved:</span>
 																			<span class="caption-helper">
 																				<?php $i=0; ?>
 																				@foreach($post->postactivity as $pa)
@@ -415,12 +493,12 @@
 																		</div>
 																	</div>
 																	<div class="portlet-body">
-																		<ul data-handle-color="#637283">
+																		<ul data-handle-color="#637283" style="padding: 0">
 																		 @foreach($post->postactivity as $pa)
 																		  	@if($pa->thanks == 1)
 														                 	<li style="font-size:15px;">
 															                    <span class="photo">
-															                    	<img src="@if($pa->user->profile_pic != null){{ '/img/profile/'.$pa->user->profile_pic }}@else{{'/assets/images/couple.png'}}@endif" 
+															                    	<img src="@if($pa->user->profile_pic != null){{ '/img/profile/'.$pa->user->profile_pic }}@else{{'/assets/images/ab.png'}}@endif" 
 															                    		 width="45" height="45" 
 															                    		 class="img-circle">
 															                    </span>
@@ -458,28 +536,13 @@
 			<div class="col-md-3">
 				<div class="portlet box red-sunglo">
 					<div class="portlet-title">
-						<div class="caption">
-							<i class="fa fa-gift"></i>Unordered Lists
-						</div>
-						<div class="tools">
-							<a href="javascript:;" class="collapse">
-							</a>
-						</div>
 					</div>
 					<div class="portlet-body">
 						<ul>
 							<li>
 								 Lorem ipsum dolor sit amet
 							</li>
-							<li>
-								 Consectetur adipiscing elit
-							</li>
-							<li>
-								 Integer molestie lorem at massa
-							</li>
-							<li>
-								 Facilisis in pretium nisl aliquet
-							</li>									
+														
 						</ul>
 					</div>
 				</div>

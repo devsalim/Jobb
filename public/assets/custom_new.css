@@ -8,7 +8,7 @@
 }
 
 .icon-color{
-	color:grey !important;
+	color: #DADADA !important;
 }
 
 
@@ -119,10 +119,14 @@ display:none !important;
 
 @media (max-width: 768px) {
   .btn-responsive {
-    padding:2px 4px;
-    font-size:80%;
+    padding: 5px 10px;
+    font-size: 112%;
     line-height: 1;
     border-radius:3px;
+  }
+   .input-responsive {
+    padding: 6px 29px;
+    /*height: 25px;*/
   }
 }
 
@@ -132,9 +136,79 @@ display:none !important;
     font-size:90%;
     line-height: 1.2;
   }
+
+  .input-responsive {
+    padding: 6px 20px;
+  }
+
+  .jobskill{
+    width: 21% !important;
+  }
 }
 
 
 .portlet.light{
     padding: 0px 20px 0px 10px !important ;
 }
+
+.back-btn {
+    margin-bottom: -30px;
+}
+
+.match {
+    float: none;
+    margin: 9px auto;
+    display: table;
+    font-size: 13px;
+    text-align: center;
+    /*width: 20px;*/
+}
+
+.mypost-match {
+    position: absolute;
+    float: left;
+    left: 25px;
+    /* top: 192px; */
+    padding: 10px 0px;
+}
+
+.ap-th-con{
+    font-size: 14px;
+    font-weight: 500 !important;
+}
+
+.mypost-photo{
+    float: left;
+    margin: 0 6px 6px 0;
+}
+
+.mypost-subject{
+    display: block !important;
+    font-size: 14px;
+    line-height: 1.3;
+    margin-left: 46px;
+}
+
+.filter-icon{
+    float: right;
+    right: 15px;
+    position: relative;
+    cursor:pointer;
+}
+
+.filter-input{
+    border-color: lightgrey !important;
+}
+
+.check-font-size{
+    font-size: 13px !important;
+}
+/*#oval{
+    width: 30px;
+    height: 15px;
+    background-color: darkcyan;
+    border-radius: 15px !important; 
+}*/
+/*body{
+    font-family: sans-serif !important;
+}*/

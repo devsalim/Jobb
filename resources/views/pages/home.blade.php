@@ -1,6 +1,91 @@
 @extends('master')
 
 @section('content')
+<!-- Jobtip Filter Start -->
+<div class="row">
+	<div class="col-md-8" style=" lightgray;margin-bottom: 5px;">
+		<div class="hide-label col-md-8 col-sm-6 col-xs-10"><label style="font-weight:500; ">Showing all Jobs, Skills posted by Individuals & Corporates</label></div>
+		<div class="show-filter col-md-8 col-sm-6 col-xs-10"><label style="font-weight:500; ">Filter Post you want to see </label></div>
+		<div class="filter-icon hide-label hide-show-filter"><i class="icon-equalizer" style="font-size:16px;"></i></div>
+		<div class="filter-icon show-filter hide-show-filter"><i class="fa fa-check-square-o" style="font-size:18px;color:#3598dc;"></i></div>
+	</div>
+</div>
+<div class="row show-filter">
+	<div class="col-md-10">
+		<div class="btn-group col-md-3 col-sm-8 col-xs-8 jobskill" data-toggle="buttons">
+			<label class="btn btn-default check-font-size active input-responsive">
+			<input type="checkbox" class="toggle"> Jobs </label>
+			<label class="btn btn-default check-font-size input-responsive">
+			<input type="checkbox" class="toggle"> Skills </label>
+		</div>
+		<div class="col-md-2 col-sm-4 col-xs-4">
+			<div class="form-group">
+				
+					<input type="experience" class="form-control filter-input" placeholder="Exp">
+				
+			</div>	
+		</div>
+		<div class="col-md-4 col-sm-12 col-xs-12">
+			<div class="form-group">
+				
+					<input type="text" name="job_title" class="form-control filter-input" placeholder="Job Title, Role">
+				
+			</div>
+		</div>
+
+	</div>
+</div>
+<div class="row show-filter" style="margin-top:10px;">
+	<div class="col-md-10">
+		
+				<div class="col-md-4 col-sm-6 col-xs-12">
+			<div class="form-group">
+				
+					<select class="form-control filter-input check-font-size" name="prof_category" value="" >
+						<optgroup label="Accounting">
+							<option value="Accounts/Finance/Tax">Accounts/Finance/Tax</option>
+							<option value="Agent">Agent</option>
+							<option value="Analytics & Business Intelligence">
+								Analytics & Business Intelligence
+							</option>
+						</optgroup>
+						<optgroup label="IT Field">
+							<option value="HR/Administration/IR">HR/Administration/IR</option>
+							<option value="IT Software - Client Server">IT Software - Client Server</option>
+							<option value="IT Software - Mainframe">IT Software - Mainframe</option>
+							<option value="IT Software - Middleware">IT Software - Middleware</option>
+							<option value="IT Software - Mobile">IT Software - Mobile</option>
+							<option value="IT Software - Other">IT Software - Other</option>
+							<option value="IT Software - System Programming">IT Software - System Programming</option>
+							<option value="IT Software - Telecom Software">IT Software - Telecom Software</option>
+							<option value="IT Software - Application Programming">IT Software - Application Programming</option>
+							<option value="IT Software - DBA/Datawarehousing">IT Software - DBA/Datawarehousing</option>
+							<option value="IT Software - E-Commerce">IT Software - E-Commerce</option>
+							<option value="IT Software - ERP/CRM">IT Software - ERP/CRM</option>
+						</optgroup>
+					</select>
+				</div>
+			
+		</div>
+		<div class="col-md-3 col-sm-6 col-xs-12">
+			<div class="form-group">
+				
+					<input type="city" class="form-control filter-input" placeholder="City">
+				
+			</div>	
+		</div>
+		<div class="btn-group col-md-5 col-sm-12 col-xs-12" data-toggle="buttons">
+			<label class="btn btn-default  check-font-size active">
+			<input type="checkbox" class="toggle"> Individual </label>
+			<label class="btn btn-default  check-font-size">
+			<input type="checkbox" class="toggle"> Company </label>
+			<label class="btn btn-default  check-font-size">
+			<input type="checkbox" class="toggle"> Consultancy </label>
+		</div>
+	</div>
+</div>
+<!-- Jobtip Filter End-->
+
 <div class="portlet light bordered" style="border: none !important;background:transparent">										
 	<div class="portlet-body form">
 			<div class="form-body">
@@ -8,24 +93,28 @@
 					@if (count($posts) > 0)
 						<?php $var = 1; ?>
 						@foreach($posts as $post)	
-						<div class="col-md-9">												
+						<div class="col-md-9">
+
 							<div class="timeline" >
 								<!-- TIMELINE ITEM -->
 								<div class="timeline-item time-item">
 									<div class="timeline-badge" style="margin: 10px 0px;">
 										@if($post->induser != null && !empty($post->induser->profile_pic))
 										<img class="timeline-badge-userpic userpic-box" src="/img/profile/{{ $post->induser->profile_pic }}" title="{{ $post->induser->fname }}">
-										<a class="icon-userpic"><i class="glyphicon glyphicon-user"></i></a>
+										<a class="icon-userpic img-circle"><i class="glyphicon glyphicon-user" style="font-size:12px;"></i></a>
 										@elseif($post->corpuser != null && !empty($post->corpuser->logo_status))
-										<img class="timeline-badge-userpic userpic-box" src="/img/profile/{{ $post->corpuser->logo_status }}" title="{{ $post->corpuser->firm_name }}">
-										<a class="icon-userpic"><i class="fa fa-institution (alias)" style="padding: 0px 5px;"></i></a>
+										<img class="" src="/img/profile/{{ $post->corpuser->logo_status }}" title="{{ $post->corpuser->firm_name }}">
+										<a class="icon-userpic"><i class="fa fa-institution (alias)" style="font-size:12px;"></i></a>
 										@elseif(empty($post->corpuser->logo_status) && $post->corpuser != null)
-										<img class="timeline-badge-userpic userpic-box" src="/assets/images/couple.png">
-										<a class="icon-userpic"><i class="fa fa-institution (alias)" style="padding: 0px 5px;"></i></a>
+										<img class="" src="/assets/images/corp.png">
+										<a class="icon-userpic"><i class="fa fa-institution (alias)" style="font-size:12px;"></i></a>
 										@elseif(empty($post->induser->profile_pic) && $post->induser != null)
 										<img class="timeline-badge-userpic userpic-box" src="/assets/images/ab.png">
-										<a class="icon-userpic"><i class="glyphicon glyphicon-user" style="padding: 0px 5px;"></i></a>
+										<a class="icon-userpic img-circle"><i class="glyphicon glyphicon-user" style=" font-size:12px;"></i></a>
 										@endif
+
+										<div class="match"><i class="icon-speedometer"></i> 55%</div>
+										<div id="oval"></div>
 									</div>
 									<div class="timeline-body" style="">
 										<div class="timeline-body-head">
@@ -80,7 +169,8 @@
 													<i class="fa fa-rupee (alias)"></i>&nbsp;:&nbsp; {{ $post->min_sal }}-{{ $post->max_sal }}/Hours
 												</div> -->
 											</div>
-										</div>		
+										</div>	
+										
 										<div class="post-job-skill-bar">
 											<div class="{{ $post->post_type }}">
 												<a class="post-type-class">{{ $post->post_type }}</a>
@@ -183,14 +273,14 @@
 														<div class="row">
 															@if($post->post_type == 'job' && $post->website_redirect_url != null)
 															<div class="col-md-12 col-sm-12 col-xs-12">
-																<label class="detail-label">Apply on Company Website: Yes</label>
+																Click on Apply, it will redirect you to Company Website.
 															</div>
 															@endif
-															@if($post->post_type == 'job' && $post->website_redirect_url != null)
+															@if($post->post_type == 'job' && $post->website_redirect_url != null && $post->corpuser != null)
 															<div class="col-md-12 col-sm-12 col-xs-12">
 																
 																	<label class="detail-label"><i class="glyphicon glyphicon-globe" style="color: deepskyblue;"></i> :</label>
-																{{ $post->website_redirect_url }}
+																{{ $post->website_url }}
 																	
 																
 															</div>
@@ -296,9 +386,15 @@
 														<form action="/job/apply" method="post" id="post-apply-{{$post->id}}" data-id="{{$post->id}}">	
 															<input type="hidden" name="_token" value="{{ csrf_token() }}">
 															<input type="hidden" name="apply" value="{{ $post->id }}">
-															<button class="btn apply-btn blue btn-sm apply-contact-btn" 
-																	id="apply-btn-{{$post->id}}" type="button">Apply
-															</button>
+															@if($post->website_redirect_url != null)
+																<button class="btn apply-btn blue btn-sm apply-contact-btn" 
+																	onclick="window.location='{{ $post->website_redirect_url }}';"	 type="button">Apply
+																</button>	
+															@else
+																<button class="btn apply-btn blue btn-sm apply-contact-btn" 
+																		id="apply-btn-{{$post->id}}" type="button">Apply
+																</button>
+																@endif
 														</form>	
 													@elseif($post->postactivity->where('user_id', Auth::user()->induser_id)->first()->apply == 1) 
 														<button type="button" class="btn btn-sm bg-grey-steel apply-contact-btn" disabled="true">
@@ -437,10 +533,11 @@
 @section('javascript')
 
 <script type="text/javascript">
-	jQuery('#show-social').hide();
+	jQuery('.show-filter').hide();
 	jQuery(document).ready(function(){ 
-	    jQuery('#hide-social').on('click', function(event) {
-	    jQuery('#show-social').toggle('show');
+	    jQuery('.hide-show-filter').on('click', function(event) {
+	    jQuery('.show-filter').toggle('show');
+	    jQuery('.hide-label').toggle('hide');
 	    });
 	});
 

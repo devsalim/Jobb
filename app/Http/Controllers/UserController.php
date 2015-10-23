@@ -139,9 +139,11 @@ class UserController extends Controller {
 				if(Input::file('resume')->isValid()) {
 					$destinationPath = 'resume/';
 					$extension = Input::file('resume')->getClientOriginalExtension();
+					// $extension  =  'mimes:pdf,txt,doc,docx,rtf|max:10000';
 					$fileName = rand(11111,99999).'.'.$extension;
 					$path = $destinationPath.$fileName;
 					Input::file('resume')->move($destinationPath, $fileName);
+
 				}			
 				$data->resume = $fileName;
 			}
