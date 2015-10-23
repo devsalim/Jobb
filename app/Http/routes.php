@@ -54,6 +54,8 @@ Route::group(array('before' => 'auth'), function(){
 	Route::post('connections/inviteFriend/{id}', 'ConnectionsController@inviteFriend');
 	Route::post('connections/destroy/{id}', 'ConnectionsController@destroy');
 	Route::post('connections/response/{id}', 'ConnectionsController@response');
+	Route::post('connections/newLink/{id}', 'ConnectionsController@newLink');
+	Route::post('connections/removeLink/{id}', 'ConnectionsController@removeLink');
 	
 	Route::get('group', 'GroupController@index');
 	Route::get('group/create', 'GroupController@create');
@@ -85,6 +87,11 @@ Route::group(array('before' => 'auth'), function(){
 	Route::get('notification_view/notification', 'PagesController@notification');
 	Route::get('notification_view/notificationThanks', 'PagesController@notificationThanks');
 	Route::get('profile/{id}', 'PagesController@profile');
+
+	// corporate follow/unfollow
+	Route::post('follow-modal', 'PagesController@followModal');
+	Route::post('corporate/follow/{id}', 'PagesController@follow');
+	Route::post('corporate/unfollow/{id}', 'PagesController@unfollow');
 	
 });
 

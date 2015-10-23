@@ -9,8 +9,10 @@ use App\Corpuser;
 use App\Postjob;
 use App\Postactivity;
 use App\Connections;
+use App\Follow;
 use Auth;
 use DB;
+use Input;
 
 class PagesController extends Controller {
 
@@ -46,10 +48,26 @@ class PagesController extends Controller {
 											where connections.user_id=?
 											 and connections.status=1
 								)', [Auth::user()->induser_id, Auth::user()->induser_id]);
-
 			$links = collect($links);
 
-			return view('pages.home', compact('posts', 'title', 'links'));
+			if(Auth::user()->induser_id != null){
+				$following = DB::select('select id from corpusers 
+										 where corpusers.id in (
+											select follows.corporate_id as id from follows
+											where follows.individual_id=?
+									)', [Auth::user()->induser_id]);
+				$following = collect($following);
+			}
+			if(Auth::user()->corpuser_id != null){
+				$following = DB::select('select id from indusers
+										 where indusers.id in (
+											select follows.individual_id as id from follows
+											where follows.corporate_id=?
+									)', [Auth::user()->corpuser_id]);
+				$following = collect($following);
+			}
+
+			return view('pages.home', compact('posts', 'title', 'links', 'following'));
 			// return $posts;
 		}else{
 			return redirect('login');
@@ -129,10 +147,26 @@ class PagesController extends Controller {
 		return view('pages.profile_indview', compact('title','thanks','posts','links','user'));
 	}
 
-	public function follow(){
+	public function follow($id){
 		$follow = new Follow();
-		$follow->corporate_id = $request['corporate_id'];
-		$follow->individual_id = $request['individual_id'];
+		$follow->corporate_id = $id;
+		$follow->individual_id = Auth::user()->induser_id;
 		$follow->save();
+		return redirect('/home');
+	}
+
+	public function unfollow($id){
+		$follow = Follow::where('corporate_id', '=', $id)
+						->where('individual_id', '=', Auth::user()->induser_id)
+						->first();
+		$follow->delete();
+		return redirect('/home');
+	}
+
+	public function followModal(){
+		$puid = Input::get('puid');
+		$linked = Input::get('linked');
+		$utype = Input::get('utype');
+		return view('pages.links_follow', compact('puid', 'linked', 'utype'));
 	}
 }
