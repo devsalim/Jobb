@@ -133,4 +133,23 @@ class ConnectionsController extends Controller {
 		return redirect('/connections/create');
 	}
 
+	public function newLink($id)
+	{
+		$connections = new Connections();
+		$connections->user_id=Auth::user()->induser_id;
+		$connections->connection_user_id=$id;
+		$connections->save();
+		return redirect('/home');
+	}
+
+	public function removeLink($id){
+		$connections = Connections::where('user_id', '=', $id)
+							      ->where('connection_user_id', '=', Auth::user()->induser_id)
+							      ->orWhere('user_id', '=', Auth::user()->induser_id)
+							      ->where('connection_user_id', '=', $id)
+							      ->first();
+		$connections->delete();
+		return redirect('/home');
+	}
+
 }

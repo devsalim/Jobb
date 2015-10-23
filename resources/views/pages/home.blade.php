@@ -118,30 +118,86 @@
 									</div>
 									<div class="timeline-body" style="">
 										<div class="timeline-body-head">
-											@if(Auth::user()->id == $post->individual_id || Auth::user()->id == $post->corporate_id)
-											<div class="timeline-body-head-caption">
-												@if($post->post_type == 'job')
-												<a   class="user-link"><i class="fa fa-unlink (alias)" style="color:lightslategray;"></i></a><a href="/profile/{{$post->individual_id}}" class="link-label">You have</a>
-												@else
-												<a class="user-link-click"><i class="fa fa-link" style="color:white;"></i></a>
-												<a class="link-label">You have</a>
-												@endif
-												<span class="timeline-body-time font-grey-cascade">Posted at 
-													{{ date('M d, Y', strtotime($post->created_at)) }}
-												</span>
-											</div>
-											@else
-											<div class="timeline-body-head-caption">
-												@if($post->post_type == 'job')
-												<a href="/profile/{{$post->individual_id}}" class="user-link"><i class="fa fa-unlink (alias)" style="color:lightslategray;"></i></a><a href="/profile/{{$post->individual_id}}" style="padding: 0px 0px 0px 32px;font-size: 15px;text-decoration:none;font-weight:600;">{{ $post->induser->fname }} {{ $post->induser->lname }}</a>
-												@else
-												<a class="user-link-click"><i class="fa fa-link" style="color:white;"></i></a>
-												<a href="/profile/{{$post->individual_id}}" style="padding: 0px 0px 0px 32px;font-size: 15px;text-decoration:none;font-weight:600;">{{ $post->induser->fname }} {{ $post->induser->lname }}</a>
-												@endif
-												<span class="timeline-body-time font-grey-cascade">Posted at 
-													{{ date('M d, Y', strtotime($post->created_at)) }}
-												</span>
-											</div>
+											@if(Auth::user()->induser_id == $post->individual_id && $post->individual_id != null)
+												<div class="timeline-body-head-caption">
+													@if($post->post_type == 'job')													
+														<a href="/profile/ind/{{$post->individual_id}}" class="link-label" data-utype="ind">
+															You have
+														</a>
+													@else													
+														<a href="/profile/ind/{{$post->individual_id}}" class="link-label" data-utype="ind">
+															You have
+														</a>
+													@endif
+													<span class="timeline-body-time font-grey-cascade">Posted at 
+														{{ date('M d, Y', strtotime($post->created_at)) }}
+													</span>
+												</div>
+											@elseif(Auth::user()->corpuser_id == $post->corporate_id && $post->corporate_id != null)
+												<div class="timeline-body-head-caption">
+													@if($post->post_type == 'job')													
+														<a href="/profile/corp/{{$post->corporate_id}}" class="link-label" data-utype="corp">
+															You have
+														</a>
+													@else													
+														<a href="/profile/corp/{{$post->corporate_id}}" class="link-label" data-utype="corp">
+															You have
+														</a>
+													@endif
+													<span class="timeline-body-time font-grey-cascade">Posted at 
+														{{ date('M d, Y', strtotime($post->created_at)) }}
+													</span>
+												</div>
+											@elseif($post->individual_id != null)
+												<div class="timeline-body-head-caption" data-puid="{{$post->individual_id}}">
+													@if($post->post_type == 'job')
+														@if($links->contains('id', $post->individual_id))
+														<a href="#links-follow" data-toggle="modal" class="user-link" data-linked="yes" data-utype="ind">
+															<i class="fa fa-link (alias)" style="color:salmon;"></i>
+														</a>
+														@elseif($following->contains('id', $post->individual_id))
+														<a class="user-link2" data-linked="yes" data-utype="ind">
+															<i class="fa fa-link (alias)" style="color:steelblue;"></i>
+														</a>
+														@else
+														<a href="#links-follow" data-toggle="modal" class="user-link" data-linked="no" data-utype="ind">
+															<i class="fa fa-unlink (alias)" style="color:lightslategray;"></i>
+														</a>
+														@endif
+														
+														<a href="/profile/ind/{{$post->individual_id}}" style="padding: 0px 0px 0px 32px;font-size: 15px;text-decoration:none;font-weight:600;">
+															{{ $post->induser->fname}} {{ $post->induser->lname}}
+														</a>
+													@else
+														<a class="user-link-click"><i class="fa fa-link" style="color:white;"></i></a>
+														<a href="/profile/ind/{{$post->individual_id}}" style="padding: 0px 0px 0px 32px;font-size: 15px;text-decoration:none;font-weight:600;">
+															{{ $post->induser->fname }} {{ $post->induser->lname }}
+														</a>
+													@endif
+													<span class="timeline-body-time font-grey-cascade">Posted at 
+														{{ date('M d, Y', strtotime($post->created_at)) }}
+													</span>
+												</div>
+											@elseif($post->corporate_id != null)
+												<div class="timeline-body-head-caption" data-puid="{{$post->corporate_id}}">
+													@if($post->post_type == 'job')
+														@if($following->contains('id', $post->corporate_id))
+															<a href="#links-follow" data-toggle="modal" class="user-link" data-linked="yes" data-utype="corp">
+																<i class="fa fa-link (alias)" style="color:yellow;"></i>
+															</a>
+														@else
+															<a href="#links-follow" data-toggle="modal" class="user-link" data-linked="no" data-utype="corp">
+																<i class="fa fa-unlink (alias)" style="color:lightslategray;"></i>
+															</a>
+														@endif														
+														<a href="/profile/corp/{{$post->corporate_id}}" style="padding: 0px 0px 0px 32px;font-size: 15px;text-decoration:none;font-weight:600;">
+															{{ $post->corpuser->firm_name}}
+														</a>
+													@endif
+													<span class="timeline-body-time font-grey-cascade">Posted at 
+														{{ date('M d, Y', strtotime($post->created_at)) }}
+													</span>
+												</div>
 											@endif
 										</div>
 										<div class="timeline-body-content">
@@ -523,6 +579,22 @@
 						<!-- END TIMELINE ITEM -->
 					<?php $var++; ?>
 				 @endforeach
+
+
+				<div class="modal fade bs-modal-sm" id="links-follow" tabindex="-1" role="dialog" aria-hidden="true">
+					<div class="modal-dialog modal-sm">
+						<div class="modal-content" id="links-follow">
+							<div id="links-follow-content">
+								Links Follow
+							</div>
+						</div>
+						<!-- /.modal-content -->
+					</div>
+					<!-- /.modal-dialog -->
+				</div>
+				<!-- /.modal -->
+
+
 				@endif
 				</div>
 			</div>
@@ -669,6 +741,35 @@ $('.apply-btn').on('click',function(event){
       }
     }); 
     return false;
+  });
+
+	// user-link
+	$('.user-link').on('click',function(event){  	    
+	  	event.preventDefault();
+	  	var post_user_id = $(this).parent().data('puid');
+	  	var post_user_linked = $(this).data('linked');
+	  	var post_user_type = $(this).data('utype');
+
+	  	// var formData = $('#post-apply-'+post_id).serialize(); 
+	   //  var formAction = $('#post-apply-'+post_id).attr('action');
+
+	    $.ajaxSetup({
+			headers: {
+				'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+			}
+		});
+
+	    $.ajax({
+	      url: "/follow-modal",
+	      type: "post",
+	      data: {puid: post_user_id, linked: post_user_linked, utype: post_user_type},
+	      cache : false,
+	      success: function(data){
+	    	$('#links-follow-content').html(data);
+	    	$('#links-follow').modal('show');
+	      }
+	    }); 
+	    return false;
   });
 
 });

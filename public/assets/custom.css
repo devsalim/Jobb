@@ -339,7 +339,7 @@ background-color:white;
     display:none;
 }
 
-.user-link{
+.user-link, .user-link2{
     position: absolute;
     width: 25px;
     height: 25px;
