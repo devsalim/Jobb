@@ -86,7 +86,7 @@ Route::group(array('before' => 'auth'), function(){
 	Route::get('notification_view', 'PagesController@notification');
 	Route::get('notification_view/notification', 'PagesController@notification');
 	Route::get('notification_view/notificationThanks', 'PagesController@notificationThanks');
-	Route::get('profile/{id}', 'PagesController@profile');
+	Route::get('profile/{utype}/{id}', 'PagesController@profile');
 
 	// corporate follow/unfollow
 	Route::post('follow-modal', 'PagesController@followModal');

@@ -132,18 +132,31 @@ class PagesController extends Controller {
 		return view('pages.notification_view', compact('user', 'thanks', 'title'));
 	}
 	
-	public function profile($id)
+	public function profile($utype,$id)
 	{		
 		$title = 'profile';
-		$user = Induser::findOrFail($id);
-		$thanks = Postactivity::with('user', 'post')
-						      ->join('postjobs', 'postjobs.id', '=', 'postactivities.post_id')
-							  ->where('postjobs.individual_id', '=', $id)
-							  ->where('postactivities.thanks', '=', 1)
-						      ->orderBy('postactivities.id', 'desc')
-						      ->sum('postactivities.thanks');
-		$posts = Postjob::where('individual_id', '=', $id)->count('id');
-		$links = Connections::where('user_id', '=', $id)->orWhere('connection_user_id', '=', $id)->count('id');
+		if($utype == 'ind'){
+			$user = Induser::findOrFail($id);
+			$thanks = Postactivity::with('user', 'post')
+							      ->join('postjobs', 'postjobs.id', '=', 'postactivities.post_id')
+								  ->where('postjobs.individual_id', '=', $id)
+								  ->where('postactivities.thanks', '=', 1)
+							      ->orderBy('postactivities.id', 'desc')
+							      ->sum('postactivities.thanks');
+			$posts = Postjob::where('individual_id', '=', $id)->count('id');
+			$links = Connections::where('user_id', '=', $id)->orWhere('connection_user_id', '=', $id)->count('id');
+		}elseif($utype == 'corp'){
+			$user = Corpuser::findOrFail($id);
+			$thanks = Postactivity::with('user', 'post')
+							      ->join('postjobs', 'postjobs.id', '=', 'postactivities.post_id')
+								  ->where('postjobs.corporate_id', '=', $id)
+								  ->where('postactivities.thanks', '=', 1)
+							      ->orderBy('postactivities.id', 'desc')
+							      ->sum('postactivities.thanks');
+			$posts = Postjob::where('corporate_id', '=', $id)->count('id');
+			$links = Follow::where('corporate_id', '=', $id)->count('id');
+		}	
+		// return $utype;	
 		return view('pages.profile_indview', compact('title','thanks','posts','links','user'));
 	}
 
