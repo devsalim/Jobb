@@ -107,7 +107,7 @@
             <a href="/notification_view" class="dropdown-toggle @if($title == 'notify_view'){{'active'}}@endif"  data-close-others="true">
               <i class="icon-pin icon-color"></i>
               
-              <span class="badge badge-default @if(count($favourites) > 0) show @else hide @endif" id="myfavcount" style="right: -14px;">{{count($favourites)}}</span>
+              <span class="badge badge-default @if(count($favourites) > 0) show @else hide @endif" id="myfavcount">{{count($favourites)}}</span>
               
             </a>            
           </li>
@@ -120,33 +120,7 @@
           
           <!-- END USER LOGIN DROPDOWN -->
         </ul>
-        
-      </div>
-      <form class="search-form search-form-expanded" method="GET">
-              <div class="input-group search-input-box">
-                <input type="text" class="form-control" placeholder="Search..." name="query">
-                <span class="input-group-btn expand-search" style="top: 20px;left: 20px;">
-                  <div class="btn-group ">
-                    <a class="" data-toggle="modal" href="#advance"> 
-                          <button class="btn blue" type="button" style="background-color:transparent;color: #7f96ac;">
-                       Advance
-                        </button></a>
-                      </div>
-                        </span>
-                <span class="input-group-btn">
-                <a class="btn submit"><i class="icon-magnifier"></i></a>
-                </span>
-              </div>
-            </form>
-            <!-- <form class="search-form" action="extra_search.html" method="GET">
-        <div class="input-group">
-          <input type="text" class="form-control input-sm" placeholder="Search..." name="query">
-          <span class="input-group-btn">
-          <a href="javascript:;" class="btn submit"><i class="icon-magnifier"></i></a>
-          </span>
-        </div>
-      </form> -->
-      <div class="btn-group" style="margin: 0px 17px;">
+        <div class="btn-group" style="margin: 0px 17px;float:right">
         <button type="button" class="btn btn-circle green-haze dropdown-toggle" data-toggle="dropdown">
         <span class="">Post</span>
         </button>
@@ -163,6 +137,26 @@
           @endif
         </ul>
       </div>
+      </div>
+      <form class="search-form search-form-expanded" method="GET">
+        <div class="input-group search-input-box">
+          <input type="text" class="form-control search-field" placeholder="Search..." name="query">
+          <span class="input-group-btn as-span">
+            <a class="advance-search btn" data-toggle="modal" href="#advance">Advance</a>
+          </span>
+          <span class="input-group-btn">
+            <a class="btn submit"><i class="icon-magnifier"></i></a>
+          </span>
+        </div>
+      </form>
+      <!-- <form class="search-form" action="extra_search.html" method="GET">
+        <div class="input-group">
+          <input type="text" class="form-control input-sm" placeholder="Search..." name="query">
+          <span class="input-group-btn">
+          <a href="javascript:;" class="btn submit"><i class="icon-magnifier"></i></a>
+          </span>
+        </div>
+      </form> -->
       
       </div>
     <!-- END PAGE ACTIONS -->

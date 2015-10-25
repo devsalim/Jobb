@@ -3,87 +3,94 @@
 @section('content')
 <!-- Jobtip Filter Start -->
 <div class="row">
-	<div class="col-md-8" style=" lightgray;margin-bottom: 5px;">
-		<div class="hide-label col-md-8 col-sm-6 col-xs-10"><label style="font-weight:500; ">Showing all Jobs, Skills posted by Individuals & Corporates</label></div>
-		<div class="show-filter col-md-8 col-sm-6 col-xs-10"><label style="font-weight:500; ">Filter Post you want to see </label></div>
+	<div class="col-md-9" style=" lightgray;margin-bottom: 5px;">
+		<div class="hide-label col-md-8 col-sm-6 col-xs-10">
+			<label style="font-weight:500; ">
+				Showing all Jobs, Skills posted by Individuals & Corporates
+			</label>
+		</div>
+		<div class="show-filter col-md-8 col-sm-6 col-xs-10">
+			<label style="font-weight:500; ">Filter Post you want to see </label>
+		</div>
 		<div class="filter-icon hide-label hide-show-filter"><i class="icon-equalizer" style="font-size:16px;"></i></div>
 		<div class="filter-icon show-filter hide-show-filter"><i class="fa fa-check-square-o" style="font-size:18px;color:#3598dc;"></i></div>
 	</div>
 </div>
+<form id="home-filter" action="/home" method="post">
+<input type="hidden" name="_token" value="{{ csrf_token() }}">
 <div class="row show-filter">
-	<div class="col-md-10">
-		<div class="btn-group col-md-3 col-sm-8 col-xs-8 jobskill" data-toggle="buttons">
-			<label class="btn btn-default check-font-size active input-responsive">
-			<input type="checkbox" class="toggle"> Jobs </label>
-			<label class="btn btn-default check-font-size input-responsive">
-			<input type="checkbox" class="toggle"> Skills </label>
-		</div>
+	<div class="col-md-9">
 		<div class="col-md-2 col-sm-4 col-xs-4">
-			<div class="form-group">
-				
-					<input type="experience" class="form-control filter-input" placeholder="Exp">
-				
+			<div class="form-group">				
+				<input type="experience" class="form-control filter-input" name="experience" placeholder="Exp" value="">				
 			</div>	
 		</div>
 		<div class="col-md-4 col-sm-12 col-xs-12">
 			<div class="form-group">
-				
-					<input type="text" name="job_title" class="form-control filter-input" placeholder="Job Title, Role">
-				
+				<input type="text" name="post_title" class="form-control filter-input" placeholder="Job Title, Role">
 			</div>
 		</div>
-
+		<div class="col-md-4 col-sm-12 col-xs-12">
+			<div class="form-group">				
+				<select class="form-control filter-input check-font-size" name="prof_category">
+					<option value="">Category</option>
+					<optgroup label="Accounting">
+						<option value="Accounts/Finance/Tax">Accounts/Finance/Tax</option>
+						<option value="Agent">Agent</option>
+						<option value="Analytics & Business Intelligence">Analytics & Business Intelligence</option>
+					</optgroup>
+					<optgroup label="IT Field">
+						<option value="HR/Administration/IR">HR/Administration/IR</option>
+						<option value="IT Software - Client Server">IT Software - Client Server</option>
+						<option value="IT Software - Mainframe">IT Software - Mainframe</option>
+						<option value="IT Software - Middleware">IT Software - Middleware</option>
+						<option value="IT Software - Mobile">IT Software - Mobile</option>
+						<option value="IT Software - Other">IT Software - Other</option>
+						<option value="IT Software - System Programming">IT Software - System Programming</option>
+						<option value="IT Software - Telecom Software">IT Software - Telecom Software</option>
+						<option value="IT Software - Application Programming">IT Software - Application Programming</option>
+						<option value="IT Software - DBA/Datawarehousing">IT Software - DBA/Datawarehousing</option>
+						<option value="IT Software - E-Commerce">IT Software - E-Commerce</option>
+						<option value="IT Software - ERP/CRM">IT Software - ERP/CRM</option>
+					</optgroup>
+				</select>
+			</div>
+			
+		</div>
+		<div class="col-md-2 col-sm-12 col-xs-12">
+			<div class="form-group">
+				<input type="text" name="city" class="form-control filter-input" placeholder="City">
+			</div>	
+		</div>
 	</div>
 </div>
 <div class="row show-filter" style="margin-top:10px;">
-	<div class="col-md-10">
-		
-				<div class="col-md-4 col-sm-6 col-xs-12">
-			<div class="form-group">
-				
-					<select class="form-control filter-input check-font-size" name="prof_category" value="" >
-						<optgroup label="Accounting">
-							<option value="Accounts/Finance/Tax">Accounts/Finance/Tax</option>
-							<option value="Agent">Agent</option>
-							<option value="Analytics & Business Intelligence">
-								Analytics & Business Intelligence
-							</option>
-						</optgroup>
-						<optgroup label="IT Field">
-							<option value="HR/Administration/IR">HR/Administration/IR</option>
-							<option value="IT Software - Client Server">IT Software - Client Server</option>
-							<option value="IT Software - Mainframe">IT Software - Mainframe</option>
-							<option value="IT Software - Middleware">IT Software - Middleware</option>
-							<option value="IT Software - Mobile">IT Software - Mobile</option>
-							<option value="IT Software - Other">IT Software - Other</option>
-							<option value="IT Software - System Programming">IT Software - System Programming</option>
-							<option value="IT Software - Telecom Software">IT Software - Telecom Software</option>
-							<option value="IT Software - Application Programming">IT Software - Application Programming</option>
-							<option value="IT Software - DBA/Datawarehousing">IT Software - DBA/Datawarehousing</option>
-							<option value="IT Software - E-Commerce">IT Software - E-Commerce</option>
-							<option value="IT Software - ERP/CRM">IT Software - ERP/CRM</option>
-						</optgroup>
-					</select>
-				</div>
-			
+	<div class="col-md-9">		
+		<div class="btn-group col-md-3 col-sm-4 col-xs-12 jobskill" data-toggle="buttons">
+			<label class="btn btn-default check-font-size input-responsive">
+				<input type="checkbox" name="post_type[]" value="job" class="toggle"> Jobs 
+			</label>
+			<label class="btn btn-default check-font-size input-responsive">
+				<input type="checkbox" name="post_type[]" value="skill" class="toggle"> Skills 
+			</label>
+		</div>
+		<div class="btn-group col-md-6 col-sm-8 col-xs-12" data-toggle="buttons">
+			<label class="btn btn-default  check-font-size">
+				<input type="checkbox" name="posted_by[]" value="individual" class="toggle"> Individual 
+			</label>
+			<label class="btn btn-default  check-font-size">
+				<input type="checkbox" name="posted_by[]" value="company" class="toggle"> Company 
+			</label>
+			<label class="btn btn-default  check-font-size">
+				<input type="checkbox" name="posted_by[]" value="consultancy" class="toggle"> Consultancy 
+			</label>
 		</div>
 		<div class="col-md-3 col-sm-6 col-xs-12">
-			<div class="form-group">
-				
-					<input type="city" class="form-control filter-input" placeholder="City">
-				
-			</div>	
-		</div>
-		<div class="btn-group col-md-5 col-sm-12 col-xs-12" data-toggle="buttons">
-			<label class="btn btn-default  check-font-size active">
-			<input type="checkbox" class="toggle"> Individual </label>
-			<label class="btn btn-default  check-font-size">
-			<input type="checkbox" class="toggle"> Company </label>
-			<label class="btn btn-default  check-font-size">
-			<input type="checkbox" class="toggle"> Consultancy </label>
+			<input type="submit" class="btn btn-sm btn-info" value="Search">
 		</div>
 	</div>
 </div>
+</form>
 <!-- Jobtip Filter End-->
 
 <div class="portlet light bordered" style="border: none !important;background:transparent">										
@@ -592,6 +599,14 @@
 					<?php $var++; ?>
 				 @endforeach
 
+				@endif
+				</div>
+
+				<div class="row">
+					<div class="col-md-9">
+						<?php echo $posts->render(); ?>
+					</div>
+				</div>
 
 				<div class="modal fade bs-modal-sm" id="links-follow" tabindex="-1" role="dialog" aria-hidden="true">
 					<div class="modal-dialog modal-sm">
@@ -607,8 +622,6 @@
 				<!-- /.modal -->
 
 
-				@endif
-				</div>
 			</div>
 	</div>
 </div>
@@ -617,15 +630,15 @@
 @section('javascript')
 
 <script type="text/javascript">
+$(document).ready(function(){
+
 	jQuery('.show-filter').hide();
 	jQuery(document).ready(function(){ 
 	    jQuery('.hide-show-filter').on('click', function(event) {
-	    jQuery('.show-filter').toggle('show');
-	    jQuery('.hide-label').toggle('hide');
+		    jQuery('.show-filter').toggle('show');
+		    jQuery('.hide-label').toggle('hide');
 	    });
 	});
-
-$(document).ready(function(){
 
   $('.like-btn').on('click',function(event){  	    
   	event.preventDefault();

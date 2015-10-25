@@ -15,6 +15,7 @@ Route::post('corporate/store', 'CorporateController@store');
 
 Route::group(array('before' => 'auth'), function(){
 
+	Route::post('home', 'PagesController@homeFilter');
 	Route::get('master', 'PagesController@master');
 	Route::get('mypost', 'PagesController@myPost');
 
