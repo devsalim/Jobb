@@ -169,7 +169,19 @@
 															{{ $post->induser->fname}} {{ $post->induser->lname}}
 														</a>
 													@else
-														<a class="user-link-click"><i class="fa fa-link" style="color:white;"></i></a>
+														@if($links->contains('id', $post->individual_id))
+														<a href="#links-follow" data-toggle="modal" class="user-link" data-linked="yes" data-utype="ind">
+															<i class="fa fa-link (alias)" style="color:salmon;"></i>
+														</a>
+														@elseif($following->contains('id', $post->individual_id))
+														<a class="user-link2" data-linked="yes" data-utype="ind">
+															<i class="fa fa-link (alias)" style="color:steelblue;"></i>
+														</a>
+														@else
+														<a href="#links-follow" data-toggle="modal" class="user-link" data-linked="no" data-utype="ind">
+															<i class="fa fa-unlink (alias)" style="color:lightslategray;"></i>
+														</a>
+														@endif
 														<a href="/profile/ind/{{$post->individual_id}}" style="padding: 0px 0px 0px 32px;font-size: 15px;text-decoration:none;font-weight:600;">
 															{{ $post->induser->fname }} {{ $post->induser->lname }}
 														</a>
