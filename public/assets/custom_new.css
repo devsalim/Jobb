@@ -134,6 +134,12 @@ display:none !important;
    right: 20px;
    top: 41px !important;
  }
+ .nav-tab-new{
+  float: none !important;
+    margin: 0px 72px auto !important;
+    display: table !important;
+    padding-left: 0px;
+}
 }
 
 @media (min-width: 769px) and (max-width: 990px) {
@@ -161,13 +167,17 @@ display:none !important;
 
 @media (min-width: 768px){
 .modal-dialog {
-    width: 450px !important;
-    margin: 30px auto;
+    width: 470px;
+    margin: 56px auto !important;
 }
 
 .btn-default {
     border-width: 1px;
-    padding: 5px 23px !important;
+    padding: 7px 10px !important;
+}
+
+.postedwidth{
+  width: 11%;
 }
 }
 .portlet.light{
@@ -233,3 +243,31 @@ display:none !important;
    right: 20px;
    top: 38px;
 }
+
+.advance-len{
+  padding-right: 10px;
+    padding-left: 6px;
+}
+
+@media (min-width: 992px){
+.new-col-md-3 {
+    width: 16%;
+}
+.nav-tab-new{
+  float: none !important;
+    margin: 0px 122px auto !important;
+    display: table !important;
+    padding-left: 0px;
+}
+}
+
+.form-group {
+    margin-bottom: 25px !important;
+}
+
+.posted{
+float: none;
+margin: 6px auto;
+display: table;
+}
+

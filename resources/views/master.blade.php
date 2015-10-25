@@ -331,7 +331,19 @@ jQuery(document).ready(function() {
   });
 });
 </script>
+<script>
+    $(document).ready(function() {
+   $('input[type="radio"]').click(function() {
+       if($(this).attr('id') == 'hide-comp') {
+            $('.show-comp').hide();           
+       }
 
+       else {
+            $('.show-comp').show();   
+       }
+   });
+});
+</script>
 @yield('javascript')
 
 <!-- END JAVASCRIPTS -->

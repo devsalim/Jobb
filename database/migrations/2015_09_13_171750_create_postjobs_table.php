@@ -46,6 +46,7 @@ class CreatePostjobsTable extends Migration {
                   $table->string('contact_person')->nullable();
                   $table->string('post_expire')->default(0); //Post Expire Button column
                   $table->string('post_expire_Dt')->nullable();
+                  $table->string('resume_required')->default(0);
                   $table->foreign('individual_id')->references('id')->on('indusers');
                   $table->foreign('corporate_id')->references('id')->on('corpusers');
 			$table->timestamps();

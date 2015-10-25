@@ -144,7 +144,7 @@ class PagesController extends Controller {
 							      ->orderBy('postactivities.id', 'desc')
 							      ->sum('postactivities.thanks');
 			$posts = Postjob::where('individual_id', '=', $id)->count('id');
-			$linkCount = Connections::where('user_id', '=', $id)
+			$linksCount = Connections::where('user_id', '=', $id)
 								->where('status', '=', 1)
 								->orWhere('connection_user_id', '=', $id)
 								->where('status', '=', 1)
@@ -158,10 +158,10 @@ class PagesController extends Controller {
 							      ->orderBy('postactivities.id', 'desc')
 							      ->sum('postactivities.thanks');
 			$posts = Postjob::where('corporate_id', '=', $id)->count('id');
-			$linkCount = Follow::where('corporate_id', '=', $id)->count('id');
+			$linksCount = Follow::where('corporate_id', '=', $id)->count('id');
 		}	
 		// return $utype;	linkCount
-		return view('pages.profile_indview', compact('title','thanks','posts','linkCount','user'));
+		return view('pages.profile_indview', compact('title','thanks','posts','linksCount','user'));
 	}
 
 	public function follow($id){

@@ -83,7 +83,7 @@
                     <a href="inbox.html?a=view">
                     <span class="photo">
                     <img src="@if($thank->user->profile_pic != null){{ '/img/profile/'.$thank->user->profile_pic }}@else{{'/assets/images/ab.png'}}@endif" class="img-circle" width="40" height="40">
-                    <div class="match"><i class="icon-speedometer"></i> 55%</div>
+                    <div class="match">
                     </span>
                     <span class="subject">
                     <span class="from">
@@ -185,125 +185,196 @@
 <div class="modal fade" id="advance" tabindex="-1" role="basic" aria-hidden="true">
   <div class="modal-dialog modal-width">
     <div class="modal-content">
-      <div class="modal-header">
+      <div class="modal-header" style="background-color: #3598dc; height: 40px;padding: 8px;">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-        <h4 class="modal-title links-title">Post</h4>
+        <h4 class="modal-title links-title" style="color:white;"><i class="icon-magnifier"></i></a> Advance Search</h4>
       </div>
-      <div class="modal-body links-title">
-        <div class="row">
-          <div class="col-md-6 col-sm-6 col-xs-6">
-            <div class="input-group">
-              <div class="icheck-inline">
-                <label>
-                <input type="radio" name="radio2" class="icheck"> Job</label>
-                <label>
-                <input type="radio" name="radio2" checked class="icheck"> Skill </label>
+      <div class="modal-body links-title" style="padding:0;">
+        <div class="portlet box" style="border: 0;">
+              <div class="portlet-body">
+                <div class="tabbable-line">
+                  <ul class="nav nav-tabs nav-tab-new">
+                    <li class="active">
+                      <a href="#tab_15_1" data-toggle="tab" style="font-size:15px;font-weight:600;">
+                      Post </a>
+                    </li>
+                    <li>
+                      <a href="#tab_15_2" data-toggle="tab" style="font-size:15px;font-weight:600;">
+                      Profile </a>
+                    </li>
+                  </ul>
+                  <div class="tab-content">
+                    <div class="tab-pane active" id="tab_15_1">
+                      <div class="row links-title" style="margin-bottom: 20px;margin-top: 10px;">
+                        <div class="col-md-12 col-sm-12 col-xs-12 advance-len">
+                          <div class="input-group">
+                            <div class="icheck-inline">
+                              <label style="font-weight:500;">
+                              <input type="radio" name="radio2" class="icheck"> Job</label>
+                              <label style="font-weight:500;">
+                              <input type="radio" name="radio2" class="icheck"> Skill </label>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row" style="margin-top: 10px;">
+                        <div class="col-md-2 col-sm-1 col-xs-1 advance-len "></div>
+                        <div class="col-md-4 col-sm-5 col-xs-5 advance-len ">
+                          <div class="input-group">
+                            <div class="icheck-inline">
+                              <label>
+                              <input type="checkbox" class="icheck">Magic Match</label>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-3 col-sm-3 col-xs-3 advance-len">
+                          <div class="form-group">              
+                              <select name="time_for" class="form-control" style="border-top: 0px;border-left: 0;border-right: 0;">
+                                <option value="30%+">30% +</option>
+                                <option value="40%+">40% +</option>
+                                <option selected value="50%+">50% +</option>
+                                <option value="60%+">60% +</option>
+                                <option value="70%+">70% +</option>
+                                <option value="80%+">80% +</option>
+                                <option value="90%+">90% +</option>
+                                <option value="All">All</option>
+                              </select>
+                          </div>  
+                        </div>
+                        <div class="col-md-2 col-sm-1 col-xs-1 advance-len "></div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-8 col-sm-8 col-xs-8 advance-len">
+                          <div class="form-group">              
+                              <input type="unique_id" class="form-control filter-input" placeholder="Enter Title">
+                          </div>  
+                        </div>
+                        <div class="col-md-4 col-sm-4 col-xs-4 advance-len">
+                          <div class="form-group">              
+                              <input type="unique_id" class="form-control filter-input" placeholder="Post Id">
+                          </div>  
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-6 col-sm-12 col-xs-12 advance-len">
+                          <div class="form-group">              
+                              <input type="unique_id" class="form-control filter-input" placeholder="Job Category">
+                          </div>  
+                        </div>
+                        <div class="col-md-6 col-sm-12 col-xs-12 advance-len">
+                          <div class="form-group">              
+                              <input type="unique_id" class="form-control filter-input" placeholder="Job Role">
+                          </div>  
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-6 col-sm-12 col-xs-12 advance-len">
+                          <div class="form-group">              
+                              <input type="unique_id" class="form-control filter-input" placeholder="Enter Name who posted Job">
+                          </div>  
+                        </div>
+                        <div class="col-md-6 col-sm-12 col-xs-12 advance-len">
+                          <div class="form-group">              
+                              <input type="unique_id" class="form-control filter-input" placeholder="Location: Pune, Hyderabad, Bangalore">
+                          </div>  
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-6 col-sm-6 col-xs-6 advance-len">
+                          <div class="form-group">              
+                              <input type="unique_id" class="form-control filter-input" placeholder="Exp">
+                          </div>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-6 advance-len">
+                          <div class="form-group">              
+                              <select name="time_for" class="form-control" >
+                                <option value="Full Time">Full Time</option>
+                                <option value="Part Time">Part Time</option>
+                                <option value="Freelancer">Freelancer</option>
+                              </select>
+                          </div>  
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12 advance-len">
+                          <div class="form-group">              
+                              <input type="unique_id" class="form-control filter-input" placeholder="Enter Skills: Painter, Delievery Boy...">
+                          </div>  
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                          <div class="form-group links-title">              
+                              <label>Posted By</label>
+                          </div>  
+                        </div>
+                      </div>
+                      <div class="row links-title">
+                        <div class="btn-group col-md-12 col-sm-12 col-xs-12" data-toggle="buttons">
+                          <label class="btn btn-default  check-font-size active">
+                          <input type="checkbox" class="toggle"> Individual </label>
+                          <label class="btn btn-default  check-font-size">
+                          <input type="checkbox" class="toggle"> Company </label>
+                          <label class="btn btn-default  check-font-size">
+                          <input type="checkbox" class="toggle"> Consultancy </label>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="tab-pane" id="tab_15_2">
+                      <div class="row links-title" style="margin-bottom: 20px;margin-top: 10px;">
+                        <div class="col-md-12 col-sm-12 col-xs-12 advance-len">
+                          <div class="input-group">
+                            <div class="icheck-inline">
+                              <label>
+                              <input type="radio" name="radio2" value="people" class="icheck">People</label>
+                              <label>
+                              <input id="hide-comp" type="radio" value="company" name="radio2" class="icheck">Company</label>
+                            </div>
+                          </div>
+                        </div>
+                        
+                      </div>
+                      <div class="row">
+                        <div class="col-md-6 col-sm-6 col-xs-6 advance-len">
+                          <div class="form-group">              
+                              <input type="unique_id" class="form-control filter-input" placeholder="Enter Name or Email Id">
+                          </div>  
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-6 advance-len">
+                          <div class="form-group">              
+                              <input type="unique_id" class="form-control filter-input" placeholder="Location: Pune, Hyderabad">
+                          </div>  
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-6 col-sm-12 col-xs-12 advance-len">
+                          <div class="form-group">              
+                              <input type="unique_id" class="form-control filter-input" placeholder="Job Role">
+                          </div>  
+                        </div>
+                        <div class="col-md-6 col-sm-12 col-xs-12 advance-len">
+                          <div class="form-group">              
+                              <input type="unique_id" class="form-control filter-input" placeholder="Job Category">
+                          </div>  
+                        </div>
+                      </div>
+                      <div class="row show-comp">
+                        <div class="col-md-6 col-sm-12 col-xs-12 advance-len">
+                          <div class="form-group">              
+                              <input type="unique_id" class="form-control filter-input" placeholder="Working at">
+                          </div>  
+                        </div>
+                        <div class="col-md-6 col-sm-12 col-xs-12 advance-len">
+                          <div class="form-group">              
+                              <input type="unique_id" class="form-control filter-input" placeholder="Phone No">
+                          </div>  
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-          <div class="col-md-6 col-sm-6 col-xs-6">
-            <div class="form-group">              
-                <input type="unique_id" class="form-control filter-input" placeholder="Post Id">
-            </div>  
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-6 col-sm-6 col-xs-6">
-            <div class="input-group">
-              <div class="icheck-inline">
-                <label>
-                <input type="checkbox" class="icheck">Magic Match</label>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6 col-sm-6 col-xs-6">
-            <div class="form-group">              
-                <select name="time_for" class="form-control" >
-                  <option value="">Select % Match</option>
-                  <option value="0-10%">0-10%</option>
-                  <option value="20-30%">20-30%</option>
-                  <option value="30-40%">30-40%</option>
-                  <option value="40-50%">40-50%</option>
-                  <option value="50-60%">50-60%</option>
-                  <option value="60-70%">60-70%</option>
-                  <option value="70-80%">70-80%</option>
-                  <option value="80-90%">80-90%</option>
-                  <option value="90-100%">90-100%</option>
-                </select>
-            </div>  
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-12 col-sm-12 col-xs-12">
-            <div class="form-group">              
-                <input type="unique_id" class="form-control filter-input" placeholder="Enter Title">
-            </div>  
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-6 col-sm-12 col-xs-12">
-            <div class="form-group">              
-                <input type="unique_id" class="form-control filter-input" placeholder="Job Category">
-            </div>  
-          </div>
-          <div class="col-md-6 col-sm-12 col-xs-12">
-            <div class="form-group">              
-                <input type="unique_id" class="form-control filter-input" placeholder="Job Role">
-            </div>  
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-6 col-sm-12 col-xs-12">
-            <div class="form-group">              
-                <input type="unique_id" class="form-control filter-input" placeholder="Enter Name who posted Job">
-            </div>  
-          </div>
-          <div class="col-md-6 col-sm-12 col-xs-12">
-            <div class="form-group">              
-                <input type="unique_id" class="form-control filter-input" placeholder="Location: Pune, Hyderabad, Bangalore">
-            </div>  
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-6 col-sm-6 col-xs-6">
-            <div class="form-group">              
-                <input type="unique_id" class="form-control filter-input" placeholder="Exp">
-            </div>
-          </div>
-          <div class="col-md-6 col-sm-6 col-xs-6">
-            <div class="form-group">              
-                <select name="time_for" class="form-control" >
-                  <option value="Full Time">Full Time</option>
-                  <option value="Part Time">Part Time</option>
-                  <option value="Freelancer">Freelancer</option>
-                </select>
-            </div>  
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-12 col-sm-12 col-xs-12">
-            <div class="form-group">              
-                <input type="unique_id" class="form-control filter-input" placeholder="Enter Skills: Painter, Delievery Boy...">
-            </div>  
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-12 col-sm-12 col-xs-12">
-            <div class="form-group links-title">              
-                <label>Posted By</label>
-            </div>  
-          </div>
-        </div>
-        <div class="row">
-          <div class="btn-group col-md-12 col-sm-12 col-xs-12" data-toggle="buttons">
-            <label class="btn btn-default  check-font-size active">
-            <input type="checkbox" class="toggle"> Individual </label>
-            <label class="btn btn-default  check-font-size">
-            <input type="checkbox" class="toggle"> Company </label>
-            <label class="btn btn-default  check-font-size">
-            <input type="checkbox" class="toggle"> Consultancy </label>
-          </div>
-        </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn blue links-title"><i class="glyphicon glyphicon-search"></i> Search</button>
@@ -314,3 +385,4 @@
   <!-- /.modal-dialog -->
 </div>
 <!-- /.modal -->
+

@@ -238,6 +238,15 @@
 										</div>
 									</div>
 									<!--/span-->
+									<div class="col-md-12">
+										<div class="form-group">
+											<!-- <label>Job Title</label> -->
+											<div class="input-group">
+												<input type="checkbox" id="resume-check" name="resume" class="form-control">
+												<label>Resume Required to apply for this Job</label>
+											</div>
+										</div>
+									</div>
 									<div class="col-md-5">
 										<div class="form-group">							
 											<label class=" control-label">Experience </label>&nbsp;: <input type="text" style="width: 20px;background:transparent;border:0" name="min_exp" class="min-exp">-
@@ -426,6 +435,7 @@
 																							Role: <p class="form-control-static" data-display="role"></p><br>
 																							Job Category: <p class="form-control-static" data-display="prof_category"></p><br>
 																							Skill: <p class="form-control-static" data-display="linked_skill"></p><br>
+																							 <div class="resume-required">Resume: Required</div><div class="not-required">Resume: Not Required</div><br>
 																							Salary (<i class="fa fa-rupee (alias)"></i>): <p class="form-control-static" data-display="min_sal"></p>-<p class="form-control-static" data-display="max_sal"></p> <p class="form-control-static" data-display="salary-type"></p><br>
 																							Description:
 																							<div class="row">
@@ -436,7 +446,7 @@
 																							<div >Reference Id: <a class="form-control-static" data-display="reference_id"></a></div>
 																							<div >Post Duration: <a class="form-control-static" data-display="post_duration"></a></div>
 																							<div class="skill-display">Contact Details:<br> </div>
-																							<div class="show-apply">Apply on Company Website:<a> <p class="form-control-static" data-display="website_redirect_url"></p></a></div><br>
+																							<div class="show-apply">Apply on Company Website:<p class="form-control-static" data-display="website_redirect_url"></p></div><br>
 																							<div id="con" class="show-apply-email">
 																							Contact Person: <p class="form-control-static" data-display="contact_person"></p><br>
 
@@ -519,10 +529,19 @@ jQuery(document).ready(function() {
         });
     });
 
-//     $('#skill-list').select2();
-//     $('#linked-skill').select2({
-//   tags: true
-// });
+        $(function () {
+        $("#resume-check").click(function () {
+            if ($(this).is(":checked")) {
+                $(".resume-required").show();
+                $(".not-required").hide();
+            } else {
+            	$(".not-required").show();
+                $(".resume-required").hide();
+                
+            }
+        });
+    });
+
     $('#connections').select2();
 </script>
 <script type="text/javascript">

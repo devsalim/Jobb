@@ -57,6 +57,7 @@
 					</div>
 				</div>
 				<!-- END SIDEBAR BUTTONS -->
+				
 			</div>
 			<!-- END PORTLET MAIN -->
 		</div>
@@ -71,7 +72,7 @@
 			<span class="caption-subject font-green-haze bold uppercase">Profile Summary</span>
 			<span class="caption-helper"></span>
 		</div>
-		@if(Auth::user()->id == $user->id)
+		@if(Auth::user()->induser_id == $user->id)
 		<div class="tools @if($title == 'indprofile_edit'){{'active'}}@endif">
 			<a href="/individual/edit_view" class="btn btn-xs blue" style="height: 20px;">
 			<i class="fa fa-edit"></i> Edit 
@@ -105,7 +106,7 @@
 			<span class="caption-subject font-green-haze bold uppercase">Professional Details</span>
 			<span class="caption-helper"></span>
 		</div>
-		@if(Auth::user()->id == $user->id)
+		@if(Auth::user()->induser_id == $user->id)
 		<div class="tools @if($title == 'indprofile_edit'){{'active'}}@endif">
 			<a href="/individual/edit_view" class="btn btn-xs blue" style="height: 20px;">
 			<i class="fa fa-edit"></i> Edit 
@@ -236,7 +237,7 @@
 			<span class="caption-subject font-green-haze bold uppercase">Contact Details</span>
 			<span class="caption-helper"></span>
 		</div>
-		@if(Auth::user()->id == $user->id)
+		@if(Auth::user()->induser_id == $user->id)
 		<div class="tools @if($title == 'indprofile_edit'){{'active'}}@endif">
 			<a href="/individual/edit_view" class="btn btn-xs blue" style="height: 20px;">
 			<i class="fa fa-edit"></i> Edit 

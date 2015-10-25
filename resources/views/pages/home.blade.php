@@ -12,69 +12,77 @@
 </div>
 <div class="row show-filter">
 	<div class="col-md-10">
-		<div class="btn-group col-md-3 col-sm-8 col-xs-8 jobskill" data-toggle="buttons">
+		<div class="btn-group col-md-3 col-sm-6 col-xs-8 jobskill new-col-md-3" data-toggle="buttons">
 			<label class="btn btn-default check-font-size active input-responsive">
-			<input type="checkbox" class="toggle"> Jobs </label>
+			<input type="checkbox" checked class="toggle"> Jobs </label>
 			<label class="btn btn-default check-font-size input-responsive">
 			<input type="checkbox" class="toggle"> Skills </label>
 		</div>
-		<div class="col-md-2 col-sm-4 col-xs-4">
+		<div class="col-md-2 col-sm-6 col-xs-4">
 			<div class="form-group">
 				
 					<input type="experience" class="form-control filter-input" placeholder="Exp">
 				
 			</div>	
 		</div>
-		<div class="col-md-4 col-sm-12 col-xs-12">
+		<div class="col-md-3 col-sm-6 col-xs-12">
 			<div class="form-group">
-				
 					<input type="text" name="job_title" class="form-control filter-input" placeholder="Job Title, Role">
-				
 			</div>
 		</div>
-
+		<div class="col-md-3 col-sm-6 col-xs-12">
+			<div class="form-group">
+				<select class="form-control filter-input check-font-size" name="prof_category" value="" >
+					<optgroup label="Accounting">
+						<option value="Accounts/Finance/Tax">Accounts/Finance/Tax</option>
+						<option value="Agent">Agent</option>
+						<option value="Analytics & Business Intelligence">
+							Analytics & Business Intelligence
+						</option>
+					</optgroup>
+					<optgroup label="IT Field">
+						<option value="HR/Administration/IR">HR/Administration/IR</option>
+						<option value="IT Software - Client Server">IT Software - Client Server</option>
+						<option value="IT Software - Mainframe">IT Software - Mainframe</option>
+						<option value="IT Software - Middleware">IT Software - Middleware</option>
+						<option value="IT Software - Mobile">IT Software - Mobile</option>
+						<option value="IT Software - Other">IT Software - Other</option>
+						<option value="IT Software - System Programming">IT Software - System Programming</option>
+						<option value="IT Software - Telecom Software">IT Software - Telecom Software</option>
+						<option value="IT Software - Application Programming">IT Software - Application Programming</option>
+						<option value="IT Software - DBA/Datawarehousing">IT Software - DBA/Datawarehousing</option>
+						<option value="IT Software - E-Commerce">IT Software - E-Commerce</option>
+						<option value="IT Software - ERP/CRM">IT Software - ERP/CRM</option>
+					</optgroup>
+				</select>
+			</div>
+		</div>
 	</div>
 </div>
 <div class="row show-filter" style="margin-top:10px;">
 	<div class="col-md-10">
-		
-				<div class="col-md-4 col-sm-6 col-xs-12">
+		<div class="col-md-3 col-sm-6 col-xs-6">
 			<div class="form-group">
-				
-					<select class="form-control filter-input check-font-size" name="prof_category" value="" >
-						<optgroup label="Accounting">
-							<option value="Accounts/Finance/Tax">Accounts/Finance/Tax</option>
-							<option value="Agent">Agent</option>
-							<option value="Analytics & Business Intelligence">
-								Analytics & Business Intelligence
-							</option>
-						</optgroup>
-						<optgroup label="IT Field">
-							<option value="HR/Administration/IR">HR/Administration/IR</option>
-							<option value="IT Software - Client Server">IT Software - Client Server</option>
-							<option value="IT Software - Mainframe">IT Software - Mainframe</option>
-							<option value="IT Software - Middleware">IT Software - Middleware</option>
-							<option value="IT Software - Mobile">IT Software - Mobile</option>
-							<option value="IT Software - Other">IT Software - Other</option>
-							<option value="IT Software - System Programming">IT Software - System Programming</option>
-							<option value="IT Software - Telecom Software">IT Software - Telecom Software</option>
-							<option value="IT Software - Application Programming">IT Software - Application Programming</option>
-							<option value="IT Software - DBA/Datawarehousing">IT Software - DBA/Datawarehousing</option>
-							<option value="IT Software - E-Commerce">IT Software - E-Commerce</option>
-							<option value="IT Software - ERP/CRM">IT Software - ERP/CRM</option>
-						</optgroup>
-					</select>
-				</div>
-			
-		</div>
-		<div class="col-md-3 col-sm-6 col-xs-12">
-			<div class="form-group">
-				
-					<input type="city" class="form-control filter-input" placeholder="City">
-				
+				<input type="city" class="form-control filter-input" placeholder="City">
 			</div>	
 		</div>
+		<div class="col-md-2 col-sm-6 col-xs-6 advance-len">
+            <div class="form-group">              
+                <select name="time_for" class="form-control" >
+                  <option value="Full Time">Full Time</option>
+                  <option value="Part Time">Part Time</option>
+                  <option value="Freelancer">Freelancer</option>
+                </select>
+            </div>  
+         </div>
+         <div class="col-md-2 col-sm-6 col-xs-12 postedwidth">
+         	<div class="form-group posted">              
+                Posted by
+            </div>  
+  
+         </div>
 		<div class="btn-group col-md-5 col-sm-12 col-xs-12" data-toggle="buttons">
+			
 			<label class="btn btn-default  check-font-size active">
 			<input type="checkbox" class="toggle"> Individual </label>
 			<label class="btn btn-default  check-font-size">
@@ -183,11 +191,11 @@
 													@if($post->post_type == 'job')
 														@if($following->contains('id', $post->corporate_id))
 															<a href="#links-follow" data-toggle="modal" class="user-link" data-linked="yes" data-utype="corp">
-																<i class="fa fa-link (alias)" style="color:yellow;"></i>
+																<i class="icon-user-following" style="color:black;"></i>
 															</a>
 														@else
 															<a href="#links-follow" data-toggle="modal" class="user-link" data-linked="no" data-utype="corp">
-																<i class="fa fa-unlink (alias)" style="color:lightslategray;"></i>
+																<i class="icon-user-follow" style="color:lightslategray;"></i>
 															</a>
 														@endif														
 														<a href="/profile/corp/{{$post->corporate_id}}" style="padding: 0px 0px 0px 32px;font-size: 15px;text-decoration:none;font-weight:600;">
