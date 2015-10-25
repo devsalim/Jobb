@@ -486,10 +486,10 @@ ul{
 }
 
 .media-body-left {
-   float: left;
-    min-width: 250px;
+    /*float: left;*/
+    /*min-width: 250px;*/
     padding-bottom: 5px;
-    margin: 10px;
+    margin: 10px 0;
 }
 .media-body-right {
     float: left;
@@ -497,11 +497,11 @@ ul{
     margin: 10px;
 }
 .media-left img {
-    width: 60px;
-    height: 60px;
+    width: 45px;
+    height: 45px;
     background-color: #EBEBEB;
     border: 1px solid #ddd;
-    padding: 3px;
+    padding: 2px;
     border-radius: 30px !important;
 }
 .select2-container-multi .select2-choices {

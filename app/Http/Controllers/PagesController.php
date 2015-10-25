@@ -144,7 +144,11 @@ class PagesController extends Controller {
 							      ->orderBy('postactivities.id', 'desc')
 							      ->sum('postactivities.thanks');
 			$posts = Postjob::where('individual_id', '=', $id)->count('id');
-			$links = Connections::where('user_id', '=', $id)->orWhere('connection_user_id', '=', $id)->count('id');
+			$linkCount = Connections::where('user_id', '=', $id)
+								->where('status', '=', 1)
+								->orWhere('connection_user_id', '=', $id)
+								->where('status', '=', 1)
+								->count('id');
 		}elseif($utype == 'corp'){
 			$user = Corpuser::findOrFail($id);
 			$thanks = Postactivity::with('user', 'post')
@@ -154,10 +158,10 @@ class PagesController extends Controller {
 							      ->orderBy('postactivities.id', 'desc')
 							      ->sum('postactivities.thanks');
 			$posts = Postjob::where('corporate_id', '=', $id)->count('id');
-			$links = Follow::where('corporate_id', '=', $id)->count('id');
+			$linkCount = Follow::where('corporate_id', '=', $id)->count('id');
 		}	
-		// return $utype;	
-		return view('pages.profile_indview', compact('title','thanks','posts','links','user'));
+		// return $utype;	linkCount
+		return view('pages.profile_indview', compact('title','thanks','posts','linkCount','user'));
 	}
 
 	public function follow($id){
@@ -182,4 +186,5 @@ class PagesController extends Controller {
 		$utype = Input::get('utype');
 		return view('pages.links_follow', compact('puid', 'linked', 'utype'));
 	}
+
 }

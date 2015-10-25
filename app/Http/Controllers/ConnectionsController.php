@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\CreateConnectionsRequest;
 use Illuminate\Support\Facades\Input;
 use App\Induser;
+use App\Corpuser;
 use App\Connections;
 use Auth;
 
@@ -39,7 +40,26 @@ class ConnectionsController extends Controller {
 	public function create()
 	{
 		$title = 'connections';
-		return view('pages.connections', compact('title'));
+		$linksCount = Connections::where('user_id', '=', Auth::user()->induser_id)
+								 ->where('status', '=', 1)
+								 ->orWhere('connection_user_id', '=', Auth::user()->induser_id)
+								 ->where('status', '=', 1)
+								 ->count('id');
+		$linkrequestCount = Connections::where('user_id', '=', Auth::user()->induser_id)
+									   ->where('status', '=', 0)
+									   ->orWhere('connection_user_id', '=', Auth::user()->induser_id)
+									   ->where('status', '=', 0)
+									   ->count('id');		
+		$linkFollow = Corpuser::leftjoin('follows', 'corpusers.id', '=', 'follows.corporate_id')
+								->where('follows.individual_id', '=', Auth::user()->induser_id)
+								->get(['corpusers.id',
+									   'corpusers.firm_name',
+									   'corpusers.logo_status',
+									   'corpusers.operating_since',
+									   'corpusers.city', 
+									   'follows.corporate_id',
+									   'follows.individual_id']);
+		return view('pages.connections', compact('title', 'linkFollow', 'linksCount', 'linkrequestCount'));
 	}
 
 	/**

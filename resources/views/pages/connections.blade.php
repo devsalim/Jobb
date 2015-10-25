@@ -14,7 +14,7 @@
 			<div class="form-body">
 				<label style="font-size: 16px;text-align: center;width: 100%;">Invite Your Friends on JobTip & Share Job Information</label>
 				<div class="row">
-					<div class="col-md-10 links-title" style="">
+					<div class="col-md-10 links-title" style="margin-bottom:15px;">
 						<div class="portlet light col-md-12 clearfix" style="background-color: transparent;">
 							<div class="row social">
 								<div class="col-md-4 col-xs-4 ">
@@ -34,7 +34,7 @@
 						
 						
 					</div>	
-					<div class="form-group  col-md-10 clearfix links-title">	
+					<div class="form-group  col-md-10 col-sm-10 col-md-xs clearfix links-title">	
 							<!-- BEGIN FORM-->
 							<form action="searchConnections" class="horizontal-form" method="post">
 								<input type="hidden" name="_token" value="{{ csrf_token() }}">				
@@ -64,15 +64,15 @@
 			<ul class="nav nav-tabs" style="padding-left: 0px;">
 				<li class="active">
 					<a href="#tab_5_1" class="label-new" data-toggle="tab">
-					Linked </a>
+					Linked @if($linksCount > 0)({{ $linksCount }})@endif</a>
 				</li>
 				<li>
 					<a href="#tab_5_2" class="label-new" data-toggle="tab">
-					Link Requests </a>
+					Link Requests @if($linkrequestCount > 0)({{ $linkrequestCount }})@endif</a>
 				</li>
 				<li>
 					<a href="#tab_5_3" class="label-new" data-toggle="tab">
-					Following </a>
+					Following</a>
 				</li>
 			</ul>
 			<div class="tab-content">
@@ -83,38 +83,37 @@
 						@if($connection->pivot->status == 1)													
 						  <li class="media ">
 						  	
-						    <div class="media-left col-md-2 col-sm-3 col-xs-3">
+						    <div class="media-left col-md-2 col-sm-2 col-xs-2" style="padding:0">
 						      <a href="#">
 						        <img class="media-object" 
 						        src="@if($connection->profile_pic != null){{ '/img/profile/'.$connection->profile_pic }}@else{{'/assets/images/ab.png'}}@endif" 
 						      alt="DP">
 						      </a>
 						    </div>
-						    <div class="media-body col-md-4 col-sm-9 col-xs-9">
+						    <div class="media-body col-md-4 col-sm-8 col-xs-8" style="padding:0;margin: 8px 14px; !important">
 						    	<div class="media-body-left">
-						    		 <h4 class="media-heading" style="text-transform: capitalize;">
-								      	{{ $connection->fname }} {{ $connection->lname }}
-								      </h4>
+						    		 
+								      	{{ $connection->fname }} {{ $connection->lname }}<br>
+								    
 								      @if($connection->working_at != null && $connection->city != null)
 								     	Working at {{ $connection->working_at }} in {{ $connection->city }}
 								      @elseif($connection->working_at == null && $connection->city != null)
 								      	{{ $connection->city }}
-								      @endif
-										
+								      @endif		
 						    	</div>
-						    	<div class="media-body-right">
-						    		<span class="input-group-btn btn-right">
-										<form action="{{ url('/connections/destroy', $connection->pivot->id) }}" method="post">
-											<input type="hidden" name="_token" value="{{ csrf_token() }}">
-											<button type="submit" class="btn btn-danger button-style-del">
-											<i class="glyphicon glyphicon-trash icon-style-del"></i>
-											</button>
-										</form>													
-									</span>
-						    	</div>
+						    <!-- 	<div class="media-body-right">
+						    		
+						    	</div> -->
 						     
 						    </div>
-						
+							<div class="media-body col-md-4 col-sm-2 col-xs-2" style="padding:0;margin: 10px 0;">
+								<form action="{{ url('/connections/destroy', $connection->pivot->id) }}" method="post">
+											<input type="hidden" name="_token" value="{{ csrf_token() }}">
+											<button type="submit" class="btn btn-danger btn-responsive button-style-del">
+											<i class="glyphicon glyphicon-trash icon-style-del"></i>
+											</button>
+										</form>	
+							</div>
 						  </li>
 						@endif
 					@endforeach
@@ -189,7 +188,36 @@
 					@endif	
 				</div>
 				<div class="tab-pane" id="tab_5_3">
-					
+						<ul class="media-list">
+						@foreach($linkFollow as $follow)														
+							  <li class="media">
+							    <div class="media-left">
+							      <a href="#">
+							        <img class="media-object" src="@if($follow->logo_status != null){{ '/img/profile/'.$follow->logo_status }}@else{{'/assets/images/ab.png'}}@endif" alt="DP" style="width:60px">
+							      </a>
+							    </div>
+							    <div class="media-body">
+							    	<div class="media-body-left">
+							    		 <h4 class="media-heading">
+							    		 	{{ $follow->firm_name }}
+							    		 </h4>
+										 {{ $follow->city }}, {{ $follow->operating_since }}
+							    	</div>
+							    	
+							    	<div class="media-body-right">
+							    		<span class="input-group-btn btn-right">
+											<form action="" method="post">
+												<input type="hidden" name="_token" value="{{ csrf_token() }}">
+												<button type="submit" name="action" value="accept" class="btn btn-success button-style-add">
+													<i class="icon-user-follow icon-style-add"  style="font-size:12px;color:white;padding-top: 3px;"></i>&nbsp;Following
+												</button>
+											</form>
+										</span>
+							    	</div>
+								</div>														     
+							  </li>						
+						@endforeach		
+						</ul>
 				</div>
 			</div>
 		</div>

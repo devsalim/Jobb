@@ -2,141 +2,58 @@
 
 @section('content')
 
-<div class="portlet light bordered">
+<div class="portlet light bordered col-md-6">
 	<div class="portlet-title">
-		<!-- <div class="caption">
-			<i class=""></i>
-			<span class="caption-subject font-blue-hoki bold uppercase">Groups</span>
-
-		</div>
-		<a href="{{ url('/group/create') }}">
-			<span class="btn btn-info btn-sm" style="margin: 5px 20px;border-radius: 25px !important;">Create Group</span>
-		</a>
-		<div class="tools">
-			<a href="" class="collapse"></a>
-			<a href="#portlet-config" data-toggle="modal" class="config"></a>
-			<a href="" class="reload"></a>
-			<a href="" class="remove"></a>
-		</div>
-
-		</div> -->
 		<a id="ajax-demo" href="#creat-group" data-toggle="modal" class="config" style="text-decoration: none;">
-			<i class="icon-plus" style="font-size:22px;color: salmon;"></i> 
+			<div class="links-title"><label><i class="glyphicon glyphicon-plus-sign" style="font-size:14px;color: #46AFA6;"></i></label> <label style="font-size: 16px;">Create New Group</label></div>
 		</a> 
-		<label style="font-size: 16px;">Create New Group</label>
-
 	</div>
 	<div class="portlet-body form">
-		
-			<div class="form-body">
-				<div class="row">
-					<div class="col-md-7" style="">
-
-					<!-- BEGIN FORM-->
-
-					<!-- <form action="{{ url('/group/store') }}" class="horizontal-form" method="post">
-
-						<input type="hidden" name="_token" value="{{ csrf_token() }}">
-							<div class="form-group">
-								<div class="input-group">
-									<div class="input-icon">
-										<i class="fa fa-lock fa-fw"></i>
-										<input id="" class="form-control" type="text" name="group_name" placeholder="Create Group"/>
-									</div>
-									<span class="input-group-btn">
-										<button id="" class="btn btn-success" type="submit" style=" margin-right: 15px;"><i class="fa fa-arrow-left fa-fw"/></i>Create</button>
-										<a href="{{url('/group/')}}" id="" class="btn default" type="button">Cancel</a>
-									</span>
-								</div>
-							</div>
-
-					</form>-->
-
-					<!-- END FORM-->
-						
-						<div class="form-group ">					
+		<div class="form-body">
+			<div class="row" style="margin-bottom: 20px;">
+				<div class="col-md-8 links-title" style="">		
+					<div class="form-group clearfix">	
+						<!-- BEGIN FORM-->
+						<form action="searchConnections" class="horizontal-form" method="post">
+							<input type="hidden" name="_token" value="{{ csrf_token() }}">				
 							<div class="input-icon right">
 								<i class="fa fa-search" style="color: darkcyan;"></i>
-								<input type="text" class="form-control input-circle" placeholder="Search" style="border: 1px solid darkcyan;">
-							</div>
-						</div>
-					
-						@if(count($groups)>0)
-						@foreach($groups as $group)
-						<div class="form-group form-md-line-input ">
-							<div class="input-group">
-								<div class="input-group-control">
-									<label class="col-md-10 control-label" for="form_control_1" >
-										<a href="/group/{{ $group->id }}">{{ $group->group_name }}</a>: {{count($group->users)}} <span style="font-weight:400;font-size:13px;">Members</span> <br/>
-										<span>Created by: {{ $group->admin_id }}</span><span style="font-size:12px;font-weight:normal"> </span>, <span>Total Post: 5</span>
-									</label>
-								</div>
-								<span class="input-group-btn btn-right">
-									<form action="{{ url('/group/destroy', $group->id) }}" method="post">
-										<input type="hidden" name="_token" value="{{ csrf_token() }}">
-										<button type="submit" class="btn yellow">
-											<i class="glyphicon glyphicon-edit" style="font-size: 12px;background-color: white;color: black;border-radius: 10px;width: 20px;height: 20px;padding-top: 3px;"></i>
-											</button>
-										<button type="submit" class="btn btn-danger">
-										<i class="glyphicon glyphicon-trash" style="font-size: 12px;background-color: white;color: black;border-radius: 10px;width: 20px;height: 20px;padding-top: 3px;"></i>
-										</button>
-									</form>
-								</span>
-							</div>
-						</div>
-						@endforeach
-						@else
-						<!-- <div class="col-md-12">					
-									<h3>Networking</h3>
-									<ul class="media-list">
-																						
-										  <li class="media">
-										    <div class="media-left">
-										      <a href="#">
-										        <img class="media-object" 
-										        src="" 
-										      alt="DP" style="width:60px">
-										      </a>
-										    </div>
-										    <div class="media-body">
-										    	<div class="media-body-left">
-										    		 <h4 class="media-heading">
-												      	Networking
-												      </h4>
-												     Friends (10 links)	<br> 
-
-														
-										    	</div>
-										    	<div class="media-body-right">
-										    		<span class="input-group-btn btn-right">
-														<form action="" method="post">
-															<input type="hidden" name="_token" value="{{ csrf_token() }}">
-															<button type="submit" class="btn yellow">
-															<i class="glyphicon glyphicon-edit" style="font-size: 12px;background-color: white;color: black;border-radius: 10px;width: 20px;height: 20px;padding-top: 3px;"></i>
-															</button>
-															<button type="submit" class="btn btn-danger">
-															<i class="glyphicon glyphicon-trash" style="font-size: 12px;background-color: white;color: black;border-radius: 10px;width: 20px;height: 20px;padding-top: 3px;"></i>
-															</button>
-														</form>													
-													</span>
-										    	</div>
-										     
-										    </div>
-										  </li>
-										
-									</ul>
-								</div> -->
-						@endif
+								<input type="text" name="keywords" id="search-input" onkeydown="down()" onkeyup="up()" class="form-control input-circle" placeholder="Search" style="border: 1px solid darkcyan;">
+							</div>	
+						</form>
+						<!-- END FORM-->
+					</div>
+					<div class="col-md-10 links-title" id="search-results">
 					</div>
 				</div>
 			</div>
-		
-	</div>
-</div>
+			<div class="row">
+				<div class="col-md-8 links-title">
+					@if(count($groups)>0)
+					@foreach($groups as $group)
+					<!-- <div class="col-md-6 col-sm-6 col-xs-12"> -->
+						<div class="form-group form-md-line-input">
+							<div class="input-group">
+								<div class="input-group-control">
+									<label class=" control-label" for="form_control_1" style="font-weight:500 !important;">
+										<a href="/group/{{ $group->id }}">{{ $group->group_name }}</a> (5) 
+										<i class="icon-users"></i> {{count($group->users)}}  <i class="icon-shield"></i> Vicky
+									</label>
+								</div>
+							</div>
+						</div>
+					<!-- </div>	 -->
+					@endforeach
+					@endif
+				</div>
+			</div>
+		</div>
+	 </div>
+
 
 <!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
 <div class="modal fade" id="creat-group" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  	<div class="modal-dialog">
+  	<div class="modal-dialog" style="width: 300px;">
 	    <div class="modal-content">
 	    	<form action="{{ url('/group/store') }}" class="horizontal-form" method="post">
 				<input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -172,5 +89,34 @@
 
 <script>
 	$('#connections').select2();
+</script>
+
+<script type="text/javascript">
+$.ajaxSetup({
+	headers: {
+		'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+	        }
+});
+
+var timer;
+function up()
+{
+	timer=setTimeout(function()
+		{
+			var keywords = $('#search-input').val();
+			if(keywords.length>0)
+			{
+				$.post('/searchConnections', {keywords: keywords}, function(markup)
+				{
+					$('#search-results').html(markup);
+				});
+			}
+		}, 500);
+}
+
+function down()
+{
+	clearTimeout(timer);
+}
 </script>
 @stop

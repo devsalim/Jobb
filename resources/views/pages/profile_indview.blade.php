@@ -31,8 +31,8 @@
 							<div>
 								 Links
 							</div>
-							<span class="badge badge-danger  @if($links > 0) show @else hide @endif" style="background-color: #26a69a;">
-							{{$links}} </span>
+							<span class="badge badge-danger @if($linksCount > 0) show @else hide @endif" style="background-color: #26a69a;">
+							{{$linksCount}} </span>
 						</a>
 					</div>
 					<div class="col-md-4 col-sm-4 col-xs-4 @if($title == 'thanks_view'){{'active'}}@endif">

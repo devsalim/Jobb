@@ -71,7 +71,7 @@ display:none !important;
 }
 
 .icon-style-del{
-	font-size: 20px !important;
+	font-size: 15px !important;
     /* background-color: #F3565D; */
     padding-top: 4px;
     color: #F3565D;
@@ -128,9 +128,15 @@ display:none !important;
     padding: 6px 29px;
     /*height: 25px;*/
   }
+  .leave-del{
+   float: right;
+   position: absolute;
+   right: 20px;
+   top: 41px !important;
+ }
 }
 
-@media (min-width: 769px) and (max-width: 992px) {
+@media (min-width: 769px) and (max-width: 990px) {
   .btn-responsive {
     padding:4px 9px;
     font-size:90%;
@@ -144,9 +150,26 @@ display:none !important;
   .jobskill{
     width: 21% !important;
   }
+    .leave-del{
+   float: right;
+   position: absolute;
+   right: 20px;
+   top: 45px !important;
+}
+  
 }
 
+@media (min-width: 768px){
+.modal-dialog {
+    width: 450px !important;
+    margin: 30px auto;
+}
 
+.btn-default {
+    border-width: 1px;
+    padding: 5px 23px !important;
+}
+}
 .portlet.light{
     padding: 0px 20px 0px 10px !important ;
 }
@@ -203,12 +226,10 @@ display:none !important;
 .check-font-size{
     font-size: 13px !important;
 }
-/*#oval{
-    width: 30px;
-    height: 15px;
-    background-color: darkcyan;
-    border-radius: 15px !important; 
-}*/
-/*body{
-    font-family: sans-serif !important;
-}*/
+
+.leave-del{
+   float: right;
+   position: absolute;
+   right: 20px;
+   top: 38px;
+}

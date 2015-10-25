@@ -4,36 +4,99 @@
 
 <div class="portlet light bordered col-md-7">
 	<div class="portlet-title">
-		<div class="back-btn"><input action="action" type="button" class="btn btn-default btn-responsive" value="Back" onclick="history.go(-1);" /></div>
 		<div class="caption links-title">
-
 			<i class=""></i>
-			<span class="caption-subject font-blue-hoki bold uppercase">Group: {{$group->group_name}}</span>
+			<span class="caption-subject font-blue-hoki bold uppercase" style="font-size:14px !important;">Group: {{$group->group_name}}</span>
 		</div>
-	</div>
-	<div class="portlet-body form">
-		
-			<div class="form-body">
-				<div class="row">
-					<div class="col-md-1"></div>
-					<div class="col-md-10" style="">
-						<div class="form-group clearfix">	
-							<!-- BEGIN FORM-->
-							<form action="searchConnections" class="horizontal-form" method="post">
-								<input type="hidden" name="_token" value="{{ csrf_token() }}">				
-								<div class="input-icon right">
-									<i class="fa fa-search" style="color: darkcyan;"></i>
-									<input type="text" name="keywords" id="search-input" onkeydown="down()" onkeyup="up()" class="form-control input-circle" placeholder="Search" style="border: 1px solid darkcyan;">
-								</div>	
-							</form>
-							<!-- END FORM-->
-						</div>
-
-						<div class="col-md-12" id="search-results"></div>
-					</div>			
-				</div>
-					
+		<div>
+			<div><input action="action" type="button" class="btn btn-default btn-responsive" value="Back" onclick="history.go(-1);" /></div>
+		@foreach($users as $user)
+		@if($user->admin_id == Auth::user()->induser_id)
+			<div class="leave-del">
+				<a id="ajax-demo" href="#delete-group" data-toggle="modal" class="config" style="text-decoration: none;">
+					<button type="submit" class="btn btn-danger btn-responsive">Delete Group
+					</button>
+				</a>
 			</div>
+		@else
+			<div class="leave-del">
+				<a id="ajax-demo" href="#leave-group" data-toggle="modal" class="config" style="text-decoration: none;">
+					<button type="submit" class="btn btn-danger btn-responsive">
+					Leave Group
+					</button>
+				</a>
+			</div>
+		</form>
+		@endif
+		@endforeach
+	</div>
+	</div>
+	<!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+<div class="modal fade" id="delete-group" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  	<div class="modal-dialog" style="width: 300px;">
+	    <div class="modal-content">
+	    	<form action="{{ url('/group/destroy', $group->id) }}" class="horizontal-form" method="post">
+				<input type="hidden" name="_token" value="{{ csrf_token() }}">
+		     	<div class="modal-header">
+			        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+			        <h4 class="modal-title">Are you sure</h4>
+			     </div>
+				<div class="modal-body">
+					  You want to delete this Group   		
+	     		</div>
+				<div class="modal-footer">
+					<button type="submit" class="btn btn-warning">Delete</button>
+					<button type="button" class="btn default" data-dismiss="modal">Close</button>
+				</div>
+			</form>
+		</div>
+	    <!-- /.modal-content -->
+ 	</div>
+  	<!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+<!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+<div class="modal fade" id="leave-group" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  	<div class="modal-dialog" style="width: 300px;">
+	    <div class="modal-content">
+	    	<form action="{{ url('/group/destroy', $group->id) }}" class="horizontal-form" method="post">
+				<input type="hidden" name="_token" value="{{ csrf_token() }}">
+		     	<div class="modal-header">
+			        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+			        <h4 class="modal-title">Are you sure</h4>
+			     </div>
+				<div class="modal-body">
+					  You want to leave this Group   		
+	     		</div>
+				<div class="modal-footer">
+					<button type="submit" class="btn btn-warning">Delete</button>
+					<button type="button" class="btn default" data-dismiss="modal">Close</button>
+				</div>
+			</form>
+		</div>
+	    <!-- /.modal-content -->
+ 	</div>
+  	<!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+	<div class="portlet-body form">
+		<div class="form-body">	
+<!-- 			<span class="input-group-btn btn-right">
+				<form action="{{ url('/group/destroy', $group->id) }}" method="post">
+					<input type="hidden" name="_token" value="{{ csrf_token() }}">
+					<div>
+						<button type="submit" class="btn yellow">
+							<i class="glyphicon glyphicon-edit" style="font-size: 12px;background-color: white;color: black;border-radius: 10px;width: 20px;height: 20px;padding-top: 3px;"></i>
+						</button>
+					</div>
+					<div>
+						<button type="submit" class="btn btn-danger">
+							<i class="glyphicon glyphicon-trash" style="font-size: 12px;background-color: white;color: black;border-radius: 10px;width: 20px;height: 20px;padding-top: 3px;"></i>
+						</button>
+					</div>
+				</form>
+			</span> -->
+		</div>
 	</div>
 </div>
 <div class="portlet box green col-md-7">
@@ -44,6 +107,26 @@
 	</div>
 	<div class="portlet-body">
 		<div class="tabbable-custom ">
+
+			<div class="row">
+				<div class="col-md-1"></div>
+				<div class="col-md-10" style="">
+					<div class="form-group clearfix">	
+						<!-- BEGIN FORM-->
+						<form action="searchConnections" class="horizontal-form" method="post">
+							<input type="hidden" name="_token" value="{{ csrf_token() }}">				
+							<div class="input-icon right">
+								<i class="fa fa-search" style="color: darkcyan;"></i>
+								<input type="text" name="keywords" id="search-input" onkeydown="down()" onkeyup="up()" class="form-control input-circle" placeholder="Search" style="border: 1px solid darkcyan;">
+							</div>	
+						</form>
+						<!-- END FORM-->
+					</div>
+
+					<div class="col-md-12" id="search-results"></div>
+				</div>			
+			</div>
+
 			<ul class="nav nav-tabs" style="padding-left: 0;">
 				<li class="active">
 					<a href="#tab_5_1" class="label-new" data-toggle="tab">
@@ -157,5 +240,33 @@
 </script>
 <script type="text/javascript">
     $('#connections').select2();
+</script>
+<script type="text/javascript">
+$.ajaxSetup({
+	headers: {
+		'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+	        }
+});
+
+var timer;
+function up()
+{
+	timer=setTimeout(function()
+		{
+			var keywords = $('#search-input').val();
+			if(keywords.length>0)
+			{
+				$.post('/searchConnections', {keywords: keywords}, function(markup)
+				{
+					$('#search-results').html(markup);
+				});
+			}
+		}, 500);
+}
+
+function down()
+{
+	clearTimeout(timer);
+}
 </script>
 @stop

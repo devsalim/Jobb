@@ -520,7 +520,7 @@ Page Header
     /* Search box */
   }
   .page-header.navbar .search-form.search-form-expanded {
-    width: 160px;
+    width: 200px;
   }
   .page-header.navbar .search-form.search-form-expanded .input-group .form-control {
     text-indent: 0;
@@ -609,7 +609,7 @@ Page Header
   }
   .page-header.navbar .page-logo img {
     margin-left: 0px !important;
-    margin-top: 2px !important;
+    margin-top: 7px !important;
   }
   .page-header.navbar .menu-toggler.sidebar-toggler {
     display: none !important;
