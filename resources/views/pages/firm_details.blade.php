@@ -177,7 +177,14 @@
 										<span class="input-group-addon">
 										<i class="fa fa-cube"style="color:darkcyan;"></i>
 										</span>
-										<input type="text" name="operating_since" class="form-control" value="{{ $user->operating_since }}">
+										<select name="operating_since" class="form-control" value="{{ $user->operating_since }}">
+											<option value="Startup">Startup</option>
+											<option value="1 - 2 Years">1 - 2 Years</option>
+											<option value="2 - 4 Years">2 - 4 Years</option>
+											<option value="4 - 7 Years">4 - 7 Years</option>
+											<option value="7 - 10 Years">7 - 10 Years</option>
+											<option value="10 + Years">10 + Years</option>
+										</select>
 									</div>
 								</div>
 							</div>
@@ -256,12 +263,20 @@
 						<div class="row-md-10">
 							<div class="col-md-6">
 								<div class="form-group">
-									<label>City</label>									
+									<label>No of Employee</label>
 									<div class="input-group">
 										<span class="input-group-addon">
-											<i class="fa fa-map-marker" style="color:darkcyan;"></i>
+											<i class="fa fa-user" style="color:darkcyan;"></i>
 										</span>
-										<input type="text" name="city" class="form-control" value="{{ $user->city }}" placeholder="City">
+										<select name="emp_count" class="form-control" value="{{ $user->emp_count }}">
+											<option value="0 - 100">0 - 100</option>
+											<option value="100 - 500">100 - 500</option>
+											<option value="500 - 1000">500 - 1000</option>
+											<option value="1000-2000">1000-2000</option>
+											<option value="2000-5000">2000-5000</option>
+											<option value="5000-10000">5000-10000</option>
+											<option value="10000 +">10000 +</option>
+										</select>
 									</div>
 								</div>
 							</div>
@@ -278,6 +293,44 @@
 								</div>
 							</div>
 							<!--/span-->
+							<div class="col-md-6">
+								<div class="form-group">
+									<label>City</label>									
+									<div class="input-group">
+										<span class="input-group-addon">
+											<i class="fa fa-map-marker" style="color:darkcyan;"></i>
+										</span>
+										<input type="text" name="city" class="form-control" value="{{ $user->city }}" placeholder="City">
+									</div>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+									<label>Profile Holder Name</label>
+									<div class="input-group">
+										<span class="input-group-addon">
+											<i class="fa fa-user" style="color:darkcyan;"></i>
+										</span>
+										<input type="text" name="username" class="form-control" value="{{ $user->username }}" placeholder="Holder Name">
+									</div>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+									<label>Working As</label>
+									<div class="input-group">
+										<span class="input-group-addon">
+											<i class="fa fa-user" style="color:darkcyan;"></i>
+										</span>
+										<select name="working_as" class="form-control" value="{{ $user->working_as }}">
+											<option value="HR Recruiter">HR Recruiter</option>
+											<option value="Administrator">Administrator</option>
+											<option value="Employee">Employee</option>
+											<option value="Other">Other</option>
+										</select>
+									</div>
+								</div>
+							</div>
 						</div>
 						
 					</div>

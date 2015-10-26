@@ -138,6 +138,9 @@ class CorporateController extends Controller {
 		$data->city = Input::get('city');
 		$data->website_url = Input::get('website_url');
 		$data->linked_skill = Input::get('linked_skill');
+		$data->username = Input::get('username');
+		$data->emp_count = Input::get('emp_count');
+		$data->working_as = Input::get('working_as');
 		$data->save();
 		return redirect('/corporate/create');
 		}else{
@@ -186,5 +189,4 @@ class CorporateController extends Controller {
 			return redirect('/home');
 	    }
 	}
-
 }

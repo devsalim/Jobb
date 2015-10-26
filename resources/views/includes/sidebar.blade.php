@@ -36,11 +36,21 @@
           <!-- BEGIN USER LOGIN DROPDOWN -->
       <li >
         <div class="user-short-detail-container">
+           @if(Auth::user()->identifier == 1)
           <div class="profile-userpic user-image">
             <a id="ajax-demo" href="#profile-pic" data-toggle="modal" class="config">
                 @if($session_user->profile_pic == null && $session_user->fname != null)
                   <div class="hover-image">Add</div>
+                @endif      
+                @if($session_user->profile_pic != null)
+                  <img src="/img/profile/{{ $session_user->profile_pic }}">
+                  <div class="hover-image"><i class="glyphicon glyphicon-edit"></i>Change</div>
                 @endif
+            </a>
+          </div>
+          @else
+          <div class="profile-userpic-corp user-image">
+            <a id="ajax-demo" href="#profile-pic" data-toggle="modal" class="config">
                 @if($session_user->logo_status == null && $session_user->firm_name != null)
                   <div class="hover-image">Add</div>
                 @endif
@@ -48,16 +58,17 @@
                   <img src="/img/profile/{{ $session_user->logo_status }}">
                   <div class="hover-image"><i class="glyphicon glyphicon-edit"></i>Change</div>
                 @endif       
-                @if($session_user->profile_pic != null)
-                  <img src="/img/profile/{{ $session_user->profile_pic }}">
-                  <div class="hover-image"><i class="glyphicon glyphicon-edit"></i>Change</div>
-                @endif
             </a>
           </div>
+          @endif
           <h3 class="form-title user-name">
-           <a style="color: deepskyblue;text-decoration:none;" class="@if($title == 'indview'){{'active'}}@endif" href="/individual_view/create"> 
+            @if(Auth::user()->identifier == 1)
+           <a style="color: deepskyblue;text-decoration:none;" class="@if($title == 'indView'){{'active'}}@endif" href="/IndividualView"> 
             {{ $session_user->fname }} {{ $session_user->lname }} <i class="fa fa-edit (alias)"></i></a>
-            {{ $session_user->firm_name }}
+            @else
+            <a style="color: deepskyblue;text-decoration:none;" class="@if($title == 'corpView'){{'active'}}@endif" href="/CorporateView"> 
+              {{ $session_user->firm_name }} <i class="fa fa-edit (alias)"></i></a>
+            @endif
           </h3>
           @if($session_user->role!=null)
           <h3 class="form-title user-company">

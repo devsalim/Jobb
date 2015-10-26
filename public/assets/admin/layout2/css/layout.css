@@ -193,7 +193,7 @@ Page Header
   /*background-image: url(../img/sidebar-toggler-inverse.png);*/
 }
 .page-header.navbar .page-actions {
-  margin: 14px 0 14px 14px;
+  margin: 0 12px;
   padding: 0;
   float: left;
 }
@@ -206,8 +206,8 @@ Page Header
   right: auto;
 }
 .page-header.navbar .top-menu {
-  margin: 0px -40px;
-    padding: 0 37px;
+  margin: 0;
+    padding: 12px 0 3px;
     float: left;
 }
 .page-header.navbar .top-menu .navbar-nav {
@@ -233,7 +233,7 @@ Page Header
   padding: 10px 16px 10px 10px;
 }
 .page-header.navbar .top-menu .navbar-nav > li.dropdown > .dropdown-toggle:last-child {
-  padding-right: 0;
+ /* padding-right: 0;*/
 }
 .page-header.navbar .top-menu .navbar-nav > li.dropdown > .dropdown-toggle > i {
   font-size: 19px;

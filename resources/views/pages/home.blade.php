@@ -3,13 +3,21 @@
 @section('content')
 <!-- Jobtip Filter Start -->
 <div class="row">
-	<div class="col-md-8" style=" lightgray;margin-bottom: 5px;">
-		<div class="hide-label col-md-8 col-sm-6 col-xs-10"><label style="font-weight:500; ">Showing all Jobs, Skills posted by Individuals & Corporates</label></div>
-		<div class="show-filter col-md-8 col-sm-6 col-xs-10"><label style="font-weight:500; ">Filter Post you want to see </label></div>
+	<div class="col-md-9" style=" lightgray;margin-bottom: 5px;">
+		<div class="hide-label col-md-8 col-sm-6 col-xs-10">
+			<label style="font-weight:500; ">
+				Showing all Jobs, Skills posted by Individuals & Corporates
+			</label>
+		</div>
+		<div class="show-filter col-md-8 col-sm-6 col-xs-10">
+			<label style="font-weight:500; ">Filter Post you want to see </label>
+		</div>
 		<div class="filter-icon hide-label hide-show-filter"><i class="icon-equalizer" style="font-size:16px;"></i></div>
 		<div class="filter-icon show-filter hide-show-filter"><i class="fa fa-check-square-o" style="font-size:18px;color:#3598dc;"></i></div>
 	</div>
 </div>
+<form id="home-filter" action="/home" method="post">
+<input type="hidden" name="_token" value="{{ csrf_token() }}">
 <div class="row show-filter">
 	<div class="col-md-10">
 		<div class="btn-group col-md-3 col-sm-6 col-xs-8 jobskill new-col-md-3" data-toggle="buttons">
@@ -22,7 +30,6 @@
 			<div class="form-group">
 				
 					<input type="experience" class="form-control filter-input" placeholder="Exp">
-				
 			</div>	
 		</div>
 		<div class="col-md-3 col-sm-6 col-xs-12">
@@ -86,12 +93,18 @@
 			<label class="btn btn-default  check-font-size active">
 			<input type="checkbox" class="toggle"> Individual </label>
 			<label class="btn btn-default  check-font-size">
-			<input type="checkbox" class="toggle"> Company </label>
+				<input type="checkbox" name="posted_by[]" value="company" class="toggle"> Company 
+			</label>
 			<label class="btn btn-default  check-font-size">
-			<input type="checkbox" class="toggle"> Consultancy </label>
+				<input type="checkbox" name="posted_by[]" value="consultancy" class="toggle"> Consultancy 
+			</label>
+		</div>
+		<div class="col-md-3 col-sm-6 col-xs-12">
+			<input type="submit" class="btn btn-sm btn-info" value="Search">
 		</div>
 	</div>
 </div>
+</form>
 <!-- Jobtip Filter End-->
 
 <div class="portlet light bordered" style="border: none !important;background:transparent">										
@@ -177,7 +190,19 @@
 															{{ $post->induser->fname}} {{ $post->induser->lname}}
 														</a>
 													@else
-														<a class="user-link-click"><i class="fa fa-link" style="color:white;"></i></a>
+														@if($links->contains('id', $post->individual_id))
+														<a href="#links-follow" data-toggle="modal" class="user-link" data-linked="yes" data-utype="ind">
+															<i class="fa fa-link (alias)" style="color:salmon;"></i>
+														</a>
+														@elseif($following->contains('id', $post->individual_id))
+														<a class="user-link2" data-linked="yes" data-utype="ind">
+															<i class="fa fa-link (alias)" style="color:steelblue;"></i>
+														</a>
+														@else
+														<a href="#links-follow" data-toggle="modal" class="user-link" data-linked="no" data-utype="ind">
+															<i class="fa fa-unlink (alias)" style="color:lightslategray;"></i>
+														</a>
+														@endif
 														<a href="/profile/ind/{{$post->individual_id}}" style="padding: 0px 0px 0px 32px;font-size: 15px;text-decoration:none;font-weight:600;">
 															{{ $post->induser->fname }} {{ $post->induser->lname }}
 														</a>
@@ -588,6 +613,14 @@
 					<?php $var++; ?>
 				 @endforeach
 
+				@endif
+				</div>
+
+				<div class="row">
+					<div class="col-md-9">
+						<?php echo $posts->render(); ?>
+					</div>
+				</div>
 
 				<div class="modal fade bs-modal-sm" id="links-follow" tabindex="-1" role="dialog" aria-hidden="true">
 					<div class="modal-dialog modal-sm">
@@ -603,8 +636,6 @@
 				<!-- /.modal -->
 
 
-				@endif
-				</div>
 			</div>
 	</div>
 </div>
@@ -613,15 +644,15 @@
 @section('javascript')
 
 <script type="text/javascript">
+$(document).ready(function(){
+
 	jQuery('.show-filter').hide();
 	jQuery(document).ready(function(){ 
 	    jQuery('.hide-show-filter').on('click', function(event) {
-	    jQuery('.show-filter').toggle('show');
-	    jQuery('.hide-label').toggle('hide');
+		    jQuery('.show-filter').toggle('show');
+		    jQuery('.hide-label').toggle('hide');
 	    });
 	});
-
-$(document).ready(function(){
 
   $('.like-btn').on('click',function(event){  	    
   	event.preventDefault();

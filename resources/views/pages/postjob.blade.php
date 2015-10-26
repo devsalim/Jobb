@@ -242,7 +242,7 @@
 										<div class="form-group">
 											<!-- <label>Job Title</label> -->
 											<div class="input-group">
-												<input type="checkbox" id="resume-check" name="resume" class="form-control">
+												<input type="checkbox" id="resume-check" name="resume_required" value="1" class="form-control">
 												<label>Resume Required to apply for this Job</label>
 											</div>
 										</div>
@@ -436,15 +436,15 @@
 																							Job Category: <p class="form-control-static" data-display="prof_category"></p><br>
 																							Skill: <p class="form-control-static" data-display="linked_skill"></p><br>
 																							 <div class="resume-required">Resume: Required</div><div class="not-required">Resume: Not Required</div><br>
-																							Salary (<i class="fa fa-rupee (alias)"></i>): <p class="form-control-static" data-display="min_sal"></p>-<p class="form-control-static" data-display="max_sal"></p> <p class="form-control-static" data-display="salary-type"></p><br>
+																							Salary (<i class="fa fa-rupee (alias)"></i>): <p class="form-control-static" data-display="min_sal"></p>-<p class="form-control-static" data-display="max_sal"></p> <p class="form-control-static" data-display="salary_type"></p><br>
 																							Description:
 																							<div class="row">
 																								<div class="col-md-11">
 																									<p class="form-control-static" data-display="job_detail"></p>
 																								</div>
 																							</div>
-																							<div >Reference Id: <a class="form-control-static" data-display="reference_id"></a></div>
-																							<div >Post Duration: <a class="form-control-static" data-display="post_duration"></a></div>
+																							<div >Reference Id: <p class="form-control-static" data-display="reference_id"></p></div>
+																							<div >Post Duration: <p class="form-control-static" data-display="post_duration"></p></div>
 																							<div class="skill-display">Contact Details:<br> </div>
 																							<div class="show-apply">Apply on Company Website:<p class="form-control-static" data-display="website_redirect_url"></p></div><br>
 																							<div id="con" class="show-apply-email">
