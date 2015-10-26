@@ -19,9 +19,28 @@
 					</div>
 					@if($user->role != null && $user->working_at !=null)
 					<div class="profile-usertitle-job" style="font-size: 15px;font-weight: 500;">
-						 {{ $user->role }} @ {{ $user->working_at }}
+						 {{ $user->role }} @ {{ $user->working_at }} 
 					</div>
 					@endif
+
+
+					<!-- Connection status -->
+					@if($connectionStatus == 'friend')
+						<a href="/links" class="btn btn-success btn-responsive btn-xs">
+							Friend
+						</a>
+					@elseif($connectionStatus == 'pendingrequest')
+						<a href="/links" class="btn btn-warning btn-responsive btn-xs">
+							Pending link request
+						</a>
+					@elseif($connectionStatus == 'requestsent')
+						<a href="/links" class="btn btn-danger btn-responsive btn-xs">
+							Link request sent
+						</a>
+					@endif
+					<!-- end Connection status -->
+
+
 				</div>
 				<!-- END SIDEBAR USER TITLE -->
 				<div class="row list-separated profile-stat" style="text-align:center;margin: 13px 0 0px -17px;">

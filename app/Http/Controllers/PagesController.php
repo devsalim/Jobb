@@ -144,11 +144,33 @@ class PagesController extends Controller {
 							      ->orderBy('postactivities.id', 'desc')
 							      ->sum('postactivities.thanks');
 			$posts = Postjob::where('individual_id', '=', $id)->count('id');
-			$linkCount = Connections::where('user_id', '=', $id)
+			$linksCount = Connections::where('user_id', '=', $id)
 								->where('status', '=', 1)
 								->orWhere('connection_user_id', '=', $id)
 								->where('status', '=', 1)
 								->count('id');
+			$connectionPendingStatus = Connections::where('user_id', '=', Auth::user()->induser_id)
+												  ->where('connection_user_id', '=', $id)
+												  ->first(['status']);
+			$connectionRequestStatus = Connections::where('connection_user_id', '=', Auth::user()->induser_id)
+												  ->where('user_id', '=', $id)
+												  ->first(['status']);
+
+			// connection status
+			$connectionStatus = 'unknown';
+			if($connectionPendingStatus != null && $connectionPendingStatus->status == 0){
+				$connectionStatus = 'requestsent';
+			}
+			elseif($connectionPendingStatus != null && $connectionPendingStatus->status == 1){
+				$connectionStatus = 'friend';
+			}
+			elseif($connectionRequestStatus != null && $connectionRequestStatus->status == 0){
+				$connectionStatus = 'pendingrequest';
+			}
+			elseif($connectionRequestStatus != null && $connectionRequestStatus->status == 1){
+				$connectionStatus = 'friend';
+			}
+
 		}elseif($utype == 'corp'){
 			$user = Corpuser::findOrFail($id);
 			$thanks = Postactivity::with('user', 'post')
@@ -158,10 +180,9 @@ class PagesController extends Controller {
 							      ->orderBy('postactivities.id', 'desc')
 							      ->sum('postactivities.thanks');
 			$posts = Postjob::where('corporate_id', '=', $id)->count('id');
-			$linkCount = Follow::where('corporate_id', '=', $id)->count('id');
+			$linksCount = Follow::where('corporate_id', '=', $id)->count('id');
 		}	
-		// return $utype;	linkCount
-		return view('pages.profile_indview', compact('title','thanks','posts','linkCount','user'));
+		return view('pages.profile_indview', compact('title','thanks','posts','linksCount','user','connectionStatus'));
 	}
 
 	public function follow($id){

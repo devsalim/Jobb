@@ -48,6 +48,7 @@ Route::group(array('before' => 'auth'), function(){
 	Route::post('skill/store', 'SkillController@store');
 	Route::post('skill/update', 'SkillController@update');
 
+	Route::get('links', 'ConnectionsController@create');
 	Route::get('connections', 'ConnectionsController@index');
 	Route::get('connections/create', 'ConnectionsController@create');
 	Route::post('connections/store', 'ConnectionsController@store');
