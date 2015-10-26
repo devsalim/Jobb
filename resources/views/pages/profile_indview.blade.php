@@ -48,6 +48,10 @@
 						<a href="/links" class="btn btn-danger btn-responsive btn-xs">
 							Link request sent
 						</a>
+					@elseif($connectionStatus == 'following')
+						<a href="/links" class="btn btn-success btn-responsive btn-xs">
+							Following
+						</a>
 					@endif
 					<!-- end Connection status -->
 

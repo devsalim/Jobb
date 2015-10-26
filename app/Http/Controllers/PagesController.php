@@ -182,6 +182,10 @@ class PagesController extends Controller {
 			$posts = Postjob::where('corporate_id', '=', $id)->count('id');
 			$linksCount = Follow::where('corporate_id', '=', $id)->count('id');
 			$connectionStatus = 'unknown';
+			$followStatus = Follow::where('individual_id', '=', Auth::user()->induser_id)->first();
+			if($followStatus != null){
+				$connectionStatus = 'following';
+			}
 		}	
 
 		return view('pages.profile_indview', compact('title','thanks','posts','linksCount','user','connectionStatus'));
