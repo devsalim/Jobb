@@ -181,7 +181,9 @@ class PagesController extends Controller {
 							      ->sum('postactivities.thanks');
 			$posts = Postjob::where('corporate_id', '=', $id)->count('id');
 			$linksCount = Follow::where('corporate_id', '=', $id)->count('id');
+			$connectionStatus = 'unknown';
 		}	
+
 		return view('pages.profile_indview', compact('title','thanks','posts','linksCount','user','connectionStatus'));
 	}
 

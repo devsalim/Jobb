@@ -57,39 +57,21 @@ var FormWizard = function () {
                     role: {
                         required: true
                     },
-                    gender: {
+                    post_compname: {
                         required: true
                     },
-                    address: {
+                    linked_skill: {
+                        required: true
+                    },
+                    education: {
                         required: true
                     },
                     city: {
                         required: true
                     },
-                    country: {
-                        required: true
-                    },
                     //payment
-                    card_name: {
+                    post_duration: {
                         required: true
-                    },
-                    card_number: {
-                        minlength: 16,
-                        maxlength: 16,
-                        required: true
-                    },
-                    card_cvc: {
-                        digits: true,
-                        required: true,
-                        minlength: 3,
-                        maxlength: 4
-                    },
-                    card_expiry_date: {
-                        required: true
-                    },
-                    'payment[]': {
-                        required: true,
-                        minlength: 1
                     }
                 },
 

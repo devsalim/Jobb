@@ -39,7 +39,7 @@
 <div class="modal-header">
 	<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
 	<h4 class="modal-title">
-		<i class="fa fa-link" style="font-size: 16px;color: firebrick;"></i> Follow
+		<i class="icon-user-follow" style="font-size: 16px;color: firebrick;"></i> Follow
 	</h4>
 </div>
 <div class="modal-body">
@@ -57,7 +57,7 @@
 <div class="modal-header">
 	<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
 	<h4 class="modal-title">
-		<i class="fa fa-link" style="font-size: 16px;color: firebrick;"></i> UnFollow
+		<i class="icon-user-unfollow" style="font-size: 16px;color: firebrick;"></i> UnFollow
 	</h4>
 </div>
 <div class="modal-body">

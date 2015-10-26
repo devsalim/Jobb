@@ -17,6 +17,22 @@
     cursor: pointer;
     /*box-shadow: 0px 3px 3px lightgrey;*/
 }
+
+.profile-userpic-corp {
+    position: relative;
+    overflow: hidden;
+    width: 128px;
+    height: 128px;
+    /*border-radius: 50% !important;*/
+    margin: auto;
+    background: #fff url("images/corp.png") !important;
+    background-size: 100%;
+    text-align: center;
+    cursor: pointer;
+    /*box-shadow: 0px 3px 3px lightgrey;*/
+}
+
+
 .hover-image {
     position: absolute;
     left: 0;
@@ -578,7 +594,7 @@ form.open .search-input-box a.advance-search{
     display: block;
 }
 form .search-input-box a.advance-search{
-    display: none;
+    /*display: none;*/
     z-index: 99999;
 }
 

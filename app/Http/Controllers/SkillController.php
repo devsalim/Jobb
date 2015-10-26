@@ -62,7 +62,7 @@ class SkillController extends Controller {
 
 		$post->skills()->attach($skillIds);
 
-		return redirect("/skill/create");
+		return redirect("/home");
 	}
 
 	/**

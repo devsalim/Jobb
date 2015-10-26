@@ -71,7 +71,7 @@ class JobController extends Controller {
 		$post = Postjob::create($request->all());
 		$post->skills()->attach($skillIds); 
 
-		return redirect("/job/create");
+		return redirect("/home");
 		
 	}
 

@@ -6351,6 +6351,7 @@ Custom tabs
 }
 .tabbable-line > .nav-tabs > li {
   margin-right: 2px;
+  border-bottom: 4px solid #B3AFAF;
 }
 .tabbable-line > .nav-tabs > li > a {
   border: 0;

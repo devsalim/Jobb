@@ -61,6 +61,7 @@
 <link href="{{ asset('/assets/global/plugins/ion.rangeslider/css/ion.rangeSlider.Metronic.css') }}" rel="stylesheet"/>
 <link href="{{ asset('/assets/custom.css') }}" rel="stylesheet"/>
 <link href="{{ asset('/assets/custom_new.css') }}" rel="stylesheet"/>
+
 <!-- END PAGE LEVEL STYLES -->
 <link href="{{ asset('assets/global/plugins/jquery-ui/jquery-ui.min.css') }}" rel="stylesheet"/>
 <!-- <link href="/assets/admin/pages/css/profile.css" rel="stylesheet" type="text/css"/> -->
@@ -317,6 +318,7 @@ body.page-boxed{
 <script src="{{ asset('/assets/admin/pages/scripts/components-jqueryui-sliders.js') }}" type="text/javascript"></script>
 <script src="/assets/global/plugins/bootstrap-tabdrop/js/bootstrap-tabdrop.js" type="text/javascript"></script>
 <script src="/assets/global/plugins/icheck/icheck.min.js"></script>
+<script src="{{ asset('/assets/ind_field.js') }}"></script>
 <script>
 jQuery(document).ready(function() {    
    Metronic.init(); // init metronic core components
@@ -331,7 +333,19 @@ jQuery(document).ready(function() {
   });
 });
 </script>
+<script>
+    $(document).ready(function() {
+   $('input[type="radio"]').click(function() {
+       if($(this).attr('id') == 'hide-comp') {
+            $('.show-comp').hide();           
+       }
 
+       else {
+            $('.show-comp').show();   
+       }
+   });
+});
+</script>
 @yield('javascript')
 
 <!-- END JAVASCRIPTS -->

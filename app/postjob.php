@@ -30,7 +30,8 @@ class Postjob extends Model {
 							'reference_id',
 							'contact_person',
 							'corporate_id',
-							'unique_id'
+							'unique_id',
+							'resume_required'
 						   ];
 
 	public function indUser(){

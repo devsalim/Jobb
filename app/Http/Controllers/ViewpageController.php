@@ -7,22 +7,23 @@ use App\Postjob;
 use App\Http\Requests\CreatePostskillRequest;
 use Auth;
 use App\Induser;
+use App\Corpuser;
 use App\Postactivity;
 use App\Connections;
 use App\User;
 
 class ViewpageController extends Controller {
 
-	public function __construct()
-	{
-	    $this->beforeFilter(function() {
-	    	if(Auth::check()){
-	        	if(Auth::user()->identifier != 1) return redirect('/home');
-	        } else{
-	        	return redirect('login');
-	        }
-	    });
-	}
+	// public function __construct()
+	// {
+	//     $this->beforeFilter(function() {
+	//     	if(Auth::check()){
+	//         	return redirect('/home');
+	//         } else{
+	//         	return redirect('login');
+	//         }
+	//     });
+	// }
 
 	/**
 	 * Display a listing of the resource.
@@ -116,9 +117,15 @@ class ViewpageController extends Controller {
 
 	public function edit_view()
 	{
-		$title = 'indprofile_edit';
-		$user = Induser::where('id', '=', Auth::user()->induser_id)->first();
-		return view('pages.professional_page', compact('user', 'title'));
+		if(Auth::user()->identifier == 1){
+			$title = 'indprofile_edit';
+			$user = Induser::where('id', '=', Auth::user()->induser_id)->first();
+			return view('pages.professional_page', compact('user', 'title'));
+		}else if(Auth::user()->identifier == 2){
+			$title = 'corpprofile_edit';
+			$user = Corpuser::where('id', '=', Auth::user()->corpuser_id)->first();
+			return view('pages.firm_details', compact('user', 'title'));
+		}
 	}
 
 	// public function links_view()
@@ -134,6 +141,48 @@ class ViewpageController extends Controller {
 		$user = Induser::where('id', '=', Auth::user()->induser_id)->first();
 		
 		return view('pages.notification_view', compact('user', 'title'));
+	}
+
+	
+
+	public function corp_indView()
+	{
+		
+		if(Auth::user()->identifier == 1){
+				$title = 'indView';
+				$user = Induser::where('id', '=', Auth::user()->induser_id)->first();
+				$thanks = Postactivity::with('user', 'post')
+						      ->join('postjobs', 'postjobs.id', '=', 'postactivities.post_id')
+							  ->where('postjobs.individual_id', '=', Auth::user()->induser_id)
+							  ->where('postactivities.thanks', '=', 1)
+						      ->orderBy('postactivities.id', 'desc')
+								      ->sum('postactivities.thanks');
+				$posts = Postjob::where('individual_id', '=', Auth::user()->induser_id)->count('id');
+				$linksCount = Connections::where('user_id', '=', Auth::user()->induser_id)
+										->where('status', '=', 1)
+										->orWhere('connection_user_id', '=', Auth::user()->induser_id)
+										->where('status', '=', 1)
+										->count('id');
+				return view('pages.profile_indview', compact('user','thanks', 'posts', 'linksCount', 'title'));
+
+			}else if(Auth::user()->identifier == 2){
+				$title = 'corpView';
+				$user = Corpuser::where('id', '=', Auth::user()->corpuser_id)->first();
+				$thanks = Postactivity::with('user', 'post')
+						      ->join('postjobs', 'postjobs.id', '=', 'postactivities.post_id')
+							  ->where('postjobs.individual_id', '=', Auth::user()->induser_id)
+							  ->where('postactivities.thanks', '=', 1)
+						      ->orderBy('postactivities.id', 'desc')
+								      ->sum('postactivities.thanks');
+				$posts = Postjob::where('individual_id', '=', Auth::user()->induser_id)->count('id');
+				$linksCount = Connections::where('user_id', '=', Auth::user()->induser_id)
+										->where('status', '=', 1)
+										->orWhere('connection_user_id', '=', Auth::user()->induser_id)
+										->where('status', '=', 1)
+										->count('id');
+				return view('pages.profile_indview', compact('user','thanks', 'posts', 'linksCount', 'title'));
+			}
+
 	}
 
 }

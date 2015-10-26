@@ -115,9 +115,9 @@
 			<a href="" class="collapse"></a>
 		</div>		
 	</div>
-	<div class="portlet-body form">
+	<div class="portlet-body form ">
 		<!-- BEGIN FORM-->
-		<form action="{{ url('/individual/update', Auth::user()->induser_id) }}" class="horizontal-form" method="post" enctype="multipart/form-data">
+		<form action="{{ url('/individual/update', Auth::user()->induser_id) }}" class="horizontal-form prof_detail" method="post" enctype="multipart/form-data">
 			<input type="hidden" name="_token" value="{{ csrf_token() }}">
 			<div class="form-body">
 				<div class="row">
@@ -405,6 +405,7 @@
 
 @section('javascript')
 <script src="{{ asset('/assets/Edubranch.js') }}"></script>
+<script src="{{ asset('/assets/ind_field.js') }}"></script>
 <script>
 	jQuery(document).ready(function() { 
 	    ComponentsIonSliders.init();

@@ -28,6 +28,7 @@ Route::group(array('before' => 'auth'), function(){
 	Route::get('corporate/create', 'CorporateController@create');
 	Route::post('corporate/update/{id}', 'CorporateController@update');
 	Route::post('corporate/basicupdate', 'CorporateController@basicUpdate');
+	Route::get('corporate/corporateView', 'CorporateController@corpView');
 
 
 	Route::get('job/skillSearch', 'JobController@skillSearch');
@@ -81,7 +82,9 @@ Route::group(array('before' => 'auth'), function(){
 	Route::get('individual_view', 'ViewpageController@index');
 	Route::get('individual_view/create', 'ViewpageController@create');
 	Route::get('individual/edit_view', 'ViewpageController@edit_view');
-	// Route::get('individual/links_view', 'ViewpageController@links_view');
+	Route::get('corporate/edit', 'ViewpageController@edit_view');
+	Route::get('IndividualView', 'ViewpageController@corp_indView');
+	Route::get('CorporateView', 'ViewpageController@corp_indView');
 	Route::get('individual/thanks_view', 'ViewpageController@thanks_view');	
 	// Route::get('individual/posts_view', 'ViewpageController@posts_view');	
 

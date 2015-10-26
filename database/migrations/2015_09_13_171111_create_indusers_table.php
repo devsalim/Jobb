@@ -30,6 +30,7 @@ class CreateIndusersTable extends Migration {
             $table->string('working_at')->nullable();
             $table->string('linked_skill')->nullable();
             $table->string('resume')->nullable();
+            $table->dateTime('resume_dtTime');
             $table->string('role')->nullable();
             $table->string('city')->nullable();
             $table->string('state')->nullable();
