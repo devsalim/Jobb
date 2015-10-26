@@ -325,6 +325,8 @@
                     </form>
                     </div>
                     <div class="tab-pane" id="tab_15_2">
+                      <form id="home-filter" action="/home" method="post">
+                      <input type="hidden" name="_token" value="{{ csrf_token() }}">
                       <div class="row links-title" style="margin-bottom: 20px;margin-top: 10px;">
                         <div class="col-md-12 col-sm-12 col-xs-12 advance-len">
                           <div class="input-group">
@@ -374,6 +376,14 @@
                           </div>  
                         </div>
                       </div>
+                      <div class="row" style="margin-top: 15px;">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                          <div class="footer links-title">              
+                              <button type="button" class="btn blue links-title"><i class="glyphicon glyphicon-search"></i> Search</button>
+                          </div>  
+                        </div>
+                      </div>
+                    </form>
                     </div>
                   </div>
                 </div>
