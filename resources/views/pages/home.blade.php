@@ -19,16 +19,16 @@
 <form id="home-filter" action="/home" method="post">
 <input type="hidden" name="_token" value="{{ csrf_token() }}">
 <div class="row show-filter">
-	<div class="col-md-9">
-		<div class="col-md-2 col-sm-4 col-xs-4">
-			<div class="form-group">				
-				<input type="experience" class="form-control filter-input" name="experience" placeholder="Exp" value="">				
-			</div>	
-		</div>
+	<div class="col-md-9">		
 		<div class="col-md-4 col-sm-12 col-xs-12">
 			<div class="form-group">
 				<input type="text" name="post_title" class="form-control filter-input" placeholder="Job Title, Role">
 			</div>
+		</div>
+		<div class="col-md-2 col-sm-4 col-xs-4">
+			<div class="form-group">				
+				<input type="experience" class="form-control filter-input" name="experience" placeholder="Exp" value="">				
+			</div>	
 		</div>
 		<div class="col-md-4 col-sm-12 col-xs-12">
 			<div class="form-group">				
@@ -66,15 +66,14 @@
 </div>
 <div class="row show-filter" style="margin-top:10px;">
 	<div class="col-md-9">		
-		<div class="btn-group col-md-3 col-sm-4 col-xs-12 jobskill" data-toggle="buttons">
-			<label class="btn btn-default check-font-size input-responsive">
-				<input type="checkbox" name="post_type[]" value="job" class="toggle"> Jobs 
-			</label>
-			<label class="btn btn-default check-font-size input-responsive">
-				<input type="checkbox" name="post_type[]" value="skill" class="toggle"> Skills 
-			</label>
-		</div>
-		<div class="btn-group col-md-6 col-sm-8 col-xs-12" data-toggle="buttons">
+		<div class="btn-group col-md-3 col-sm-3 col-xs-12 jobskill" data-toggle="buttons">
+			<select name="time_for" class="form-control" >
+				<option value="Full Time">Full Time</option>
+				<option value="Part Time">Part Time</option>
+				<option value="Freelancer">Freelancer</option>
+			</select>
+		</div>		
+		<div class="btn-group col-md-5 col-sm-5 col-xs-12" data-toggle="buttons">
 			<label class="btn btn-default  check-font-size">
 				<input type="checkbox" name="posted_by[]" value="individual" class="toggle"> Individual 
 			</label>
@@ -85,8 +84,17 @@
 				<input type="checkbox" name="posted_by[]" value="consultancy" class="toggle"> Consultancy 
 			</label>
 		</div>
-		<div class="col-md-3 col-sm-6 col-xs-12">
-			<input type="submit" class="btn btn-sm btn-info" value="Search">
+
+		<div class="col-md-4 col-sm-4 col-xs-12">
+			<div class="btn-group jobskill" data-toggle="buttons">
+				<label class="btn btn-default check-font-size input-responsive">
+					<input type="checkbox" name="post_type[]" value="job" class="toggle"> Jobs 
+				</label>
+				<label class="btn btn-default check-font-size input-responsive">
+					<input type="checkbox" name="post_type[]" value="skill" class="toggle"> Skills 
+				</label>
+			</div>
+			<input type="submit" class="btn btn-info" value="Search">
 		</div>
 	</div>
 </div>
@@ -633,12 +641,10 @@
 $(document).ready(function(){
 
 	jQuery('.show-filter').hide();
-	jQuery(document).ready(function(){ 
-	    jQuery('.hide-show-filter').on('click', function(event) {
-		    jQuery('.show-filter').toggle('show');
-		    jQuery('.hide-label').toggle('hide');
-	    });
-	});
+    jQuery('.hide-show-filter').on('click', function(event) {
+	    jQuery('.show-filter').toggle('show');
+	    jQuery('.hide-label').toggle('hide');
+    });
 
   $('.like-btn').on('click',function(event){  	    
   	event.preventDefault();

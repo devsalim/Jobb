@@ -224,6 +224,7 @@ class PagesController extends Controller {
 			$city = Input::get('city');
 			$prof_category = Input::get('prof_category');
 			$experience = Input::get('experience');
+			$time_for = Input::get('time_for');
 
 			$posts = Postjob::orderBy('id', 'desc')->with('indUser', 'corpUser', 'postActivity');
 
@@ -237,7 +238,10 @@ class PagesController extends Controller {
 				$posts->where('prof_category', 'like', '%'.$prof_category.'%');
 			}
 			if($experience != null){
-				$posts->where('min_exp', '=', $experience);
+				$posts->whereRaw("$experience between min_exp and max_exp");
+			}
+			if($time_for != null){
+				$posts->where('time_for', '=', $time_for);
 			}
 			if(count($post_type) > 0){
 				if(in_array("job", $post_type)){
