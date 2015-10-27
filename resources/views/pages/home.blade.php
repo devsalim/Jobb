@@ -73,7 +73,18 @@
 				<option value="Freelancer">Freelancer</option>
 			</select>
 		</div>		
-		<div class="btn-group col-md-5 col-sm-5 col-xs-12" data-toggle="buttons">
+		<div class="col-md-3 col-sm-3 col-xs-1 btn-group jobskill" data-toggle="buttons">
+			<label class="btn btn-default check-font-size input-responsive">
+				<input type="checkbox" name="post_type[]" value="job" class="toggle"> Jobs 
+			</label>
+			<label class="btn btn-default check-font-size input-responsive">
+				<input type="checkbox" name="post_type[]" value="skill" class="toggle"> Skills 
+			</label>
+		</div>
+
+		<div class=" col-md-6 col-sm-6 col-xs-12">
+			
+			<div class="btn-group" data-toggle="buttons">
 			<label class="btn btn-default  check-font-size">
 				<input type="checkbox" name="posted_by[]" value="individual" class="toggle"> Individual 
 			</label>
@@ -84,16 +95,6 @@
 				<input type="checkbox" name="posted_by[]" value="consultancy" class="toggle"> Consultancy 
 			</label>
 		</div>
-
-		<div class="col-md-4 col-sm-4 col-xs-12">
-			<div class="btn-group jobskill" data-toggle="buttons">
-				<label class="btn btn-default check-font-size input-responsive">
-					<input type="checkbox" name="post_type[]" value="job" class="toggle"> Jobs 
-				</label>
-				<label class="btn btn-default check-font-size input-responsive">
-					<input type="checkbox" name="post_type[]" value="skill" class="toggle"> Skills 
-				</label>
-			</div>
 			<input type="submit" class="btn btn-info" value="Search">
 		</div>
 	</div>

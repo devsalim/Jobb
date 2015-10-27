@@ -45,9 +45,7 @@ class ConnectionsController extends Controller {
 								 ->orWhere('connection_user_id', '=', Auth::user()->induser_id)
 								 ->where('status', '=', 1)
 								 ->count('id');
-		$linkrequestCount = Connections::where('user_id', '=', Auth::user()->induser_id)
-									   ->where('status', '=', 0)
-									   ->orWhere('connection_user_id', '=', Auth::user()->induser_id)
+		$linkrequestCount = Connections::where('connection_user_id', '=', Auth::user()->induser_id)
 									   ->where('status', '=', 0)
 									   ->count('id');		
 		$linkFollow = Corpuser::leftjoin('follows', 'corpusers.id', '=', 'follows.corporate_id')

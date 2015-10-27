@@ -147,7 +147,7 @@ class ViewpageController extends Controller {
 
 	public function corp_indView()
 	{
-		
+		$connectionStatus = 'unknown';
 		if(Auth::user()->identifier == 1){
 				$title = 'indView';
 				$user = Induser::where('id', '=', Auth::user()->induser_id)->first();
@@ -162,8 +162,7 @@ class ViewpageController extends Controller {
 										->where('status', '=', 1)
 										->orWhere('connection_user_id', '=', Auth::user()->induser_id)
 										->where('status', '=', 1)
-										->count('id');
-				return view('pages.profile_indview', compact('user','thanks', 'posts', 'linksCount', 'title'));
+										->count('id');				
 
 			}else if(Auth::user()->identifier == 2){
 				$title = 'corpView';
@@ -180,8 +179,9 @@ class ViewpageController extends Controller {
 										->orWhere('connection_user_id', '=', Auth::user()->induser_id)
 										->where('status', '=', 1)
 										->count('id');
-				return view('pages.profile_indview', compact('user','thanks', 'posts', 'linksCount', 'title'));
 			}
+
+			return view('pages.profile_indview', compact('user','thanks', 'posts', 'linksCount', 'title', 'connectionStatus'));
 
 	}
 

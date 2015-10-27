@@ -37,21 +37,13 @@
 
 					<!-- Connection status -->
 					@if($connectionStatus == 'friend')
-						<a href="/links" class="btn btn-success btn-responsive btn-xs">
-							Friend
-						</a>
+						<a href="/links" class="btn btn-success btn-responsive btn-xs">Friend</a>
 					@elseif($connectionStatus == 'pendingrequest')
-						<a href="/links" class="btn btn-warning btn-responsive btn-xs">
-							Pending link request
-						</a>
+						<a href="/links" class="btn btn-warning btn-responsive btn-xs">Pending link request</a>
 					@elseif($connectionStatus == 'requestsent')
-						<a href="/links" class="btn btn-danger btn-responsive btn-xs">
-							Link request sent
-						</a>
+						<a href="/links" class="btn btn-danger btn-responsive btn-xs">Link request sent</a>
 					@elseif($connectionStatus == 'following')
-						<a href="/links" class="btn btn-success btn-responsive btn-xs">
-							Following
-						</a>
+						<a href="/links" class="btn btn-success btn-responsive btn-xs">Following</a>
 					@endif
 					<!-- end Connection status -->
 
