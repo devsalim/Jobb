@@ -163,7 +163,29 @@ class ViewpageController extends Controller {
 										->orWhere('connection_user_id', '=', Auth::user()->induser_id)
 										->where('status', '=', 1)
 										->count('id');
-				return view('pages.profile_indview', compact('user','thanks', 'posts', 'linksCount', 'title'));
+				$connectionPendingStatus = Connections::where('user_id', '=', Auth::user()->induser_id)
+										 ->where('connection_user_id', '=', Auth::user()->induser_id)
+										 ->first(['status']); 
+				$connectionRequestStatus = Connections::where('connection_user_id', '=', Auth::user()->induser_id)
+									   ->where('user_id', '=', Auth::user()->induser_id)
+									   ->first(['status']);
+
+			// connection status
+			$connectionStatus = 'unknown';
+			if($connectionPendingStatus != null && $connectionPendingStatus->status == 0){
+				$connectionStatus = 'requestsent';
+			}
+			elseif($connectionPendingStatus != null && $connectionPendingStatus->status == 1){
+				$connectionStatus = 'friend';
+			}
+			elseif($connectionRequestStatus != null && $connectionRequestStatus->status == 0){
+				$connectionStatus = 'pendingrequest';
+			}
+			elseif($connectionRequestStatus != null && $connectionRequestStatus->status == 1){
+				$connectionStatus = 'friend';
+			}
+				return view('pages.profile_indview', compact('user','thanks', 'posts', 'connectionStatus', 'linksCount', 'title'));
+
 
 			}else if(Auth::user()->identifier == 2){
 				$title = 'corpView';
@@ -180,7 +202,28 @@ class ViewpageController extends Controller {
 										->orWhere('connection_user_id', '=', Auth::user()->induser_id)
 										->where('status', '=', 1)
 										->count('id');
-				return view('pages.profile_indview', compact('user','thanks', 'posts', 'linksCount', 'title'));
+										$connectionPendingStatus = Connections::where('user_id', '=', Auth::user()->induser_id)
+										 ->where('connection_user_id', '=', Auth::user()->induser_id)
+										 ->first(['status']); 
+				$connectionRequestStatus = Connections::where('connection_user_id', '=', Auth::user()->induser_id)
+									   ->where('user_id', '=', Auth::user()->induser_id)
+									   ->first(['status']);
+
+			// connection status
+			$connectionStatus = 'unknown';
+			if($connectionPendingStatus != null && $connectionPendingStatus->status == 0){
+				$connectionStatus = 'requestsent';
+			}
+			elseif($connectionPendingStatus != null && $connectionPendingStatus->status == 1){
+				$connectionStatus = 'friend';
+			}
+			elseif($connectionRequestStatus != null && $connectionRequestStatus->status == 0){
+				$connectionStatus = 'pendingrequest';
+			}
+			elseif($connectionRequestStatus != null && $connectionRequestStatus->status == 1){
+				$connectionStatus = 'friend';
+			}
+				return view('pages.profile_indview', compact('user','thanks', 'posts', 'connectionStatus', 'linksCount', 'title'));
 			}
 
 	}

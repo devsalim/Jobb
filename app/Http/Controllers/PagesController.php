@@ -224,9 +224,17 @@ class PagesController extends Controller {
 			$city = Input::get('city');
 			$prof_category = Input::get('prof_category');
 			$experience = Input::get('experience');
+			$unique_id = Input::get('unique_id');
+			$role = Input::get('role');
 
 			$posts = Postjob::orderBy('id', 'desc')->with('indUser', 'corpUser', 'postActivity');
 
+			if($role !=null){
+				$posts->where('role', 'like', '%'.$role.'%');
+			}
+			if($unique_id !=null){
+				$posts->where('unique_id', 'like', '%'.$unique_id.'%');
+			}
 			if($post_title != null){
 				$posts->where('post_title', 'like', '%'.$post_title.'%');
 			}

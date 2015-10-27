@@ -19,6 +19,7 @@ class CreateCorpusersTable extends Migration {
 			$table->string('username');->nullable();
 			$table->integer('emp_count');->nullable();
 			$table->string('working_as')->nullable();
+			$table->string('slogan')->nullable();
             $table->string('firm_name');
             $table->string('firm_email_id')->nullable();
             $table->string('logo_status')->nullable();

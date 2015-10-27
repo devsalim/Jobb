@@ -141,6 +141,7 @@ class CorporateController extends Controller {
 		$data->username = Input::get('username');
 		$data->emp_count = Input::get('emp_count');
 		$data->working_as = Input::get('working_as');
+		$data->slogan = Input::get('slogan');
 		$data->save();
 		return redirect('/corporate/create');
 		}else{

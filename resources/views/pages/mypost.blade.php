@@ -377,11 +377,113 @@
 																							<div class="modal-header">
 																								<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
 																								<h4 class="modal-title">Matching Criteria</h4>
-																								Skills: CSS, PHP 34%<br>
-																								Education: B.tech 60%<br>
-																								Experience:2 Years 50%<br>
-																								City: Chennai 0%
-
+																								<div class="modal-body">
+																									<div class="portlet light bordered form-fit">
+																										<div class="portlet-title">
+																										</div>
+																										<div class="portlet-body form">
+																											<!-- BEGIN FORM-->
+																											<form action="#" class="form-horizontal form-bordered form-label-stripped">
+																												<div class="form-body">
+																													<div class="form-group">
+																														<div class="col-md-8">
+																														<label class="control-label links-title" style="padding-top:0 !important;">Requirement</label>
+																														<!-- <div class=""> -->
+																														</div>
+																														<div class=" col-md-4" style="border-right: 1px solid #efefef;">
+																														<label class="control-label links-title" style="padding-top:0 !important;">Profile</label>
+																														</div>	
+																													</div>
+																													<div class="form-group">
+																														<div class="col-md-8">
+																														
+																														<label class="label-padding-top">
+																															<input type="checkbox" class="icheck" data-checkbox="icheckbox_line-grey" data-label="Skills">
+																														</label>
+																														<!-- <div class=""> -->
+																														</div>
+																														<div class=" col-md-4" style="border-right: 1px solid #efefef;">
+																														<label class="control-label label-padding-top"></label>
+																														</div>	
+																													</div>
+																													<div class="form-group">
+																														<div class="col-md-8">
+																														<!-- <label class="control-label" style="padding-top:0 !important;">Job Role</label> -->
+																														<label class="label-padding-top">
+																															<input type="checkbox" class="icheck" data-checkbox="icheckbox_line-grey" data-label="Job Role">
+																														</label>
+																														<!-- <div class=""> -->
+																														</div>
+																														<div class=" col-md-4" style="border-right: 1px solid #efefef;">
+																														<label class="control-label label-padding-top"></label>
+																														</div>	
+																													</div>
+																													<div class="form-group">
+																														<div class="col-md-8">
+																														<!-- <label class="control-label" style="padding-top:0 !important;">Job Category</label> -->
+																														<label class="label-padding-top">
+																															<input type="checkbox" class="icheck" data-checkbox="icheckbox_line-grey" data-label="Job Category">
+																														</label>
+																														<!-- <div class=""> -->
+																														</div>
+																														<div class=" col-md-4" style="border-right: 1px solid #efefef;">
+																														<label class="control-label label-padding-top"></label>
+																														</div>	
+																													</div>
+																													<div class="form-group">
+																														<div class="col-md-8">
+																														<!-- <label class="control-label" style="padding-top:0 !important;">Experience</label> -->
+																														<label class="label-padding-top">
+																															<input type="checkbox" class="icheck" data-checkbox="icheckbox_line-grey" data-label="Experience">
+																														</label>
+																														<!-- <div class=""> -->
+																														</div>
+																														<div class=" col-md-4" style="border-right: 1px solid #efefef;">
+																														<label class="control-label label-padding-top"></label>
+																														</div>	
+																													</div>
+																													<div class="form-group">
+																														<div class="col-md-8">
+																														<!-- <label class="control-label" style="padding-top:0 !important;">Location</label> -->
+																														<label class="label-padding-top">
+																															<input type="checkbox" class="icheck" data-checkbox="icheckbox_line-grey" data-label="Location">
+																														</label>
+																														<!-- <div class=""> -->
+																														</div>
+																														<div class=" col-md-4" style="border-right: 1px solid #efefef;">
+																														<label class="control-label label-padding-top"></label>
+																														</div>	
+																													</div>
+																													<div class="form-group">
+																														<div class="col-md-8">
+																														<!-- <label class="control-label" style="padding-top:0 !important;">Education</label> -->
+																														<label class="label-padding-top">
+																															<input type="checkbox" class="icheck" data-checkbox="icheckbox_line-grey" data-label="Education">
+																														</label>
+																														<!-- <div class=""> -->
+																														</div>
+																														<div class=" col-md-4" style="border-right: 1px solid #efefef;">
+																														<label class="control-label label-padding-top"></label>
+																														</div>	
+																													</div>
+																													<div class="form-group">
+																														<div class="col-md-8">
+																														<!-- <label class="control-label" style="padding-top:0 !important;">Job Type</label> -->
+																														<label class="label-padding-top">
+																															<input type="checkbox" class="icheck" data-checkbox="icheckbox_line-grey" data-label="Job Type">
+																														</label>
+																														<!-- <div class=""> -->
+																														</div>
+																														<div class=" col-md-4" style="border-right: 1px solid #efefef;">
+																														<label class="control-label label-padding-top"></label>
+																														</div>	
+																													</div>
+																												</div>
+																											</form>
+																											<!-- END FORM-->
+																										</div>
+																									</div>
+																								</div>
 																							</div>
 																						</div>
 																						<!-- /.modal-content -->
