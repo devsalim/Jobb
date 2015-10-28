@@ -274,3 +274,7 @@ display: table;
 .label-padding-top{
   padding-top: 0 !important;
 }
+
+.matching-criteria-align{
+  text-align: center !important;
+}

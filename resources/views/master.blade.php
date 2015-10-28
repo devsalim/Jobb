@@ -319,12 +319,14 @@ body.page-boxed{
 <script src="/assets/global/plugins/bootstrap-tabdrop/js/bootstrap-tabdrop.js" type="text/javascript"></script>
 <script src="/assets/global/plugins/icheck/icheck.min.js"></script>
 <script src="{{ asset('/assets/ind_field.js') }}"></script>
+<script src="{{ asset('/assets/admin/pages/scripts/components-knob-dials.js') }}"></script>
+<script src="{{ asset('/assets/global/plugins/jquery-knob/js/jquery.knob.js') }}"></script>
 <script>
 jQuery(document).ready(function() {    
    Metronic.init(); // init metronic core components
    Layout.init(); // init current layout
    Demo.init(); // init demo features
-
+   ComponentsKnobDials.init();
   $('.toggle-display').click(function () {
         $('#nav-display').hide();   
   });
