@@ -10,6 +10,7 @@ use App\Induser;
 use App\Corpuser;
 use App\Connections;
 use Auth;
+use DB;
 
 class ConnectionsController extends Controller {
 
@@ -138,7 +139,20 @@ class ConnectionsController extends Controller {
 						->orWhere('working_at', 'like', '%'.$keywords.'%')
 						->where('id', '<>', Auth::user()->induser_id)
 					    ->get();
-		return view('pages.searchUsers', compact('users'));
+
+		$links = DB::select('select id from indusers
+									where indusers.id in (
+											select connections.user_id as id from connections
+											where connections.connection_user_id=?
+											 and connections.status=1
+											union 
+											select connections.connection_user_id as id from connections
+											where connections.user_id=?
+											 and connections.status=1
+								)', [Auth::user()->induser_id, Auth::user()->induser_id]);
+		$links = collect($links);
+
+		return view('pages.searchUsers', compact('users', 'links'));
 	}
 
 	public function response($id)
