@@ -261,7 +261,7 @@ display:none !important;
 }
 }
 
-.form-group {
+.form-group-new {
     margin-bottom: 25px !important;
 }
 
@@ -271,3 +271,10 @@ margin: 6px auto;
 display: table;
 }
 
+.label-padding-top{
+  padding-top: 0 !important;
+}
+
+.matching-criteria-align{
+  text-align: center !important;
+}

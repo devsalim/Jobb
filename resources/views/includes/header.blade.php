@@ -208,9 +208,9 @@
                           <div class="input-group">
                             <div class="icheck-inline">
                               <label style="font-weight:500;">
-                              <input type="radio" name="radio2" class="icheck"> Job</label>
+                              <input type="radio" name="post_type[]" class="icheck"> Job</label>
                               <label style="font-weight:500;">
-                              <input type="radio" name="radio2" class="icheck"> Skill </label>
+                              <input type="radio" name="post_type[]" class="icheck"> Skill </label>
                             </div>
                           </div>
                         </div>
@@ -244,43 +244,43 @@
                       <div class="row">
                         <div class="col-md-8 col-sm-8 col-xs-8 advance-len">
                           <div class="form-group">              
-                              <input type="unique_id" class="form-control filter-input" placeholder="Enter Title">
+                              <input type="text" name="post_title" class="form-control filter-input" placeholder="Enter Title">
                           </div>  
                         </div>
                         <div class="col-md-4 col-sm-4 col-xs-4 advance-len">
                           <div class="form-group">              
-                              <input type="unique_id" class="form-control filter-input" placeholder="Post Id">
+                              <input type="text" name="unique_id" class="form-control filter-input" placeholder="Post Id">
                           </div>  
                         </div>
                       </div>
                       <div class="row">
                         <div class="col-md-6 col-sm-12 col-xs-12 advance-len">
                           <div class="form-group">              
-                              <input type="unique_id" class="form-control filter-input" placeholder="Job Category">
+                              <input type="text" name="prof_category" class="form-control filter-input" placeholder="Job Category">
                           </div>  
                         </div>
                         <div class="col-md-6 col-sm-12 col-xs-12 advance-len">
                           <div class="form-group">              
-                              <input type="unique_id" class="form-control filter-input" placeholder="Job Role">
+                              <input type="text" name="role" class="form-control filter-input" placeholder="Job Role">
                           </div>  
                         </div>
                       </div>
                       <div class="row">
                         <div class="col-md-6 col-sm-12 col-xs-12 advance-len">
                           <div class="form-group">              
-                              <input type="unique_id" class="form-control filter-input" placeholder="Enter Name who posted Job">
+                              <input type="text" class="form-control filter-input" placeholder="Enter Name who posted Job">
                           </div>  
                         </div>
                         <div class="col-md-6 col-sm-12 col-xs-12 advance-len">
                           <div class="form-group">              
-                              <input type="unique_id" class="form-control filter-input" placeholder="Location: Pune, Hyderabad, Bangalore">
+                              <input type="text" name="city" class="form-control filter-input" placeholder="Location: Pune, Hyderabad, Bangalore">
                           </div>  
                         </div>
                       </div>
                       <div class="row">
                         <div class="col-md-6 col-sm-6 col-xs-6 advance-len">
                           <div class="form-group">              
-                              <input type="unique_id" class="form-control filter-input" placeholder="Exp">
+                              <input type="text" class="form-control filter-input" placeholder="Exp">
                           </div>
                         </div>
                         <div class="col-md-6 col-sm-6 col-xs-6 advance-len">
@@ -296,7 +296,7 @@
                       <div class="row">
                         <div class="col-md-12 col-sm-12 col-xs-12 advance-len">
                           <div class="form-group">              
-                              <input type="unique_id" class="form-control filter-input" placeholder="Enter Skills: Painter, Delievery Boy...">
+                              <input type="text" class="form-control filter-input" placeholder="Enter Skills: Painter, Delievery Boy...">
                           </div>  
                         </div>
                       </div>
@@ -310,17 +310,17 @@
                       <div class="row links-title">
                         <div class="btn-group col-md-12 col-sm-12 col-xs-12" data-toggle="buttons">
                           <label class="btn btn-default  check-font-size active">
-                          <input type="checkbox" class="toggle"> Individual </label>
+                          <input type="checkbox" name="posted_by[]" class="toggle"> Individual </label>
                           <label class="btn btn-default  check-font-size">
-                          <input type="checkbox" class="toggle"> Company </label>
+                          <input type="checkbox" name="posted_by[]" class="toggle"> Company </label>
                           <label class="btn btn-default  check-font-size">
-                          <input type="checkbox" class="toggle"> Consultancy </label>
+                          <input type="checkbox" name="posted_by[]" class="toggle"> Consultancy </label>
                         </div>
                       </div>
                       <div class="row" style="margin-top: 15px;">
                         <div class="col-md-12 col-sm-12 col-xs-12">
                           <div class="footer links-title">              
-                              <button type="button" class="btn blue links-title"><i class="glyphicon glyphicon-search"></i> Search</button>
+                              <button type="submit" class="btn blue links-title"><i class="glyphicon glyphicon-search"></i> Search</button>
                           </div>  
                         </div>
                       </div>

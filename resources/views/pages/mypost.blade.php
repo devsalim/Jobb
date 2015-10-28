@@ -385,14 +385,138 @@
 															               		<div class="modal fade" id="{{$post->id}}" tabindex="-1" role="basic" aria-hidden="true">
 																					<div class="modal-dialog">
 																						<div class="modal-content">
-																							<div class="modal-header">
+																							<div class="modal-header" style=" padding: 10px !important;">
 																								<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-																								<h4 class="modal-title">Matching Criteria</h4>
-																								Skills: CSS, PHP 34%<br>
-																								Education: B.tech 60%<br>
-																								Experience:2 Years 50%<br>
-																								City: Chennai 0%
+																								<div class="modal-body" style=" padding:10px 0 !important;">
+																									
+																										<!-- BEGIN BORDERED TABLE PORTLET-->
+																										<div class="portlet box">
+																											<div class="portlet-title">
+																												<div class="caption links-title">
+																													<i class="fa fa-coffee"></i> Matching Criteria
+																												</div>
+																											</div>
+																											<div class="portlet-body" style=" padding: 0 !important;">
+																												<div class="table-scrollable">
+																													<table class="table table-bordered table-hover">
+																													<thead>
+																													<tr>
 
+																														<th class="col-md-6 col-sm-6 col-xs-6 matching-criteria-align">
+																															 Requirement
+																														</th>
+																														<th class="col-md-6 col-sm-6 col-xs-6 matching-criteria-align">
+																															 Profile
+																														</th>
+																														
+																													</tr>
+																													</thead>
+
+																													<tbody>
+																														<tr>
+																															<td colspan="2" class="col-md-12 col-sm-12 col-xs-12 matching-criteria-align">
+																																Skill
+																															</td>
+																														</tr>
+																														<tr>
+																															<td class="col-md-6 col-sm-6 col-xs-6">
+																																@foreach($post->skills as $skill)
+																																	{{$skill->name}},
+																																@endforeach
+																															</td>
+																															<td class="col-md-6 col-sm-6 col-xs-6">
+																																@foreach($post->skills as $skill)
+																																	{{$skill->name}},
+																																@endforeach
+																															</td>
+																														</tr>
+																														<tr>
+																															<td colspan="2" class="col-md-12 col-sm-12 col-xs-12 matching-criteria-align">
+																																<i class="glyphicon glyphicon-ok" style="color:#01b070;font-size:16px;"></i> Job Role
+																															</td>
+																														</tr>
+																														<tr>
+																															<td class="col-md-6 col-sm-6 col-xs-6 success">
+																																{{ $post->role }}
+																															</td>
+																															<td class="col-md-6 col-sm-6 col-xs-6 success">
+																																{{ $post->role }}
+																															</td>
+																														</tr>
+																														<tr>
+																															<td colspan="2" class="col-md-12 col-sm-12 col-xs-12 matching-criteria-align">
+																																 <i class="glyphicon glyphicon-remove" style="color:red;font-size:16px;"></i> Job Category
+																															</td>
+																														</tr>
+																														<tr>
+																															<td class="col-md-6 col-sm-6 col-xs-6 danger">
+																																{{ $post->prof_category }}
+																															</td>
+																															<td class="col-md-6 col-sm-6 col-xs-6 danger">
+																																{{ $post->prof_category }}
+																															</td>
+																														</tr>
+																														<tr>
+																															<td colspan="2" class="col-md-12 col-sm-12 col-xs-12 matching-criteria-align">
+																																<i class="glyphicon glyphicon-ok" style="color:#01b070;font-size:16px;"></i> Experience
+																															</td>
+																														</tr>
+																														<tr>
+																															<td class="col-md-6 col-sm-6 col-xs-6 success">
+																																{{ $post->min_exp }}-{{ $post->max_exp }}
+																															</td>
+																															<td class="col-md-6 col-sm-6 col-xs-6 success">
+																																{{ $post->min_exp }}-{{ $post->max_exp }}
+																															</td>
+																														</tr>
+																														<tr>
+																															<td colspan="2" class="col-md-12 col-sm-12 col-xs-12 matching-criteria-align">
+																																<i class="glyphicon glyphicon-remove" style="color:red;font-size:16px;"></i> Education
+																															</td>
+																														</tr>
+																														<tr>
+																															<td class="col-md-6 col-sm-6 col-xs-6 danger">
+																																{{ $post->education }}
+																															</td>
+																															<td class="col-md-6 col-sm-6 col-xs-6 danger">
+																																{{ $post->education }}
+																															</td>
+																														</tr>
+																														<tr>
+																															<td colspan="2" class="col-md-12 col-sm-12 col-xs-12 matching-criteria-align">
+																																<i class="glyphicon glyphicon-ok" style="color:#01b070;font-size:16px;"></i> Location
+																															</td>
+																														</tr>
+																														<tr>
+																															<td class="col-md-6 col-sm-6 col-xs-6 success">
+																																{{ $post->city }}
+																															</td>
+																															<td class="col-md-6 col-sm-6 col-xs-6 success">
+																																{{ $post->city }}
+																															</td>
+																														</tr>
+																														<tr>
+																															<td colspan="2" class="col-md-12 col-sm-12 col-xs-12 matching-criteria-align">
+																																<i class="glyphicon glyphicon-remove" style="color:red;font-size:16px;"></i> Job Type
+																															</td>
+																														</tr>
+																														<tr>
+																															<td class="col-md-6 col-sm-6 col-xs-6 danger">
+																																{{ $post->job_type }}
+																															</td>
+																															<td class="col-md-6 col-sm-6 col-xs-6 danger">
+																																{{ $post->jobtype }}
+																															</td>
+																														</tr>
+																													</tbody>
+																													</table>
+																												</div>
+																											</div>
+																										</div>
+																										<!-- END BORDERED TABLE PORTLET-->
+																									<!-- </div> -->
+																								
+																								</div>
 																							</div>
 																						</div>
 																						<!-- /.modal-content -->
@@ -465,14 +589,144 @@
 															               		<div class="modal fade" id="{{$post->id}}" tabindex="-1" role="basic" aria-hidden="true">
 																					<div class="modal-dialog">
 																						<div class="modal-content">
-																							<div class="modal-header">
+																							<div class="modal-header" style=" padding: 10px !important;">
 																								<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-																								<h4 class="modal-title">Matching Criteria</h4>
-																								Skills: CSS, PHP 55%<br>
-																								Education: B.tech 60%<br>
-																								Experience:2 Years 50%<br>
-																								City: Chennai 100%
+																								<div class="modal-body" style=" padding:10px 0 !important;">
+																									
+																										<!-- BEGIN BORDERED TABLE PORTLET-->
+																										<div class="portlet box">
+																											<div class="portlet-title">
+																												<div class="caption links-title">
+																													<i class="fa fa-coffee"></i> Matching Criteria
+																												</div>
+																											</div>
+																											<div class="portlet-body" style=" padding: 0 !important;">
+																												<div class="table-scrollable">
+																													<table class="table table-bordered table-hover">
+																													<thead>
+																													<tr>
 
+																														<th class="col-md-6 col-sm-6 col-xs-6 matching-criteria-align">
+																															 Requirement
+																														</th>
+																														<th class="col-md-6 col-sm-6 col-xs-6 matching-criteria-align">
+																															 Profile
+																														</th>
+																														
+																													</tr>
+																													</thead>
+
+																													<tbody>
+																														<tr>
+																															<td colspan="2" class="col-md-12 col-sm-12 col-xs-12 matching-criteria-align">
+																																<!-- <input class="knob" data-width="100" data-displayinput=true value="35"> --> Skill
+																															</td>
+																														</tr>
+																														<tr>
+																															<td class="col-md-6 col-sm-6 col-xs-6">
+																																@foreach($post->skills as $skill)
+																																	{{$skill->name}},
+																																@endforeach
+																															</td>
+																															<td class="col-md-6 col-sm-6 col-xs-6">
+																																@foreach($post->skills as $skill)
+																																	{{$skill->name}},
+																																@endforeach
+																															</td>
+																														</tr>
+																														<tr>
+																															<td colspan="2" class="col-md-12 col-sm-12 col-xs-12 matching-criteria-align">
+																																<i class="glyphicon glyphicon-ok" style="color:#01b070;font-size:16px;"></i> 
+																																Job Role
+																															</td>
+																														</tr>
+																														<tr>
+																															<td class="col-md-6 col-sm-6 col-xs-6">
+																																{{ $post->role }}
+																															</td>
+																															<td class="col-md-6 col-sm-6 col-xs-6">
+																																{{ $post->role }}
+																															</td>
+																														</tr>
+																														<tr>
+																															<td colspan="2" class="col-md-12 col-sm-12 col-xs-12 matching-criteria-align">
+																																 <i class="glyphicon glyphicon-remove" style="color:red;font-size:16px;"></i> 
+																																 Job Category
+																															</td>
+																														</tr>
+																														<tr>
+																															<td class="col-md-6 col-sm-6 col-xs-6">
+																																{{ $post->prof_category }}
+																															</td>
+																															<td class="col-md-6 col-sm-6 col-xs-6">
+																																{{ $post->prof_category }}
+																															</td>
+																														</tr>
+																														<tr>
+																															<td colspan="2" class="col-md-12 col-sm-12 col-xs-12 matching-criteria-align">
+																																<i class="glyphicon glyphicon-ok" style="color:#01b070;font-size:16px;"></i> 
+																																Experience
+																															</td>
+																														</tr>
+																														<tr>
+																															<td class="col-md-6 col-sm-6 col-xs-6">
+																																{{ $post->min_exp }}-{{ $post->max_exp }}
+																															</td>
+																															<td class="col-md-6 col-sm-6 col-xs-6">
+																																{{ $post->min_exp }}-{{ $post->max_exp }}
+																															</td>
+																														</tr>
+																														<tr>
+																															<td colspan="2" class="col-md-12 col-sm-12 col-xs-12 matching-criteria-align">
+																																<i class="glyphicon glyphicon-remove" style="color:red;font-size:16px;"></i> 
+																																Education
+																															</td>
+																														</tr>
+																														<tr>
+																															<td class="col-md-6 col-sm-6 col-xs-6">
+																																{{ $post->education }}
+																															</td>
+																															<td class="col-md-6 col-sm-6 col-xs-6">
+																																{{ $post->education }}
+																															</td>
+																														</tr>
+																														<tr>
+																															<td colspan="2" class="col-md-12 col-sm-12 col-xs-12 matching-criteria-align">
+																																<i class="glyphicon glyphicon-ok" style="color:#01b070;font-size:16px;"></i> 
+																																Location
+																															</td>
+																														</tr>
+																														<tr>
+																															<td class="col-md-6 col-sm-6 col-xs-6">
+																																{{ $post->city }}
+																															</td>
+																															<td class="col-md-6 col-sm-6 col-xs-6">
+																																{{ $post->city }}
+																															</td>
+																														</tr>
+																														<tr>
+																															<td colspan="2" class="col-md-12 col-sm-12 col-xs-12 matching-criteria-align">
+																																<i class="glyphicon glyphicon-remove" style="color:red;font-size:16px;"></i> 
+																																Job Type
+																															</td>
+																														</tr>
+																														<tr>
+																															<td class="col-md-6 col-sm-6 col-xs-6">
+																																{{ $post->job_type }}
+																															</td>
+																															<td class="col-md-6 col-sm-6 col-xs-6">
+																																{{ $post->jobtype }}
+																															</td>
+																														</tr>
+																													</tbody>
+																													</table>
+																												</div>
+																											</div>
+																										</div>
+																										<!-- END BORDERED TABLE PORTLET-->
+																									<!-- </div> -->
+																								
+																								</div>
 																							</div>
 																						</div>
 																						<!-- /.modal-content -->

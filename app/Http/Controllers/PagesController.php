@@ -158,16 +158,16 @@ class PagesController extends Controller {
 
 			// connection status
 			$connectionStatus = 'unknown';
-			$connectionId = $connectionRequestStatus->id;
+			$connectionId = 'unknown';
 			if($connectionPendingStatus != null && $connectionPendingStatus->status == 0){
 				$connectionStatus = 'requestsent';
 			}
 			elseif($connectionPendingStatus != null && $connectionPendingStatus->status == 1){
 				$connectionStatus = 'friend';
-
 			}
 			elseif($connectionRequestStatus != null && $connectionRequestStatus->status == 0){
 				$connectionStatus = 'pendingrequest';
+				$connectionId = $connectionRequestStatus->id;
 			}
 			elseif($connectionRequestStatus != null && $connectionRequestStatus->status == 1){
 				$connectionStatus = 'friend';
@@ -228,9 +228,17 @@ class PagesController extends Controller {
 			$prof_category = Input::get('prof_category');
 			$experience = Input::get('experience');
 			$time_for = Input::get('time_for');
+			$unique_id = Input::get('unique_id');
+			$role = Input::get('role');
 
 			$posts = Postjob::orderBy('id', 'desc')->with('indUser', 'corpUser', 'postActivity');
 
+			if($role !=null){
+				$posts->where('role', 'like', '%'.$role.'%');
+			}
+			if($unique_id !=null){
+				$posts->where('unique_id', 'like', '%'.$unique_id.'%');
+			}
 			if($post_title != null){
 				$posts->where('post_title', 'like', '%'.$post_title.'%');
 			}
