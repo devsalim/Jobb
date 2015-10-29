@@ -78,11 +78,30 @@ class PagesController extends Controller {
 		if (Auth::check()) {
 			$title = 'mypost';
 			if(Auth::user()->identifier == 1){
-				$posts = Postjob::with('induser', 'postActivity', 'postactivity.user')->where('individual_id', '=', Auth::user()->induser_id)->orderBy('id', 'desc')->get();
+				$posts = Postjob::with('induser', 'postActivity', 'postactivity.user')
+								->where('individual_id', '=', Auth::user()->induser_id)
+								->orderBy('id', 'desc')->get();
+				$myActivities = DB::select('(select pa.id,pa.user_id,pa.post_id,"Thanks" as identifier,pa.thanks as activity, pa.thanks_dtTime as time, pj.post_title, pj.post_compname
+										from postactivities pa 
+										join postjobs pj on pj.id = pa.post_id
+										where pa.user_id=? and pa.thanks = 1)
+										union
+										(select pa.id,pa.user_id,pa.post_id,"Applied" as identifier,pa.apply as activity, pa.apply_dtTime as time, pj.post_title, pj.post_compname
+										from postactivities pa 
+										join postjobs pj on pj.id = pa.post_id
+										where pa.user_id=? and pa.apply = 1)
+										union
+										(select pa.id,pa.user_id,pa.post_id,"Contacted" as identifier,pa.contact_view as activity,pa.contact_view_dtTime as time, pj.post_title, pj.post_compname
+										from postactivities pa 
+										join postjobs pj on pj.id = pa.post_id
+										where pa.user_id=? and pa.contact_view = 1)
+										order by time desc', [1,1,1]);
+				$myActivities = collect($myActivities);
+				// return $myActivities;
 			}else if(Auth::user()->identifier == 2){
 				$posts = Postjob::with('corpuser')->where('corporate_id', '=', Auth::user()->corpuser_id)->orderBy('id', 'desc')->get();
 			}
-			return view('pages.mypost', compact('posts', 'title'));
+			return view('pages.mypost', compact('posts', 'title', 'myActivities'));
 		}else{
 			return redirect('login');
 		}	

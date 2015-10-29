@@ -81,7 +81,7 @@
 								  	?>
 									<div class="row" style="margin-top: 15px;">
 										@if($expired != 1)
-											@if($remainingDays > 2)
+											@if($remainingDays >= 2)
 											<div class="col-md-5 col-sm-3 col-xs-12">
 												<div class="">Post Expires in: {{ $remainingDays }} days
 													<a href="#extend-job-expiry-{{ $post->id }}" data-toggle="modal" 
@@ -876,11 +876,10 @@
 				</div>
 				<div class="tab-pane" id="tab_5_2">
 					<div class="row">
-					
-								
+						@foreach($myActivities as $myActivity)								
 						<div class="col-md-9">												
-							<div class="updates-style">Datetime: Applied for post_title , post_compname 
-							<br>Post ID: id  <a class="" data-toggle="modal" href="#basic">See the full Post </a>
+							<div class="updates-style">{{$myActivity->time}}: {{$myActivity->identifier}} for {{$myActivity->post_title}}, {{$myActivity->post_compname}} 
+							<br>Post ID: {{$myActivity->id}}  <a class="" data-toggle="modal" href="#basic">See the full Post </a>
 							</div>				
 							<div class="modal fade" id="basic" tabindex="-1" role="basic" aria-hidden="true">
 								<div class="modal-dialog">
@@ -895,7 +894,8 @@
 								<!-- /.modal-dialog -->
 							</div>
 							<!-- /.modal -->
-						</div>			
+						</div>	
+						@endforeach		
 					</div>
 				</div>
 			</div>
