@@ -321,12 +321,16 @@ body.page-boxed{
 <script src="{{ asset('/assets/ind_field.js') }}"></script>
 <script src="{{ asset('/assets/admin/pages/scripts/components-knob-dials.js') }}"></script>
 <script src="{{ asset('/assets/global/plugins/jquery-knob/js/jquery.knob.js') }}"></script>
+<script src="/assets/admin/pages/scripts/form-validation.js"></script>
+<script type="text/javascript" src="/assets/global/plugins/jquery-validation/js/jquery.validate.min.js"></script>
+<script type="text/javascript" src="/assets/global/plugins/jquery-validation/js/additional-methods.min.js"></script>
 <script>
 jQuery(document).ready(function() {    
    Metronic.init(); // init metronic core components
    Layout.init(); // init current layout
    Demo.init(); // init demo features
    ComponentsKnobDials.init();
+   FormValidation.init();
   $('.toggle-display').click(function () {
         $('#nav-display').hide();   
   });

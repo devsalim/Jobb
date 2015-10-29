@@ -19,7 +19,7 @@ var Individual = function() {
                 linked_skill: {
                     required: true
                 },
-                Job Category: {
+                Job_Category: {
                     required: false
                 }
             },

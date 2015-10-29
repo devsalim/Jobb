@@ -70,6 +70,9 @@
 								 		$difference = $currentDate->diff($expiryDate);
 								 		$remainingDays = $difference->format('%d');
 								 		$remainingHours = $difference->format('%h');
+
+								 		$abc= $expiryDate->format('d M Y');
+
 								 		if($currentDate >= $fresh){
 								 			$expired = 1;
 								 		}else{
@@ -77,40 +80,43 @@
 								 		}
 								  	?>
 									<div class="row" style="margin-top: 15px;">
-										@if($remainingDays > 2)
-										<div class="col-md-6 col-sm-3 col-xs-12">
-											<div class="">Post Expires in: {{ $remainingDays }} days
-												<a href="#extend-job-expiry-{{ $post->id }}" data-toggle="modal" class="btn btn-sm extend-expire">Extend</a>
+										@if($expired != 1)
+											@if($remainingDays > 2)
+											<div class="col-md-5 col-sm-3 col-xs-12">
+												<div class="">Post Expires in: {{ $remainingDays }} days
+													<a href="#extend-job-expiry-{{ $post->id }}" data-toggle="modal" 
+													   class="btn btn-sm btn-info">Extend</a>
+												</div>
 											</div>
-										</div>
-										@elseif( $remainingDays == 2 && $remainingDays > 1)
-										<div class="col-md-6 col-sm-3 col-xs-12">
-											<div class="">Post Expires in: Tomorrow
-												<a href="#extend-job-expiry-{{ $post->id }}" data-toggle="modal" class="btn btn-sm extend-expire">Extend</a>
+											@elseif( $remainingDays == 1)
+											<div class="col-md-6 col-sm-3 col-xs-12">
+												<div class="">Post Expires in: Tomorrow
+													<a href="#extend-job-expiry-{{ $post->id }}" 
+													   data-toggle="modal" 
+													   class="btn btn-sm btn-info">Extend</a>
+												</div>
 											</div>
-										</div>
-										@elseif($remainingDays < 1 && $remainingHours > 10)
-										<div class="col-md-6 col-sm-3 col-xs-12">
-											<div class="">Post Expires in: Today
-												<a href="#extend-job-expiry-{{ $post->id }}" data-toggle="modal" class="btn btn-sm extend-expire">Extend</a>
+											@elseif($remainingDays == 0 && $remainingHours > 10)
+											<div class="col-md-6 col-sm-3 col-xs-12">
+												<div class="">Post Expires in: Today
+													<a href="#extend-job-expiry-{{ $post->id }}" 
+													   data-toggle="modal" 
+													   class="btn btn-sm btn-info">Extend</a>
+												</div>
 											</div>
-										</div>
-										@elseif($remainingHours < 10)
-										<div class="col-md-6 col-sm-3 col-xs-12">
-											<div class="">Post Expires in: {{ $remainingHours }} Hours
-												<a href="#extend-job-expiry-{{ $post->id }}" data-toggle="modal" class="btn btn-sm extend-expire">Extend</a>
-											</div>
-										</div>
-										@else
-										<div class="col-md-3 col-sm-3 col-xs-12">
-											<div class="">
-												<a href="#extend-job-expiry-{{ $post->id }}" disabled data-toggle="modal" class="btn btn-sm extend-expire">Extend</a>
-											</div>
-										</div>
+											@elseif($remainingHours < 10)
+											<div class="col-md-6 col-sm-3 col-xs-12">
+												<div class="">Post Expires in: {{ $remainingHours }} Hours
+													<a href="#extend-job-expiry-{{ $post->id }}" 
+													   data-toggle="modal" 
+													   class="btn btn-sm btn-info">Extend</a>
+												</div>
+											</div>										
+											@endif
 										@endif
 										@if($expired != 1)
 										<div class="col-md-3 col-sm-3 col-xs-12">
-											<a class="btn btn-sm red extend-expire" data-toggle="modal" href="#expire">
+											<a class="btn btn-sm btn-danger" data-toggle="modal" href="#expire">
 												Expire
 											</a>
 											<div class="modal fade bs-modal-sm" id="expire" tabindex="-1" role="dialog" aria-hidden="true">
@@ -140,20 +146,25 @@
 										</div>
 										@elseif($expired == 1)
 										<div class="col-md-3 col-sm-3 col-xs-12">
-											<a class="btn btn-sm red extend-expire" disabled data-toggle="modal" href="#expire">
+											<a class="btn btn-sm btn-danger" disabled data-toggle="modal" href="#expire">
 												Expired
 											</a>
 										</div>
 										@endif
 									</div>
 									<div class="row" style="margin-top: 15px;">
-										@if($post->post_duration_extend != 0 && $expired != 1)
+										@if($post->post_duration_extend == 1 && $expired == 0)
 										<div class="col-md-12 col-sm-12 col-xs-12">
-											You have extended the post for {{ $post->post_duration }} days 
+											You have extended the post for {{ $post->post_duration }} days <br/>
+											Now this post will expire on {{$abc}}											
 										</div>
+										@elseif($post->post_duration_extend == 0 && $expired == 0)
+											<div class="col-md-12 col-sm-12 col-xs-12">
+												Your post will expire on {{$abc}}
+											</div>
 										@elseif($expired == 1)
 										<div class="col-md-12 col-sm-12 col-xs-12">
-											Your post has been expired. 
+											Your post has been expired on {{$abc}}
 										</div>
 										@endif
 									</div>
@@ -382,7 +393,7 @@
 																										<div class="portlet box">
 																											<div class="portlet-title">
 																												<div class="caption links-title">
-																													<i class="icon-speedometer"></i> 56% Match
+																													<i class="icon-speedometer" style="font-size:16px;"></i> 56% Match
 																												</div>
 																											</div>
 																											<div class="portlet-body" style=" padding: 0 !important;">
@@ -404,7 +415,7 @@
 																													<tbody>
 																														<tr>
 																															<td colspan="2" class="col-md-12 col-sm-12 col-xs-12 matching-criteria-align">
-																																Skill
+																																<label>Skill</label>
 																															</td>
 																														</tr>
 																														<tr>
@@ -421,7 +432,8 @@
 																														</tr>
 																														<tr>
 																															<td colspan="2" class="col-md-12 col-sm-12 col-xs-12 matching-criteria-align success">
-																																<i class="glyphicon glyphicon-ok" style="color:#01b070;font-size:16px;"></i> Job Role
+																																<i class="glyphicon glyphicon-ok" style="color:#01b070;font-size:16px;"></i>
+																																<label> Job Role</label>
 																															</td>
 																														</tr>
 																														<tr>
@@ -434,7 +446,8 @@
 																														</tr>
 																														<tr>
 																															<td colspan="2" class="col-md-12 col-sm-12 col-xs-12 matching-criteria-align danger">
-																																 <i class="glyphicon glyphicon-remove" style="color:red;font-size:16px;"></i> Job Category
+																																 <i class="glyphicon glyphicon-remove" style="color:red;font-size:16px;"></i>
+																																 <label> Job Category</label>
 																															</td>
 																														</tr>
 																														<tr>
@@ -446,8 +459,9 @@
 																															</td>
 																														</tr>
 																														<tr>
-																															<td colspan="2" class="col-md-12 col-sm-12 col-xs-12 matching-criteria-align">
-																																<i class="glyphicon glyphicon-ok" style="color:#01b070;font-size:16px;"></i> Experience
+																															<td colspan="2" class="col-md-12 col-sm-12 col-xs-12 matching-criteria-align success">
+																																<i class="glyphicon glyphicon-ok" style="color:#01b070;font-size:16px;"></i> 
+																																<label>Experience</label>
 																															</td>
 																														</tr>
 																														<tr>
@@ -460,7 +474,8 @@
 																														</tr>
 																														<tr>
 																															<td colspan="2" class="col-md-12 col-sm-12 col-xs-12 matching-criteria-align danger">
-																																<i class="glyphicon glyphicon-remove" style="color:red;font-size:16px;"></i> Education
+																																<i class="glyphicon glyphicon-remove" style="color:red;font-size:16px;"></i>
+																																<label> Education</label>
 																															</td>
 																														</tr>
 																														<tr>
@@ -472,8 +487,9 @@
 																															</td>
 																														</tr>
 																														<tr>
-																															<td colspan="2" class="col-md-12 col-sm-12 col-xs-12 matching-criteria-align">
-																																<i class="glyphicon glyphicon-ok" style="color:#01b070;font-size:16px;"></i> Location
+																															<td colspan="2" class="col-md-12 col-sm-12 col-xs-12 matching-criteria-align success">
+																																<i class="glyphicon glyphicon-ok" style="color:#01b070;font-size:16px;"></i> 
+																																<label>Location</label>
 																															</td>
 																														</tr>
 																														<tr>
@@ -486,12 +502,13 @@
 																														</tr>
 																														<tr>
 																															<td colspan="2" class="col-md-12 col-sm-12 col-xs-12 matching-criteria-align danger">
-																																<i class="glyphicon glyphicon-remove" style="color:red;font-size:16px;"></i> Job Type
+																																<i class="glyphicon glyphicon-remove" style="color:red;font-size:16px;"></i>
+																																<label> Job Type</label>
 																															</td>
 																														</tr>
 																														<tr>
 																															<td class="col-md-6 col-sm-6 col-xs-6 danger matching-criteria-align">
-																																{{ $post->job_type }}
+																																{{ $post->time_for }}
 																															</td>
 																															<td class="col-md-6 col-sm-6 col-xs-6 danger matching-criteria-align">
 																																{{ $post->jobtype }}

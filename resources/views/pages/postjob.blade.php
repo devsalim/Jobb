@@ -9,7 +9,7 @@
 			
 			<div class="portlet-body form">
 				<!-- <form action="#" class="form-horizontal"  method="POST"> -->
-				<form action="{{ url('job/store') }}" method="post" id="submit_form" class="form-horizontal">
+				<form action="{{ url('job/store') }}" method="post" id="submit_form" data-toggle="validator" role="form" class="form-horizontal">
 					<input type="hidden" name="_token" value="{{ csrf_token() }}">
 					<div class="form-wizard">
 						<div class="form-body">
@@ -75,11 +75,14 @@
 									<input type="hidden" name="post_id" value"rand(11111,99999)">
 									<div class="col-md-12">
 										<div class="form-group">
+											<div class="input-icon right">
+													<i class="fa"></i>
 											<label>Job Title</label>
 											<div class="input-group">
 												<span class="input-group-addon"><i class="fa fa-user" style="color:darkcyan;"></i></span>
-												<input type="text" name="post_title" class="form-control" placeholder="Job Title">
+												<input type="text" name="post_title" class="form-control" placeholder="Job Title" required>
 											</div>
+										</div>
 										</div>
 									</div>
 									<div class="col-md-12">
@@ -140,6 +143,8 @@
 									</div>
 									<div class="col-md-5">
 										<div class="form-group">
+											<div class="input-icon right">
+													<i class="fa"></i>
 											<label>Company Name</label>
 											<div class="input-group">
 												<span class="input-group-addon">
@@ -147,6 +152,7 @@
 												</span>
 												<input type="text" name="post_compname" class="form-control" placeholder="Company Name">
 											</div>
+										</div>
 										</div>
 									</div>
 									<div class="col-md-2"></div>

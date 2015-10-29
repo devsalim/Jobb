@@ -278,3 +278,9 @@ display: table;
 .matching-criteria-align{
   text-align: center !important;
 }
+
+.help-block {
+    color: #a94442;
+    display: inline;
+    font-weight: bolder;
+}

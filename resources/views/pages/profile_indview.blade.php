@@ -36,22 +36,36 @@
 					@endif
 
 					<!-- Connection status -->
-					@if($connectionStatus == 'friend')
-						<a href="/links" class="btn btn-success btn-responsive btn-xs">
-							Friend
-						</a>
+					@if($connectionStatus == 'friend' && Auth::user()->induser_id != $user->id)
+						<a href="/links" class="btn btn-success btn-responsive btn-xs">Friend</a>
 					@elseif($connectionStatus == 'pendingrequest')
-						<a href="/links" class="btn btn-warning btn-responsive btn-xs">
-							Pending link request
-						</a>
-					@elseif($connectionStatus == 'requestsent')
-						<a href="/links" class="btn btn-danger btn-responsive btn-xs">
-							Link request sent
-						</a>
+						<a href="/links" class="btn btn-warning btn-responsive btn-xs">Pending link request</a>
+						<form action="{{ url('/connections/response', $connectionId) }}" method="post">
+							<input type="hidden" name="_token" value="{{ csrf_token() }}">
+							<button type="submit" name="action" value="accept" class="btn btn-success btn-xs">
+								<i class="fa fa-check" ></i>&nbsp;Accept
+							</button>
+							<button type="submit" name="action" value="reject" class="btn btn-danger btn-xs">
+								<i class="glyphicon glyphicon-trash"></i>&nbsp;Ignore
+							</button>
+						</form>
+					@elseif($connectionStatus == 'requestsent' && Auth::user()->induser_id != $user->id)
+						<a href="/links" class="btn btn-danger btn-responsive btn-xs">Link request sent</a>
+						@elseif($connectionStatus == 'add' && Auth::user()->induser_id != $user->id)
+						<form action="{{ url('/connections/inviteFriend', $user->id) }}" method="post">
+							<input type="hidden" name="_token" value="{{ csrf_token() }}">
+						<button type="submit" name="action" value="accept" class="btn btn-success btn-xs">
+							<i class="fa fa-check" ></i>&nbsp;Add Links
+						</button>
+						</form>
 					@elseif($connectionStatus == 'following')
-						<a href="/links" class="btn btn-success btn-responsive btn-xs">
-							Following
-						</a>
+						<a href="/links" class="btn btn-success btn-responsive btn-xs">Following</a>
+						<form action="{{ url('/corporate/unfollow', $connectionId) }}" method="post">
+							<input type="hidden" name="_token" value="{{ csrf_token() }}">
+							<button type="submit" name="action" value="accept" class="btn btn-danger btn-xs">
+								<i class="icon-user-follow"></i>&nbsp;Unfollow
+							</button>
+						</form>
 					@endif
 					<!-- end Connection status -->
 

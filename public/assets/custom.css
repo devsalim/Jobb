@@ -584,7 +584,7 @@ ul{
 }
 
 .show-filter .form-group {
-    margin: 5px 0;
+    margin: 5px 0 !important;
 }
 
 .search-input-box{

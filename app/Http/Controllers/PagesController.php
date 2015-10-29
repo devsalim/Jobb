@@ -157,7 +157,8 @@ class PagesController extends Controller {
 												  ->first(['status']);
 
 			// connection status
-			$connectionStatus = 'unknown';
+			$connectionStatus = 'add';
+			$connectionId = 'unknown';
 			if($connectionPendingStatus != null && $connectionPendingStatus->status == 0){
 				$connectionStatus = 'requestsent';
 			}
@@ -166,6 +167,7 @@ class PagesController extends Controller {
 			}
 			elseif($connectionRequestStatus != null && $connectionRequestStatus->status == 0){
 				$connectionStatus = 'pendingrequest';
+				$connectionId = $connectionRequestStatus->id;
 			}
 			elseif($connectionRequestStatus != null && $connectionRequestStatus->status == 1){
 				$connectionStatus = 'friend';
@@ -183,12 +185,8 @@ class PagesController extends Controller {
 			$linksCount = Follow::where('corporate_id', '=', $id)->count('id');
 			$connectionStatus = 'unknown';
 			$followStatus = Follow::where('individual_id', '=', Auth::user()->induser_id)->first();
-			if($followStatus != null){
-				$connectionStatus = 'following';
-			}
 		}	
-
-		return view('pages.profile_indview', compact('title','thanks','posts','linksCount','user','connectionStatus','utype'));
+		return view('pages.profile_indview', compact('title','thanks','posts','linksCount','user','connectionStatus','utype','connectionId'));
 	}
 
 	public function follow($id){
@@ -224,6 +222,7 @@ class PagesController extends Controller {
 			$city = Input::get('city');
 			$prof_category = Input::get('prof_category');
 			$experience = Input::get('experience');
+			$time_for = Input::get('time_for');
 			$unique_id = Input::get('unique_id');
 			$role = Input::get('role');
 
@@ -239,13 +238,20 @@ class PagesController extends Controller {
 				$posts->where('post_title', 'like', '%'.$post_title.'%');
 			}
 			if($city != null){
-				$posts->where('city', 'like', '%'.$city.'%');
+				$pattern = '/\s*,\s*/';
+				$replace = ',';
+				$city = preg_replace($pattern, $replace, $city);
+				$cityArray = explode(',', $city);
+				$posts->whereIn('city', $cityArray);
 			}
 			if($prof_category != null){
 				$posts->where('prof_category', 'like', '%'.$prof_category.'%');
 			}
 			if($experience != null){
-				$posts->where('min_exp', '=', $experience);
+				$posts->whereRaw("$experience between min_exp and max_exp");
+			}
+			if($time_for != null){
+				$posts->where('time_for', '=', $time_for);
 			}
 			if(count($post_type) > 0){
 				if(in_array("job", $post_type)){
@@ -300,6 +306,94 @@ class PagesController extends Controller {
 		}else{
 			return redirect('login');
 		}	
+	}
+
+	public function searchProfile(){
+		if (Auth::check()) {
+			$title = 'Profile search';
+
+			$city = Input::get('city');
+			$name = Input::get('name');
+			$role = Input::get('role');
+			$category = Input::get('category');
+			$working_at = Input::get('working_at');
+			$mobile = Input::get('mobile');
+
+			$type = Input::get('type');
+			if($type == 'people'){
+				$users = Induser::orderBy('id', 'desc');
+
+				if($name != null){
+					$users->where('fname', 'like', '%'.$name.'%')->orWhere('lname', 'like', '%'.$name.'%')->orWhere('email', '=', $name);
+				}
+				if($city != null){
+					$pattern = '/\s*,\s*/';
+					$replace = ',';
+					$city = preg_replace($pattern, $replace, $city);
+					$cityArray = explode(',', $city);
+					$users->whereIn('city', $cityArray);
+				}
+				if($role != null){
+					$users->where('role', 'like', '%'.$role.'%');
+				}
+				if($category != null){
+					$users->where('prof_category', 'like', '%'.$category.'%');
+				}
+				if($working_at != null){
+					$users->where('working_at', 'like', '%'.$working_at.'%');
+				}
+				if($mobile != null){
+					$users->where('mobile', 'like', '%'.$mobile.'%');
+				}
+				$users = $users->paginate(15);
+
+				$links = DB::select('select id from indusers
+									where indusers.id in (
+											select connections.user_id as id from connections
+											where connections.connection_user_id=?
+											 and connections.status=1
+											union 
+											select connections.connection_user_id as id from connections
+											where connections.user_id=?
+											 and connections.status=1
+								)', [Auth::user()->induser_id, Auth::user()->induser_id]);
+				$links = collect($links);
+				return view('pages.profileSearch', compact('users', 'title', 'links', 'type'));
+			}elseif($type == 'company'){
+				$users = Corpuser::orderBy('id', 'desc');
+
+				if($name != null){
+					$users->where('firm_name', 'like', '%'.$name.'%')->orWhere('firm_email_id', '=', $name);
+				}
+				if($city != null){
+					$pattern = '/\s*,\s*/';
+					$replace = ',';
+					$city = preg_replace($pattern, $replace, $city);
+					$cityArray = explode(',', $city);
+					$users->whereIn('city', $cityArray);
+				}
+				if($role != null){
+					$users->where('role', 'like', '%'.$role.'%');
+				}
+				if($category != null){
+					$users->where('prof_category', 'like', '%'.$category.'%');
+				}
+				if($mobile != null){
+					$users->where('firm_phone', 'like', '%'.$mobile.'%');
+				}
+				$users = $users->paginate(15);
+
+				$following = DB::select('select id from corpusers 
+										 where corpusers.id in (
+											select follows.corporate_id as id from follows
+											where follows.individual_id=?
+									)', [Auth::user()->induser_id]);
+				$following = collect($following);
+
+				return view('pages.profileSearch', compact('users', 'title', 'following', 'type'));
+			}
+		
+		}
 	}
 
 }

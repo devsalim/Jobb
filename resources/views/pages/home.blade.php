@@ -19,16 +19,16 @@
 <form id="home-filter" action="/home" method="post">
 <input type="hidden" name="_token" value="{{ csrf_token() }}">
 <div class="row show-filter">
-	<div class="col-md-9">
-		<div class="col-md-2 col-sm-4 col-xs-4">
-			<div class="form-group">				
-				<input type="experience" class="form-control filter-input" name="experience" placeholder="Exp" value="">				
-			</div>	
-		</div>
+	<div class="col-md-9">		
 		<div class="col-md-4 col-sm-12 col-xs-12">
 			<div class="form-group">
 				<input type="text" name="post_title" class="form-control filter-input" placeholder="Job Title, Role">
 			</div>
+		</div>
+		<div class="col-md-2 col-sm-4 col-xs-4">
+			<div class="form-group">				
+				<input type="experience" class="form-control filter-input" name="experience" placeholder="Exp" value="">				
+			</div>	
 		</div>
 		<div class="col-md-4 col-sm-12 col-xs-12">
 			<div class="form-group">				
@@ -66,7 +66,14 @@
 </div>
 <div class="row show-filter" style="margin-top:10px;">
 	<div class="col-md-9">		
-		<div class="btn-group col-md-3 col-sm-4 col-xs-12 jobskill" data-toggle="buttons">
+		<div class="btn-group col-md-3 col-sm-3 col-xs-12 jobskill" data-toggle="buttons">
+			<select name="time_for" class="form-control" >
+				<option value="Full Time">Full Time</option>
+				<option value="Part Time">Part Time</option>
+				<option value="Freelancer">Freelancer</option>
+			</select>
+		</div>		
+		<div class="col-md-3 col-sm-3 col-xs-1 btn-group jobskill" data-toggle="buttons">
 			<label class="btn btn-default check-font-size input-responsive">
 				<input type="checkbox" name="post_type[]" value="job" class="toggle"> Jobs 
 			</label>
@@ -74,7 +81,10 @@
 				<input type="checkbox" name="post_type[]" value="skill" class="toggle"> Skills 
 			</label>
 		</div>
-		<div class="btn-group col-md-6 col-sm-8 col-xs-12" data-toggle="buttons">
+
+		<div class=" col-md-6 col-sm-6 col-xs-12">
+			
+			<div class="btn-group" data-toggle="buttons">
 			<label class="btn btn-default  check-font-size">
 				<input type="checkbox" name="posted_by[]" value="individual" class="toggle"> Individual 
 			</label>
@@ -85,8 +95,7 @@
 				<input type="checkbox" name="posted_by[]" value="consultancy" class="toggle"> Consultancy 
 			</label>
 		</div>
-		<div class="col-md-3 col-sm-6 col-xs-12">
-			<input type="submit" class="btn btn-sm btn-info" value="Search">
+			<input type="submit" class="btn btn-info" value="Search">
 		</div>
 	</div>
 </div>
@@ -120,8 +129,157 @@
 										<a class="icon-userpic img-circle"><i class="glyphicon glyphicon-user" style=" font-size:12px;"></i></a>
 										@endif
 
-										<div class="match"><i class="icon-speedometer"></i> 55%</div>
+										<div class="match"><a data-toggle="modal" href="#{{$post->id}}"><i class="icon-speedometer"></i> 55%</a></div>
 										<div id="oval"></div>
+										<!-- Modal for Matching Percentage -->
+										<div class="modal fade" id="{{$post->id}}" tabindex="-1" role="basic" aria-hidden="true">
+											<div class="modal-dialog">
+												<div class="modal-content">
+													<div class="modal-header" style=" padding: 10px !important;">
+														<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+														<div class="modal-body" style=" padding:10px 0 !important;">
+															
+																<!-- BEGIN BORDERED TABLE PORTLET-->
+																<div class="portlet box">
+																	<div class="portlet-title">
+																		<div class="caption links-title">
+																			<i class="icon-speedometer" style="font-size:16px;"></i> 56% Match
+																		</div>
+																	</div>
+																	<div class="portlet-body" style=" padding: 0 !important;">
+																		<div class="table-scrollable">
+																			<table class="table table-bordered table-hover">
+																			<thead>
+																			<tr>
+
+																				<th class="col-md-6 col-sm-6 col-xs-6 matching-criteria-align">
+																					 Required Profile
+																				</th>
+																				<th class="col-md-6 col-sm-6 col-xs-6 matching-criteria-align">
+																					 My Profile
+																				</th>
+																				
+																			</tr>
+																			</thead>
+
+																			<tbody>
+																				<tr>
+																					<td colspan="2" class="col-md-12 col-sm-12 col-xs-12 matching-criteria-align">
+																						<label>Skill</label>
+																					</td>
+																				</tr>
+																				<tr>
+																					<td class="col-md-6 col-sm-6 col-xs-6 matching-criteria-align">
+																						@foreach($post->skills as $skill)
+																							{{$skill->name}},
+																						@endforeach
+																					</td>
+																					<td class="col-md-6 col-sm-6 col-xs-6 matching-criteria-align">
+																						@foreach($post->skills as $skill)
+																							{{$skill->name}},
+																						@endforeach
+																					</td>
+																				</tr>
+																				<tr>
+																					<td colspan="2" class="col-md-12 col-sm-12 col-xs-12 matching-criteria-align success">
+																						<i class="glyphicon glyphicon-ok" style="color:#01b070;font-size:16px;"></i>
+																						<label> Job Role</label>
+																					</td>
+																				</tr>
+																				<tr>
+																					<td class="col-md-6 col-sm-6 col-xs-6 success matching-criteria-align">
+																						{{ $post->role }}
+																					</td>
+																					<td class="col-md-6 col-sm-6 col-xs-6 success matching-criteria-align">
+																						{{ $post->role }}
+																					</td>
+																				</tr>
+																				<tr>
+																					<td colspan="2" class="col-md-12 col-sm-12 col-xs-12 matching-criteria-align danger">
+																						 <i class="glyphicon glyphicon-remove" style="color:red;font-size:16px;"></i>
+																						 <label> Job Category</label>
+																					</td>
+																				</tr>
+																				<tr>
+																					<td class="col-md-6 col-sm-6 col-xs-6 danger matching-criteria-align">
+																						{{ $post->prof_category }}
+																					</td>
+																					<td class="col-md-6 col-sm-6 col-xs-6 danger matching-criteria-align">
+																						Programmer
+																					</td>
+																				</tr>
+																				<tr>
+																					<td colspan="2" class="col-md-12 col-sm-12 col-xs-12 matching-criteria-align success">
+																						<i class="glyphicon glyphicon-ok" style="color:#01b070;font-size:16px;"></i> 
+																						<label>Experience</label>
+																					</td>
+																				</tr>
+																				<tr>
+																					<td class="col-md-6 col-sm-6 col-xs-6 success matching-criteria-align">
+																						{{ $post->min_exp }}-{{ $post->max_exp }}
+																					</td>
+																					<td class="col-md-6 col-sm-6 col-xs-6 success matching-criteria-align">
+																						{{ $post->min_exp }}-{{ $post->max_exp }}
+																					</td>
+																				</tr>
+																				<tr>
+																					<td colspan="2" class="col-md-12 col-sm-12 col-xs-12 matching-criteria-align danger">
+																						<i class="glyphicon glyphicon-remove" style="color:red;font-size:16px;"></i>
+																						<label> Education</label>
+																					</td>
+																				</tr>
+																				<tr>
+																					<td class="col-md-6 col-sm-6 col-xs-6 danger matching-criteria-align">
+																						{{ $post->education }}
+																					</td>
+																					<td class="col-md-6 col-sm-6 col-xs-6 danger matching-criteria-align">
+																						{{ $post->education }}
+																					</td>
+																				</tr>
+																				<tr>
+																					<td colspan="2" class="col-md-12 col-sm-12 col-xs-12 matching-criteria-align success">
+																						<i class="glyphicon glyphicon-ok" style="color:#01b070;font-size:16px;"></i> 
+																						<label>Location</label>
+																					</td>
+																				</tr>
+																				<tr>
+																					<td class="col-md-6 col-sm-6 col-xs-6 success matching-criteria-align">
+																						{{ $post->city }}
+																					</td>
+																					<td class="col-md-6 col-sm-6 col-xs-6 success matching-criteria-align">
+																						{{ $post->city }}
+																					</td>
+																				</tr>
+																				<tr>
+																					<td colspan="2" class="col-md-12 col-sm-12 col-xs-12 matching-criteria-align danger">
+																						<i class="glyphicon glyphicon-remove" style="color:red;font-size:16px;"></i>
+																						<label> Job Type</label>
+																					</td>
+																				</tr>
+																				<tr>
+																					<td class="col-md-6 col-sm-6 col-xs-6 danger matching-criteria-align">
+																						{{ $post->time_for }}
+																					</td>
+																					<td class="col-md-6 col-sm-6 col-xs-6 danger matching-criteria-align">
+																						{{ $post->jobtype }}
+																					</td>
+																				</tr>
+																			</tbody>
+																			</table>
+																		</div>
+																	</div>
+																</div>
+																<!-- END BORDERED TABLE PORTLET-->
+															<!-- </div> -->
+														
+														</div>
+													</div>
+												</div>
+												<!-- /.modal-content -->
+											</div>
+											<!-- /.modal-dialog -->
+											</div>
+											<!-- /.modal -->
 									</div>
 									<div class="timeline-body" style="">
 										<div class="timeline-body-head">
@@ -455,7 +613,7 @@
 													{{-- {{ $post->postactivity->where('user_id', Auth::user()->induser_id)->sum('thanks') }} --}}
 													</span>
 													
-														@if($post->post_type == 'job' && Auth::user()->id != $post->individual_id)		
+														@if($post->post_type == 'job' && Auth::user()->id != $post->individual_id && Auth::user()->identifier == 1)		
 													@if($post->postactivity->where('user_id', Auth::user()->induser_id)->isEmpty())
 
 														<form action="/job/apply" method="post" id="post-apply-{{$post->id}}" data-id="{{$post->id}}">	
@@ -471,7 +629,7 @@
 																</button>
 																@endif
 														</form>	
-													@elseif($post->postactivity->where('user_id', Auth::user()->induser_id)->first()->apply == 1) 
+													@elseif($post->postactivity->where('user_id', Auth::user()->induser_id)->first()->apply == 1 && Auth::user()->identifier == 1) 
 														<button type="button" class="btn btn-sm bg-grey-steel apply-contact-btn" disabled="true">
 															Applied
 														</button>
@@ -485,7 +643,7 @@
 													</form>							
 													@endif	
 												@endif	
-												@if($post->post_type == 'skill' && Auth::user()->id != $post->individual_id)		
+												@if($post->post_type == 'skill' && Auth::user()->id != $post->individual_id && Auth::user()->identifier == 1)		
 													@if($post->postactivity->where('user_id', Auth::user()->induser_id)->isEmpty())
 														<form action="/job/contact" method="post" id="post-contact-{{$post->id}}" data-id="{{$post->id}}">	
 															<input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -625,6 +783,8 @@
 			</div>
 	</div>
 </div>
+
+
 @stop
 
 @section('javascript')
@@ -633,12 +793,10 @@
 $(document).ready(function(){
 
 	jQuery('.show-filter').hide();
-	jQuery(document).ready(function(){ 
-	    jQuery('.hide-show-filter').on('click', function(event) {
-		    jQuery('.show-filter').toggle('show');
-		    jQuery('.hide-label').toggle('hide');
-	    });
-	});
+    jQuery('.hide-show-filter').on('click', function(event) {
+	    jQuery('.show-filter').toggle('show');
+	    jQuery('.hide-label').toggle('hide');
+    });
 
   $('.like-btn').on('click',function(event){  	    
   	event.preventDefault();
