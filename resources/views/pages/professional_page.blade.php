@@ -364,7 +364,37 @@
 								</div>
 							</div>
 						</div>
-
+						<div class="row-md-10">
+							<div class="col-md-6">
+								<div class="form-group">
+									<label>Prefered Location</label>
+									<div class="input-group">
+										<span class="input-group-addon">
+											<i class="fa fa-map-marker"></i>
+										</span>
+										
+										<input type="text" class="form-control" value="{{ $user->prefered_location }}" name="Prefered Location">
+									</div>
+								</div>
+							</div>
+							<!--/span-->
+							<div class="col-md-6">
+								<div class="form-group">
+									<label>Prefered Job Type</label>
+									<div class="input-group">
+										<span class="input-group-addon">
+											<i class=" icon-briefcase"></i>
+										</span>
+										<select class="form-control" name="prefered_jobtype">
+											<option @if($user->prefered_jobtype=="Full Time") {{ $selected }} @endif value="Full Time">Full Time</option>
+											<option @if($user->prefered_jobtype=="Part Time") {{ $selected }} @endif value="Part Time">Part Time</option>
+											<option @if($user->prefered_jobtype=="Freelancer") {{ $selected }} @endif value="Freelancer">Freelancer</option>
+											<option @if($user->prefered_jobtype=="Work from home") {{ $selected }} @endif value="Work from home">Work from home</option>
+										</select>
+									</div>
+								</div>
+							</div>
+						</div>
 						<div class="row-md-10">
 							<div class="col-md-12">
 								<div class="form-group" style="">

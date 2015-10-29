@@ -188,7 +188,7 @@ class PagesController extends Controller {
 			}
 		}	
 
-		return view('pages.profile_indview', compact('title','thanks','posts','linksCount','user','connectionStatus'));
+		return view('pages.profile_indview', compact('title','thanks','posts','linksCount','user','connectionStatus','utype'));
 	}
 
 	public function follow($id){

@@ -155,6 +155,8 @@ class UserController extends Controller {
 			$data->working_at = Input::get('working_at');
 			$data->state = Input::get('state');
 			$data->city = Input::get('city');
+			$data->prefered_location = Input::get('prefered_location');
+			$data->prefered_jobtype = Input::get('prefered_jobtype');
 			$data->linked_skill = Input::get('linked_skill');
 			$data->about_individual = Input::get('about_individual');
 			$data->save();

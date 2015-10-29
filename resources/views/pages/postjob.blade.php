@@ -224,7 +224,7 @@
 									<div class="col-md-2"></div>
 									<div class="col-md-5">
 										<div class="form-group">
-											<label>Employment Type</label>
+											<label>Job Type</label>
 											<div class="input-group">
 												<span class="input-group-addon">
 													<i class="icon-hourglass" style="color:darkcyan;"></i>

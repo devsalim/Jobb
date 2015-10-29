@@ -382,7 +382,7 @@
 																										<div class="portlet box">
 																											<div class="portlet-title">
 																												<div class="caption links-title">
-																													<i class="fa fa-coffee"></i> Matching Criteria
+																													<i class="icon-speedometer"></i> 56% Match
 																												</div>
 																											</div>
 																											<div class="portlet-body" style=" padding: 0 !important;">
@@ -392,10 +392,10 @@
 																													<tr>
 
 																														<th class="col-md-6 col-sm-6 col-xs-6 matching-criteria-align">
-																															 Requirement
+																															 Required Profile
 																														</th>
 																														<th class="col-md-6 col-sm-6 col-xs-6 matching-criteria-align">
-																															 Profile
+																															 My Profile
 																														</th>
 																														
 																													</tr>
@@ -408,41 +408,41 @@
 																															</td>
 																														</tr>
 																														<tr>
-																															<td class="col-md-6 col-sm-6 col-xs-6">
+																															<td class="col-md-6 col-sm-6 col-xs-6 matching-criteria-align">
 																																@foreach($post->skills as $skill)
 																																	{{$skill->name}},
 																																@endforeach
 																															</td>
-																															<td class="col-md-6 col-sm-6 col-xs-6">
+																															<td class="col-md-6 col-sm-6 col-xs-6 matching-criteria-align">
 																																@foreach($post->skills as $skill)
 																																	{{$skill->name}},
 																																@endforeach
 																															</td>
 																														</tr>
 																														<tr>
-																															<td colspan="2" class="col-md-12 col-sm-12 col-xs-12 matching-criteria-align">
+																															<td colspan="2" class="col-md-12 col-sm-12 col-xs-12 matching-criteria-align success">
 																																<i class="glyphicon glyphicon-ok" style="color:#01b070;font-size:16px;"></i> Job Role
 																															</td>
 																														</tr>
 																														<tr>
-																															<td class="col-md-6 col-sm-6 col-xs-6 success">
+																															<td class="col-md-6 col-sm-6 col-xs-6 success matching-criteria-align">
 																																{{ $post->role }}
 																															</td>
-																															<td class="col-md-6 col-sm-6 col-xs-6 success">
+																															<td class="col-md-6 col-sm-6 col-xs-6 success matching-criteria-align">
 																																{{ $post->role }}
 																															</td>
 																														</tr>
 																														<tr>
-																															<td colspan="2" class="col-md-12 col-sm-12 col-xs-12 matching-criteria-align">
+																															<td colspan="2" class="col-md-12 col-sm-12 col-xs-12 matching-criteria-align danger">
 																																 <i class="glyphicon glyphicon-remove" style="color:red;font-size:16px;"></i> Job Category
 																															</td>
 																														</tr>
 																														<tr>
-																															<td class="col-md-6 col-sm-6 col-xs-6 danger">
+																															<td class="col-md-6 col-sm-6 col-xs-6 danger matching-criteria-align">
 																																{{ $post->prof_category }}
 																															</td>
-																															<td class="col-md-6 col-sm-6 col-xs-6 danger">
-																																{{ $post->prof_category }}
+																															<td class="col-md-6 col-sm-6 col-xs-6 danger matching-criteria-align">
+																																Programmer
 																															</td>
 																														</tr>
 																														<tr>
@@ -451,23 +451,23 @@
 																															</td>
 																														</tr>
 																														<tr>
-																															<td class="col-md-6 col-sm-6 col-xs-6 success">
+																															<td class="col-md-6 col-sm-6 col-xs-6 success matching-criteria-align">
 																																{{ $post->min_exp }}-{{ $post->max_exp }}
 																															</td>
-																															<td class="col-md-6 col-sm-6 col-xs-6 success">
+																															<td class="col-md-6 col-sm-6 col-xs-6 success matching-criteria-align">
 																																{{ $post->min_exp }}-{{ $post->max_exp }}
 																															</td>
 																														</tr>
 																														<tr>
-																															<td colspan="2" class="col-md-12 col-sm-12 col-xs-12 matching-criteria-align">
+																															<td colspan="2" class="col-md-12 col-sm-12 col-xs-12 matching-criteria-align danger">
 																																<i class="glyphicon glyphicon-remove" style="color:red;font-size:16px;"></i> Education
 																															</td>
 																														</tr>
 																														<tr>
-																															<td class="col-md-6 col-sm-6 col-xs-6 danger">
+																															<td class="col-md-6 col-sm-6 col-xs-6 danger matching-criteria-align">
 																																{{ $post->education }}
 																															</td>
-																															<td class="col-md-6 col-sm-6 col-xs-6 danger">
+																															<td class="col-md-6 col-sm-6 col-xs-6 danger matching-criteria-align">
 																																{{ $post->education }}
 																															</td>
 																														</tr>
@@ -477,23 +477,23 @@
 																															</td>
 																														</tr>
 																														<tr>
-																															<td class="col-md-6 col-sm-6 col-xs-6 success">
+																															<td class="col-md-6 col-sm-6 col-xs-6 success matching-criteria-align">
 																																{{ $post->city }}
 																															</td>
-																															<td class="col-md-6 col-sm-6 col-xs-6 success">
+																															<td class="col-md-6 col-sm-6 col-xs-6 success matching-criteria-align">
 																																{{ $post->city }}
 																															</td>
 																														</tr>
 																														<tr>
-																															<td colspan="2" class="col-md-12 col-sm-12 col-xs-12 matching-criteria-align">
+																															<td colspan="2" class="col-md-12 col-sm-12 col-xs-12 matching-criteria-align danger">
 																																<i class="glyphicon glyphicon-remove" style="color:red;font-size:16px;"></i> Job Type
 																															</td>
 																														</tr>
 																														<tr>
-																															<td class="col-md-6 col-sm-6 col-xs-6 danger">
+																															<td class="col-md-6 col-sm-6 col-xs-6 danger matching-criteria-align">
 																																{{ $post->job_type }}
 																															</td>
-																															<td class="col-md-6 col-sm-6 col-xs-6 danger">
+																															<td class="col-md-6 col-sm-6 col-xs-6 danger matching-criteria-align">
 																																{{ $post->jobtype }}
 																															</td>
 																														</tr>
