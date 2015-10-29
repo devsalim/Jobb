@@ -71,6 +71,7 @@
 
 				</div>
 				<!-- END SIDEBAR USER TITLE -->
+				@if(Auth::user()->induser_id == $user->individual_id)
 				<div class="row list-separated profile-stat" style="text-align:center;margin: 13px 0 0px -17px;">
 					@if($utype == 'ind')
 					<div class="col-md-4 col-sm-4 col-xs-4 @if($title == 'connections'){{'active'}}@endif">
@@ -116,6 +117,53 @@
 						</a>
 					</div>
 				</div>
+				@else
+				<div class="row list-separated profile-stat" style="text-align:center;margin: 13px 0 0px -17px;">
+					@if($utype == 'ind')
+					<div class="col-md-4 col-sm-4 col-xs-4 @if($title == 'friendLink'){{'active'}}@endif">
+						<a href="/connections/friendlink/{{$user->id}}" class="icon-btn">
+							<i class="icon-link"></i>
+							<div>
+								 Links
+							</div>
+							<span class="badge badge-danger @if($linksCount > 0) show @else hide @endif" style="background-color: #26a69a;">
+							{{$linksCount}} </span>
+						</a>
+					</div>
+					@elseif($utype == 'corp')
+					<div class="col-md-4 col-sm-4 col-xs-4 @if($title == 'connections'){{'active'}}@endif">
+						<a href="/connections/create" class="icon-btn">
+							<i class="icon-user-following"></i>
+							<div>
+								 Followers
+							</div>
+							<!-- <span class="badge badge-danger" style="background-color: #26a69a;">
+							</span> -->
+						</a>
+					</div>
+					@endif
+					<div class="col-md-4 col-sm-4 col-xs-4 @if($title == 'thanks_view'){{'active'}}@endif">
+						<a href="/individual/thanks_view" class="icon-btn">
+							<i class="icon-like"></i>
+							<div>
+								 Thanks
+							</div>
+							<span class="badge badge-danger  @if($thanks > 0) show @else hide @endif" style="background-color: #3598dc;">
+							{{$thanks}}</span>
+						</a>
+					</div>
+					<div class="col-md-4 col-sm-4 col-xs-4 @if($title == 'mypost'){{'active'}}@endif">
+						<a href="/mypost" class="icon-btn">
+							<i class="icon-note"></i>
+							<div>
+								 Posts
+							</div>
+							<span class="badge badge-danger  @if($posts > 0) show @else hide @endif">
+							{{$posts}} </span>
+						</a>
+					</div>
+				</div>
+				@endif
 				<!-- END SIDEBAR BUTTONS -->
 				
 			</div>

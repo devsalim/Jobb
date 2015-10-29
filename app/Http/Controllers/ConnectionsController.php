@@ -184,4 +184,29 @@ class ConnectionsController extends Controller {
 		return redirect('/home');
 	}
 
+	public function friendLink($id)
+	{
+		$title = 'friendLink';
+		$linkFollow = Corpuser::leftjoin('follows', 'corpusers.id', '=', 'follows.corporate_id')
+								->where('follows.individual_id', '=', $id)
+								->get(['corpusers.id',
+									   'corpusers.firm_name',
+									   'corpusers.logo_status',
+									   'corpusers.operating_since',
+									   'corpusers.city', 
+									   'follows.corporate_id',
+									   'follows.individual_id']);
+		$connections = DB::select('select id,fname,lname,working_at,city,state,profile_pic from indusers
+									where indusers.id in (
+
+									select connections.user_id as id from connections
+									where connections.connection_user_id=?
+									 and connections.status=1 
+									union 
+									select connections.connection_user_id as id from connections
+									where connections.user_id=?
+									 and connections.status=1
+								)', [$id, $id]);
+		return view('pages.friendlink', compact('title', 'linkFollow', 'connections'));
+	}
 }

@@ -81,7 +81,7 @@
 								  	?>
 									<div class="row" style="margin-top: 15px;">
 										@if($expired != 1)
-											@if($remainingDays > 2)
+											@if($remainingDays >= 2)
 											<div class="col-md-5 col-sm-3 col-xs-12">
 												<div class="">Post Expires in: {{ $remainingDays }} days
 													<a href="#extend-job-expiry-{{ $post->id }}" data-toggle="modal" 
@@ -90,7 +90,7 @@
 											</div>
 											@elseif( $remainingDays == 1)
 											<div class="col-md-6 col-sm-3 col-xs-12">
-												<div class="">Post Expires in: Tomorrow
+												<div class="">Post Expires : Tomorrow
 													<a href="#extend-job-expiry-{{ $post->id }}" 
 													   data-toggle="modal" 
 													   class="btn btn-sm btn-info">Extend</a>
@@ -98,7 +98,7 @@
 											</div>
 											@elseif($remainingDays == 0 && $remainingHours > 10)
 											<div class="col-md-6 col-sm-3 col-xs-12">
-												<div class="">Post Expires in: Today
+												<div class="">Post Expires : Today
 													<a href="#extend-job-expiry-{{ $post->id }}" 
 													   data-toggle="modal" 
 													   class="btn btn-sm btn-info">Extend</a>
