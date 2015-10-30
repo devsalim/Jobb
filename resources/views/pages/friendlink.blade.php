@@ -5,7 +5,9 @@
 <div class="portlet box green col-md-7">
 	<div class="portlet-title">
 		<div class="caption">
-			<i class="icon-users"></i>Manage your Links
+			<i class="icon-users"></i>
+			Links
+			
 		</div>
 	</div>
 	<div class="portlet-body">

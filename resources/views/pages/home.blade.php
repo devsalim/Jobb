@@ -136,7 +136,7 @@
 											<div class="modal-dialog">
 												<div class="modal-content">
 													<div class="modal-header" style=" padding: 10px !important;">
-														<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+														<button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="position: absolute;right: 15px;top: 15px;"></button>
 														<div class="modal-body" style=" padding:10px 0 !important;">
 															
 																<!-- BEGIN BORDERED TABLE PORTLET-->

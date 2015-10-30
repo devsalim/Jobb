@@ -35,6 +35,7 @@ var FormWizard = function () {
                 rules: {
                     //profile
                     post_title: {
+                        minlength: 10,
                         required: true
                     },
                     prof_category: {
@@ -43,7 +44,8 @@ var FormWizard = function () {
                     role: {
                         required: true
                     },
-                    post_compname: {
+                    job_detail: {
+                        minlength: 20,
                         required: true
                     },
                     linked_skill: {
@@ -58,9 +60,38 @@ var FormWizard = function () {
                     //payment
                     post_duration: {
                         required: true
+                    },
+                    time_for:{
+                        required: true
                     }
                 },
 
+                messages: {
+                post_title: {
+                    required: "Enter Job Title"
+                },
+                 job_detail: {
+                    required: "Enter Job Detail"
+                },
+                 prof_category: {
+                    required: "Select Job Category"
+                },
+                role: {
+                    required: "Select Job Role"
+                },
+                linked_skill: {
+                    required: "Add Skills"
+                },
+                city: {
+                    required: "Select Job Location"
+                },
+                time_for: {
+                    required: "Select Job Type"
+                },
+                post_duration: {
+                    required: "Select Post Duration"
+                }
+          },
                 invalidHandler: function (event, validator) { //display error alert on form submit   
                     success.hide();
                     error.show();
@@ -196,7 +227,7 @@ var FormWizard = function () {
 
             $('#form_wizard_1').find('.button-previous').hide();
             $('#form_wizard_1 .button-submit').click(function () {
-                alert('Finished! Hope you like it :)');
+                
                 
             }).hide();
 

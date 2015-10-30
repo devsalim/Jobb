@@ -284,3 +284,13 @@ display: table;
     display: inline;
     font-weight: bolder;
 }
+
+
+.required{
+  color: red !important;
+}
+
+.new-margin-formgroup{
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}

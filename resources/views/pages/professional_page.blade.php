@@ -372,8 +372,57 @@
 										<span class="input-group-addon">
 											<i class="fa fa-map-marker"></i>
 										</span>
-										
-										<input type="text" class="form-control" value="{{ $user->prefered_location }}" name="Prefered Location">
+										<select id="select2_sample_modal_2" value="{{ $user->prefered_location }}" placeholder="Prefered Location" name="prefered_location" class="form-control select2" multiple>
+													<option value="">&nbsp;</option>
+													<optgroup label="NFC EAST">
+													<option>Hyderabad</option>
+													<option>Bangalore</option>
+													<option>Philadelphia Eagles</option>
+													<option>Washington Redskins</option>
+													</optgroup>
+													<optgroup label="NFC NORTH">
+													<option>Chicago Bears</option>
+													<option>Detroit Lions</option>
+													<option>Green Bay Packers</option>
+													<option>Minnesota Vikings</option>
+													</optgroup>
+													<optgroup label="NFC SOUTH">
+													<option>Patna</option>
+													<option>Mumbai</option>
+													<option>New Orleans Saints</option>
+													<option>Tampa Bay Buccaneers</option>
+													</optgroup>
+													<optgroup label="NFC WEST">
+													<option>Delhi</option>
+													<option>Chennai</option>
+													<option>San Francisco 49ers</option>
+													<option>Seattle Seahawks</option>
+													</optgroup>
+													<optgroup label="AFC EAST">
+													<option>Buffalo Bills</option>
+													<option>Miami Dolphins</option>
+													<option>New England Patriots</option>
+													<option>New York Jets</option>
+													</optgroup>
+													<optgroup label="AFC NORTH">
+													<option>Baltimore Ravens</option>
+													<option>Cincinnati Bengals</option>
+													<option>Cleveland Browns</option>
+													<option>Pittsburgh Steelers</option>
+													</optgroup>
+													<optgroup label="AFC SOUTH">
+													<option>Houston Texans</option>
+													<option>Indianapolis Colts</option>
+													<option>Jacksonville Jaguars</option>
+													<option>Tennessee Titans</option>
+													</optgroup>
+													<optgroup label="AFC WEST">
+													<option>Denver Broncos</option>
+													<option>Kansas City Chiefs</option>
+													<option>Oakland Raiders</option>
+													<option>San Diego Chargers</option>
+													</optgroup>
+												</select>
 									</div>
 								</div>
 							</div>

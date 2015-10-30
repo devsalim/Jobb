@@ -60,22 +60,15 @@
 														</ul>
 													</div>
 												@endif
-												<div class="alert alert-danger display-none">
-													<button class="close" data-dismiss="alert"></button>
-													You have some form errors. Please check below.
-												</div>
-												<div class="alert alert-success display-none">
-													<button class="close" data-dismiss="alert"></button>
-													Your form validation is successful!
-												</div>
 												<div class="tab-pane active" id="tab1">
 													<!-- <h3 class="block">Provide your account details</h3> -->
 													<div class="col-md-12">
 														<div class="form-group">
-															<label>Skill Title</label>
+															<label>Skill Title <span class="required">
+															* </span></label>
 															<div class="input-group">
 																<span class="input-group-addon">
-																	<i class="fa fa-user" style="color:darkcyan;"></i>
+																	<i class="fa fa-flag" style="color:darkcyan;"></i>
 																</span>
 																<input type="text" name="post_title" class="form-control" placeholder="Job Title">
 															</div>
@@ -83,21 +76,24 @@
 													</div>
 													<div class="col-md-12">
 														<div class="form-group">
-															<label>Skill Details</label>
+															<label>Skill Details <span class="required">
+															* </span></label>
 															<div class="" style=" padding-bottom: 10px;">
 																<textarea name="job_detail" class="form-control" rows="6"></textarea>
 															</div>
 														</div>
 													</div>
-													
-													<div class="col-md-5">
-														<div class="form-group">
-															<label>Skill Category</label>
+													<div class="row">
+													<div class="col-md-5 col-sm-5 col-sm-12">
+														<div class="form-group new-margin-formgroup">
+															<label>Skill Category <span class="required">
+															* </span></label>
 															<div class="input-group">
 															<span class="input-group-addon">
-															<i class="fa fa-university " style="color:darkcyan;"></i>
+															<i class="fa fa-cubes" style="color:darkcyan;"></i>
 															</span>
-															<select class="form-control" name="prof_category">
+															<select class="form-control" placeholder="Skill Category" name="prof_category">
+																<option value="">-- select --</option>
 																<optgroup label="Accounting">
 																<option value="Accounts/Finance/Tax">Accounts/Finance/Tax</option>
 																<option value="Agent">Agent</option>
@@ -122,41 +118,49 @@
 														</div>
 													</div>
 													<!--/span-->
-													<div class="col-md-2"></div>
-													<div class="col-md-5">
-														<div class="form-group">
-															<label>Role</label>
+													<div class="col-md-2 col-sm-2 col-sm-2"></div>
+													<div class="col-md-5 col-sm-5 col-sm-12">
+														<div class="form-group new-margin-formgroup">
+															<label>Role <span class="required">
+															* </span></label>
 															<div class="input-group">
 																<span class="input-group-addon">
-																	<i class="fa fa-university" style="color:darkcyan;"></i>
+																	<i class="fa fa-cube" style="color:darkcyan;"></i>
 																</span>
-																<select name="role" class="form-control" >
+																<select name="role" placeholder="Role" class="form-control" >
+																	<option value="">-- select --</option>
 																	<option value="Web Developer">Web Developer</option>
 																	<option value="Software Developer">Software Developer</option>
 																</select>
 															</div>
 														</div>
 													</div>
-													<div class="col-md-5">
-														<div class="form-group">
-															<!-- <form action="{{ url('job/newskill') }}" id="newskillfrm" method="post">					
-															<input type="hidden" name="_token" value="{{ csrf_token() }}"> -->
-															<div class="input-group">
-																<input type="text" name="name" id="newskill" class="form-control" placeholder="Search for skill...">
-																<span class="input-group-btn">
-																	<button id="add-new-skill" class="btn btn-success" type="button"><i class="icon-plus"></i> Add</button>	
-																</span>
+												</div>
+													<div class="row">
+														<div class="col-md-5 col-sm-5 col-sm-12">
+															<div class="form-group new-margin-formgroup">
+																<!-- <form action="{{ url('job/newskill') }}" id="newskillfrm" method="post">					
+																<input type="hidden" name="_token" value="{{ csrf_token() }}"> -->
+																<label>Search Skills</label>
+																<div class="input-group">
+																	<input type="text" name="name" id="newskill" class="form-control" placeholder="Search for skill...">
+																	<span class="input-group-btn">
+																		<button id="add-new-skill" class="btn btn-success" type="button"><i class="icon-plus"></i> Add</button>	
+																	</span>
+																</div>
 															</div>
 														</div>
-													</div>
-													<div class="col-md-2"></div>
-													<div class="col-md-5">
-														<div class="form-group">
-														    <input type="text" id="linked_skill" name="linked_skill" 
-														     		class="form-control select2"
-														     		placeholder="List of skills to be added">
-														    <input type="hidden" id="linked_skill_id" name="linked_skill_id" 
-														     		class="form-control">
+														<div class="col-md-2 col-sm-2 col-sm-2"></div>
+														<div class="col-md-5 col-sm-5 col-sm-12">
+															<div class="form-group new-margin-formgroup">
+																<label>Added Skills <span class="required">
+															* </span></label>
+															    <input type="text" id="linked_skill" name="linked_skill" 
+															     		class="form-control select2"
+															     		placeholder="List of skills to be added">
+															    <input type="hidden" id="linked_skill_id" name="linked_skill_id" 
+															     		class="form-control">
+															</div>
 														</div>
 													</div>
 													<!--/span-->
@@ -166,12 +170,12 @@
 												</div>
 												<div class="tab-pane" id="tab2">
 													
-													<div class="col-md-5">
+													<div class="col-md-5 col-sm-5 col-xs-12">
 														<div class="form-group">
 															<label>Qualification</label>
 															<div class="input-group">
 																<span class="input-group-addon">
-																	<i class="fa fa-university"></i>
+																	<i class="icon-graduation"></i>
 																</span>
 																<select class="bs-select form-control" name="education" multiple>
 																	<option value="Any Diploma">Any Diploma</option>
@@ -198,15 +202,17 @@
 														</div>
 													</div>
 													<!--/span-->
-													<div class="col-md-2"></div>
-													<div class="col-md-5">
+													<div class="col-md-2 col-sm-2 col-xs-2"></div>
+													<div class="col-md-5 col-sm-5 col-xs-12">
 														<div class="form-group">
-															<label>Employment Type</label>
+															<label>Employment Type<span class="required">
+															* </span></label>
 															<div class="input-group">
 																<span class="input-group-addon">
 																	<i class="icon-hourglass" style="color:darkcyan;"></i>
 																</span>
 																<select name="time_for" class="form-control" >
+																	<option value="">-- select --</option>
 																	<option value="Full Time">Full Time</option>
 																	<option value="Part Time">Part Time</option>
 																	<option value="Freelancer">Freelancer</option>
@@ -215,11 +221,11 @@
 														</div>
 													</div>
 													<!--/span-->
-													<div class="col-md-5">
+													<div class="col-md-5 col-sm-5 col-xs-12">
 														<div class="form-group">							
 															<label class=" control-label">Experience </label>&nbsp;: <input type="text" style="width: 20px;background:transparent;border:0" name="min_exp" class="min-exp">-
 															<input type="text" style="width: 14px;margin:0 4px;background:transparent;border:0" name="max_exp" class="max-exp">Years
-															<div class="">
+															<div class="col-md-12">
 																<input id="range_1" type="text"  value=""/>
 																<!-- <input type="hidden" name="min_exp" class="min-exp">
 																<input type="hidden" name="max_exp" class="max-exp"> -->
@@ -227,8 +233,8 @@
 														</div>
 													</div>
 													<!--/span-->
-													<div class="col-md-2"></div>
-													<div class="col-md-5">
+													<div class="col-md-2 col-sm-2 col-xs-2"></div>
+													<div class="col-md-5 col-sm-5 col-xs-12">
 														<div class="form-group">							
 															<label class=" control-label"><input type="checkbox" id="hide-check">&nbsp;Salary 
 															</label>&nbsp;:<select name="salary_type" style="border-top: 0px;border-left: 0;border-right: 0;">									
@@ -255,27 +261,80 @@
 													</div>
 												</div>
 												<div class="tab-pane" id="tab3">
-													<div class="col-md-5">
-														<div class="form-group">
-															<label>City</label>
-															
+													<div class="row">
+													<div class="col-md-5 col-sm-5 col-xs-12">
+														<div class="form-group new-margin-formgroup">
+															<label>Prefered Location <span class="required">
+															* </span></label></label>
 															<div class="input-group">
-																<span class="input-group-addon">
-																	<i class="fa fa-map-marker" style="color:darkcyan;"></i>
-																</span>
-																<input type="text" name="city" class="form-control" placeholder="City, State">
+															<span class="input-group-addon">
+																<i class="fa fa-map-marker" style="color:darkcyan;"></i>
+															</span>
+																<select id="select2_sample_modal_2" placeholder="Job Location" name="city" class="form-control select2" multiple>
+																	<option value="">-- select --</option>
+																	<optgroup label="NFC EAST">
+																	<option>Hyderabad</option>
+																	<option>Bangalore</option>
+																	<option>Philadelphia Eagles</option>
+																	<option>Washington Redskins</option>
+																	</optgroup>
+																	<optgroup label="NFC NORTH">
+																	<option>Chicago Bears</option>
+																	<option>Detroit Lions</option>
+																	<option>Green Bay Packers</option>
+																	<option>Minnesota Vikings</option>
+																	</optgroup>
+																	<optgroup label="NFC SOUTH">
+																	<option>Patna</option>
+																	<option>Mumbai</option>
+																	<option>New Orleans Saints</option>
+																	<option>Tampa Bay Buccaneers</option>
+																	</optgroup>
+																	<optgroup label="NFC WEST">
+																	<option>Delhi</option>
+																	<option>Chennai</option>
+																	<option>San Francisco 49ers</option>
+																	<option>Seattle Seahawks</option>
+																	</optgroup>
+																	<optgroup label="AFC EAST">
+																	<option>Buffalo Bills</option>
+																	<option>Miami Dolphins</option>
+																	<option>New England Patriots</option>
+																	<option>New York Jets</option>
+																	</optgroup>
+																	<optgroup label="AFC NORTH">
+																	<option>Baltimore Ravens</option>
+																	<option>Cincinnati Bengals</option>
+																	<option>Cleveland Browns</option>
+																	<option>Pittsburgh Steelers</option>
+																	</optgroup>
+																	<optgroup label="AFC SOUTH">
+																	<option>Houston Texans</option>
+																	<option>Indianapolis Colts</option>
+																	<option>Jacksonville Jaguars</option>
+																	<option>Tennessee Titans</option>
+																	</optgroup>
+																	<optgroup label="AFC WEST">
+																	<option>Denver Broncos</option>
+																	<option>Kansas City Chiefs</option>
+																	<option>Oakland Raiders</option>
+																	<option>San Diego Chargers</option>
+																	</optgroup>
+																</select>
 															</div>
 														</div>
 													</div>
-													<div class="col-md-2"></div>
-													<div class="col-md-5">
-														<div class="form-group">
-															<label>Post Duration</label>
+													<div class="col-md-2 col-sm-2 col-xs-2"></div>
+													<div class="col-md-5 col-sm-5 col-xs-12">
+														<div class="form-group new-margin-formgroup">
+															<label>Post Duration<span class="required">
+															* </span></label>
 															<div class="input-group">
 																<span class="input-group-addon">
 																<i class="icon-clock" style=" color: darkcyan;"></i>
 																</span>
-																<select name="post_duration" class="form-control" >						
+																<select name="post_duration" class="form-control" >
+																	<option value="">-- Select --</option>						
 																	<option value="3">3 Days</option>
 																	<option value="7">7 Days</option>
 																	<option value="15">15 Days</option>
@@ -284,9 +343,11 @@
 															</div>
 														</div>
 													</div>
-													<label style="margin-left: -5px;"><input id="hide-apply" type="checkbox"></label>
+												<!-- </div> -->
+												</div>
+													<!-- <label style="margin-left: -5px;"><input id="hide-apply" type="checkbox">DO you want to show the bellow Field</label> -->
 													<div class="show-apply">
-															<div class="col-md-5">
+															<div class="col-md-5 col-sm-5 col-xs-12">
 																<div class="form-group">
 																	<label>Email Id (Registered)</label>
 																	<div class="input-group">
@@ -299,8 +360,8 @@
 																</div>
 															</div>
 															<!--/span-->
-															<div class="col-md-2"></div>
-															<div class="col-md-5">
+															<div class="col-md-2 col-sm-2 col-xs-2"></div>
+															<div class="col-md-5 col-sm-5 col-xs-12">
 																<div class="form-group">
 																	<label>Phone No (Registered)</label>
 																	<div class="input-group">
