@@ -419,4 +419,45 @@ class PagesController extends Controller {
 		}
 	}
 
+
+	public function post(){
+		if (Auth::check()) {
+			$post = Postjob::with('indUser', 'corpUser', 'postActivity')->where('id', '=', Input::get('post_id'))->first();
+
+			$links = DB::select('select id from indusers
+									where indusers.id in (
+											select connections.user_id as id from connections
+											where connections.connection_user_id=?
+											 and connections.status=1
+											union 
+											select connections.connection_user_id as id from connections
+											where connections.user_id=?
+											 and connections.status=1
+								)', [Auth::user()->induser_id, Auth::user()->induser_id]);
+			$links = collect($links);
+
+			if(Auth::user()->induser_id != null){
+				$following = DB::select('select id from corpusers 
+										 where corpusers.id in (
+											select follows.corporate_id as id from follows
+											where follows.individual_id=?
+									)', [Auth::user()->induser_id]);
+				$following = collect($following);
+			}
+			if(Auth::user()->corpuser_id != null){
+				$following = DB::select('select id from indusers
+										 where indusers.id in (
+											select follows.individual_id as id from follows
+											where follows.corporate_id=?
+									)', [Auth::user()->corpuser_id]);
+				$following = collect($following);
+			}
+
+			return view('pages.singlepost', compact('post', 'links', 'following'));
+			// return $post;
+		}else{
+			return redirect('login');
+		}	
+	}
+
 }

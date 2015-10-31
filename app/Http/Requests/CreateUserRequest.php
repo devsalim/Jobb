@@ -22,8 +22,7 @@ class CreateUserRequest extends Request {
 	public function rules()
 	{
 		return [
-			'fname'		=>	'required',
-			'lname'		=>	'required',
+			'fname'		=>	'required|min:3',
 			'email'		=>	'required_without:mobile|email|unique:indusers',
 			'mobile'	=>	'required_without:email|unique:indusers|numeric|min:10',
 			'password'	=>	'required|min:6|max:15'

@@ -2690,7 +2690,7 @@ Dropdown Menu
   list-style: none;
   text-shadow: none;
   padding: 0px;
-  background-color: #eaedf2;
+  background-color: white !important;
   margin: 10px  0px 0px 0px;
   /*box-shadow: 5px 5px rgba(102, 102, 102, 0.1);*/
   border: 1px solid #eee;

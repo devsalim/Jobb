@@ -20,6 +20,7 @@ Route::group(array('before' => 'auth'), function(){
 
 	Route::get('master', 'PagesController@master');
 	Route::get('mypost', 'PagesController@myPost');
+	Route::post('myactivity/post', 'PagesController@post');
 
 	Route::get('individual', 'UserController@index');
 	Route::get('individual/create', 'UserController@create');

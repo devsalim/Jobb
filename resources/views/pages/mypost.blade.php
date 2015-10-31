@@ -878,22 +878,10 @@
 					<div class="row">
 						@foreach($myActivities as $myActivity)								
 						<div class="col-md-9">												
-							<div class="updates-style">{{$myActivity->time}}: {{$myActivity->identifier}} for {{$myActivity->post_title}}, {{$myActivity->post_compname}} 
-							<br>Post ID: {{$myActivity->id}}  <a class="" data-toggle="modal" href="#basic">See the full Post </a>
+							<div class="updates-style" data-postid="{{$myActivity->post_id}}">{{$myActivity->time}}: {{$myActivity->identifier}} for {{$myActivity->post_title}}, {{$myActivity->post_compname}} 
+							<br>Post ID: {{$myActivity->post_id}}  
+							<a class="myactivity-post" data-toggle="modal" href="#myactivity-post">See the full Post </a>
 							</div>				
-							<div class="modal fade" id="basic" tabindex="-1" role="basic" aria-hidden="true">
-								<div class="modal-dialog">
-									<div class="modal-content">
-										<div class="modal-header">
-											<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-											<h4 class="modal-title">Modal Title</h4>
-										</div>
-									</div>
-									<!-- /.modal-content -->
-								</div>
-								<!-- /.modal-dialog -->
-							</div>
-							<!-- /.modal -->
 						</div>	
 						@endforeach		
 					</div>
@@ -903,6 +891,19 @@
 	</div>
 </div>
 
+
+<div class="modal fade bs-modal-md" id="myactivity-post" tabindex="-1" role="dialog" aria-hidden="true">
+	<div class="modal-dialog modal-md">
+		<div class="modal-content">
+			<div id="myactivity-post-content">
+				My Activity Post 
+			</div>
+		</div>
+		<!-- /.modal-content -->
+	</div>
+	<!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
 @stop
 
 @section('javascript')
@@ -950,18 +951,44 @@ $(document).ready(function(){
 
 </script>
 <script>
-$('.content').slideUp(400);//reset panels
+// $('.content').slideUp(400);//reset panels
 
-$('.panel').click(function() {//open
-   var takeID = $(this).attr('id');//takes id from clicked ele
-   $('#'+takeID+'C').slideDown(400);
-                             //show's clicked ele's id macthed div = 1second
+// $('.panel').click(function() {//open
+//    var takeID = $(this).attr('id');//takes id from clicked ele
+//    $('#'+takeID+'C').slideDown(400);
+//                              //show's clicked ele's id macthed div = 1second
+// });
+// $('span').click(function() {//close
+//    var takeID = $(this).attr('id').replace('Close','');
+//    //strip close from id = 1second
+//     $('#'+takeID+'C').slideUp(400);//hide clicked close button's panel
+// });​
+
+$(document).ready(function(){
+	// myactivity-post
+$('.myactivity-post').on('click',function(event){  	    
+  	event.preventDefault();
+  	var post_id = $(this).parent().data('postid');
+
+    $.ajaxSetup({
+		headers: {
+			'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+		}
+	});
+
+    $.ajax({
+      url: "/myactivity/post",
+      type: "post",
+      data: {post_id: post_id},
+      cache : false,
+      success: function(data){
+    	$('#myactivity-post-content').html(data);
+    	$('#myactivity-post').modal('show');
+      }
+    }); 
+    return false;
 });
-$('span').click(function() {//close
-   var takeID = $(this).attr('id').replace('Close','');
-   //strip close from id = 1second
-    $('#'+takeID+'C').slideUp(400);//hide clicked close button's panel
-});​
 
+});
 </script>
 @stop

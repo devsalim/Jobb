@@ -276,18 +276,7 @@
 					<span class="input-group-addon">
 						<i class="glyphicon glyphicon-font"></i>
 					</span>	
-					<input type="text" name="fname" class="form-control" placeholder="First Name" value="{{ old('fname') }}">
-				</div>
-			</div>
-		</div>
-		<div class="form-group">
-			<div class="input-icon right">
-				<i class="fa"></i>
-				<div class="input-group margin-top-15">
-					<span class="input-group-addon">
-						<i class="glyphicon glyphicon-font"></i>
-					</span>	
-					<input type="text" name="lname" class="form-control" placeholder="Last Name" value="{{ old('lname') }}">
+					<input type="text" name="fname" class="form-control" placeholder="Full Name" value="{{ old('fname') }}">
 				</div>
 			</div>
 		</div>
@@ -298,7 +287,7 @@
 					<span class="input-group-addon">
 						<i class="icon-envelope"></i>
 					</span>	
-					<input type="email" pattern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?" name="email" class="form-control" placeholder="Email Id" value="{{ old('email') }}" />
+					<input type="email" id="email_address" pattern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?" name="email" class="form-control" placeholder="Email Id" value="{{ old('email') }}" />
 				</div>
 			</div>
 		</div>
@@ -480,29 +469,29 @@
 @section('javascript')
 <script type="text/javascript">
 function loader(arg){
-	if(arg == 'show'){
-		$('#loader').show();
-	}else{
-		$('#loader').hide();
-	}
+    if(arg == 'show'){
+        $('#loader').show();
+    }else{
+        $('#loader').hide();
+    }
 }
 function redirect(url){
-	window.location = url;
+    window.location = url;
 }
 $(document).ready(function(){
-  $('#individual-login-btn').on('click',function(event){  	    
-  	event.preventDefault();
+  $('#individual-login-btn').on('click',function(event){        
+    event.preventDefault();
 
-  	loader('show');
+    loader('show');
 
-  	var formData = $('#individual-login').serialize(); // form data as string
+    var formData = $('#individual-login').serialize(); // form data as string
     var formAction = $('#individual-login').attr('action'); // form handler url
 
     $.ajaxSetup({
-		headers: {
-			'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-		}
-	});
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
 
     $.ajax({
       url: formAction,
@@ -510,46 +499,46 @@ $(document).ready(function(){
       data: formData,
       cache : false,
       success: function(data){
-	    loader('hide');
-        if(data == 'login'){        	
-        	$('#ind-msg-box').removeClass('alert alert-success');
-        	$('#ind-msg-box').addClass('alert alert-danger').fadeIn(1000, function(){
-        		$(this).show();
-        	});
-        	$('#ind-msg').text('Invalid user');
-        }else{        	
-        	$('#ind-msg-box').removeClass('alert alert-danger');
-        	$('#ind-msg-box').addClass('alert alert-success').fadeIn(1000, function(){
-        		$(this).show();
-        	});
-        	$('#ind-msg').text('Login success');
-        	redirect(data);
+        loader('hide');
+        if(data == 'login'){            
+            $('#ind-msg-box').removeClass('alert alert-success');
+            $('#ind-msg-box').addClass('alert alert-danger').fadeIn(1000, function(){
+                $(this).show();
+            });
+            $('#ind-msg').text('Invalid user');
+        }else{          
+            $('#ind-msg-box').removeClass('alert alert-danger');
+            $('#ind-msg-box').addClass('alert alert-success').fadeIn(1000, function(){
+                $(this).show();
+            });
+            $('#ind-msg').text('Login success');
+            redirect(data);
         }
       },
       error: function(data) {
-      	loader('hide');
-      	$('#ind-msg-box').addClass('alert alert-danger').fadeIn(1000, function(){
-        		$(this).show();
-    	});
-    	$('#ind-msg').text('Some error occured !');
+        loader('hide');
+        $('#ind-msg-box').addClass('alert alert-danger').fadeIn(1000, function(){
+                $(this).show();
+        });
+        $('#ind-msg').text('Some error occured !');
       }
     }); 
     return false;
   }); 
 
-$('#corporate-login-btn').on('click',function(event){  	    
-  	event.preventDefault();
+$('#corporate-login-btn').on('click',function(event){       
+    event.preventDefault();
 
-  	loader('show');
+    loader('show');
 
-  	var formData = $('#corporate-login').serialize(); // form data as string
+    var formData = $('#corporate-login').serialize(); // form data as string
     var formAction = $('#corporate-login').attr('action'); // form handler url
 
     $.ajaxSetup({
-		headers: {
-			'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-		}
-	});
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
 
     $.ajax({
       url: formAction,
@@ -557,46 +546,46 @@ $('#corporate-login-btn').on('click',function(event){
       data: formData,
       cache : false,
       success: function(data){
-	    loader('hide');
+        loader('hide');
         if(data == 'login'){
-        	$('#corp-msg-box').removeClass('alert alert-success');
-        	$('#corp-msg-box').addClass('alert alert-danger').fadeIn(1000, function(){
-        		$(this).show();
-        	});
-        	$('#corp-msg').text('Invalid user');
+            $('#corp-msg-box').removeClass('alert alert-success');
+            $('#corp-msg-box').addClass('alert alert-danger').fadeIn(1000, function(){
+                $(this).show();
+            });
+            $('#corp-msg').text('Invalid user');
         }else{
-        	$('#corp-msg-box').removeClass('alert alert-danger');
-        	$('#corp-msg-box').addClass('alert alert-success').fadeIn(1000, function(){
-        		$(this).show();
-        	});
-        	$('#corp-msg').text('Login success');
-        	redirect(data);
+            $('#corp-msg-box').removeClass('alert alert-danger');
+            $('#corp-msg-box').addClass('alert alert-success').fadeIn(1000, function(){
+                $(this).show();
+            });
+            $('#corp-msg').text('Login success');
+            redirect(data);
         }
       },
       error: function(data) {
-      	loader('hide');
-      	$('#corp-msg-box').addClass('alert alert-danger').fadeIn(1000, function(){
-        		$(this).show();
-    	});
-    	$('#corp-msg').text('Some error occured !');
+        loader('hide');
+        $('#corp-msg-box').addClass('alert alert-danger').fadeIn(1000, function(){
+                $(this).show();
+        });
+        $('#corp-msg').text('Some error occured !');
       }
     }); 
     return false;
   }); 
-	
-$('#individual-register-btn').on('click',function(event){  	    
-  	event.preventDefault();
+    
+$('#individual-register-btn').on('click',function(event){       
+    event.preventDefault();
 
-  	loader('show');
+    loader('show');
 
-  	var formData = $('#individual-register').serialize(); // form data as string
+    var formData = $('#individual-register').serialize(); // form data as string
     var formAction = $('#individual-register').attr('action'); // form handler url
 
     $.ajaxSetup({
-		headers: {
-			'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-		}
-	});
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
 
     $.ajax({
       url: formAction,
@@ -604,48 +593,48 @@ $('#individual-register-btn').on('click',function(event){
       data: formData,
       cache : false,
       success: function(data){
-	    loader('hide');
+        loader('hide');
         if(data == 'login'){
-        	$('#ind-msg-reg-box').removeClass('alert alert-danger');
-        	$('#ind-msg-reg-box').addClass('alert alert-success').fadeIn(1000, function(){
-        		$(this).show();
-        	});
-        	$('#individual-register')[0].reset();
-        	$('#t-n-c').attr('checked', false); // Unchecks it
-        	$('#ind-reg-msg').text('Registration successful');
-        	
+            $('#ind-msg-reg-box').removeClass('alert alert-danger');
+            $('#ind-msg-reg-box').addClass('alert alert-success').fadeIn(1000, function(){
+                $(this).show();
+            });
+            $('#individual-register')[0].reset();
+            $('#t-n-c').attr('checked', false); // Unchecks it
+            $('#ind-reg-msg').text('Registration successful');
+            
         }else{
-        	$('#ind-msg-reg-box').removeClass('alert alert-success');
-        	$('#ind-msg-reg-box').addClass('alert alert-danger').fadeIn(1000, function(){
-        		$(this).show();
-        	});
-        	$('#ind-reg-msg').text('Some errors occured during Registration!');
+            $('#ind-msg-reg-box').removeClass('alert alert-success');
+            $('#ind-msg-reg-box').addClass('alert alert-danger').fadeIn(1000, function(){
+                $(this).show();
+            });
+            $('#ind-reg-msg').text('Some errors occured during Registration!');
         }
       },
       error: function(data) {
-      	loader('hide');
-      	$('#ind-msg-reg-box').addClass('alert alert-danger').fadeIn(1000, function(){
-        		$(this).show();
-    	});
-    	$('#ind-reg-msg').text('Some error occured !');
+        loader('hide');
+        $('#ind-msg-reg-box').addClass('alert alert-danger').fadeIn(1000, function(){
+                $(this).show();
+        });
+        $('#ind-reg-msg').text('Some error occured !');
       }
     }); 
     return false;
   });
 
-$('#corporate-register-btn').on('click',function(event){  	    
-  	event.preventDefault();
+$('#corporate-register-btn').on('click',function(event){        
+    event.preventDefault();
 
-  	loader('show');
+    loader('show');
 
-  	var formData = $('#corporate-register').serialize(); // form data as string
+    var formData = $('#corporate-register').serialize(); // form data as string
     var formAction = $('#corporate-register').attr('action'); // form handler url
 
     $.ajaxSetup({
-		headers: {
-			'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-		}
-	});
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
 
     $.ajax({
       url: formAction,
@@ -653,28 +642,28 @@ $('#corporate-register-btn').on('click',function(event){
       data: formData,
       cache : false,
       success: function(data){
-	    loader('hide');
+        loader('hide');
         if(data == 'login'){
-        	$('#corp-msg-reg-box').removeClass('alert alert-success');
-        	$('#corp-msg-reg-box').addClass('alert alert-danger').fadeIn(1000, function(){
-        		$(this).show();
-        	});
-        	$('#corp-reg-msg').text('Invalid user');
+            $('#corp-msg-reg-box').removeClass('alert alert-success');
+            $('#corp-msg-reg-box').addClass('alert alert-danger').fadeIn(1000, function(){
+                $(this).show();
+            });
+            $('#corp-reg-msg').text('Invalid user');
         }else{
-        	$('#corp-msg-reg-box').removeClass('alert alert-danger');
-        	$('#corp-msg-reg-box').addClass('alert alert-success').fadeIn(1000, function(){
-        		$(this).show();
-        	});
-        	$('#corp-reg-msg').text('Registration success');
-        	redirect(data);
+            $('#corp-msg-reg-box').removeClass('alert alert-danger');
+            $('#corp-msg-reg-box').addClass('alert alert-success').fadeIn(1000, function(){
+                $(this).show();
+            });
+            $('#corp-reg-msg').text('Registration success');
+            redirect(data);
         }
       },
       error: function(data) {
-      	loader('hide');
-      	$('#corp-msg-reg-box').addClass('alert alert-danger').fadeIn(1000, function(){
-        		$(this).show();
-    	});
-    	$('#corp-reg-msg').text('Some error occured !');
+        loader('hide');
+        $('#corp-msg-reg-box').addClass('alert alert-danger').fadeIn(1000, function(){
+                $(this).show();
+        });
+        $('#corp-reg-msg').text('Some error occured !');
       }
     }); 
     return false;

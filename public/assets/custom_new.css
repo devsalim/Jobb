@@ -125,7 +125,7 @@ display:none !important;
     border-radius:3px;
   }
    .input-responsive {
-    padding: 6px 29px;
+    padding: 6px 16px;
     /*height: 25px;*/
   }
   .leave-del{
@@ -178,6 +178,8 @@ display:none !important;
 
 .postedwidth{
   width: 11%;
+  padding: 9px 14px !important;
+    margin: 0px -12px !important;
 }
 }
 .portlet.light{
@@ -259,6 +261,10 @@ display:none !important;
     display: table !important;
     padding-left: 0px;
 }
+.active-expire{
+  padding: 14px 12px !important; 
+  width:11% !important;
+} 
 }
 
 .form-group-new {
@@ -294,3 +300,35 @@ display: table;
   margin-left: 0 !important;
   margin-right: 0 !important;
 }
+
+
+.color-button:active:hover, .color-button.active:hover{
+  background-color: #61b3de !important;
+}
+
+
+.color-button:active, .color-button.active{
+  background-color: #61b3de !important;
+}
+
+.show-filter{
+  display: none;
+}
+
+.modal-border{
+    border-top: 0;
+    border-right: 0;
+    border-left: 0;
+}
+
+.table-bordered>tbody>tr>td, .table-bordered>tbody>tr>th, .table-bordered>tfoot>tr>td, .table-bordered>tfoot>tr>th, .table-bordered>thead>tr>td, .table-bordered>thead>tr>th{
+  border:2px solid #ddd;
+}
+
+.title-color{
+  color:darkblue !important;
+}
+
+.content-color{
+  color: black !important;
+} 
