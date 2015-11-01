@@ -39,7 +39,7 @@ class CreatePostjobsTable extends Migration {
                   $table->string('city')->nullable();
                   $table->string('time_for')->nullable();
                   $table->string('education')->nullable();
-                  $table->string('website_redirect')->default(0); //Company webiste check box for Yes or No
+                  $table->string('website_redirect')->default(0); //Company website check box for Yes or No
                   $table->string('website_redirect_url')->nullable();
                   $table->string('salary_type')->nullable();
                   $table->string('reference_id')->nullable();

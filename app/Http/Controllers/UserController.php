@@ -45,61 +45,53 @@ class UserController extends Controller {
 	public function store(CreateUserRequest $request)
 	{
 		if($request->ajax()){
-		DB::beginTransaction();
-		try{
-			$indUser = new Induser();
-			$indUser->fname = $request['fname'];
-			$indUser->lname = $request['lname'];
-			$indUser->email = $request['email'];
-			$indUser->mobile = $request['mobile'];
-			$indUser->save();
-
-			$user = new User();
-			$user->name = $request['fname'].' '.$request['lname'];
-			$user->email = $request['email'];
-			$user->mobile = $request['mobile'];
-			$user->password = bcrypt($request['password']);
-			$user->identifier = 1;
-
-			$indUser->user()->save($user);
-		}catch(\Exception $e)
-		{
-		   DB::rollback();
-		   throw $e;
-		}
-		
-		DB::commit();
-
-		return 'login';
-		}
-		else
-		{
 			DB::beginTransaction();
-		try{
-			$indUser = new Induser();
-			$indUser->fname = $request['fname'];
-			$indUser->lname = $request['lname'];
-			$indUser->email = $request['email'];
-			$indUser->mobile = $request['mobile'];
-			$indUser->save();
+			try{
+				$indUser = new Induser();
+				$indUser->fname = $request['fname'];
+				$indUser->lname = $request['lname'];
+				$indUser->email = $request['email'];
+				$indUser->mobile = $request['mobile'];
+				$indUser->save();
 
-			$user = new User();
-			$user->name = $request['fname'].' '.$request['lname'];
-			$user->email = $request['email'];
-			$user->mobile = $request['mobile'];
-			$user->password = bcrypt($request['password']);
-			$user->identifier = 1;
+				$user = new User();
+				$user->name = $request['fname'].' '.$request['lname'];
+				$user->email = $request['email'];
+				$user->mobile = $request['mobile'];
+				$user->password = bcrypt($request['password']);
+				$user->identifier = 1;
 
-			$indUser->user()->save($user);
-		}catch(\Exception $e)
-		{
-		   DB::rollback();
-		   throw $e;
-		}
+				$indUser->user()->save($user);
+			}catch(\Exception $e){
+			   DB::rollback();
+			   throw $e;
+			}
+			DB::commit();
+			return 'login';
+		}else{
+			DB::beginTransaction();
+			try{
+				$indUser = new Induser();
+				$indUser->fname = $request['fname'];
+				$indUser->lname = $request['lname'];
+				$indUser->email = $request['email'];
+				$indUser->mobile = $request['mobile'];
+				$indUser->save();
 
-		DB::commit();
+				$user = new User();
+				$user->name = $request['fname'].' '.$request['lname'];
+				$user->email = $request['email'];
+				$user->mobile = $request['mobile'];
+				$user->password = bcrypt($request['password']);
+				$user->identifier = 1;
 
-		return redirect('/login');
+				$indUser->user()->save($user);
+			}catch(\Exception $e){
+			   DB::rollback();
+			   throw $e;
+			}
+			DB::commit();
+			return redirect('/login');
 		}
 	}
 

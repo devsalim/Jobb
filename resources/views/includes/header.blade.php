@@ -82,7 +82,7 @@
                   <li>
                     <a href="inbox.html?a=view">
                     <span class="photo">
-                    <img src="@if($application->user->profile_pic != null){{ '/img/profile/'.$application->user->profile_pic }}@else{{'/assets/images/ab.png'}}@endif" class="img-circle" width="40" height="40">
+                    <img src="@if($thank->user->profile_pic != null){{ '/img/profile/'.$thank->user->profile_pic }}@else{{'/assets/images/ab.png'}}@endif" class="img-circle" width="40" height="40">
                     <div class="match"><i class="icon-speedometer"></i> 55%</div>
                     </span>
                     <span class="subject">

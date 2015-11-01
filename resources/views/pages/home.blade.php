@@ -129,7 +129,11 @@
 										<a class="icon-userpic img-circle"><i class="glyphicon glyphicon-user" style=" font-size:12px;"></i></a>
 										@endif
 
-										<div class="match"><a data-toggle="modal" href="#{{$post->id}}"><i class="icon-speedometer"></i> 55%</a></div>
+										<div class="match">
+											<a data-toggle="modal" href="#{{$post->id}}">
+												<i class="icon-speedometer"></i> 55%
+											</a>
+										</div>
 										<div id="oval"></div>
 										<!-- Modal for Matching Percentage -->
 										<div class="modal fade" id="{{$post->id}}" tabindex="-1" role="basic" aria-hidden="true">

@@ -67,8 +67,12 @@ class PagesController extends Controller {
 				$following = collect($following);
 			}
 
-			return view('pages.home', compact('posts', 'title', 'links', 'following'));
-			// return $posts;
+			$userSkills = Induser::where('id', '=', Auth::user()->induser_id)->first(['linked_skill']);
+			$userSkills = array_map('trim', explode(',', $userSkills->linked_skill));
+			unset ($userSkills[count($userSkills)-1]); 
+			
+			return view('pages.home', compact('posts', 'title', 'links', 'following', 'userSkills'));
+			// return $userSkills;
 		}else{
 			return redirect('login');
 		}	
