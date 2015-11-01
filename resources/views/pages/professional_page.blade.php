@@ -81,7 +81,7 @@
 										<span class="input-group-addon">
 											<i class="icon-envelope"></i>
 										</span>
-										<input type="text" disabled name="email" class="form-control" placeholder="Email Id" value="{{ $user->email }}">
+										<input type="text" readonly name="email" class="form-control" placeholder="Email Id" value="{{ $user->email }}">
 										<span class="input-group-addon">
 											<i class="glyphicon glyphicon-ok-circle" style="color: #1EC71E;font-size: 16px;"></i>
 										</span>
@@ -182,12 +182,12 @@
 													Female </label>
 												</div>
 												<div class="md-radio">
-													<input type="radio" id="radio7" name="gender" value="Others" class="md-radiobtn" 
+													<input type="radio" id="radio8" name="gender" value="Others" class="md-radiobtn" 
 													@if($user->gender == 'Others')
 														checked
 													@endif
 													>
-													<label for="radio7" style="">
+													<label for="radio8" style="">
 													<span></span>
 													<span class="check"></span>
 													<span class="box"></span>

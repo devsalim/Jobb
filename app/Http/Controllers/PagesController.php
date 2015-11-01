@@ -66,10 +66,11 @@ class PagesController extends Controller {
 									)', [Auth::user()->corpuser_id]);
 				$following = collect($following);
 			}
-
-			$userSkills = Induser::where('id', '=', Auth::user()->induser_id)->first(['linked_skill']);
-			$userSkills = array_map('trim', explode(',', $userSkills->linked_skill));
-			unset ($userSkills[count($userSkills)-1]); 
+			if(Auth::user()->indentifier == 1){
+				$userSkills = Induser::where('id', '=', Auth::user()->induser_id)->first(['linked_skill']);
+				$userSkills = array_map('trim', explode(',', $userSkills->linked_skill));
+				unset ($userSkills[count($userSkills)-1]); 
+			}
 			
 			return view('pages.home', compact('posts', 'title', 'links', 'following', 'userSkills'));
 			// return $userSkills;

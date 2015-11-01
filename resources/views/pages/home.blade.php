@@ -134,7 +134,7 @@
          <div class="col-md-2 col-sm-3 col-xs-6" >
          	 <div class="form-group"> 
 				<select name="active-expire" class="form-control">
-				  <option  value="All">All</option>
+				  <option  value="">All</option>
                   <option selected value="Active">Active</option>
                 </select>
             </div>
@@ -143,7 +143,7 @@
 			<div class="form-group">		
 				<select class="bs-select form-control" name="education" multiple >
 					<optgroup label="Posted by">
-						<option selected value="All"><b>Posted by:</b> All</option>
+						<option selected value=""><b>Posted by:</b> All</option>
 						<option value="individual">Individual</option>
 						<option value="company">Company</option>
 						<option value="consultancy">Consultancy</option>
@@ -186,7 +186,7 @@
 										<img class="timeline-badge-userpic userpic-box" src="/assets/images/ab.png">
 										<a class="icon-userpic img-circle"><i class="glyphicon glyphicon-user" style=" font-size:12px;"></i></a>
 										@endif
-
+										@if(Auth::user()->identifier == 1)
 										<div class="match">
 											<?php $postSkills = array(); ?>
 											@foreach($post->skills as $skill)
@@ -200,12 +200,13 @@
 												<i class="icon-speedometer"></i> 
 												<?php
 													if(count($postSkills) > 0){
-													$per = (count($counts) / count($postSkills)) * 100;
-													echo $per.'%';
-												}
+														$per = (count($counts) / count($postSkills)) * 100;
+														echo $per.' %';
+													}
 												?>
 											</a>
 										</div>
+
 										<div id="oval"></div>
 										<!-- Modal for Matching Percentage -->
 										<div class="modal fade" id="mod-{{$post->id}}" tabindex="-1" role="basic" aria-hidden="true">
@@ -313,6 +314,7 @@
 											<!-- /.modal-dialog -->
 											</div>
 											<!-- /.modal -->
+											@endif
 									</div>
 									<div class="timeline-body" style="">
 										<div class="timeline-body-head">
