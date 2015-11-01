@@ -38,6 +38,7 @@
 		<div class="col-md-3 col-sm-4 col-xs-12">
 			<div class="form-group">
 				<select class="form-control filter-input check-font-size" name="prof_category" value="" >
+					<option value="">&nbsp;</option>
 					<optgroup label="Accounting">
 						<option value="Accounts/Finance/Tax">Accounts/Finance/Tax</option>
 						<option value="Agent">Agent</option>
@@ -124,6 +125,7 @@
 		<div class="col-md-2 col-sm-2 col-xs-6">
             <div class="form-group">              
                 <select name="time_for" class="form-control" >
+                	<option value="">&nbsp;</option>
                   <option value="Full Time">Full Time</option>
                   <option value="Part Time">Part Time</option>
                   <option value="Freelancer">Freelancer</option>
