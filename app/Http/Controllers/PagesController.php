@@ -255,10 +255,10 @@ class PagesController extends Controller {
 
 			$posts = Postjob::orderBy('id', 'desc')->with('indUser', 'corpUser', 'postActivity');
 
-			if($role !=null){
+			if($role != null){
 				$posts->where('role', 'like', '%'.$role.'%');
 			}
-			if($unique_id !=null){
+			if($unique_id != null){
 				$posts->where('unique_id', 'like', '%'.$unique_id.'%');
 			}
 			if($post_title != null){
@@ -297,7 +297,9 @@ class PagesController extends Controller {
 
 			$posts = $posts->paginate(15);
 
-
+			$userSkills = Induser::where('id', '=', Auth::user()->induser_id)->first(['linked_skill']);
+			$userSkills = array_map('trim', explode(',', $userSkills->linked_skill));
+			unset ($userSkills[count($userSkills)-1]); 
 
 			$links = DB::select('select id from indusers
 									where indusers.id in (
@@ -328,7 +330,7 @@ class PagesController extends Controller {
 				$following = collect($following);
 			}
 
-			return view('pages.home', compact('posts', 'title', 'links', 'following'));
+			return view('pages.home', compact('posts', 'title', 'links', 'following', 'userSkills'));
 			// return $posts;
 		}else{
 			return redirect('login');

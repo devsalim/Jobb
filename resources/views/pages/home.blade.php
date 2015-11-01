@@ -12,8 +12,7 @@
 		<div class="show-filter col-md-8 col-sm-6 col-xs-10">
 			<label style="font-weight:500; ">Filter Post you want to see </label>
 		</div>
-		<div class="filter-icon hide-show-filter"><i class="icon-equalizer" style="font-size:16px;"></i></div>
-		
+		<div class="filter-icon hide-show-filter"><i class="icon-equalizer" style="font-size:16px;"></i></div>		
 	</div>
 </div>
 <form id="home-filter" action="/home" method="post">
@@ -27,15 +26,13 @@
 			<input type="checkbox" name="post_type[]" value="skill" class="toggle"> Skills </label>
 		</div>
 		<div class="col-md-2 col-sm-2 col-xs-6">
-			<div class="form-group">
-				
-					<input type="experience" name="experience" class="form-control filter-input" placeholder="Exp">
-				
+			<div class="form-group">				
+				<input type="experience" name="experience" class="form-control filter-input" placeholder="Exp">				
 			</div>	
 		</div>
 		<div class="col-md-3 col-sm-3 col-xs-12">
 			<div class="form-group">
-					<input type="text" name="job_title" class="form-control filter-input" placeholder="Job Title, Role">
+				<input type="text" name="job_title" class="form-control filter-input" placeholder="Job Title, Role">
 			</div>
 		</div>
 		<div class="col-md-3 col-sm-4 col-xs-12">
@@ -191,164 +188,122 @@
 										@endif
 
 										<div class="match">
-											<a data-toggle="modal" href="#{{$post->id}}">
-												<i class="icon-speedometer"></i> 55%
+											<?php $postSkills = array(); ?>
+											@foreach($post->skills as $skill)
+												<?php $postSkills[] = $skill->name; ?>
+											@endforeach
+											<?php 
+												$overlap = array_intersect($userSkills, $postSkills);
+												$counts  = array_count_values($overlap);
+											?>
+											<a data-toggle="modal" href="#mod-{{$post->id}}">
+												<i class="icon-speedometer"></i> 
+												<?php 
+													$per = (count($counts) / count($postSkills)) * 100;
+													echo $per.'%';
+												?>
 											</a>
 										</div>
 										<div id="oval"></div>
 										<!-- Modal for Matching Percentage -->
-										<div class="modal fade" id="{{$post->id}}" tabindex="-1" role="basic" aria-hidden="true">
+										<div class="modal fade" id="mod-{{$post->id}}" tabindex="-1" role="basic" aria-hidden="true">
 											<div class="modal-dialog">
 												<div class="modal-content">
-													<div class="modal-header" style=" padding: 10px !important;">
-														<button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="position: absolute;right: 15px;top: 15px;"></button>
-														<div class="modal-body" style=" padding:10px 0 !important;">
+													<div class="modal-header">
+														<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+													   <h4 class="modal-title">
+													   		<i class="icon-speedometer" style="font-size:16px;"></i> Match {{$per}}% 
+													   	</h4>
+													</div>
+													<div class="modal-body">
 															
-																<!-- BEGIN BORDERED TABLE PORTLET-->
-																<div class="portlet box">
-																	<div class="portlet-title">
-																		<div class="caption links-title">
-																			<i class="icon-speedometer" style="font-size:16px;"></i> 56% Match
-																		</div>
-																	</div>
-																	<div class="portlet-body" style=" padding: 0 !important;">
-																		<div class="row" style="margin:10px 0 !important;">
-																			<div class="col-md-5 col-xs-5 col-sm-5 matching-criteria-align" style="font-size:14px;">
-																				Required Profile
-																			</div>
-																			<div class="col-md-2 col-xs-2 col-sm-2 matching-criteria-align" style="font-size:14px;">
-																				vs
-																			</div>
-																			<div class="col-md-5 col-xs-5 col-sm-5 matching-criteria-align" style="font-size:14px;">
-																				My Profile
-																			</div>
-																		</div>
-																		<div class="table-scrollable">
-																			<table class="table table-bordered table-hover">
-<!-- 																			<thead style="border:0 !important;">
-																			<tr style="border:0 !important;">
+														<!-- BEGIN BORDERED TABLE PORTLET-->
+														<div class="portlet box">
+															<div class="portlet-body" style=" padding: 0 !important;">
+																<div class="table-scrollable">
+																	<table class="table table-bordered table-hover">
+																	<thead style="border:0 !important;">
+																	<tr style="border:0 !important;">
+																		<th class="col-md-4 col-sm-4 col-xs-6 matching-criteria-align">
+																			 Criteria
+																		</th>
+																		<th class="col-md-4 col-sm-4 col-xs-6 matching-criteria-align">
+																			 Required Profile
+																		</th>
+																		<th class="col-md-4 col-sm-4 col-xs-6 matching-criteria-align">
+																			 My Profile
+																		</th>
+																	</tr>
+																	</thead>
 
-																				<th class="col-md-6 col-sm-6 col-xs-6 matching-criteria-align" style="border:0 !important;">
-																					 Required Profile
-																				</th>
-																				<th class="col-md-6 col-sm-6 col-xs-6 matching-criteria-align" style="border:0 !important;">
-																					 My Profile
-																				</th>
-																				
-																			</tr>
-																			</thead> -->
-
-																			<tbody>
-																				<tr>
-																					<td colspan="2" class="col-md-12 col-sm-12 col-xs-12 matching-criteria-align success">
-																						<label class="title-color">3 Skill Matched</label>
-																					</td>
-																				</tr>
-																				<tr>
-																					<td class="col-md-6 col-sm-6 col-xs-6 success matching-criteria-align content-color">
-																						@foreach($post->skills as $skill)
-																							{{$skill->name}},
-																						@endforeach
-																					</td>
-																					<td class="col-md-6 col-sm-6 col-xs-6 success matching-criteria-align content-color">
-																						@foreach($post->skills as $skill)
-																							{{$skill->name}},
-																						@endforeach
-																					</td>
-																				</tr>
-																				<tr>
-																					<td colspan="2" class="col-md-12 col-sm-12 col-xs-12 matching-criteria-align success">
-																						<i class="glyphicon glyphicon-ok" style="color:#01b070;font-size:16px;"></i>
-																						<label class="title-color"> Job Role</label>
-																					</td>
-																				</tr>
-																				<tr>
-																					<td class="col-md-6 col-sm-6 col-xs-6 success matching-criteria-align content-color">
-																						{{ $post->role }}
-																					</td>
-																					<td class="col-md-6 col-sm-6 col-xs-6 success matching-criteria-align content-color">
-																						{{ $post->role }}
-																					</td>
-																				</tr>
-																				<tr>
-																					<td colspan="2" class="col-md-12 col-sm-12 col-xs-12 matching-criteria-align danger">
-																						 <i class="glyphicon glyphicon-remove" style="color:red;font-size:16px;"></i>
-																						 <label class="title-color"> Job Category</label>
-																					</td>
-																				</tr>
-																				<tr>
-																					<td class="col-md-6 col-sm-6 col-xs-6 danger matching-criteria-align content-color">
-																						{{ $post->prof_category }}
-																					</td>
-																					<td class="col-md-6 col-sm-6 col-xs-6 danger matching-criteria-align content-color">
-																						Programmer
-																					</td>
-																				</tr>
-																				<tr>
-																					<td colspan="2" class="col-md-12 col-sm-12 col-xs-12 matching-criteria-align success">
-																						<i class="glyphicon glyphicon-ok" style="color:#01b070;font-size:16px;"></i> 
-																						<label class="title-color">Experience</label>
-																					</td>
-																				</tr>
-																				<tr>
-																					<td class="col-md-6 col-sm-6 col-xs-6 success matching-criteria-align content-color">
-																						{{ $post->min_exp }}-{{ $post->max_exp }}
-																					</td>
-																					<td class="col-md-6 col-sm-6 col-xs-6 success matching-criteria-align content-color">
-																						{{ $post->min_exp }}-{{ $post->max_exp }}
-																					</td>
-																				</tr>
-																				<tr>
-																					<td colspan="2" class="col-md-12 col-sm-12 col-xs-12 matching-criteria-align danger">
-																						<i class="glyphicon glyphicon-remove" style="color:red;font-size:16px;"></i>
-																						<label class="title-color"> Education</label>
-																					</td>
-																				</tr>
-																				<tr>
-																					<td class="col-md-6 col-sm-6 col-xs-6 danger matching-criteria-align content-color">
-																						{{ $post->education }}
-																					</td>
-																					<td class="col-md-6 col-sm-6 col-xs-6 danger matching-criteria-align content-color">
-																						{{ $post->education }}
-																					</td>
-																				</tr>
-																				<tr>
-																					<td colspan="2" class="col-md-12 col-sm-12 col-xs-12 matching-criteria-align success">
-																						<i class="glyphicon glyphicon-ok" style="color:#01b070;font-size:16px;"></i> 
-																						<label class="title-color">Location</label>
-																					</td>
-																				</tr>
-																				<tr>
-																					<td class="col-md-6 col-sm-6 col-xs-6 success matching-criteria-align content-color">
-																						{{ $post->city }}
-																					</td>
-																					<td class="col-md-6 col-sm-6 col-xs-6 success matching-criteria-align content-color">
-																						{{ $post->city }}
-																					</td>
-																				</tr>
-																				<tr>
-																					<td colspan="2" class="col-md-12 col-sm-12 col-xs-12 matching-criteria-align danger">
-																						<i class="glyphicon glyphicon-remove" style="color:red;font-size:16px;"></i>
-																						<label class="title-color"> Job Type</label>
-																					</td>
-																				</tr>
-																				<tr>
-																					<td class="col-md-6 col-sm-6 col-xs-6 danger matching-criteria-align content-color">
-																						{{ $post->time_for }}
-																					</td>
-																					<td class="col-md-6 col-sm-6 col-xs-6 danger matching-criteria-align content-color">
-																						{{ $post->jobtype }}
-																					</td>
-																				</tr>
-																			</tbody>
-																			</table>
-																		</div>
-																	</div>
+																	<tbody>
+																		<tr class="@if(count($counts) > 0) success @else danger @endif">
+																			<td>
+																				<label class="title-color">
+																					Skills <i class="badge">{{count($counts)}}</i> 
+																				</label>
+																			</td>
+																			<td>
+																				@foreach($post->skills as $skill)
+																					{{$skill->name}},
+																				@endforeach
+																			</td>
+																			<td>
+																				@foreach($overlap as $myskill)
+																					{{$myskill}},
+																				@endforeach												
+																			</td>
+																		</tr>
+																		<tr class="@if($post->role == Auth::user()->induser->role) success @else danger @endif">
+																			<td>
+																				<label class="title-color">Job Role</label>
+																			</td>
+																			<td>{{ $post->role }}</td>
+																			<td>{{ Auth::user()->induser->role }}</td>
+																		</tr>
+																		<tr class="@if($post->prof_category == Auth::user()->induser->prof_category) success @else danger @endif">
+																			<td>
+																				 <label class="title-color">Job Category</label>
+																			</td>																		
+																			<td>{{ $post->prof_category }}</td>
+																			<td>{{ Auth::user()->induser->prof_category }}</td>
+																		</tr>
+																		<tr class="@if($post->min_exp == Auth::user()->induser->experience) success @else danger @endif">
+																			<td>
+																				<label class="title-color">Experience</label>
+																			</td>
+																			<td>{{ $post->min_exp }}-{{ $post->max_exp }}</td>
+																			<td>{{ Auth::user()->induser->experience }}</td>
+																		</tr>
+																		<tr class="@if($post->education == Auth::user()->induser->education) success @else danger @endif">
+																			<td>
+																				<label class="title-color">Education</label>
+																			</td>
+																			<td>{{ $post->education }}</td>
+																			<td>{{ Auth::user()->induser->education }}</td>
+																		</tr>
+																		<tr class="@if($post->city == Auth::user()->induser->city) success @else danger @endif">
+																			<td>
+																				<label class="title-color">Location</label>			
+																			</td>															
+																			<td>{{ $post->city }}</td>
+																			<td>{{ Auth::user()->induser->city }}</td>
+																		</tr>
+																		<tr class="@if($post->time_for == Auth::user()->induser->prefered_jobtype || ($post->time_for == 'Part Time' && Auth::user()->induser->prefered_jobtype == 'Full Time')) success @else danger @endif">
+																			<td>						
+																				<label class="title-color">Job Type
+																				</label>
+																			</td>															
+																			<td>{{ $post->time_for }}</td>
+																			<td>{{ Auth::user()->induser->prefered_jobtype }}</td>
+																		</tr>
+																	</tbody>
+																	</table>
 																</div>
-																<!-- END BORDERED TABLE PORTLET-->
-															<!-- </div> -->
-														
+															</div>
 														</div>
+														<!-- END BORDERED TABLE PORTLET-->
+														<!-- </div> -->	
 													</div>
 												</div>
 												<!-- /.modal-content -->
