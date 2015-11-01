@@ -218,12 +218,13 @@ var Login = function() {
             focusInvalid: false, // do not focus the last invalid input
             ignore: "",
             rules: {
-                name: {
+                fname: {
                     required: true
                 },
                 email: {
                     required: true,
-                    email: true
+                    email: true,
+                    remote: '/UserController.php' + $('#email_address').val()
                 },
                 mobile: {
                     required: false,
@@ -243,15 +244,16 @@ var Login = function() {
             },
 
             messages: { // custom messages for radio buttons and checkboxes
-                fullname: {
+                fname: {
                     required: "Full name is required"
                 },
                 email: {
-                    required: "Email Id or Mobile No is required"
+                    required: "Email Id or Mobile No is required",
+                    remote: "Email Id is already Registered"
                 },
                 mobile: {
                     required:   "Mobile no. is required",
-                    minlength:  "Minimum 10 lenght is required",
+                    minlength:  "Minimum 10 length is required",
                     maxlength:  "Maximum 10 length is required"
                 },
                 password: {
