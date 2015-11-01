@@ -20,6 +20,11 @@ class CreateIndusersTable extends Migration {
                   $table->string('lname')->nullable();
                   $table->string('email')->nullable();
                   $table->string('mobile')->nullable();
+                  
+                  //Added two column dob and gender
+                  $table->string('dob')->nullable();
+                  $table->string('gender')->nullable();
+
                   $table->string('profile_pic')->nullable();
                   $table->string('active_profile')->nullable();
                   $table->string('verified')->nullable();

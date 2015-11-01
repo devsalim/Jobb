@@ -267,7 +267,7 @@
 							<label class="control-label col-md-4 col-xs-6">Education:</label>
 							<div class="col-md-6 col-xs-6">
 								<p class="form-control-static view-page text-capitalize">
-									@if($user->education != null)
+									@if($user->education != null && $user->education != null)
 									{{ $user->education }} in {{ $user->branch }} 
 									@elseif($user->education == null)
 									--
@@ -546,6 +546,38 @@
 				<div class="row">
 					<div class="col-md-6 col-sm-6 col-xs-12">
 						<div class="form-group">
+							<label class="control-label col-md-4 col-xs-12">Date of Birth:</label>
+							<div class="col-md-8 col-xs-12">
+								<p class="form-control-static view-page">
+									@if($user->dob != null)
+									{{$user->dob }}
+									@else
+									--
+									@endif
+								</p>
+							</div>
+						</div>
+					</div>
+					<!--/span-->
+					<div class="col-md-6 col-sm-6 col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-md-4 col-xs-12">Gender:</label>
+							<div class="col-md-6 col-xs-12">
+								<p class="form-control-static view-page">
+									@if($user->gender != null)
+									{{ $user->gender }}
+									@else
+									--
+									@endif
+								</p>
+							</div>
+						</div>
+					</div>
+					<!--/span-->
+				</div>
+				<div class="row">
+					<div class="col-md-6 col-sm-6 col-xs-12">
+						<div class="form-group">
 							<label class="control-label col-md-4 col-xs-12">City:</label>
 							<div class="col-md-6 col-xs-12">
 								<p class="form-control-static view-page">
@@ -566,6 +598,39 @@
 								<p class="form-control-static view-page">
 									@if($user->state != null)
 									{{ $user->state }}
+									@else
+									--
+									@endif
+								</p>
+							</div>
+						</div>
+					</div>
+					<!--/span-->
+				</div>
+				<!--/row-->
+				<div class="row">
+					<div class="col-md-6 col-sm-6 col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-md-4 col-xs-12">Prefered Location:</label>
+							<div class="col-md-6 col-xs-12">
+								<p class="form-control-static view-page">
+									@if($user->prefered_location != null)
+									{{ $user->prefered_location }}
+									@else
+									--
+									@endif
+								</p>
+							</div>
+						</div>
+					</div>
+					<!--/span-->
+					<div class="col-md-6 col-sm-6 col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-md-4 col-xs-12">Job Type:</label>
+							<div class="col-md-6 col-xs-12">
+								<p class="form-control-static view-page">
+									@if($user->prefered_jobtype != null)
+									{{ $user->prefered_jobtype }}
 									@else
 									--
 									@endif

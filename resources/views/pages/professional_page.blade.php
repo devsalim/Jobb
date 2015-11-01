@@ -30,7 +30,7 @@
 								</ul>
 							</div>
 							@endif
-							<div class="col-md-6">
+							<div class="col-md-6 col-sm-6">
 								<div class="form-group">
 									<label>First Name</label>
 									<div class="input-group">
@@ -42,7 +42,7 @@
 								</div>
 							</div>
 							<!--/span-->
-							<div class="col-md-6">
+							<div class="col-md-6 col-sm-6">
 								<div class="form-group">
 									<label>Last Name</label>
 									<div class="input-group">
@@ -56,7 +56,7 @@
 							<!--/span-->
 						</div>
 						<div class="row-md-10">
-							<div class="col-md-6">
+							<div class="col-md-6 col-sm-6">
 								<div class="form-group">
 									<label>Mobile No</label>
 									<div class="input-group">
@@ -74,7 +74,7 @@
 								</div>
 							</div>
 							<!--/span-->
-							<div class="col-md-6">
+							<div class="col-md-6 col-sm-6">
 								<div class="form-group">
 									<label>Email Id</label>								
 									<div class="input-group">
@@ -117,7 +117,7 @@
 	</div>
 	<div class="portlet-body form ">
 		<!-- BEGIN FORM-->
-		<form action="{{ url('/individual/update', Auth::user()->induser_id) }}" class="horizontal-form prof_detail" method="post" enctype="multipart/form-data">
+		<form action="{{ url('/individual/update', Auth::user()->induser_id) }}" id="ind_validation" class="horizontal-form prof_detail" method="post" enctype="multipart/form-data">
 			<input type="hidden" name="_token" value="{{ csrf_token() }}">
 			<div class="form-body">
 				<div class="row">
@@ -126,7 +126,7 @@
 						<div class="row-md-10">
 							<div class="col-md-12">
 								<div class="form-group">
-									<label>About Me:</label>
+									<label>About Me</label>
 									<div class="input-group">
 										<span class="input-group-addon">
 											<i class="icon-note" style="color:darkcyan;"></i>
@@ -136,16 +136,65 @@
 								</div>
 							</div>
 							<!--/span-->
-						</div>		
+						</div>	
+						<!-- new column added as dob and gender	 -->
 						<div class="row-md-10">
 							<div class="col-md-6">
+								<div class="form-group">
+									<label>Date of Birth</label>
+									<div class="input-group">
+										<span class="input-group-addon">
+											<i class="icon-calendar" style="color:darkcyan;"></i>
+										</span>
+										<input class="form-control date-picker" size="16" type="text" value="{{ $user->dob }}"/>
+									</div>
+								</div>
+							</div>
+							<!--/span-->
+							<div class="col-md-6">
+								<div class="form-group">
+									<label>Gender</label>
+									<div class="input-group">
+											<div class="md-radio-inline">
+												<div class="md-radio">
+													<input type="radio" id="radio6" name="gender" value="Male" class="md-radiobtn" 
+														@if($user->gender == 'Male')
+															checked
+														@endif
+													>
+													<label for="radio6" style="">
+													<span></span>
+													<span class="check"></span>
+													<span class="box"></span>
+													Male </label>
+												</div>
+												<div class="md-radio">
+													<input type="radio" id="radio7" name="gender" value="Female" class="md-radiobtn" 
+													@if($user->gender == 'Female')
+														checked
+													@endif
+													>
+													<label for="radio7" style="">
+													<span></span>
+													<span class="check"></span>
+													<span class="box"></span>
+													Female </label>
+												</div>
+											</div>	
+											<div id="radio_error"></div>					<!-- /input-group -->
+										</div>
+								</div>
+							</div>
+							<!--/span-->
+						</div>		
+						<div class="row-md-10">
+							<div class="col-md-6 col-sm-6">
 								<div class="form-group">
 									<label>Education</label>
 									<div class="input-group">
 										<span class="input-group-addon">
 											<i class="icon-graduation"></i>
 										</span>
-										
 										<select class="form-control" name="education" id="parent_selection" >
 											<option value="">--Please Select--</option>
 											<option @if($user->education=="BA") {{ $selected }} @endif value="BA">B.A</option>
@@ -170,16 +219,15 @@
 								</div>
 							</div>
 							<!--/span-->
-							<div class="col-md-6">
+							<div class="col-md-6 col-sm-6">
 								<div class="form-group">
 									<label>Branch</label>
 									<div class="input-group">
 										<span class="input-group-addon">
 										<i class="icon-graduation"></i>
 										</span>
-										<select class="form-control" name="branch" id="child_selection" >
+										<select class="form-control" name="branch" id="child_selection" value="{{ $user->branch }}">
 											<option value="">--Please Select--</option>
-											<option @if($user->branch) {{ $selected }} @endif value="">--Please Select--</option>
 										</select>
 									</div>
 								</div>
@@ -188,7 +236,7 @@
 						</div>						
 						<div class="row-md-10">
 							
-							<div class="col-md-6">
+							<div class="col-md-6 col-sm-6">
 								<div class="form-group">
 									<label>Working at</label>
 									<div class="input-group">
@@ -201,7 +249,7 @@
 								</div>
 							</div>
 							<!--/span-->
-							<div class="col-md-6">
+							<div class="col-md-6 col-sm-6">
 								<div class="form-group">
 									<label>Experience</label>
 									<div class="input-group">
@@ -209,6 +257,7 @@
 											<i class=" icon-briefcase"></i>
 										</span>
 										<select class="form-control" name="experience" >
+											<option value="">-- Select --</option>
 											<option @if($user->experience=="1") {{ $selected }} @endif value="1">1</option>
 											<option @if($user->experience=="2") {{ $selected }} @endif value="2">2</option>
 											<option @if($user->experience=="3") {{ $selected }} @endif value="3">3</option>
@@ -230,7 +279,7 @@
 							</div>
 						</div>
 						<div class="row-md-10">
-							<div class="col-md-6">
+							<div class="col-md-6 col-sm-6">
 								<div class="form-group">
 									<label>Job Category</label>
 									<div class="input-group">
@@ -238,33 +287,34 @@
 											<i class="fa fa-cubes"></i>
 										</span>
 										<select class="form-control" name="prof_category" value="{{ $user->prof_category }}" >
+											<option value="">-- Select --</option>
 											<optgroup label="Accounting">
-												<option value="Accounts/Finance/Tax">Accounts/Finance/Tax</option>
-												<option value="Agent">Agent</option>
-												<option value="Analytics & Business Intelligence">
+												<option @if($user->experience=="Accounts/Finance/Tax") {{ $selected }} @endif value="Accounts/Finance/Tax">Accounts/Finance/Tax</option>
+												<option @if($user->experience=="Agent") {{ $selected }} @endif value="Agent">Agent</option>
+												<option @if($user->experience=="Analytics & Business Intelligence") {{ $selected }} @endif value="Analytics & Business Intelligence">
 													Analytics & Business Intelligence
 												</option>
 											</optgroup>
 											<optgroup label="IT Field">
-												<option value="HR/Administration/IR">HR/Administration/IR</option>
-												<option value="IT Software - Client Server">IT Software - Client Server</option>
-												<option value="IT Software - Mainframe">IT Software - Mainframe</option>
-												<option value="IT Software - Middleware">IT Software - Middleware</option>
-												<option value="IT Software - Mobile">IT Software - Mobile</option>
-												<option value="IT Software - Other">IT Software - Other</option>
-												<option value="IT Software - System Programming">IT Software - System Programming</option>
-												<option value="IT Software - Telecom Software">IT Software - Telecom Software</option>
-												<option value="IT Software - Application Programming">IT Software - Application Programming</option>
-												<option value="IT Software - DBA/Datawarehousing">IT Software - DBA/Datawarehousing</option>
-												<option value="IT Software - E-Commerce">IT Software - E-Commerce</option>
-												<option value="IT Software - ERP/CRM">IT Software - ERP/CRM</option>
+												<option @if($user->experience=="HR/Administration/IR") {{ $selected }} @endif value="HR/Administration/IR">HR/Administration/IR</option>
+												<option @if($user->experience=="IT Software - Client Server") {{ $selected }} @endif value="IT Software - Client Server">IT Software - Client Server</option>
+												<option @if($user->experience=="IT Software - Mainframe") {{ $selected }} @endif value="IT Software - Mainframe">IT Software - Mainframe</option>
+												<option @if($user->experience=="IT Software - Middleware") {{ $selected }} @endif value="IT Software - Middleware">IT Software - Middleware</option>
+												<option @if($user->experience=="IT Software - Mobile") {{ $selected }} @endif value="IT Software - Mobile">IT Software - Mobile</option>
+												<option @if($user->experience=="IT Software - Other") {{ $selected }} @endif value="IT Software - Other">IT Software - Other</option>
+												<option @if($user->experience=="IT Software - System Programming") {{ $selected }} @endif value="IT Software - System Programming">IT Software - System Programming</option>
+												<option @if($user->experience=="IT Software - Telecom Software") {{ $selected }} @endif value="IT Software - Telecom Software">IT Software - Telecom Software</option>
+												<option @if($user->experience=="IT Software - Application Programming") {{ $selected }} @endif value="IT Software - Application Programming">IT Software - Application Programming</option>
+												<option @if($user->experience=="IT Software - DBA/Datawarehousing") {{ $selected }} @endif value="IT Software - DBA/Datawarehousing">IT Software - DBA/Datawarehousing</option>
+												<option @if($user->experience=="IT Software - E-Commerce") {{ $selected }} @endif value="IT Software - E-Commerce">IT Software - E-Commerce</option>
+												<option @if($user->experience=="IT Software - ERP/CRM") {{ $selected }} @endif value="IT Software - ERP/CRM">IT Software - ERP/CRM</option>
 											</optgroup>
 										</select>
 									</div>
 								</div>
 							</div>
 							<!--/span-->
-							<div class="col-md-6">
+							<div class="col-md-6 col-sm-6">
 								<div class="form-group">
 									<label>Role</label>
 									<div class="input-group">
@@ -279,7 +329,7 @@
 						</div>
 						
 						<div class="row-md-10">
-							<div class="col-md-6">
+							<div class="col-md-6 col-sm-6">
 								<div class="form-group">
 									<label>City</label>									
 									<div class="input-group">
@@ -291,7 +341,7 @@
 								</div>
 							</div>
 							<!--/span-->
-							<div class="col-md-6">
+							<div class="col-md-6 col-sm-6">
 								<div class="form-group">
 									<label>State</label>
 									<div class="input-group">
@@ -299,6 +349,7 @@
 										<i class="fa fa-map-marker"></i>
 										</span>
 										<select class="form-control" name="state" value="{{ $user->state }}">
+											<option value="">-- Select --</option>
 											<option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
 											<option value="Andhra Pradesh">Andhra Pradesh</option>
 											<option value="Arunachal Pradesh">Arunachal Pradesh</option>
@@ -339,7 +390,7 @@
 							<!--/span-->
 						</div>
 						<div class="row-md-10">
-							<div class="col-md-6">
+							<div class="col-md-6 col-sm-6">
 								<div class="form-group">
 									<label>Add Skill</label>
 									<!-- <form action="{{ url('job/newskill') }}" id="newskillfrm" method="post">					
@@ -353,7 +404,7 @@
 								</div>
 							</div>
 							
-							<div class="col-md-6">
+							<div class="col-md-6 col-sm-6">
 								<div class="form-group">
 									<label>Added Skill</label>
 								    <input type="text" id="linked_skill" name="linked_skill" value="{{ $user->linked_skill }}"
@@ -365,7 +416,7 @@
 							</div>
 						</div>
 						<div class="row-md-10">
-							<div class="col-md-6">
+							<div class="col-md-6 col-sm-6">
 								<div class="form-group">
 									<label>Prefered Location</label>
 									<div class="input-group">
@@ -373,68 +424,69 @@
 											<i class="fa fa-map-marker"></i>
 										</span>
 										<select id="select2_sample_modal_2" value="{{ $user->prefered_location }}" placeholder="Prefered Location" name="prefered_location" class="form-control select2" multiple>
-													<option value="">&nbsp;</option>
-													<optgroup label="NFC EAST">
-													<option>Hyderabad</option>
-													<option>Bangalore</option>
-													<option>Philadelphia Eagles</option>
-													<option>Washington Redskins</option>
-													</optgroup>
-													<optgroup label="NFC NORTH">
-													<option>Chicago Bears</option>
-													<option>Detroit Lions</option>
-													<option>Green Bay Packers</option>
-													<option>Minnesota Vikings</option>
-													</optgroup>
-													<optgroup label="NFC SOUTH">
-													<option>Patna</option>
-													<option>Mumbai</option>
-													<option>New Orleans Saints</option>
-													<option>Tampa Bay Buccaneers</option>
-													</optgroup>
-													<optgroup label="NFC WEST">
-													<option>Delhi</option>
-													<option>Chennai</option>
-													<option>San Francisco 49ers</option>
-													<option>Seattle Seahawks</option>
-													</optgroup>
-													<optgroup label="AFC EAST">
-													<option>Buffalo Bills</option>
-													<option>Miami Dolphins</option>
-													<option>New England Patriots</option>
-													<option>New York Jets</option>
-													</optgroup>
-													<optgroup label="AFC NORTH">
-													<option>Baltimore Ravens</option>
-													<option>Cincinnati Bengals</option>
-													<option>Cleveland Browns</option>
-													<option>Pittsburgh Steelers</option>
-													</optgroup>
-													<optgroup label="AFC SOUTH">
-													<option>Houston Texans</option>
-													<option>Indianapolis Colts</option>
-													<option>Jacksonville Jaguars</option>
-													<option>Tennessee Titans</option>
-													</optgroup>
-													<optgroup label="AFC WEST">
-													<option>Denver Broncos</option>
-													<option>Kansas City Chiefs</option>
-													<option>Oakland Raiders</option>
-													<option>San Diego Chargers</option>
-													</optgroup>
-												</select>
+											<option value="">&nbsp;</option>
+											<optgroup label="NFC EAST">
+											<option>Hyderabad</option>
+											<option>Bangalore</option>
+											<option>Philadelphia Eagles</option>
+											<option>Washington Redskins</option>
+											</optgroup>
+											<optgroup label="NFC NORTH">
+											<option>Chicago Bears</option>
+											<option>Detroit Lions</option>
+											<option>Green Bay Packers</option>
+											<option>Minnesota Vikings</option>
+											</optgroup>
+											<optgroup label="NFC SOUTH">
+											<option>Patna</option>
+											<option>Mumbai</option>
+											<option>New Orleans Saints</option>
+											<option>Tampa Bay Buccaneers</option>
+											</optgroup>
+											<optgroup label="NFC WEST">
+											<option>Delhi</option>
+											<option>Chennai</option>
+											<option>San Francisco 49ers</option>
+											<option>Seattle Seahawks</option>
+											</optgroup>
+											<optgroup label="AFC EAST">
+											<option>Buffalo Bills</option>
+											<option>Miami Dolphins</option>
+											<option>New England Patriots</option>
+											<option>New York Jets</option>
+											</optgroup>
+											<optgroup label="AFC NORTH">
+											<option>Baltimore Ravens</option>
+											<option>Cincinnati Bengals</option>
+											<option>Cleveland Browns</option>
+											<option>Pittsburgh Steelers</option>
+											</optgroup>
+											<optgroup label="AFC SOUTH">
+											<option>Houston Texans</option>
+											<option>Indianapolis Colts</option>
+											<option>Jacksonville Jaguars</option>
+											<option>Tennessee Titans</option>
+											</optgroup>
+											<optgroup label="AFC WEST">
+											<option>Denver Broncos</option>
+											<option>Kansas City Chiefs</option>
+											<option>Oakland Raiders</option>
+											<option>San Diego Chargers</option>
+											</optgroup>
+										</select>
 									</div>
 								</div>
 							</div>
 							<!--/span-->
-							<div class="col-md-6">
+							<div class="col-md-6 col-sm-6">
 								<div class="form-group">
 									<label>Prefered Job Type</label>
 									<div class="input-group">
 										<span class="input-group-addon">
 											<i class=" icon-briefcase"></i>
 										</span>
-										<select class="form-control" name="prefered_jobtype">
+										<select class="form-control" value="{{ $user->prefered_jobtype }}" name="prefered_jobtype">
+											<option value="">-- Select --</option>
 											<option @if($user->prefered_jobtype=="Full Time") {{ $selected }} @endif value="Full Time">Full Time</option>
 											<option @if($user->prefered_jobtype=="Part Time") {{ $selected }} @endif value="Part Time">Part Time</option>
 											<option @if($user->prefered_jobtype=="Freelancer") {{ $selected }} @endif value="Freelancer">Freelancer</option>

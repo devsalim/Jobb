@@ -142,6 +142,8 @@ class UserController extends Controller {
 			$data->education = Input::get('education');
 			$data->branch = Input::get('branch');
 			$data->prof_category = Input::get('prof_category');
+			$data->dob = Input::get('dob');
+			$data->gender = Input::get('gender');
 			$data->experience = Input::get('experience');
 			$data->role = Input::get('role');
 			$data->working_at = Input::get('working_at');

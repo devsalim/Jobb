@@ -4,7 +4,7 @@
 <!-- Jobtip Filter Start -->
 <div class="row">
 	<div class="col-md-9" style=" lightgray;margin-bottom: 5px;">
-		<div class="hide-label col-md-8 col-sm-6 col-xs-10">
+		<div class="hide-label col-md-8 col-sm-6 col-xs-10" style="padding: 6px 14px;">
 			<label style="font-weight:500; ">
 				Showing all Jobs, Skills posted by Individuals & Corporates
 			</label>
@@ -12,32 +12,41 @@
 		<div class="show-filter col-md-8 col-sm-6 col-xs-10">
 			<label style="font-weight:500; ">Filter Post you want to see </label>
 		</div>
-		<div class="filter-icon hide-label hide-show-filter"><i class="icon-equalizer" style="font-size:16px;"></i></div>
-		<div class="filter-icon show-filter hide-show-filter"><i class="fa fa-check-square-o" style="font-size:18px;color:#3598dc;"></i></div>
+		<div class="filter-icon hide-show-filter"><i class="icon-equalizer" style="font-size:16px;"></i></div>
+		
 	</div>
 </div>
 <form id="home-filter" action="/home" method="post">
 <input type="hidden" name="_token" value="{{ csrf_token() }}">
 <div class="row show-filter">
-	<div class="col-md-9">		
-		<div class="col-md-4 col-sm-12 col-xs-12">
-			<div class="form-group">
-				<input type="text" name="post_title" class="form-control filter-input" placeholder="Job Title, Role">
-			</div>
+	<div class="col-md-10">
+		<div class="btn-group col-md-3 col-sm-3 col-xs-6 jobskill new-col-md-3" data-toggle="buttons" style="padding: 6px 14px;">
+			<label class="btn btn-default color-button check-font-size active input-responsive">
+			<input type="checkbox" name="post_type[]" value="job" class="toggle"> Jobs </label>
+			<label class="btn btn-default color-button check-font-size input-responsive">
+			<input type="checkbox" name="post_type[]" value="skill" class="toggle"> Skills </label>
 		</div>
-		<div class="col-md-2 col-sm-4 col-xs-4">
-			<div class="form-group">				
-				<input type="experience" class="form-control filter-input" name="experience" placeholder="Exp" value="">				
+		<div class="col-md-2 col-sm-2 col-xs-6">
+			<div class="form-group">
+				
+					<input type="experience" name="experience" class="form-control filter-input" placeholder="Exp">
+				
 			</div>	
 		</div>
-		<div class="col-md-4 col-sm-12 col-xs-12">
-			<div class="form-group">				
-				<select class="form-control filter-input check-font-size" name="prof_category">
-					<option value="">Category</option>
+		<div class="col-md-3 col-sm-3 col-xs-12">
+			<div class="form-group">
+					<input type="text" name="job_title" class="form-control filter-input" placeholder="Job Title, Role">
+			</div>
+		</div>
+		<div class="col-md-3 col-sm-4 col-xs-12">
+			<div class="form-group">
+				<select class="form-control filter-input check-font-size" name="prof_category" value="" >
 					<optgroup label="Accounting">
 						<option value="Accounts/Finance/Tax">Accounts/Finance/Tax</option>
 						<option value="Agent">Agent</option>
-						<option value="Analytics & Business Intelligence">Analytics & Business Intelligence</option>
+						<option value="Analytics & Business Intelligence">
+							Analytics & Business Intelligence
+						</option>
 					</optgroup>
 					<optgroup label="IT Field">
 						<option value="HR/Administration/IR">HR/Administration/IR</option>
@@ -55,50 +64,102 @@
 					</optgroup>
 				</select>
 			</div>
-			
-		</div>
-		<div class="col-md-2 col-sm-12 col-xs-12">
-			<div class="form-group">
-				<input type="text" name="city" class="form-control filter-input" placeholder="City">
-			</div>	
 		</div>
 	</div>
 </div>
 <div class="row show-filter" style="margin-top:10px;">
-	<div class="col-md-9">		
-		<div class="btn-group col-md-3 col-sm-3 col-xs-12 jobskill" data-toggle="buttons">
-			<select name="time_for" class="form-control" >
-				<option value="Full Time">Full Time</option>
-				<option value="Part Time">Part Time</option>
-				<option value="Freelancer">Freelancer</option>
-			</select>
-		</div>		
-		<div class="col-md-3 col-sm-3 col-xs-1 btn-group jobskill" data-toggle="buttons">
-			<label class="btn btn-default check-font-size input-responsive">
-				<input type="checkbox" name="post_type[]" value="job" class="toggle"> Jobs 
-			</label>
-			<label class="btn btn-default check-font-size input-responsive">
-				<input type="checkbox" name="post_type[]" value="skill" class="toggle"> Skills 
-			</label>
+	<div class="col-md-10">
+		<div class="col-md-3 col-sm-3 col-xs-12">
+			<div class="form-group">
+				<select id="select2_sample_modal_2" placeholder="City" name="city" class="form-control select2" multiple>
+					<option value="">-- select --</option>
+					<optgroup label="NFC EAST">
+					<option>Hyderabad</option>
+					<option>Bangalore</option>
+					<option>Philadelphia Eagles</option>
+					<option>Washington Redskins</option>
+					</optgroup>
+					<optgroup label="NFC NORTH">
+					<option>Chicago Bears</option>
+					<option>Detroit Lions</option>
+					<option>Green Bay Packers</option>
+					<option>Minnesota Vikings</option>
+					</optgroup>
+					<optgroup label="NFC SOUTH">
+					<option>Patna</option>
+					<option>Mumbai</option>
+					<option>New Orleans Saints</option>
+					<option>Tampa Bay Buccaneers</option>
+					</optgroup>
+					<optgroup label="NFC WEST">
+					<option>Delhi</option>
+					<option>Chennai</option>
+					<option>San Francisco 49ers</option>
+					<option>Seattle Seahawks</option>
+					</optgroup>
+					<optgroup label="AFC EAST">
+					<option>Buffalo Bills</option>
+					<option>Miami Dolphins</option>
+					<option>New England Patriots</option>
+					<option>New York Jets</option>
+					</optgroup>
+					<optgroup label="AFC NORTH">
+					<option>Baltimore Ravens</option>
+					<option>Cincinnati Bengals</option>
+					<option>Cleveland Browns</option>
+					<option>Pittsburgh Steelers</option>
+					</optgroup>
+					<optgroup label="AFC SOUTH">
+					<option>Houston Texans</option>
+					<option>Indianapolis Colts</option>
+					<option>Jacksonville Jaguars</option>
+					<option>Tennessee Titans</option>
+					</optgroup>
+					<optgroup label="AFC WEST">
+					<option>Denver Broncos</option>
+					<option>Kansas City Chiefs</option>
+					<option>Oakland Raiders</option>
+					<option>San Diego Chargers</option>
+					</optgroup>
+				</select>
+			</div>	
 		</div>
-
-		<div class=" col-md-6 col-sm-6 col-xs-12">
-			
-			<div class="btn-group" data-toggle="buttons">
-			<label class="btn btn-default  check-font-size">
-				<input type="checkbox" name="posted_by[]" value="individual" class="toggle"> Individual 
-			</label>
-			<label class="btn btn-default  check-font-size">
-				<input type="checkbox" name="posted_by[]" value="company" class="toggle"> Company 
-			</label>
-			<label class="btn btn-default  check-font-size">
-				<input type="checkbox" name="posted_by[]" value="consultancy" class="toggle"> Consultancy 
-			</label>
+		<div class="col-md-2 col-sm-2 col-xs-6">
+            <div class="form-group">              
+                <select name="time_for" class="form-control" >
+                  <option value="Full Time">Full Time</option>
+                  <option value="Part Time">Part Time</option>
+                  <option value="Freelancer">Freelancer</option>
+                  <option value="Work from Home">Work from Home</option>
+                </select>
+            </div>  
+         </div>
+         <div class="col-md-2 col-sm-3 col-xs-6" >
+         	 <div class="form-group"> 
+				<select name="active-expire" class="form-control">
+				  <option  value="All">All</option>
+                  <option selected value="Active">Active</option>
+                </select>
+            </div>
 		</div>
-			<input type="submit" class="btn btn-info" value="Search">
+		<div class="col-md-3 col-sm-3 col-xs-5">
+			<div class="form-group">		
+				<select class="bs-select form-control" name="education" multiple >
+					<optgroup label="Posted by">
+						<option selected value="All"><b>Posted by:</b> All</option>
+						<option value="individual">Individual</option>
+						<option value="company">Company</option>
+						<option value="consultancy">Consultancy</option>
+					</optgroup>
+				</select>
+			</div>
+		</div>
+		<div class="col-md-2 col-sm-1 col-sm-1">
+		<button type="submit" class="btn btn-info" value="Search" style="float:left;background-color:transparent !important;margin:10px 0;"><i class="fa fa-check-square-o" style="font-size:25px;color:#3598dc;"></i></button>
 		</div>
 	</div>
 </div>
+
 </form>
 <!-- Jobtip Filter End-->
 
@@ -151,34 +212,45 @@
 																		</div>
 																	</div>
 																	<div class="portlet-body" style=" padding: 0 !important;">
+																		<div class="row" style="margin:10px 0 !important;">
+																			<div class="col-md-5 col-xs-5 col-sm-5 matching-criteria-align" style="font-size:14px;">
+																				Required Profile
+																			</div>
+																			<div class="col-md-2 col-xs-2 col-sm-2 matching-criteria-align" style="font-size:14px;">
+																				vs
+																			</div>
+																			<div class="col-md-5 col-xs-5 col-sm-5 matching-criteria-align" style="font-size:14px;">
+																				My Profile
+																			</div>
+																		</div>
 																		<div class="table-scrollable">
 																			<table class="table table-bordered table-hover">
-																			<thead>
-																			<tr>
+<!-- 																			<thead style="border:0 !important;">
+																			<tr style="border:0 !important;">
 
-																				<th class="col-md-6 col-sm-6 col-xs-6 matching-criteria-align">
+																				<th class="col-md-6 col-sm-6 col-xs-6 matching-criteria-align" style="border:0 !important;">
 																					 Required Profile
 																				</th>
-																				<th class="col-md-6 col-sm-6 col-xs-6 matching-criteria-align">
+																				<th class="col-md-6 col-sm-6 col-xs-6 matching-criteria-align" style="border:0 !important;">
 																					 My Profile
 																				</th>
 																				
 																			</tr>
-																			</thead>
+																			</thead> -->
 
 																			<tbody>
 																				<tr>
-																					<td colspan="2" class="col-md-12 col-sm-12 col-xs-12 matching-criteria-align">
-																						<label>Skill</label>
+																					<td colspan="2" class="col-md-12 col-sm-12 col-xs-12 matching-criteria-align success">
+																						<label class="title-color">3 Skill Matched</label>
 																					</td>
 																				</tr>
 																				<tr>
-																					<td class="col-md-6 col-sm-6 col-xs-6 matching-criteria-align">
+																					<td class="col-md-6 col-sm-6 col-xs-6 success matching-criteria-align content-color">
 																						@foreach($post->skills as $skill)
 																							{{$skill->name}},
 																						@endforeach
 																					</td>
-																					<td class="col-md-6 col-sm-6 col-xs-6 matching-criteria-align">
+																					<td class="col-md-6 col-sm-6 col-xs-6 success matching-criteria-align content-color">
 																						@foreach($post->skills as $skill)
 																							{{$skill->name}},
 																						@endforeach
@@ -187,84 +259,84 @@
 																				<tr>
 																					<td colspan="2" class="col-md-12 col-sm-12 col-xs-12 matching-criteria-align success">
 																						<i class="glyphicon glyphicon-ok" style="color:#01b070;font-size:16px;"></i>
-																						<label> Job Role</label>
+																						<label class="title-color"> Job Role</label>
 																					</td>
 																				</tr>
 																				<tr>
-																					<td class="col-md-6 col-sm-6 col-xs-6 success matching-criteria-align">
+																					<td class="col-md-6 col-sm-6 col-xs-6 success matching-criteria-align content-color">
 																						{{ $post->role }}
 																					</td>
-																					<td class="col-md-6 col-sm-6 col-xs-6 success matching-criteria-align">
+																					<td class="col-md-6 col-sm-6 col-xs-6 success matching-criteria-align content-color">
 																						{{ $post->role }}
 																					</td>
 																				</tr>
 																				<tr>
 																					<td colspan="2" class="col-md-12 col-sm-12 col-xs-12 matching-criteria-align danger">
 																						 <i class="glyphicon glyphicon-remove" style="color:red;font-size:16px;"></i>
-																						 <label> Job Category</label>
+																						 <label class="title-color"> Job Category</label>
 																					</td>
 																				</tr>
 																				<tr>
-																					<td class="col-md-6 col-sm-6 col-xs-6 danger matching-criteria-align">
+																					<td class="col-md-6 col-sm-6 col-xs-6 danger matching-criteria-align content-color">
 																						{{ $post->prof_category }}
 																					</td>
-																					<td class="col-md-6 col-sm-6 col-xs-6 danger matching-criteria-align">
+																					<td class="col-md-6 col-sm-6 col-xs-6 danger matching-criteria-align content-color">
 																						Programmer
 																					</td>
 																				</tr>
 																				<tr>
 																					<td colspan="2" class="col-md-12 col-sm-12 col-xs-12 matching-criteria-align success">
 																						<i class="glyphicon glyphicon-ok" style="color:#01b070;font-size:16px;"></i> 
-																						<label>Experience</label>
+																						<label class="title-color">Experience</label>
 																					</td>
 																				</tr>
 																				<tr>
-																					<td class="col-md-6 col-sm-6 col-xs-6 success matching-criteria-align">
+																					<td class="col-md-6 col-sm-6 col-xs-6 success matching-criteria-align content-color">
 																						{{ $post->min_exp }}-{{ $post->max_exp }}
 																					</td>
-																					<td class="col-md-6 col-sm-6 col-xs-6 success matching-criteria-align">
+																					<td class="col-md-6 col-sm-6 col-xs-6 success matching-criteria-align content-color">
 																						{{ $post->min_exp }}-{{ $post->max_exp }}
 																					</td>
 																				</tr>
 																				<tr>
 																					<td colspan="2" class="col-md-12 col-sm-12 col-xs-12 matching-criteria-align danger">
 																						<i class="glyphicon glyphicon-remove" style="color:red;font-size:16px;"></i>
-																						<label> Education</label>
+																						<label class="title-color"> Education</label>
 																					</td>
 																				</tr>
 																				<tr>
-																					<td class="col-md-6 col-sm-6 col-xs-6 danger matching-criteria-align">
+																					<td class="col-md-6 col-sm-6 col-xs-6 danger matching-criteria-align content-color">
 																						{{ $post->education }}
 																					</td>
-																					<td class="col-md-6 col-sm-6 col-xs-6 danger matching-criteria-align">
+																					<td class="col-md-6 col-sm-6 col-xs-6 danger matching-criteria-align content-color">
 																						{{ $post->education }}
 																					</td>
 																				</tr>
 																				<tr>
 																					<td colspan="2" class="col-md-12 col-sm-12 col-xs-12 matching-criteria-align success">
 																						<i class="glyphicon glyphicon-ok" style="color:#01b070;font-size:16px;"></i> 
-																						<label>Location</label>
+																						<label class="title-color">Location</label>
 																					</td>
 																				</tr>
 																				<tr>
-																					<td class="col-md-6 col-sm-6 col-xs-6 success matching-criteria-align">
+																					<td class="col-md-6 col-sm-6 col-xs-6 success matching-criteria-align content-color">
 																						{{ $post->city }}
 																					</td>
-																					<td class="col-md-6 col-sm-6 col-xs-6 success matching-criteria-align">
+																					<td class="col-md-6 col-sm-6 col-xs-6 success matching-criteria-align content-color">
 																						{{ $post->city }}
 																					</td>
 																				</tr>
 																				<tr>
 																					<td colspan="2" class="col-md-12 col-sm-12 col-xs-12 matching-criteria-align danger">
 																						<i class="glyphicon glyphicon-remove" style="color:red;font-size:16px;"></i>
-																						<label> Job Type</label>
+																						<label class="title-color"> Job Type</label>
 																					</td>
 																				</tr>
 																				<tr>
-																					<td class="col-md-6 col-sm-6 col-xs-6 danger matching-criteria-align">
+																					<td class="col-md-6 col-sm-6 col-xs-6 danger matching-criteria-align content-color">
 																						{{ $post->time_for }}
 																					</td>
-																					<td class="col-md-6 col-sm-6 col-xs-6 danger matching-criteria-align">
+																					<td class="col-md-6 col-sm-6 col-xs-6 danger matching-criteria-align content-color">
 																						{{ $post->jobtype }}
 																					</td>
 																				</tr>
@@ -288,38 +360,26 @@
 									<div class="timeline-body" style="">
 										<div class="timeline-body-head">
 											@if(Auth::user()->induser_id == $post->individual_id && $post->individual_id != null)
-												<div class="timeline-body-head-caption">
-													@if($post->post_type == 'job')													
+												<div class="timeline-body-head-caption">												
 														<a href="/profile/ind/{{$post->individual_id}}" class="link-label" data-utype="ind">
 															You have
 														</a>
-													@else													
-														<a href="/profile/ind/{{$post->individual_id}}" class="link-label" data-utype="ind">
-															You have
-														</a>
-													@endif
 													<span class="timeline-body-time font-grey-cascade">Posted at 
 														{{ date('M d, Y', strtotime($post->created_at)) }}
 													</span>
 												</div>
 											@elseif(Auth::user()->corpuser_id == $post->corporate_id && $post->corporate_id != null)
-												<div class="timeline-body-head-caption">
-													@if($post->post_type == 'job')													
+												<div class="timeline-body-head-caption">													
 														<a href="/profile/corp/{{$post->corporate_id}}" class="link-label" data-utype="corp">
 															You have
 														</a>
-													@else													
-														<a href="/profile/corp/{{$post->corporate_id}}" class="link-label" data-utype="corp">
-															You have
-														</a>
-													@endif
 													<span class="timeline-body-time font-grey-cascade">Posted at 
 														{{ date('M d, Y', strtotime($post->created_at)) }}
 													</span>
 												</div>
 											@elseif($post->individual_id != null)
 												<div class="timeline-body-head-caption" data-puid="{{$post->individual_id}}">
-													@if($post->post_type == 'job')
+												
 														@if($links->contains('id', $post->individual_id))
 														<a href="#links-follow" data-toggle="modal" class="user-link" data-linked="yes" data-utype="ind">
 															<i class="fa fa-link (alias)" style="color:salmon;"></i>
@@ -337,31 +397,15 @@
 														<a href="/profile/ind/{{$post->individual_id}}" style="padding: 0px 0px 0px 32px;font-size: 15px;text-decoration:none;font-weight:600;">
 															{{ $post->induser->fname}} {{ $post->induser->lname}}
 														</a>
-													@else
-														@if($links->contains('id', $post->individual_id))
-														<a href="#links-follow" data-toggle="modal" class="user-link" data-linked="yes" data-utype="ind">
-															<i class="fa fa-link (alias)" style="color:salmon;"></i>
-														</a>
-														@elseif($following->contains('id', $post->individual_id))
-														<a class="user-link2" data-linked="yes" data-utype="ind">
-															<i class="fa fa-link (alias)" style="color:steelblue;"></i>
-														</a>
-														@else
-														<a href="#links-follow" data-toggle="modal" class="user-link" data-linked="no" data-utype="ind">
-															<i class="fa fa-unlink (alias)" style="color:lightslategray;"></i>
-														</a>
-														@endif
-														<a href="/profile/ind/{{$post->individual_id}}" style="padding: 0px 0px 0px 32px;font-size: 15px;text-decoration:none;font-weight:600;">
-															{{ $post->induser->fname }} {{ $post->induser->lname }}
-														</a>
-													@endif
+													
+
+													
 													<span class="timeline-body-time font-grey-cascade">Posted at 
 														{{ date('M d, Y', strtotime($post->created_at)) }}
 													</span>
 												</div>
 											@elseif($post->corporate_id != null)
 												<div class="timeline-body-head-caption" data-puid="{{$post->corporate_id}}">
-													@if($post->post_type == 'job')
 														@if($following->contains('id', $post->corporate_id))
 															<a href="#links-follow" data-toggle="modal" class="user-link" data-linked="yes" data-utype="corp">
 																<i class="icon-user-following" style="color:black;"></i>
@@ -374,7 +418,6 @@
 														<a href="/profile/corp/{{$post->corporate_id}}" style="padding: 0px 0px 0px 32px;font-size: 15px;text-decoration:none;font-weight:600;">
 															{{ $post->corpuser->firm_name}}
 														</a>
-													@endif
 													<span class="timeline-body-time font-grey-cascade">Posted at 
 														{{ date('M d, Y', strtotime($post->created_at)) }}
 													</span>
@@ -792,11 +835,17 @@
 @stop
 
 @section('javascript')
-
+<script>
+jQuery(document).ready(function() {       
+	ComponentsIonSliders.init();    
+	ComponentsDropdowns.init();
+	ComponentsEditors.init();
+    FormWizard.init();
+});
+</script>
 <script type="text/javascript">
 $(document).ready(function(){
 
-	jQuery('.show-filter').hide();
     jQuery('.hide-show-filter').on('click', function(event) {
 	    jQuery('.show-filter').toggle('show');
 	    jQuery('.hide-label').toggle('hide');
