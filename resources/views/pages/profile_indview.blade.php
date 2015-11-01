@@ -29,10 +29,16 @@
 					</div>
 					@endif
 
-					@if($user->operating_since != null)
+					@if($user->operating_since != null && $user->operating_since != "Startup")
 					<div class="profile-usertitle-job" style="font-size: 15px;font-weight: 500;">
-						Since: {{ $user->operating_since }} Years, {{ $user->emp_count }} Employee
+						Established Since: {{ $user->operating_since }}  Years, {{ $user->emp_count }} Employee
 					</div>
+					@elseif($user->operating_since != null && $user->operating_since == "Startup")
+					<div class="profile-usertitle-job" style="font-size: 15px;font-weight: 500;">
+						Established Since: {{ $user->operating_since }}, {{ $user->emp_count }} Employee
+					</div>
+					@elseif($user->operating_since != null)
+					--
 					@endif
 
 					<!-- Connection status -->
@@ -426,9 +432,11 @@
 							<label class="control-label col-md-4 col-xs-6">Operating Since:</label>
 							<div class="col-md-6 col-xs-6">
 								<p class="form-control-static view-page">
-									@if($user->operating_since != null)
+									@if($user->operating_since != null && $user->operating_since != "Startup")
 									{{ $user->operating_since }} Years
-									@elseif($user->operating_since != null)
+									@elseif($user->operating_since == "Startup")
+									{{ $user->operating_since }}
+									@else
 									--
 									@endif
 								</p>
@@ -692,12 +700,40 @@
 					<!--/span-->
 				</div>
 				<div class="row">
-					<div class="col-md-8 col-sm-8 col-xs-12">
+					<div class="col-md-6 col-sm-6 col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-md-4 col-xs-12">Profile Holder Name:</label>
+							<label class="control-label col-md-4 col-xs-12">User Name:</label>
+							<div class="col-md-8 col-xs-12">
+								<p class="form-control-static view-page">	
+									@if($user->username != null && $user->working_as != null)
+
+									I am {{ $user->username }} working as {{ $user->working_as }}
+
+									@elseif($user->username != null && $user->working_as == null)
+
+									{{ $user->username }}
+
+									@elseif($user->username == null && $user->working_as != null)
+
+									I am {{ $user->working_as }}
+
+									@else
+									--
+									@endif
+								</p>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-6 col-sm-6 col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-md-4 col-xs-12">Slogan:</label>
 							<div class="col-md-8 col-xs-12">
 								<p class="form-control-static view-page">
-									I am {{ $user->username }} working as {{ $user->working_as }}
+									@if($user->slogan != null)
+									{{ $user->slogan }}
+									@else
+									--
+									@endif
 								</p>
 							</div>
 						</div>

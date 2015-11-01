@@ -1,5 +1,5 @@
 
-<div class="modal-body">
+<div class="modal-body modal-body-new">
  <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
 <div class="portlet light bordered" style="border: none !important;background:transparent">                                     
     <div class="portlet-body form">
@@ -7,7 +7,7 @@
             <div class="row"> 
                     <div class="timeline" >
                         <!-- TIMELINE ITEM -->
-                        <div class="timeline-item time-item">
+                        <div class="timeline-item">
                             <div class="timeline-badge" style="margin: 10px 0px;">
                                 @if(  $post->induser != null && !empty(  $post->induser->profile_pic))
                                 <img class="timeline-badge-userpic userpic-box" src="/img/profile/{{   $post->induser->profile_pic }}" title="{{   $post->induser->fname }}">
@@ -26,155 +26,8 @@
                                 <div class="match"><a data-toggle="modal" href="#{{  $post->id}}"><i class="icon-speedometer"></i> 55%</a></div>
                                 <div id="oval"></div>
                                 <!-- Modal for Matching Percentage -->
-                                <div class="modal fade" id="{{  $post->id}}" tabindex="-1" role="basic" aria-hidden="true">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header" style=" padding: 10px !important;">
-                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="position: absolute;right: 15px;top: 15px;"></button>
-                                                <div class="modal-body" style=" padding:10px 0 !important;">
-                                                    
-                                                        <!-- BEGIN BORDERED TABLE PORTLET-->
-                                                        <div class="portlet box">
-                                                            <div class="portlet-title">
-                                                                <div class="caption links-title">
-                                                                    <i class="icon-speedometer" style="font-size:16px;"></i> 56% Match
-                                                                </div>
-                                                            </div>
-                                                            <div class="portlet-body" style=" padding: 0 !important;">
-                                                                <div class="table-scrollable">
-                                                                    <table class="table table-bordered table-hover">
-                                                                    <thead>
-                                                                    <tr>
-
-                                                                        <th class="col-md-6 col-sm-6 col-xs-6 matching-criteria-align">
-                                                                             Required Profile
-                                                                        </th>
-                                                                        <th class="col-md-6 col-sm-6 col-xs-6 matching-criteria-align">
-                                                                             My Profile
-                                                                        </th>
-                                                                        
-                                                                    </tr>
-                                                                    </thead>
-
-                                                                    <tbody>
-                                                                        <tr>
-                                                                            <td colspan="2" class="col-md-12 col-sm-12 col-xs-12 matching-criteria-align">
-                                                                                <label>Skill</label>
-                                                                            </td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td class="col-md-6 col-sm-6 col-xs-6 matching-criteria-align">
-                                                                                @foreach(  $post->skills as $skill)
-                                                                                    {{$skill->name}},
-                                                                                @endforeach
-                                                                            </td>
-                                                                            <td class="col-md-6 col-sm-6 col-xs-6 matching-criteria-align">
-                                                                                @foreach(  $post->skills as $skill)
-                                                                                    {{$skill->name}},
-                                                                                @endforeach
-                                                                            </td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td colspan="2" class="col-md-12 col-sm-12 col-xs-12 matching-criteria-align success">
-                                                                                <i class="glyphicon glyphicon-ok" style="color:#01b070;font-size:16px;"></i>
-                                                                                <label> Job Role</label>
-                                                                            </td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td class="col-md-6 col-sm-6 col-xs-6 success matching-criteria-align">
-                                                                                {{   $post->role }}
-                                                                            </td>
-                                                                            <td class="col-md-6 col-sm-6 col-xs-6 success matching-criteria-align">
-                                                                                {{   $post->role }}
-                                                                            </td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td colspan="2" class="col-md-12 col-sm-12 col-xs-12 matching-criteria-align danger">
-                                                                                 <i class="glyphicon glyphicon-remove" style="color:red;font-size:16px;"></i>
-                                                                                 <label> Job Category</label>
-                                                                            </td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td class="col-md-6 col-sm-6 col-xs-6 danger matching-criteria-align">
-                                                                                {{   $post->prof_category }}
-                                                                            </td>
-                                                                            <td class="col-md-6 col-sm-6 col-xs-6 danger matching-criteria-align">
-                                                                                Programmer
-                                                                            </td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td colspan="2" class="col-md-12 col-sm-12 col-xs-12 matching-criteria-align success">
-                                                                                <i class="glyphicon glyphicon-ok" style="color:#01b070;font-size:16px;"></i> 
-                                                                                <label>Experience</label>
-                                                                            </td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td class="col-md-6 col-sm-6 col-xs-6 success matching-criteria-align">
-                                                                                {{   $post->min_exp }}-{{   $post->max_exp }}
-                                                                            </td>
-                                                                            <td class="col-md-6 col-sm-6 col-xs-6 success matching-criteria-align">
-                                                                                {{   $post->min_exp }}-{{   $post->max_exp }}
-                                                                            </td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td colspan="2" class="col-md-12 col-sm-12 col-xs-12 matching-criteria-align danger">
-                                                                                <i class="glyphicon glyphicon-remove" style="color:red;font-size:16px;"></i>
-                                                                                <label> Education</label>
-                                                                            </td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td class="col-md-6 col-sm-6 col-xs-6 danger matching-criteria-align">
-                                                                                {{   $post->education }}
-                                                                            </td>
-                                                                            <td class="col-md-6 col-sm-6 col-xs-6 danger matching-criteria-align">
-                                                                                {{   $post->education }}
-                                                                            </td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td colspan="2" class="col-md-12 col-sm-12 col-xs-12 matching-criteria-align success">
-                                                                                <i class="glyphicon glyphicon-ok" style="color:#01b070;font-size:16px;"></i> 
-                                                                                <label>Location</label>
-                                                                            </td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td class="col-md-6 col-sm-6 col-xs-6 success matching-criteria-align">
-                                                                                {{   $post->city }}
-                                                                            </td>
-                                                                            <td class="col-md-6 col-sm-6 col-xs-6 success matching-criteria-align">
-                                                                                {{   $post->city }}
-                                                                            </td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td colspan="2" class="col-md-12 col-sm-12 col-xs-12 matching-criteria-align danger">
-                                                                                <i class="glyphicon glyphicon-remove" style="color:red;font-size:16px;"></i>
-                                                                                <label> Job Type</label>
-                                                                            </td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td class="col-md-6 col-sm-6 col-xs-6 danger matching-criteria-align">
-                                                                                {{   $post->time_for }}
-                                                                            </td>
-                                                                            <td class="col-md-6 col-sm-6 col-xs-6 danger matching-criteria-align">
-                                                                                {{   $post->jobtype }}
-                                                                            </td>
-                                                                        </tr>
-                                                                    </tbody>
-                                                                    </table>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <!-- END BORDERED TABLE PORTLET-->
-                                                    <!-- </div> -->
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- /.modal-content -->
-                                    </div>
-                                    <!-- /.modal-dialog -->
-                                </div>
-                                <!-- /.modal -->
                             </div>
-                             <div class="timeline-body" style="">
+                             <div class="timeline-body" style=" margin-top:-9px;">
                                 <div class="timeline-body-head">
                                     @if(Auth::user()->induser_id ==   $post->individual_id &&   $post->individual_id != null)
                                         <div class="timeline-body-head-caption">
@@ -297,6 +150,180 @@
                                     </div>
                                 </div>  
                             </div>
+                                    <div class="portlet-body" style="margin: 0 -5px;">
+                                        <div class="panel-group accordion" id="accordion1" style="margin-bottom: 0;">
+                                            <div class="panel panel-default" style=" position: relative;border:0 !important;">
+                                                <div class="panel-heading" style="background-color: white;margin: 5px 0px;">
+                                                    <h4 class="panel-title">
+                                                    <a class="" 
+                                                    data-toggle="collapse" data-parent="#accordion1" href="#collapse_1_1"  style="font-size: 15px;font-weight: 600;padding:0 16px;" >
+                                                    Details: </a>   
+                                                    </h4>
+                                                </div>
+                                                <div id="collapse_1_1" class="panel-collapse">
+                                                    <div class="panel-body" style="border-top: 0;padding: 4px 15px;">
+                                                        
+                                                        <div class="row">
+                                                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                                                
+                                                                    <label class="detail-label">Education Required :</label>
+                                                                
+                                                                    {{ $post->education }}
+                                                                 
+                                                            </div>
+                                                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                                                
+                                                                    <label class="detail-label">Role :</label>
+                                                                
+                                                                    {{ $post->role }}
+                                                                
+                                                            </div>
+                                                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                                                
+                                                                    <label class="detail-label">Job Category :</label>
+                                                                
+                                                                    {{ $post->prof_category }}
+                                                                 
+                                                            </div>
+                                                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                                                
+                                                                    <label class="detail-label">Skills :</label>
+                                                                
+                                                                    @foreach($post->skills as $skill)
+                                                                        {{$skill->name}},
+                                                                    @endforeach
+                                                                 
+                                                            </div>
+                                                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                                                
+                                                                    <label class="detail-label">Salary (<i class="fa fa-rupee (alias)"></i>):</label>
+                                                                
+                                                                    {{ $post->min_sal }}-{{ $post->max_sal }} {{ $post->salary_type }}
+                                                                 
+                                                            </div>
+                                                        </div>
+                                                        <?php 
+                                                            $strNew = '+'.$post->post_duration.' day';
+                                                            $strOld = $post->created_at;
+                                                            $fresh = $strOld->modify($strNew);
+
+                                                            $currentDate = new \DateTime();
+                                                            $expiryDate = new \DateTime($fresh);
+                                                            // $difference = $expiryDate->diff($currentDate);
+                                                            // $remainingDays = $difference->format('%d');
+                                                            if($currentDate >= $fresh){
+                                                                $expired = 1;
+                                                            }else{
+                                                                $expired = 0;
+                                                            }
+                                                        ?>
+                                                        <div class="skill-display">Description : </div>
+                                                        {{ $post->job_detail }}
+                                                        
+                                                        @if($post->post_type == 'job')
+                                                        <div class="skill-display">Reference Id&nbsp;: {{ $post->reference_id }} </div> 
+                                                        @endif
+
+                                                        @if($expired != 1)
+                                                        <div class="skill-display">Contact Details : </div> 
+                                                        <div class="row">
+                                                            @if($post->post_type == 'job' && $post->website_redirect_url != null)
+                                                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                                                Click on Apply, it will redirect you to Company Website.
+                                                            </div>
+                                                            @endif
+                                                            @if($post->post_type == 'job' && $post->website_redirect_url != null && $post->corpuser != null)
+                                                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                                                
+                                                                    <label class="detail-label"><i class="glyphicon glyphicon-globe" style="color: deepskyblue;"></i> :</label>
+                                                                {{ $post->website_url }}
+                                                                    
+                                                                
+                                                            </div>
+                                                            @endif
+                                                            @if($post->website_redirect_url == null && $post->contact_person != null)
+                                                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                                                
+                                                                    <label class="detail-label"><i class="glyphicon glyphicon-user"></i> :</label>
+                                                                
+                                                                    {{ $post->contact_person }}
+                                                                
+                                                            </div>
+                                                            @endif
+
+                                                            @if($post->email_id != null && $post->alt_emailid != null && $post->website_redirect_url == null)
+                                                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                                                
+                                                                    <label class="detail-label"><i class="glyphicon glyphicon-envelope"></i> :</label>
+                                                                
+                                                                    
+                                                                    {{ $post->email_id }} - {{ $post->alt_emailid }}
+                                                                
+                                                            </div>  
+                                                            
+                                                            @elseif($post->email_id != null && $post->alt_emailid == null && $post->website_redirect_url == null)
+                                                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                                                
+                                                                    <label class="detail-label"><i class="glyphicon glyphicon-envelope"></i> :</label>
+                                                                
+                                                                    
+                                                                    {{ $post->email_id }}
+                                                                
+                                                            </div>
+                                                            @elseif($post->email_id == null && $post->alt_emailid != null && $post->website_redirect_url == null)
+                                                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                                                
+                                                                    <label class="detail-label"><i class="glyphicon glyphicon-envelope"></i> :</label>
+                                                                
+                                                                        {{ $post->alt_emailid }}
+                                                                 
+                                                            </div>  
+                                                            @endif  
+                                                            @if($post->phone != null && $post->alt_phone != null && $post->website_redirect_url == null)
+                                                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                                                
+                                                                    <label class="detail-label"><i class="glyphicon glyphicon-earphone"></i> :</label>
+                                                                
+                                                                    
+                                                                    {{ $post->phone }} - {{ $post->alt_phone }}
+                                                                 
+                                                            </div>  
+                                                            @elseif($post->phone != null && $post->alt_phone == null && $post->website_redirect_url == null)
+                                                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                                                
+                                                                    <label class="detail-label"><i class="glyphicon glyphicon-earphone"></i> :</label>
+                                                                
+                                                                    
+                                                                    {{ $post->phone }}
+                                                                
+                                                            </div>
+                                                            @elseif($post->phone == null && $post->alt_phone != null && $post->website_redirect_url == null)
+                                                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                                                
+                                                                    <label class="detail-label"><i class="glyphicon glyphicon-earphone"></i> :</label>
+                                                                
+                                                                        {{ $post->alt_phone }}
+                                                                
+                                                            </div>  
+                                                            @endif                                          
+                                                        </div>
+                                                        @endif
+                                                        <div class="skill-display">Post Id&nbsp;: {{ $post->unique_id }} </div>
+
+                                                        @if($expired != 1)
+                                                             <div class="skill-display">Post expires on:                                         
+                                                             <span class="btn-success" style="padding: 2px 8px;font-size: 12px;border-radius: 20px !important;">{{$fresh->format("d M Y")}}</span>
+                                                             </div>
+                                                         @else
+                                                             <div class="skill-display">Post expired on:                                         
+                                                             <span class="btn-danger" style="padding: 2px 8px;font-size: 12px;border-radius: 20px !important;">{{$fresh->format("d M Y")}}</span>
+                                                             </div>
+                                                        @endif
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                         </div>
                     </div>
              </div>

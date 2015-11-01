@@ -221,19 +221,6 @@
 																		</div>
 																		<div class="table-scrollable">
 																			<table class="table table-bordered table-hover">
-<!-- 																			<thead style="border:0 !important;">
-																			<tr style="border:0 !important;">
-
-																				<th class="col-md-6 col-sm-6 col-xs-6 matching-criteria-align" style="border:0 !important;">
-																					 Required Profile
-																				</th>
-																				<th class="col-md-6 col-sm-6 col-xs-6 matching-criteria-align" style="border:0 !important;">
-																					 My Profile
-																				</th>
-																				
-																			</tr>
-																			</thead> -->
-
 																			<tbody>
 																				<tr>
 																					<td colspan="2" class="col-md-12 col-sm-12 col-xs-12 matching-criteria-align success">

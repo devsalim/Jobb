@@ -331,3 +331,16 @@ display: table;
 .content-color{
   color: black !important;
 } 
+
+
+@media (min-width: 768px){
+.modal-dialog-new {
+    width: 540px;
+    margin: 56px auto !important;
+}
+}
+
+.modal-body-new{
+  height: 560px;
+    overflow-y: auto;
+}

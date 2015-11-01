@@ -2,7 +2,7 @@
 
 @section('content')
 
-<div class="portlet light bordered">
+<div class="portlet light bordered" style="border: 1px solid #e1e1e1 !important;">
 	<div class="portlet-title">
 		<div class="caption">
 			<i class=""></i>
@@ -10,9 +10,6 @@
 		</div>
 		<div class="tools">
 			<a href="" class="collapse"></a>
-			<a href="#portlet-config" data-toggle="modal" class="config"></a>
-			<a href="" class="reload"></a>
-			<a href="" class="remove"></a>
 		</div>
 	</div>
 	<div class="portlet-body form">
@@ -23,7 +20,7 @@
 				<div class="row">
 					<div class="" style=""></div>
 					<div class="col-md-8" style="">
-						<div class="row-md-10">
+						<div class="row">
 							@if (count($errors) > 0)
 							<div class="alert alert-danger">
 								<ul>
@@ -81,7 +78,7 @@
 							</div>
 							<!--/span-->
 						</div>
-						<div class="row-md-10">
+						<div class="row">
 							<div class="col-md-6">
 								<div class="form-group">
 									<label>Phone</label>
@@ -119,7 +116,7 @@
 	</div>
 </div>
 
-<div class="portlet light bordered">
+<div class="portlet light bordered" style="border: 1px solid #e1e1e1 !important;">
 	<div class="portlet-title">
 		<div class="caption">
 			<i class=""></i>
@@ -127,20 +124,29 @@
 		</div>
 		<div class="tools">
 			<a href="" class="collapse"></a>
-			<a href="#portlet-config" data-toggle="modal" class="config"></a>
-			<a href="" class="reload"></a>
-			<a href="" class="remove"></a>
 		</div>
 	</div>
 	<div class="portlet-body form">
 		<!-- BEGIN FORM-->
-		<form action="{{ url('/corporate/update', Auth::user()->corpuser_id) }}" class="horizontal-form" method="post">
+		<form action="{{ url('/corporate/update', Auth::user()->corpuser_id) }}" id="corp_validation" class="horizontal-form" method="post">
 			<input type="hidden" name="_token" value="{{ csrf_token() }}">
 			<div class="form-body">
 				<div class="row">
-					<div class="" style=""></div>
-					<div class="col-md-8" style="">
-						<div class="row-md-10">
+					<div class="col-md-8">
+						<div class="row">
+							<div class="col-md-6">
+								<div class="form-group">								
+									<label>Slogan</label>										
+									<div class="input-group">
+										<span class="input-group-addon">
+											<i class="fa fa-comment-o" style="color:darkcyan;"></i>
+										</span>
+										<input type="text" name="slogan" class="form-control" value="{{ $user->slogan }}" placeholder="Enter Company Slogan">
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
 							<div class="col-md-12">
 								<div class="form-group">								
 									<label>About Firm</label>										
@@ -153,8 +159,7 @@
 								</div>
 							</div>
 						</div>						
-						<div class="row-md-2"></div>
-						<div class="row-md-10">
+						<div class="row">
 							<div class="col-md-6">
 								<div class="form-group">
 									<label>Industry</label>
@@ -190,39 +195,7 @@
 							</div>
 							<!--/span-->
 						</div>
-						<!--<div class="row-md-2"></div>
-						<div class="row-md-10">
-							<div class="col-md-6">
-								<div class="form-group">
-									<label>Functional Area</label>
-									<div class="input-group">
-										<span class="input-group-addon">
-											<i class="fa fa-university " style="color:darkcyan;"></i>
-										</span>
-										<select class="form-control" name="">
-											<option value="AL">Alabama</option>
-											<option value="WY">Wyoming</option>
-										</select>
-									</div>
-								</div>
-							</div>
-							<div class="col-md-6">
-								<div class="form-group">
-									<label>Job Role</label>
-									<div class="input-group">
-										<span class="input-group-addon">
-											<i class="fa fa-university" style="color:darkcyan;"></i>
-										</span>
-										<select name="role" class="form-control" value="{{ $user->role }}">
-											<option value="AL">Alabama</option>
-											<option value="WY">Wyoming</option>
-										</select>
-									</div>
-								</div>
-							</div>
-						</div>-->
-						<div class="row-md-2"></div>
-						<div class="row-md-10">
+						<div class="row">
 							<div class="col-md-12">
 								<div class="form-group">								
 									<label>Work Area</label>										
@@ -230,8 +203,7 @@
 								</div>
 							</div>
 						</div>
-						<div class="row-md-2"></div>
-						<div class="row-md-10">
+						<div class="row">
 							<div class="col-md-12">
 								<div class="form-group">								
 									<label>Address</label>										
@@ -244,8 +216,7 @@
 								</div>
 							</div>
 						</div>
-						<div class="row-md-2"></div>
-						<div class="row-md-10">
+						<div class="row">
 							<div class="col-md-6">
 								<div class="form-group">
 									<label>Website</label>
@@ -253,20 +224,17 @@
 										<span class="input-group-addon">
 											<i class="icon-info"style="color:darkcyan;"></i>
 										</span>
-										<input type="url" name="website_url" class="form-control" value="{{ $user->website_url }}" placeholder="Company Website">
+										<input type="text" name="website_url" class="form-control" value="{{ $user->website_url }}" placeholder="http://www.website.com">
 									</div>
 								</div>
 							</div>
 							<!--/span-->
-						</div>
-						<div class="row-md-2"></div>
-						<div class="row-md-10">
 							<div class="col-md-6">
 								<div class="form-group">
 									<label>No of Employee</label>
 									<div class="input-group">
 										<span class="input-group-addon">
-											<i class="fa fa-user" style="color:darkcyan;"></i>
+											<i class="fa fa-users" style="color:darkcyan;"></i>
 										</span>
 										<select name="emp_count" class="form-control" value="{{ $user->emp_count }}">
 											<option value="0 - 100">0 - 100</option>
@@ -280,7 +248,8 @@
 									</div>
 								</div>
 							</div>
-							<!--/span-->
+						</div>
+						<div class="row">
 							<div class="col-md-6">
 								<div class="form-group">
 									<label>State</label>
@@ -304,9 +273,11 @@
 									</div>
 								</div>
 							</div>
+						</div>
+						<div class="row">
 							<div class="col-md-6">
 								<div class="form-group">
-									<label>Profile Holder Name</label>
+									<label>Profile Handler Name</label>
 									<div class="input-group">
 										<span class="input-group-addon">
 											<i class="fa fa-user" style="color:darkcyan;"></i>
@@ -331,12 +302,11 @@
 									</div>
 								</div>
 							</div>
-						</div>
-						
+						</div>	
 					</div>
 				</div>
 				<div class="form-actions ">
-					<button type="submit" class="btn blue"><i class="fa fa-check"></i> Save</button>
+					<button type="submit" class="btn blue"><i class="fa fa-check"></i> Update</button>
 					<button type="button" class="btn default">Cancel</button>
 				</div>
 			</div>
@@ -348,6 +318,7 @@
 @stop
 
 @section('javascript')
+<script src="{{ asset('/assets/corp_validation.js') }}"></script>
 <script>
 	jQuery(document).ready(function() {
 	    ComponentsDropdowns.init();

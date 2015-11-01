@@ -20,7 +20,7 @@
 				<div class="row">
 					<div class="" style=""></div>
 					<div class="col-md-8" style="">
-						<div class="row-md-10">
+						<div class="row">
 							@if (count($errors) > 0)
 							<div class="alert alert-danger">
 								<ul>
@@ -55,7 +55,7 @@
 							</div>
 							<!--/span-->
 						</div>
-						<div class="row-md-10">
+						<div class="row">
 							<div class="col-md-6 col-sm-6">
 								<div class="form-group">
 									<label>Mobile No</label>
@@ -123,7 +123,7 @@
 				<div class="row">
 					<div class="" style=""></div>
 					<div class="col-md-8" style="">
-						<div class="row-md-10">
+						<div class="row">
 							<div class="col-md-12">
 								<div class="form-group">
 									<label>About Me</label>
@@ -138,15 +138,16 @@
 							<!--/span-->
 						</div>	
 						<!-- new column added as dob and gender	 -->
-						<div class="row-md-10">
+						<div class="row">
 							<div class="col-md-6">
 								<div class="form-group">
-									<label>Date of Birth</label>
+									<label>Date of Birth <span class="required">
+											* </span></label>
 									<div class="input-group">
 										<span class="input-group-addon">
 											<i class="icon-calendar" style="color:darkcyan;"></i>
 										</span>
-										<input class="form-control date-picker" size="16" type="text" value="{{ $user->dob }}"/>
+										<input class="form-control date-picker" name="dob" size="16" type="text" value="{{ $user->dob }}"/>
 									</div>
 								</div>
 							</div>
@@ -157,7 +158,7 @@
 									<div class="input-group">
 											<div class="md-radio-inline">
 												<div class="md-radio">
-													<input type="radio" id="radio6" name="gender" value="Male" class="md-radiobtn" 
+													<input type="radio" checked id="radio6" name="gender" value="Male" class="md-radiobtn" 
 														@if($user->gender == 'Male')
 															checked
 														@endif
@@ -180,6 +181,18 @@
 													<span class="box"></span>
 													Female </label>
 												</div>
+												<div class="md-radio">
+													<input type="radio" id="radio7" name="gender" value="Others" class="md-radiobtn" 
+													@if($user->gender == 'Others')
+														checked
+													@endif
+													>
+													<label for="radio7" style="">
+													<span></span>
+													<span class="check"></span>
+													<span class="box"></span>
+													Others </label>
+												</div>
 											</div>	
 											<div id="radio_error"></div>					<!-- /input-group -->
 										</div>
@@ -187,10 +200,11 @@
 							</div>
 							<!--/span-->
 						</div>		
-						<div class="row-md-10">
+						<div class="row">
 							<div class="col-md-6 col-sm-6">
 								<div class="form-group">
-									<label>Education</label>
+									<label>Education <span class="required">
+											* </span></label>
 									<div class="input-group">
 										<span class="input-group-addon">
 											<i class="icon-graduation"></i>
@@ -221,20 +235,20 @@
 							<!--/span-->
 							<div class="col-md-6 col-sm-6">
 								<div class="form-group">
-									<label>Branch</label>
+									<label>Branch <span class="required">
+											* </span></label>
 									<div class="input-group">
 										<span class="input-group-addon">
 										<i class="icon-graduation"></i>
 										</span>
 										<select class="form-control" name="branch" id="child_selection" value="{{ $user->branch }}">
-											<option value="">--Please Select--</option>
 										</select>
 									</div>
 								</div>
 							</div>
 							<!--/span-->
 						</div>						
-						<div class="row-md-10">
+						<div class="row">
 							
 							<div class="col-md-6 col-sm-6">
 								<div class="form-group">
@@ -258,6 +272,7 @@
 										</span>
 										<select class="form-control" name="experience" >
 											<option value="">-- Select --</option>
+											<option @if($user->experience=="Fresher") {{ $selected }} @endif value="Fresher">Fresher</option>
 											<option @if($user->experience=="1") {{ $selected }} @endif value="1">1</option>
 											<option @if($user->experience=="2") {{ $selected }} @endif value="2">2</option>
 											<option @if($user->experience=="3") {{ $selected }} @endif value="3">3</option>
@@ -278,7 +293,7 @@
 								</div>
 							</div>
 						</div>
-						<div class="row-md-10">
+						<div class="row">
 							<div class="col-md-6 col-sm-6">
 								<div class="form-group">
 									<label>Job Category</label>
@@ -328,10 +343,11 @@
 							<!--/span-->
 						</div>
 						
-						<div class="row-md-10">
+						<div class="row">
 							<div class="col-md-6 col-sm-6">
 								<div class="form-group">
-									<label>City</label>									
+									<label>City <span class="required">
+											* </span></label>									
 									<div class="input-group">
 										<span class="input-group-addon">
 											<i class="fa fa-map-marker"></i>
@@ -343,7 +359,8 @@
 							<!--/span-->
 							<div class="col-md-6 col-sm-6">
 								<div class="form-group">
-									<label>State</label>
+									<label>State <span class="required">
+											* </span></label>
 									<div class="input-group">
 										<span class="input-group-addon">
 										<i class="fa fa-map-marker"></i>
@@ -389,7 +406,7 @@
 							</div>
 							<!--/span-->
 						</div>
-						<div class="row-md-10">
+						<div class="row">
 							<div class="col-md-6 col-sm-6">
 								<div class="form-group">
 									<label>Add Skill</label>
@@ -406,7 +423,8 @@
 							
 							<div class="col-md-6 col-sm-6">
 								<div class="form-group">
-									<label>Added Skill</label>
+									<label>Added Skill <span class="required">
+											* </span></label>
 								    <input type="text" id="linked_skill" name="linked_skill" value="{{ $user->linked_skill }}"
 								     		class="form-control select2"
 								     		placeholder="List of skills to be added">
@@ -415,10 +433,11 @@
 								</div>
 							</div>
 						</div>
-						<div class="row-md-10">
+						<div class="row">
 							<div class="col-md-6 col-sm-6">
 								<div class="form-group">
-									<label>Prefered Location</label>
+									<label>Prefered Location <span class="required">
+											* </span></label>
 									<div class="input-group">
 										<span class="input-group-addon">
 											<i class="fa fa-map-marker"></i>
@@ -480,13 +499,14 @@
 							<!--/span-->
 							<div class="col-md-6 col-sm-6">
 								<div class="form-group">
-									<label>Prefered Job Type</label>
+									<label>Prefered Job Type <span class="required">
+											* </span></label>
 									<div class="input-group">
 										<span class="input-group-addon">
 											<i class=" icon-briefcase"></i>
 										</span>
 										<select class="form-control" value="{{ $user->prefered_jobtype }}" name="prefered_jobtype">
-											<option value="">-- Select --</option>
+											<option value="">&nbsp;</option>
 											<option @if($user->prefered_jobtype=="Full Time") {{ $selected }} @endif value="Full Time">Full Time</option>
 											<option @if($user->prefered_jobtype=="Part Time") {{ $selected }} @endif value="Part Time">Part Time</option>
 											<option @if($user->prefered_jobtype=="Freelancer") {{ $selected }} @endif value="Freelancer">Freelancer</option>
@@ -496,7 +516,7 @@
 								</div>
 							</div>
 						</div>
-						<div class="row-md-10">
+						<div class="row">
 							<div class="col-md-12">
 								<div class="form-group" style="">
 									<label class="control-label">Upload Resume <small style="font-weight: 400; font-size: 13px;">(Optional) only pdf or word format</small></label>&nbsp;
@@ -536,7 +556,7 @@
 
 @section('javascript')
 <script src="{{ asset('/assets/Edubranch.js') }}"></script>
-<script src="{{ asset('/assets/ind_field.js') }}"></script>
+<script src="{{ asset('/assets/ind_validation.js') }}"></script>
 <script>
 	jQuery(document).ready(function() { 
 	    ComponentsIonSliders.init();
