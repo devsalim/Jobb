@@ -288,9 +288,11 @@
 							<label class="control-label col-md-4 col-xs-6">Experience:</label>
 							<div class="col-md-6 col-xs-6">
 								<p class="form-control-static view-page">
-									@if($user->experience != null)
+									@if($user->experience != null && $user->experience != "Fresher")
 									{{ $user->experience }} Years
-									@elseif($user->experience == null)
+									@elseif($user->experience == "Fresher" )
+									{{ $user->experience }}
+									@else
 									--
 									@endif
 								</p>

@@ -206,8 +206,15 @@
 												<i class="icon-speedometer"></i> 
 												<?php
 													if(count($postSkills) > 0){
-														$per = (count($counts) / count($postSkills)) * 100;
-														echo $per.' %';
+														$skillPer = (count($counts) / count($postSkills)) * 100;
+														if($post->role == Auth::user()->induser->role){$rolePer = 100;}else{$rolePer = 0;}
+														if($post->prof_category == Auth::user()->induser->prof_category){$jobPer = 100;}else{$jobPer = 0;}
+														if($post->min_exp == Auth::user()->induser->experience){$expPer = 100;}else{$expPer = 0;}
+														if($post->education == Auth::user()->induser->education){$eduPer = 100;}else{$eduPer = 0;}
+														if($post->city == Auth::user()->induser->city){$cityPer = 100;}else{$cityPer = 0;}
+														if($post->time_for == Auth::user()->induser->prefered_jobtype){$typePer = 100;}else{$typePer = 0;}
+														$avgPer = ($skillPer + $rolePer + $jobPer + $expPer + $eduPer + $cityPer + $typePer)/7;
+														echo round($avgPer).' %';
 													}
 												?>
 											</a>
@@ -221,7 +228,7 @@
 													<div class="modal-header">
 														<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
 													   <h4 class="modal-title">
-													   		<i class="icon-speedometer" style="font-size:16px;"></i> Match {{$per}}% 
+													   		<i class="icon-speedometer" style="font-size:16px;"></i> Match {{round($avgPer)}}% 
 													   	</h4>
 													</div>
 													<div class="modal-body">

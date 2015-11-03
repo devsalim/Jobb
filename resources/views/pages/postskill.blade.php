@@ -153,7 +153,7 @@
 															<div class="form-group new-margin-formgroup">
 																<label>Added Skills <span class="required">
 															* </span></label>
-															    <input type="text" id="linked_skill" name="linked_skill" 
+															    <input type="text" readonly id="linked_skill" name="linked_skill" 
 															     		class="form-control select2"
 															     		placeholder="List of skills to be added">
 															    <input type="hidden" id="linked_skill_id" name="linked_skill_id" 

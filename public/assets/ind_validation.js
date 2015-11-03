@@ -34,9 +34,9 @@
             prefered_jobtype : {
                 required : true
             },
-            rsume: {
+            resume: {
                 required: false,
-                accept: 'docx|doc|pdf'
+                extension: 'docx|doc|pdf|rtf'
             }
         },
         messages: {
@@ -65,7 +65,7 @@
                 required: "Select Job Type"
             },
             resume:{
-                accept: "Upload only pdf or word files"
+                extension: "Upload only pdf or word files"
             }
         },
             invalidHandler: function (event, validator) { //display error alert on form submit   

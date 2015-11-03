@@ -411,23 +411,20 @@
 						<div class="row">
 							<div class="col-md-6 col-sm-6">
 								<div class="form-group">
-									<label>Add Skill</label>
 									<!-- <form action="{{ url('job/newskill') }}" id="newskillfrm" method="post">					
 									<input type="hidden" name="_token" value="{{ csrf_token() }}"> -->
-									<div class="input-group">
+									<label>Search Skills</label>
+									<div style="position:relative;">
 										<input type="text" name="name" id="newskill" class="form-control" placeholder="Search for skill...">
-										<span class="input-group-btn">
-											<button id="add-new-skill" class="btn btn-success" type="button"><i class="icon-plus"></i> Add</button>	
-										</span>
+											<button id="add-new-skill" style="position:absolute;right:0;top:0;" class="btn btn-success" type="button"><i class="icon-plus"></i> Add</button>	
 									</div>
 								</div>
 							</div>
-							
 							<div class="col-md-6 col-sm-6">
 								<div class="form-group">
-									<label>Added Skill <span class="required">
-											* </span></label>
-								    <input type="text" id="linked_skill" name="linked_skill" value="{{ $user->linked_skill }}"
+									<label>Added Skills <span class="required">
+													* </span></label>
+								    <input type="text" readonly id="linked_skill" value="{{ $user->linked_skill }}" name="linked_skill" 
 								     		class="form-control select2"
 								     		placeholder="List of skills to be added">
 								    <input type="hidden" id="linked_skill_id" name="linked_skill_id" 
@@ -525,7 +522,7 @@
 	});   
 </script>
 <script type="text/javascript">
-	 $(function(){
+		 $(function(){
 
 	 	function split( val ) {
 	      return val.split( /,\s*/ );
@@ -542,9 +539,27 @@
 		})
 		.autocomplete({
 			source: function( request, response ) {
-				$.getJSON( "/job/skillSearch", {
-					term: extractLast( request.term )
-				}, response );
+				// $.getJSON( "/job/skillSearch", {
+				// 	term: extractLast( request.term )
+				// }, response );
+
+
+				$.ajax({
+					url: '/job/skillSearch',
+					dataType: "json",
+					data: { term: extractLast( request.term ) },
+					success: function(data) {
+					if (data.length === 0) {
+						$('#add-new-skill').removeClass('hide');
+						$('#add-new-skill').addClass('show');
+					}else{
+						$('#add-new-skill').removeClass('show');
+						$('#add-new-skill').addClass('hide');
+					}
+					response(data);
+					}
+				});
+
 			},
 			search: function() {
 				var term = extractLast( this.value );
