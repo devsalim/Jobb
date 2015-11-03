@@ -66,7 +66,7 @@ class PagesController extends Controller {
 									)', [Auth::user()->corpuser_id]);
 				$following = collect($following);
 			}
-			if(Auth::user()->indentifier == 1){
+			if(Auth::user()->identifier == 1){
 				$userSkills = Induser::where('id', '=', Auth::user()->induser_id)->first(['linked_skill']);
 				$userSkills = array_map('trim', explode(',', $userSkills->linked_skill));
 				unset ($userSkills[count($userSkills)-1]); 
@@ -297,11 +297,11 @@ class PagesController extends Controller {
 			}
 
 			$posts = $posts->paginate(15);
-
-			$userSkills = Induser::where('id', '=', Auth::user()->induser_id)->first(['linked_skill']);
-			$userSkills = array_map('trim', explode(',', $userSkills->linked_skill));
-			unset ($userSkills[count($userSkills)-1]); 
-
+			if(Auth::user()->identifier == 1){
+				$userSkills = Induser::where('id', '=', Auth::user()->induser_id)->first(['linked_skill']);
+				$userSkills = array_map('trim', explode(',', $userSkills->linked_skill));
+				unset ($userSkills[count($userSkills)-1]); 
+			}
 			$links = DB::select('select id from indusers
 									where indusers.id in (
 											select connections.user_id as id from connections
@@ -465,6 +465,12 @@ class PagesController extends Controller {
 		}else{
 			return redirect('login');
 		}	
+	}
+
+	public function matching()
+	{
+		$posts = Postjob::with('indUser', 'corpUser', 'postActivity')->where('id', '=', Auth::user()->induser_id)->first();
+		return view('pages.matching_criteria',compact('posts'));
 	}
 
 }

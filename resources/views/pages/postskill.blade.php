@@ -142,11 +142,9 @@
 																<!-- <form action="{{ url('job/newskill') }}" id="newskillfrm" method="post">					
 																<input type="hidden" name="_token" value="{{ csrf_token() }}"> -->
 																<label>Search Skills</label>
-																<div class="input-group">
+																<div style="position:relative;">
 																	<input type="text" name="name" id="newskill" class="form-control" placeholder="Search for skill...">
-																	<span class="input-group-btn">
-																		<button id="add-new-skill" class="btn btn-success" type="button"><i class="icon-plus"></i> Add</button>	
-																	</span>
+																		<button id="add-new-skill" style="position:absolute;right:0;top:0;" class="btn btn-success" type="button"><i class="icon-plus"></i> Add</button>	
 																</div>
 															</div>
 														</div>
@@ -549,9 +547,27 @@ Demo.init(); // init demo features
 		})
 		.autocomplete({
 			source: function( request, response ) {
-				$.getJSON( "/job/skillSearch", {
-					term: extractLast( request.term )
-				}, response );
+				// $.getJSON( "/job/skillSearch", {
+				// 	term: extractLast( request.term )
+				// }, response );
+
+
+				$.ajax({
+					url: '/job/skillSearch',
+					dataType: "json",
+					data: { term: extractLast( request.term ) },
+					success: function(data) {
+					if (data.length === 0) {
+						$('#add-new-skill').removeClass('hide');
+						$('#add-new-skill').addClass('show');
+					}else{
+						$('#add-new-skill').removeClass('show');
+						$('#add-new-skill').addClass('hide');
+					}
+					response(data);
+					}
+				});
+
 			},
 			search: function() {
 				var term = extractLast( this.value );

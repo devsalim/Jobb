@@ -21,6 +21,7 @@ Route::group(array('before' => 'auth'), function(){
 	Route::get('master', 'PagesController@master');
 	Route::get('mypost', 'PagesController@myPost');
 	Route::post('myactivity/post', 'PagesController@post');
+	Route::post('/matching_criteria', 'PagesController@matching');
 
 	Route::get('individual', 'UserController@index');
 	Route::get('individual/create', 'UserController@create');
@@ -85,9 +86,9 @@ Route::group(array('before' => 'auth'), function(){
 
 	Route::get('individual_view', 'ViewpageController@index');
 	Route::get('individual_view/create', 'ViewpageController@create');
-	Route::get('individual/edit_view', 'ViewpageController@edit_view');
+	Route::get('individual/edit', 'ViewpageController@edit_view');
 	Route::get('corporate/edit', 'ViewpageController@edit_view');
-	Route::get('profile/{utype}/{id}', 'ViewpageController@corpindView');
+	// Route::get('profile/{utype}/{id}', 'ViewpageController@corpindView');
 	Route::get('individual/thanks_view', 'ViewpageController@thanks_view');	
 	// Route::get('individual/posts_view', 'ViewpageController@posts_view');	
 

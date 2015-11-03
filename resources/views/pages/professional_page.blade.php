@@ -14,7 +14,7 @@
 	</div>
 	<div class="portlet-body form">
 		<!-- BEGIN FORM-->
-		<form action="{{ url('/individual/basicupdate') }}" class="horizontal-form" method="post">
+		<form action="{{ url('/individual/basicupdate') }}" id="profile_validation" class="horizontal-form" method="post">
 			<input type="hidden" name="_token" value="{{ csrf_token() }}">
 			<div class="form-body">
 				<div class="row">
@@ -303,26 +303,28 @@
 										</span>
 										<select class="form-control" name="prof_category" value="{{ $user->prof_category }}" >
 											<option value="">-- Select --</option>
+											<option @if($user->prof_category=="Searching Job") {{ $selected }} @endif value="Searching Job">Searching Job</option>
+											<option @if($user->prof_category=="Student") {{ $selected }} @endif value="Student">Student</option>
 											<optgroup label="Accounting">
-												<option @if($user->experience=="Accounts/Finance/Tax") {{ $selected }} @endif value="Accounts/Finance/Tax">Accounts/Finance/Tax</option>
-												<option @if($user->experience=="Agent") {{ $selected }} @endif value="Agent">Agent</option>
-												<option @if($user->experience=="Analytics & Business Intelligence") {{ $selected }} @endif value="Analytics & Business Intelligence">
+												<option @if($user->prof_category=="Accounts/Finance/Tax") {{ $selected }} @endif value="Accounts/Finance/Tax">Accounts/Finance/Tax</option>
+												<option @if($user->prof_category=="Agent") {{ $selected }} @endif value="Agent">Agent</option>
+												<option @if($user->prof_category=="Analytics & Business Intelligence") {{ $selected }} @endif value="Analytics & Business Intelligence">
 													Analytics & Business Intelligence
 												</option>
 											</optgroup>
 											<optgroup label="IT Field">
-												<option @if($user->experience=="HR/Administration/IR") {{ $selected }} @endif value="HR/Administration/IR">HR/Administration/IR</option>
-												<option @if($user->experience=="IT Software - Client Server") {{ $selected }} @endif value="IT Software - Client Server">IT Software - Client Server</option>
-												<option @if($user->experience=="IT Software - Mainframe") {{ $selected }} @endif value="IT Software - Mainframe">IT Software - Mainframe</option>
-												<option @if($user->experience=="IT Software - Middleware") {{ $selected }} @endif value="IT Software - Middleware">IT Software - Middleware</option>
-												<option @if($user->experience=="IT Software - Mobile") {{ $selected }} @endif value="IT Software - Mobile">IT Software - Mobile</option>
-												<option @if($user->experience=="IT Software - Other") {{ $selected }} @endif value="IT Software - Other">IT Software - Other</option>
-												<option @if($user->experience=="IT Software - System Programming") {{ $selected }} @endif value="IT Software - System Programming">IT Software - System Programming</option>
-												<option @if($user->experience=="IT Software - Telecom Software") {{ $selected }} @endif value="IT Software - Telecom Software">IT Software - Telecom Software</option>
-												<option @if($user->experience=="IT Software - Application Programming") {{ $selected }} @endif value="IT Software - Application Programming">IT Software - Application Programming</option>
-												<option @if($user->experience=="IT Software - DBA/Datawarehousing") {{ $selected }} @endif value="IT Software - DBA/Datawarehousing">IT Software - DBA/Datawarehousing</option>
-												<option @if($user->experience=="IT Software - E-Commerce") {{ $selected }} @endif value="IT Software - E-Commerce">IT Software - E-Commerce</option>
-												<option @if($user->experience=="IT Software - ERP/CRM") {{ $selected }} @endif value="IT Software - ERP/CRM">IT Software - ERP/CRM</option>
+												<option @if($user->prof_category=="HR/Administration/IR") {{ $selected }} @endif value="HR/Administration/IR">HR/Administration/IR</option>
+												<option @if($user->prof_category=="IT Software - Client Server") {{ $selected }} @endif value="IT Software - Client Server">IT Software - Client Server</option>
+												<option @if($user->prof_category=="IT Software - Mainframe") {{ $selected }} @endif value="IT Software - Mainframe">IT Software - Mainframe</option>
+												<option @if($user->prof_category=="IT Software - Middleware") {{ $selected }} @endif value="IT Software - Middleware">IT Software - Middleware</option>
+												<option @if($user->prof_category=="IT Software - Mobile") {{ $selected }} @endif value="IT Software - Mobile">IT Software - Mobile</option>
+												<option @if($user->prof_category=="IT Software - Other") {{ $selected }} @endif value="IT Software - Other">IT Software - Other</option>
+												<option @if($user->prof_category=="IT Software - System Programming") {{ $selected }} @endif value="IT Software - System Programming">IT Software - System Programming</option>
+												<option @if($user->prof_category=="IT Software - Telecom Software") {{ $selected }} @endif value="IT Software - Telecom Software">IT Software - Telecom Software</option>
+												<option @if($user->prof_category=="IT Software - Application Programming") {{ $selected }} @endif value="IT Software - Application Programming">IT Software - Application Programming</option>
+												<option @if($user->prof_category=="IT Software - DBA/Datawarehousing") {{ $selected }} @endif value="IT Software - DBA/Datawarehousing">IT Software - DBA/Datawarehousing</option>
+												<option @if($user->prof_category=="IT Software - E-Commerce") {{ $selected }} @endif value="IT Software - E-Commerce">IT Software - E-Commerce</option>
+												<option @if($user->prof_category=="IT Software - ERP/CRM") {{ $selected }} @endif value="IT Software - ERP/CRM">IT Software - ERP/CRM</option>
 											</optgroup>
 										</select>
 									</div>
@@ -367,39 +369,39 @@
 										</span>
 										<select class="form-control" name="state" value="{{ $user->state }}">
 											<option value="">-- Select --</option>
-											<option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
-											<option value="Andhra Pradesh">Andhra Pradesh</option>
-											<option value="Arunachal Pradesh">Arunachal Pradesh</option>
-											<option value="Assam">Assam</option>
-											<option value="Bihar">Bihar</option>
-											<option value="Chandigarh">Chandigarh</option>
-											<option value="Delhi">Delhi</option>
-											<option value="Goa">Goa</option>
-											<option value="Gujarat">Gujarat</option>
-											<option value="Haryana">Haryana</option>
-											<option value="Himachal Pradesh">Himachal Pradesh</option>
-											<option value="Jammu and Kashmir">Jammu and Kashmir</option>
-											<option value="Jharkhand">Jharkhand</option>
-											<option value="Karnataka">Karnataka</option>
-											<option value="Kerala">Kerala</option>
-											<option value="Lakshadweep">Lakshadweep</option>
-											<option value="Madhya Pradesh">Madhya Pradesh</option>
-											<option value="Maharashtra">Maharashtra</option>
-											<option value="Manipur">Manipur</option>
-											<option value="Meghalaya">Meghalaya</option>
-											<option value="Mizoram">Mizoram</option>
-											<option value="Nagaland">Nagaland</option>
-											<option value="Orissa">Orissa</option>
-											<option value="Pondicherry">Pondicherry</option>
-											<option value="Punjab">Punjab</option>
-											<option value="Rajasthan">Rajasthan</option>
-											<option value="Sikkim">Sikkim</option>
-											<option value="Tamil Nadu">Tamil Nadu</option>
-											<option value="Telangana">Telangana</option>
-											<option value="Tripura">Tripura</option>
-											<option value="Uttar Pradesh">Uttar Pradesh</option>
-											<option value="Uttaranchal">Uttaranchal</option>
-											<option value="West Bengal">West Bengal</option>
+											<option @if($user->state=="Andaman and Nicobar Islands") {{ $selected }} @endif value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
+											<option @if($user->state=="Andhra Pradesh") {{ $selected }} @endif value="Andhra Pradesh">Andhra Pradesh</option>
+											<option @if($user->state=="Arunachal Pradesh") {{ $selected }} @endif value="Arunachal Pradesh">Arunachal Pradesh</option>
+											<option @if($user->state=="Assam") {{ $selected }} @endif value="Assam">Assam</option>
+											<option @if($user->state=="Bihar") {{ $selected }} @endif value="Bihar">Bihar</option>
+											<option @if($user->state=="Chandigarh") {{ $selected }} @endif value="Chandigarh">Chandigarh</option>
+											<option @if($user->state=="Delhi") {{ $selected }} @endif value="Delhi">Delhi</option>
+											<option @if($user->state=="Goa") {{ $selected }} @endif value="Goa">Goa</option>
+											<option @if($user->state=="Gujarat") {{ $selected }} @endif value="Gujarat">Gujarat</option>
+											<option @if($user->state=="Haryana") {{ $selected }} @endif value="Haryana">Haryana</option>
+											<option @if($user->state=="Himachal Pradesh") {{ $selected }} @endif value="Himachal Pradesh">Himachal Pradesh</option>
+											<option @if($user->state=="Jammu and Kashmir") {{ $selected }} @endif value="Jammu and Kashmir">Jammu and Kashmir</option>
+											<option @if($user->state=="Jharkhand") {{ $selected }} @endif value="Jharkhand">Jharkhand</option>
+											<option @if($user->state=="Karnataka") {{ $selected }} @endif value="Karnataka">Karnataka</option>
+											<option @if($user->state=="Kerala") {{ $selected }} @endif value="Kerala">Kerala</option>
+											<option @if($user->state=="Lakshadweep") {{ $selected }} @endif value="Lakshadweep">Lakshadweep</option>
+											<option @if($user->state=="Madhya Pradesh") {{ $selected }} @endif value="Madhya Pradesh">Madhya Pradesh</option>
+											<option @if($user->state=="Maharashtra") {{ $selected }} @endif value="Maharashtra">Maharashtra</option>
+											<option @if($user->state=="Manipur") {{ $selected }} @endif value="Manipur">Manipur</option>
+											<option @if($user->state=="Meghalaya") {{ $selected }} @endif value="Meghalaya">Meghalaya</option>
+											<option @if($user->state=="Mizoram") {{ $selected }} @endif value="Mizoram">Mizoram</option>
+											<option @if($user->state=="Nagaland") {{ $selected }} @endif value="Nagaland">Nagaland</option>
+											<option @if($user->state=="Orissa") {{ $selected }} @endif value="Orissa">Orissa</option>
+											<option @if($user->state=="Pondicherry") {{ $selected }} @endif value="Pondicherry">Pondicherry</option>
+											<option @if($user->state=="Punjab") {{ $selected }} @endif value="Punjab">Punjab</option>
+											<option @if($user->state=="Rajasthan") {{ $selected }} @endif value="Rajasthan">Rajasthan</option>
+											<option @if($user->state=="Sikkim") {{ $selected }} @endif value="Sikkim">Sikkim</option>
+											<option @if($user->state=="Tamil Nadu") {{ $selected }} @endif value="Tamil Nadu">Tamil Nadu</option>
+											<option @if($user->state=="Telangana") {{ $selected }} @endif value="Telangana">Telangana</option>
+											<option @if($user->state=="Tripura") {{ $selected }} @endif value="Tripura">Tripura</option>
+											<option @if($user->state=="Uttar Pradesh") {{ $selected }} @endif value="Uttar Pradesh">Uttar Pradesh</option>
+											<option @if($user->state=="Uttaranchal") {{ $selected }} @endif value="Uttaranchal">Uttaranchal</option>
+											<option @if($user->state=="West Bengal") {{ $selected }} @endif value="West Bengal">West Bengal</option>
 										</select>
 									</div>
 								</div>
@@ -444,54 +446,12 @@
 										</span>
 										<select id="select2_sample_modal_2" value="{{ $user->prefered_location }}" placeholder="Prefered Location" name="prefered_location" class="form-control select2" multiple>
 											<option value="">&nbsp;</option>
-											<optgroup label="NFC EAST">
-											<option>Hyderabad</option>
-											<option>Bangalore</option>
-											<option>Philadelphia Eagles</option>
-											<option>Washington Redskins</option>
-											</optgroup>
-											<optgroup label="NFC NORTH">
-											<option>Chicago Bears</option>
-											<option>Detroit Lions</option>
-											<option>Green Bay Packers</option>
-											<option>Minnesota Vikings</option>
-											</optgroup>
-											<optgroup label="NFC SOUTH">
-											<option>Patna</option>
-											<option>Mumbai</option>
-											<option>New Orleans Saints</option>
-											<option>Tampa Bay Buccaneers</option>
-											</optgroup>
-											<optgroup label="NFC WEST">
-											<option>Delhi</option>
-											<option>Chennai</option>
-											<option>San Francisco 49ers</option>
-											<option>Seattle Seahawks</option>
-											</optgroup>
-											<optgroup label="AFC EAST">
-											<option>Buffalo Bills</option>
-											<option>Miami Dolphins</option>
-											<option>New England Patriots</option>
-											<option>New York Jets</option>
-											</optgroup>
-											<optgroup label="AFC NORTH">
-											<option>Baltimore Ravens</option>
-											<option>Cincinnati Bengals</option>
-											<option>Cleveland Browns</option>
-											<option>Pittsburgh Steelers</option>
-											</optgroup>
-											<optgroup label="AFC SOUTH">
-											<option>Houston Texans</option>
-											<option>Indianapolis Colts</option>
-											<option>Jacksonville Jaguars</option>
-											<option>Tennessee Titans</option>
-											</optgroup>
-											<optgroup label="AFC WEST">
-											<option>Denver Broncos</option>
-											<option>Kansas City Chiefs</option>
-											<option>Oakland Raiders</option>
-											<option>San Diego Chargers</option>
-											</optgroup>
+											<option @if($user->prefered_location=="Hyderabad") {{ $selected }} @endif value="Hyderabad">Hyderabad</option>
+											<option @if($user->prefered_location=="Bangalore") {{ $selected }} @endif value="Bangalore">Bangalore</option>
+											<option @if($user->prefered_location=="Patna") {{ $selected }} @endif value="Patna">Patna</option>
+											<option @if($user->prefered_location=="Mumbai") {{ $selected }} @endif value="Mumbai">Mumbai</option>
+											<option @if($user->prefered_location=="Delhi") {{ $selected }} @endif value="Delhi">Delhi</option>
+											<option @if($user->prefered_location=="Chennai") {{ $selected }} @endif value="Chennai">Chennai</option>
 										</select>
 									</div>
 								</div>

@@ -77,7 +77,7 @@
 
 				</div>
 				<!-- END SIDEBAR USER TITLE -->
-				@if(Auth::user()->induser_id == $user->individual_id)
+				@if(Auth::user()->induser_id == $user->id)
 				<div class="row list-separated profile-stat" style="text-align:center;margin: 13px 0 0px -17px;">
 					@if($utype == 'ind')
 					<div class="col-md-4 col-sm-4 col-xs-4 @if($title == 'connections'){{'active'}}@endif">
@@ -190,7 +190,7 @@
 		</div>
 		@if(Auth::user()->induser_id == $user->id)
 		<div class="tools @if($title == 'indprofile_edit'){{'active'}}@endif">
-			<a href="/individual/edit_view" class="btn btn-xs blue" style="height: 20px;">
+			<a href="/individual/edit" class="btn btn-xs blue" style="height: 20px;">
 			<i class="fa fa-edit"></i> Edit 
 			</a>
 		</div>
@@ -414,14 +414,34 @@
 				<div class="row">
 					<div class="col-md-6 col-sm-6 col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-md-4 col-xs-6">Industry:</label>
-							<div class="col-md-6 col-xs-6">
-								<p class="form-control-static view-page text-capitalize">
-									@if($user->industry != null)
-									 {{ $user->industry }}
-									@elseif($user->industry != null)
-									--
-									@endif
+							<label class="control-label col-md-4 col-xs-12">Firm Name:</label>
+							<div class="col-md-8 col-xs-12">
+								<p class="form-control-static view-page">
+									 {{ $user->firm_name }}
+								</p>
+							</div>
+						</div>
+					</div>
+					<!--/span-->
+					<div class="col-md-6 col-sm-6 col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-md-4 col-xs-12">Slogan:</label>
+							<div class="col-md-6 col-xs-12">
+								<p class="form-control-static view-page">
+									 {{ $user->slogan }}
+								</p>
+							</div>
+						</div>
+					</div>
+					<!--/span-->
+				</div>
+				<div class="row">
+					<div class="col-md-6 col-sm-6 col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-md-4 col-xs-12">Firm Type:</label>
+							<div class="col-md-6 col-xs-12">
+								<p class="form-control-static view-page">
+									 {{ $user->firm_type }}
 								</p>
 							</div>
 						</div>
@@ -446,6 +466,38 @@
 					<!--/span-->
 				</div>
 				<!--/row-->
+				<div class="row">
+					<div class="col-md-6 col-sm-6 col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-md-4 col-xs-6">Industry:</label>
+							<div class="col-md-6 col-xs-6">
+								<p class="form-control-static view-page text-capitalize">
+									@if($user->industry != null)
+									 {{ $user->industry }}
+									@elseif($user->industry != null)
+									--
+									@endif
+								</p>
+							</div>
+						</div>
+					</div>
+					<!--/span-->
+					<div class="col-md-6 col-sm-6 col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-md-4 col-xs-6">No of Employee:</label>
+							<div class="col-md-6 col-xs-6">
+								<p class="form-control-static view-page text-capitalize">
+									@if($user->emp_count != null)
+									 {{ $user->emp_count }} Employees
+									@elseif($user->emp_count == null)
+									--
+									@endif
+								</p>
+							</div>
+						</div>
+					</div>
+					<!--/span-->
+				</div>
 				<div class="row">
 					<div class="col-md-6 col-sm-6 col-xs-12">
 						<div class="form-group">
@@ -479,28 +531,6 @@
 					<!--/span-->
 				</div>
 				<!--/row-->
-				<div class="row">
-					<div class="col-md-8 col-sm-8 col-xs-12">
-						<div class="form-group">
-							<label class="control-label col-md-4 col-xs-6">Address:</label>
-							<div class="col-md-6 col-xs-6">
-								<p class="form-control-static view-page">
-									@if($user->firm_address != null)
-									 {{ $user->firm_address }}
-									 @elseif($user->firm_address == null)
-									 --
-									 @endif
-								</p>
-							</div>
-						</div>
-					</div>
-					<!--/span-->
-					<div class="col-md-6 col-sm-6 col-xs-12">
-						
-					</div>
-					<!--/span-->
-				</div>
-				<!--/row-->
 			</div>
 		<!-- END FORM-->
 	</div>
@@ -516,7 +546,7 @@
 		</div>
 		@if(Auth::user()->induser_id == $user->id)
 		<div class="tools @if($title == 'indprofile_edit'){{'active'}}@endif">
-			<a href="/individual/edit_view" class="btn btn-xs blue" style="height: 20px;">
+			<a href="/individual/edit" class="btn btn-xs blue" style="height: 20px;">
 			<i class="fa fa-edit"></i> Edit 
 			</a>
 		</div>
@@ -678,91 +708,24 @@
 				<div class="row">
 					<div class="col-md-6 col-sm-6 col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-md-4 col-xs-12">Firm Name:</label>
-							<div class="col-md-8 col-xs-12">
+							<label class="control-label col-md-4 col-xs-6">Address:</label>
+							<div class="col-md-8 col-xs-6">
 								<p class="form-control-static view-page">
-									 {{ $user->firm_name }}
+									@if($user->firm_address != null)
+									 {{ $user->firm_address }}
+									 @elseif($user->firm_address == null)
+									 --
+									 @endif
 								</p>
 							</div>
 						</div>
 					</div>
 					<!--/span-->
-					<div class="col-md-6 col-sm-6 col-xs-12">
-						<div class="form-group">
-							<label class="control-label col-md-4 col-xs-12">Firm Type:</label>
-							<div class="col-md-6 col-xs-12">
-								<p class="form-control-static view-page">
-									 {{ $user->firm_type }}
-								</p>
-							</div>
-						</div>
+					<div class="col-md-6 col-sm-6 col-xs-12">	
 					</div>
 					<!--/span-->
 				</div>
-				<div class="row">
-					<div class="col-md-6 col-sm-6 col-xs-12">
-						<div class="form-group">
-							<label class="control-label col-md-4 col-xs-12">User Name:</label>
-							<div class="col-md-8 col-xs-12">
-								<p class="form-control-static view-page">	
-									@if($user->username != null && $user->working_as != null)
-
-									I am {{ $user->username }} working as {{ $user->working_as }}
-
-									@elseif($user->username != null && $user->working_as == null)
-
-									{{ $user->username }}
-
-									@elseif($user->username == null && $user->working_as != null)
-
-									I am {{ $user->working_as }}
-
-									@else
-									--
-									@endif
-								</p>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-6 col-sm-6 col-xs-12">
-						<div class="form-group">
-							<label class="control-label col-md-4 col-xs-12">Slogan:</label>
-							<div class="col-md-8 col-xs-12">
-								<p class="form-control-static view-page">
-									@if($user->slogan != null)
-									{{ $user->slogan }}
-									@else
-									--
-									@endif
-								</p>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-6 col-sm-6 col-xs-12">
-						<div class="form-group">
-							<label class="control-label col-md-4 col-xs-12">Email Id:</label>
-							<div class="col-md-8 col-xs-12">
-								<p class="form-control-static view-page">
-									{{ $user->firm_email_id }} <i class="glyphicon glyphicon-ok-circle" style="color: #1EC71E;font-size: 16px;"></i>
-								</p>
-							</div>
-						</div>
-					</div>
-					<!--/span-->
-					<div class="col-md-6 col-sm-6 col-xs-12">
-						<div class="form-group">
-							<label class="control-label col-md-4 col-xs-12">Mobile:</label>
-							<div class="col-md-6 col-xs-12">
-								<p class="form-control-static view-page">
-									 {{ $user->firm_phone }} <i class="fa fa-exclamation-circle" style="color: #cb5a5e;font-size: 16px;"></i>
-								</p>
-							</div>
-						</div>
-					</div>
-					<!--/span-->
-				</div>
+				<!--/row-->
 				<div class="row">
 					<div class="col-md-6 col-sm-6 col-xs-12">
 						<div class="form-group">
@@ -796,6 +759,59 @@
 					<!--/span-->
 				</div>
 				<!--/row-->
+				<div class="row">
+					<div class="col-md-6 col-sm-6 col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-md-4 col-xs-12">Profile Handler Name:</label>
+							<div class="col-md-8 col-xs-12">
+								<p class="form-control-static view-page">	
+									@if($user->username != null && $user->working_as != null)
+
+									I am {{ $user->username }} working as {{ $user->working_as }}
+
+									@elseif($user->username != null && $user->working_as == null)
+
+									{{ $user->username }}
+
+									@elseif($user->username == null && $user->working_as != null)
+
+									I am {{ $user->working_as }}
+
+									@else
+									--
+									@endif
+								</p>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-6 col-sm-6 col-xs-12">
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-6 col-sm-6 col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-md-4 col-xs-12">Email Id:</label>
+							<div class="col-md-8 col-xs-12">
+								<p class="form-control-static view-page">
+									{{ $user->firm_email_id }} <i class="glyphicon glyphicon-ok-circle" style="color: #1EC71E;font-size: 16px;"></i>
+								</p>
+							</div>
+						</div>
+					</div>
+					<!--/span-->
+					<div class="col-md-6 col-sm-6 col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-md-4 col-xs-12">Mobile:</label>
+							<div class="col-md-6 col-xs-12">
+								<p class="form-control-static view-page">
+									 {{ $user->firm_phone }} <i class="fa fa-exclamation-circle" style="color: #cb5a5e;font-size: 16px;"></i>
+								</p>
+							</div>
+						</div>
+					</div>
+					<!--/span-->
+				</div>
+
 			</div>
 		</form>
 		<!-- END FORM-->

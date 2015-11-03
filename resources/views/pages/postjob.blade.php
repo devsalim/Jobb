@@ -73,19 +73,22 @@
 								<div class="tab-pane active" id="tab1">
 									<!-- <h3 class="block">Provide your account details</h3> -->
 									<input type="hidden" name="post_id" value"rand(11111,99999)">
-									<div class="col-md-12">
-										<div class="form-group">
-											<div class="input-icon right">
-													<i class="fa"></i>
-											<label>Job Title <span class="required">
-											* </span></label>
-											<div class="input-group">
-												<span class="input-group-addon"><i class="fa fa-flag" style="color:darkcyan;"></i></span>
-												<input type="text" name="post_title" class="form-control" placeholder="Job Title" required>
+									<div class="row">
+										<div class="col-md-12">
+											<div class="form-group">
+												<div class="input-icon right">
+														<i class="fa"></i>
+												<label>Job Title <span class="required">
+												* </span></label>
+												<div class="input-group">
+													<span class="input-group-addon"><i class="fa fa-flag" style="color:darkcyan;"></i></span>
+													<input type="text" name="post_title" class="form-control" placeholder="Job Title" required>
+												</div>
+											</div>
 											</div>
 										</div>
-										</div>
 									</div>
+									<div class="row">
 									<div class="col-md-12">
 										<div class="form-group">
 											<label>Job Details <span class="required">
@@ -95,59 +98,62 @@
 											</div>
 										</div>
 									</div>
-									
-									<div class="col-md-5">
-										<div class="form-group">
-											<label>Job Category <span class="required">
-											* </span></label>
-											<div class="input-group">
-											<span class="input-group-addon">
-											<i class="fa fa-cubes" style="color:darkcyan;"></i>
-											</span>
-											<select class="form-control" name="prof_category">
-												<option value="">-- select --</option>
-												<optgroup label="Accounting">
-												<option value="Accounts/Finance/Tax">Accounts/Finance/Tax</option>
-												<option value="Agent">Agent</option>
-												<option value="Analytics & Business Intelligence">Analytics & Business Intelligence</option>
-												</optgroup>
-												<optgroup label="IT Field">
-												<option value="HR/Administration/IR">HR/Administration/IR</option>
-												<option value="IT Software - Client Server">IT Software - Client Server</option>
-												<option value="IT Software - Mainframe">IT Software - Mainframe</option>
-												<option value="IT Software - Middleware">IT Software - Middleware</option>
-												<option value="IT Software - Mobile">IT Software - Mobile</option>
-												<option value="IT Software - Other">IT Software - Other</option>
-												<option value="IT Software - System Programming">IT Software - System Programming</option>
-												<option value="IT Software - Telecom Software">IT Software - Telecom Software</option>
-												<option value="IT Software - Application Programming">IT Software - Application Programming</option>
-												<option value="IT Software - DBA/Datawarehousing">IT Software - DBA/Datawarehousing</option>
-												<option value="IT Software - E-Commerce">IT Software - E-Commerce</option>
-												<option value="IT Software - ERP/CRM">IT Software - ERP/CRM</option>
-												</optgroup>
-											</select>
-										</div>
-										</div>
 									</div>
-									<!--/span-->
-									<div class="col-md-2"></div>
-									<div class="col-md-5">
-										<div class="form-group">
-											<label>Job Role <span class="required">
-											* </span></label>
-											<div class="input-group">
-												<span class="input-group-addon">
-													<i class="fa fa-cube" style="color:darkcyan;"></i>
-												</span>
-												<select name="role" class="form-control" >
-													<option value="">-- select --</option>
-													<option value="Web Developer">Web Developer</option>
-													<option value="Software Developer">Software Developer</option>
-												</select>
+									<div class="row">
+										<div class="col-md-5 col-sm-5 col-xs-12">
+											<div class="form-group">
+												<label>Job Category <span class="required">
+												* </span></label>
+												<div class="input-group">
+													<span class="input-group-addon">
+													<i class="fa fa-cubes" style="color:darkcyan;"></i>
+													</span>
+													<select class="form-control" name="prof_category">
+														<option value="">-- select --</option>
+														<optgroup label="Accounting">
+														<option value="Accounts/Finance/Tax">Accounts/Finance/Tax</option>
+														<option value="Agent">Agent</option>
+														<option value="Analytics & Business Intelligence">Analytics & Business Intelligence</option>
+														</optgroup>
+														<optgroup label="IT Field">
+														<option value="HR/Administration/IR">HR/Administration/IR</option>
+														<option value="IT Software - Client Server">IT Software - Client Server</option>
+														<option value="IT Software - Mainframe">IT Software - Mainframe</option>
+														<option value="IT Software - Middleware">IT Software - Middleware</option>
+														<option value="IT Software - Mobile">IT Software - Mobile</option>
+														<option value="IT Software - Other">IT Software - Other</option>
+														<option value="IT Software - System Programming">IT Software - System Programming</option>
+														<option value="IT Software - Telecom Software">IT Software - Telecom Software</option>
+														<option value="IT Software - Application Programming">IT Software - Application Programming</option>
+														<option value="IT Software - DBA/Datawarehousing">IT Software - DBA/Datawarehousing</option>
+														<option value="IT Software - E-Commerce">IT Software - E-Commerce</option>
+														<option value="IT Software - ERP/CRM">IT Software - ERP/CRM</option>
+														</optgroup>
+													</select>
+												</div>
+											</div>
+										</div>
+										<!--/span-->
+										<div class="col-md-2 col-sm-2 col-xs-2"></div>
+										<div class="col-md-5 col-sm-5 col-xs-12">
+											<div class="form-group">
+												<label>Job Role <span class="required">
+												* </span></label>
+												<div class="input-group">
+													<span class="input-group-addon">
+														<i class="fa fa-cube" style="color:darkcyan;"></i>
+													</span>
+													<select name="role" class="form-control" >
+														<option value="">-- select --</option>
+														<option value="Web Developer">Web Developer</option>
+														<option value="Software Developer">Software Developer</option>
+													</select>
+												</div>
 											</div>
 										</div>
 									</div>
-									<div class="col-md-5">
+									<div class="row">
+									<div class="col-md-5 col-sm-5 col-xs-12">
 										<div class="form-group">
 											<div class="input-icon right">
 													<i class="fa"></i>
@@ -161,8 +167,8 @@
 										</div>
 										</div>
 									</div>
-									<div class="col-md-2"></div>
-									<div class="col-md-5">
+									<div class="col-md-2 col-sm-2 col-xs-2"></div>
+									<div class="col-md-5 col-sm-5 col-xs-12">
 										<div class="form-group">
 											<label>Reference Id</label>
 											<div class="input-group">
@@ -172,6 +178,7 @@
 												<input type="text" name="reference_id" class="form-control" placeholder="Reference Id">
 											</div>
 										</div>
+									</div>
 									</div>													
 									<!--/span-->
 									<div class="form-group">
@@ -179,37 +186,38 @@
 									</div>
 								</div>
 								<div class="tab-pane" id="tab2">
-									<div class="col-md-5">
+									<div class="row">
+									<div class="col-md-5 col-sm-5 col-xs-12">
 										<div class="form-group">
 											<!-- <form action="{{ url('job/newskill') }}" id="newskillfrm" method="post">					
 											<input type="hidden" name="_token" value="{{ csrf_token() }}"> -->
 											<label>Search Skills</label>
-											<div class="input-group">
+											<div style="position:relative;">
 												<input type="text" name="name" id="newskill" class="form-control" placeholder="Search for skill...">
-												<span class="input-group-btn">
-													<button class="btn btn-success" type="button"><i class="icon-plus"></i> Add</button>	
-												</span>
+													<button id="add-new-skill" style="position:absolute;right:0;top:0;" class="btn btn-success" type="button"><i class="icon-plus"></i> Add</button>	
 											</div>
 										</div>
 									</div>
-									<div class="col-md-2"></div>
-									<div class="col-md-5">
+									<div class="col-md-2 col-sm-2 col-xs-2"></div>
+									<div class="col-md-5 col-sm-5 col-xs-12">
 										<div class="form-group">
 											<label>Added Skills <span class="required">
 															* </span></label>
-										    <input type="text" id="linked_skill" disabled name="linked_skill" 
+										    <input type="text" id="linked_skill" name="linked_skill" 
 										     		class="form-control select2"
 										     		placeholder="List of skills to be added">
 										    <input type="hidden" id="linked_skill_id" name="linked_skill_id" 
 										     		class="form-control">
 										</div>
 									</div>
+								</div>
+								<div class="row">
 									<div class="col-md-5">
 										<div class="form-group">
 											<label> Required Education</label>
 											<div class="input-group">
 												<span class="input-group-addon">
-													<i class="icon-graduation"></i>
+													<i class="icon-hourglass" style="color:darkcyan;"></i>
 												</span>
 												<select class="bs-select form-control" name="education" multiple style="float:none;">
 													<option value="Any Diploma">Any Diploma</option>
@@ -236,8 +244,8 @@
 										</div>
 									</div>
 									<!--/span-->
-									<div class="col-md-2"></div>
-									<div class="col-md-5">
+									<div class="col-md-2 col-sm-2 col-xs-2"></div>
+									<div class="col-md-5 col-sm-5 col-xs-12">
 										<div class="form-group">
 											<label>Job Type <span class="required">
 											* </span></label>
@@ -255,7 +263,9 @@
 											</div>
 										</div>
 									</div>
+								</div>
 									<!--/span-->
+									<div class="row">
 									<div class="col-md-12">
 										<div class="form-group">
 											<!-- <label>Job Title</label> -->
@@ -265,11 +275,13 @@
 											</div>
 										</div>
 									</div>
-									<div class="col-md-5">
+								</div>
+								<div class="row">
+									<div class="col-md-5 col-sm-5 col-xs-12">
 										<div class="form-group">							
 											<label class=" control-label">Experience </label>&nbsp;: <input type="text" style="width: 20px;background:transparent;border:0" name="min_exp" class="min-exp">-
 											<input type="text" style="width: 14px;margin:0 4px;background:transparent;border:0" name="max_exp" class="max-exp">Years
-											<div class="input-group">
+											<div class="">
 												<input id="range_1" type="text"  value=""/>
 												<!-- <input type="hidden" name="min_exp" class="min-exp">
 												<input type="hidden" name="max_exp" class="max-exp"> -->
@@ -277,8 +289,8 @@
 										</div>
 									</div>
 									<!--/span-->
-									<div class="col-md-2"></div>
-									<div class="col-md-5">
+									<div class="col-md-2 col-sm-2 col-xs-2"></div>
+									<div class="col-md-5 col-sm-5 col-xs-12">
 										<div class="form-group">							
 											<label class=" control-label"><input type="checkbox" id="hide-check">&nbsp;Salary 
 											</label>&nbsp;:<select name="salary_type" style="border-top: 0px;border-left: 0;border-right: 0;">									
@@ -299,6 +311,7 @@
 											</div>
 										</div>
 									</div>
+								</div>
 									<!--/span-->
 									<div class="form-group">
 										
@@ -388,6 +401,7 @@
 										</div>
 									</div>
 								</div>
+								<div class="row">
 									<div class="col-md-5">
 										<div class="form-group">
 											<label style="margin-left: -5px;"><input id="hide-apply" name="apply-check" type="checkbox"></label><label>&nbsp;Apply On Company Website</label>
@@ -411,8 +425,9 @@
 											</div>
 										</div>
 									</div>
+								</div>
 										<!--/span-->
-									<div class="show-apply-email">
+									<div class="row show-apply-email">
 											<div class="col-md-5">
 												<div class="form-group">
 													<label>Email Id (Registered)</label>

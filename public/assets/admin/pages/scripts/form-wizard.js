@@ -41,6 +41,14 @@ var FormWizard = function () {
                     prof_category: {
                         required: true
                     },
+                    post_compname: {
+                        required:false,
+                        maxlength:30
+                    },
+                    reference_id: {
+                        required:false,
+                        maxlength:20
+                    },
                     role: {
                         required: true
                     },
@@ -70,14 +78,20 @@ var FormWizard = function () {
                 post_title: {
                     required: "Enter Job Title"
                 },
-                 job_detail: {
+                job_detail: {
                     required: "Enter Job Detail"
                 },
-                 prof_category: {
+                prof_category: {
                     required: "Select Job Category"
                 },
                 role: {
                     required: "Select Job Role"
+                },
+                post_compname: {
+                    maxlength: "Maximum Length is 30"
+                },
+                reference_id: {
+                    maxlength: "Maximum Length is 20"
                 },
                 linked_skill: {
                     required: "Add Skills"

@@ -130,18 +130,14 @@ class CorporateController extends Controller {
 	{
 		$data = Corpuser::where('id', '=', $id)->first();
 		if($data != null){
-		$data->about_firm = Input::get('about_firm');
-		$data->industry = Input::get('industry');
-		$data->operating_since = Input::get('operating_since');
+		
 		$data->firm_address = Input::get('firm_address');
 		$data->state = Input::get('state');
 		$data->city = Input::get('city');
-		$data->website_url = Input::get('website_url');
-		$data->linked_skill = Input::get('linked_skill');
 		$data->username = Input::get('username');
-		$data->emp_count = Input::get('emp_count');
 		$data->working_as = Input::get('working_as');
-		$data->slogan = Input::get('slogan');
+		$data->firm_email_id = Input::get('firm_email_id');
+		$data->firm_phone = Input::get('firm_phone');
 		$data->save();
 		return redirect('/corporate/create');
 		}else{
@@ -163,10 +159,15 @@ class CorporateController extends Controller {
 	public function basicUpdate(){
 		$data = Corpuser::where('id', '=', Auth::user()->corpuser_id)->first();
 		if($data != null){
+			$data->about_firm = Input::get('about_firm');
+			$data->industry = Input::get('industry');
+			$data->operating_since = Input::get('operating_since');
 			$data->firm_name = Input::get('firm_name');
 			$data->firm_type = Input::get('firm_type');
-			$data->firm_email_id = Input::get('firm_email_id');
-			$data->firm_phone = Input::get('firm_phone');
+			$data->website_url = Input::get('website_url');
+			$data->linked_skill = Input::get('linked_skill');
+			$data->emp_count = Input::get('emp_count');
+			$data->slogan = Input::get('slogan');
 			$data->save();
 			return redirect('/corporate/create');
 		}

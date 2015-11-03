@@ -1,6 +1,6 @@
  $(document).ready(function () {            
     //validation rules
-    var form = $('#corp_validation');
+    var form = $('#corp_firm_validation');
     var error = $('.alert-danger', form);
     var success = $('.alert-success', form);
     form.validate({
@@ -15,17 +15,14 @@
             operating_since : {
                 required : true
             },
-            city : {
-                required : true
-            },
-            state : {
-                required : true
-            },
             firm_name : {
                 required : true
             },
-            firm_address: {
-                required: true
+            linked_skill: {
+                required : true
+            },
+            firm_type: {
+                required : true
             }
         },
         messages: {
@@ -35,17 +32,14 @@
             operating_since: {
                 required: "Select Operating Since"
             },
-            city: {
-                required: "Enter City"
-            },
-            state: {
-                required: "Select State"
-            },
             firm_name: {
                 required: "Enter Firm Name"
             },
-            firm_address: {
-                required: "Enter Company/Consultancy Address"
+            linked_skill: {
+                required: "Enter Work Area"
+            },
+            firm_type: {
+                required: "Enter Firm Type"
             } 
         },
             invalidHandler: function (event, validator) { //display error alert on form submit   
@@ -71,3 +65,5 @@
          },
     });
 });
+
+

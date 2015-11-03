@@ -17,6 +17,7 @@
 </div>
 <form id="home-filter" action="/home" method="post">
 <input type="hidden" name="_token" value="{{ csrf_token() }}">
+
 <div class="row show-filter">
 	<div class="col-md-10">
 		<div class="btn-group col-md-3 col-sm-3 col-xs-6 jobskill new-col-md-3" data-toggle="buttons" style="padding: 6px 14px;">
@@ -27,7 +28,7 @@
 		</div>
 		<div class="col-md-2 col-sm-2 col-xs-6">
 			<div class="form-group">				
-				<input type="experience" name="experience" class="form-control filter-input" placeholder="Exp">				
+				<input type="text" name="experience" class="form-control filter-input" placeholder="Exp">				
 			</div>	
 		</div>
 		<div class="col-md-3 col-sm-3 col-xs-12">
@@ -158,7 +159,10 @@
 		</div>
 	</div>
 </div>
-
+<div id="filter">
+	<p class="form-control-static" data-display="experience"></p>
+	<p class="form-control-static" data-display="job_title"></p>
+</div>
 </form>
 <!-- Jobtip Filter End-->
 
@@ -416,7 +420,7 @@
 											<div class="{{ $post->post_type }}">
 												<a class="post-type-class">{{ $post->post_type }}</a>
 											</div>
-											@if(Auth::user()->id != $post->individual_id )
+											@if(Auth::user()->induser_id != $post->individual_id )
 											<form action="/job/fav" method="post" id="post-fav-{{$post->id}}" data-id="{{$post->id}}">
 												<input type="hidden" name="_token" value="{{ csrf_token() }}">
 												<input type="hidden" name="fav_post" value="{{ $post->id }}">
@@ -651,7 +655,7 @@
 													</form>							
 													@endif	
 												@endif	
-												@if($post->post_type == 'skill' && Auth::user()->id != $post->individual_id && Auth::user()->identifier == 1)		
+												@if($post->post_type == 'skill' && Auth::user()->induser_id != $post->individual_id && Auth::user()->identifier == 1)		
 													@if($post->postactivity->where('user_id', Auth::user()->induser_id)->isEmpty())
 														<form action="/job/contact" method="post" id="post-contact-{{$post->id}}" data-id="{{$post->id}}">	
 															<input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -811,6 +815,28 @@ $(document).ready(function(){
 	    jQuery('.show-filter').toggle('show');
 	    jQuery('.hide-label').toggle('hide');
     });
+
+    var displayConfirm = function() {
+                $('#filter .form-control-static', form).each(function(){
+                    var input = $('[name="'+$(this).attr("data-display")+'"]', form);
+                    if (input.is(":radio")) {
+                        input = $('[name="'+$(this).attr("data-display")+'"]:checked', form);
+                    }
+                    if (input.is(":text") || input.is("textarea")) {
+                        $(this).html(input.val());
+                    } else if (input.is("select")) {
+                        $(this).html(input.find('option:selected').text());
+                    } else if (input.is(":radio") && input.is(":checked")) {
+                        $(this).html(input.attr("data-title"));
+                    } else if ($(this).attr("data-display") == 'payment[]') {
+                        var payment = [];
+                        $('[name="payment[]"]:checked', form).each(function(){ 
+                            payment.push($(this).attr('data-title'));
+                        });
+                        $(this).html(payment.join("<br>"));
+                    }
+                });
+            }
 
   $('.like-btn').on('click',function(event){  	    
   	event.preventDefault();

@@ -44,7 +44,7 @@
                 <ul class="dropdown-menu-list scroller" style="height: 275px;" data-handle-color="#637283">
                   @foreach($applications as $application)
                   <li>
-                    <a href="inbox.html?a=view">
+                    <a href="">
                     <span class="photo">
                     <img src="@if($application->user->profile_pic != null){{ '/img/profile/'.$application->user->profile_pic }}@else{{'/assets/images/ab.png'}}@endif" class="img-circle" width="40" height="40">
                     <div class="match"><i class="icon-speedometer"></i> 55%</div>
@@ -80,7 +80,7 @@
                 <ul class="dropdown-menu-list scroller" style="height: 275px;" data-handle-color="#637283">
                   @foreach($thanks as $thank)
                   <li>
-                    <a href="inbox.html?a=view">
+                    <a class="myactivity-post" data-toggle="modal" href="#myactivity-post">
                     <span class="photo">
                     <img src="@if($thank->user->profile_pic != null){{ '/img/profile/'.$thank->user->profile_pic }}@else{{'/assets/images/ab.png'}}@endif" class="img-circle" width="40" height="40">
                     <div class="match"><i class="icon-speedometer"></i> 55%</div>
@@ -401,4 +401,43 @@
   <!-- /.modal-dialog -->
 </div>
 <!-- /.modal -->
+<div class="modal fade" id="myactivity-post" tabindex="-1" role="basic" aria-hidden="true">
+  <div class="modal-dialog-new">
+    <div class="modal-content">
+      <div id="myactivity-post-content">
+        My Activity Post 
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+<script type="text/javascript">
+$(document).ready(function(){
+  // myactivity-post
+$('.myactivity-post').on('click',function(event){       
+    event.preventDefault();
+    var post_id = $(this).parent().data('postid');
 
+    $.ajaxSetup({
+    headers: {
+      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+  });
+
+    $.ajax({
+      url: "/myactivity/post",
+      type: "post",
+      data: {post_id: post_id},
+      cache : false,
+      success: function(data){
+      $('#myactivity-post-content').html(data);
+      $('#myactivity-post').modal('show');
+      }
+    }); 
+    return false;
+});
+
+});
+</script>
