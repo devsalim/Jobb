@@ -7,6 +7,7 @@ use Auth;
 use Redirect;
 use App\Groups_users;
 use App\Induser;
+use Input;
 use DB;
 
 class GroupController extends Controller {
@@ -108,7 +109,14 @@ class GroupController extends Controller {
 	 */
 	public function update($id)
 	{
-		//
+		$data = Group::where('id', '=', $id)->first();
+		if($data != null){
+		$data->group_name = Input::get('group_name');
+		$data->save();
+		return redirect('/group');
+		}else{
+			return 'some error occured.';
+		}
 	}
 
 	/**
@@ -120,8 +128,10 @@ class GroupController extends Controller {
 	public function destroy($id)
 	{
 		$group = Group::findOrFail($id);
+		$group_user = Groups_users::findOrFail($id);
+		$group_user->delete();
 		$group->delete();
-		return redirect('/group/create');
+		return redirect('/group');
 	}
 
 	public function detail($id)
@@ -178,7 +188,7 @@ class GroupController extends Controller {
 	public function deleteUser(Request $request){
 		$groups_users = Groups_users::findOrFail($request['id']);
 		$groups_users->delete();
-		return redirect('/group/'.$request['groupid']);
+		return redirect('/group/'.$request['group_id']);
 	}
 
 

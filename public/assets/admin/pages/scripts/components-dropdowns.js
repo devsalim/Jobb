@@ -49,7 +49,7 @@ var ComponentsDropdowns = function () {
         });
 
         $("#select2_sample5").select2({
-            tags: ["red", "green", "blue", "yellow", "pink"]
+            tags: []
         });
         //Tag for post job
          $("#select2_sample7").select2({

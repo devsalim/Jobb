@@ -4,7 +4,7 @@
 
 <div class="portlet light bordered col-md-6">
 	<div class="portlet-title">
-		<a id="ajax-demo" href="#creat-group" data-toggle="modal" class="config" style="text-decoration: none;">
+		<a id="ajax-demo" href="#create-group" data-toggle="modal" class="config" style="text-decoration: none;">
 			<div class="links-title"><label><i class="glyphicon glyphicon-plus-sign" style="font-size:14px;color: #46AFA6;"></i></label> <label style="font-size: 16px;">Create New Group</label></div>
 		</a> 
 	</div>
@@ -52,7 +52,7 @@
 
 
 <!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
-<div class="modal fade" id="creat-group" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="create-group" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   	<div class="modal-dialog" style="width: 300px;">
 	    <div class="modal-content">
 	    	<form action="{{ url('/group/store') }}" class="horizontal-form" method="post">

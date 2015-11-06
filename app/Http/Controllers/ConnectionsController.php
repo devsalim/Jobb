@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Input;
 use App\Induser;
 use App\Corpuser;
 use App\Connections;
+use App\Follow;
 use Auth;
 use DB;
 
@@ -48,7 +49,10 @@ class ConnectionsController extends Controller {
 								 ->count('id');
 		$linkrequestCount = Connections::where('connection_user_id', '=', Auth::user()->induser_id)
 									   ->where('status', '=', 0)
-									   ->count('id');		
+									   ->count('id');	
+		$followCount = Follow::Where('individual_id', '=', Auth::user()->induser_id)
+								->where('status', '=', 1)
+								->count('id');	
 		$linkFollow = Corpuser::leftjoin('follows', 'corpusers.id', '=', 'follows.corporate_id')
 								->where('follows.individual_id', '=', Auth::user()->induser_id)
 								->get(['corpusers.id',
@@ -58,7 +62,7 @@ class ConnectionsController extends Controller {
 									   'corpusers.city', 
 									   'follows.corporate_id',
 									   'follows.individual_id']);
-		return view('pages.connections', compact('title', 'linkFollow', 'linksCount', 'linkrequestCount'));
+		return view('pages.connections', compact('title', 'linkFollow', 'linksCount', 'linkrequestCount', 'followCount'));
 	}
 
 	/**
@@ -139,6 +143,15 @@ class ConnectionsController extends Controller {
 						->orWhere('working_at', 'like', '%'.$keywords.'%')
 						->where('id', '<>', Auth::user()->induser_id)
 					    ->get();
+		$corps = Corpuser::where('firm_email_id', '=', $keywords)
+						->where('id', '<>', Auth::user()->induser_id)
+						->orWhere('firm_name', 'like', '%'.$keywords.'%')
+						->where('id', '<>', Auth::user()->induser_id)
+						->orWhere('firm_type', 'like', '%'.$keywords.'%')
+						->where('id', '<>', Auth::user()->induser_id)
+						->orWhere('city', 'like', '%'.$keywords.'%')
+						->where('id', '<>', Auth::user()->induser_id)
+					    ->get();
 
 		$links = DB::select('select id from indusers
 									where indusers.id in (
@@ -152,7 +165,19 @@ class ConnectionsController extends Controller {
 								)', [Auth::user()->induser_id, Auth::user()->induser_id]);
 		$links = collect($links);
 
-		return view('pages.searchUsers', compact('users', 'links'));
+		$follows = DB::select('select id from corpusers
+									where corpusers.id in (
+											select follows.individual_id as id from follows
+											where follows.corporate_id=?
+											 and follows.status=1
+											union 
+											select follows.corporate_id as id from follows
+											where follows.individual_id=?
+											 and follows.status=1
+								)', [Auth::user()->induser_id, Auth::user()->corpuser_id]);
+		$follows = collect($follows);
+
+		return view('pages.searchUsers', compact('users', 'links', 'corps', 'follows'));
 	}
 
 	public function response($id)
@@ -196,6 +221,9 @@ class ConnectionsController extends Controller {
 									   'corpusers.city', 
 									   'follows.corporate_id',
 									   'follows.individual_id']);
+		$followCount = Follow::Where('individual_id', '=', $id)
+								->where('status', '=', 1)
+								->count('id');						
 		$connections = DB::select('select id,fname,lname,working_at,city,state,profile_pic from indusers
 									where indusers.id in (
 
@@ -207,6 +235,11 @@ class ConnectionsController extends Controller {
 									where connections.user_id=?
 									 and connections.status=1
 								)', [$id, $id]);
-		return view('pages.friendlink', compact('title', 'linkFollow', 'connections'));
+		$linksCount = Connections::where('user_id', '=', $id)
+								 ->where('status', '=', 1)
+								 ->orWhere('connection_user_id', '=', $id)
+								 ->where('status', '=', 1)
+								 ->count('id');
+		return view('pages.friendlink', compact('title', 'linkFollow', 'connections', 'linksCount', 'followCount'));
 	}
 }

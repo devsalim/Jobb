@@ -41,6 +41,26 @@ var FormWizard = function () {
                     prof_category: {
                         required: true
                     },
+                    // #ref_id_1: {
+                    //     required:false,
+                    //     maxlength:20
+                    // },
+                    // #ref_id_2: {
+                    //     required:false,
+                    //     maxlength:20
+                    // },
+                    // #ref_id_3: {
+                    //     required:false,
+                    //     maxlength:20
+                    // },
+                    // #comp_name_1: {
+                    //     required:false,
+                    //     maxlength:30
+                    // },
+                    // #comp_name_2: {
+                    //     required:false,
+                    //     maxlength:30
+                    // },
                     post_compname: {
                         required:false,
                         maxlength:30
@@ -61,11 +81,11 @@ var FormWizard = function () {
                     },
                     education: {
                         required: true
+                        // minimum: 2
                     },
                     city: {
                         required: true
                     },
-                    //payment
                     post_duration: {
                         required: true
                     },
@@ -87,11 +107,30 @@ var FormWizard = function () {
                 role: {
                     required: "Select Job Role"
                 },
+                // #ref_id_1: {
+                //         maxlength: "Maximum Length is 20"
+                // },
+                // #ref_id_2: {
+                //         maxlength: "Maximum Length is 20"
+                // },
+                // #ref_id_3: {
+                //         maxlength: "Maximum Length is 20"
+                // },
+                // #comp_name_1: {
+                //         maxlength: "Maximum Length is 30"
+                // },
+                // #comp_name_2: {
+                //         maxlength: "Maximum Length is 30"
+                // },
                 post_compname: {
                     maxlength: "Maximum Length is 30"
                 },
                 reference_id: {
                     maxlength: "Maximum Length is 20"
+                },
+                education: {
+                    required: "Select Required Education"
+                    // minimum: "Select atleast 2 option"
                 },
                 linked_skill: {
                     required: "Add Skills"

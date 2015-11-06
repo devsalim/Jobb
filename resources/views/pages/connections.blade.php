@@ -1,7 +1,7 @@
 @extends('master')
 
 @section('content')
-
+@if(Auth::user()->identifier == 1)
 <div class="portlet light bordered col-md-7">
 	<div class="portlet-title">
 		<div class="caption links-title">
@@ -38,6 +38,9 @@
 							<!-- BEGIN FORM-->
 							<form action="searchConnections" class="horizontal-form" method="post">
 								<input type="hidden" name="_token" value="{{ csrf_token() }}">				
+								 <span class="">
+						            <a class="advance-search btn" data-toggle="modal" href="#advance">Click for Advance Search</a>
+						          </span>
 								<div class="input-icon right">
 									<i class="fa fa-search" style="color: darkcyan;"></i>
 									<input type="text" name="keywords" id="search-input" onkeydown="down()" onkeyup="up()" class="form-control input-circle" placeholder="Search" style="border: 1px solid darkcyan;">
@@ -72,7 +75,7 @@
 				</li>
 				<li>
 					<a href="#tab_5_3" class="label-new" data-toggle="tab">
-					Following</a>
+					Following @if($followCount > 0)({{ $followCount }})@endif</a>
 				</li>
 			</ul>
 			<div class="tab-content">
@@ -93,7 +96,8 @@
 						    <div class="media-body col-md-4 col-sm-8 col-xs-8" style="padding:0;margin: 8px 14px; !important">
 						    	<div class="media-body-left">
 						    		 
-								      	{{ $connection->fname }} {{ $connection->lname }}<br>
+								      <a href="/profile/ind/{{$connection->id}}" data-utype="ind">
+								     {{ $connection->fname }} {{ $connection->lname }}</a><br>
 								    
 								      @if($connection->working_at != null && $connection->city != null)
 								     	Working at {{ $connection->working_at }} in {{ $connection->city }}
@@ -148,7 +152,8 @@
 							    <div class="media-body">
 							    	<div class="media-body-left">
 							    		 <h4 class="media-heading">
-							    		 	{{ $conreq->fname }} {{ $conreq->lname }}
+							    		 	 <a href="/profile/ind/{{$conreq->id}}" data-utype="ind">
+							    		 	 	{{ $conreq->fname }} {{ $conreq->lname }}</a>
 							    		 </h4>
 									     {{ $conreq->working_at }}<br>
 										 {{ $conreq->city }} {{ $conreq->state }}
@@ -199,7 +204,9 @@
 							    <div class="media-body">
 							    	<div class="media-body-left">
 							    		 <h4 class="media-heading">
-							    		 	{{ $follow->firm_name }}
+							    		 	<a href="/profile/corp/{{$follow->id}}" class="link-label" data-utype="corp">
+							    		 		{{ $follow->firm_name }}
+							    		 	</a>
 							    		 </h4>
 										 {{ $follow->city }}, {{ $follow->operating_since }}
 							    	</div>
@@ -222,7 +229,147 @@
 			</div>
 		</div>
 	</div>
-</div>									
+</div>
+<div class="modal fade" id="advance" tabindex="-1" role="basic" aria-hidden="true">
+  <div class="modal-dialog modal-width">
+    <div class="modal-content">
+      <div class="modal-header" style="background-color: #3598dc; height: 40px;padding: 8px;">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="position: absolute;right: 15px;top: 15px;"></button>
+        <h4 class="modal-title links-title" style="color:white;">
+          <i class="icon-magnifier"></i> Advance Search
+        </h4>
+      </div>
+      <div class="modal-body links-title" style="padding:0;">
+        <div class="portlet box" style="border: 0;">
+              <div class="portlet-body">
+                <div class="tabbable-line">
+                  <ul class="nav nav-tabs nav-tab-new">
+                    <li class="active">
+                      <a href="#tab_15_2" data-toggle="tab" style="font-size:15px;font-weight:600;">
+                      Profile </a>
+                    </li>
+                  </ul>
+                  <div class="tab-content">
+                    <div class="tab-pane active" id="tab_15_2">
+                      <form id="search-profile" action="/search/profile" method="post">
+                      <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                      <div class="row links-title" style="margin-bottom: 20px;margin-top: 10px;">
+                        <div class="col-md-12 col-sm-12 col-xs-12 advance-len">
+                          <div class="input-group">
+                            <div class="icheck-inline">
+                              <label>
+                              <input id="id_radio1" type="radio" name="type" value="people" class="">People</label>
+                              <label>
+                              <input id="id_radio2" type="radio" value="company" name="type" class="">Company</label>
+                            </div>
+                          </div>
+                        </div>
+                        
+                      </div>
+                      <div class="row show-firm-type">
+                      	<div class="btn-group col-md-12 col-sm-12 col-xs-12" style="margin:10px;" data-toggle="buttons">
+							<label class="btn btn-default color-button check-font-size active" >
+							<input type="checkbox" name="firm_type[]" value="Company" class="toggle"> Company </label>
+							<label class="btn btn-default color-button check-font-size">
+							<input type="checkbox" name="firm_type[]" value="Consultancy" class="toggle"> Consultancy </label>
+						</div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-6 col-sm-6 col-xs-6 advance-len">
+                          <div class="form-group">              
+                              <input type="text" name="name" class="form-control filter-input" placeholder="Enter Name or Email Id">
+                          </div>  
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-6 advance-len">
+                          <div class="form-group">              
+                              <input type="text" name="city" class="form-control filter-input" placeholder="Location: Pune, Hyderabad">
+                          </div>  
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-6 col-sm-12 col-xs-12 advance-len">
+                          <div class="form-group">              
+                              <input type="text" name="role" class="form-control filter-input" placeholder="Job Role">
+                          </div>  
+                        </div>
+                        <div class="col-md-6 col-sm-12 col-xs-12 advance-len">
+                          <div class="form-group">              
+                              <input type="text" name="category" class="form-control filter-input" placeholder="Job Category">
+                          </div>  
+                        </div>
+                      </div>
+                      <div class="row show-comp">
+                        <div class="col-md-6 col-sm-12 col-xs-12 advance-len">
+                          <div class="form-group">              
+                              <input type="text" name="working_at" class="form-control filter-input" placeholder="Working at">
+                          </div>  
+                        </div>
+                        <div class="col-md-6 col-sm-12 col-xs-12 advance-len">
+                          <div class="form-group">              
+                              <input type="text" name="mobile" class="form-control filter-input" placeholder="Mobile No">
+                          </div>  
+                        </div>
+                      </div>
+                      <div class="row" style="margin-bottom: 10px;">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                          <div class="footer links-title">              
+                              <button type="submit" class="btn blue links-title"><i class="glyphicon glyphicon-search"></i> Search</button>
+                          </div>  
+                        </div>
+                      </div>
+                    </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+      </div>
+     <!--  <div class="modal-footer">
+        <button type="button" class="btn blue links-title"><i class="glyphicon glyphicon-search"></i> Search</button>
+      </div> -->
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+@elseif(Auth::user()->identifier == 2)
+<div class="portlet light bordered col-md-7">
+	<div class="portlet-title">
+		<div class="caption links-title">
+			<i class=""></i>
+			<span class="caption-subject font-blue-hoki bold uppercase">Followers</span>
+		</div>
+	</div>
+	<div class="portlet-body form">
+		<div class="form-body">
+			<div class="row">
+			</div>		
+		</div>
+	</div>
+</div>
+<div class="portlet box green col-md-7">
+	<div class="portlet-title">
+		<div class="caption">
+			<i class="icon-users"></i>Manage your Followers
+		</div>
+	</div>
+	<div class="portlet-body">
+		<div class="tabbable-custom ">
+			<ul class="nav nav-tabs" style="padding-left: 0px;">
+				<li class="active">
+					<a href="#tab_5_4" class="label-new" data-toggle="tab">
+					Following </a>
+				</li>
+			</ul>
+			<div class="tab-content">
+				<div class="tab-pane" id="tab_5_4">
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+@endif									
 @stop
 
 @section('javascript')
@@ -253,5 +400,19 @@ function down()
 {
 	clearTimeout(timer);
 }
+</script>
+
+<script type="text/javascript">
+     $(document).ready(function () {
+     	$('.show-firm-type').hide();
+        $('#id_radio1').click(function () {
+           $('.show-comp').show();
+           $('.show-firm-type').hide();
+    });
+    $('#id_radio2').click(function () {
+          $('.show-comp').hide();
+          $('.show-firm-type').show();
+     });
+   });
 </script>
 @stop

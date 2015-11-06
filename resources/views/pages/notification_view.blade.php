@@ -6,8 +6,16 @@
 	<div class="portlet-title">
 		<div class="caption">
 			<i class="icon-settings font-purple-studio"></i>
+			@if($utype == 'fav')
 			<span class="caption-subject bold font-purple-studio uppercase">
-			Notification </span>
+			Favourite </span>
+			@elseif($utype == 'app')
+			<span class="caption-subject bold font-purple-studio uppercase">
+			Applied </span>
+			@elseif($utype == 'thank')
+			<span class="caption-subject bold font-purple-studio uppercase">
+			Thanks </span>
+			@endif
 		</div>
 		<ul class="pagination pagination-circle">
 			<li>
@@ -38,6 +46,7 @@
 		<div class="" >
 			<h4></h4>
 			<p>
+				@if($utype == 'app')
 				<ul class="" data-handle-color="#637283">
                   @foreach($applications as $application)
                   <li>
@@ -56,6 +65,7 @@
                   </li>
                  @endforeach
                 </ul>
+                @elseif($utype == 'thank')
                 <ul class="" data-handle-color="#637283">
                   @foreach($thanks as $thank)
                   <li>
@@ -74,7 +84,26 @@
                   </li>
                  @endforeach
                 </ul>
-				
+				@elseif($utype == 'fav')
+				<ul class="" data-handle-color="#637283">
+                  @foreach($favourites as $favourite)
+                  <li>
+                    <a href="inbox.html?a=view">
+                    <span class="photo">
+                    <img src="@if($favourite->user->profile_pic != null){{ '/img/profile/'.$favourite->user->profile_pic }}@else{{'/assets/images/ab.png'}}@endif" class="img-circle" width="40" height="40">
+                    </span>
+                    <span class="subject">
+                    <span class="from">
+                    {{$favourite->user->fname}} </span>
+                    <span class="time">{{$favourite->fav_post_dtTime}}</span>
+                    </span>
+                    <span class="message">
+                    has favourite  the Post Id: {{$favourite->post_id}} </span>
+                    </a>
+                  </li>
+                 @endforeach
+                </ul>
+                @endif
 			</p>
 		</div>
 	</div>

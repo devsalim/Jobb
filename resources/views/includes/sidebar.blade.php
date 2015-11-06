@@ -103,7 +103,7 @@
       </li>
       @if (Auth::user()->identifier == 1)
       <li class="@if($title == 'connections'){{'active'}}@endif">
-        <a class="" href="/connections/create">
+        <a class="" href="/connections/create/">
         <i class="icon-link"></i>
         <span class="title">
         Links</span>
@@ -123,10 +123,10 @@
       @endif
       @if (Auth::user()->identifier == 2)
       <li class="@if($title == 'profile'){{'active'}}@endif">
-        <a class="" href="/corporate/create">
+        <a class="" href="/connections/create">
         <i class=" icon-note"></i>
         <span class="title">
-        Profile</span>
+        Followers</span>
         <span class="selected">
         </span>
         </a>

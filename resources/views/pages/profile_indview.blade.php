@@ -20,12 +20,32 @@
 				<!-- END SIDEBAR USERPIC -->
 				<!-- SIDEBAR USER TITLE -->
 				<div class="profile-usertitle usertitle-profile" >
-					<div class="profile-usertitle-name" style="font-size: 18px;font-weight: 600;">
+					<div class="profile-usertitle-name text-capitalize" style="font-size: 18px;font-weight: 600;">
 						 {{ $user->fname }} {{ $user->lname }} {{ $user->firm_name }}
 					</div>
-					@if($user->role != null && $user->working_at !=null)
-					<div class="profile-usertitle-job" style="font-size: 15px;font-weight: 500;">
+					@if($user->working_status == "Student")
+					<div class="profile-usertitle-job text-capitalize" style="font-size: 15px;font-weight: 500;">
+						 {{ $user->education }} in {{ $user->branch }}, {{ $user->city }}
+					</div>
+					@elseif($user->working_status == "Searching Job")
+					<div class="profile-usertitle-job text-capitalize" style="font-size: 15px;font-weight: 500;">
+						 {{ $user->working_status }} in {{ $user->prof_category }}, {{ $user->city }}
+					</div>
+					@elseif($user->working_status == "Freelanching")
+					<div class="profile-usertitle-job text-capitalize" style="font-size: 15px;font-weight: 500;">
+						 {{ $user->role }} {{ $user->working_status }}, {{ $user->city }}
+					</div>
+					@elseif($user->role != null && $user->working_at !=null && $user->working_status == "Working")
+					<div class="profile-usertitle-job text-capitalize" style="font-size: 15px;font-weight: 500;">
 						 {{ $user->role }} @ {{ $user->working_at }} 
+					</div>
+					@elseif($user->role != null && $user->working_at ==null && $user->working_status == "Working")
+					<div class="profile-usertitle-job text-capitalize" style="font-size: 15px;font-weight: 500;">
+						 {{ $user->role }}, {{ $user->city }}
+					</div>
+					@elseif($user->role == null && $user->working_at !=null && $user->working_status == "Working")
+					<div class="profile-usertitle-job text-capitalize" style="font-size: 15px;font-weight: 500;">
+						 {{ $user->woring_at }}, {{ $user->city }}
 					</div>
 					@endif
 
@@ -97,8 +117,8 @@
 							<div>
 								 Followers
 							</div>
-							<!-- <span class="badge badge-danger" style="background-color: #26a69a;">
-							</span> -->
+							<span class="badge badge-danger @if($followCount > 0) show @else hide @endif" style="background-color: #26a69a;">
+							{{$followCount}}</span>
 						</a>
 					</div>
 					@endif
@@ -143,8 +163,8 @@
 							<div>
 								 Followers
 							</div>
-							<!-- <span class="badge badge-danger" style="background-color: #26a69a;">
-							</span> -->
+							<span class="badge badge-danger @if($followCount > 0) show @else hide @endif" style="background-color: #26a69a;">
+							{{$followCount}}</span>
 						</a>
 					</div>
 					@endif
@@ -258,7 +278,7 @@
 		</div>
 		@if(Auth::user()->induser_id == $user->id)
 		<div class="tools @if($title == 'indprofile_edit'){{'active'}}@endif">
-			<a href="/individual/edit_view" class="btn btn-xs blue" style="height: 20px;">
+			<a href="/individual/edit" class="btn btn-xs blue" style="height: 20px;">
 			<i class="fa fa-edit"></i> Edit 
 			</a>
 		</div>
@@ -288,10 +308,10 @@
 							<label class="control-label col-md-4 col-xs-6">Experience:</label>
 							<div class="col-md-6 col-xs-6">
 								<p class="form-control-static view-page">
-									@if($user->experience != null && $user->experience != "Fresher")
+									@if($user->experience != null && $user->experience != 0)
 									{{ $user->experience }} Years
-									@elseif($user->experience == "Fresher" )
-									{{ $user->experience }}
+									@elseif($user->experience == 0 )
+									{{ $user->experience }} Year
 									@else
 									--
 									@endif
@@ -303,6 +323,21 @@
 				</div>
 				<!--/row-->
 				<div class="row">
+					<div class="col-md-6 col-sm-6 col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-md-4 col-xs-6">Working Status:</label>
+							<div class="col-md-6 col-xs-6">
+								<p class="form-control-static view-page">
+									@if($user->working_status != null)
+									{{ $user->working_status }}
+									@elseif($user->working_status == null)
+									--
+									@endif
+								</p>
+							</div>
+						</div>
+					</div>
+					<!--/span-->
 					<div class="col-md-6 col-sm-6 col-xs-12">
 						<div class="form-group">
 							<label class="control-label col-md-4 col-xs-6">Working At:</label>
@@ -318,6 +353,10 @@
 						</div>
 					</div>
 					<!--/span-->
+					
+				</div>
+				<!--/row-->
+				<div class="row">
 					<div class="col-md-6 col-sm-6 col-xs-12">
 						<div class="form-group">
 							<label class="control-label col-md-4 col-xs-6">Job Category:</label>							
@@ -333,9 +372,6 @@
 						</div>
 					</div>
 					<!--/span-->
-				</div>
-				<!--/row-->
-				<div class="row">
 					<div class="col-md-6 col-sm-6 col-xs-12">
 						<div class="form-group">
 							<label class="control-label col-md-4 col-xs-6">Job Role:</label>
@@ -350,7 +386,10 @@
 							</div>
 						</div>
 					</div>
-					<!--/span-->
+					<!--/span-->	
+				</div>
+				<!--/row-->
+				<div class="row">
 					<div class="col-md-6 col-sm-6 col-xs-12">
 						<div class="form-group">
 							<label class="control-label col-md-4 col-xs-6">Resume:</label>
@@ -366,13 +405,10 @@
 						</div>
 					</div>
 					<!--/span-->
-				</div>
-				<!--/row-->
-				<div class="row">
 					<div class="col-md-6 col-sm-6 col-xs-12">
 						<div class="form-group">
 							<label class="control-label col-md-4 col-xs-6">Key Skills:</label>
-							<div class="col-md-6 col-xs-6">
+							<div class="col-md-8 col-xs-6">
 								<p class="form-control-static view-page">
 									
 									@if($user->linked_skill != null)
@@ -383,10 +419,6 @@
 								</p>
 							</div>
 						</div>
-					</div>
-					<!--/span-->
-					<div class="col-md-6 col-sm-6 col-xs-12">
-						
 					</div>
 					<!--/span-->
 				</div>

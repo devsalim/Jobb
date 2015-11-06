@@ -67,8 +67,8 @@ Route::group(array('before' => 'auth'), function(){
 	
 	Route::get('group', 'GroupController@index');
 	Route::get('group/create', 'GroupController@create');
-	Route::post('group/store', 'GroupController@store');
-	Route::post('group/update', 'GroupController@update');
+	Route::get('group/store', 'GroupController@store');
+	Route::post('group/update/{id}', 'GroupController@update');
 	Route::post('group/destroy/{id}', 'GroupController@destroy');
 	Route::get('group/{id}', 'GroupController@detail');
 	Route::post('group/adduser', 'GroupController@addUser');	
@@ -81,6 +81,7 @@ Route::group(array('before' => 'auth'), function(){
 	Route::get('feedback/create', 'FeedbackController@create');
 	Route::post('feedback/store', 'FeedbackController@store');
 	Route::post('feedback/update', 'FeedbackController@update');
+	Route::post('/home', 'FeedbackController@report');
 
 	Route::post('searchConnections', 'ConnectionsController@searchConnections');
 
@@ -92,7 +93,7 @@ Route::group(array('before' => 'auth'), function(){
 	Route::get('individual/thanks_view', 'ViewpageController@thanks_view');	
 	// Route::get('individual/posts_view', 'ViewpageController@posts_view');	
 
-	Route::get('notification_view', 'PagesController@notification');
+	Route::get('notification_view/{utype}', 'PagesController@notification');
 	Route::get('notification_view/notification', 'PagesController@notification');
 	Route::get('notification_view/notificationThanks', 'PagesController@notificationThanks');
 	Route::get('profile/{utype}/{id}', 'PagesController@profile');

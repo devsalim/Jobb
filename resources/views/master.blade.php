@@ -324,11 +324,13 @@ body.page-boxed{
 <script src="/assets/admin/pages/scripts/form-validation.js"></script>
 <script type="text/javascript" src="/assets/global/plugins/jquery-validation/js/jquery.validate.min.js"></script>
 <script type="text/javascript" src="/assets/global/plugins/jquery-validation/js/additional-methods.min.js"></script>
+<script src="/assets/admin/pages/scripts/components-form-tools.js"></script>
 <script>
 jQuery(document).ready(function() {    
    Metronic.init(); // init metronic core components
    Layout.init(); // init current layout
    Demo.init(); // init demo features
+   // ComponentsFormTools.init();
    ComponentsKnobDials.init();
    FormValidation.init();
   $('.toggle-display').click(function () {

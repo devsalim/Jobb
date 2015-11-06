@@ -94,7 +94,8 @@
 }
 
 .job{
-    float: right;
+    background-color: #61b3de !important;
+   /* float: right;
     position: absolute;
     right: 0;
     top: 0;
@@ -103,17 +104,17 @@
     text-transform: capitalize;
     font-family: sans-serif;
     font-weight: bold;
-    color: #FFF;
+    color: #FFF;*/
     /*border-radius: 20px !important;*/
-    width: 65px;
+  /*  width: 65px;
     text-align: center;
     margin: -47px -28px 0px 16px;
    -webkit-transform: rotate(-45deg);
-   -ms-transform: rotate(-45deg); /* IE 9 */
+   -ms-transform: rotate(-45deg);  IE 9 
     transform: rotate(-45deg);
     border-top: 44px solid transparent;
     border-bottom: 44px solid transparent;
-    border-left: 44px solid #61b3de;
+    border-left: 44px solid #61b3de;*/
 }
 
 .job a:hover{
@@ -123,7 +124,8 @@
 }
 
 .skill{
-    float: right;
+    background-color: #70b29c !important;
+    /*float: right;
     position: absolute;
     right: 0;
     top: 0;
@@ -132,17 +134,17 @@
     text-transform: capitalize;
     font-family: sans-serif;
     font-weight: bold;
-    color: #FFF;
+    color: #FFF;*/
     /*border-radius: 20px !important;*/
-    width: 65px;
+    /*width: 65px;
     text-align: center;
     margin: -47px -28px 0px 16px;
    -webkit-transform: rotate(-45deg);
-   -ms-transform: rotate(-45deg); /* IE 9 */
+   -ms-transform: rotate(-45deg);  IE 9 
     transform: rotate(-45deg);
     border-top: 44px solid transparent;
     border-bottom: 44px solid transparent;
-    border-left: 44px solid #70b29c; 
+    border-left: 44px solid #70b29c; */
 }
 
 .skill a:hover{

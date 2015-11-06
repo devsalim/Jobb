@@ -152,34 +152,79 @@
 											</div>
 										</div>
 									</div>
+									@if(Auth::user()->identifier == 1)
 									<div class="row">
-									<div class="col-md-5 col-sm-5 col-xs-12">
-										<div class="form-group">
-											<div class="input-icon right">
-													<i class="fa"></i>
-											<label>Company Name</label>
-											<div class="input-group">
-												<span class="input-group-addon">
-													<i class="fa fa-building" style="color:darkcyan;"></i>
-												</span>
-												<input type="text" name="post_compname" class="form-control" placeholder="Company Name">
+										<div class="col-md-5 col-sm-5 col-xs-12">
+											<div class="form-group">
+												<div class="input-icon right">
+														<i class="fa"></i>
+													<label>Company Name</label>
+													<div class="input-group">
+														<span class="input-group-addon">
+															<i class="fa fa-building" style="color:darkcyan;"></i>
+														</span>
+														<input type="text" id="comp_name_1" name="post_compname" class="form-control" placeholder="Company Name">
+													</div>
+												</div>
 											</div>
 										</div>
-										</div>
-									</div>
-									<div class="col-md-2 col-sm-2 col-xs-2"></div>
-									<div class="col-md-5 col-sm-5 col-xs-12">
-										<div class="form-group">
-											<label>Reference Id</label>
-											<div class="input-group">
-												<span class="input-group-addon">
-													<i class="fa fa-info" style="color:darkcyan;"></i>
-												</span>
-												<input type="text" name="reference_id" class="form-control" placeholder="Reference Id">
+										<div class="col-md-2 col-sm-2 col-xs-2"></div>
+										<div class="col-md-5 col-sm-5 col-xs-12">
+											<div class="form-group">
+												<label>Reference Id</label>
+												<div class="input-group">
+													<span class="input-group-addon">
+														<i class="fa fa-info" style="color:darkcyan;"></i>
+													</span>
+													<input type="text" id="ref_id_1" name="reference_id" class="form-control" placeholder="Reference Id">
+												</div>
 											</div>
 										</div>
-									</div>
-									</div>													
+									</div>	
+									@elseif(Auth::user()->identifier == 2 && Auth::user()->corpuser->firm_type == "consultancy")
+									<div class="row">
+										<div class="col-md-5 col-sm-5 col-xs-12">
+											<div class="form-group">
+												<div class="input-icon right">
+														<i class="fa"></i>
+													<label>Company Name</label>
+													<div class="input-group">
+														<span class="input-group-addon">
+															<i class="fa fa-building" style="color:darkcyan;"></i>
+														</span>
+														<input type="text" id="comp_name_2" name="post_compname" class="form-control" placeholder="Company Name">
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="col-md-2 col-sm-2 col-xs-2"></div>
+										<div class="col-md-5 col-sm-5 col-xs-12">
+											<div class="form-group">
+												<label>Reference Id</label>
+												<div class="input-group">
+													<span class="input-group-addon">
+														<i class="fa fa-info" style="color:darkcyan;"></i>
+													</span>
+													<input type="text" id="ref_id_2" name="reference_id" class="form-control" placeholder="Reference Id">
+												</div>
+											</div>
+										</div>
+									</div>	
+									@elseif(Auth::user()->identifier == 2 && Auth::user()->corpuser->firm_type == "company")
+									<div class="row">
+										<div class="col-md-5 col-sm-5 col-xs-12">
+											<div class="form-group">
+												<label>Reference Id</label>
+												<div class="input-group">
+													<span class="input-group-addon">
+														<i class="fa fa-info" style="color:darkcyan;"></i>
+													</span>
+													<input type="text" id="ref_id_3" name="reference_id" class="form-control" placeholder="Reference Id">
+												</div>
+											</div>
+										</div>
+									</div>	
+									@endif									
 									<!--/span-->
 									<div class="form-group">
 										
@@ -214,12 +259,14 @@
 								<div class="row">
 									<div class="col-md-5">
 										<div class="form-group">
-											<label> Required Education</label>
+											<label> Required Education <span class="required">
+															* </span></label>
 											<div class="input-group">
 												<span class="input-group-addon">
 													<i class="icon-hourglass" style="color:darkcyan;"></i>
 												</span>
 												<select class="bs-select form-control" name="education" multiple style="float:none;">
+													<option value="">&nbsp;</option>
 													<option value="Any Diploma">Any Diploma</option>
 													<option value="Any Graduate">Any Graduate</option>
 													<option value="Any Post Graduate">Any Post Graduate</option>
@@ -414,6 +461,19 @@
 										</div>
 									</div>
 									<div class="col-md-2"></div>
+									@if(Auth::user()->identifier == 2)
+									<div class="col-md-5 show-apply-email">
+										<div class="form-group">
+											<label>Contact Person</label>
+											<div class="input-group">
+											<span class="input-group-addon">
+											<i class="glyphicon glyphicon-user" style="color:darkcyan;"></i>
+											</span>
+											<input type="text" name="contact_person" value="{{ Auth::user()->corpuser->username }}" class="form-control" placeholder="Contact Person">
+											</div>
+										</div>
+									</div>
+									@else
 									<div class="col-md-5 show-apply-email">
 										<div class="form-group">
 											<label>Contact Person</label>
@@ -425,6 +485,7 @@
 											</div>
 										</div>
 									</div>
+									@endif
 								</div>
 										<!--/span-->
 									<div class="row show-apply-email">

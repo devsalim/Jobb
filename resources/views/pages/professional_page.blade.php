@@ -19,7 +19,43 @@
 			<div class="form-body">
 				<div class="row">
 					<div class="" style=""></div>
-					<div class="col-md-8" style="">
+					<div class="col-md-9" style="">
+														<!-- <div class="row">
+									<div class="col-md-5 col-sm-5 col-xs-12">
+										<div class="form-group">							
+											<label class=" control-label">Experience </label>&nbsp;: <input type="text" style="width: 20px;background:transparent;border:0" name="min_exp" class="min-exp">-
+											<input type="text" style="width: 14px;margin:0 4px;background:transparent;border:0" name="max_exp" class="max-exp">Years
+											<div class="">
+												<input id="range_1" type="text"  value=""/> -->
+												<!-- <input type="hidden" name="min_exp" class="min-exp">
+												<input type="hidden" name="max_exp" class="max-exp"> -->
+											<!-- </div>
+										</div>
+									</div> -->
+									<!--/span-->
+									<!-- <div class="col-md-2 col-sm-2 col-xs-2"></div>
+									<div class="col-md-5 col-sm-5 col-xs-12">
+										<div class="form-group">							
+											<label class=" control-label"><input type="checkbox" id="hide-check">&nbsp;Salary 
+											</label>&nbsp;:<select name="salary_type" style="border-top: 0px;border-left: 0;border-right: 0;">									
+													<option value="Monthly">Monthly</option>
+													<option value="Weekly">Weekly</option>
+													<option value="Daily">Daily</option>
+													<option value="Hourly">Hourly</option>
+													<option value="Per Visit">Per Visit</option>	
+												</select>
+											 <i class="fa fa-rupee (alias)"></i>&nbsp;<input type="text" style="width: 30px;margin:0 6px;background:transparent;border:0" name="min_sal" class="min-sal">-
+											<input type="text" style="width:40px;margin:0 4px;background:transparent;border:0" name="max_sal" class="max-sal">&nbsp;
+											
+											<div id="hide-sal" class="">
+												<input id="range_7" type="text"  value=""/> -->
+												<!-- <label name="min_sal" class="min-sal"></label> -->
+												<!-- <input type="hidden" name="min_sal" class="min-sal">
+												<input type="hidden" name="max_sal" class="max-sal"> -->
+											<!-- </div>
+										</div>
+									</div>
+								</div> -->
 						<div class="row">
 							@if (count($errors) > 0)
 							<div class="alert alert-danger">
@@ -97,7 +133,7 @@
 				</div>
 				<div class="form-actions ">
 					<button type="submit" class="btn blue"><i class="fa fa-check"></i> Update</button>
-					<button type="button" class="btn default">Cancel</button>
+					<!-- <button type="button" class="btn default">Cancel</button> -->
 				</div>
 			</div>
 		</form>
@@ -122,7 +158,7 @@
 			<div class="form-body">
 				<div class="row">
 					<div class="" style=""></div>
-					<div class="col-md-8" style="">
+					<div class="col-md-9" style="">
 						<div class="row">
 							<div class="col-md-12">
 								<div class="form-group">
@@ -249,21 +285,24 @@
 							<!--/span-->
 						</div>						
 						<div class="row">
-							
-							<div class="col-md-6 col-sm-6">
+							<div class="col-md-3 col-sm-3 col-xs-6">
 								<div class="form-group">
-									<label>Working at</label>
+									<label>Working Status</label>
 									<div class="input-group">
 										<span class="input-group-addon">
-											<i class="fa fa-university"></i>
+											<i class=" icon-briefcase"></i>
 										</span>
-										
-										<input type="text" class="form-control" value="{{ $user->working_at }}" name="working_at">
+										<select class="form-control" id="menu" onChange="checkOption(this)" value="{{ $user->working_status }}" name="working_status">
+											<option value="">Select</option>
+											<option @if($user->working_status=="Student") {{ $selected }} @endif value="Student">Student</option>
+											<option @if($user->working_status=="Searching Job") {{ $selected }} @endif value="Searching Job">Searching Job</option>
+											<option @if($user->working_status=="Working") {{ $selected }} @endif value="Working">Working</option>
+											<option @if($user->working_status=="Freelanching") {{ $selected }} @endif value="Freelanching">Freelanching</option>
+										</select>
 									</div>
 								</div>
-							</div>
-							<!--/span-->
-							<div class="col-md-6 col-sm-6">
+							</div>	
+							<div class="col-md-3 col-sm-3 col-xs-6">
 								<div class="form-group">
 									<label>Experience</label>
 									<div class="input-group">
@@ -271,8 +310,8 @@
 											<i class=" icon-briefcase"></i>
 										</span>
 										<select class="form-control" name="experience" >
-											<option value="">-- Select --</option>
-											<option @if($user->experience=="Fresher") {{ $selected }} @endif value="Fresher">Fresher</option>
+											<option value=""> Select </option>
+											<option @if($user->experience=="0") {{ $selected }} @endif value="0">0</option>
 											<option @if($user->experience=="1") {{ $selected }} @endif value="1">1</option>
 											<option @if($user->experience=="2") {{ $selected }} @endif value="2">2</option>
 											<option @if($user->experience=="3") {{ $selected }} @endif value="3">3</option>
@@ -292,6 +331,19 @@
 									</div>
 								</div>
 							</div>
+							<div class="col-md-6 col-sm-6 col-xs-12">
+								<div class="form-group">
+									<label>Working at</label>
+									<div class="input-group">
+										<span class="input-group-addon">
+											<i class="fa fa-university"></i>
+										</span>
+										
+										<input type="text" id="workingAs" class="form-control" value="{{ $user->working_at }}" name="working_at">
+									</div>
+								</div>
+							</div>
+							<!--/span-->
 						</div>
 						<div class="row">
 							<div class="col-md-6 col-sm-6">
@@ -500,7 +552,7 @@
 				</div>
 				<div class="form-actions ">
 					<button type="submit" name="individual" value="Save" class="btn blue"><i class="fa fa-check"></i> Update</button>
-					<button type="button" class="btn default">Cancel</button>
+					<!-- <button type="button" class="btn default">Cancel</button> -->
 				</div>
 			</div>
 		</form>
@@ -521,7 +573,13 @@
 	    ComponentsEditors.init();
 	});   
 </script>
+
 <script type="text/javascript">
+function checkOption(obj) {
+    var input = document.getElementById("workingAs");
+    input.disabled = obj.value == "Student";
+}
+
 		 $(function(){
 
 	 	function split( val ) {

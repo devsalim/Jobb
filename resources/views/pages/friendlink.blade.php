@@ -15,11 +15,11 @@
 			<ul class="nav nav-tabs" style="padding-left: 0px;">
 				<li class="active">
 					<a href="#tab_5_1" class="label-new" data-toggle="tab">
-					Linked </a>
+					Linked @if($linksCount > 0)({{ $linksCount }})@endif</a>
 				</li>
 				<li>
 					<a href="#tab_5_2" class="label-new" data-toggle="tab">
-					Following</a>
+					Following @if($followCount > 0)({{ $followCount }})@endif</a>
 				</li>
 			</ul>
 			<div class="tab-content">
@@ -39,7 +39,8 @@
 						    <div class="media-body col-md-4 col-sm-8 col-xs-8" style="padding:0;margin: 8px 14px; !important">
 						    	<div class="media-body-left">
 						    		 
-								      	{{ $connection->fname }} {{ $connection->lname }}<br>
+								    <a href="/profile/ind/{{$connection->id}}" data-utype="ind">
+								      	{{ $connection->fname }} {{ $connection->lname }}</a><br>
 								    
 								      @if($connection->working_at != null && $connection->city != null)
 								     	Working at {{ $connection->working_at }} in {{ $connection->city }}

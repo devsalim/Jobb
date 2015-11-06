@@ -10,6 +10,7 @@ use App\Postjob;
 use App\Postactivity;
 use App\Connections;
 use App\Follow;
+use App\Skills;
 use Auth;
 use DB;
 use Input;
@@ -27,7 +28,7 @@ class PagesController extends Controller {
 
 	public function login(){
 		if (Auth::check()) {
-			return redirect('/home');
+			return redirect("/home");
 		}else{
 			return view('pages.login');
 		}
@@ -36,6 +37,7 @@ class PagesController extends Controller {
 	public function home(){
 		if (Auth::check()) {
 			$title = 'home';
+			$skills = Skills::lists('name', 'id');
 			$posts = Postjob::orderBy('id', 'desc')->with('indUser', 'corpUser', 'postActivity')->paginate(15);
 
 			$links = DB::select('select id from indusers
@@ -72,7 +74,7 @@ class PagesController extends Controller {
 				unset ($userSkills[count($userSkills)-1]); 
 			}
 			
-			return view('pages.home', compact('posts', 'title', 'links', 'following', 'userSkills'));
+			return view('pages.home', compact('posts', 'title', 'links', 'following', 'userSkills', 'skills'));
 			// return $userSkills;
 		}else{
 			return redirect('login');
@@ -117,31 +119,34 @@ class PagesController extends Controller {
 		return redirect('login');
 	}
 
-	public function notification(){
-		$title = 'notify_view';
-		$user = Induser::where('id', '=', Auth::user()->induser_id)->first();
-		$applications = Postactivity::with('user', 'post')
-									->join('postjobs', 'postjobs.id', '=', 'postactivities.post_id')
-									->where('postjobs.individual_id', '=', Auth::user()->induser_id)
-									->where('postactivities.apply', '=', 1)
-									->orderBy('postactivities.id', 'desc')
-									->take(25)
-									->get(['postactivities.id','postjobs.unique_id', 'postactivities.apply', 'postactivities.apply_dtTime', 'postactivities.user_id', 'postactivities.post_id']);
-		$thanks = Postactivity::with('user', 'post')
-						      ->join('postjobs', 'postjobs.id', '=', 'postactivities.post_id')
-							  ->where('postjobs.individual_id', '=', Auth::user()->induser_id)
-							  ->where('postactivities.thanks', '=', 1)
-						      ->orderBy('postactivities.id', 'desc')
-						      ->take(25)
-						      ->get(['postactivities.id','postjobs.unique_id', 'postactivities.thanks', 'postactivities.thanks_dtTime', 'postactivities.user_id', 'postactivities.post_id']);
-		$favourites = Postactivity::with('user')
-							      ->where('fav_post', '=', 1)
-							      ->where('user_id', '=', Auth::user()->induser_id)
-							      ->orderBy('id', 'desc')
-						          ->get(['id', 'fav_post', 'fav_post_dtTime', 'user_id', 'post_id']);
-	
-		return view('pages.notification_view', compact('user', 'applications', 'thanks', 'favourites', 'title'));
-	}
+  public function notification($utype){
+        $title = 'notify_view';
+        $user = Induser::where('id', '=', Auth::user()->induser_id)->first();
+        if($utype == 'app'){
+            $applications = Postactivity::with('user', 'post')
+                                        ->join('postjobs', 'postjobs.id', '=', 'postactivities.post_id')
+                                        ->where('postjobs.individual_id', '=', Auth::user()->induser_id)
+                                        ->where('postactivities.apply', '=', 1)
+                                        ->orderBy('postactivities.id', 'desc')
+                                        ->take(25)
+                                        ->get(['postactivities.id','postjobs.unique_id', 'postactivities.apply', 'postactivities.apply_dtTime', 'postactivities.user_id', 'postactivities.post_id']);
+        }elseif($utype == 'thank'){
+            $thanks = Postactivity::with('user', 'post')
+                                  ->join('postjobs', 'postjobs.id', '=', 'postactivities.post_id')
+                                  ->where('postjobs.individual_id', '=', Auth::user()->induser_id)
+                                  ->where('postactivities.thanks', '=', 1)
+                                  ->orderBy('postactivities.id', 'desc')
+                                  ->take(25)
+                                  ->get(['postactivities.id','postjobs.unique_id', 'postactivities.thanks', 'postactivities.thanks_dtTime', 'postactivities.user_id', 'postactivities.post_id']);
+        }elseif($utype == 'fav'){
+            $favourites = Postactivity::with('user')
+                                      ->where('fav_post', '=', 1)
+                                      ->where('user_id', '=', Auth::user()->induser_id)
+                                      ->orderBy('id', 'desc')
+                                      ->get(['id', 'fav_post', 'fav_post_dtTime', 'user_id', 'post_id']);
+        }
+        return view('pages.notification_view', compact('user', 'applications', 'thanks', 'favourites', 'title', 'utype'));
+    }
 
 	public function notify(){
 		$title = 'notification';
@@ -207,6 +212,11 @@ class PagesController extends Controller {
 							      ->sum('postactivities.thanks');
 			$posts = Postjob::where('corporate_id', '=', $id)->count('id');
 			$linksCount = Follow::where('corporate_id', '=', $id)->count('id');
+			$followCount = Follow::where('corporate_id', '=', $id)
+								->where('status', '=', 1)
+								->orWhere('individual_id', '=', $id)
+								->where('status', '=', 1)
+								->count('id');
 			$connectionStatus = 'unknown';
 			$followStatus = Follow::where('individual_id', '=', Auth::user()->induser_id)->first();
 			if($followStatus != null){
@@ -214,7 +224,7 @@ class PagesController extends Controller {
                 $connectionId = $followStatus->id;
             }
 		}	
-		return view('pages.profile_indview', compact('title','thanks','posts','linksCount','user','connectionStatus','utype','connectionId'));
+		return view('pages.profile_indview', compact('title','thanks','posts','linksCount','user','connectionStatus','utype','connectionId', 'followCount'));
 	}
 
 	public function follow($id){

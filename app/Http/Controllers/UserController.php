@@ -146,6 +146,7 @@ class UserController extends Controller {
 			$data->experience = Input::get('experience');
 			$data->role = Input::get('role');
 			$data->working_at = Input::get('working_at');
+			$data->working_status = Input::get('working_status');
 			$data->state = Input::get('state');
 			$data->city = Input::get('city');
 			$data->prefered_location = Input::get('prefered_location');

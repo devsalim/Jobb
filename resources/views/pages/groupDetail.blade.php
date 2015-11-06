@@ -7,6 +7,13 @@
 		<div class="caption links-title">
 			<i class=""></i>
 			<span class="caption-subject font-blue-hoki bold uppercase" style="font-size:14px !important;">Group: {{$group->group_name}}</span>
+			@foreach($users as $user)
+			@if($user->admin_id == Auth::user()->induser_id)
+			<a id="ajax-demo" href="#edit-group" data-toggle="modal" class="config" style="text-decoration: none;">
+				<i class="fa fa-edit"></i>
+			</a>
+			@endif
+			@endforeach
 		</div>
 		<div>
 			<div><input action="action" type="button" class="btn btn-default btn-responsive" value="Back" onclick="history.go(-1);" /></div>
@@ -32,6 +39,37 @@
 	</div>
 	</div>
 	<!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+	<!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+<div class="modal fade" id="edit-group" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  	<div class="modal-dialog" style="width: 300px;">
+	    <div class="modal-content">
+	    	<form action="{{ url('/group/update', $group->id) }}" class="horizontal-form" method="post">
+				<input type="hidden" name="_token" value="{{ csrf_token() }}">
+		     	<div class="modal-header">
+			        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+			        <h4 class="modal-title">{{$group->group_name}}</h4>
+			     </div>
+				<div class="modal-body">
+					<div class="form-group">
+						<div class="input-group">
+							<span class="input-group-addon">
+								<i class="icon-call-end" style="color:darkcyan;"></i>
+							</span>
+							<input type="text" name="group_name" class="form-control" placeholder="Enter New Group name">
+						</div>
+					</div>	      		
+	     		</div>
+				<div class="modal-footer">
+					<button type="submit" class="btn btn-success">Update</button>
+					<button type="button" class="btn default" data-dismiss="modal">Close</button>
+				</div>
+			</form>
+		</div>
+	    <!-- /.modal-content -->
+ 	</div>
+  	<!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
 <div class="modal fade" id="delete-group" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   	<div class="modal-dialog" style="width: 300px;">
 	    <div class="modal-content">
@@ -151,7 +189,8 @@
 						    <div class="media-body" style="font-weight:300">
 							    <div class="media-body-left">
 							      <h4 class="media-heading" style="margin-bottom:0;font-weight:300;word-break:break-word">
-							      	{{ $user->fname }} {{ $user->lname }}
+							      	<a href="/profile/ind/{{$user->id}}" data-utype="ind">
+							      		{{ $user->fname }} {{ $user->lname }}</a>
 								      @if($user->id == $user->admin_id && $user->id != null)
 								      	<span class="btn btn-xs btn-warning" style="border-radius:25px !important;margin:0 10px">
 								      		Admin
