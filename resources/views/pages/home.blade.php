@@ -206,7 +206,7 @@
 										<img class="timeline-badge-userpic userpic-box" src="/assets/images/ab.png">
 										<a class="icon-userpic img-circle"><i class="glyphicon glyphicon-user" style=" font-size:12px;"></i></a>
 										@endif
-										@if(Auth::user()->identifier == 1 && $post->post_type == 'job')
+										@if(Auth::user()->identifier == 1 && $post->post_type == 'job' && Auth::user()->induser_id != $post->individual_id)
 										<div class="match">
 											<?php $postSkills = array(); ?>
 											@foreach($post->skills as $skill)

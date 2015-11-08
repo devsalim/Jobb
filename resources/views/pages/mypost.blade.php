@@ -73,7 +73,7 @@
 								 		$remainingDays = $difference->format('%d');
 								 		$remainingHours = $difference->format('%h');
 
-								 		$abc= $expiryDate->format('d M Y');
+								 		$dateExpire= $expiryDate->format('d M Y');
 
 								 		if($currentDate >= $fresh){
 								 			$expired = 1;
@@ -82,7 +82,7 @@
 								 		}
 								  	?>
 									<div class="row" style="margin-top: 15px;">
-										@if($expired == 1)
+										@if($expired != 1)
 											@if($remainingDays >= 2)
 											<div class="col-md-5 col-sm-3 col-xs-12">
 												<div class="">Post Expires in: {{ $remainingDays }} days
@@ -128,6 +128,7 @@
 												</div>
 											</div>										
 											@endif
+
 										@endif
 										@if($expired != 1)
 										<div class="col-md-3 col-sm-3 col-xs-12">
@@ -171,20 +172,25 @@
 										@if($post->post_duration_extend == 1 && $expired == 0)
 										<div class="col-md-12 col-sm-12 col-xs-12">
 											You have extended the post for {{ $post->post_duration }} days <br/>
-											Now this post will expire on {{$abc}}											
+											Now this post will expire on {{$dateExpire}}											
 										</div>
 										@elseif($post->post_duration_extend == 0 && $expired == 0)
 											<div class="col-md-12 col-sm-12 col-xs-12">
-												Your post will expire on {{$abc}}
+												Date:   Post extended for {{ $post->post_duration }} days<br/>
+												Your post will expire on {{$dateExpire}}
 											</div>
 										@elseif($expired == 1)
 										<div class="col-md-12 col-sm-12 col-xs-12">
-											Your post has been expired on {{$abc}}
+											Date: Post extended for {{ $post->post_duration }} days<br/>
+											{{$dateExpire}}: Post Expired
 										</div>
 										@endif
 									</div>
 								</div>		
 							</div>
+							<div class="box">
+										   <div class="ribbon"><span class="{{ $post->post_type }}">{{ $post->post_type }}</span></div>
+										</div>
 							<div class="portlet-body" style="margin: 0 -5px;">
 								<div class="panel-group accordion" id="accordion{{$post->id}}" style="margin-bottom: 0;">
 									<div class="panel panel-default" style=" position: relative;">
@@ -388,9 +394,9 @@
 																	                    		<a data-toggle="modal" href="#{{$post->id}}">
 																	                    			<i class="icon-speedometer"></i> 49%</a>
 																	                    	</div>
-																	                    	<div class="col-md-2 col-sm-4 col-xs-4">
+																	                    	<!-- <div class="col-md-2 col-sm-4 col-xs-4">
 																	                    		Profile
-																	                    	</div>
+																	                    	</div> -->
 																	                    	<div class="col-md-2 col-sm-4 col-xs-4">
 																	                    		Contact
 																	                    	</div>
@@ -743,7 +749,7 @@
 						@foreach($myActivities as $myActivity)								
 						<div class="col-md-9">												
 							<div class="updates-style" data-postid="{{$myActivity->post_id}}">{{$myActivity->time}}: {{$myActivity->identifier}} for {{$myActivity->post_title}}, {{$myActivity->post_compname}} 
-							<br>Post ID: {{$myActivity->post_id}}  
+							<br>Post ID: {{$myActivity->unique_id}}  
 							<a class="myactivity-post" data-toggle="modal" href="#myactivity-post">See the full Post </a>
 							</div>				
 						</div>	

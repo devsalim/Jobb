@@ -207,8 +207,13 @@
 							    		 	<a href="/profile/corp/{{$follow->id}}" class="link-label" data-utype="corp">
 							    		 		{{ $follow->firm_name }}
 							    		 	</a>
+							    		 	 <small>{{ $follow->firm_type }}</small>
 							    		 </h4>
-										 {{ $follow->city }}, {{ $follow->operating_since }}
+										<i class="fa fa-clock-o" style="color:darkslategray;font-size:16px;"></i>
+										 {{ $follow->operating_since }}
+										 <i class="fa fa-users" style="color:darkslategray;"></i>
+										 {{ $follow->emp_count }}<br>
+										 @if($follonewCount > 0)({{ $follonewCount }})@endif Followers
 							    	</div>
 							    	
 							    	<div class="media-body-right">

@@ -70,17 +70,37 @@
               {{ $session_user->firm_name }} <i class="fa fa-edit (alias)"></i></a>
             @endif
           </h3>
-          @if($session_user->role!=null)
-          <h3 class="form-title user-company">
-          {{ $session_user->role }} @ {{ $session_user->working_at }}
-          </h3>
+          @if(Auth::user()->identifier == 1)
+            @if($session_user->working_status == "Student")
+            <div class="profile-usertitle-job text-capitalize" style="font-size: 15px;font-weight: 500;">
+               {{ $session_user->education }} in {{ $session_user->branch }}, {{ $session_user->city }}
+            </div>
+            @elseif($session_user->working_status == "Searching Job")
+            <div class="profile-usertitle-job text-capitalize" style="font-size: 15px;font-weight: 500;">
+               {{ $session_user->working_status }} in {{ $session_user->prof_category }}, {{ $session_user->city }}
+            </div>
+            @elseif($session_user->working_status == "Freelanching")
+            <div class="profile-usertitle-job text-capitalize" style="font-size: 15px;font-weight: 500;">
+               {{ $session_user->role }} {{ $session_user->working_status }}, {{ $session_user->city }}
+            </div>
+            @elseif($session_user->role != null && $session_user->working_at !=null && $session_user->working_status == "Working")
+            <div class="profile-usertitle-job text-capitalize" style="font-size: 15px;font-weight: 500;">
+               {{ $session_user->role }} @ {{ $session_user->working_at }} 
+            </div>
+            @elseif($session_user->role != null && $session_user->working_at ==null && $session_user->working_status == "Working")
+            <div class="profile-usertitle-job text-capitalize" style="font-size: 15px;font-weight: 500;">
+               {{ $session_user->role }}, {{ $session_user->city }}
+            </div>
+            @elseif($session_user->role == null && $session_user->working_at !=null && $session_user->working_status == "Working")
+            <div class="profile-usertitle-job text-capitalize" style="font-size: 15px;font-weight: 500;">
+               {{ $session_user->woring_at }}, {{ $session_user->city }}
+            </div>
+            @elseif($session_user->role == null && $session_user->working_at ==null && $session_user->working_status == "Working")
+            <div class="profile-usertitle-job text-capitalize" style="font-size: 15px;font-weight: 500;">
+               {{ $session_user->prof_category }}, {{ $session_user->city }}
+            </div>
+            @endif
           @endif
-          @if($session_user->city!=null)
-          <h3 class="form-title user-location">
-            {{ $session_user->city }}
-          </h3>
-          @endif 
-
         </div>
       </li>
       <li class="@if($title == 'home'){{'active'}}@endif">
