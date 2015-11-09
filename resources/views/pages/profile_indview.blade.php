@@ -601,7 +601,15 @@
 							<label class="control-label col-md-4 col-xs-12">Email Id:</label>
 							<div class="col-md-8 col-xs-12">
 								<p class="form-control-static view-page">
-									{{ $user->email }} <i class="glyphicon glyphicon-ok-circle" style="color: #1EC71E;font-size: 16px;"></i>
+									{{ $user->email }} 
+									@if($user->email_verify == 0)
+									<a>
+										<i class="fa fa-exclamation-circle" 
+										style="color: #cb5a5e;font-size: 16px;"></i>
+									</a>
+									@elseif($user->email_verify == 1)
+										<i class="glyphicon glyphicon-ok-circle" style="color: #1EC71E;font-size: 16px;"></i>
+									@endif
 								</p>
 							</div>
 						</div>
@@ -612,7 +620,15 @@
 							<label class="control-label col-md-4 col-xs-12">Mobile:</label>
 							<div class="col-md-6 col-xs-12">
 								<p class="form-control-static view-page">
-									{{ $user->mobile }} <i class="fa fa-exclamation-circle" style="color: #cb5a5e;font-size: 16px;"></i>
+									{{ $user->mobile }} 
+									@if($user->mobile_verify == 0)
+									<a>
+										<i class="fa fa-exclamation-circle" 
+										style="color: #cb5a5e;font-size: 16px;"></i>
+									</a>
+									@elseif($user->mobile_verify == 1)
+										<i class="glyphicon glyphicon-ok-circle" style="color: #1EC71E;font-size: 16px;"></i>
+									@endif
 								</p>
 							</div>
 						</div>
