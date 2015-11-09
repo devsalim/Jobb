@@ -114,7 +114,9 @@ class UserController extends Controller {
 	 */
 	public function edit($id)
 	{
-		//
+		$title = 'profile';
+		$user = Induser::where('id', '=', Auth::user()->induser_id)->first();
+		return view('pages.professional_page', compact('user', 'title'));
 	}
 
 	/**
@@ -201,5 +203,51 @@ class UserController extends Controller {
 	    }
 	}
 
+	public function edit_me(){
+		$type = Input::get('type');
+		return view('pages.mobile_email_modal', compact('type'));
+	}
+
+	public function sendOTP(){
+		$type = 'mobile-otp';
+		$mobile = Input::get('mobile_no');
+		$otp = rand(1111,9999);
+		$otpEnc = md5($otp);
+		return view('pages.verify_email_mobile', compact('mobile', 'otpEnc', 'type', 'otp'));
+	}
+
+	public function verifyOTP(){
+		$mobile = Input::get('mobile');
+		$otp = md5(Input::get('mobile_otp'));
+		$otpEnc = Input::get('motpenc');
+		if($otp == $otpEnc){
+			Induser::where('id', '=', Auth::user()->induser_id)->update(['mobile' => $mobile]);
+			Induser::where('id', '=', Auth::user()->induser_id)->update(['mobile_verify' => 1]);
+			return 'verification-success';
+		}else{
+			return 'verification-failure';
+		}
+	}
+
+	public function sendEVC(){
+		$type = 'email-verification-code';
+		$email = Input::get('new_email');
+		$code = 'A'.Auth::user()->induser_id.rand(1111,9999);
+		$codeEnc = md5($code);
+		return view('pages.verify_email_mobile', compact('email', 'codeEnc', 'type', 'code'));
+	}
+
+	public function verifyEVC(){
+		$email = Input::get('email');
+		$code = md5(Input::get('email_vcode'));
+		$codeEnc = Input::get('ecodeenc');
+		if($code == $codeEnc){
+			Induser::where('id', '=', Auth::user()->induser_id)->update(['email' => $email]);
+			Induser::where('id', '=', Auth::user()->induser_id)->update(['email_verify' => 1]);
+			return 'verification-success';
+		}else{
+			return 'verification-failure';
+		}
+	}
 		
 }

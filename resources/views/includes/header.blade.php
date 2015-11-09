@@ -188,31 +188,3 @@
   <!-- /.modal-dialog -->
 </div>
 <!-- /.modal -->
-<script type="text/javascript">
-$(document).ready(function(){
-  // myactivity-post
-$('.myactivity-post').on('click',function(event){       
-    event.preventDefault();
-    var post_id = $(this).parent().data('postid');
-
-    $.ajaxSetup({
-    headers: {
-      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    }
-  });
-
-    $.ajax({
-      url: "/myactivity/post",
-      type: "post",
-      data: {post_id: post_id},
-      cache : false,
-      success: function(data){
-      $('#myactivity-post-content').html(data);
-      $('#myactivity-post').modal('show');
-      }
-    }); 
-    return false;
-});
-
-});
-</script>

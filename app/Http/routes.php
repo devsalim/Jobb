@@ -25,6 +25,7 @@ Route::group(array('before' => 'auth'), function(){
 
 	Route::get('individual', 'UserController@index');
 	Route::get('individual/create', 'UserController@create');
+	Route::get('individual/edit', 'UserController@edit');
 	Route::post('individual/update/{id}', 'UserController@update');
 	Route::post('individual/basicupdate', 'UserController@basicUpdate');
 
@@ -33,7 +34,6 @@ Route::group(array('before' => 'auth'), function(){
 	Route::post('corporate/update/{id}', 'CorporateController@update');
 	Route::post('corporate/basicupdate', 'CorporateController@basicUpdate');
 	Route::get('corporate/corporateView', 'CorporateController@corpView');
-
 
 	Route::get('job/skillSearch', 'JobController@skillSearch');
 	Route::get('job', 'JobController@index');
@@ -103,6 +103,13 @@ Route::group(array('before' => 'auth'), function(){
 	Route::post('corporate/follow/{id}', 'PagesController@follow');
 	Route::post('corporate/unfollow/{id}', 'PagesController@unfollow');
 	
+	Route::post('me-change', 'UserController@edit_me');
+	Route::post('me-change', 'UserController@edit_me');
+	Route::post('send-otp', 'UserController@sendOTP');
+	Route::post('verify-otp', 'UserController@verifyOTP');
+	Route::post('send-evc', 'UserController@sendEVC');
+	Route::post('verify-evc', 'UserController@verifyEVC');
+
 });
 
 

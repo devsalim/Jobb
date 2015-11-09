@@ -186,7 +186,10 @@
 				<div class="row">
 					@if (count($posts) > 0)
 						<?php $var = 1; ?>
-						@foreach($posts as $post)	
+						@foreach($posts as $post)
+						@if($post->tagged->contains('user_id', Auth::user()->induser_id) || 
+							$post->individual_id == Auth::user()->induser_id || 
+							Auth::user()->corpuser_id != null)	
 						<div class="col-md-9">
 
 							<div class="timeline" >
@@ -787,8 +790,8 @@
 											@else
 											<div class="post-job post-icon-bar">
 												<button type="button" class="btn btn-sm bg-grey-steel expire-btn" disabled="true">
-															Expired
-														</button>
+													Expired
+												</button>
 											</div>
 											@endif
 											</div>
@@ -821,6 +824,7 @@
 							</div>
 						</div>	
 						<!-- END TIMELINE ITEM -->
+						@endif
 					<?php $var++; ?>
 				 @endforeach
 
@@ -876,26 +880,26 @@ $(document).ready(function(){
     });
 
     var displayConfirm = function() {
-                $('#filter .form-control-static', form).each(function(){
-                    var input = $('[name="'+$(this).attr("data-display")+'"]', form);
-                    if (input.is(":radio")) {
-                        input = $('[name="'+$(this).attr("data-display")+'"]:checked', form);
-                    }
-                    if (input.is(":text") || input.is("textarea")) {
-                        $(this).html(input.val());
-                    } else if (input.is("select")) {
-                        $(this).html(input.find('option:selected').text());
-                    } else if (input.is(":radio") && input.is(":checked")) {
-                        $(this).html(input.attr("data-title"));
-                    } else if ($(this).attr("data-display") == 'payment[]') {
-                        var payment = [];
-                        $('[name="payment[]"]:checked', form).each(function(){ 
-                            payment.push($(this).attr('data-title'));
-                        });
-                        $(this).html(payment.join("<br>"));
-                    }
-                });
+        $('#filter .form-control-static', form).each(function(){
+            var input = $('[name="'+$(this).attr("data-display")+'"]', form);
+            if (input.is(":radio")) {
+                input = $('[name="'+$(this).attr("data-display")+'"]:checked', form);
             }
+            if (input.is(":text") || input.is("textarea")) {
+                $(this).html(input.val());
+            } else if (input.is("select")) {
+                $(this).html(input.find('option:selected').text());
+            } else if (input.is(":radio") && input.is(":checked")) {
+                $(this).html(input.attr("data-title"));
+            } else if ($(this).attr("data-display") == 'payment[]') {
+                var payment = [];
+                $('[name="payment[]"]:checked', form).each(function(){ 
+                    payment.push($(this).attr('data-title'));
+                });
+                $(this).html(payment.join("<br>"));
+            }
+        });
+    }
 
   $('.like-btn').on('click',function(event){  	    
   	event.preventDefault();

@@ -54,4 +54,12 @@ class Postjob extends Model {
 		return $this->hasMany('App\Postactivity', 'post_id', 'id');
 	}
 
+	public function taggedUser(){
+		return $this->belongsToMany('App\Postjob', 'post_user_taggings', 'post_id', 'user_id')->withTimestamps();
+	}
+
+	public function tagged(){
+		return $this->hasMany('App\PostUserTagging', 'post_id', 'id')->select('user_id');
+	}
+
 }

@@ -38,7 +38,7 @@ class PagesController extends Controller {
 		if (Auth::check()) {
 			$title = 'home';
 			$skills = Skills::lists('name', 'id');
-			$posts = Postjob::orderBy('id', 'desc')->with('indUser', 'corpUser', 'postActivity')->paginate(15);
+			$posts = Postjob::orderBy('id', 'desc')->with('indUser', 'corpUser', 'postActivity', 'taggedUser')->paginate(15);
 
 			$links = DB::select('select id from indusers
 									where indusers.id in (

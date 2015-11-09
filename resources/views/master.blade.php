@@ -318,67 +318,60 @@ body.page-boxed{
 <script src="{{ asset('/assets/admin/pages/scripts/components-jqueryui-sliders.js') }}" type="text/javascript"></script>
 <script src="/assets/global/plugins/bootstrap-tabdrop/js/bootstrap-tabdrop.js" type="text/javascript"></script>
 <script src="/assets/global/plugins/icheck/icheck.min.js"></script>
-<script src="{{ asset('/assets/ind_field.js') }}"></script>
+{{-- <script src="{{ asset('/assets/ind_field.js') }}"></script> --}}
 <script src="{{ asset('/assets/admin/pages/scripts/components-knob-dials.js') }}"></script>
 <script src="{{ asset('/assets/global/plugins/jquery-knob/js/jquery.knob.js') }}"></script>
 <script src="/assets/admin/pages/scripts/form-validation.js"></script>
 <script type="text/javascript" src="/assets/global/plugins/jquery-validation/js/jquery.validate.min.js"></script>
 <script type="text/javascript" src="/assets/global/plugins/jquery-validation/js/additional-methods.min.js"></script>
 <script src="/assets/admin/pages/scripts/components-form-tools.js"></script>
-<script>
-jQuery(document).ready(function() {    
-   Metronic.init(); // init metronic core components
-   Layout.init(); // init current layout
-   Demo.init(); // init demo features
-   // ComponentsFormTools.init();
-   ComponentsKnobDials.init();
-   FormValidation.init();
-  $('.toggle-display').click(function () {
+<script type="text/javascript">
+  $(document).ready(function() {
+
+    Metronic.init(); // init metronic core components
+    Layout.init(); // init current layout
+    Demo.init(); // init demo features
+    ComponentsKnobDials.init();
+    FormValidation.init();
+
+      $('.toggle-display').click(function () {
         $('#nav-display').hide();   
-  });
-  $(".toggle-disp").click(function () {
+      });
+      $(".toggle-disp").click(function () {
         $(".nav-disp").show();   
-  });
-});
-</script>
-<script>
-    $(document).ready(function() {
-   $('input[type="radio"]').click(function() {
-       if($(this).attr('id') == 'hide-comp') {
+      });
+
+     $('input[type="radio"]').click(function() {
+         if($(this).attr('id') == 'hide-comp') {
             $('.show-comp').hide();           
-       }
-
-       else {
+         }else {
             $('.show-comp').show();   
-       }
-   });
-});
-</script>
-<script>
-$(document).ready(function(){
-  // myactivity-post
-$('.myactivity-post').on('click',function(event){       
-    event.preventDefault();
-    var post_id = $(this).parent().data('postid');
+         }
+     });
 
-    $.ajaxSetup({
-    headers: {
-      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    }
+    // myactivity-post
+    $('.myactivity-post').on('click',function(event){       
+      event.preventDefault();
+      var post_id = $(this).parent().data('postid');
+
+      $.ajaxSetup({
+        headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+      });
+
+      $.ajax({
+        url: "/myactivity/post",
+        type: "post",
+        data: {post_id: post_id},
+        cache : false,
+        success: function(data){
+        $('#myactivity-post-content').html(data);
+        $('#myactivity-post').modal('show');
+        }
+      }); 
+      return false;
   });
-
-    $.ajax({
-      url: "/myactivity/post",
-      type: "post",
-      data: {post_id: post_id},
-      cache : false,
-      success: function(data){
-      $('#myactivity-post-content').html(data);
-      $('#myactivity-post').modal('show');
-      }
-    }); 
-    return false;
-});
 
 });
 </script>

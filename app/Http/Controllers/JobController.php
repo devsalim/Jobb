@@ -71,8 +71,11 @@ class JobController extends Controller {
 		$post = Postjob::create($request->all());
 		$post->skills()->attach($skillIds); 
 
+		$taggedUsers = $request['connections'];
+		$post->taggeduser()->attach($taggedUsers);
+
 		return redirect("/home");
-		
+		// return $taggedUsers;
 	}
 
 	/**

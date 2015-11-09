@@ -99,12 +99,27 @@
 										<span class="input-group-addon">
 											<i class="icon-call-end"></i>
 										</span>
-										<input type="text" name="mobile" class="form-control" placeholder="Mobile No" value="{{ $user->mobile }}">
+										<input type="text" 
+												name="mobile" 
+												class="form-control" 
+												placeholder="Mobile No" 
+												value="{{ $user->mobile }}"
+												@if($user->mobile_verify == 1)readonly @endif
+												>
 										<span class="input-group-addon">
-											<a><i class="fa fa-exclamation-circle" style="color: #cb5a5e;font-size: 16px;"></i></a>
+											@if($user->mobile_verify == 0)
+											<a>
+												<i class="fa fa-exclamation-circle" 
+												style="color: #cb5a5e;font-size: 16px;"></i>
+											</a>
+											@elseif($user->mobile_verify == 1)
+												<i class="glyphicon glyphicon-ok-circle" style="color: #1EC71E;font-size: 16px;"></i>
+											@endif
 										</span>
 										<span class="input-group-addon">
-											<i class="fa fa-pencil"></i>
+											<a href="#edit-me-modal" data-toggle="modal" data-type="mobile" class="change-me">
+												<i class="fa fa-pencil"></i>
+											</a>
 										</span>
 									</div>
 								</div>
@@ -117,12 +132,25 @@
 										<span class="input-group-addon">
 											<i class="icon-envelope"></i>
 										</span>
-										<input type="text" readonly name="email" class="form-control" placeholder="Email Id" value="{{ $user->email }}">
+										<input type="text" name="email" 
+												class="form-control" 
+												placeholder="Email Id" 
+												value="{{ $user->email }}"
+												@if($user->email_verify == 1)readonly @endif>
 										<span class="input-group-addon">
-											<i class="glyphicon glyphicon-ok-circle" style="color: #1EC71E;font-size: 16px;"></i>
+											@if($user->email_verify == 0)
+											<a>
+												<i class="fa fa-exclamation-circle" 
+												style="color: #cb5a5e;font-size: 16px;"></i>
+											</a>
+											@elseif($user->email_verify == 1)
+												<i class="glyphicon glyphicon-ok-circle" style="color: #1EC71E;font-size: 16px;"></i>
+											@endif
 										</span>
 										<span class="input-group-addon">
-											<i class="fa fa-pencil"></i>
+											<a href="#edit-me-modal" data-toggle="modal" data-type="email" class="change-me">
+												<i class="fa fa-pencil"></i>
+											</a>
 										</span>
 									</div>
 								</div>
@@ -560,6 +588,20 @@
 	</div>
 </div>
 
+<!-- Mobile/Email verification -->
+<div class="modal fade bs-modal-sm" id="edit-me-modal" tabindex="-1" role="dialog" aria-hidden="true">
+	<div class="modal-dialog modal-sm">
+		<div class="modal-content" id="edit-me-content">
+			<div id="edit-me-content-inner">
+				Edit
+			</div>
+		</div>
+		<!-- /.modal-content -->
+	</div>
+	<!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+
 @stop
 
 
@@ -575,12 +617,12 @@
 </script>
 
 <script type="text/javascript">
-function checkOption(obj) {
-    var input = document.getElementById("workingAs");
-    input.disabled = obj.value == "Student";
-}
+	function checkOption(obj) {
+	    var input = document.getElementById("workingAs");
+	    input.disabled = obj.value == "Student";
+	}
 
-		 $(function(){
+	$(function(){
 
 	 	function split( val ) {
 	      return val.split( /,\s*/ );
@@ -600,7 +642,6 @@ function checkOption(obj) {
 				// $.getJSON( "/job/skillSearch", {
 				// 	term: extractLast( request.term )
 				// }, response );
-
 
 				$.ajax({
 					url: '/job/skillSearch',
@@ -648,43 +689,201 @@ function checkOption(obj) {
 		});
 	});
 
+	$(document).ready(function(){
+		$('#add-new-skill').on('click',function(event){  	    
+		  	event.preventDefault();
+		  	if (!$('#newskill').val()) {
+		  		alert('Please enter some skill to add.');
+		  		return false;
+		  	}else{
+			  	var name = $('#newskill').val(); 
+			    $.ajaxSetup({
+					headers: {
+						'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+					}
+				});
+			    $.ajax({
+			      url: "{{ url('job/newskill') }}",
+			      type: "POST",
+			      data: { name: name },
+			      cache : false,
+			      success: function(data){
+			        if(data > 0){
+			        	$newSkill = $('#newskill').val();
+			        	$newSkillId = data;
+			        	$selectedSkill = $('#linked_skill').val();
+			        	$selectedSkillId = $('#linked_skill_id').val();
+			        	$('#linked_skill').val($selectedSkill+""+$newSkill+", ");
+			        	$('#linked_skill_id').val($selectedSkillId+""+$newSkillId+", ");
+			        	$('#newskill').val("");
+			        }
+			      },
+			      error: function(data) {
+			      	alert('some error occured...');
+			      }
+			    }); 
+			    return false;
+			}
+		});
 
-$(document).ready(function(){
-	$('#add-new-skill').on('click',function(event){  	    
-	  	event.preventDefault();
-	  	if (!$('#newskill').val()) {
-	  		alert('Please enter some skill to add.');
-	  		return false;
-	  	}else{
-		  	var name = $('#newskill').val(); 
+		// mobile-email-change
+		$('.change-me').on('click',function(event){  	    
+		  	event.preventDefault();
+		  	var type = $(this).data('type');
+
 		    $.ajaxSetup({
 				headers: {
 					'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
 				}
 			});
+
 		    $.ajax({
-		      url: "{{ url('job/newskill') }}",
-		      type: "POST",
-		      data: { name: name },
+		      url: "/me-change",
+		      type: "post",
+		      data: {type: type},
 		      cache : false,
 		      success: function(data){
-		        if(data > 0){
-		        	$newSkill = $('#newskill').val();
-		        	$newSkillId = data;
-		        	$selectedSkill = $('#linked_skill').val();
-		        	$selectedSkillId = $('#linked_skill_id').val();
-		        	$('#linked_skill').val($selectedSkill+""+$newSkill+", ");
-		        	$('#linked_skill_id').val($selectedSkillId+""+$newSkillId+", ");
-		        	$('#newskill').val("");
-		        }
-		      },
-		      error: function(data) {
-		      	alert('some error occured...');
+		    	$('#edit-me-content-inner').html(data);
+		    	$('#edit-me-modal').modal('show');
 		      }
 		    }); 
 		    return false;
-		}
+	  });
+
+	// mobile-email-change
+	$('#send-otp').live('click',function(event){  	    
+	  	event.preventDefault();
+
+	  	var formData = $('#send-mobile-otp-form').serialize(); 
+	    var formAction = $('#send-mobile-otp-form').attr('action');
+
+	    $.ajaxSetup({
+			headers: {
+				'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+			}
+		});
+
+	    $.ajax({
+	      url: formAction,
+	      type: "post",
+	      data: formData,
+	      success: function(data){
+	    	$('#edit-me-content-inner').html(data);
+	    	$('#edit-me-modal').modal('show');
+	      }
+	    }); 
+	    return false;
+  	});
+
+  	// verify-otp
+	$('#verify-otp').live('click',function(event){  	    
+	  	event.preventDefault();
+
+	  	var formData = $('#verify-otp-form').serialize(); 
+	    var formAction = $('#verify-otp-form').attr('action');
+
+	    $.ajaxSetup({
+			headers: {
+				'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+			}
+		});
+
+	    $.ajax({
+	      url: formAction,
+	      type: "post",
+	      data: formData,
+	      success: function(data){
+	      	if(data == 'verification-failure'){
+	      		$('#msg-box').removeClass('alert alert-success');
+	            $('#msg-box').addClass('alert alert-danger').fadeIn(1000, function(){
+	                $(this).show();
+	            });
+	            $('#msg-text').text('Invalid OTP');
+	      	}else if(data == 'verification-success'){
+	      		$('#msg-box').removeClass('alert alert-danger');
+	            $('#msg-box').addClass('alert alert-success').fadeIn(1000, function(){
+	                $(this).show();
+	            });
+	            $('#msg-text').text('Verification successful');
+	      		window.location = "/individual/edit";
+	      	}
+	      }
+	    }); 
+	    return false;
+  	});
+
+	// mobile-email-change
+	$('#send-evc').live('click',function(event){  	    
+	  	event.preventDefault();
+
+	  	var formData = $('#send-evc-form').serialize(); 
+	    var formAction = $('#send-evc-form').attr('action');
+
+	    $.ajaxSetup({
+			headers: {
+				'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+			}
+		});
+
+	    $.ajax({
+	      url: formAction,
+	      type: "post",
+	      data: formData,
+	      success: function(data){
+	    	$('#edit-me-content-inner').html(data);
+	    	$('#edit-me-modal').modal('show');
+	      }
+	    }); 
+	    return false;
+  	});
+
+  	// verify-otp
+	$('#verify-ver-code').live('click',function(event){  	    
+	  	event.preventDefault();
+
+	  	var formData = $('#verify-evc-form').serialize(); 
+	    var formAction = $('#verify-evc-form').attr('action');
+
+	    $.ajaxSetup({
+			headers: {
+				'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+			}
+		});
+
+	    $.ajax({
+	      url: formAction,
+	      type: "post",
+	      data: formData,
+	      success: function(data){
+	      	if(data == 'verification-failure'){
+	      		$('#msg-box').removeClass('alert alert-success');
+	            $('#msg-box').addClass('alert alert-danger').fadeIn(1000, function(){
+	                $(this).show();
+	            });
+	            $('#msg-text').text('Invalid verification code');
+	      	}else if(data == 'verification-success'){
+	      		$('#msg-box').removeClass('alert alert-danger');
+	            $('#msg-box').addClass('alert alert-success').fadeIn(1000, function(){
+	                $(this).show();
+	            });
+	            $('#msg-text').text('Verification successful');
+	      		window.location = "/individual/edit";
+	      	}else{
+	      		$('#msg-text').text('some error occured');
+	      	}
+	      }
+	    }); 
+	    return false;
+  	});
+
+	$(window).keydown(function(event){
+	    if(event.keyCode == 13) {
+	      event.preventDefault();
+	      return false;
+	    }
+	  });
+		
+
 	});
-});
 </script>
 @stop

@@ -63,8 +63,11 @@
           @endif
           <h3 class="form-title user-name">
             @if(Auth::user()->identifier == 1)
-           <a style="color: deepskyblue;text-decoration:none;" class="" href="/profile/ind/{{$session_user->id}}" data-utype="ind"> 
-            {{ $session_user->fname }} {{ $session_user->lname }} <i class="fa fa-edit (alias)"></i></a>
+           <a style="color: deepskyblue;text-decoration:none;" href="/profile/ind/{{$session_user->id}}" data-utype="ind"> 
+            {{ $session_user->fname }} {{ $session_user->lname }} </a>
+            <a style="color: white;text-decoration:none;" href="/individual/edit" data-utype="ind"> 
+              <i class="fa fa-edit (alias)"></i>
+            </a>
             @else
             <a style="color: deepskyblue;text-decoration:none;" class="" href="/profile/corp/{{$session_user->id}}" data-utype="corp"> 
               {{ $session_user->firm_name }} <i class="fa fa-edit (alias)"></i></a>
