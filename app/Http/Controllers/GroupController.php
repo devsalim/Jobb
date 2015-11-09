@@ -127,9 +127,9 @@ class GroupController extends Controller {
 	 */
 	public function destroy($id)
 	{
+		$groups_users = Groups_users::findOrFail($id);
 		$group = Group::findOrFail($id);
-		$group_user = Groups_users::findOrFail($id);
-		$group_user->delete();
+		$groups_users->delete();
 		$group->delete();
 		return redirect('/group');
 	}

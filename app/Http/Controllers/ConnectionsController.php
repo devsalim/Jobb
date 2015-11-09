@@ -50,17 +50,23 @@ class ConnectionsController extends Controller {
 		$linkrequestCount = Connections::where('connection_user_id', '=', Auth::user()->induser_id)
 									   ->where('status', '=', 0)
 									   ->count('id');	
-		$followCount = Follow::Where('individual_id', '=', Auth::user()->induser_id)->count('id');	
+
+		$followCount = Follow::Where('individual_id', '=', Auth::user()->induser_id)
+								->count('id');
+		$followNewCount = Follow::Where('corporate_id', '=', Auth::user()->induser_id)
+								 ->count('id');
 		$linkFollow = Corpuser::leftjoin('follows', 'corpusers.id', '=', 'follows.corporate_id')
 								->where('follows.individual_id', '=', Auth::user()->induser_id)
 								->get(['corpusers.id',
 									   'corpusers.firm_name',
+									   'corpusers.firm_type',
+									   'corpusers.emp_count',
 									   'corpusers.logo_status',
 									   'corpusers.operating_since',
 									   'corpusers.city', 
 									   'follows.corporate_id',
 									   'follows.individual_id']);
-		return view('pages.connections', compact('title', 'linkFollow', 'linksCount', 'linkrequestCount', 'followCount'));
+		return view('pages.connections', compact('title', 'linkFollow', 'linksCount', 'linkrequestCount', 'followCount', 'followNewCount'));
 	}
 
 	/**

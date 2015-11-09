@@ -47,6 +47,10 @@
 					<div class="profile-usertitle-job text-capitalize" style="font-size: 15px;font-weight: 500;">
 						 {{ $user->woring_at }}, {{ $user->city }}
 					</div>
+					@elseif($user->role == null && $user->working_at ==null && $user->working_status == "Working")
+		            <div class="profile-usertitle-job text-capitalize" style="font-size: 15px;font-weight: 500;">
+		               {{ $user->prof_category }}, {{ $user->city }}
+		            </div>
 					@endif
 
 					@if($user->operating_since != null && $user->operating_since != "Startup")
@@ -122,8 +126,8 @@
 						</a>
 					</div>
 					@endif
-					<div class="col-md-4 col-sm-4 col-xs-4 @if($title == 'thanks_view'){{'active'}}@endif">
-						<a href="/individual/thanks_view" class="icon-btn">
+					<div class="col-md-4 col-sm-4 col-xs-4 @if($title == 'notify_view'){{'active'}}@endif">
+						<a href="/notification_view/thank" data-utype="thank" class="icon-btn">
 							<i class="icon-like"></i>
 							<div>
 								 Thanks
@@ -157,8 +161,8 @@
 						</a>
 					</div>
 					@elseif($utype == 'corp')
-					<div class="col-md-4 col-sm-4 col-xs-4 @if($title == 'connections'){{'active'}}@endif">
-						<a href="/connections/create" class="icon-btn">
+					<div class="col-md-4 col-sm-4 col-xs-4 @if($title == 'friendLink'){{'active'}}@endif">
+						<a href="/connections/friendlink/{{$user->id}}" class="icon-btn">
 							<i class="icon-user-following"></i>
 							<div>
 								 Followers

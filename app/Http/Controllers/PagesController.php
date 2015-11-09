@@ -88,17 +88,17 @@ class PagesController extends Controller {
 				$posts = Postjob::with('induser', 'postActivity', 'postactivity.user')
 								->where('individual_id', '=', Auth::user()->induser_id)
 								->orderBy('id', 'desc')->get();
-				$myActivities = DB::select('(select pa.id,pa.user_id,pa.post_id,"Thanks" as identifier,pa.thanks as activity, pa.thanks_dtTime as time, pj.post_title, pj.post_compname
+				$myActivities = DB::select('(select pa.id,pa.user_id,pa.post_id,"Thanks" as identifier,pa.thanks as activity, pa.thanks_dtTime as time,pj.unique_id, pj.post_title, pj.post_compname
 										from postactivities pa 
 										join postjobs pj on pj.id = pa.post_id
 										where pa.user_id=? and pa.thanks = 1)
 										union
-										(select pa.id,pa.user_id,pa.post_id,"Applied" as identifier,pa.apply as activity, pa.apply_dtTime as time, pj.post_title, pj.post_compname
+										(select pa.id,pa.user_id,pa.post_id,"Applied" as identifier,pa.apply as activity, pa.apply_dtTime as time,pj.unique_id,pj.post_title, pj.post_compname
 										from postactivities pa 
 										join postjobs pj on pj.id = pa.post_id
 										where pa.user_id=? and pa.apply = 1)
 										union
-										(select pa.id,pa.user_id,pa.post_id,"Contacted" as identifier,pa.contact_view as activity,pa.contact_view_dtTime as time, pj.post_title, pj.post_compname
+										(select pa.id,pa.user_id,pa.post_id,"Contacted" as identifier,pa.contact_view as activity,pa.contact_view_dtTime as time,pj.unique_id, pj.post_title, pj.post_compname
 										from postactivities pa 
 										join postjobs pj on pj.id = pa.post_id
 										where pa.user_id=? and pa.contact_view = 1)

@@ -236,7 +236,8 @@
 						    <div class="media-body" style="font-weight:300">
 							    <div class="media-body-left">
 							      <h4 class="media-heading" style="margin-bottom:0;font-weight:300;margin-bottom:0">
-								      	{{$connection->fname}} {{$connection->lname}}
+								      	<a href="/profile/ind/{{$connection->id}}" data-utype="ind">
+								      		{{$connection->fname}} {{$connection->lname}}</a>
 							      </h4>
 							     {{ $connection->working_at }}<br>
 								 {{ $connection->city }} {{ $connection->state }}
