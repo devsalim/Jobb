@@ -581,7 +581,7 @@ Bootstrap Wizard
 .form-wizard .steps > li > a.step > .desc {
   display: inline-block;
   font-size: 14px;
-  font-weight: 300;
+  /*font-weight: 300;*/
 }
 .form-wizard .steps > li > a.step > .desc > i {
   display: none;
@@ -591,9 +591,10 @@ Bootstrap Wizard
   color: #fff;
 }
 .form-wizard .steps > li.active > a.step .desc {
-    color: orangered;
+    /*color: orangered;
     font-size: 17px;
-    font-weight: 500;
+    font-weight: 500;*/
+    font-weight: bold;
 }
 .form-wizard .steps > li.done > a.step .number {
   background-color: #dfba49;

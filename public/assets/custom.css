@@ -630,3 +630,33 @@ form.search-form.search-form-expanded {
         margin: 0 !important;
     }
 }
+
+.post-job-heading{
+    font-size: 18px;
+    text-align: center;
+    width:100%;
+    border-bottom:2px solid darkred;
+}
+
+.form-wizard .form-body {
+    padding: 0;
+}
+.form-wizard .form-body ul {
+    padding-left: 0;
+}
+
+.form-wizard .form-body .progress {
+    height: 8px;
+}
+
+.form-horizontal .form-wizard .form-body .form-group {
+    margin-right: 0;
+    margin-left: 0;
+    margin-bottom: 20px;
+}
+.form .form-actions {
+    background-color: transparent;
+}
+.form-horizontal .md-radio-inline {
+    margin: 6.5px 0;
+}

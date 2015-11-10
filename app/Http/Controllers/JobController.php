@@ -13,6 +13,7 @@ use App\Postactivity;
 use Input;
 use DB;
 use Response;
+use App\Group;
 
 class JobController extends Controller {
 
@@ -46,7 +47,15 @@ class JobController extends Controller {
 		$skills = Skills::lists('name', 'id');
 		if(Auth::user()->identifier == 1){
 			$connections=Auth::user()->induser->friends->lists('fname', 'id');
-			return view('pages.postjob', compact('title', 'skills', 'connections'));
+
+			$groups = Group::leftjoin('groups_users', 'groups_users.group_id', '=', 'groups.id')					
+						->where('groups.admin_id', '=', Auth::user()->induser_id)
+						->orWhere('groups_users.user_id', '=', Auth::user()->induser_id)
+						->groupBy('groups.id')
+						->get(['groups.id as id', 'groups.group_name as name'])
+						->lists('name', 'id');
+
+			return view('pages.postjob', compact('title', 'skills', 'connections', 'groups'));
 		}else{
 			return view('pages.postjob', compact('title', 'skills'));
 		}
@@ -71,8 +80,14 @@ class JobController extends Controller {
 		$post = Postjob::create($request->all());
 		$post->skills()->attach($skillIds); 
 
-		$taggedUsers = $request['connections'];
-		$post->taggeduser()->attach($taggedUsers);
+		if($request['connections'] != null){
+			$taggedUsers = $request['connections'];
+			$post->taggeduser()->attach($taggedUsers);
+		}
+		if($request['groups'] != null){
+			$taggedGroups = $request['groups'];
+			$post->taggedGroup()->attach($taggedGroups);
+		}		
 
 		return redirect("/home");
 		// return $taggedUsers;

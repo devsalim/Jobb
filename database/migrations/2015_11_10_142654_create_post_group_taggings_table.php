@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePostUserTaggingsTable extends Migration {
+class CreatePostGroupTaggingsTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,13 +12,13 @@ class CreatePostUserTaggingsTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('post_user_taggings', function(Blueprint $table)
+		Schema::create('post_group_taggings', function(Blueprint $table)
 		{
 			$table->increments('id');
 			$table->integer('post_id')->unsigned();
-            $table->integer('user_id')->unsigned();
+            $table->integer('group_id')->unsigned();
             $table->foreign('post_id')->references('id')->on('postjobs');
-            $table->foreign('user_id')->references('id')->on('indusers');
+            $table->foreign('group_id')->references('id')->on('groups');
 			$table->timestamps();
 		});
 	}
@@ -30,7 +30,7 @@ class CreatePostUserTaggingsTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('post_user_taggings');
+		Schema::drop('post_group_taggings');
 	}
 
 }

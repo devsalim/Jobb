@@ -103,11 +103,11 @@
           <!-- BEGIN TODO DROPDOWN -->
           <!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
           <li class="dropdown dropdown-extended dropdown-tasks thank-fav-icon" id="header_task_bar">
-            <a href="/notification_view/fav" data-utype="fav" class="dropdown-toggle @if($title == 'notify_view'){{'active'}}@endif"  data-close-others="true">
-              <i class="icon-pin icon-color"></i>
-              
-              <span class="badge badge-default @if(count($favourites) > 0) show @else hide @endif" id="myfavcount">{{count($favourites)}}</span>
-              
+            <a href="/favourite" data-utype="fav" class="dropdown-toggle @if($title == 'notify_view'){{'active'}}@endif"  data-close-others="true">
+              <i class="icon-pin icon-color"></i>              
+              <span class="badge badge-default @if(count($favourites) > 0) show @else hide @endif" 
+                    id="myfavcount">{{count($favourites)}}
+              </span>              
             </a>            
           </li>
            <!-- <li class="dropdown dropdown-extended dropdown-inbox" id="header_inbox_bar">

@@ -62,4 +62,12 @@ class Postjob extends Model {
 		return $this->hasMany('App\PostUserTagging', 'post_id', 'id')->select('user_id');
 	}
 
+	public function taggedGroup(){
+		return $this->belongsToMany('App\Postjob', 'post_group_taggings', 'post_id', 'group_id')->withTimestamps();
+	}
+
+	public function groupTagged(){
+		return $this->hasMany('App\PostGroupTagging', 'post_id', 'id')->select('group_id');
+	}
+
 }

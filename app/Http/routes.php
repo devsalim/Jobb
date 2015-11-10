@@ -110,6 +110,8 @@ Route::group(array('before' => 'auth'), function(){
 	Route::post('send-evc', 'UserController@sendEVC');
 	Route::post('verify-evc', 'UserController@verifyEVC');
 
+	Route::get('favourite', 'PagesController@favourite');
+
 });
 
 

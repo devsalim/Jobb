@@ -3,54 +3,42 @@
 @section('content')
 																			
 <div class="row">
-		<div class="col-md-9">
-			<label style="font-size: 18px;text-align: center;width:100%;border-bottom:2px solid darkred;">Do you like to Post Job?<br>Post Job for FREE!!</label>	
-		<div class="portlet box" id="form_wizard_1">
-			
+	<div class="col-md-9">
+		<label class="post-job-heading">
+			Do you like to Post Job?<br>
+			Post Job for FREE!!
+		</label>	
+		<div class="portlet box" id="form_wizard_1">			
 			<div class="portlet-body form">
-				<!-- <form action="#" class="form-horizontal"  method="POST"> -->
-				<form action="{{ url('job/store') }}" method="post" id="submit_form" data-toggle="validator" role="form" class="form-horizontal">
+				<form action="{{ url('job/store') }}" method="post" id="submit_form" 
+					  data-toggle="validator" role="form" class="form-horizontal">
 					<input type="hidden" name="_token" value="{{ csrf_token() }}">
 					<div class="form-wizard">
 						<div class="form-body">
-							<ul class="nav nav-pills nav-justified steps">
-								
+							<ul class="nav nav-pills nav-justified steps">							
 								<li>
 									<a href="#tab1" data-toggle="tab" class="step">
-									<span class="desc">
-									Job </span>
-									</a>
-									
+										<span class="desc">Job</span>
+									</a>									
 								</li>
 								<li>
-									<a href="#tab2" data-toggle="tab" class="step">
-									
-									<span class="desc">
-									Skills </span>
-									</a>
-									
+									<a href="#tab2" data-toggle="tab" class="step">									
+										<span class="desc">Skills </span>
+									</a>									
 								</li>
 								<li>
-									<a href="#tab3" data-toggle="tab" class="step active">
-									
-									<span class="desc">
-									 Contact</span>
-									</a>
-									
+									<a href="#tab3" data-toggle="tab" class="step active">							
+										<span class="desc">Contact</span>
+									</a>									
 								</li>
 								<li>
-									<a href="#tab4" data-toggle="tab" class="step">
-									
-									<span class="desc">
-									 Confirm </span>
-									</a>
-									
+									<a href="#tab4" data-toggle="tab" class="step">									
+										<span class="desc">Confirm</span>
+									</a>									
 								</li>
 							</ul>
-							<div id="bar" class="progress progress-striped" role="progressbar" style="background-color: transparent;height: 10px;">
-								<!--  -->
-								<div class="progress-bar progress-bar-success">
-								</div>
+							<div id="bar" class="progress progress-striped" role="progressbar">
+								<div class="progress-bar progress-bar-success"></div>
 							</div>
 							<div class="tab-content">
 								@if (count($errors) > 0)
@@ -71,31 +59,29 @@
 									Your form validation is successful!
 								</div> -->
 								<div class="tab-pane active" id="tab1">
-									<!-- <h3 class="block">Provide your account details</h3> -->
 									<input type="hidden" name="post_id" value"rand(11111,99999)">
 									<div class="row">
 										<div class="col-md-12">
 											<div class="form-group">
 												<div class="input-icon right">
-														<i class="fa"></i>
-												<label>Job Title <span class="required">
-												* </span></label>
-												<div class="input-group">
-													<span class="input-group-addon"><i class="fa fa-flag" style="color:darkcyan;"></i></span>
-													<input type="text" name="post_title" class="form-control" placeholder="Job Title" required>
+													<i class="fa"></i>
+													<label>Job Title <span class="required">*</span></label>
+													<div class="input-group">
+														<span class="input-group-addon">
+															<i class="fa fa-flag" style="color:darkcyan;"></i>
+														</span>
+														<input type="text" name="post_title" class="form-control" 
+															   placeholder="Job Title" required>
+													</div>
 												</div>
-											</div>
 											</div>
 										</div>
 									</div>
 									<div class="row">
 									<div class="col-md-12">
 										<div class="form-group">
-											<label>Job Details <span class="required">
-											* </span></label>
-											<div class="" style=" padding-bottom: 10px;">
-												<textarea name="job_detail" class="form-control" rows="6"></textarea>
-											</div>
+											<label>Job Details <span class="required">*</span></label>								
+											<textarea name="job_detail" class="form-control" rows="6"></textarea>
 										</div>
 									</div>
 									</div>
@@ -224,11 +210,7 @@
 											</div>
 										</div>
 									</div>	
-									@endif									
-									<!--/span-->
-									<div class="form-group">
-										
-									</div>
+									@endif	
 								</div>
 								<div class="tab-pane" id="tab2">
 									<div class="row">
@@ -524,125 +506,178 @@
 								<div class="tab-pane" id="tab4">
 									
 									<input type="hidden" name="post_type">
-											<div class="form-body">
-												@if(Auth::user()->induser)
-												<div class="row" style="margin-top: -20px;">	
-													<div class="col-md-12">
-														<div class="form-group">
-															<label>Who can see this Post</label>
-															{{-- <input type="hidden" name="tag_friends" id="select2_sample7" class="form-control select2" value="All"> --}}
-															{!! Form::select('connections[]', $connections, null, ['id'=>'connections', 'class'=>'form-control', 'multiple']) !!}
+										<div class="form-body">
+											@if(Auth::user()->induser)
+											<div class="row">	
+												<div class="col-md-4">											
+													<h4>Who can see this Post</h4>
+												</div>
+												<div class="col-md-8">
+													<div class="md-radio-inline">
+														<div class="md-radio">
+															<input type="radio" id="tag-group-all" name="tag-group" value="all" class="md-radiobtn">
+															<label for="tag-group-all" style="">
+																<span></span>
+																<span class="check"></span>
+																<span class="box"></span>
+																All 
+															</label>
+														</div>
+														<div class="md-radio">
+															<input type="radio" id="tag-group-links" name="tag-group" value="links" class="md-radiobtn" >
+															<label for="tag-group-links" style="">
+															<span></span>
+															<span class="check"></span>
+															<span class="box"></span>
+															Links </label>
+														</div>
+														<div class="md-radio">
+															<input type="radio" id="tag-group-groups" name="tag-group" value="groups" class="md-radiobtn" >
+															<label for="tag-group-groups" style="">
+															<span></span>
+															<span class="check"></span>
+															<span class="box"></span>
+															Groups </label>
+														</div>
+														<div class="md-radio">
+															<input type="radio" id="tag-group-both" name="tag-group" value="both" class="md-radiobtn" >
+															<label for="tag-group-both" style="">
+															<span></span>
+															<span class="check"></span>
+															<span class="box"></span>
+															Both </label>
 														</div>
 													</div>
 												</div>
-												@endif				
 											</div>
+
+											<div class="row">	
+											  	<div class="col-md-12"><hr style="margin:0 0 15px 0"></div>
+											</div>
+
+											<div class="row">	
+												<div class="col-md-6" id="connections-list">
+													<div class="form-group">
+														<label>Links</label>
+														{!! Form::select('connections[]', $connections, null, ['id'=>'connections', 'class'=>'form-control', 'multiple']) !!}								
+													</div>									
+													{{-- <input type="hidden" name="tag_friends" id="select2_sample7" class="form-control select2" value="All"> --}}
+												</div>
+												<div class="col-md-6" id="groups-list">
+													<div class="form-group" >
+														<label>Groups</label>
+														{!! Form::select('groups[]', $groups, null, ['id'=>'groups', 'class'=>'form-control', 'multiple']) !!}	
+													</div>												
+												</div>
+											</div>
+											@endif	
 											<?php $var = 1; ?>
-											<div class="portlet light bordered" style="border: none !important;background:transparent">										
-												<div class="portlet-body form">
-													<!-- BEGIN FORM-->
-														<div class="form-body">
-															<div class="row">																				
-																<div class="col-md-12" style="">												
-																		<div class="timeline" style="margin: 0 -25px;">
-																		<!-- TIMELINE ITEM -->
-																		<div class="timeline-item time-item" style="margin: -30px 0px 0px 0px;">
-																			<div class="timeline-body" style="margin-left: 0;">
-																				<div class="timeline-body-content" style="margin-top: -25px;">
-																					<!-- <span class="font-grey-cascade"> -->
-																						<div style="font-weight: 600;color: black;font-size: 16px;"><p class="form-control-static" data-display="post_title"></p>  </div>
-																						 <div><div> <h4 style="margin: 0 0 4px 0;"> <p class="form-control-static" data-display="post_compname"></p> </h4></div>  </div>		 							
-																					<!-- </span> -->
-																					
-																						
-																							<i class="icon-pointer"></i>&nbsp;: <p class="form-control-static" data-display="city"></p>
-																						
-																						<br><i class="icon-briefcase"></i>&nbsp;: <p class="form-control-static" data-display="min_exp"></p>-<p class="form-control-static" data-display="max_exp"></p> Years
-																						
-																						
-																					
-																				</div>		
-																				<div class="post-job-skill-bar">
-																					<div class="job"><a class="post-type-class">Job</a></div>
-																				</div>
-																			</div>
-																			<div class="portlet-body" style="margin: 0 -5px;">
-																			<div class="panel-group accordion" id="accordion{{$var}}" style="margin-bottom: 0;">
-																				<div class="panel panel-default" style=" position: relative;">
-																					<div class="panel-heading">
-																						<h4 class="panel-title">
-																						<a class="accordion-toggle accordion-toggle-styled" 
-																						data-toggle="collapse" data-parent="#accordion{{$var}}" href="#collapse_{{$var}}_{{$var}}"  style="font-size: 15px;font-weight: 600;">
-																						Details:</a>	
-																						</h4>
-																					</div>
-																					<div id="collapse_{{$var}}_{{$var}}" class="panel-collapse collapse">
-																						<div class="panel-body" style="border-top: 0;padding: 4px 15px;">
-																							
-																							Education Required: <p class="form-control-static" data-display="education"></p><br>
-																							Role: <p class="form-control-static" data-display="role"></p><br>
-																							Job Category: <p class="form-control-static" data-display="prof_category"></p><br>
-																							Skill: <p class="form-control-static" data-display="linked_skill"></p><br>
-																							 <div class="resume-required">Resume: Required</div><div class="not-required">Resume: Not Required</div><br>
-																							Salary (<i class="fa fa-rupee (alias)"></i>): <p class="form-control-static" data-display="min_sal"></p>-<p class="form-control-static" data-display="max_sal"></p> <p class="form-control-static" data-display="salary_type"></p><br>
-																							Description:
-																							<div class="row">
-																								<div class="col-md-11">
-																									<p class="form-control-static" data-display="job_detail"></p>
-																								</div>
-																							</div>
-																							<div >Reference Id: <p class="form-control-static" data-display="reference_id"></p></div>
-																							<div >Post Duration: <p class="form-control-static" data-display="post_duration"></p></div>
-																							<div class="skill-display">Contact Details:<br> </div>
-																							<div class="show-apply">Apply on Company Website:<p class="form-control-static" data-display="website_redirect_url"></p></div><br>
-																							<div id="con" class="show-apply-email">
-																							Contact Person: <p class="form-control-static" data-display="contact_person"></p><br>
-
-																								<i class="glyphicon glyphicon-envelope" style="color: #13B8D4;font-size: 16px;"></i>&nbsp;:<p class="form-control-static" data-display="email_id"></p>
-																								 
-																							<br>
-																								<i class="glyphicon glyphicon-earphone" style="color: green;font-size: 16px;"></i>&nbsp;:<p class="form-control-static" data-display="phone"></p>
-																								</div> 
-																							<div class="skill-display">Post Id&nbsp;:  </div> 
-
-																						</div>
-																					</div>
-																					
-																				</div>
-																			</div>
-																		</div>
-																		</div>
-
-																		<!-- END TIMELINE ITEM -->
+											
+											<div class="row">																				
+												<div class="col-md-12" style="">												
+														<div class="timeline">
+														<!-- TIMELINE ITEM -->
+														<div class="timeline-item time-item">
+															<div class="timeline-body" style="margin: 0;">
+																<div class="timeline-body-content" style="margin: 0;">
+																	<div style="font-weight: 600;color: black;font-size: 16px;">
+																		<p class="form-control-static" data-display="post_title"></p>
 																	</div>
-																</div>	
-																
-																<!-- END TIMELINE ITEM -->
-															
+																	<div>
+																	 	<div> 
+																	 		<h4 style="margin: 0 0 4px 0;"> 
+																	 			<p class="form-control-static" data-display="post_compname"></p> 
+																	 		</h4>
+																	 	</div>  
+																	</div>
+																	<i class="icon-pointer"></i>&nbsp;: 
+																	<p class="form-control-static" data-display="city"></p><br>
+																	<i class="icon-briefcase"></i>&nbsp;: 
+																	<p class="form-control-static" data-display="min_exp"></p>-
+																	<p class="form-control-static" data-display="max_exp"></p> Years
+																</div>		
+																{{-- <div class="post-job-skill-bar">
+																	<div class="job"><a class="post-type-class">Job</a></div>
+																</div> --}}
+																<div class="box">
+																   <div class="ribbon"><span class="job">Job</span></div>
+																</div>
+															</div>
+															<div class="portlet-body" style="margin: 0 -5px;">
+															<div class="panel-group accordion" id="accordion{{$var}}" style="margin-bottom: 0;">
+																<div class="panel panel-default" style=" position: relative;">
+																	<div class="panel-heading">
+																		<h4 class="panel-title">
+																		<a class="accordion-toggle accordion-toggle-styled" 
+																		data-toggle="collapse" data-parent="#accordion{{$var}}" href="#collapse_{{$var}}_{{$var}}"  style="font-size: 15px;font-weight: 600;">
+																		Details:</a>	
+																		</h4>
+																	</div>
+																	<div id="collapse_{{$var}}_{{$var}}" class="panel-collapse collapse">
+																		<div class="panel-body" style="border-top: 0;padding: 4px 15px;">
+																			
+																			Education Required: <p class="form-control-static" data-display="education"></p><br>
+																			Role: <p class="form-control-static" data-display="role"></p><br>
+																			Job Category: <p class="form-control-static" data-display="prof_category"></p><br>
+																			Skill: <p class="form-control-static" data-display="linked_skill"></p><br>
+																			 <div class="resume-required">Resume: Required</div><div class="not-required">Resume: Not Required</div><br>
+																			Salary (<i class="fa fa-rupee (alias)"></i>): <p class="form-control-static" data-display="min_sal"></p>-<p class="form-control-static" data-display="max_sal"></p> <p class="form-control-static" data-display="salary_type"></p><br>
+																			Description:
+																			<div class="row">
+																				<div class="col-md-11">
+																					<p class="form-control-static" data-display="job_detail"></p>
+																				</div>
+																			</div>
+																			<div >Reference Id: <p class="form-control-static" data-display="reference_id"></p></div>
+																			<div >Post Duration: <p class="form-control-static" data-display="post_duration"></p></div>
+																			<div class="skill-display">Contact Details:<br> </div>
+																			<div class="show-apply">Apply on Company Website:<p class="form-control-static" data-display="website_redirect_url"></p></div><br>
+																			<div id="con" class="show-apply-email">
+																			Contact Person: <p class="form-control-static" data-display="contact_person"></p><br>
+
+																				<i class="glyphicon glyphicon-envelope" style="color: #13B8D4;font-size: 16px;"></i>&nbsp;:<p class="form-control-static" data-display="email_id"></p>
+																				 
+																			<br>
+																				<i class="glyphicon glyphicon-earphone" style="color: green;font-size: 16px;"></i>&nbsp;:<p class="form-control-static" data-display="phone"></p>
+																				</div> 
+																			<div class="skill-display">Post Id&nbsp;:  </div> 
+
+																		</div>
+																	</div>
+																	
+																</div>
 															</div>
 														</div>
+														</div>
+
+														<!-- END TIMELINE ITEM -->
+													</div>
+												</div>	
+												
+												<!-- END TIMELINE ITEM -->
+											
+											</div>
+														
 													
 													<!-- END FORM-->
-												</div>
-											</div>	
+													
 										<?php $var++; ?>
-									
+									</div>
 								</div>
 							</div>
 						</div>
 						<div class="form-actions">
-							<div class="row">
-								<div class="col-md-offset-3 col-md-9">
-									<a href="javascript:;" class="btn default button-previous">
-									<i class="m-icon-swapleft"></i> Back </a>
-									<a href="javascript:;" class="btn blue button-next">
+							<div style="margin: auto;display: table;">
+								<a href="javascript:;" class="btn default button-previous">
+									<i class="m-icon-swapleft"></i> Back 
+								</a>
+								<a href="javascript:;" class="btn blue button-next">
 									Continue <i class="m-icon-swapright m-icon-white"></i>
-									</a>
-									<!-- <a href="javascript:;" class="btn green ">
-									Submit <i class="m-icon-swapright m-icon-white"></i>
-									</a> -->
-									<button type="submit" class=" btn blue button-submit">Submit</button>
-								</div>
+								</a>
+								<!-- <a href="javascript:;" class="btn green ">
+								Submit <i class="m-icon-swapright m-icon-white"></i>
+								</a> -->
+								<button type="submit" class=" btn blue button-submit">Submit</button>
 							</div>
 						</div>
 					</div>
@@ -691,6 +726,7 @@ jQuery(document).ready(function() {
     });
 
     $('#connections').select2();
+    $('#groups').select2();
 </script>
 <script type="text/javascript">
 	 $(function () {
@@ -812,6 +848,45 @@ $(document).ready(function(){
 		    return false;
 		}
 	});
+
+	// user post tagging
+	$("#connections-list").hide();
+    $("#groups-list").hide();
+    $("#connections").prop('required',false);
+    $("#groups").prop('required',false);
+	$("input[name$='tag-group']").click(function() {
+        var selected = $(this).val();
+        if(selected == 'all'){
+        	$("#connections-list").hide();
+        	$("#groups-list").hide();
+        	$("#connections").hide();
+        	$("#groups").hide();
+        	$("#connections").prop('required',false);
+        	$("#groups").prop('required',false);
+        }else if(selected == 'links'){
+        	$("#connections-list").show();
+        	$("#groups-list").hide();
+        	$("#connections").show();
+        	$("#groups").hide();
+        	$("#connections").prop('required',true);
+        	$("#groups").prop('required',false);
+        }else if(selected == 'groups'){
+        	$("#connections-list").hide();
+        	$("#groups-list").show();
+        	$("#connections").hide();
+        	$("#groups").show();
+        	$("#groups").prop('required',true);
+        	$("#connections").prop('required',false);
+        }else if(selected == 'both'){
+        	$("#connections-list").show();
+        	$("#groups-list").show();
+        	$("#connections").show();
+        	$("#groups").show();
+        	$("#connections").prop('required',true);
+        	$("#groups").prop('required',true);
+        }
+    }); 
+
 });
 </script>
 @stop

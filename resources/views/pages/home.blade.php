@@ -187,9 +187,20 @@
 					@if (count($posts) > 0)
 						<?php $var = 1; ?>
 						@foreach($posts as $post)
+						
+						<?php $groupsTagged = array(); ?>
+						@foreach($post->groupTagged as $gt)
+							<?php $groupsTagged[] = $gt->group_id; ?>
+						@endforeach
+
+						<?php
+							$crossCheck = array_intersect($groupsTagged, $groups);
+							$elements  = array_count_values($crossCheck); ?>
+
 						@if($post->tagged->contains('user_id', Auth::user()->induser_id) || 
 							$post->individual_id == Auth::user()->induser_id || 
-							Auth::user()->corpuser_id != null)	
+							count($elements) > 0 || 
+							(count($elements) == 0 && count($post->tagged) == 0))
 						<div class="col-md-9">
 
 							<div class="timeline" >
