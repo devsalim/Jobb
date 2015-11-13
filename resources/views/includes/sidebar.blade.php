@@ -69,37 +69,37 @@
               <i class="fa fa-edit (alias)"></i>
             </a>
             @else
-            <a style="color: deepskyblue;text-decoration:none;" class="" href="/profile/corp/{{$session_user->id}}" data-utype="corp"> 
-              {{ $session_user->firm_name }} <i class="fa fa-edit (alias)"></i></a>
+            <a style="color: deepskyblue;text-decoration:none;" class="" href="/profile/corp/{{$session_user->id}}" data-utype="corp">  {{ $session_user->firm_name }} <i class="fa fa-edit (alias)"></i>
+            </a>
             @endif
           </h3>
           @if(Auth::user()->identifier == 1)
             @if($session_user->working_status == "Student")
-            <div class="profile-usertitle-job text-capitalize" style="font-size: 15px;font-weight: 500;">
+            <div class="profile-usertitle-job">
                {{ $session_user->education }} in {{ $session_user->branch }}, {{ $session_user->city }}
             </div>
             @elseif($session_user->working_status == "Searching Job")
-            <div class="profile-usertitle-job text-capitalize" style="font-size: 15px;font-weight: 500;">
+            <div class="profile-usertitle-job">
                {{ $session_user->working_status }} in {{ $session_user->prof_category }}, {{ $session_user->city }}
             </div>
             @elseif($session_user->working_status == "Freelanching")
-            <div class="profile-usertitle-job text-capitalize" style="font-size: 15px;font-weight: 500;">
+            <div class="profile-usertitle-job">
                {{ $session_user->role }} {{ $session_user->working_status }}, {{ $session_user->city }}
             </div>
             @elseif($session_user->role != null && $session_user->working_at !=null && $session_user->working_status == "Working")
-            <div class="profile-usertitle-job text-capitalize" style="font-size: 15px;font-weight: 500;">
+            <div class="profile-usertitle-job">
                {{ $session_user->role }} @ {{ $session_user->working_at }} 
             </div>
             @elseif($session_user->role != null && $session_user->working_at ==null && $session_user->working_status == "Working")
-            <div class="profile-usertitle-job text-capitalize" style="font-size: 15px;font-weight: 500;">
+            <div class="profile-usertitle-job">
                {{ $session_user->role }}, {{ $session_user->city }}
             </div>
             @elseif($session_user->role == null && $session_user->working_at !=null && $session_user->working_status == "Working")
-            <div class="profile-usertitle-job text-capitalize" style="font-size: 15px;font-weight: 500;">
+            <div class="profile-usertitle-job">
                {{ $session_user->woring_at }}, {{ $session_user->city }}
             </div>
             @elseif($session_user->role == null && $session_user->working_at ==null && $session_user->working_status == "Working")
-            <div class="profile-usertitle-job text-capitalize" style="font-size: 15px;font-weight: 500;">
+            <div class="profile-usertitle-job">
                {{ $session_user->prof_category }}, {{ $session_user->city }}
             </div>
             @endif

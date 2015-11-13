@@ -1,6 +1,7 @@
 @extends('master')
 
 @section('content')
+@if($title != 'favourite')
 <!-- Jobtip Filter Start -->
 <div class="row">
 	<div class="col-md-9" style=" lightgray;margin-bottom: 5px;">
@@ -179,7 +180,16 @@
 </div> -->
 </form>
 <!-- Jobtip Filter End-->
-
+@elseif($title == 'favourite')
+<div class="portlet light bordered col-md-9">
+<div class="portlet-title">
+		<div class="caption links-title">
+			<i class=""></i>
+			<span class="caption-subject font-blue-hoki bold uppercase">My Favourite Posts</span>
+		</div>
+	</div>
+</div>
+@endif
 <div class="portlet light bordered" style="border: none !important;background:transparent">										
 	<div class="portlet-body form">
 			<div class="form-body">
@@ -200,7 +210,7 @@
 						@if($post->tagged->contains('user_id', Auth::user()->induser_id) || 
 							$post->individual_id == Auth::user()->induser_id || 
 							count($elements) > 0 || 
-							(count($elements) == 0 && count($post->tagged) == 0))
+							(count($groupsTagged) == 0 && count($post->tagged) == 0))
 						<div class="col-md-9">
 
 							<div class="timeline" >

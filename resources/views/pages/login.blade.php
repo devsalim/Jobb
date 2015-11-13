@@ -52,6 +52,14 @@
 					<span style="font-size: 13px;">OR</span>
 				</h2>
 
+				@if ( Session::has('flash_message') )
+ 
+				  <div class="alert {{ Session::get('flash_type') }}">
+				      <ul><li>{{ Session::get('flash_message') }}</li></ul>
+				  </div>
+				  
+				@endif
+
 				@if (count($errors) > 0)
 					<div class="alert alert-danger">
 						<ul>
@@ -594,14 +602,14 @@ $('#individual-register-btn').on('click',function(event){
       cache : false,
       success: function(data){
         loader('hide');
-        if(data == 'login'){
+        if(data.data.page == 'login'){
             $('#ind-msg-reg-box').removeClass('alert alert-danger');
             $('#ind-msg-reg-box').addClass('alert alert-success').fadeIn(1000, function(){
                 $(this).show();
             });
             $('#individual-register')[0].reset();
             $('#t-n-c').attr('checked', false); // Unchecks it
-            $('#ind-reg-msg').text('Registration successful');
+            $('#ind-reg-msg').html('Registration successful ! <br/>Check your mobile/email for further instruction. <br/>or Go to this url (<a href="http://jobtip.dev/verify" target="_blank">http://jobtip.dev/verify</a>) with your otp: <b>'+data.data.otp+'</b> to verify mobile. or <a href="/verify/'+data.data.vcode+'" target="_blank">click here</a> to verify your email.');
             
         }else{
             $('#ind-msg-reg-box').removeClass('alert alert-success');
@@ -616,6 +624,7 @@ $('#individual-register-btn').on('click',function(event){
         $('#ind-msg-reg-box').addClass('alert alert-danger').fadeIn(1000, function(){
                 $(this).show();
         });
+        console.log(data);
         $('#ind-reg-msg').text('Some error occured !');
       }
     }); 

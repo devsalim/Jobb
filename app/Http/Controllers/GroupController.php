@@ -29,9 +29,11 @@ class GroupController extends Controller {
 	public function index()
 	{
 		$title = 'group';
-		$groups = Group::leftjoin('groups_users', 'groups_users.group_id', '=', 'groups.id')					
+		$groups = Group::leftjoin('groups_users', 'groups_users.group_id', '=', 'groups.id')
+						->where('groups.rowStatus', '=', 0)					
 						->where('groups.admin_id', '=', Auth::user()->induser_id)
 						->orWhere('groups_users.user_id', '=', Auth::user()->induser_id)
+						->where('groups.rowStatus', '=', 0)
 						->groupBy('groups.id')
 						->get(['groups.id', 'groups.group_name', 'groups.admin_id']);
 
@@ -111,9 +113,9 @@ class GroupController extends Controller {
 	{
 		$data = Group::where('id', '=', $id)->first();
 		if($data != null){
-		$data->group_name = Input::get('group_name');
-		$data->save();
-		return redirect('/group');
+			$data->group_name = Input::get('group_name');
+			$data->save();
+			return redirect('/group/'.$id);
 		}else{
 			return 'some error occured.';
 		}
@@ -127,10 +129,9 @@ class GroupController extends Controller {
 	 */
 	public function destroy($id)
 	{
-		$groups_users = Groups_users::findOrFail($id);
 		$group = Group::findOrFail($id);
-		$groups_users->delete();
-		$group->delete();
+		$group->rowStatus = 1;
+		$group->save();
 		return redirect('/group');
 	}
 
@@ -180,15 +181,21 @@ class GroupController extends Controller {
 	}
 
 	public function addUser(Request $request){
-		$group = Group::findOrFail($request['group_id']);
-		$group->users()->attach($request['user_id']);
-		return redirect('/group/'.$request['group_id']);
+		$group = Group::findOrFail($request['add_group_id']);
+		$group->users()->attach($request['add_user_id']);
+		return redirect('/group/'.$request['add_group_id']);
 	}
 
 	public function deleteUser(Request $request){
-		$groups_users = Groups_users::findOrFail($request['id']);
+		$groups_users = Groups_users::findOrFail($request['delete_id']);
 		$groups_users->delete();
-		return redirect('/group/'.$request['group_id']);
+		return redirect('/group/'.$request['delete_group_id']);
+	}
+
+	public function leavegroup(Request $request){
+		$groups_users = Groups_users::where('user_id', '=', $request['my_id'])->where('group_id', '=', $request['my_group_id']);
+		$groups_users->delete();
+		return redirect('/group');
 	}
 
 

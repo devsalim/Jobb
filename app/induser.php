@@ -4,7 +4,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Induser extends Model {
 
-	protected $fillable = ['fname', 'lname', 'email', 'mobile', 'password'];
+	protected $fillable = ['fname', 'lname', 'email', 'mobile', 'mobile_otp', 'email_vcode'];
 
 	public function user(){
 		return $this->hasOne('app\user', 'induser_id', 'id');

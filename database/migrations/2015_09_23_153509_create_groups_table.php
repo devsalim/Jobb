@@ -17,6 +17,7 @@ class CreateGroupsTable extends Migration {
 			$table->increments('id');
 			$table->string('group_name');
 			$table->integer('admin_id')->unsigned();
+			$table->integer('rowStatus')->default(0)->unsigned();
 			$table->foreign('admin_id')->references('id')->on('indusers');
 			$table->timestamps();
 		});

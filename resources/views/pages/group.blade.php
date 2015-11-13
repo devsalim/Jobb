@@ -4,9 +4,15 @@
 
 <div class="portlet light bordered col-md-6">
 	<div class="portlet-title">
-		<a id="ajax-demo" href="#create-group" data-toggle="modal" class="config" style="text-decoration: none;">
-			<div class="links-title"><label><i class="glyphicon glyphicon-plus-sign" style="font-size:14px;color: #46AFA6;"></i></label> <label style="font-size: 16px;">Create New Group</label></div>
-		</a> 
+		<div class="caption links-title">
+			<span class="caption-subject font-blue-hoki bold uppercase">Groups</span>
+			<a id="ajax-demo" href="#create-group" data-toggle="modal" class="config pull-right" style="text-decoration: none;">
+				<label>
+					<i class="glyphicon glyphicon-plus-sign" style="font-size:14px;color:#46AFA6;"></i>
+				</label> 
+				<label style="font-size: 15px;"> Create new</label>				
+			</a> 
+		</div>
 	</div>
 	<div class="portlet-body form">
 		<div class="form-body">

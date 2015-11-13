@@ -6,35 +6,36 @@
 	<div class="portlet-title">
 		<div class="caption links-title">
 			<i class=""></i>
-			<span class="caption-subject font-blue-hoki bold uppercase" style="font-size:14px !important;">Group: {{$group->group_name}}</span>
+			<span class="caption-subject font-blue-hoki bold uppercase" style="font-size:14px !important;">
+				Group: {{$group->group_name}}
+			</span>
 			@foreach($users as $user)
-			@if($user->admin_id == Auth::user()->induser_id)
-			<a id="ajax-demo" href="#edit-group" data-toggle="modal" class="config" style="text-decoration: none;">
-				<i class="fa fa-edit"></i>
-			</a>
-			@endif
+				@if($user->admin_id == Auth::user()->induser_id)
+				<a id="ajax-demo" href="#edit-group" data-toggle="modal" class="config" style="text-decoration: none;">
+					<i class="fa fa-edit"></i>
+				</a>
+				@endif
 			@endforeach
 		</div>
 		<div>
-			<div><input action="action" type="button" class="btn btn-default btn-responsive" value="Back" onclick="history.go(-1);" /></div>
+			<div>
+				<input action="action" type="button" class="btn btn-default btn-responsive" value="Back" onclick="history.go(-1);" />
+			</div>
 		@foreach($users as $user)
-		@if($user->admin_id == Auth::user()->induser_id)
-			<div class="leave-del">
-				<a id="ajax-demo" href="#delete-group" data-toggle="modal" class="config" style="text-decoration: none;">
-					<button type="submit" class="btn btn-danger btn-responsive">Delete Group
-					</button>
-				</a>
-			</div>
-		@else
-			<div class="leave-del">
-				<a id="ajax-demo" href="#leave-group" data-toggle="modal" class="config" style="text-decoration: none;">
-					<button type="submit" class="btn btn-danger btn-responsive">
-					Leave Group
-					</button>
-				</a>
-			</div>
-		</form>
-		@endif
+			@if($user->admin_id == Auth::user()->induser_id)
+				<div class="leave-del">
+					<a id="ajax-demo" href="#delete-group" data-toggle="modal" class="config btn btn-danger btn-responsive" style="text-decoration: none;">
+						Delete Group
+					</a>
+				</div>
+			@else
+				<div class="leave-del">
+					<a id="ajax-demo" href="#leave-group" data-toggle="modal" class="config btn btn-danger btn-responsive" style="text-decoration: none;">						
+						Leave Group
+					</a>
+				</div>
+			</form>
+			@endif
 		@endforeach
 	</div>
 	</div>
@@ -83,8 +84,8 @@
 					  You want to delete this Group   		
 	     		</div>
 				<div class="modal-footer">
-					<button type="submit" class="btn btn-warning">Delete</button>
-					<button type="button" class="btn default" data-dismiss="modal">Close</button>
+					<button type="submit" class="btn btn-warning">Yes</button>
+					<button type="button" class="btn default" data-dismiss="modal">No</button>
 				</div>
 			</form>
 		</div>
@@ -97,7 +98,7 @@
 <div class="modal fade" id="leave-group" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   	<div class="modal-dialog" style="width: 300px;">
 	    <div class="modal-content">
-	    	<form action="{{ url('/group/destroy', $group->id) }}" class="horizontal-form" method="post">
+	    	<form action="{{ url('/group/leavegroup') }}" class="horizontal-form" method="post">
 				<input type="hidden" name="_token" value="{{ csrf_token() }}">
 		     	<div class="modal-header">
 			        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
@@ -107,8 +108,10 @@
 					  You want to leave this Group   		
 	     		</div>
 				<div class="modal-footer">
-					<button type="submit" class="btn btn-warning">Delete</button>
-					<button type="button" class="btn default" data-dismiss="modal">Close</button>
+					<input type="hidden" name="my_id" value="{{Auth::user()->induser_id}}">
+					<input type="hidden" name="my_group_id" value="{{$group->id}}">
+					<button type="submit" class="btn btn-warning">Yes</button>
+					<button type="button" class="btn default" data-dismiss="modal">No</button>
 				</div>
 			</form>
 		</div>
@@ -205,8 +208,8 @@
 									 	@if($user->admin_id == Auth::user()->induser_id)
 										<form action="{{ url('/group/deleteuser') }}" method="post">
 											<input type="hidden" name="_token" value="{{ csrf_token() }}">
-											<input type="hidden" name="id" value="{{$user->groups_users_id}}">
-											<input type="hidden" name="groupid" value="{{$user->group_id}}">
+											<input type="hidden" name="delete_id" value="{{$user->groups_users_id}}">
+											<input type="hidden" name="delete_group_id" value="{{$user->group_id}}">
 											<button type="submit" class="btn btn-danger">
 											<i class="glyphicon glyphicon-trash" style="font-size: 12px;background-color: white;color: black;border-radius: 10px;width: 20px;height: 20px;padding-top: 3px;"></i>
 											</button>
@@ -246,8 +249,8 @@
 								 	<span class="input-group-btn btn-right">
 										<form action="{{ url('/group/adduser') }}" method="post">
 											<input type="hidden" name="_token" value="{{ csrf_token() }}">
-											<input type="hidden" name="user_id" value="{{$connection->id}}">
-											<input type="hidden" name="group_id" value="{{$group->id}}">
+											<input type="hidden" name="add_user_id" value="{{$connection->id}}">
+											<input type="hidden" name="add_group_id" value="{{$group->id}}">
 											<button type="submit" class="btn btn-success">
 											<i class="icon-plus" style="font-size: 12px;background-color: white;color: black;border-radius: 10px;width: 20px;height: 20px;padding-top: 3px;"></i>
 											</button>

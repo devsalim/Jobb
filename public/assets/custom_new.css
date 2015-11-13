@@ -48,8 +48,8 @@ display:none !important;
 
 .links-title{
 	float: none !important;
-    margin: 0 auto;
-    display: table !important;
+    /*margin: 0 auto;
+    display: table !important;*/
 }
 
 
@@ -341,7 +341,7 @@ display: table;
 }
 
 .modal-body-new{
-  height: 560px;
+  height: 520px;
     overflow-y: auto;
 }
 

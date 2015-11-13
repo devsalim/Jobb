@@ -45,6 +45,8 @@ class CreateIndusersTable extends Migration {
                   $table->string('about_individual')->nullable();
                   $table->string('email_verify')->default(0)->nullable();
                   $table->string('mobile_verify')->default(0)->nullable();
+                  $table->string('mobile_otp')->nullable();
+                  $table->string('email_vcode')->nullable();
          		$table->timestamps();
 		});
 	}

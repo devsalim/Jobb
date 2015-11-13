@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use App\Http\Requests\CreateUserRequest;
 use App\Http\Requests\CreateImgUploadRequest;
+use Illuminate\Http\Response;
 
 class UserController extends Controller {
 
@@ -46,12 +47,24 @@ class UserController extends Controller {
 	{
 		if($request->ajax()){
 			DB::beginTransaction();
+			$vcode = "";
+			$otp = "";
 			try{
 				$indUser = new Induser();
 				$indUser->fname = $request['fname'];
 				$indUser->lname = $request['lname'];
 				$indUser->email = $request['email'];
 				$indUser->mobile = $request['mobile'];
+
+				if($request['email'] != null){
+					$vcode = 'A'.rand(1111,9999);
+					$indUser->email_vcode = $vcode;
+				}
+				if($request['mobile'] != null){
+					$otp = rand(1111,9999);
+					$indUser->mobile_otp = $otp;
+				}
+
 				$indUser->save();
 
 				$user = new User();
@@ -67,7 +80,11 @@ class UserController extends Controller {
 			   throw $e;
 			}
 			DB::commit();
-			return 'login';
+
+			$data = ['page'=>'login','vcode'=>$vcode,'otp'=>$otp];
+			return response()->json(['success'=>true,'data'=>$data]);
+
+			// return 'login';
 		}else{
 			DB::beginTransaction();
 			try{
@@ -76,6 +93,16 @@ class UserController extends Controller {
 				$indUser->lname = $request['lname'];
 				$indUser->email = $request['email'];
 				$indUser->mobile = $request['mobile'];
+
+				if($request['email'] != null){
+					$vcode = 'A'.rand(1111,9999);
+					$indUser->email_vcode = $vcode;
+				}
+				if($request['mobile'] != null){
+					$otp = rand(1111,9999);
+					$indUser->mobile_otp = $otp;
+				}
+
 				$indUser->save();
 
 				$user = new User();
@@ -223,6 +250,8 @@ class UserController extends Controller {
 		if($otp == $otpEnc){
 			Induser::where('id', '=', Auth::user()->induser_id)->update(['mobile' => $mobile]);
 			Induser::where('id', '=', Auth::user()->induser_id)->update(['mobile_verify' => 1]);
+			User::where('induser_id', '=', Auth::user()->induser_id)->update(['mobile' => $mobile]);
+			User::where('induser_id', '=', Auth::user()->induser_id)->update(['mobile_verify' => 1]);
 			return 'verification-success';
 		}else{
 			return 'verification-failure';
@@ -244,6 +273,8 @@ class UserController extends Controller {
 		if($code == $codeEnc){
 			Induser::where('id', '=', Auth::user()->induser_id)->update(['email' => $email]);
 			Induser::where('id', '=', Auth::user()->induser_id)->update(['email_verify' => 1]);
+			User::where('induser_id', '=', Auth::user()->induser_id)->update(['email' => $email]);
+			User::where('induser_id', '=', Auth::user()->induser_id)->update(['email_verify' => 1]);
 			return 'verification-success';
 		}else{
 			return 'verification-failure';

@@ -13,6 +13,10 @@ Route::controllers([
 Route::post('individual/store', 'UserController@store');
 Route::post('corporate/store', 'CorporateController@store');
 
+Route::get('verify', 'PagesController@verifyPage');
+Route::get('verify/{id}', 'PagesController@verifyEmail');
+Route::post('verify', 'PagesController@verifyMobile');
+
 Route::group(array('before' => 'auth'), function(){
 
 	Route::post('home', 'PagesController@homeFilter');
@@ -67,12 +71,13 @@ Route::group(array('before' => 'auth'), function(){
 	
 	Route::get('group', 'GroupController@index');
 	Route::get('group/create', 'GroupController@create');
-	Route::get('group/store', 'GroupController@store');
+	Route::post('group/store', 'GroupController@store');
 	Route::post('group/update/{id}', 'GroupController@update');
 	Route::post('group/destroy/{id}', 'GroupController@destroy');
 	Route::get('group/{id}', 'GroupController@detail');
 	Route::post('group/adduser', 'GroupController@addUser');	
 	Route::post('group/deleteuser', 'GroupController@deleteUser');
+	Route::post('group/leavegroup', 'GroupController@leavegroup');
 
 	Route::post('user/imgUpload', 'UserController@imgUpload');	
 	Route::post('corporate/imgUpload', 'CorporateController@imgUpload');	

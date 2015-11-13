@@ -513,41 +513,18 @@
 													<h4>Who can see this Post</h4>
 												</div>
 												<div class="col-md-8">
-													<div class="md-radio-inline">
-														<div class="md-radio">
-															<input type="radio" id="tag-group-all" name="tag-group" value="all" class="md-radiobtn">
-															<label for="tag-group-all" style="">
-																<span></span>
-																<span class="check"></span>
-																<span class="box"></span>
-																All 
-															</label>
-														</div>
-														<div class="md-radio">
-															<input type="radio" id="tag-group-links" name="tag-group" value="links" class="md-radiobtn" >
-															<label for="tag-group-links" style="">
-															<span></span>
-															<span class="check"></span>
-															<span class="box"></span>
-															Links </label>
-														</div>
-														<div class="md-radio">
-															<input type="radio" id="tag-group-groups" name="tag-group" value="groups" class="md-radiobtn" >
-															<label for="tag-group-groups" style="">
-															<span></span>
-															<span class="check"></span>
-															<span class="box"></span>
-															Groups </label>
-														</div>
-														<div class="md-radio">
-															<input type="radio" id="tag-group-both" name="tag-group" value="both" class="md-radiobtn" >
-															<label for="tag-group-both" style="">
-															<span></span>
-															<span class="check"></span>
-															<span class="box"></span>
-															Both </label>
-														</div>
-													</div>
+													<label for="tag-group-all" style="padding: 5.5px 12px;">
+														<input type="checkbox" id="tag-group-all" name="tag-group" value="all" class="md-radiobtn">
+														Public 
+													</label>
+													<label for="tag-group-links" style="padding: 5.5px 12px;">
+														<input type="checkbox" id="tag-group-links" name="tag-group" value="links" class="md-radiobtn" >
+														Links 
+													</label>
+													<label for="tag-group-groups" style="padding: 5.5px 12px;">
+														<input type="checkbox" id="tag-group-groups" name="tag-group" value="groups" class="md-radiobtn" >														
+														Groups 
+													</label>
 												</div>
 											</div>
 
@@ -850,40 +827,72 @@ $(document).ready(function(){
 	});
 
 	// user post tagging
-	$("#connections-list").hide();
-    $("#groups-list").hide();
-    $("#connections").prop('required',false);
-    $("#groups").prop('required',false);
+	/*$("#connections-list").hide();
+    $("#groups-list").hide();*/
+   /* $("#connections").prop('required',false);
+    $("#groups").prop('required',false);*/
+    $("#connections").prop('disabled',true);
+    $("#groups").prop('disabled',true);
+    $("#tag-group-all").prop('checked', true);
 	$("input[name$='tag-group']").click(function() {
         var selected = $(this).val();
-        if(selected == 'all'){
-        	$("#connections-list").hide();
+        if(selected == 'all' && $(this).prop('checked')){
+        	/*$("#connections-list").hide();
         	$("#groups-list").hide();
         	$("#connections").hide();
-        	$("#groups").hide();
+        	$("#groups").hide();*/
         	$("#connections").prop('required',false);
         	$("#groups").prop('required',false);
-        }else if(selected == 'links'){
-        	$("#connections-list").show();
-        	$("#groups-list").hide();
-        	$("#connections").show();
-        	$("#groups").hide();
-        	$("#connections").prop('required',true);
-        	$("#groups").prop('required',false);
-        }else if(selected == 'groups'){
-        	$("#connections-list").hide();
-        	$("#groups-list").show();
-        	$("#connections").hide();
-        	$("#groups").show();
-        	$("#groups").prop('required',true);
-        	$("#connections").prop('required',false);
-        }else if(selected == 'both'){
-        	$("#connections-list").show();
+        	$("#connections").prop('disabled',true);
+        	$("#groups").prop('disabled',true);
+        	$("#tag-group-links").prop('checked', false);
+        	$("#tag-group-groups").prop('checked', false);
+        }else if(selected == 'links' && $(this).prop('checked')){
+        	/*$("#connections-list").show();
         	$("#groups-list").show();
         	$("#connections").show();
-        	$("#groups").show();
+        	$("#groups").show();*/
         	$("#connections").prop('required',true);
+        	$("#connections").prop('disabled',false);
+        	if ($("#groups").prop('disabled') === false) {
+	        	$("#groups").prop('disabled',false);
+	        }else{
+	        	$("#groups").prop('disabled',true);
+	        }
+	        if ($("#groups").prop('required') === false) {
+	        	$("#groups").prop('required',false);
+	        }else{
+	        	$("#groups").prop('required',true);
+	        }
+        	$("#tag-group-all").prop('checked', false);
+        }else if(selected == 'groups' && $(this).prop('checked')){
+        	/*$("#connections-list").show();
+        	$("#groups-list").show();
+        	$("#connections").show();
+        	$("#groups").show();*/
         	$("#groups").prop('required',true);
+        	$("#groups").prop('disabled',false);
+        	if ($("#connections").prop('disabled') === false) {	        	
+        		$("#connections").prop('disabled',false);
+	        }else{
+	        	$("#connections").prop('disabled',true);
+	        }
+	        if ($("#connections").prop('required') === false) {	        	
+        		$("#connections").prop('required',false);
+	        }else{
+	        	$("#connections").prop('required',true);
+	        }
+        	$("#tag-group-all").prop('checked', false);
+        }else if(selected == 'links' && $(this).prop('checked') === false){
+        	$("#connections").prop('disabled',true);
+        	if($("#tag-group-groups").prop('checked') === false){
+	        	$("#tag-group-all").prop('checked', true);
+	        }
+        }else if(selected == 'groups' && $(this).prop('checked') === false){
+        	$("#groups").prop('disabled',true);
+        	if($("#tag-group-links").prop('checked') === false){
+	        	$("#tag-group-all").prop('checked', true);
+	        }
         }
     }); 
 

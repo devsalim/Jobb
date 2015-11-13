@@ -660,3 +660,10 @@ form.search-form.search-form-expanded {
 .form-horizontal .md-radio-inline {
     margin: 6.5px 0;
 }
+.profile-usertitle-job {
+    text-transform: uppercase;
+    font-size: 12px;
+    padding: 0px 2px;
+    margin: 0 0 10px 0;
+    color: #ccc;
+}

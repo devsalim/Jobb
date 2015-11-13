@@ -11,6 +11,7 @@ use App\Postactivity;
 use App\Connections;
 use App\Follow;
 use App\Skills;
+use App\User;
 use Auth;
 use DB;
 use Input;
@@ -493,11 +494,10 @@ class PagesController extends Controller {
 		if (Auth::check()) {
 			$title = 'favourite';
 			$skills = Skills::lists('name', 'id');
-			$posts = Postjob::orderBy('postjobs.id', 'desc')							
+
+			$posts = Postjob::orderBy('id', 'desc')							
 							->with('indUser', 'corpUser', 'postActivity', 'taggedUser', 'taggedGroup')
-							->leftjoin('postactivities', 'postjobs.id', '=', 'postactivities.post_id')
-							->where('postactivities.user_id', '=', Auth::user()->induser_id)
-							->where('postactivities.fav_post', '=', 1)
+							->whereRaw('id in (select post_id from postactivities where user_id = '.Auth::user()->induser_id.' and fav_post = 1)')
 							->paginate(15);
 
 			$links = DB::select('select id from indusers
@@ -541,11 +541,55 @@ class PagesController extends Controller {
 				unset ($userSkills[count($userSkills)-1]); 
 			}
 			
-			return view('pages.post', compact('posts', 'title', 'links', 'groups', 'following', 'userSkills', 'skills'));
+			return view('pages.home', compact('posts', 'title', 'links', 'groups', 'following', 'userSkills', 'skills'));
 			// return $posts;
 		}else{
 			return redirect('login');
 		}	
+	}
+
+	public function verifyPage(){
+		return view('pages.verify');
+	}
+
+	public function verifyEmail($id){
+		if($id != null){
+			$user = Induser::where('email_vcode', '=', $id)->first(['id']);
+		}
+		if($user != null){
+			Induser::where('email_vcode', '=', $id)->update(['email_verify' => 1]);
+			User::where('induser_id', '=', $user->id)->update(['email_verify' => 1]);
+			$msg = 'Email verified successfully. Now you can login with your registered email id.';
+
+			return redirect('/login')
+					->with('flash_message', $msg)
+					->with('flash_type', 'alert-success');
+		}else{
+			$msg = 'Invalid attempt';
+			return redirect('/login')
+					->with('flash_message', $msg)
+					->with('flash_type', 'alert-danger');
+		}
+	}
+
+	public function verifyMobile(){
+		if(Input::get('mobileOTP') != null){
+			$user = Induser::where('mobile_otp', '=', Input::get('mobileOTP'))->first(['id']);
+		}
+		if($user != null){
+			Induser::where('mobile_otp', '=', Input::get('mobileOTP'))->update(['mobile_verify' => 1]);
+			User::where('induser_id', '=', $user->id)->update(['mobile_verify' => 1]);
+			$msg = 'Mobile no. verified successfully. Now you can login with your mobile no.';
+
+			return redirect('/login')
+					->with('flash_message', $msg)
+					->with('flash_type', 'alert-success');
+		}else{
+			$msg = 'Invalid OTP';
+			return redirect('/verify')
+					->with('flash_message', $msg)
+					->with('flash_type', 'alert-danger');
+		}		
 	}
 
 }

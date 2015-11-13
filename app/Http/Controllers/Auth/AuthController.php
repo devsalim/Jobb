@@ -44,15 +44,20 @@ class AuthController extends Controller {
 		$field = filter_var($request->input('email'), FILTER_VALIDATE_EMAIL) ? 'email' : 'mobile';
     	$request->merge([$field => $request->input('email')]);
 
+    	$credentials = $request->only($field, 'password');
+    	if($field == 'email'){
+    		 $credentials = array_add($credentials, 'email_verify', '1');
+    	}elseif($field == 'mobile'){
+    		 $credentials = array_add($credentials, 'mobile_verify', '1');
+    	}
 		if($request->ajax()){
-			if ($this->auth->attempt($request->only($field, 'password')))
+			if ($this->auth->attempt($credentials))
 		    {
-		        // return redirect()->intended($this->redirectPath());
 		        return $this->redirectPath();
 		    }
 		    return $this->loginPath();
 		}else{
-			if ($this->auth->attempt($request->only($field, 'password')))
+			if ($this->auth->attempt($credentials))
 		    {
 		        return redirect()->intended($this->redirectPath());
 		    }
