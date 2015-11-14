@@ -137,6 +137,7 @@ class ViewpageController extends Controller {
 
 	public function thanks_view()
 	{
+		$utype='thank';
 		$title = 'thanks_view';
 		$user = Induser::where('id', '=', Auth::user()->induser_id)->first();
 		$applications = Postactivity::with('user', 'post')
@@ -158,7 +159,7 @@ class ViewpageController extends Controller {
 							      ->where('user_id', '=', Auth::user()->induser_id)
 							      ->orderBy('id', 'desc')
 						          ->get(['id', 'fav_post', 'fav_post_dtTime', 'user_id', 'post_id']);
-		return view('pages.notification_view', compact('user','applications','thanks', 'favourites', 'title'));
+		return view('pages.notification_view', compact('user','applications','thanks', 'favourites', 'title', 'utype'));
 	}
 
 }

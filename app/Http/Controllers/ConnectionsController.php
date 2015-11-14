@@ -173,11 +173,9 @@ class ConnectionsController extends Controller {
 									where corpusers.id in (
 											select follows.individual_id as id from follows
 											where follows.corporate_id=?
-											 and follows.status=1
 											union 
 											select follows.corporate_id as id from follows
 											where follows.individual_id=?
-											 and follows.status=1
 								)', [Auth::user()->induser_id, Auth::user()->corpuser_id]);
 		$follows = collect($follows);
 
@@ -226,7 +224,6 @@ class ConnectionsController extends Controller {
 									   'follows.corporate_id',
 									   'follows.individual_id']);
 		$followCount = Follow::Where('individual_id', '=', $id)
-								->where('status', '=', 1)
 								->count('id');						
 		$connections = DB::select('select id,fname,lname,working_at,city,state,profile_pic from indusers
 									where indusers.id in (
