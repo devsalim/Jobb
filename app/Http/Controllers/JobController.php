@@ -14,6 +14,7 @@ use Input;
 use DB;
 use Response;
 use App\Group;
+use App\Induser;
 
 class JobController extends Controller {
 
@@ -46,7 +47,17 @@ class JobController extends Controller {
 		$title = 'job';
 		$skills = Skills::lists('name', 'id');
 		if(Auth::user()->identifier == 1){
-			$connections=Auth::user()->induser->friends->lists('fname', 'id');
+			$connections=Induser::whereRaw('indusers.id in (
+											select connections.user_id as id from connections
+											where connections.connection_user_id=?
+											 and connections.status=1
+											union 
+											select connections.connection_user_id as id from connections
+											where connections.user_id=?
+											 and connections.status=1
+								)', [Auth::user()->induser_id, Auth::user()->induser_id])
+							->get(['id','fname'])
+							->lists('fname','id');
 
 			$groups = Group::leftjoin('groups_users', 'groups_users.group_id', '=', 'groups.id')					
 						->where('groups.admin_id', '=', Auth::user()->induser_id)
