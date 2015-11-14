@@ -16,12 +16,27 @@ class UserServiceProvider extends ServiceProvider {
 	public function boot()
 	{
 		view()->composer('includes.sidebar', function($view){
+			$favouritesCount = 0;
+			$thanksCount = 0;
 			if(Auth::user()->identifier == 1){
 				$user = Induser::where('id', '=', Auth::user()->induser_id)->first();
+
+				$favouritesCount = Postactivity::with('user')
+									      ->where('fav_post', '=', 1)
+									      ->where('user_id', '=', Auth::user()->induser_id)
+									      ->orderBy('id', 'desc')
+								          ->sum('postactivities.fav_post');
+				$thanksCount = Postactivity::with('user', 'post')
+								      ->join('postjobs', 'postjobs.id', '=', 'postactivities.post_id')
+									  ->where('postjobs.individual_id', '=', Auth::user()->induser_id)
+									  ->where('postactivities.thanks', '=', 1)
+								      ->orderBy('postactivities.id', 'desc')
+								      ->sum('postactivities.thanks');
+
 			}else if(Auth::user()->identifier == 2){
 				$user = Corpuser::where('id', '=', Auth::user()->corpuser_id)->first();
 			}
-			$view->with('session_user', $user);
+			$view->with('session_user', $user)->with('favouritesCount', $favouritesCount)->with('thanksCount', $thanksCount);
 		});
 
 		view()->composer('includes.header', function($view){

@@ -15,18 +15,18 @@
           <div style="color: whitesmoke;">
              Thanks
           </div>
-          <span class="badge badge-danger  " style="background-color: #3598dc;right:8px !important;">
-          3</span>
+          <span class="badge badge-danger @if($thanksCount > 0) show @else hide @endif" style="background-color: #3598dc;right:8px !important;">
+          {{$thanksCount}}</span>
         </a>
       </div>
       <div class="col-md-4 col-sm-4 col-xs-4">
-        <a href="/home" class="icon-btn" style="border: 0 !important;background-color: transparent !important;">
+        <a href="/favourite" class="icon-btn" style="border: 0 !important;background-color: transparent !important;">
           <i class="icon-pin" style="color:yellow"></i>
           <div style="color: whitesmoke;">
-             Favourite
+           Favourites
           </div>
-          <span class="badge badge-danger" style="background-color: #26a69a;right:15px !important;">
-         2 </span>
+          <span class="badge badge-danger @if($favouritesCount > 0) show @else hide @endif" style="background-color: #26a69a;right:15px !important;">
+          {{$favouritesCount}} </span>
         </a>
       </div>
     </div>
