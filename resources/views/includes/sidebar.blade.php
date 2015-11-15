@@ -126,7 +126,7 @@
       </li>
       @if (Auth::user()->identifier == 1)
       <li class="@if($title == 'connections'){{'active'}}@endif">
-        <a class="" href="/connections/create/">
+        <a class="" href="/links">
         <i class="icon-link"></i>
         <span class="title">
         Links</span>

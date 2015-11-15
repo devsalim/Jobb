@@ -33,25 +33,25 @@
 	  </li>
 </form>
 @endforeach
-@foreach($corps as $user)
+@foreach($corps as $corp)
 <!-- BEGIN FORM-->
-<form action="{{ url('/', $user->id) }}" method="post">
+<form action="{{ url('/links/corporate/follow', $corp->id) }}" method="post">
 	<input type="hidden" name="_token" value="{{ csrf_token() }}">
 	
 	  <li class="media">
 	    <div class="media-left">
 	      <a href="#">
-	        <img class="media-object" src="@if($user->logo_status != null){{ '/img/profile/'.$user->logo_status }}@else{{'/assets/images/ab.png'}}@endif" alt="DP" style="width:64px;height:64px">
+	        <img class="media-object" src="@if($corp->logo_status != null){{ '/img/profile/'.$corp->logo_status }}@else{{'/assets/images/ab.png'}}@endif" alt="DP" style="width:64px;height:64px">
 	      </a>
 	    </div>
 	    <div class="media-body">
 	    	<div class="media-body-left" style="float: left;min-width: 250px;">
-		      <h4 class="media-heading">{{ $user->firm_name }}</h4>
-		     	{{ $user->firm_type }},{{ $user->city }}
+		      <h4 class="media-heading">{{ $corp->firm_name }}</h4>
+		     	{{ $corp->firm_type }},{{ $corp->city }}
 			</div>
-			@if($user->id != Auth::user()->induser_id)
+			
 		 	<div class="media-body-right">
-		 		@if($follows->contains('id', $user->id))
+		 		@if($follows->contains('id', $corp->id))
 		 			<div class="btn btn-success">Following</div>
 		 		@else
 		 		<span class="input-group-btn btn-right">
@@ -61,7 +61,7 @@
 				</span>
 				@endif
 		 	</div>
-		 	@endif
+		 	
 	    </div>
 	  </li>
 </form>

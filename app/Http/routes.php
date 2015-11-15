@@ -107,6 +107,7 @@ Route::group(array('before' => 'auth'), function(){
 	Route::post('follow-modal', 'PagesController@followModal');
 	Route::post('corporate/follow/{id}', 'PagesController@follow');
 	Route::post('corporate/unfollow/{id}', 'PagesController@unfollow');
+	Route::post('links/corporate/follow/{id}', 'ConnectionsController@linkPageFollow');
 	
 	Route::post('me-change', 'UserController@edit_me');
 	Route::post('me-change', 'UserController@edit_me');

@@ -148,13 +148,9 @@ class ConnectionsController extends Controller {
 						->where('id', '<>', Auth::user()->induser_id)
 					    ->get();
 		$corps = Corpuser::where('firm_email_id', '=', $keywords)
-						->where('id', '<>', Auth::user()->induser_id)
 						->orWhere('firm_name', 'like', '%'.$keywords.'%')
-						->where('id', '<>', Auth::user()->induser_id)
 						->orWhere('firm_type', 'like', '%'.$keywords.'%')
-						->where('id', '<>', Auth::user()->induser_id)
 						->orWhere('city', 'like', '%'.$keywords.'%')
-						->where('id', '<>', Auth::user()->induser_id)
 					    ->get();
 
 		$links = DB::select('select id from indusers
@@ -169,14 +165,9 @@ class ConnectionsController extends Controller {
 								)', [Auth::user()->induser_id, Auth::user()->induser_id]);
 		$links = collect($links);
 
-		$follows = DB::select('select id from corpusers
-									where corpusers.id in (
-											select follows.individual_id as id from follows
-											where follows.corporate_id=?
-											union 
-											select follows.corporate_id as id from follows
-											where follows.individual_id=?
-								)', [Auth::user()->induser_id, Auth::user()->corpuser_id]);
+		$follows = DB::select('select follows.corporate_id as id 
+								from follows 
+								where follows.individual_id=?', [Auth::user()->induser_id]);
 		$follows = collect($follows);
 
 		return view('pages.searchUsers', compact('users', 'links', 'corps', 'follows'));
@@ -242,5 +233,13 @@ class ConnectionsController extends Controller {
 								 ->where('status', '=', 1)
 								 ->count('id');
 		return view('pages.friendlink', compact('title', 'linkFollow', 'connections', 'linksCount', 'followCount'));
+	}
+
+	public function linkPageFollow($id){
+		$follow = new Follow();
+		$follow->corporate_id = $id;
+		$follow->individual_id = Auth::user()->induser_id;
+		$follow->save();
+		return redirect('/links');
 	}
 }
