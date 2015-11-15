@@ -52,10 +52,13 @@
 		      <h4 class="media-heading">
 		      	<a href="/profile/corp/{{$corp->id}}" class="link-label" data-utype="corp">
 		      		{{ $corp->firm_name }}
-		      	</a>	
+		      	</a> {{ $corp->firm_type }}
 		      </h4>
-		     	{{ $corp->firm_type }},{{ $corp->city }}<br/>
-		     	operating since: {{ $corp->operating_since }} Followers: 44
+		      	{{ $corp->city }} 
+		     	<i class="fa fa-clock-o" style="color:darkslategray;font-size:16px;"></i>
+		     	 {{ $corp->operating_since }} 
+		     	 <i class="fa fa-users" style="color:darkslategray;"></i> {{ $corp->emp_count }}<br>
+		     	 ({{$corp->followers}}) followers
 			</div>
 			
 		 	<div class="media-body-right">

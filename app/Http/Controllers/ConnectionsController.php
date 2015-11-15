@@ -147,12 +147,16 @@ class ConnectionsController extends Controller {
 						->orWhere('working_at', 'like', '%'.$keywords.'%')
 						->where('id', '<>', Auth::user()->induser_id)
 					    ->get();
-		$corps = Corpuser::where('firm_email_id', '=', $keywords)
-						->orWhere('firm_name', 'like', '%'.$keywords.'%')
-						->orWhere('firm_type', 'like', '%'.$keywords.'%')
-						->orWhere('city', 'like', '%'.$keywords.'%')
-					    ->get();
 
+		$corps = DB::select('select cu.*,(select count(id) 
+										from follows 
+										where follows.corporate_id=cu.id) as followers from corpusers cu 
+									where cu.firm_email_id = ? or 
+										  cu.firm_name like ? or 
+										  cu.firm_type like ? or 
+										  cu.city like ?
+										  ', [$keywords, '%'.$keywords.'%', '%'.$keywords.'%', '%'.$keywords.'%']);
+		
 		$links = DB::select('select id from indusers
 									where indusers.id in (
 											select connections.user_id as id from connections
