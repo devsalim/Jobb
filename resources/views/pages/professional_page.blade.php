@@ -299,13 +299,13 @@
 							<!--/span-->
 							<div class="col-md-6 col-sm-6">
 								<div class="form-group">
-									<label>Branch <span class="required">
-											* </span></label>
+									<label>Branch <span class="required"> * </span></label>
 									<div class="input-group">
 										<span class="input-group-addon">
-										<i class="icon-graduation"></i>
+											<i class="icon-graduation"></i>
 										</span>
 										<select class="form-control" name="branch" id="child_selection" value="{{ $user->branch }}">
+											<option value="{{ $user->branch }}">{{ $user->branch }}</option>
 										</select>
 									</div>
 								</div>
