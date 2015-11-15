@@ -68,6 +68,8 @@ Route::group(array('before' => 'auth'), function(){
 	Route::post('connections/newLink/{id}', 'ConnectionsController@newLink');
 	Route::post('connections/removeLink/{id}', 'ConnectionsController@removeLink');
 	Route::get('connections/friendlink/{id}', 'ConnectionsController@friendLink');
+	Route::post('links/corporate/follow/{id}', 'ConnectionsController@linkPageFollow');
+	Route::post('links/corporate/unfollow/{id}', 'ConnectionsController@linkPageUnfollow');
 	
 	Route::get('group', 'GroupController@index');
 	Route::get('group/create', 'GroupController@create');
@@ -107,7 +109,6 @@ Route::group(array('before' => 'auth'), function(){
 	Route::post('follow-modal', 'PagesController@followModal');
 	Route::post('corporate/follow/{id}', 'PagesController@follow');
 	Route::post('corporate/unfollow/{id}', 'PagesController@unfollow');
-	Route::post('links/corporate/follow/{id}', 'ConnectionsController@linkPageFollow');
 	
 	Route::post('me-change', 'UserController@edit_me');
 	Route::post('me-change', 'UserController@edit_me');

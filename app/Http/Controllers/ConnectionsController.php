@@ -242,4 +242,12 @@ class ConnectionsController extends Controller {
 		$follow->save();
 		return redirect('/links');
 	}
+
+	public function linkPageUnfollow($id){
+		$follow = Follow::where('corporate_id', '=', $id)
+						->where('individual_id', '=', Auth::user()->induser_id)
+						->first();
+		$follow->delete();
+		return redirect('/links');
+	}
 }

@@ -218,7 +218,7 @@
 							    	
 							    	<div class="media-body-right">
 							    		<span class="input-group-btn btn-right">
-											<form action="{{ url('/corporate/unfollow', $follow->id) }}" method="post">
+											<form action="{{ url('links/corporate/unfollow', $follow->id) }}" method="post">
 												<input type="hidden" name="_token" value="{{ csrf_token() }}">
 												<button type="submit" name="action" value="accept" class="btn btn-success button-style-add">
 													<i class="icon-user-follow icon-style-add"  style="font-size:12px;color:white;padding-top: 3px;"></i>&nbsp;Unfollow
