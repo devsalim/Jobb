@@ -12,7 +12,10 @@
 	    </div>
 	    <div class="media-body">
 	    	<div class="media-body-left" style="float: left;min-width: 250px;">
-		      <h4 class="media-heading">{{ $user->fname }} {{ $user->lname }}</h4>
+		      <h4 class="media-heading">
+		      	<a href="/profile/ind/{{$user->id}}" data-utype="ind">
+		      		{{ $user->fname }} {{ $user->lname }}</h4>
+		      	</a>
 		     	{{ $user->working_at }}<br>
 			 	{{ $user->city }} {{ $user->state }}
 			</div>
@@ -46,8 +49,13 @@
 	    </div>
 	    <div class="media-body">
 	    	<div class="media-body-left" style="float: left;min-width: 250px;">
-		      <h4 class="media-heading">{{ $corp->firm_name }}</h4>
-		     	{{ $corp->firm_type }},{{ $corp->city }}
+		      <h4 class="media-heading">
+		      	<a href="/profile/corp/{{$corp->id}}" class="link-label" data-utype="corp">
+		      		{{ $corp->firm_name }}
+		      	</a>	
+		      </h4>
+		     	{{ $corp->firm_type }},{{ $corp->city }}<br/>
+		     	operating since: {{ $corp->operating_since }} Followers: 44
 			</div>
 			
 		 	<div class="media-body-right">
