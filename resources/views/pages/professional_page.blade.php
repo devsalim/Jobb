@@ -161,7 +161,7 @@
 				</div>
 				<div class="form-actions ">
 					<button type="submit" class="btn blue"><i class="fa fa-check"></i> Update</button>
-					<!-- <button type="button" class="btn default">Cancel</button> -->
+					<a href="/profile/ind/{{Auth::user()->induser_id}}" class="btn default">Cancel</a>
 				</div>
 			</div>
 		</form>
@@ -181,7 +181,8 @@
 	</div>
 	<div class="portlet-body form ">
 		<!-- BEGIN FORM-->
-		<form action="{{ url('/individual/update', Auth::user()->induser_id) }}" id="ind_validation" class="horizontal-form prof_detail" method="post" enctype="multipart/form-data">
+		<form action="{{ url('/individual/update', Auth::user()->induser_id) }}" id="ind_validation" 
+				class="horizontal-form prof_detail" method="post" enctype="multipart/form-data">
 			<input type="hidden" name="_token" value="{{ csrf_token() }}">
 			<div class="form-body">
 				<div class="row">
@@ -579,8 +580,10 @@
 					</div>
 				</div>
 				<div class="form-actions ">
-					<button type="submit" name="individual" value="Save" class="btn blue"><i class="fa fa-check"></i> Update</button>
-					<!-- <button type="button" class="btn default">Cancel</button> -->
+					<button type="submit" name="individual" value="Save" class="btn blue">
+						<i class="fa fa-check"></i> Update
+					</button>
+					<a href="/profile/ind/{{Auth::user()->induser_id}}" class="btn default">Cancel</a>
 				</div>
 			</div>
 		</form>

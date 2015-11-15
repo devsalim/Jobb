@@ -183,7 +183,7 @@ class UserController extends Controller {
 			$data->linked_skill = Input::get('linked_skill');
 			$data->about_individual = Input::get('about_individual');
 			$data->save();
-			return redirect('/individual/create');
+			return redirect('/profile/ind/'.$id);
 		}else{
 			return 'some error occured.';
 		}
