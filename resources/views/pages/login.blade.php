@@ -52,12 +52,10 @@
 					<span style="font-size: 13px;">OR</span>
 				</h2>
 
-				@if ( Session::has('flash_message') )
- 
+				@if ( Session::has('flash_message') ) 
 				  <div class="alert {{ Session::get('flash_type') }}">
 				      <ul><li>{{ Session::get('flash_message') }}</li></ul>
-				  </div>
-				  
+				  </div>				  
 				@endif
 
 				@if (count($errors) > 0)
@@ -101,7 +99,7 @@
 						</div>
 					</div>
 					<br><br>
-					<button type="submit" class="btn btn-default pull-right" style="margin-left: 0px; " id="individual-login-btn">
+					<button type="submit" class="btn btn-default pull-left" style="margin-left: 0px; " id="individual-login-btn">
 					Login <i class="m-icon-swapright"></i>
 					</button>
 					<a href="javascript:;" id="forget-password" class="forget-password" style="font-size: 14px;/* color: gray; */text-decoration: initial;">Forgot Password ?
@@ -178,7 +176,7 @@
 					</div>
 				</div>
 				<br><br>
-				<button type="button" class="btn btn-default pull-right" style="margin-left: 0px; " id="corporate-login-btn">
+				<button type="button" class="btn btn-default pull-left" style="margin-left: 0px; " id="corporate-login-btn">
 				Login <i class="m-icon-swapright"></i>
 				</button>
 				<a href="javascript:;" id="forget-password-corp" class="forget-password" style="font-size: 14px;/* color: gray; */text-decoration: initial;">Forgot Password ?
@@ -209,7 +207,7 @@
 		</div>
 		<div class="form-actions" style="margin-top:25px">
 			<label id="back-btn" style="margin-left: 39px;cursor: pointer;">Back</label>
-			<button type="submit" class="btn btn-default pull-right" style="margin-left: 0px; ">Submit <i class="m-icon-swapright"></i></button>
+			<button type="submit" class="btn btn-default pull-left" style="margin-left: 0px; ">Submit <i class="m-icon-swapright"></i></button>
 		</div>
 	</form>
 	<!-- END FORGOT PASSWORD FORM -->
@@ -341,7 +339,7 @@
 		</div>									
 		<div class="form-actions">
 			<label id="register-back-btn" style="margin-left: 39px;cursor: pointer;">Back</label>
-			<button type="submit" id="individual-register-btn" class="btn btn-default pull-right">
+			<button type="submit" id="individual-register-btn" class="btn btn-default pull-left">
 			Submit&nbsp;<i class="m-icon-swapright"></i>
 			</button>
 		</div>
@@ -459,7 +457,7 @@
 			<div id="register_ctnc_error"></div>
 		</div>
 		<label id="register-back-btn3" style="margin-left: 39px;cursor: pointer;">Back</label>
-		<button type="submit" id="corporate-register-btn" class="btn btn-default pull-right">
+		<button type="submit" id="corporate-register-btn" class="btn btn-default pull-left">
 			Submit&nbsp;<i class="m-icon-swapright"></i>
 		</button>
 	</form>

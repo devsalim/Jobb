@@ -39,13 +39,13 @@
 		</div>
 		<div class="col-md-2 col-sm-2 col-xs-6">
 			<div class="form-group">				
-				<input type="text" name="unique_id" class="form-control filter-input" placeholder="Unique_id">				
+				<input type="text" name="unique_id" class="form-control filter-input" placeholder="Unique id">				
 			</div>	
 		</div>
 		<div class="col-md-3 col-sm-3 col-xs-6">
 			<div class="form-group">
-				<select class="form-control filter-input check-font-size" name="prof_category" value="" >
-					<option value="">&nbsp;</option>
+				<select id="category-list" class="form-control filter-input check-font-size" name="prof_category">
+					<option value="">Category</option>
 					<optgroup label="Accounting">
 						<option value="Accounts/Finance/Tax">Accounts/Finance/Tax</option>
 						<option value="Agent">Agent</option>
@@ -77,7 +77,7 @@
 		<div class="col-md-2 col-sm-3 col-xs-12">
 			<div class="form-group">
 				<select id="select2_sample_modal_2" placeholder="City" name="city" class="form-control select2" multiple>
-					<option value="">-- select --</option>
+					<option value="">select</option>
 					<optgroup label="NFC EAST">
 					<option>Hyderabad</option>
 					<option>Bangalore</option>
@@ -132,25 +132,25 @@
 		<div class="col-md-2 col-sm-2 col-xs-6">
 			<div class="form-group">				
 				{{-- <input type="hidden" placeholder="Skills" name="linked_skill" id="select2_sample5" class="form-control select2" value=""> --}}
-				{!! Form::select('skill_list[]', $skills, null, ['id'=>'skill-list', 'class'=>'form-control', 'multiple']) !!}				
+				{!! Form::select('skill_list[]', $skills, null, ['id'=>'skill-list', 'class'=>'form-control', 'placeholder'=>'Skills', 'multiple']) !!}				
 			</div>	
 		</div>
 		<div class="col-md-2 col-sm-2 col-xs-6">
             <div class="form-group">              
                 <select name="time_for" class="form-control" >
-                	<option value="">Select</option>
-                  <option value="Full Time">Full Time</option>
-                  <option value="Part Time">Part Time</option>
-                  <option value="Freelancer">Freelancer</option>
-                  <option value="Work from Home">Work from Home</option>
+                	<option value="">Time For</option>
+					<option value="Full Time">Full Time</option>
+					<option value="Part Time">Part Time</option>
+					<option value="Freelancer">Freelancer</option>
+					<option value="Work from Home">Work from Home</option>
                 </select>
             </div>  
          </div>
          <div class="col-md-2 col-sm-3 col-xs-4" >
          	 <div class="form-group"> 
 				<select name="active-expire" class="form-control">
-				  <option  value="">All</option>
-                  <option selected value="Active">Active</option>
+				  <option value="">All</option>
+                  <option value="Active" selected>Active</option>
                 </select>
             </div>
 		</div>
@@ -167,10 +167,14 @@
 			</div>
 		</div>
 		<div class="col-md-1 col-sm-1 col-sm-2">
-		<button type="submit" class="btn btn-info" value="Search" style="float:left;background-color:transparent !important;margin:10px -25px;">
-			<i class="fa fa-check-square-o" style="font-size:25px;color:#3598dc;"></i></button>
-		<button type="button" class="btn" style="background-color:transparent !important;margin:8px 1px;" onclick="myFunction()">
-			<i class="icon-refresh" style="font-size:22px;"></i></button>
+			<button type="submit" class="btn btn-info" value="Search" title="Search" 
+					style="float:left;background-color:transparent !important;margin:10px -25px;">
+				<i class="fa fa-check-square-o" style="font-size:25px;color:#3598dc;"></i>
+			</button>
+			<button type="button" class="btn" onclick="resetFilter()" title="Reset" 
+					style="background-color:transparent !important;margin:8px 1px;" >
+				<i class="icon-refresh" style="font-size:22px;"></i>
+			</button>
 		</div>
 	</div>
 </div>
@@ -888,7 +892,8 @@ jQuery(document).ready(function() {
     FormWizard.init();
 });
 $('#skill-list').select2();
-function myFunction() {
+$('#category-list').select2();
+function resetFilter() {
     document.getElementById("home-filter").reset();
 }
 </script>

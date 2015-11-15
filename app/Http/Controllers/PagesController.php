@@ -260,6 +260,7 @@ class PagesController extends Controller {
 	public function homeFilter(){
 		if (Auth::check()) {
 			$title = 'home';
+			$skills = Skills::lists('name', 'id');
 
 			$post_type = Input::get('post_type');
 			$posted_by = Input::get('posted_by');
@@ -331,6 +332,13 @@ class PagesController extends Controller {
 								)', [Auth::user()->induser_id, Auth::user()->induser_id]);
 			$links = collect($links);
 
+			$groups = Group::leftjoin('groups_users', 'groups_users.group_id', '=', 'groups.id')					
+						->where('groups.admin_id', '=', Auth::user()->induser_id)
+						->orWhere('groups_users.user_id', '=', Auth::user()->induser_id)
+						->groupBy('groups.id')
+						->get(['groups.id as id'])
+						->lists('id');
+
 			if(Auth::user()->induser_id != null){
 				$following = DB::select('select id from corpusers 
 										 where corpusers.id in (
@@ -348,7 +356,7 @@ class PagesController extends Controller {
 				$following = collect($following);
 			}
 
-			return view('pages.home', compact('posts', 'title', 'links', 'following', 'userSkills'));
+			return view('pages.home', compact('posts', 'title', 'links', 'groups', 'following', 'userSkills', 'skills'));
 			// return $posts;
 		}else{
 			return redirect('login');

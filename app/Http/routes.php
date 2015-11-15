@@ -86,7 +86,7 @@ Route::group(array('before' => 'auth'), function(){
 	Route::get('feedback/create', 'FeedbackController@create');
 	Route::post('feedback/store', 'FeedbackController@store');
 	Route::post('feedback/update', 'FeedbackController@update');
-	Route::post('/home', 'FeedbackController@report');
+	Route::post('feedback/home', 'FeedbackController@report');
 
 	Route::post('searchConnections', 'ConnectionsController@searchConnections');
 
