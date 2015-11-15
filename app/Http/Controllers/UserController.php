@@ -208,7 +208,7 @@ class UserController extends Controller {
 			$data->email = Input::get('email');
 			$data->mobile = Input::get('mobile');
 			$data->save();
-			return redirect('/individual/create');
+			return redirect('/profile/ind/'.Auth::user()->induser_id);
 		}
 	}
 

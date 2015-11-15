@@ -196,7 +196,10 @@
 										<span class="input-group-addon">
 											<i class="icon-note" style="color:darkcyan;"></i>
 										</span>
-										<textarea name="about_individual" class="form-control autosizeme" rows="3">{{ $user->about_individual }}</textarea>
+										<textarea id="about-me" name="about_individual" 
+											onkeyup="textAreaAdjust(this)"
+											class="form-control autosizeme" rows="3">{{ $user->about_individual }}
+										</textarea>
 									</div>
 								</div>
 							</div>
@@ -618,8 +621,11 @@
 	    ComponentsEditors.init();
 	});   
 </script>
-
 <script type="text/javascript">
+	function textAreaAdjust(o) {
+	    o.style.height = "1px";
+	    o.style.height = (25+o.scrollHeight)+"px";
+	}
 	function checkOption(obj) {
 	    var input = document.getElementById("workingAs");
 	    input.disabled = obj.value == "Student";
