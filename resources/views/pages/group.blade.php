@@ -42,13 +42,15 @@
 							<div class="input-group">
 								<div class="input-group-control">
 									<label class=" control-label" for="form_control_1" style="font-weight:500 !important;">
-										<a href="/group/{{ $group->id }}">{{ $group->group_name }}</a> (5) 
-										<i class="icon-users"></i> {{count($group->users)}}  <i class="icon-shield"></i> Vicky
+										<a href="/group/{{ $group->id }}">{{ $group->group_name }}</a> 
+										({{$group->postsCount()->first()->totalPosts}}) 
+										<i class="icon-users"></i> {{count($group->users)}}  <i class="icon-shield"></i> {{$group->admin()->first()->fname}}
 									</label>
 								</div>
 							</div>
 						</div>
 					<!-- </div>	 -->
+
 					@endforeach
 					@endif
 				</div>
