@@ -42,8 +42,8 @@
 							<div class="input-group">
 								<div class="input-group-control">
 									<label class=" control-label" for="form_control_1" style="font-weight:500 !important;">
-										<a href="/group/{{ $group->id }}">{{ $group->group_name }}</a> 
-										({{$group->postsCount()->first()->totalPosts}}) 
+										<a href="/group/{{ $group->id }}">{{ $group->group_name }}</a>
+										({{$group->posts_count}})
 										<i class="icon-users"></i> {{count($group->users)}}  <i class="icon-shield"></i> {{$group->admin()->first()->fname}}
 									</label>
 								</div>

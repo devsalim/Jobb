@@ -28,4 +28,13 @@ class Group extends Model {
 			        ->groupBy('post_group_taggings.group_id');;
     }
 
+    public function getPostsCountAttribute()
+	{
+	    if ( ! array_key_exists('postsCount', $this->relations)) $this->load('postsCount');
+
+	    $related = $this->getRelation('postsCount')->first();
+
+	    return ($related) ? $related->totalPosts : 0;
+	}
+
 }

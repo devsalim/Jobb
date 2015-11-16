@@ -29,7 +29,7 @@ class GroupController extends Controller {
 	public function index()
 	{
 		$title = 'group';
-		$groups = Group::leftjoin('groups_users', 'groups_users.group_id', '=', 'groups.id')
+		$groups = Group::with('postsCount')->leftjoin('groups_users', 'groups_users.group_id', '=', 'groups.id')
 						->where('groups.rowStatus', '=', 0)					
 						->where('groups.admin_id', '=', Auth::user()->induser_id)
 						->orWhere('groups_users.user_id', '=', Auth::user()->induser_id)
