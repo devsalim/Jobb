@@ -111,7 +111,7 @@ class PagesController extends Controller {
 										from postactivities pa 
 										join postjobs pj on pj.id = pa.post_id
 										where pa.user_id=? and pa.contact_view = 1)
-										order by time desc', [1,1,1]);
+										order by time desc', [Auth::user()->induser_id,Auth::user()->induser_id,Auth::user()->induser_id]);
 				$myActivities = collect($myActivities);
 				// return $myActivities;
 			}else if(Auth::user()->identifier == 2){
