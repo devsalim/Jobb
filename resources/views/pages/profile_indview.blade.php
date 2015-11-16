@@ -127,7 +127,7 @@
 					</div>
 					@endif
 					<div class="col-md-4 col-sm-4 col-xs-4 @if($title == 'notify_view'){{'active'}}@endif">
-						<a href="/notification_view/thank" data-utype="thank" class="icon-btn">
+						<a href="/thanks/{{Auth::user()->induser_id}}" data-utype="thank" class="icon-btn">
 							<i class="icon-like"></i>
 							<div>
 								 Thanks
@@ -173,7 +173,7 @@
 					</div>
 					@endif
 					<div class="col-md-4 col-sm-4 col-xs-4 @if($title == 'thanks_view'){{'active'}}@endif">
-						<a href="/individual/thanks_view" class="icon-btn">
+						<a href="/thanks/{{$user->id}}" class="icon-btn">
 							<i class="icon-like"></i>
 							<div>
 								 Thanks

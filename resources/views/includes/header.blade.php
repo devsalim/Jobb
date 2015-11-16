@@ -38,7 +38,7 @@
             <ul class="dropdown-menu">
               <li class="external">
                 <h3>You have <span class="bold">{{$applicationsCount}}</span> Messages</h3>
-                <a class="@if($title == 'notify_view'){{'active'}}@endif" href="/notification_view/app" data-utype="app" style="color: darkblue;">view all</a>
+                <a class="@if($title == 'notify_view'){{'active'}}@endif" href="/applications/{{Auth::user()->induser_id}}" data-utype="app" style="color: darkblue;">view all</a>
               </li>
               <li>
                 <ul class="dropdown-menu-list scroller" style="height: 275px;" data-handle-color="#637283">
@@ -74,7 +74,7 @@
             <ul class="dropdown-menu">
               <li class="external">
                 <h3>You have <span class="bold">{{$thanksCount}}</span> Messages</h3>
-                <a class="@if($title == 'notify_view'){{'active'}}@endif" href="/notification_view/thank" data-utype="thank" style="color: darkblue;">view all</a>
+                <a class="@if($title == 'notify_view'){{'active'}}@endif" href="/thanks/{{Auth::user()->induser_id}}" data-utype="thank" style="color: darkblue;">view all</a>
               </li>
               <li>
                 <ul class="dropdown-menu-list scroller" style="height: 275px;" data-handle-color="#637283">

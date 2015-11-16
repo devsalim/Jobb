@@ -97,12 +97,12 @@ Route::group(array('before' => 'auth'), function(){
 	Route::get('individual/edit', 'ViewpageController@edit_view');
 	Route::get('corporate/edit', 'ViewpageController@edit_view');
 	// Route::get('profile/{utype}/{id}', 'ViewpageController@corpindView');
-	Route::get('individual/thanks_view', 'ViewpageController@thanks_view');	
+	// Route::get('individual/{id}/thanks', 'ViewpageController@thanks_view');	
 	// Route::get('individual/posts_view', 'ViewpageController@posts_view');	
 
-	Route::get('notification_view/{utype}', 'PagesController@notification');
-	Route::get('notification_view/notification', 'PagesController@notification');
-	Route::get('notification_view/notificationThanks', 'PagesController@notificationThanks');
+	Route::get('{utype}/{id}', 'PagesController@notification');
+	// Route::get('notification/notification', 'PagesController@notification');
+	// Route::get('notification/notificationThanks', 'PagesController@notificationThanks');
 	Route::get('profile/{utype}/{id}', 'PagesController@profile');
 
 	// corporate follow/unfollow

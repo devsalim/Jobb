@@ -128,33 +128,26 @@ class PagesController extends Controller {
 		return redirect('login');
 	}
 
-  public function notification($utype){
-        $title = 'notify_view';
-        $user = Induser::where('id', '=', Auth::user()->induser_id)->first();
-        if($utype == 'app'){
-            $applications = Postactivity::with('user', 'post')
-                                        ->join('postjobs', 'postjobs.id', '=', 'postactivities.post_id')
-                                        ->where('postjobs.individual_id', '=', Auth::user()->induser_id)
-                                        ->where('postactivities.apply', '=', 1)
-                                        ->orderBy('postactivities.id', 'desc')
-                                        ->take(25)
-                                        ->get(['postactivities.id','postjobs.unique_id', 'postactivities.apply', 'postactivities.apply_dtTime', 'postactivities.user_id', 'postactivities.post_id']);
-        }elseif($utype == 'thank'){
-            $thanks = Postactivity::with('user', 'post')
-                                  ->join('postjobs', 'postjobs.id', '=', 'postactivities.post_id')
-                                  ->where('postjobs.individual_id', '=', Auth::user()->induser_id)
-                                  ->where('postactivities.thanks', '=', 1)
-                                  ->orderBy('postactivities.id', 'desc')
-                                  ->take(25)
-                                  ->get(['postactivities.id','postjobs.unique_id', 'postactivities.thanks', 'postactivities.thanks_dtTime', 'postactivities.user_id', 'postactivities.post_id']);
-        }elseif($utype == 'fav'){
-            $favourites = Postactivity::with('user')
-                                      ->where('fav_post', '=', 1)
-                                      ->where('user_id', '=', Auth::user()->induser_id)
-                                      ->orderBy('id', 'desc')
-                                      ->get(['id', 'fav_post', 'fav_post_dtTime', 'user_id', 'post_id']);
+  	public function notification($type, $id){
+        $title = $type;
+        if($type == 'applications'){
+            $notificationList = Postactivity::with('user', 'post')
+											->join('postjobs', 'postjobs.id', '=', 'postactivities.post_id')
+											->where('postjobs.individual_id', '=', $id)
+											->where('postactivities.apply', '=', 1)
+											->orderBy('postactivities.id', 'desc')
+											->take(25)
+											->get(['postactivities.id','postjobs.unique_id', 'postactivities.apply', 'postactivities.apply_dtTime', 'postactivities.user_id', 'postactivities.post_id']);
+		}elseif($type == 'thanks'){
+            $notificationList = Postactivity::with('user', 'post')
+											->join('postjobs', 'postjobs.id', '=', 'postactivities.post_id')
+											->where('postjobs.individual_id', '=', $id)
+											->where('postactivities.thanks', '=', 1)
+											->orderBy('postactivities.id', 'desc')
+											->take(25)
+											->get(['postactivities.id','postjobs.unique_id', 'postactivities.thanks', 'postactivities.thanks_dtTime', 'postactivities.user_id', 'postactivities.post_id']);
         }
-        return view('pages.notification_view', compact('user', 'applications', 'thanks', 'favourites', 'title', 'utype'));
+        return view('pages.notifications', compact('notificationList', 'title'));
     }
 
 	public function notify(){
