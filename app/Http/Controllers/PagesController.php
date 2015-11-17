@@ -596,8 +596,9 @@ class PagesController extends Controller {
 	public function postByUser($id){
 		if (Auth::check()) {
 			$title = 'postByUser';
+			$postuser = Induser::find($id);
 			$skills = Skills::lists('name', 'id');
-			$posts = Postjob::orderBy('id', 'desc')->with('user','indUser', 'corpUser', 'postActivity', 'taggedUser', 'taggedGroup')
+			$posts = Postjob::orderBy('id', 'desc')->with('indUser', 'corpUser', 'postActivity', 'taggedUser', 'taggedGroup')
 							->where('postjobs.individual_id', '=', $id)
 							->paginate(15);
 
@@ -642,7 +643,7 @@ class PagesController extends Controller {
 				unset ($userSkills[count($userSkills)-1]); 
 			}
 			
-			return view('pages.home', compact('posts', 'title', 'links', 'groups', 'following', 'userSkills', 'skills'));
+			return view('pages.home', compact('posts', 'title', 'links', 'groups', 'following', 'userSkills', 'skills', 'postuser'));
 			// return $userSkills;
 		}else{
 			return redirect('login');

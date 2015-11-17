@@ -74,12 +74,4 @@ class Postjob extends Model {
 		return $this->belongsTo('App\Induser');
 	}
 
-	public function getUserAttribute(){
-	    if ( ! array_key_exists('user', $this->relations)) $this->load('user');
-
-	    $related = $this->getRelation('user')->first();
-
-	    return ($related) ? $related : 0;
-	}
-
 }
