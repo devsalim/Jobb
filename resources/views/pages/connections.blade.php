@@ -14,9 +14,9 @@
 			<div class="form-body">
 				<label style="font-size: 16px;text-align: center;width: 100%;">Invite Your Friends on JobTip & Share Job Information</label>
 				<div class="row">
-					<div class="col-md-10 links-title" style="margin-bottom:15px;">
+					<div class="col-md-12" style="margin-bottom:15px;">
 						<div class="portlet light col-md-12 clearfix" style="background-color: transparent;">
-							<div class="row social">
+							<div class="row social" style="margin: 5px auto;display: table;">
 								<div class="col-md-4 col-xs-4 ">
 									<a  class="btn btn-lg btn-facebook btn-block" href="" style="background: #3b5998;color: white;border-radius: 25px !important;height: 35px;">
 									<i class="fa fa-facebook "></i><span class="hidden-xs" style="font-size:14px"> &nbsp;Facebook</span></a>	
@@ -34,7 +34,7 @@
 						
 						
 					</div>	
-					<div class="form-group  col-md-10 col-sm-10 col-md-xs clearfix links-title">	
+					<div class="form-group col-md-10 col-sm-10 col-md-xs clearfix" style="margin-bottom:10px">	
 							<!-- BEGIN FORM-->
 							<form action="searchConnections" class="horizontal-form" method="post">
 								<input type="hidden" name="_token" value="{{ csrf_token() }}">				
@@ -43,14 +43,15 @@
 						          </span>
 								<div class="input-icon right">
 									<i class="fa fa-search" style="color: darkcyan;"></i>
-									<input type="text" name="keywords" id="search-input" onkeydown="down()" onkeyup="up()" class="form-control input-circle" placeholder="Search" style="border: 1px solid darkcyan;">
+									<input type="text" name="keywords" id="search-input" onkeydown="down()" onkeyup="up()" class="form-control" placeholder="Search" style="border: 1px solid darkcyan;margin-bottom:0">
 								</div>	
 							</form>
 							<!-- END FORM-->
+							<div class="col-md-12 links-title" id="search-results" style="background:#f2f2f2;max-height:200px;overflow:auto;margin-bottom:10px">
+							</div>	
 						</div>
 
-						<div class="col-md-10 links-title" id="search-results">
-						</div>		
+							
 				</div>
 					
 			</div>
@@ -391,12 +392,16 @@ function up()
 	timer=setTimeout(function()
 		{
 			var keywords = $('#search-input').val();
-			if(keywords.length>0)
+			if(keywords.length>2)
 			{
 				$.post('/searchConnections', {keywords: keywords}, function(markup)
 				{
 					$('#search-results').html(markup);
 				});
+			}
+			else
+			{
+				$('#search-results').empty();
 			}
 		}, 500);
 }

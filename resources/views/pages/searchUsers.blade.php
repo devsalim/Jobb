@@ -11,7 +11,7 @@
 	      </a>
 	    </div>
 	    <div class="media-body">
-	    	<div class="media-body-left" style="float: left;min-width: 250px;">
+	    	<div class="media-body-left" style="float: left;min-width: 230px;">
 		      <h4 class="media-heading">
 		      	<a href="/profile/ind/{{$user->id}}" data-utype="ind">
 		      		{{ $user->fname }} {{ $user->lname }}</h4>
@@ -48,7 +48,7 @@
 	      </a>
 	    </div>
 	    <div class="media-body">
-	    	<div class="media-body-left" style="float: left;min-width: 250px;">
+	    	<div class="media-body-left" style="float: left;min-width: 225px;margin-top: 2px;">
 		      <h4 class="media-heading">
 		      	<a href="/profile/corp/{{$corp->id}}" class="link-label" data-utype="corp">
 		      		{{ $corp->firm_name }}

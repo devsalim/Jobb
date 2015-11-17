@@ -29,7 +29,7 @@
 						</form>
 						<!-- END FORM-->
 					</div>
-					<div class="col-md-10 links-title" id="search-results">
+					<div class="col-md-10 links-title" id="search-results" style="max-height:200px;overflow:auto;margin-bottom:10px">
 					</div>
 				</div>
 			</div>
@@ -112,12 +112,16 @@ function up()
 	timer=setTimeout(function()
 		{
 			var keywords = $('#search-input').val();
-			if(keywords.length>0)
+			if(keywords.length>2)
 			{
 				$.post('/searchConnections', {keywords: keywords}, function(markup)
 				{
 					$('#search-results').html(markup);
 				});
+			}
+			else
+			{
+				$('#search-results').empty();
 			}
 		}, 500);
 }
