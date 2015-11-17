@@ -70,4 +70,16 @@ class Postjob extends Model {
 		return $this->hasMany('App\PostGroupTagging', 'post_id', 'id')->select('group_id');
 	}
 
+	public function user(){
+		return $this->belongsTo('App\Induser');
+	}
+
+	public function getUserAttribute(){
+	    if ( ! array_key_exists('user', $this->relations)) $this->load('user');
+
+	    $related = $this->getRelation('user')->first();
+
+	    return ($related) ? $related : 0;
+	}
+
 }

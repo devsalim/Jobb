@@ -100,7 +100,7 @@ Route::group(array('before' => 'auth'), function(){
 	// Route::get('individual/{id}/thanks', 'ViewpageController@thanks_view');	
 	// Route::get('individual/posts_view', 'ViewpageController@posts_view');	
 
-	Route::get('{utype}/{id}', 'PagesController@notification');
+	Route::get('notify/{utype}/{id}', 'PagesController@notification');
 	// Route::get('notification/notification', 'PagesController@notification');
 	// Route::get('notification/notificationThanks', 'PagesController@notificationThanks');
 	Route::get('profile/{utype}/{id}', 'PagesController@profile');
@@ -118,6 +118,7 @@ Route::group(array('before' => 'auth'), function(){
 	Route::post('verify-evc', 'UserController@verifyEVC');
 
 	Route::get('favourite', 'PagesController@favourite');
+	Route::get('postbyuser/{id}', 'PagesController@postByUser');
 
 });
 

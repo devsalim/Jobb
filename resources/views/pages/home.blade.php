@@ -1,7 +1,7 @@
 @extends('master')
 
 @section('content')
-@if($title != 'favourite')
+@if($title == 'home')
 <!-- Jobtip Filter Start -->
 <div class="row">
 	<div class="col-md-9" style=" lightgray;margin-bottom: 5px;">
@@ -190,6 +190,15 @@
 		<div class="caption links-title">
 			<i class=""></i>
 			<span class="caption-subject font-blue-hoki bold uppercase">My Favourite Posts</span>
+		</div>
+	</div>
+</div>
+@elseif($title == 'postByUser')
+<div class="portlet light bordered col-md-9">
+<div class="portlet-title">
+		<div class="caption links-title">
+			<i class=""></i>
+			<span class="caption-subject font-blue-hoki bold uppercase">Posts by "<span style="color: orangered;">{{$posts->first()->induser->fname}} {{$posts->first()->induser->lname}}</span>"</span>
 		</div>
 	</div>
 </div>

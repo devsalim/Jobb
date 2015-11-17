@@ -127,7 +127,7 @@
 					</div>
 					@endif
 					<div class="col-md-4 col-sm-4 col-xs-4 @if($title == 'notify_view'){{'active'}}@endif">
-						<a href="/thanks/{{Auth::user()->induser_id}}" data-utype="thank" class="icon-btn">
+						<a href="/notify/thanks/{{Auth::user()->induser_id}}" data-utype="thank" class="icon-btn">
 							<i class="icon-like"></i>
 							<div>
 								 Thanks
@@ -137,7 +137,7 @@
 						</a>
 					</div>
 					<div class="col-md-4 col-sm-4 col-xs-4 @if($title == 'mypost'){{'active'}}@endif">
-						<a href="/mypost" class="icon-btn">
+						<a href="/postbyuser/{{Auth::user()->induser_id}}" class="icon-btn">
 							<i class="icon-note"></i>
 							<div>
 								 Posts
@@ -173,7 +173,7 @@
 					</div>
 					@endif
 					<div class="col-md-4 col-sm-4 col-xs-4 @if($title == 'thanks_view'){{'active'}}@endif">
-						<a href="/thanks/{{$user->id}}" class="icon-btn">
+						<a href="/notify/thanks/{{$user->id}}" class="icon-btn">
 							<i class="icon-like"></i>
 							<div>
 								 Thanks
@@ -183,7 +183,7 @@
 						</a>
 					</div>
 					<div class="col-md-4 col-sm-4 col-xs-4 @if($title == 'mypost'){{'active'}}@endif">
-						<a href="/mypost" class="icon-btn">
+						<a href="/postbyuser/{{$user->id}}" class="icon-btn">
 							<i class="icon-note"></i>
 							<div>
 								 Posts

@@ -10,30 +10,26 @@ class Induser extends Model {
 		return $this->hasOne('app\user', 'induser_id', 'id');
 	}
 
-	public function friendsOfMine()
-	{
+	public function friendsOfMine(){
 	  return $this->belongsToMany('App\Induser', 'connections', 'user_id', 'connection_user_id')
 			      ->withPivot('id')
 			      ->withPivot('status');
 	}
 
-	public function friendOf()
-	{
+	public function friendOf(){
 	  return $this->belongsToMany('App\Induser', 'connections', 'connection_user_id', 'user_id')
 	 			 ->withPivot('id')
 			     ->withPivot('status');
 	}
 
-	public function getFriendsAttribute()
-	{
+	public function getFriendsAttribute(){
 	    if ( ! array_key_exists('connections', $this->relations)) 
 	    	$this->loadFriends();
 
 	    return $this->getRelation('connections');
 	}
 
-	protected function loadFriends()
-	{
+	protected function loadFriends(){
 	    if ( ! array_key_exists('connections', $this->relations))
 	    {
 	        $connections = $this->mergeFriends();
@@ -42,15 +38,17 @@ class Induser extends Model {
 	    }
 	}
 
-	protected function mergeFriends()
-	{
+	protected function mergeFriends(){
 	    return $this->friendsOfMine->merge($this->friendOf);
 	}
 
-	public function groups() 
-    {
+	public function groups(){
         return $this->belongsToMany('App\Group', 'groups_users', 'user_id', 'group_id')->withPivot('id');
     }
 
+
+    public function posts(){
+        return $this->hasMany('App\Postjob', 'individual_id', 'id');
+    }
 
 }
