@@ -198,7 +198,7 @@
 <div class="portlet-title">
 		<div class="caption links-title">
 			<i class=""></i>
-			<span class="caption-subject font-blue-hoki bold uppercase">Posts by "<span style="color: orangered;">{{$postuser->fname}} {{$postuser->lname}}</span>"</span>
+			<span class="caption-subject font-blue-hoki bold uppercase">Posts by "<span style="color: orangered;"> {{$postuser->firm_name}}{{$postuser->fname}} {{$postuser->lname}} </span>"</span>
 		</div>
 	</div>
 </div>

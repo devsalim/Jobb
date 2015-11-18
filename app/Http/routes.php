@@ -57,6 +57,7 @@ Route::group(array('before' => 'auth'), function(){
 	Route::post('skill/store', 'SkillController@store');
 	Route::post('skill/update', 'SkillController@update');
 
+	Route::get('followers', 'ConnectionsController@followers');
 	Route::get('links', 'ConnectionsController@create');
 	Route::get('connections', 'ConnectionsController@index');
 	Route::get('connections/create', 'ConnectionsController@create');
@@ -67,7 +68,7 @@ Route::group(array('before' => 'auth'), function(){
 	Route::post('connections/response/{id}', 'ConnectionsController@response');
 	Route::post('connections/newLink/{id}', 'ConnectionsController@newLink');
 	Route::post('connections/removeLink/{id}', 'ConnectionsController@removeLink');
-	Route::get('connections/friendlink/{id}', 'ConnectionsController@friendLink');
+	Route::get('connections/friendlink/{utype}/{id}', 'ConnectionsController@friendLink');
 	Route::post('links/corporate/follow/{id}', 'ConnectionsController@linkPageFollow');
 	Route::post('links/corporate/unfollow/{id}', 'ConnectionsController@linkPageUnfollow');
 	
@@ -100,7 +101,7 @@ Route::group(array('before' => 'auth'), function(){
 	// Route::get('individual/{id}/thanks', 'ViewpageController@thanks_view');	
 	// Route::get('individual/posts_view', 'ViewpageController@posts_view');	
 
-	Route::get('notify/{utype}/{id}', 'PagesController@notification');
+	Route::get('notify/{type}/{utype}/{id}', 'PagesController@notification');
 	// Route::get('notification/notification', 'PagesController@notification');
 	// Route::get('notification/notificationThanks', 'PagesController@notificationThanks');
 	Route::get('profile/{utype}/{id}', 'PagesController@profile');
@@ -118,7 +119,7 @@ Route::group(array('before' => 'auth'), function(){
 	Route::post('verify-evc', 'UserController@verifyEVC');
 
 	Route::get('favourite', 'PagesController@favourite');
-	Route::get('postbyuser/{id}', 'PagesController@postByUser');
+	Route::get('postbyuser/{utype}/{id}', 'PagesController@postByUser');
 
 });
 

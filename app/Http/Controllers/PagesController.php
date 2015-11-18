@@ -128,25 +128,45 @@ class PagesController extends Controller {
 		return redirect('login');
 	}
 
-  	public function notification($type, $id){
+  	public function notification($type, $utype, $id){
         $title = $type;
-        if($type == 'applications'){
-            $notificationList = Postactivity::with('user', 'post')
-											->join('postjobs', 'postjobs.id', '=', 'postactivities.post_id')
-											->where('postjobs.individual_id', '=', $id)
-											->where('postactivities.apply', '=', 1)
-											->orderBy('postactivities.id', 'desc')
-											->take(25)
-											->get(['postactivities.id','postjobs.unique_id', 'postactivities.apply', 'postactivities.apply_dtTime', 'postactivities.user_id', 'postactivities.post_id']);
-		}elseif($type == 'thanks'){
-            $notificationList = Postactivity::with('user', 'post')
-											->join('postjobs', 'postjobs.id', '=', 'postactivities.post_id')
-											->where('postjobs.individual_id', '=', $id)
-											->where('postactivities.thanks', '=', 1)
-											->orderBy('postactivities.id', 'desc')
-											->take(25)
-											->get(['postactivities.id','postjobs.unique_id', 'postactivities.thanks', 'postactivities.thanks_dtTime', 'postactivities.user_id', 'postactivities.post_id']);
-        }
+        if($utype == 'ind'){
+	        if($type == 'applications'){
+	            $notificationList = Postactivity::with('user', 'post')
+												->join('postjobs', 'postjobs.id', '=', 'postactivities.post_id')
+												->where('postjobs.individual_id', '=', $id)
+												->where('postactivities.apply', '=', 1)
+												->orderBy('postactivities.id', 'desc')
+												->take(25)
+												->get(['postactivities.id','postjobs.unique_id', 'postactivities.apply', 'postactivities.apply_dtTime', 'postactivities.user_id', 'postactivities.post_id']);
+			}elseif($type == 'thanks'){
+	            $notificationList = Postactivity::with('user', 'post')
+												->join('postjobs', 'postjobs.id', '=', 'postactivities.post_id')
+												->where('postjobs.individual_id', '=', $id)
+												->where('postactivities.thanks', '=', 1)
+												->orderBy('postactivities.id', 'desc')
+												->take(25)
+												->get(['postactivities.id','postjobs.unique_id', 'postactivities.thanks', 'postactivities.thanks_dtTime', 'postactivities.user_id', 'postactivities.post_id']);
+	        }
+	    }elseif($utype == 'corp'){
+	    	if($type == 'applications'){
+	            $notificationList = Postactivity::with('user', 'post')
+												->join('postjobs', 'postjobs.id', '=', 'postactivities.post_id')
+												->where('postjobs.corporate_id', '=', $id)
+												->where('postactivities.apply', '=', 1)
+												->orderBy('postactivities.id', 'desc')
+												->take(25)
+												->get(['postactivities.id','postjobs.unique_id', 'postactivities.apply', 'postactivities.apply_dtTime', 'postactivities.user_id', 'postactivities.post_id']);
+			}elseif($type == 'thanks'){
+	            $notificationList = Postactivity::with('user', 'post')
+												->join('postjobs', 'postjobs.id', '=', 'postactivities.post_id')
+												->where('postjobs.corporate_id', '=', $id)
+												->where('postactivities.thanks', '=', 1)
+												->orderBy('postactivities.id', 'desc')
+												->take(25)
+												->get(['postactivities.id','postjobs.unique_id', 'postactivities.thanks', 'postactivities.thanks_dtTime', 'postactivities.user_id', 'postactivities.post_id']);
+	        }
+	    }
         return view('pages.notifications', compact('notificationList', 'title'));
     }
 
@@ -593,16 +613,17 @@ class PagesController extends Controller {
 		}		
 	}
 
-	public function postByUser($id){
+	public function postByUser($utype, $id){
 		if (Auth::check()) {
 			$title = 'postByUser';
-			$postuser = Induser::find($id);
-			$skills = Skills::lists('name', 'id');
-			$posts = Postjob::orderBy('id', 'desc')->with('indUser', 'corpUser', 'postActivity', 'taggedUser', 'taggedGroup')
+			$groups = array();
+			if($utype == 'ind'){
+				$postuser = Induser::find($id);
+				$posts = Postjob::orderBy('id', 'desc')->with('indUser', 'corpUser', 'postActivity', 'taggedUser', 'taggedGroup')
 							->where('postjobs.individual_id', '=', $id)
 							->paginate(15);
 
-			$links = DB::select('select id from indusers
+				$links = DB::select('select id from indusers
 									where indusers.id in (
 											select connections.user_id as id from connections
 											where connections.connection_user_id=?
@@ -612,14 +633,23 @@ class PagesController extends Controller {
 											where connections.user_id=?
 											 and connections.status=1
 								)', [Auth::user()->induser_id, Auth::user()->induser_id]);
-			$links = collect($links);
+				$links = collect($links);
 
-			$groups = Group::leftjoin('groups_users', 'groups_users.group_id', '=', 'groups.id')					
-						->where('groups.admin_id', '=', Auth::user()->induser_id)
-						->orWhere('groups_users.user_id', '=', Auth::user()->induser_id)
-						->groupBy('groups.id')
-						->get(['groups.id as id'])
-						->lists('id');
+				$groups = Group::leftjoin('groups_users', 'groups_users.group_id', '=', 'groups.id')					
+							->where('groups.admin_id', '=', Auth::user()->induser_id)
+							->orWhere('groups_users.user_id', '=', Auth::user()->induser_id)
+							->groupBy('groups.id')
+							->get(['groups.id as id'])
+							->lists('id');
+
+			}elseif($utype == 'corp'){
+				$postuser = Corpuser::find($id);
+				$posts = Postjob::orderBy('id', 'desc')->with('indUser', 'corpUser', 'postActivity', 'taggedUser', 'taggedGroup')
+							->where('postjobs.corporate_id', '=', $id)
+							->paginate(15);
+			}
+			
+			$skills = Skills::lists('name', 'id');			
 
 			if(Auth::user()->induser_id != null){
 				$following = DB::select('select id from corpusers 

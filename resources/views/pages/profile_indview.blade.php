@@ -114,20 +114,8 @@
 							{{$linksCount}} </span>
 						</a>
 					</div>
-					@elseif($utype == 'corp')
-					<div class="col-md-4 col-sm-4 col-xs-4 @if($title == 'connections'){{'active'}}@endif">
-						<a href="/connections/create" class="icon-btn">
-							<i class="icon-user-following"></i>
-							<div>
-								 Followers
-							</div>
-							<span class="badge badge-danger @if($followCount > 0) show @else hide @endif" style="background-color: #26a69a;">
-							{{$followCount}}</span>
-						</a>
-					</div>
-					@endif
 					<div class="col-md-4 col-sm-4 col-xs-4 @if($title == 'notify_view'){{'active'}}@endif">
-						<a href="/notify/thanks/{{Auth::user()->induser_id}}" data-utype="thank" class="icon-btn">
+						<a href="/notify/thanks/ind/{{Auth::user()->induser_id}}" data-utype="thank" class="icon-btn">
 							<i class="icon-like"></i>
 							<div>
 								 Thanks
@@ -137,7 +125,7 @@
 						</a>
 					</div>
 					<div class="col-md-4 col-sm-4 col-xs-4 @if($title == 'mypost'){{'active'}}@endif">
-						<a href="/postbyuser/{{Auth::user()->induser_id}}" class="icon-btn">
+						<a href="/postbyuser/ind/{{Auth::user()->induser_id}}" class="icon-btn">
 							<i class="icon-note"></i>
 							<div>
 								 Posts
@@ -146,12 +134,45 @@
 							{{$posts}} </span>
 						</a>
 					</div>
+					@elseif($utype == 'corp')
+					<div class="col-md-4 col-sm-4 col-xs-4 @if($title == 'connections'){{'active'}}@endif">
+						<a href="/connections/friendlink/corp/{{$user->id}}" class="icon-btn">
+							<i class="icon-user-following"></i>
+							<div>
+								 Followers
+							</div>
+							<span class="badge badge-danger @if($followCount > 0) show @else hide @endif" style="background-color: #26a69a;">
+							{{$followCount}}</span>
+						</a>
+					</div>
+					<div class="col-md-4 col-sm-4 col-xs-4 @if($title == 'notify_view'){{'active'}}@endif">
+						<a href="/notify/thanks/corp/{{Auth::user()->induser_id}}" data-utype="thank" class="icon-btn">
+							<i class="icon-like"></i>
+							<div>
+								 Thanks
+							</div>
+							<span class="badge badge-danger  @if($thanks > 0) show @else hide @endif" style="background-color: #3598dc;">
+							{{$thanks}}</span>
+						</a>
+					</div>
+					<div class="col-md-4 col-sm-4 col-xs-4 @if($title == 'mypost'){{'active'}}@endif">
+						<a href="/postbyuser/corp/{{Auth::user()->induser_id}}" class="icon-btn">
+							<i class="icon-note"></i>
+							<div>
+								 Posts
+							</div>
+							<span class="badge badge-danger  @if($posts > 0) show @else hide @endif">
+							{{$posts}} </span>
+						</a>
+					</div>
+					@endif
+					
 				</div>
 				@else
 				<div class="row list-separated profile-stat" style="text-align:center;margin: 13px 0 0px -17px;">
 					@if($utype == 'ind')
 					<div class="col-md-4 col-sm-4 col-xs-4 @if($title == 'friendLink'){{'active'}}@endif">
-						<a href="/connections/friendlink/{{$user->id}}" class="icon-btn">
+						<a href="/connections/friendlink/ind/{{$user->id}}" class="icon-btn">
 							<i class="icon-link"></i>
 							<div>
 								 Links
@@ -160,20 +181,8 @@
 							{{$linksCount}} </span>
 						</a>
 					</div>
-					@elseif($utype == 'corp')
-					<div class="col-md-4 col-sm-4 col-xs-4 @if($title == 'friendLink'){{'active'}}@endif">
-						<a href="/connections/friendlink/{{$user->id}}" class="icon-btn">
-							<i class="icon-user-following"></i>
-							<div>
-								 Followers
-							</div>
-							<span class="badge badge-danger @if($followCount > 0) show @else hide @endif" style="background-color: #26a69a;">
-							{{$followCount}}</span>
-						</a>
-					</div>
-					@endif
 					<div class="col-md-4 col-sm-4 col-xs-4 @if($title == 'thanks_view'){{'active'}}@endif">
-						<a href="/notify/thanks/{{$user->id}}" class="icon-btn">
+						<a href="/notify/thanks/ind/{{$user->id}}" class="icon-btn">
 							<i class="icon-like"></i>
 							<div>
 								 Thanks
@@ -183,7 +192,7 @@
 						</a>
 					</div>
 					<div class="col-md-4 col-sm-4 col-xs-4 @if($title == 'mypost'){{'active'}}@endif">
-						<a href="/postbyuser/{{$user->id}}" class="icon-btn">
+						<a href="/postbyuser/ind/{{$user->id}}" class="icon-btn">
 							<i class="icon-note"></i>
 							<div>
 								 Posts
@@ -192,6 +201,39 @@
 							{{$posts}} </span>
 						</a>
 					</div>
+					@elseif($utype == 'corp')
+					<div class="col-md-4 col-sm-4 col-xs-4 @if($title == 'friendLink'){{'active'}}@endif">
+						<a href="/connections/friendlink/corp/{{$user->id}}" class="icon-btn">
+							<i class="icon-user-following"></i>
+							<div>
+								 Followers
+							</div>
+							<span class="badge badge-danger @if($followCount > 0) show @else hide @endif" style="background-color: #26a69a;">
+							{{$followCount}}</span>
+						</a>
+					</div>
+					<div class="col-md-4 col-sm-4 col-xs-4 @if($title == 'thanks_view'){{'active'}}@endif">
+						<a href="/notify/thanks/corp/{{$user->id}}" class="icon-btn">
+							<i class="icon-like"></i>
+							<div>
+								 Thanks
+							</div>
+							<span class="badge badge-danger  @if($thanks > 0) show @else hide @endif" style="background-color: #3598dc;">
+							{{$thanks}}</span>
+						</a>
+					</div>
+					<div class="col-md-4 col-sm-4 col-xs-4 @if($title == 'mypost'){{'active'}}@endif">
+						<a href="/postbyuser/corp/{{$user->id}}" class="icon-btn">
+							<i class="icon-note"></i>
+							<div>
+								 Posts
+							</div>
+							<span class="badge badge-danger  @if($posts > 0) show @else hide @endif">
+							{{$posts}} </span>
+						</a>
+					</div>
+					@endif
+					
 				</div>
 				@endif
 				<!-- END SIDEBAR BUTTONS -->

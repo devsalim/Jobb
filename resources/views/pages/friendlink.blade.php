@@ -1,13 +1,12 @@
 @extends('master')
 
 @section('content')
-
+@if($utype == 'ind')
 <div class="portlet box green col-md-7">
 	<div class="portlet-title">
 		<div class="caption">
 			<i class="icon-users"></i>
-			Links
-			
+			Links			
 		</div>
 	</div>
 	<div class="portlet-body">
@@ -64,7 +63,7 @@
 							  <li class="media">
 							    <div class="media-left">
 							      <a href="#">
-							        <img class="media-object" src="@if($follow->logo_status != null){{ '/img/profile/'.$follow->logo_status }}@else{{'/assets/images/ab.png'}}@endif" alt="DP" style="width:60px">
+							        <img class="media-object" src="@if($follow->logo_status != null){{ '/img/profile/'.$follow->logo_status }}@else{{'/assets/images/ab.png'}}@endif" alt="DP">
 							      </a>
 							    </div>
 							    <div class="media-body">
@@ -73,17 +72,6 @@
 							    		 	{{ $follow->firm_name }}
 							    		 </h4>
 										 {{ $follow->city }}, {{ $follow->operating_since }}
-							    	</div>
-							    	
-							    	<div class="media-body-right">
-							    		<span class="input-group-btn btn-right">
-											<form action="{{ url('/corporate/unfollow', $follow->id) }}" method="post">
-												<input type="hidden" name="_token" value="{{ csrf_token() }}">
-												<button type="submit" name="action" value="accept" class="btn btn-success button-style-add">
-													<i class="icon-user-follow icon-style-add"  style="font-size:12px;color:white;padding-top: 3px;"></i>&nbsp;Unfollow
-												</button>
-											</form>
-										</span>
 							    	</div>
 								</div>														     
 							  </li>						
@@ -94,4 +82,50 @@
 		</div>
 	</div>
 </div>
+@elseif($utype == 'corp')
+<div class="portlet box green col-md-7">
+	<div class="portlet-title">
+		<div class="caption">
+			<i class="icon-users"></i>
+			Followers			
+		</div>
+	</div>
+	<div class="portlet-body">
+		<div class="tabbable-custom ">
+			<ul class="nav nav-tabs" style="padding-left: 0px;">
+				<li class="active">
+					<a href="#tab_5_1" class="label-new" data-toggle="tab">
+					Followers @if(count($followers) > 0)({{ count($followers) }})@endif</a>
+				</li>
+			</ul>
+			<div class="tab-content">
+				<div class="tab-pane active" id="tab_5_1">
+					<ul class="media-list">
+						@foreach($followers as $follower)												
+						  <li class="media">
+						    <div class="media-left">
+						      <a href="#">
+						        <img class="media-object" src="@if($follower->profile_pic != null){{ '/img/profile/'.$follower->profile_pic }}@else{{'/assets/images/ab.png'}}@endif" alt="DP">
+						      </a>
+						    </div>
+						    <div class="media-body">
+						    	<div class="media-body-left"  style="margin: 4px 0;">
+						    		 <h4 class="media-heading">
+						    		 	<a href="/profile/ind/{{$follower->id}}" data-utype="ind">
+						    		 	{{ $follower->fname }} {{ $follower->lname }}
+						    		 	</a>
+						    		 </h4>
+									 {{ $follower->city }}, {{ $follower->state }}
+						    	</div>						    	
+							</div>														     
+						  </li>						
+						@endforeach		
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+@endif
+
 @stop

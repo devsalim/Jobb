@@ -10,4 +10,8 @@ class Corpuser extends Model {
 		return $this->hasOne('App\User', 'corpuser_id', 'id');
 	}
 
+	public function followers(){
+		return $this->belongsToMany('App\Induser', 'follows', 'corporate_id', 'individual_id');
+	}
+
 }

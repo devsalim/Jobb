@@ -365,11 +365,33 @@
 			<ul class="nav nav-tabs" style="padding-left: 0px;">
 				<li class="active">
 					<a href="#tab_5_4" class="label-new" data-toggle="tab">
-					Following </a>
+					Followers @if(count($followers) > 0)({{ count($followers) }})@endif
+					</a>
 				</li>
 			</ul>
 			<div class="tab-content">
-				<div class="tab-pane" id="tab_5_4">
+				<div class="tab-pane active" id="tab_5_4">
+					<ul class="media-list">
+						@foreach($followers as $follower)												
+						  <li class="media">
+						    <div class="media-left">
+						      <a href="#">
+						        <img class="media-object" src="@if($follower->profile_pic != null){{ '/img/profile/'.$follower->profile_pic }}@else{{'/assets/images/ab.png'}}@endif" alt="DP">
+						      </a>
+						    </div>
+						    <div class="media-body">
+						    	<div class="media-body-left"  style="margin: 4px 0;">
+						    		 <h4 class="media-heading">
+						    		 	<a href="/profile/ind/{{$follower->id}}" data-utype="ind">
+						    		 	{{ $follower->fname }} {{ $follower->lname }}
+						    		 	</a>
+						    		 </h4>
+									 {{ $follower->city }}, {{ $follower->state }}
+						    	</div>						    	
+							</div>														     
+						  </li>						
+						@endforeach		
+					</ul>
 				</div>
 			</div>
 		</div>

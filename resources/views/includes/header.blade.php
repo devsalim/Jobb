@@ -38,13 +38,13 @@
             <ul class="dropdown-menu">
               <li class="external">
                 <h3>You have <span class="bold">{{$applicationsCount}}</span> Messages</h3>
-                <a class="@if($title == 'notify_view'){{'active'}}@endif" href="/notify/applications/{{Auth::user()->induser_id}}" data-utype="app" style="color: darkblue;">view all</a>
+                <a class="@if($title == 'notify_view'){{'active'}}@endif" href="/notify/applications/@if(Auth::user()->identifier==1){{'ind'}}@elseif(Auth::user()->identifier==2){{'corp'}}@endif/{{Auth::user()->induser_id}}{{Auth::user()->corpuser_id}}" data-utype="app" style="color: darkblue;">view all</a>
               </li>
               <li>
                 <ul class="dropdown-menu-list scroller" style="height: 275px;" data-handle-color="#637283">
                   @foreach($applications as $application)
                   <li>
-                    <a href="">
+                    <a href="#">
                     <span class="photo">
                     <img src="@if($application->user->profile_pic != null){{ '/img/profile/'.$application->user->profile_pic }}@else{{'/assets/images/ab.png'}}@endif" class="img-circle" width="40" height="40">
                     <div class="match"><i class="icon-speedometer"></i> 55%</div>
@@ -74,7 +74,7 @@
             <ul class="dropdown-menu">
               <li class="external">
                 <h3>You have <span class="bold">{{$thanksCount}}</span> Messages</h3>
-                <a class="@if($title == 'notify_view'){{'active'}}@endif" href="/notify/thanks/{{Auth::user()->induser_id}}" data-utype="thank" style="color: darkblue;">view all</a>
+                <a class="@if($title == 'notify_view'){{'active'}}@endif" href="/notify/thanks/@if(Auth::user()->identifier==1){{'ind'}}@elseif(Auth::user()->identifier==2){{'corp'}}@endif/{{Auth::user()->induser_id}}{{Auth::user()->corpuser_id}}" data-utype="thank" style="color: darkblue;">view all</a>
               </li>
               <li>
                 <ul class="dropdown-menu-list scroller" style="height: 275px;" data-handle-color="#637283">

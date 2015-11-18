@@ -146,7 +146,7 @@
       @endif
       @if (Auth::user()->identifier == 2)
       <li class="@if($title == 'profile'){{'active'}}@endif">
-        <a class="" href="/connections/create">
+        <a class="" href="/followers">
         <i class=" icon-note"></i>
         <span class="title">
         Followers</span>

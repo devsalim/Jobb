@@ -41,7 +41,7 @@ class ConnectionsController extends Controller {
 	 */
 	public function create()
 	{
-		$title = 'connections';
+		$title = 'links';
 		$linksCount = Connections::where('user_id', '=', Auth::user()->induser_id)
 								 ->where('status', '=', 1)
 								 ->orWhere('connection_user_id', '=', Auth::user()->induser_id)
@@ -206,10 +206,11 @@ class ConnectionsController extends Controller {
 		return redirect('/home');
 	}
 
-	public function friendLink($id)
+	public function friendLink($utype, $id)
 	{
 		$title = 'friendLink';
-		$linkFollow = Corpuser::leftjoin('follows', 'corpusers.id', '=', 'follows.corporate_id')
+		if($utype == 'ind'){
+			$linkFollow = Corpuser::leftjoin('follows', 'corpusers.id', '=', 'follows.corporate_id')
 								->where('follows.individual_id', '=', $id)
 								->get(['corpusers.id',
 									   'corpusers.firm_name',
@@ -218,25 +219,30 @@ class ConnectionsController extends Controller {
 									   'corpusers.city', 
 									   'follows.corporate_id',
 									   'follows.individual_id']);
-		$followCount = Follow::Where('individual_id', '=', $id)
-								->count('id');						
-		$connections = DB::select('select id,fname,lname,working_at,city,state,profile_pic from indusers
-									where indusers.id in (
+			$followCount = Follow::Where('individual_id', '=', $id)
+									->count('id');						
+			$connections = DB::select('select id,fname,lname,working_at,city,state,profile_pic from indusers
+										where indusers.id in (
 
-									select connections.user_id as id from connections
-									where connections.connection_user_id=?
-									 and connections.status=1 
-									union 
-									select connections.connection_user_id as id from connections
-									where connections.user_id=?
-									 and connections.status=1
-								)', [$id, $id]);
-		$linksCount = Connections::where('user_id', '=', $id)
-								 ->where('status', '=', 1)
-								 ->orWhere('connection_user_id', '=', $id)
-								 ->where('status', '=', 1)
-								 ->count('id');
-		return view('pages.friendlink', compact('title', 'linkFollow', 'connections', 'linksCount', 'followCount'));
+										select connections.user_id as id from connections
+										where connections.connection_user_id=?
+										 and connections.status=1 
+										union 
+										select connections.connection_user_id as id from connections
+										where connections.user_id=?
+										 and connections.status=1
+									)', [$id, $id]);
+			$linksCount = Connections::where('user_id', '=', $id)
+									 ->where('status', '=', 1)
+									 ->orWhere('connection_user_id', '=', $id)
+									 ->where('status', '=', 1)
+									 ->count('id');
+
+			return view('pages.friendlink', compact('title', 'linkFollow', 'connections', 'linksCount', 'followCount', 'utype'));
+		}elseif($utype == 'corp'){
+			$followers = Corpuser::find($id)->followers;
+			return view('pages.friendlink', compact('title', 'followers', 'utype'));	
+		}
 	}
 
 	public function linkPageFollow($id){
@@ -253,5 +259,11 @@ class ConnectionsController extends Controller {
 						->first();
 		$follow->delete();
 		return redirect('/links');
+	}
+
+	public function followers(){
+		$title = 'followers';
+		$followers = Corpuser::find(Auth::user()->corpuser_id)->followers;
+		return view('pages.connections', compact('title', 'followers'));	
 	}
 }
