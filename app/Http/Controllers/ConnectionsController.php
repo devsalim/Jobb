@@ -189,10 +189,17 @@ class ConnectionsController extends Controller {
 
 	public function newLink($id)
 	{
-		$connections = new Connections();
-		$connections->user_id=Auth::user()->induser_id;
-		$connections->connection_user_id=$id;
-		$connections->save();
+		try{
+			$connections = new Connections();
+			$connections->user_id=Auth::user()->induser_id;
+			$connections->connection_user_id=$id;
+			$connections->save();
+		}catch (\Illuminate\Database\QueryException $e){
+		    $errorCode = $e->errorInfo[1];
+		    if($errorCode == 1062){
+		        return redirect('/home');
+		    }
+		}
 		return redirect('/home');
 	}
 
