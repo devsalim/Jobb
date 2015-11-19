@@ -359,7 +359,11 @@
 																				@foreach($post->postactivity as $pa)
 																		  			@if($pa->apply == 1) <?php $i++; ?> @endif
 																		  		@endforeach
-																		  		<?php echo $i; ?>
+																		  		<?php 
+																			  		if($i>0){
+																			  			echo $i;
+																			  		} 
+																			  	?>
 																			</span>
 																		</div>		
 																	</div>
@@ -573,7 +577,12 @@
 																				@foreach($post->postactivity as $pa)
 																		  			@if($pa->contact_view == 1) <?php $i++; ?> @endif
 																		  		@endforeach
-																		  		<?php echo $i; ?></span>
+																		  		<?php 
+																			  		if($i>0){
+																			  			echo $i;
+																			  		} 
+																			  	?>
+																			 </span>
 																		</div>		
 																	</div>
 																	<div class="portlet-body">													
@@ -627,7 +636,11 @@
 																				@foreach($post->postactivity as $pa)
 																		  			@if($pa->thanks == 1) <?php $i++; ?> @endif
 																		  		@endforeach
-																		  		<?php echo $i; ?>
+																		  		<?php 
+																			  		if($i>0){
+																			  			echo $i;
+																			  		} 
+																			  	?>
 																			</span>
 																		</div>
 																	</div>

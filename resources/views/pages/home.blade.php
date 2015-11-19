@@ -186,7 +186,7 @@
 <!-- Jobtip Filter End-->
 @elseif($title == 'favourite')
 <div class="portlet light bordered col-md-9">
-<div class="portlet-title">
+	<div class="portlet-title">
 		<div class="caption links-title">
 			<i class=""></i>
 			<span class="caption-subject font-blue-hoki bold uppercase">My Favourite Posts</span>
@@ -195,7 +195,7 @@
 </div>
 @elseif($title == 'postByUser')
 <div class="portlet light bordered col-md-9">
-<div class="portlet-title">
+	<div class="portlet-title">
 		<div class="caption links-title">
 			<i class=""></i>
 			<span class="caption-subject font-blue-hoki bold uppercase">Posts by "<span style="color: orangered;"> {{$postuser->firm_name}}{{$postuser->fname}} {{$postuser->lname}} </span>"</span>
@@ -203,7 +203,19 @@
 	</div>
 </div>
 @endif
-<div class="portlet light bordered" style="border: none !important;background:transparent">										
+<div class="row">
+	<div class="col-md-9">
+		<div class="sorting-row pull-right">
+			Sort by 
+			<div class="btn-group btn-group-xs" role="group" aria-label="...">
+			  <button type="button" class="btn btn-default">Magic match</button>
+			  <button type="button" class="btn btn-default">Posted by</button>
+			  <button type="button" class="btn btn-default">Date</button>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="portlet light bordered" style="border: none !important;background:transparent;padding:0 !important">										
 	<div class="portlet-body form">
 			<div class="form-body">
 				<div class="row">
