@@ -319,12 +319,12 @@
 									<div class="panel panel-default" style=" position: relative;">
 										<div class="panel-heading">
 											<h4 class="panel-title">
-											<a class="accordion-toggle accordion-toggle-styled collapsed" 
+											<a class="accordion-toggle accordion-toggle-styled" 
 											data-toggle="collapse" data-parent="#accordion2_{{$post->id}}" href="#collapse2_{{$post->id}}_{{$post->id}}"  style="font-size: 15px;font-weight: 600;">
 											Post Activity :</a>	
 											</h4>
 										</div>
-										<div id="collapse2_{{$post->id}}_{{$post->id}}" class="panel-collapse collapse">
+										<div id="collapse2_{{$post->id}}_{{$post->id}}" class="panel-collapse">
 											<div class="panel-body" style="border-top: 0;padding: 0;">
 												
 												<div class="portlet box">
