@@ -5,7 +5,7 @@
 <!-- Jobtip Filter Start -->
 <div class="row">
 	<div class="col-md-9" style=" lightgray;margin-bottom: 5px;">
-		<div class="hide-label col-md-8 col-sm-6 col-xs-10" style="padding: 6px 14px;">
+		<div class="hide-label col-md-8 col-sm-6 col-xs-10" style="padding: 5px;">
 			<label style="font-weight:500; ">
 				Showing all Jobs, Skills posted by Individuals & Corporates
 			</label>
@@ -209,8 +209,17 @@
 			Sort by 
 			<div class="btn-group btn-group-xs" role="group" aria-label="...">
 			  <button type="button" class="btn btn-default">Magic match</button>
-			  <button type="button" class="btn btn-default">Posted by</button>
 			  <button type="button" class="btn btn-default">Date</button>
+			  <div class="btn-group  btn-group-xs" role="group">
+			    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			      Posted by
+			      <span class="caret"></span>
+			    </button>
+			    <ul class="dropdown-menu">
+			      <li><a href="#">Individual</a></li>
+			      <li><a href="#">Corporate</a></li>
+			    </ul>
+			  </div>
 			</div>
 		</div>
 	</div>
