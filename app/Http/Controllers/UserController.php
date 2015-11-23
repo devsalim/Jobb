@@ -81,6 +81,12 @@ class UserController extends Controller {
 			}
 			DB::commit();
 
+			if($request['email'] != null){
+				Mail::send('emails.welcome', array('fname'=>$request['fname']), function($message){
+			        $message->to($request['email'], $request['fname'].' '.$request['lname'])->subject('Welcome to Jobtip!');
+			    });
+			}
+
 			$data = ['page'=>'login','vcode'=>$vcode,'otp'=>$otp];
 			return response()->json(['success'=>true,'data'=>$data]);
 
@@ -118,6 +124,12 @@ class UserController extends Controller {
 			   throw $e;
 			}
 			DB::commit();
+			if($request['email'] != null){
+				Mail::send('emails.welcome', array('fname'=>$request['fname']), function($message){
+			        $message->to($request['email'], $request['fname'].' '.$request['lname'])->subject('Welcome to Jobtip!');
+			    });
+			}
+			
 			return redirect('/login');
 		}
 	}

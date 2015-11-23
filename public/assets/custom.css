@@ -1,3 +1,20 @@
+.pac-icon {width: 0;background-image: none;}
+.pac-logo::after {
+    content: "";
+    padding: 0 important;
+    height: 0 !important;
+    display: none !important;
+    background-image: none !important;
+}
+.pac-container {
+    border-radius: 0 !important;
+    border-top: 0 solid #d9d9d9 !important;
+    border: 1px solid #d9d9d9;
+}
+
+
+
+
 .user-image:hover .hover-image{
         display: block;
 }
@@ -666,4 +683,33 @@ form.search-form.search-form-expanded {
     padding: 0px 2px;
     margin: 0 0 10px 0;
     color: #ccc;
+}
+
+
+/* text casing */
+.capitalize{text-transform: capitalize !important;}
+.lowercase{text-transform: lowercase !important;}
+.uppercase{text-transform: uppercase !important;}
+
+
+/* group admin title */
+.group-admin-title {
+    font-size: 12px;
+    font-weight: normal;
+}
+
+.group-admin-title-left {
+    background: #ddd;
+    padding: 2px 4px;
+    float: left;
+}
+
+.group-admin-title-right {
+    background: rgba(221, 221, 221, 0.5);
+    padding: 2px 4px;
+    float: left;
+}
+
+.group-title-info{
+    margin-left: 8px;
 }

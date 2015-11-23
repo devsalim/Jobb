@@ -176,8 +176,9 @@ class GroupController extends Controller {
 										where groups_users.group_id=?)
 								)', [Auth::user()->induser_id, $id, Auth::user()->induser_id, $id]);
 
-		$group = Group::findOrFail($id);
+		$group = Group::where('id','=',$id)->with('admin')->first();
 		return view('pages.groupDetail', compact('users', 'title', 'connections', 'group'));
+		// return $group;
 	}
 
 	public function addUser(Request $request){

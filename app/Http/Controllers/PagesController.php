@@ -267,7 +267,27 @@ class PagesController extends Controller {
 		$puid = Input::get('puid');
 		$linked = Input::get('linked');
 		$utype = Input::get('utype');
-		return view('pages.links_follow', compact('puid', 'linked', 'utype'));
+		$status = 'unknown';
+
+		if($linked == 'no'){
+			$receivedLinkedStatus = Connections::where('user_id', '=', $puid)
+											->Where('connection_user_id', '=', Auth::user()->induser_id)
+											->first(['status']);
+
+			if($receivedLinkedStatus!=null && $receivedLinkedStatus->status == 0){
+				$status = 'received';
+			}
+			
+			$sentLinkedStatus = Connections::where('user_id', '=', Auth::user()->induser_id)
+											->Where('connection_user_id', '=', $puid)
+											->first(['status']);
+
+			if($sentLinkedStatus!=null && $sentLinkedStatus->status == 0){
+				$status = 'sent';
+			}
+		}
+
+		return view('pages.links_follow', compact('puid', 'linked', 'utype', 'status'));
 	}
 
 	public function homeFilter(){

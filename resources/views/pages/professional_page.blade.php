@@ -438,7 +438,7 @@
 										<span class="input-group-addon">
 											<i class="fa fa-map-marker"></i>
 										</span>
-										<input type="text" name="city" class="form-control" value="{{ $user->city }}" placeholder="City">
+										<input type="text" id="city" name="city" class="form-control" value="{{ $user->city }}" placeholder="City">
 									</div>
 								</div>
 							</div>
@@ -451,7 +451,7 @@
 										<span class="input-group-addon">
 										<i class="fa fa-map-marker"></i>
 										</span>
-										<select class="form-control" name="state" value="{{ $user->state }}">
+										<select class="form-control" id="state" name="state" value="{{ $user->state }}">
 											<option value="">-- Select --</option>
 											<option @if($user->state=="Andaman and Nicobar Islands") {{ $selected }} @endif value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
 											<option @if($user->state=="Andhra Pradesh") {{ $selected }} @endif value="Andhra Pradesh">Andhra Pradesh</option>
@@ -612,6 +612,23 @@
 
 
 @section('javascript')
+<script src="http://maps.googleapis.com/maps/api/js?libraries=places&region=IN" type="text/javascript"></script>
+<script type="text/javascript">
+	function initialize() {
+		var options = {	types: ['(cities)'], componentRestrictions: {country: "in"}	};
+		var input = document.getElementById('city');
+		var autocomplete = new google.maps.places.Autocomplete(input, options);
+		autocomplete.addListener('place_changed', onPlaceChanged); 
+		function onPlaceChanged() {
+		  var place = autocomplete.getPlace();
+		  if (place.address_components) { city = place.address_components[0];
+		  	document.getElementById('city').value = city.long_name;
+		  } else { document.getElementById('autocomplete').placeholder = 'Enter a city'; }
+		}
+	}
+   google.maps.event.addDomListener(window, 'load', initialize);   
+</script>
+
 <script src="{{ asset('/assets/Edubranch.js') }}"></script>
 <script src="{{ asset('/assets/ind_validation.js') }}"></script>
 <script>

@@ -52,7 +52,9 @@
                     <span class="subject">
                     <span class="from">
                     {{$application->user->fname}} </span>
-                    <span class="time">{{$application->apply_dtTime}}</span>
+                    <span class="time">
+                      {{ \Carbon\Carbon::createFromTimeStamp(strtotime($application->apply_dtTime))->diffForHumans() }}
+                    </span>
                     </span>
                     <span class="message">
                     has applied your Job<br> Post Id: {{$application->unique_id}} </span>
@@ -87,7 +89,9 @@
                     <span class="subject">
                     <span class="from">
                     {{$thank->user->fname}} </span>
-                    <span class="time">{{$thank->thanks_dtTime}}</span>
+                    <span class="time">
+                      {{ \Carbon\Carbon::createFromTimeStamp(strtotime($thank->thanks_dtTime))->diffForHumans() }}
+                    </span>
                     </span>
                     <span class="message">
                     has thanked for Job<br> Post Id: {{$thank->unique_id}} </span>
