@@ -46,3 +46,4 @@ Temporary Items
 .env
 /vendor
 *.jpg
+resources/views/pages/home.blade.php_

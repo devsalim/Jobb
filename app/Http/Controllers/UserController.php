@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Input;
 use App\Http\Requests\CreateUserRequest;
 use App\Http\Requests\CreateImgUploadRequest;
 use Illuminate\Http\Response;
+use Mail;
 
 class UserController extends Controller {
 
@@ -82,7 +83,8 @@ class UserController extends Controller {
 			DB::commit();
 
 			if($request['email'] != null){
-				Mail::send('emails.welcome', array('fname'=>$request['fname']), function($message){
+				$vcode = Induser::where('email', '=', $request['email'])->pluck('vcode');
+				Mail::send('emails.welcome', array('fname'=>$request['fname'], 'vcode'=>$vcode), function($message){
 			        $message->to($request['email'], $request['fname'].' '.$request['lname'])->subject('Welcome to Jobtip!');
 			    });
 			}
@@ -125,7 +127,8 @@ class UserController extends Controller {
 			}
 			DB::commit();
 			if($request['email'] != null){
-				Mail::send('emails.welcome', array('fname'=>$request['fname']), function($message){
+				$vcode = Induser::where('email', '=', $request['email'])->pluck('vcode');
+				Mail::send('emails.welcome', array('fname'=>$request['fname'], 'vcode'=>$vcode), function($message){
 			        $message->to($request['email'], $request['fname'].' '.$request['lname'])->subject('Welcome to Jobtip!');
 			    });
 			}
