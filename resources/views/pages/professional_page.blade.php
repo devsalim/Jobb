@@ -18,44 +18,7 @@
 			<input type="hidden" name="_token" value="{{ csrf_token() }}">
 			<div class="form-body">
 				<div class="row">
-					<div class="" style=""></div>
 					<div class="col-md-9" style="">
-														<!-- <div class="row">
-									<div class="col-md-5 col-sm-5 col-xs-12">
-										<div class="form-group">							
-											<label class=" control-label">Experience </label>&nbsp;: <input type="text" style="width: 20px;background:transparent;border:0" name="min_exp" class="min-exp">-
-											<input type="text" style="width: 14px;margin:0 4px;background:transparent;border:0" name="max_exp" class="max-exp">Years
-											<div class="">
-												<input id="range_1" type="text"  value=""/> -->
-												<!-- <input type="hidden" name="min_exp" class="min-exp">
-												<input type="hidden" name="max_exp" class="max-exp"> -->
-											<!-- </div>
-										</div>
-									</div> -->
-									<!--/span-->
-									<!-- <div class="col-md-2 col-sm-2 col-xs-2"></div>
-									<div class="col-md-5 col-sm-5 col-xs-12">
-										<div class="form-group">							
-											<label class=" control-label"><input type="checkbox" id="hide-check">&nbsp;Salary 
-											</label>&nbsp;:<select name="salary_type" style="border-top: 0px;border-left: 0;border-right: 0;">									
-													<option value="Monthly">Monthly</option>
-													<option value="Weekly">Weekly</option>
-													<option value="Daily">Daily</option>
-													<option value="Hourly">Hourly</option>
-													<option value="Per Visit">Per Visit</option>	
-												</select>
-											 <i class="fa fa-rupee (alias)"></i>&nbsp;<input type="text" style="width: 30px;margin:0 6px;background:transparent;border:0" name="min_sal" class="min-sal">-
-											<input type="text" style="width:40px;margin:0 4px;background:transparent;border:0" name="max_sal" class="max-sal">&nbsp;
-											
-											<div id="hide-sal" class="">
-												<input id="range_7" type="text"  value=""/> -->
-												<!-- <label name="min_sal" class="min-sal"></label> -->
-												<!-- <input type="hidden" name="min_sal" class="min-sal">
-												<input type="hidden" name="max_sal" class="max-sal"> -->
-											<!-- </div>
-										</div>
-									</div>
-								</div> -->
 						<div class="row">
 							@if (count($errors) > 0)
 							<div class="alert alert-danger">
@@ -196,14 +159,10 @@
 										<span class="input-group-addon">
 											<i class="icon-note" style="color:darkcyan;"></i>
 										</span>
-										<textarea id="about-me" name="about_individual" 
-											onkeyup="textAreaAdjust(this)"
-											class="form-control autosizeme" rows="3">{{ $user->about_individual }}
-										</textarea>
+										<textarea name="job_detail" class="form-control autosizeme" rows="3"></textarea>
 									</div>
 								</div>
 							</div>
-							<!--/span-->
 						</div>	
 						<!-- new column added as dob and gender	 -->
 						<div class="row">
@@ -622,14 +581,17 @@
 	});   
 </script>
 <script type="text/javascript">
-	function textAreaAdjust(o) {
-	    o.style.height = "1px";
-	    o.style.height = (25+o.scrollHeight)+"px";
-	}
+	
 	function checkOption(obj) {
 	    var input = document.getElementById("workingAs");
 	    input.disabled = obj.value == "Student";
+	    input.disabled = obj.value == "Searching Job";
 	}
+
+	// function checkOption(obj) {
+	//     var input = document.getElementById("workingAs");
+	//     input.disabled = obj.value == "Searching Job";
+	// }
 
 	$(function(){
 

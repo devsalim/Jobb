@@ -81,7 +81,7 @@
 									<div class="col-md-12">
 										<div class="form-group">
 											<label>Job Details <span class="required">*</span></label>								
-											<textarea name="job_detail" class="form-control" rows="6"></textarea>
+											<textarea name="job_detail" class="form-control autosizeme" rows="6"></textarea>
 										</div>
 									</div>
 									</div>

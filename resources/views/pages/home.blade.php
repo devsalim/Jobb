@@ -729,7 +729,7 @@
 														<input type="hidden" name="_token" value="{{ csrf_token() }}">
 														<input type="hidden" name="like" value="{{ $post->id }}">
 														<button class="btn like-btn"  type="button" style="background-color: transparent;">
-														<i class="fa fa-thumbs-up thanks-icon" id="like-{{$post->id}}">
+														<i class="icon-like thanks-icon" id="like-{{$post->id}}">
 														</i>
 														</button>
 													</form>

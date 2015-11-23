@@ -62,24 +62,28 @@
 												@endif
 												<div class="tab-pane active" id="tab1">
 													<!-- <h3 class="block">Provide your account details</h3> -->
-													<div class="col-md-12">
-														<div class="form-group">
-															<label>Skill Title <span class="required">
-															* </span></label>
-															<div class="input-group">
-																<span class="input-group-addon">
-																	<i class="fa fa-flag" style="color:darkcyan;"></i>
-																</span>
-																<input type="text" name="post_title" class="form-control" placeholder="Job Title">
+													<div class="row">
+														<div class="col-md-12">
+															<div class="form-group">
+																<label>Skill Title <span class="required">
+																* </span></label>
+																<div class="input-group">
+																	<span class="input-group-addon">
+																		<i class="fa fa-flag" style="color:darkcyan;"></i>
+																	</span>
+																	<input type="text" name="post_title" class="form-control" placeholder="Job Title">
+																</div>
 															</div>
 														</div>
 													</div>
-													<div class="col-md-12">
-														<div class="form-group">
-															<label>Skill Details <span class="required">
-															* </span></label>
-															<div class="" style=" padding-bottom: 10px;">
-																<textarea name="job_detail" class="form-control" rows="6"></textarea>
+													<div class="row">
+														<div class="col-md-12">
+															<div class="form-group">
+																<label>Skill Details <span class="required">
+																* </span></label>
+																<div class="" style=" padding-bottom: 10px;">
+																	<textarea name="job_detail" class="form-control autosizeme" rows="3"></textarea>
+																</div>
 															</div>
 														</div>
 													</div>

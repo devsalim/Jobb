@@ -195,7 +195,8 @@
 				</div>
 				<div class="tab-pane" id="tab_5_3">
 						<ul class="media-list">
-						@foreach($linkFollow as $follow)														
+							@if(count($linkFollow) > 0)
+							@foreach($linkFollow as $follow)	
 							  <li class="media">
 							    <div class="media-left">
 							      <a href="#">
@@ -228,8 +229,21 @@
 										</span>
 							    	</div>
 								</div>														     
-							  </li>						
-						@endforeach		
+							  </li>	
+							  @endforeach
+							   @else							
+							  <li class="media">
+							    <div class="media-lef">
+							    </div>
+							    <div class="media-body">
+							    	<div class="media-body-left">
+							    		 <h4 class="media-heading">
+									      	<i class="fa fa-frown-o" style="font-size: 16px !important;"></i> You have not Follow Anyone
+									      </h4>
+							    	</div>
+							    </div>
+							  </li>
+							@endif									
 						</ul>
 				</div>
 			</div>
@@ -249,7 +263,7 @@
         <div class="portlet box" style="border: 0;">
               <div class="portlet-body">
                 <div class="tabbable-line">
-                  <ul class="nav nav-tabs nav-tab-new">
+                  <ul class="nav nav-tabs" style="padding-left: 0;margin: 0 auto;float: none;display: table;">
                     <li class="active">
                       <a href="#tab_15_2" data-toggle="tab" style="font-size:15px;font-weight:600;">
                       Profile </a>
@@ -259,18 +273,18 @@
                     <div class="tab-pane active" id="tab_15_2">
                       <form id="search-profile" action="/search/profile" method="post">
                       <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                      <div class="row links-title" style="margin-bottom: 20px;margin-top: 10px;">
+                      <div class="row-md-2"></div>
+                      <div class="row-md-6" style="margin-bottom: 20px;margin-top: 10px;">
                         <div class="col-md-12 col-sm-12 col-xs-12 advance-len">
-                          <div class="input-group">
+                          <div class="input-group" style="margin:0 auto;">
                             <div class="icheck-inline">
                               <label>
-                              <input id="id_radio1" type="radio" name="type" value="people" class="">People</label>
+                              <input id="id_radio1" type="radio" checked name="type" value="people" class="">People</label>
                               <label>
                               <input id="id_radio2" type="radio" value="company" name="type" class="">Company</label>
                             </div>
                           </div>
-                        </div>
-                        
+                        </div> 
                       </div>
                       <div class="row show-firm-type">
                       	<div class="btn-group col-md-12 col-sm-12 col-xs-12" style="margin:10px;" data-toggle="buttons">
@@ -372,7 +386,8 @@
 			<div class="tab-content">
 				<div class="tab-pane active" id="tab_5_4">
 					<ul class="media-list">
-						@foreach($followers as $follower)												
+						@foreach($followers as $follower)
+																
 						  <li class="media">
 						    <div class="media-left">
 						      <a href="#">
@@ -389,7 +404,8 @@
 									 {{ $follower->city }}, {{ $follower->state }}
 						    	</div>						    	
 							</div>														     
-						  </li>						
+						  </li>		
+						  		
 						@endforeach		
 					</ul>
 				</div>
