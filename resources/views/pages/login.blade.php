@@ -555,11 +555,11 @@ $(document).ready(function(){
             });
             $('#ind-msg').text('Invalid user');
         }else{          
-            $('#ind-msg-box').removeClass('alert alert-danger');
-            $('#ind-msg-box').addClass('alert alert-success').fadeIn(1000, function(){
-                $(this).show();
-            });
-            $('#ind-msg').text('Login success');
+            // $('#ind-msg-box').removeClass('alert alert-danger');
+            // $('#ind-msg-box').addClass('alert alert-success').fadeIn(1000, function(){
+            //     $(this).show();
+            // });
+            // $('#ind-msg').text('Login success');
             redirect(data);
         }
       },
