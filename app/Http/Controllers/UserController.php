@@ -15,6 +15,7 @@ use App\Http\Requests\CreateUserRequest;
 use App\Http\Requests\CreateImgUploadRequest;
 use Illuminate\Http\Response;
 use Mail;
+use Hash;
 
 
 class UserController extends Controller {
@@ -363,6 +364,31 @@ class UserController extends Controller {
 				return redirect('/login');
 			}
 		}
+	}
+
+	public function postChangePassword(){
+		$validator = Validator::make(
+					    ['password' => Input::get('password'), 
+					     'password_confirmation' => Input::get('password_confirmation'),
+					     'old_password' => Input::get('old_password')
+					    ],
+					    ['password' => 'required|min:6|confirmed', 
+					     'password_confirmation' => 'required|min:6',
+					     'old_password' => 'required|min:6'
+					    ]
+					);
+		if ($validator->fails()) {
+	        return redirect("/home#change-password")->withErrors($validator->errors());
+	    }else{
+	    	$user = User::where('induser_id','=',Auth::user()->induser_id)->first();
+			if( Hash::check(Input::get('old_password'), $user->password) ){
+				$user->password = bcrypt(Input::get('password'));
+				$user->save();
+				return redirect('/home#change-password')->withErrors(['Password changed successfully']);
+			}else{
+				return redirect("/home#change-password")->withErrors(['Old password doesnt match']);
+			}
+	    }
 	}
 		
 }

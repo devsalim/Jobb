@@ -126,6 +126,8 @@ Route::group(array('before' => 'auth'), function(){
 	Route::get('reset/password/{token}', 'UserController@resetPassword');
 	Route::post('reset/password', 'UserController@postResetPassword');
 
+	Route::post('change/password', 'UserController@postChangePassword');
+
 });
 
 

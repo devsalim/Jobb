@@ -58,11 +58,10 @@
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
         <h4 class="modal-title">Change password</h4>
       </div>
-      <form class="form-horizontal" role="form" method="POST" action="{{ url('/password/reset') }}">
+      <form class="form-horizontal" role="form" method="POST" action="{{ url('/change/password') }}">
       <div class="modal-body">
           @if (count($errors) > 0)
             <div class="alert alert-danger">
-              <strong>Whoops!</strong> There were some problems with your input.<br><br>
               <ul>
                 @foreach ($errors->all() as $error)
                   <li>{{ $error }}</li>
@@ -75,30 +74,30 @@
           <div class="form-group" style="margin-bottom:15px">
             <label class="col-md-4 control-label">Old Password</label>
             <div class="col-md-8">
-              <input type="email" class="form-control" name="email" value="{{ old('email') }}">
+              <input type="password" class="form-control" name="old_password" required>
             </div>
           </div>
 
           <div class="form-group" style="margin-bottom:15px">
             <label class="col-md-4 control-label">New Password</label>
             <div class="col-md-8">
-              <input type="password" class="form-control" name="password">
+              <input type="password" class="form-control" name="password" required>
             </div>
           </div>
 
           <div class="form-group" style="margin-bottom:15px">
             <label class="col-md-4 control-label">Confirm Password</label>
             <div class="col-md-8">
-              <input type="password" class="form-control" name="password_confirmation">
+              <input type="password" class="form-control" name="password_confirmation" required>
             </div>
           </div>
      
       </div>
-      </form>
       <div class="modal-footer">
-        <button type="submit" class="btn btn-sm btn-success" data-dismiss="modal">Change</button>
+        <button type="submit" class="btn btn-sm btn-success">Change</button>
         <button type="button" class="btn btn-sm default" data-dismiss="modal">Close</button>
-      </div>
+      </div>      
+      </form>
     </div>
     <!-- /.modal-content -->
   </div>
