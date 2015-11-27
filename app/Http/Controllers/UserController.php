@@ -84,14 +84,14 @@ class UserController extends Controller {
 			}
 			
 			DB::commit();
-			// if($request['email'] != null){
-			// 	$email = $request['email'];
-			// 	$fname = $request['fname'];
-			// 	$vcode = Induser::where('email', '=', $request['email'])->pluck('email_vcode');
-			// 	Mail::send('emails.welcome', array('fname'=>$fname, 'vcode'=>$vcode), function($message) use ($email,$fname){
-			//         $message->to($email, $fname)->subject('Welcome to Jobtip!')->from('admin@jobtip.in', 'JobTip');
-			//     });
-			// }
+			if($request['email'] != null){
+				$email = $request['email'];
+				$fname = $request['fname'];
+				$vcode = Induser::where('email', '=', $request['email'])->pluck('email_vcode');
+				Mail::send('emails.welcome', array('fname'=>$fname, 'vcode'=>$vcode), function($message) use ($email,$fname){
+			        $message->to($email, $fname)->subject('Welcome to Jobtip!')->from('admin@jobtip.in', 'JobTip');
+			    });
+			}
 
 			$data = ['page'=>'login','vcode'=>$vcode,'otp'=>$otp];
 			return response()->json(['success'=>true,'data'=>$data]);
