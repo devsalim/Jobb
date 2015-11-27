@@ -4,9 +4,12 @@
 	<title>Jobtip</title>
 </head>
 <body>
-<h2>Password Reset</h2>
-<div>
-Reset your password, complete this form: {{ URL::to('password/reset', array($token)) }}.
-This link will expire in {{ Config::get('auth.reminder.expire', 120) }} minutes.</div>
+
+<h1>Hi, {{ $fname }}</h1>
+
+<h2>You have requested for password reset</h2>
+<p>
+To reset your password <a href="{{ URL::to('reset/password', array($token)) }}">click here</a>.
+</p>
 </body>
 </html>

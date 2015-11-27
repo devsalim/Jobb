@@ -122,6 +122,10 @@ Route::group(array('before' => 'auth'), function(){
 	Route::get('favourite', 'PagesController@favourite');
 	Route::get('postbyuser/{utype}/{id}', 'PagesController@postByUser');
 
+	Route::post('forget', 'UserController@forgetPassword');
+	Route::get('reset/password/{token}', 'UserController@resetPassword');
+	Route::post('reset/password', 'UserController@postResetPassword');
+
 });
 
 

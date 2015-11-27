@@ -222,6 +222,11 @@
         </a>
         <ul class="sub-menu">
           <li>
+            <a href="#change-password" data-toggle="modal">
+              <i class="icon-user"></i>&nbsp;Change password 
+            </a>
+          </li>
+          <li>
             <a class="ajaxify" href="accountsetting.html">
               <i class="icon-user"></i>&nbsp;Account 
             </a>
