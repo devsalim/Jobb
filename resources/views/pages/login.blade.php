@@ -190,27 +190,68 @@
 		</div>
 	</form>
 	<!-- BEGIN FORGOT PASSWORD FORM -->
-	<form class="forget-form" action="#" method="post" id="forgot-password">
+	<form class="forget-form" action="/forget" method="post" id="forgot-password">
 		<h3 style="margin-bottom: 18px;color:khaki;font-size: 27px;text-shadow: 0px 1px 1px blue;">Forgot Password ?</h3>
 		<p style="text-align: center;font-size: 21px;color: yellow;">No Worries&nbsp;<i class="icon-emoticon-smile"></i></p>
 		<p style="text-align: center;font-size: 15px;">
 			 Enter your e-mail iD or Mobile No. You will get a link to reset password.
 		</p>
+		@if ( Session::has('flash_message') ) 
+		  <div class="alert {{ Session::get('flash_type') }}">
+		     <ul><li>{{ Session::get('flash_message') }}</li></ul>
+		  </div>	  
+		@endif
+		<div id="forget-box" style="display:none">
+			<div id="forget-box-msg"></div>
+		</div>
 		<div class="form-group">
 			<div class="input-icon right">
 				<i class="fa"></i>
 				<div class="input-group margin-top-10">
 					<span class="input-group-addon"><i class="icon-envelope"></i></span>
-					<input type="email" name="email" class="form-control" placeholder="Email Id or Mobile No">
+					<input type="email" name="forget_email" class="form-control" placeholder="Email Id or Mobile No">
 				</div>
 			</div>
 		</div>
 		<div class="form-actions" style="margin-top:25px">
 			<label id="back-btn" style="margin-left: 39px;cursor: pointer;">Back</label>
-			<button type="submit" class="btn btn-default pull-left" style="margin-left: 0px; ">Submit <i class="m-icon-swapright"></i></button>
+			<button type="submit" id="forget-password-btn" class="btn btn-default pull-left" style="margin-left: 0px; ">Submit 
+				<i class="m-icon-swapright"></i>
+			</button>
 		</div>
 	</form>
 	<!-- END FORGOT PASSWORD FORM -->
+
+	<!-- BEGIN OTP VERIFICATIO FORM -->
+	<form class="otp-verify-form" action="/verify" method="post" id="mobile-otp-form" style="display:none" id="verify-otp">
+	<input type="hidden" name="_token" value="{{ csrf_token() }}">
+		<h3 style="margin-bottom: 18px;color:khaki;font-size: 27px;text-shadow: 0px 1px 1px blue;">Mobile Verification</h3>
+		<p style="text-align: center;font-size: 15px;">
+			 Enter OTP received to verify your mobile.
+		</p>
+		@if ( Session::has('flash_message') ) 
+		  <div class="alert {{ Session::get('flash_type') }}">
+		     <ul><li>{{ Session::get('flash_message') }}</li></ul>
+		  </div>	  
+		@endif
+		<div id="ind-msg-reg-box" style="display:none">
+			<div id="ind-reg-msg"></div>
+		</div>
+		<div class="form-group">
+			<div class="input-icon right">
+				<i class="fa"></i>
+				<div class="input-group margin-top-10">
+					<span class="input-group-addon"><i class="icon-envelope"></i></span>
+					<input type="password" name="mobileOTP" class="form-control" placeholder="Enter OTP here" required>
+				</div>
+			</div>
+		</div>
+		<div class="form-actions" style="margin-top:25px;border-bottom: none;">
+			<label id="resend-otp-btn" style="margin-left: 39px;cursor: pointer;">Resend OTP</label>
+			<button type="submit" class="btn btn-default pull-left" style="margin-left: 0px; ">Submit <i class="m-icon-swapright"></i></button>
+		</div>
+	</form>
+	<!-- END OTP VERIFICATIO FORM -->
 	
 	<!-- BEGIN REGISTRATION FORM -->
 
@@ -271,10 +312,10 @@
 					@endforeach
 				</ul>
 			</div>
-		@endif	
-		<div id="ind-msg-reg-box" style="display:none">
-			<div id="ind-reg-msg"></div>
-		</div>								
+		@endif
+
+		<div id="ind-reg-form-errors" style="display:none"></div>
+										
 		<div class="form-group">
 			<div class="input-icon right">
 				<i class="fa"></i>
@@ -304,7 +345,8 @@
 					<span class="input-group-addon">
 						<i class="icon-call-end"></i>
 					</span>
-					<input type="text" name="mobile" maxlength="10" class="form-control" placeholder="Mobile No" value="{{ old('mobile') }}"/>
+					<input type="text" name="mobile" maxlength="10" class="form-control" placeholder="Mobile No" 
+							value="{{ old('mobile') }}"/>
 				</div>
 			</div>
 		</div>
@@ -513,11 +555,11 @@ $(document).ready(function(){
             });
             $('#ind-msg').text('Invalid user');
         }else{          
-            $('#ind-msg-box').removeClass('alert alert-danger');
-            $('#ind-msg-box').addClass('alert alert-success').fadeIn(1000, function(){
-                $(this).show();
-            });
-            $('#ind-msg').text('Login success');
+            // $('#ind-msg-box').removeClass('alert alert-danger');
+            // $('#ind-msg-box').addClass('alert alert-success').fadeIn(1000, function(){
+            //     $(this).show();
+            // });
+            // $('#ind-msg').text('Login success');
             redirect(data);
         }
       },
@@ -607,8 +649,9 @@ $('#individual-register-btn').on('click',function(event){
             });
             $('#individual-register')[0].reset();
             $('#t-n-c').attr('checked', false); // Unchecks it
-            $('#ind-reg-msg').html('Registration successful ! <br/>Check your mobile/email for further instruction. <br/>or Go to this url (<a href="http://jobtip.dev/verify" target="_blank">http://jobtip.dev/verify</a>) with your otp: <b>'+data.data.otp+'</b> to verify mobile. or <a href="/verify/'+data.data.vcode+'" target="_blank">click here</a> to verify your email.');
-            
+            $('#individual-register').hide();
+            $('#mobile-otp-form').show();
+            $('#ind-reg-msg').html('Registration successful ! <br/>Check your mobile/email for further instruction. <br/>Your otp: <b>'+data.data.otp+'</b> to verify mobile.');  
         }else{
             $('#ind-msg-reg-box').removeClass('alert alert-success');
             $('#ind-msg-reg-box').addClass('alert alert-danger').fadeIn(1000, function(){
@@ -619,11 +662,20 @@ $('#individual-register-btn').on('click',function(event){
       },
       error: function(data) {
         loader('hide');
-        $('#ind-msg-reg-box').addClass('alert alert-danger').fadeIn(1000, function(){
-                $(this).show();
-        });
-        console.log(data);
-        $('#ind-reg-msg').text('Some error occured !');
+	    var errors = data.responseJSON;
+	    // console.log(errors);
+	    $errorsHtml = '<div class="alert alert-danger"><ul>';
+	    $.each(errors, function(index, value) {
+			 $errorsHtml += '<li>' + value[0] + '</li>';
+	    });
+ 		$errorsHtml += '</ul></div>';	            
+        $( '#ind-reg-form-errors' ).html( $errorsHtml );
+        $( '#ind-reg-form-errors' ).show();
+
+        // $('#ind-msg-reg-box').addClass('alert alert-danger').fadeIn(1000, function(){
+        //         $(this).show();
+        // });
+        // $('#ind-reg-msg').text('Some error occured !');
       }
     }); 
     return false;
@@ -677,6 +729,53 @@ $('#corporate-register-btn').on('click',function(event){
   });
 });
 
+$('#forget-password-btn').on('click',function(event){        
+    event.preventDefault();
+
+    loader('show');
+
+    var formData = $('#forgot-password').serialize(); // form data as string
+    var formAction = $('#forgot-password').attr('action'); // form handler url
+
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
+    $.ajax({
+      url: formAction,
+      type: "post",
+      data: formData,
+      cache : false,
+      success: function(data){
+        loader('hide');
+        if(data.data.page == 'login' && data.data.error == 'none'){
+            $('#forget-box').removeClass('alert alert-danger');
+            $('#forget-box').addClass('alert alert-success').fadeIn(1000, function(){
+                $(this).show();
+            });
+            $('#forgot-password')[0].reset();
+            $('#forget-box-msg').html('Check your mobile/email for password reset link.');  
+        }else if(data.data.page == 'login' && data.data.error != 'none'){
+            $('#forget-box').removeClass('alert alert-success');
+            $('#forget-box').addClass('alert alert-danger').fadeIn(1000, function(){
+                $(this).show();
+            });
+            $('#forget-box-msg').text(data.data.error);
+        }
+      },
+      error: function(data) {
+        loader('hide');
+        $('#forget-box').addClass('alert alert-danger').fadeIn(1000, function(){
+                $(this).show();
+        });
+        $('#forget-box-msg').text('Some error occured !');
+      }
+    }); 
+    return false;
+  }); 
+
 $('#individual-login').bind('keydown', function(e){         
     if (e.which == 13){
        $('#individual-login-btn').trigger('click'); 
@@ -687,6 +786,13 @@ $('#individual-login').bind('keydown', function(e){
 $('#corporate-login').bind('keydown', function(e){         
     if (e.which == 13){
        $('#corporate-login-btn').trigger('click'); 
+       return false;  
+   }
+});
+
+$('#forgot-password').bind('keydown', function(e){         
+    if (e.which == 13){
+       $('#forgot-password-btn').trigger('click'); 
        return false;  
    }     
 });

@@ -2,6 +2,7 @@
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Validator;
 
 use DB;
 use Auth;
@@ -14,6 +15,8 @@ use App\Http\Requests\CreateUserRequest;
 use App\Http\Requests\CreateImgUploadRequest;
 use Illuminate\Http\Response;
 use Mail;
+use Hash;
+
 
 class UserController extends Controller {
 
@@ -80,12 +83,14 @@ class UserController extends Controller {
 			   DB::rollback();
 			   throw $e;
 			}
+			
 			DB::commit();
-
 			if($request['email'] != null){
-				$vcode = Induser::where('email', '=', $request['email'])->pluck('vcode');
-				Mail::send('emails.welcome', array('fname'=>$request['fname'], 'vcode'=>$vcode), function($message){
-			        $message->to($request['email'], $request['fname'].' '.$request['lname'])->subject('Welcome to Jobtip!');
+				$email = $request['email'];
+				$fname = $request['fname'];
+				$vcode = Induser::where('email', '=', $request['email'])->pluck('email_vcode');
+				Mail::send('emails.welcome', array('fname'=>$fname, 'vcode'=>$vcode), function($message) use ($email,$fname){
+			        $message->to($email, $fname)->subject('Welcome to Jobtip!')->from('admin@jobtip.in', 'JobTip');
 			    });
 			}
 
@@ -125,11 +130,14 @@ class UserController extends Controller {
 			   DB::rollback();
 			   throw $e;
 			}
+			
 			DB::commit();
 			if($request['email'] != null){
-				$vcode = Induser::where('email', '=', $request['email'])->pluck('vcode');
-				Mail::send('emails.welcome', array('fname'=>$request['fname'], 'vcode'=>$vcode), function($message){
-			        $message->to($request['email'], $request['fname'].' '.$request['lname'])->subject('Welcome to Jobtip!');
+				$email = $request['email'];
+				$fname = $request['fname'];
+				$vcode = Induser::where('email', '=', $request['email'])->pluck('email_vcode');
+				Mail::send('emails.welcome', array('fname'=>$fname, 'vcode'=>$vcode), function($message) use ($email,$fname){
+			        $message->to($email, $fname)->subject('Welcome to Jobtip!')->from('admin@jobtip.in', 'JobTip');
 			    });
 			}
 			
@@ -295,6 +303,93 @@ class UserController extends Controller {
 		}else{
 			return 'verification-failure';
 		}
+	}
+
+	public function forgetPassword(){
+		$emailOrMobile = Input::get('forget_email');
+		$user = User::where('email','=',$emailOrMobile)->orWhere('mobile','=',$emailOrMobile)->first();
+		if($user != null && ($user->email == $emailOrMobile || $user->mobile == $emailOrMobile)){
+			$resetCode = md5(rand(11111,99999));
+			$user->reset_code = $resetCode;
+			$user->save();
+
+			if($user->email != null){
+				$email = $user->email;
+				$fname = $user->induser->fname;
+				Mail::send('emails.auth.reminder', array('fname'=>$fname, 'token'=>$resetCode), function($message) use ($email,$fname){
+			        $message->to($email, $fname)->subject('Jobtip - Password Reset!')->from('admin@jobtip.in', 'JobTip');
+			    });
+			}
+
+			$data = ['page'=>'login', 'error'=>'none'];
+			return response()->json(['success'=>true,'data'=>$data]);
+
+		}else{
+			$data = ['page'=>'login', 'error'=>'Invalid email/mobile'];
+			return response()->json(['success'=>true,'data'=>$data]);
+		}
+	}
+
+	public function resetPassword($token){
+		if($token != null){
+			$user = User::where('reset_code','=',$token)->first();
+			if($user!=null){
+				return view('pages.resetpassword', compact('token'));
+			}else{
+				return redirect('/login');
+			}
+		}else{
+			return redirect('/login');
+		}
+	}
+
+	public function postResetPassword(){
+		$validator = Validator::make(
+					    ['password' => Input::get('password'), 
+					     'password_confirmation' => Input::get('password_confirmation'),
+					     'token' => Input::get('token')
+					    ],
+					    ['password' => 'required|min:6|confirmed', 
+					     'password_confirmation' => 'required|min:6',
+					     'token' => 'required'
+					    ]
+					);
+		if ($validator->fails()) {
+	        return redirect()->back()->withErrors($validator->errors());
+	    }else{
+			$user = User::where('reset_code','=',Input::get('token'))->first();
+			if($user!=null){
+				$user->password = bcrypt(Input::get('password'));
+				$user->reset_code = null;
+				$user->save();
+				return redirect('/login');
+			}
+		}
+	}
+
+	public function postChangePassword(){
+		$validator = Validator::make(
+					    ['password' => Input::get('password'), 
+					     'password_confirmation' => Input::get('password_confirmation'),
+					     'old_password' => Input::get('old_password')
+					    ],
+					    ['password' => 'required|min:6|confirmed', 
+					     'password_confirmation' => 'required|min:6',
+					     'old_password' => 'required|min:6'
+					    ]
+					);
+		if ($validator->fails()) {
+	        return redirect("/home#change-password")->withErrors($validator->errors());
+	    }else{
+	    	$user = User::where('induser_id','=',Auth::user()->induser_id)->first();
+			if( Hash::check(Input::get('old_password'), $user->password) ){
+				$user->password = bcrypt(Input::get('password'));
+				$user->save();
+				return redirect('/home#change-password')->withErrors(['Password changed successfully']);
+			}else{
+				return redirect("/home#change-password")->withErrors(['Old password doesnt match']);
+			}
+	    }
 	}
 		
 }
