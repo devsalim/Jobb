@@ -123,7 +123,7 @@ class ConnectionsController extends Controller {
 	{
 		$connections = Connections::findOrFail($id);
 		$connections->delete();
-		return redirect('/connections/create');
+		return redirect('/links');
 	}
 
 	public function inviteFriend($id)
@@ -132,7 +132,7 @@ class ConnectionsController extends Controller {
 		$connections->user_id=Auth::user()->induser_id;
 		$connections->connection_user_id=$id;
 		$connections->save();
-		return redirect('/connections/create');
+		return redirect('/links');
 	}
 
 	public function searchConnections()
@@ -184,7 +184,7 @@ class ConnectionsController extends Controller {
 		}elseif(Input::get('action') == 'reject'){
 			Connections::where('id', '=', $id)->update(['status' => 2]);
 		}
-		return redirect('/connections/create');
+		return redirect('/links');
 	}
 
 	public function newLink($id)
@@ -230,7 +230,6 @@ class ConnectionsController extends Controller {
 									->count('id');						
 			$connections = DB::select('select id,fname,lname,working_at,city,state,profile_pic from indusers
 										where indusers.id in (
-
 										select connections.user_id as id from connections
 										where connections.connection_user_id=?
 										 and connections.status=1 
@@ -272,5 +271,46 @@ class ConnectionsController extends Controller {
 		$title = 'followers';
 		$followers = Corpuser::find(Auth::user()->corpuser_id)->followers;
 		return view('pages.connections', compact('title', 'followers'));	
+	}
+
+	public function searchLinks()
+	{
+		$keywords = Input::get('keywords');
+		/*$users = Induser::where('email', '=', $keywords)
+						->where('id', '<>', Auth::user()->induser_id)
+						->orWhere('fname', 'like', '%'.$keywords.'%')
+						->where('id', '<>', Auth::user()->induser_id)
+						->orWhere('lname', 'like', '%'.$keywords.'%')
+						->where('id', '<>', Auth::user()->induser_id)
+						->orWhere('working_at', 'like', '%'.$keywords.'%')
+						->where('id', '<>', Auth::user()->induser_id)
+					    ->get();
+*/
+		$users = Induser::whereRaw('indusers.id in (
+										select connections.user_id as id from connections
+										where connections.connection_user_id=?
+										 and connections.status=1 
+										union 
+										select connections.connection_user_id as id from connections
+										where connections.user_id=?
+										 and connections.status=1
+									)', [Auth::user()->induser_id, Auth::user()->induser_id])
+						->whereRaw('fname like '.'%'.$keywords.'%')						
+						->get(['id','fname', 'lname', 'working_at', 'city', 'state', 'profile_pic']);
+		
+		/*$links = DB::select('select id from indusers
+									where indusers.id in (
+											select connections.user_id as id from connections
+											where connections.connection_user_id=?
+											 and connections.status=1
+											union 
+											select connections.connection_user_id as id from connections
+											where connections.user_id=?
+											 and connections.status=1
+								)', [Auth::user()->induser_id, Auth::user()->induser_id]);
+		$links = collect($links);*/
+
+		// return view('pages.searchUsers', compact('users', 'links', 'corps', 'follows'));
+		return $users;
 	}
 }

@@ -16,23 +16,24 @@
 	</div>
 	<div class="portlet-body form">
 		<div class="form-body">
-			<div class="row" style="margin-bottom: 20px;">
-				<div class="col-md-8 links-title" style="">		
-					<div class="form-group clearfix">	
+			<div class="row">
+				<div class="col-md-12" style="">
+					<div class="form-group clearfix" style="margin-bottom:0">	
 						<!-- BEGIN FORM-->
 						<form action="searchConnections" class="horizontal-form" method="post">
 							<input type="hidden" name="_token" value="{{ csrf_token() }}">				
 							<div class="input-icon right">
 								<i class="fa fa-search" style="color: darkcyan;"></i>
-								<input type="text" name="keywords" id="search-input" onkeydown="down()" onkeyup="up()" class="form-control input-circle" placeholder="Search" style="border: 1px solid darkcyan;">
+								<input type="text" name="keywords" id="search-input" onkeydown="down()" onkeyup="up()" class="form-control" placeholder="Search" style="border: 1px solid darkcyan;">
 							</div>	
 						</form>
 						<!-- END FORM-->
 					</div>
-					<div class="col-md-10 links-title" id="search-results" style="max-height:200px;overflow:auto;margin-bottom:10px">
-					</div>
-				</div>
+
+					<div class="col-md-12" id="search-results" style="background:#f2f2f2;max-height:200px;overflow:auto;margin-bottom:10px"></div>
+				</div>			
 			</div>
+
 			<div class="row">
 				<div class="col-md-8 links-title">
 					@if(count($groups)>0)

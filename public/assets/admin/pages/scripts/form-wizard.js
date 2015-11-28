@@ -92,11 +92,25 @@ var FormWizard = function () {
                     time_for:{
                         required: true
                     }
+                    email_id:{
+                        required: false,
+                        email: true
+                    },
+                    phone:{
+                        required: false,
+                        number: true
+                    }
                 },
 
                 messages: {
                 post_title: {
                     required: "Enter Job Title"
+                },
+                email_id: {
+                    email: "Enter valid Email Id"
+                },
+                phone: {
+                    number: "Enter Integer only"
                 },
                 job_detail: {
                     required: "Enter Job Detail"

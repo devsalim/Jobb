@@ -94,14 +94,68 @@
 													<span class="input-group-addon">
 													<i class="fa fa-cubes" style="color:darkcyan;"></i>
 													</span>
-													<select class="form-control" name="prof_category">
+													<select class="form-control" id="job_categories" multiple=multiple name="prof_category">
+<!-- 														Automotive/ Ancillaries
+														Banking/ Financial Services
+														Bio Technology & Life Sciences
+														Chemicals/Petrochemicals
+														Construction
+														FMCG
+														Education
+														Entertainment/ Media/ Publishing
+														Insurance
+														ITES/BPO
+														IT/ Computers - Hardware
+														IT/ Computers - Software
+														KPO/Analytics
+														Machinery/ Equipment Mfg.
+														Oil/ Gas/ Petroleum
+														Pharmaceuticals
+														Plastic/ Rubber
+														Power/Energy
+														Real Estate
+														Retailing
+														Telecom
+														Advertising/PR/Events
+														Agriculture/ Dairy Based
+														Aviation/Aerospace
+														Beauty/Fitness/PersonalCare/SPA
+														Beverages/ Liquor
+														Cement
+														Ceramics & Sanitary Ware
+														Consultancy
+														Courier/ Freight/ Transportation
+														Law Enforcement/Security Services
+														E-Learning
+														Shipping/ Marine Services
+														Engineering, Procurement, Construction
+														Environmental Service
+														Facility management
+														Fertilizer/ Pesticides
+														Food & Packaged Food
+														Textiles / Yarn / Fabrics / Garments
+														
+														
+														
+														
+														
+														
+														
+														
+														Mining
+														NGO
+														
+														
+														Public Relations (PR)
+														Travel/ Tourism
+														Other -->
 														<option value="">-- select --</option>
-														<optgroup label="Accounting">
+														<!-- <optgroup label="Accounting"> -->
 														<option value="Accounts/Finance/Tax">Accounts/Finance/Tax</option>
 														<option value="Agent">Agent</option>
 														<option value="Analytics & Business Intelligence">Analytics & Business Intelligence</option>
-														</optgroup>
-														<optgroup label="IT Field">
+														<!-- </optgroup>
+														<optgroup label="IT Field"> -->
 														<option value="HR/Administration/IR">HR/Administration/IR</option>
 														<option value="IT Software - Client Server">IT Software - Client Server</option>
 														<option value="IT Software - Mainframe">IT Software - Mainframe</option>
@@ -114,7 +168,20 @@
 														<option value="IT Software - DBA/Datawarehousing">IT Software - DBA/Datawarehousing</option>
 														<option value="IT Software - E-Commerce">IT Software - E-Commerce</option>
 														<option value="IT Software - ERP/CRM">IT Software - ERP/CRM</option>
-														</optgroup>
+														<option value="IT Software - ERP/CRM">IT Software - ERP/CRM</option>
+														<option value="IT Software - ERP/CRM">IT Software - ERP/CRM</option>
+														<!-- </optgroup> -->
+														<option value="Travel/ Tourism">Travel/ Tourism</option>
+														<option value="Public Relations (PR)">Public Relations (PR)</option>
+														<option value="Printing/ Packaging">Printing/ Packaging</option>
+														<option value="Medical Transcription">Medical Transcription</option>
+														<option value="Market Research">Market Research</option>
+														<option value="Import / Export">Import / Export</option>
+														<option value="Hotels/ Restaurant">Hotels/ Restaurant</option>
+														<option value="Hospitals/ Health Care">Hospitals/ Health Care</option>
+														<option value="Consumer Electronics/Appliances">Consumer Electronics/Appliances</option>
+														<option value="Government/ PSU/ Defence">Government/ PSU/ Defence</option>
+														<option value="Gems & Jewellery">Gems & Jewellery</option>
 													</select>
 												</div>
 											</div>
@@ -129,7 +196,7 @@
 													<span class="input-group-addon">
 														<i class="fa fa-cube" style="color:darkcyan;"></i>
 													</span>
-													<select name="role" class="form-control" >
+													<select name="role" class="form-control" style="z-index:0;">
 														<option value="">-- select --</option>
 														<option value="Web Developer">Web Developer</option>
 														<option value="Software Developer">Software Developer</option>
@@ -149,7 +216,7 @@
 														<span class="input-group-addon">
 															<i class="fa fa-building" style="color:darkcyan;"></i>
 														</span>
-														<input type="text" id="comp_name_1" name="post_compname" class="form-control" placeholder="Company Name">
+														<input type="text" id="comp_name_1" style="z-index:0;" name="post_compname" class="form-control" placeholder="Company Name">
 													</div>
 												</div>
 											</div>
@@ -162,7 +229,7 @@
 													<span class="input-group-addon">
 														<i class="fa fa-info" style="color:darkcyan;"></i>
 													</span>
-													<input type="text" id="ref_id_1" name="reference_id" class="form-control" placeholder="Reference Id">
+													<input type="text" id="ref_id_1" style="z-index:0;" name="reference_id" class="form-control" placeholder="Reference Id">
 												</div>
 											</div>
 										</div>
@@ -205,7 +272,7 @@
 													<span class="input-group-addon">
 														<i class="fa fa-info" style="color:darkcyan;"></i>
 													</span>
-													<input type="text" id="ref_id_3" name="reference_id" class="form-control" placeholder="Reference Id">
+													<input type="text" id="ref_id_3" name="reference_id" style="z-index:0;" class="form-control" placeholder="Reference Id">
 												</div>
 											</div>
 										</div>
@@ -247,8 +314,8 @@
 												<span class="input-group-addon">
 													<i class="icon-hourglass" style="color:darkcyan;"></i>
 												</span>
-												<select class="bs-select form-control" name="education" multiple style="float:none;">
-													<option value="">&nbsp;</option>
+												<select class="form-control" name="education" id="education" multiple=multiple style="margin: 20px;width:300px;" style="float:none;">
+													
 													<option value="Any Diploma">Any Diploma</option>
 													<option value="Any Graduate">Any Graduate</option>
 													<option value="Any Post Graduate">Any Post Graduate</option>
@@ -282,7 +349,7 @@
 												<span class="input-group-addon">
 													<i class="icon-hourglass" style="color:darkcyan;"></i>
 												</span>
-												<select name="time_for" class="form-control">
+												<select name="time_for" class="form-control" style="z-index:0;">
 													<option value="">-- select --</option>
 													<option value="Full Time">Full Time</option>
 													<option value="Part Time">Part Time</option>
@@ -306,37 +373,117 @@
 									</div>
 								</div>
 								<div class="row">
-									<div class="col-md-5 col-sm-5 col-xs-12">
+									<div class="col-md-2 col-sm-2 col-xs-6">
 										<div class="form-group">							
-											<label class=" control-label">Experience </label>&nbsp;: <input type="text" style="width: 20px;background:transparent;border:0" name="min_exp" class="min-exp">-
-											<input type="text" style="width: 14px;margin:0 4px;background:transparent;border:0" name="max_exp" class="max-exp">Years
-											<div class="">
-												<input id="range_1" type="text"  value=""/>
-												<!-- <input type="hidden" name="min_exp" class="min-exp">
-												<input type="hidden" name="max_exp" class="max-exp"> -->
+											<label class=" control-label">Min Exp </label>&nbsp;: 
+											<input type="text" style="width: 20px;background:transparent;border:0" id="min-label-exp" class="min-exp">
+											<div class="input-group">
+												<select name="min_exp" id="min-exp" style="z-index:0;" class="form-control positionTypes" >
+													<option value="">Select</option>					
+													<option value="1">1</option>
+													<option value="2">2 </option>
+													<option value="3">3</option>
+													<option value="4">4</option>
+													<option value="5">5</option>
+													<option value="6">6</option>
+													<option value="7">7</option>
+													<option value="8">8</option>
+													<option value="9">9</option>
+													<option value="10">10</option>
+													<option value="11">11</option>
+													<option value="12">12</option>
+												</select>
+											</div>
+										</div>
+									</div>
+									<div class="col-md-2 col-sm-2 col-xs-6">
+										<div class="form-group">	
+										<label class=" control-label">Max Exp </label>&nbsp;:
+										<input type="text" style="width: 20px;background:transparent;border:0" id="max-label-exp" class="max-exp">							
+											<div class="input-group">
+												<select name="max_exp" id="max-exp" style="z-index:0;" class="form-control positionTypes" >
+													<option value="">Select</option>					
+													<option value="1">1</option>
+													<option value="2">2 </option>
+													<option value="3">3</option>
+													<option value="4">4</option>
+													<option value="5">5</option>
+													<option value="6">6</option>
+													<option value="7">7</option>
+													<option value="8">8</option>
+													<option value="9">9</option>
+													<option value="10">10</option>
+													<option value="11">11</option>
+													<option value="12">12</option>
+												</select>
 											</div>
 										</div>
 									</div>
 									<!--/span-->
-									<div class="col-md-2 col-sm-2 col-xs-2"></div>
-									<div class="col-md-5 col-sm-5 col-xs-12">
+									<!-- <div class="col-md-2 col-sm-2 col-xs-2"></div> -->
+									<div class="col-md-4 col-sm-4 col-xs-6">
 										<div class="form-group">							
-											<label class=" control-label"><input type="checkbox" id="hide-check">&nbsp;Salary 
-											</label>&nbsp;:<select name="salary_type" style="border-top: 0px;border-left: 0;border-right: 0;">									
+											<label class=" control-label"><input type="checkbox" id="hide-check">&nbsp;Min Sal 
+											</label>&nbsp;
+											 <i class="fa fa-rupee (alias)"></i>
+											 <input type="text" style="width: 50px;margin:0 6px;background:transparent;border:0" id="min-label-sal" class="min-sal">
+											<div  class="input-group hide-sal">
+												<!-- <select  >
+													<option value="">Select</option>					
+													<option value="100">100</option>
+													<option value="500">500</option>
+													<option value="1000">1000</option>
+													<option value="1500">1500</option>
+													<option value="2000">2000</option>
+													<option value="3000">3000</option>
+													<option value="5000">5000</option>
+													<option value="7000">7000</option>
+													<option value="10000">10000</option>
+													<option value="15000">15000</option>
+													<option value="20000">20000</option>
+													<option value="25000">25000</option>
+													<option value="30000">30000</option>
+													<option value="50000">50000</option>
+													<option value="50000+">50000+</option>
+												</select> -->
+												<input name="min_sal" number id="min-sal" style="z-index:0;" class="form-control positionTypes">
+											</div>
+										</div>
+									</div>
+									<div class="col-md-4 col-sm-4 col-xs-6">
+										<div class="form-group">							
+											<label class=" control-label">Max Sal 
+											</label>&nbsp;:
+											<input type="text" style="width:50px;margin:0 6px;background:transparent;border:0" id="max-label-sal" class="max-sal">
+											<select name="salary_type" style="border-top: 0px;border-left: 0;border-right: 0;">									
+													<option value="">Select</option>
 													<option value="Monthly">Monthly</option>
 													<option value="Weekly">Weekly</option>
 													<option value="Daily">Daily</option>
 													<option value="Hourly">Hourly</option>
 													<option value="Per Visit">Per Visit</option>	
 												</select>
-											 <i class="fa fa-rupee (alias)"></i>&nbsp;<input type="text" style="width: 30px;margin:0 6px;background:transparent;border:0" name="min_sal" class="min-sal">-
-											<input type="text" style="width:40px;margin:0 4px;background:transparent;border:0" name="max_sal" class="max-sal">&nbsp;
-											
-											<div id="hide-sal" class="">
-												<input id="range_7" type="text"  value=""/>
-												<!-- <label name="min_sal" class="min-sal"></label> -->
-												<!-- <input type="hidden" name="min_sal" class="min-sal">
-												<input type="hidden" name="max_sal" class="max-sal"> -->
+											  
+											<div  class="input-group hide-sal">
+												<!-- <select name="max_sal" id="max-sal" class="form-control positionTypes" >
+													<option value="">Select</option>					
+													<option value="100">100</option>
+													<option value="500">500</option>
+													<option value="1000">1000</option>
+													<option value="1500">1500</option>
+													<option value="2000">2000</option>
+													<option value="3000">3000</option>
+													<option value="5000">5000</option>
+													<option value="7000">7000</option>
+													<option value="10000">10000</option>
+													<option value="15000">15000</option>
+													<option value="20000">20000</option>
+													<option value="25000">25000</option>
+													<option value="30000">30000</option>
+													<option value="50000">50000</option>
+													<option value="50000+">50000+</option>
+												</select> -->
+												<input name="max_sal" number id="max-sal" style="z-index:0;" class="form-control positionTypes">
 											</div>
 										</div>
 									</div>
@@ -416,20 +563,20 @@
 												<label>Post Duration <span class="required">
 													* </span></label>
 												<div class="input-group">
-												<span class="input-group-addon">
-												<i class="icon-clock" style=" color: darkcyan;"></i>
-												</span>
-												<select name="post_duration" class="form-control" >
-													<option value="">--select--</option>					
-													<option value="3">3 Days</option>
-													<option value="7">7 Days</option>
-													<option value="15">15 Days</option>
-													<option value="30">30 Days</option>
-												</select>
+													<span class="input-group-addon">
+													<i class="icon-clock" style=" color: darkcyan;"></i>
+													</span>
+													<select name="post_duration" class="form-control" >
+														<option value="">--select--</option>					
+														<option value="3">3 Days</option>
+														<option value="7">7 Days</option>
+														<option value="15">15 Days</option>
+														<option value="30">30 Days</option>
+													</select>
+												</div>
 											</div>
 										</div>
 									</div>
-								</div>
 								<div class="row">
 									<div class="col-md-5">
 										<div class="form-group">
@@ -677,14 +824,45 @@ jQuery(document).ready(function() {
     FormWizard.init();
 });
 </script>
+<script>
+        $("#education").multipleSelect({
+            filter: true,
+            multiple: true
+        });
+
+         $("#job_categories").multipleSelect();
+
+        $("#min-exp").change(function () {
+	    $("#min-label-exp").val($(this).val());
+	    //alert($(this).val()) 
+	})
+         $("#max-exp").change(function () {
+	    $("#max-label-exp").val($(this).val());
+	    //alert($(this).val()) 
+	})
+         $("#min-sal").change(function () {
+	    $("#min-label-sal").val($(this).val());
+	    //alert($(this).val()) 
+	})
+         $("#max-sal").change(function () {
+	    $("#max-label-sal").val($(this).val());
+	    //alert($(this).val()) 
+	})
+    $("select.positionTypes").change(function () {
+    $("select.positionTypes option[value='" + $(this).data('index') + "']").prop('disabled', false); //reset others on change everytime
+    $(this).data('index', this.value);
+    $("select.positionTypes option[value='" + this.value + "']:not([value=''])").prop('disabled', true);
+    $(this).find("option[value='" + this.value + "']:not([value=''])").prop('disabled', false); // Do not apply the logic to the current one
+});
+    </script>
 <script type="text/javascript">
     $(function () {
-    	$("#hide-sal").hide();
+    	$(".hide-sal").hide();
         $("#hide-check").click(function () {
             if ($(this).is(":checked")) {
-                $("#hide-sal").show();
+                $(".hide-sal").show();
             } else {
-                $("#hide-sal").hide();
+                $(".hide-sal").hide();
             }
         });
     });

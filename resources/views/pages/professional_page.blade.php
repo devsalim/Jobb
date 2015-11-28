@@ -1,6 +1,35 @@
 @extends('master')
 
+<!--  -->
 @section('content')
+<!-- <dl class="dropdown"> 
+  
+    <dt>
+    <a href="#">
+      <span class="hida">Select</span>    
+      <p class="multiSel"></p>  
+    </a>
+    </dt>
+  
+    <dd>
+        <div class="mutliSelect">
+            <ul>
+                <li>
+                    <input type="checkbox" value="Apple" />Apple</li>
+                <li>
+                    <input type="checkbox" value="Blackberry" />Blackberry</li>
+                <li>
+                    <input type="checkbox" value="HTC" />HTC</li>
+                <li>
+                    <input type="checkbox" value="Sony Ericson" />Sony Ericson</li>
+                <li>
+                    <input type="checkbox" value="Motorola" />Motorola</li>
+                <li>
+                    <input type="checkbox" value="Nokia" />Nokia</li>
+            </ul>
+        </div>
+    </dd>
+</dl> -->
 <?php $selected = 'selected'; ?> 
 <div class="portlet light bordered" style="border: 1px solid #e1e1e1 !important;">
 	<div class="portlet-title">
@@ -283,7 +312,7 @@
 										<span class="input-group-addon">
 											<i class=" icon-briefcase"></i>
 										</span>
-										<select class="form-control" id="menu" onChange="checkOption(this)" value="{{ $user->working_status }}" name="working_status">
+										<select class="form-control" id="working_status" name="working_status">
 											<option value="">Select</option>
 											<option @if($user->working_status=="Student") {{ $selected }} @endif value="Student">Student</option>
 											<option @if($user->working_status=="Searching Job") {{ $selected }} @endif value="Searching Job">Searching Job</option>
@@ -322,7 +351,7 @@
 									</div>
 								</div>
 							</div>
-							<div class="col-md-6 col-sm-6 col-xs-12">
+							<div class="col-md-6 col-sm-6 col-xs-12" >
 								<div class="form-group">
 									<label>Working at</label>
 									<div class="input-group">
@@ -330,7 +359,7 @@
 											<i class="fa fa-university"></i>
 										</span>
 										
-										<input type="text" id="workingAs" class="form-control" value="{{ $user->working_at }}" name="working_at">
+										<input type="text" id="workingat" class="form-control" value="{{ $user->working_at }}" name="working_at">
 									</div>
 								</div>
 							</div>
@@ -344,30 +373,57 @@
 										<span class="input-group-addon">
 											<i class="fa fa-cubes"></i>
 										</span>
-										<select class="form-control" name="prof_category" value="{{ $user->prof_category }}" >
-											<option value="">-- Select --</option>
-											<option @if($user->prof_category=="Searching Job") {{ $selected }} @endif value="Searching Job">Searching Job</option>
-											<option @if($user->prof_category=="Student") {{ $selected }} @endif value="Student">Student</option>
+<!-- 										<ul class="form-control">
+											<li>Student</li>
+											<li>Searcing Job 
+
+											<ul class="sub-menu">
+									          <li>
+									            <a class="ajaxify" href="layout_ajax_content_2.html">
+									            Ajax Link Sample 1 </a>
+									          </li>
+									          <li>
+									            <a class="ajaxify" href="layout_ajax_content_3.html">
+									            Ajax Link Sample 2 </a>
+									          </li>
+									          <li>
+									            <a class="ajaxify" href="layout_ajax_content_2.html">
+									            Ajax Link Sample 3 </a>
+									          </li>
+									          <li>
+									            <a class="ajaxify" href="layout_ajax_content_3.html">
+									            Ajax Link Sample 4 </a>
+									          </li>
+									        </ul>
+									    </li>
+											<li></li>
+											<li></li>
+										</ul> -->	
+										<select class="form-control" id="job-category" multiple="multiple" name="prof_category">
+											
+											
 											<optgroup label="Accounting">
-												<option @if($user->prof_category=="Accounts/Finance/Tax") {{ $selected }} @endif value="Accounts/Finance/Tax">Accounts/Finance/Tax</option>
-												<option @if($user->prof_category=="Agent") {{ $selected }} @endif value="Agent">Agent</option>
-												<option @if($user->prof_category=="Analytics & Business Intelligence") {{ $selected }} @endif value="Analytics & Business Intelligence">
+												<option  value="Searching Job">Searching Job</option>
+												<option  value="Student">Student</option>
+												<option  value="Accounts/Finance/Tax">Accounts/Finance/Tax</option>
+												<option  value="Agent">Agent</option>
+												<option  value="Analytics & Business Intelligence">
 													Analytics & Business Intelligence
 												</option>
 											</optgroup>
 											<optgroup label="IT Field">
-												<option @if($user->prof_category=="HR/Administration/IR") {{ $selected }} @endif value="HR/Administration/IR">HR/Administration/IR</option>
-												<option @if($user->prof_category=="IT Software - Client Server") {{ $selected }} @endif value="IT Software - Client Server">IT Software - Client Server</option>
-												<option @if($user->prof_category=="IT Software - Mainframe") {{ $selected }} @endif value="IT Software - Mainframe">IT Software - Mainframe</option>
-												<option @if($user->prof_category=="IT Software - Middleware") {{ $selected }} @endif value="IT Software - Middleware">IT Software - Middleware</option>
-												<option @if($user->prof_category=="IT Software - Mobile") {{ $selected }} @endif value="IT Software - Mobile">IT Software - Mobile</option>
-												<option @if($user->prof_category=="IT Software - Other") {{ $selected }} @endif value="IT Software - Other">IT Software - Other</option>
-												<option @if($user->prof_category=="IT Software - System Programming") {{ $selected }} @endif value="IT Software - System Programming">IT Software - System Programming</option>
-												<option @if($user->prof_category=="IT Software - Telecom Software") {{ $selected }} @endif value="IT Software - Telecom Software">IT Software - Telecom Software</option>
-												<option @if($user->prof_category=="IT Software - Application Programming") {{ $selected }} @endif value="IT Software - Application Programming">IT Software - Application Programming</option>
-												<option @if($user->prof_category=="IT Software - DBA/Datawarehousing") {{ $selected }} @endif value="IT Software - DBA/Datawarehousing">IT Software - DBA/Datawarehousing</option>
-												<option @if($user->prof_category=="IT Software - E-Commerce") {{ $selected }} @endif value="IT Software - E-Commerce">IT Software - E-Commerce</option>
-												<option @if($user->prof_category=="IT Software - ERP/CRM") {{ $selected }} @endif value="IT Software - ERP/CRM">IT Software - ERP/CRM</option>
+												<option value="HR/Administration/IR">HR/Administration/IR</option>
+												<option value="IT Software - Client Server">IT Software - Client Server</option>
+												<option value="IT Software - Mainframe">IT Software - Mainframe</option>
+												<option value="IT Software - Middleware">IT Software - Middleware</option>
+												<option value="IT Software - Mobile">IT Software - Mobile</option>
+												<option value="IT Software - Other">IT Software - Other</option>
+												<option value="IT Software - System Programming">IT Software - System Programming</option>
+												<option value="IT Software - Telecom Software">IT Software - Telecom Software</option>
+												<option value="IT Software - Application Programming">IT Software - Application Programming</option>
+												<option value="IT Software - DBA/Datawarehousing">IT Software - DBA/Datawarehousing</option>
+												<option value="IT Software - E-Commerce">IT Software - E-Commerce</option>
+												<option value="IT Software - ERP/CRM">IT Software - ERP/CRM</option>
 											</optgroup>
 										</select>
 									</div>
@@ -391,61 +447,26 @@
 						<div class="row">
 							<div class="col-md-6 col-sm-6">
 								<div class="form-group">
-									<label>City <span class="required">
+									<label> Current City <span class="required">
 											* </span></label>									
 									<div class="input-group">
 										<span class="input-group-addon">
 											<i class="fa fa-map-marker"></i>
 										</span>
-										<input type="text" name="city" class="form-control" value="{{ $user->city }}" placeholder="City">
+										<input type="text" id="city" name="city" class="form-control" value="{{ $user->city }}" placeholder="City">
 									</div>
 								</div>
 							</div>
 							<!--/span-->
 							<div class="col-md-6 col-sm-6">
 								<div class="form-group">
-									<label>State <span class="required">
-											* </span></label>
+									<label>Locality </label>
 									<div class="input-group">
 										<span class="input-group-addon">
 										<i class="fa fa-map-marker"></i>
 										</span>
-										<select class="form-control" name="state" value="{{ $user->state }}">
-											<option value="">-- Select --</option>
-											<option @if($user->state=="Andaman and Nicobar Islands") {{ $selected }} @endif value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
-											<option @if($user->state=="Andhra Pradesh") {{ $selected }} @endif value="Andhra Pradesh">Andhra Pradesh</option>
-											<option @if($user->state=="Arunachal Pradesh") {{ $selected }} @endif value="Arunachal Pradesh">Arunachal Pradesh</option>
-											<option @if($user->state=="Assam") {{ $selected }} @endif value="Assam">Assam</option>
-											<option @if($user->state=="Bihar") {{ $selected }} @endif value="Bihar">Bihar</option>
-											<option @if($user->state=="Chandigarh") {{ $selected }} @endif value="Chandigarh">Chandigarh</option>
-											<option @if($user->state=="Delhi") {{ $selected }} @endif value="Delhi">Delhi</option>
-											<option @if($user->state=="Goa") {{ $selected }} @endif value="Goa">Goa</option>
-											<option @if($user->state=="Gujarat") {{ $selected }} @endif value="Gujarat">Gujarat</option>
-											<option @if($user->state=="Haryana") {{ $selected }} @endif value="Haryana">Haryana</option>
-											<option @if($user->state=="Himachal Pradesh") {{ $selected }} @endif value="Himachal Pradesh">Himachal Pradesh</option>
-											<option @if($user->state=="Jammu and Kashmir") {{ $selected }} @endif value="Jammu and Kashmir">Jammu and Kashmir</option>
-											<option @if($user->state=="Jharkhand") {{ $selected }} @endif value="Jharkhand">Jharkhand</option>
-											<option @if($user->state=="Karnataka") {{ $selected }} @endif value="Karnataka">Karnataka</option>
-											<option @if($user->state=="Kerala") {{ $selected }} @endif value="Kerala">Kerala</option>
-											<option @if($user->state=="Lakshadweep") {{ $selected }} @endif value="Lakshadweep">Lakshadweep</option>
-											<option @if($user->state=="Madhya Pradesh") {{ $selected }} @endif value="Madhya Pradesh">Madhya Pradesh</option>
-											<option @if($user->state=="Maharashtra") {{ $selected }} @endif value="Maharashtra">Maharashtra</option>
-											<option @if($user->state=="Manipur") {{ $selected }} @endif value="Manipur">Manipur</option>
-											<option @if($user->state=="Meghalaya") {{ $selected }} @endif value="Meghalaya">Meghalaya</option>
-											<option @if($user->state=="Mizoram") {{ $selected }} @endif value="Mizoram">Mizoram</option>
-											<option @if($user->state=="Nagaland") {{ $selected }} @endif value="Nagaland">Nagaland</option>
-											<option @if($user->state=="Orissa") {{ $selected }} @endif value="Orissa">Orissa</option>
-											<option @if($user->state=="Pondicherry") {{ $selected }} @endif value="Pondicherry">Pondicherry</option>
-											<option @if($user->state=="Punjab") {{ $selected }} @endif value="Punjab">Punjab</option>
-											<option @if($user->state=="Rajasthan") {{ $selected }} @endif value="Rajasthan">Rajasthan</option>
-											<option @if($user->state=="Sikkim") {{ $selected }} @endif value="Sikkim">Sikkim</option>
-											<option @if($user->state=="Tamil Nadu") {{ $selected }} @endif value="Tamil Nadu">Tamil Nadu</option>
-											<option @if($user->state=="Telangana") {{ $selected }} @endif value="Telangana">Telangana</option>
-											<option @if($user->state=="Tripura") {{ $selected }} @endif value="Tripura">Tripura</option>
-											<option @if($user->state=="Uttar Pradesh") {{ $selected }} @endif value="Uttar Pradesh">Uttar Pradesh</option>
-											<option @if($user->state=="Uttaranchal") {{ $selected }} @endif value="Uttaranchal">Uttaranchal</option>
-											<option @if($user->state=="West Bengal") {{ $selected }} @endif value="West Bengal">West Bengal</option>
-										</select>
+										<input type="text" name="c_locality" class="form-control" placeholder="Locality">
+										
 									</div>
 								</div>
 							</div>
@@ -499,6 +520,21 @@
 							<!--/span-->
 							<div class="col-md-6 col-sm-6">
 								<div class="form-group">
+									<label>Prefered Locality </label>
+									<div class="input-group">
+										<span class="input-group-addon">
+										<i class="fa fa-map-marker"></i>
+										</span>
+										<input type="text" name="p_locality" class="form-control" placeholder="Locality">
+										
+									</div>
+								</div>
+							</div>
+							
+						</div>
+						<div class="row">
+							<div class="col-md-6 col-sm-6">
+								<div class="form-group">
 									<label>Prefered Job Type <span class="required">
 											* </span></label>
 									<div class="input-group">
@@ -515,9 +551,7 @@
 									</div>
 								</div>
 							</div>
-						</div>
-						<div class="row">
-							<div class="col-md-12">
+							<div class="col-md-6 col-sm-6">
 								<div class="form-group" style="">
 									<label class="control-label">Upload Resume <small style="font-weight: 400; font-size: 13px;">(Optional) only pdf or word format</small></label>&nbsp;
 									
@@ -571,6 +605,30 @@
 
 
 @section('javascript')
+
+<script src="http://maps.googleapis.com/maps/api/js?libraries=places&region=IN" type="text/javascript"></script>
+<script type="text/javascript">
+	function initialize() {
+		var options = {	types: ['(cities)'], componentRestrictions: {country: "in"}	};
+		var input = document.getElementById('city');
+		var autocomplete = new google.maps.places.Autocomplete(input, options);
+		autocomplete.addListener('place_changed', onPlaceChanged); 
+		function onPlaceChanged() {
+		  var place = autocomplete.getPlace();
+		  if (place.address_components) { city = place.address_components[0];
+		  	document.getElementById('city').value = city.long_name;
+		  } else { document.getElementById('autocomplete').placeholder = 'Enter a city'; }
+		}
+	}
+   google.maps.event.addDomListener(window, 'load', initialize);   
+</script>
+	<script>
+        $("#job-category").multipleSelect({
+            filter: true,
+            multiple: true
+        });
+    </script>
+
 <script src="{{ asset('/assets/Edubranch.js') }}"></script>
 <script src="{{ asset('/assets/ind_validation.js') }}"></script>
 <script>
@@ -582,16 +640,33 @@
 </script>
 <script type="text/javascript">
 	
-	function checkOption(obj) {
-	    var input = document.getElementById("workingAs");
-	    input.disabled = obj.value == "Student";
-	    input.disabled = obj.value == "Searching Job";
-	}
 
 	// function checkOption(obj) {
 	//     var input = document.getElementById("workingAs");
 	//     input.disabled = obj.value == "Searching Job";
 	// }
+	$(document).ready(function () {
+toggleFields();
+$('#working_status').change(function () {
+toggleFields();
+});
+
+});
+function toggleFields() {
+if ($('#working_status').val() == 'Student' || $('#working_status').val() == 'Searching Job')
+// $("#workingat").removeAttr('value');
+$("#workingat").attr('disabled','disabled').val('');
+else
+$("#workingat").removeAttr('disabled');
+}
+
+// rules: {
+// working_at: {
+// required: function(element) {
+// return $("#working_status").val() == 'Working'
+// }
+// }
+// }
 
 	$(function(){
 

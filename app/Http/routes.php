@@ -26,6 +26,7 @@ Route::group(array('before' => 'auth'), function(){
 	Route::get('mypost', 'PagesController@myPost');
 	Route::post('myactivity/post', 'PagesController@post');
 	Route::post('/matching_criteria', 'PagesController@matching');
+	Route::post('viewcontact/view', 'PagesController@viewContact');
 
 	Route::get('individual', 'UserController@index');
 	Route::get('individual/create', 'UserController@create');
@@ -92,6 +93,7 @@ Route::group(array('before' => 'auth'), function(){
 	Route::post('feedback/home', 'FeedbackController@report');
 
 	Route::post('searchConnections', 'ConnectionsController@searchConnections');
+	Route::get('searchLinks', 'ConnectionsController@searchLinks');
 
 	Route::get('individual_view', 'ViewpageController@index');
 	Route::get('individual_view/create', 'ViewpageController@create');

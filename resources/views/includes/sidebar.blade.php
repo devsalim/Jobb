@@ -10,7 +10,8 @@
   </div>
    <div class="row  nav-thank-fav" id="nav-than-fav">
       <div class="col-md-4 col-sm-4 col-xs-4">
-        <a href="/notification_view" class="icon-btn" style="border: 0 !important;background-color: transparent !important;min-width:55px !important;">
+        <a href="/notify/thanks/@if(Auth::user()->identifier==1){{'ind'}}@elseif(Auth::user()->identifier==2){{'corp'}}@endif/{{Auth::user()->induser_id}}{{Auth::user()->corpuser_id}}" data-utype="thank"
+         class="icon-btn @if($title == 'notify_view'){{'active'}}@endif" style="border: 0 !important;background-color: transparent !important;min-width:55px !important;">
           <i class="icon-like" style="color: white"></i>
           <div style="color: whitesmoke;">
              Thanks

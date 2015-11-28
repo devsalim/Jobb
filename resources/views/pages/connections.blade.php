@@ -38,12 +38,93 @@
 							<!-- BEGIN FORM-->
 							<form action="searchConnections" class="horizontal-form" method="post">
 								<input type="hidden" name="_token" value="{{ csrf_token() }}">				
-								 <span class="">
-						            <a class="advance-search btn" data-toggle="modal" href="#advance">Click for Advance Search</a>
-						          </span>
-								<div class="input-icon right">
+								<!--  <span class="">
+						            <a class="advance-search btn">Click for Advance Search</a>
+						          </span> -->
+						          	<div class="show-adsearch">
+						          		<form id="search-profile" action="/search/profile" method="post">
+					                      <input type="hidden" name="_token" value="{{ csrf_token() }}">
+					                      <div class="row-md-2"></div>
+					                      <div class="row-md-6" style="margin-bottom: 20px;margin-top: 10px;">
+					                        <div class="col-md-12 col-sm-12 col-xs-12 advance-len">
+					                          <div class="input-group" style="margin:0 auto;">
+					                            <div class="icheck-inline">
+					                              <label>
+					                              <input id="id_radio1" type="radio" checked name="type" value="people" class="">People</label>
+					                              <label>
+					                              <input id="id_radio2" type="radio" value="company" name="type" class="">Company</label>
+					                            </div>
+					                          </div>
+					                        </div> 
+					                      </div>
+					                      <div class="row show-firm-type">
+					                      	<div class="btn-group col-md-12 col-sm-12 col-xs-12" style="margin:10px;" data-toggle="buttons">
+												<label class="btn btn-default color-button check-font-size active" >
+												<input type="checkbox" name="firm_type[]" value="Company" class="toggle"> Company </label>
+												<label class="btn btn-default color-button check-font-size">
+												<input type="checkbox" name="firm_type[]" value="Consultancy" class="toggle"> Consultancy </label>
+											</div>
+					                      </div>
+					                      <div class="row">
+					                        <div class="col-md-6 col-sm-6 col-xs-6 advance-len">
+					                          <div class="form-group">              
+					                              <input type="text" name="name" class="form-control filter-input" placeholder="Enter Name or Email Id">
+					                          </div>  
+					                        </div>
+					                        <div class="col-md-6 col-sm-6 col-xs-6 advance-len">
+					                          <div class="form-group">              
+					                              <input type="text" name="city" class="form-control filter-input" placeholder="Location: Pune, Hyderabad">
+					                          </div>  
+					                        </div>
+					                      </div>
+					                      <div class="row">
+					                        <div class="col-md-6 col-sm-12 col-xs-12 advance-len">
+					                          <div class="form-group">              
+					                              <input type="text" name="role" class="form-control filter-input" placeholder="Job Role">
+					                          </div>  
+					                        </div>
+					                        <div class="col-md-6 col-sm-12 col-xs-12 advance-len">
+					                          <div class="form-group">              
+					                              <input type="text" name="category" class="form-control filter-input" placeholder="Job Category">
+					                          </div>  
+					                        </div>
+					                      </div>
+					                      <div class="row show-comp">
+					                        <div class="col-md-6 col-sm-12 col-xs-12 advance-len">
+					                          <div class="form-group">              
+					                              <input type="text" name="working_at" class="form-control filter-input" placeholder="Working at">
+					                          </div>  
+					                        </div>
+					                        <div class="col-md-6 col-sm-12 col-xs-12 advance-len">
+					                          <div class="form-group">              
+					                              <input type="text" name="mobile" class="form-control filter-input" placeholder="Mobile No">
+					                          </div>  
+					                        </div>
+					                      </div>
+					                      <div class="row" style="margin-bottom: 10px;">
+					                        <div class="col-md-12 col-sm-12 col-xs-12">
+ 					                          <div class="footer links-title center-css">              
+					                              <button type="submit" class="btn blue "><i class="glyphicon glyphicon-search"></i> Search</button>
+					                          		<a class="advance-search">
+					                              	<button type="button" class="btn"><i class="glyphicon glyphicon-chevron-left"></i> Back</button>
+					                         	  </a>
+					                          </div> 
+					                        </div>
+					                        <!-- <div class="col-md-6 col-sm-6 col-xs-6">
+ 					                          <div class="footer links-title">              
+					                            
+					                              <a class="advance-search">
+					                              	<button type="button" class="btn"><i class="glyphicon glyphicon-chevron-left"></i> Back</button>
+					                         	  </a>
+					                          </div> 
+					                        </div> -->
+					                      </div>
+					                    </form>
+						          </div>
+								<div class="input-icon right normal_search">
 									<i class="fa fa-search" style="color: darkcyan;"></i>
 									<input type="text" name="keywords" id="search-input" onkeydown="down()" onkeyup="up()" class="form-control" placeholder="Search" style="border: 1px solid darkcyan;margin-bottom:0">
+									<a class="advance-search btn" style="position: absolute;right: 30px;top: 5px;">Advance</a>
 								</div>	
 							</form>
 							<!-- END FORM-->
@@ -250,109 +331,6 @@
 		</div>
 	</div>
 </div>
-<div class="modal fade" id="advance" tabindex="-1" role="basic" aria-hidden="true">
-  <div class="modal-dialog modal-width">
-    <div class="modal-content">
-      <div class="modal-header" style="background-color: #3598dc; height: 40px;padding: 8px;">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="position: absolute;right: 15px;top: 15px;"></button>
-        <h4 class="modal-title links-title" style="color:white;">
-          <i class="icon-magnifier"></i> Advance Search
-        </h4>
-      </div>
-      <div class="modal-body links-title" style="padding:0;">
-        <div class="portlet box" style="border: 0;">
-              <div class="portlet-body">
-                <div class="tabbable-line">
-                  <ul class="nav nav-tabs" style="padding-left: 0;margin: 0 auto;float: none;display: table;">
-                    <li class="active">
-                      <a href="#tab_15_2" data-toggle="tab" style="font-size:15px;font-weight:600;">
-                      Profile </a>
-                    </li>
-                  </ul>
-                  <div class="tab-content">
-                    <div class="tab-pane active" id="tab_15_2">
-                      <form id="search-profile" action="/search/profile" method="post">
-                      <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                      <div class="row-md-2"></div>
-                      <div class="row-md-6" style="margin-bottom: 20px;margin-top: 10px;">
-                        <div class="col-md-12 col-sm-12 col-xs-12 advance-len">
-                          <div class="input-group" style="margin:0 auto;">
-                            <div class="icheck-inline">
-                              <label>
-                              <input id="id_radio1" type="radio" checked name="type" value="people" class="">People</label>
-                              <label>
-                              <input id="id_radio2" type="radio" value="company" name="type" class="">Company</label>
-                            </div>
-                          </div>
-                        </div> 
-                      </div>
-                      <div class="row show-firm-type">
-                      	<div class="btn-group col-md-12 col-sm-12 col-xs-12" style="margin:10px;" data-toggle="buttons">
-							<label class="btn btn-default color-button check-font-size active" >
-							<input type="checkbox" name="firm_type[]" value="Company" class="toggle"> Company </label>
-							<label class="btn btn-default color-button check-font-size">
-							<input type="checkbox" name="firm_type[]" value="Consultancy" class="toggle"> Consultancy </label>
-						</div>
-                      </div>
-                      <div class="row">
-                        <div class="col-md-6 col-sm-6 col-xs-6 advance-len">
-                          <div class="form-group">              
-                              <input type="text" name="name" class="form-control filter-input" placeholder="Enter Name or Email Id">
-                          </div>  
-                        </div>
-                        <div class="col-md-6 col-sm-6 col-xs-6 advance-len">
-                          <div class="form-group">              
-                              <input type="text" name="city" class="form-control filter-input" placeholder="Location: Pune, Hyderabad">
-                          </div>  
-                        </div>
-                      </div>
-                      <div class="row">
-                        <div class="col-md-6 col-sm-12 col-xs-12 advance-len">
-                          <div class="form-group">              
-                              <input type="text" name="role" class="form-control filter-input" placeholder="Job Role">
-                          </div>  
-                        </div>
-                        <div class="col-md-6 col-sm-12 col-xs-12 advance-len">
-                          <div class="form-group">              
-                              <input type="text" name="category" class="form-control filter-input" placeholder="Job Category">
-                          </div>  
-                        </div>
-                      </div>
-                      <div class="row show-comp">
-                        <div class="col-md-6 col-sm-12 col-xs-12 advance-len">
-                          <div class="form-group">              
-                              <input type="text" name="working_at" class="form-control filter-input" placeholder="Working at">
-                          </div>  
-                        </div>
-                        <div class="col-md-6 col-sm-12 col-xs-12 advance-len">
-                          <div class="form-group">              
-                              <input type="text" name="mobile" class="form-control filter-input" placeholder="Mobile No">
-                          </div>  
-                        </div>
-                      </div>
-                      <div class="row" style="margin-bottom: 10px;">
-                        <div class="col-md-12 col-sm-12 col-xs-12">
-                          <div class="footer links-title">              
-                              <button type="submit" class="btn blue links-title"><i class="glyphicon glyphicon-search"></i> Search</button>
-                          </div>  
-                        </div>
-                      </div>
-                    </form>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-      </div>
-     <!--  <div class="modal-footer">
-        <button type="button" class="btn blue links-title"><i class="glyphicon glyphicon-search"></i> Search</button>
-      </div> -->
-    </div>
-    <!-- /.modal-content -->
-  </div>
-  <!-- /.modal-dialog -->
-</div>
-<!-- /.modal -->
 @elseif(Auth::user()->identifier == 2)
 <div class="portlet light bordered col-md-7">
 	<div class="portlet-title">
@@ -462,5 +440,14 @@ function down()
           $('.show-firm-type').show();
      });
    });
+
+    $(document).ready(function(){
+
+    jQuery('.advance-search').on('click', function(event) {
+	    jQuery('.show-adsearch').toggle('show');
+	    jQuery('.normal_search').toggle('hide');
+    });
+});
+
 </script>
 @stop

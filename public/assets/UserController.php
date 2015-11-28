@@ -2,6 +2,7 @@
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Validator;
 
 use DB;
 use Auth;
@@ -14,6 +15,7 @@ use App\Http\Requests\CreateUserRequest;
 use App\Http\Requests\CreateImgUploadRequest;
 use Illuminate\Http\Response;
 use Mail;
+
 
 class UserController extends Controller {
 
@@ -80,12 +82,14 @@ class UserController extends Controller {
 			   DB::rollback();
 			   throw $e;
 			}
+			
 			DB::commit();
-
 			if($request['email'] != null){
-				$vcode = Induser::where('email', '=', $request['email'])->pluck('vcode');
-				Mail::send('emails.welcome', array('fname'=>$request['fname'], 'vcode'=>$vcode), function($message){
-			        $message->to($request['email'], $request['fname'].' '.$request['lname'])->subject('Welcome to Jobtip!');
+				$email = $request['email'];
+				$fname = $request['fname'];
+				$vcode = Induser::where('email', '=', $request['email'])->pluck('email_vcode');
+				Mail::send('emails.welcome', array('fname'=>$fname, 'vcode'=>$vcode), function($message) use ($email,$fname){
+			        $message->to($email, $fname)->subject('Welcome to Jobtip!')->from('admin@jobtip.in', 'JobTip');
 			    });
 			}
 
@@ -125,11 +129,14 @@ class UserController extends Controller {
 			   DB::rollback();
 			   throw $e;
 			}
+			
 			DB::commit();
 			if($request['email'] != null){
-				$vcode = Induser::where('email', '=', $request['email'])->pluck('vcode');
-				Mail::send('emails.welcome', array('fname'=>$request['fname'], 'vcode'=>$vcode), function($message){
-			        $message->to($request['email'], $request['fname'].' '.$request['lname'])->subject('Welcome to Jobtip!');
+				$email = $request['email'];
+				$fname = $request['fname'];
+				$vcode = Induser::where('email', '=', $request['email'])->pluck('email_vcode');
+				Mail::send('emails.welcome', array('fname'=>$fname, 'vcode'=>$vcode), function($message) use ($email,$fname){
+			        $message->to($email, $fname)->subject('Welcome to Jobtip!')->from('admin@jobtip.in', 'JobTip');
 			    });
 			}
 			
@@ -191,8 +198,7 @@ class UserController extends Controller {
 			$data->role = Input::get('role');
 			$data->working_at = Input::get('working_at');
 			$data->working_status = Input::get('working_status');
-			$data->c_locality = Input::get('c_locality');
-			$data->p_locality = Input::get('p_locality');
+			$data->state = Input::get('state');
 			$data->city = Input::get('city');
 			$data->prefered_location = Input::get('prefered_location');
 			$data->prefered_jobtype = Input::get('prefered_jobtype');
@@ -294,6 +300,68 @@ class UserController extends Controller {
 			return 'verification-success';
 		}else{
 			return 'verification-failure';
+		}
+	}
+
+	public function forgetPassword(){
+		$emailOrMobile = Input::get('email');
+		$user = User::where('email','=',$emailOrMobile)->orWhere('mobile','=',$emailOrMobile)->first();
+		if($user != null && ($user->email == $emailOrMobile || $user->mobile == $emailOrMobile)){
+			$resetCode = md5(rand(11111,99999));
+			$user->reset_code = $resetCode;
+			$user->save();
+
+			if($user->email != null){
+				$email = $user->email;
+				$fname = $user->induser->fname;
+				Mail::send('emails.auth.reminder', array('fname'=>$fname, 'token'=>$resetCode), function($message) use ($email,$fname){
+			        $message->to($email, $fname)->subject('Jobtip - Password Reset!')->from('admin@jobtip.in', 'JobTip');
+			    });
+			}
+
+			$data = ['page'=>'login', 'error'=>'none'];
+			return response()->json(['success'=>true,'data'=>$data]);
+
+		}else{
+			$data = ['page'=>'login', 'error'=>'Invalid email/mobile'];
+			return response()->json(['success'=>true,'data'=>$data]);
+		}
+	}
+
+	public function resetPassword($token){
+		if($token != null){
+			$user = User::where('reset_code','=',$token)->first();
+			if($user!=null){
+				return view('pages.resetpassword', compact('token'));
+			}else{
+				return redirect('/login');
+			}
+		}else{
+			return redirect('/login');
+		}
+	}
+
+	public function postResetPassword(){
+		$validator = Validator::make(
+					    ['password' => Input::get('password'), 
+					     'password_confirmation' => Input::get('password_confirmation'),
+					     'token' => Input::get('token')
+					    ],
+					    ['password' => 'required|min:6|confirmed', 
+					     'password_confirmation' => 'required|min:6',
+					     'token' => 'required'
+					    ]
+					);
+		if ($validator->fails()) {
+	        return redirect()->back()->withErrors($validator->errors());
+	    }else{
+			$user = User::where('reset_code','=',Input::get('token'))->first();
+			if($user!=null){
+				$user->password = bcrypt(Input::get('password'));
+				$user->reset_code = null;
+				$user->save();
+				return redirect('/login');
+			}
 		}
 	}
 		

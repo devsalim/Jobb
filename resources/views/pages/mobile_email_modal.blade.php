@@ -1,5 +1,5 @@
 @if($type == 'mobile')
-<form action="/send-otp" method="post" id="send-mobile-otp-form">				
+<form action="/send-otp" class="change-val-mob" method="post" id="send-mobile-otp-form">				
 <input type="hidden" name="_token" value="{{ csrf_token() }}">
 <div class="modal-header">
 	<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
@@ -8,7 +8,7 @@
 	</h4>
 </div>	
 <div class="modal-body">
-	<input type="text" class="form-control" name="mobile_no" placeholder="Enter new mobile number" required>
+	<input type="number" maxlength="10" class="form-control" name="mobile_no" placeholder="Enter new mobile number" required>
 </div>
 <div class="modal-footer">		
 	<button type="button" class="btn btn-sm blue" id="send-otp">Send OTP</button>
@@ -25,7 +25,7 @@
 <form action="{{ url('/send-evc') }}" method="post" id="send-evc-form">				
 <input type="hidden" name="_token" value="{{ csrf_token() }}">	
 <div class="modal-body">
-	 <input type="text" class="form-control" name="new_email" placeholder="Enter new email">
+	 <input type="email" class="form-control" name="new_email" placeholder="Enter new email" required>
 </div>
 <div class="modal-footer">		
 	<button type="submit" class="btn btn-sm blue" id="send-evc">Send verification code</button>

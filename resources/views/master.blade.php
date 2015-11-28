@@ -68,7 +68,10 @@
 <link href="/assets/admin/pages/css/tasks.css" rel="stylesheet" type="text/css"/>
 <!-- <link rel="stylesheet" type="text/css" href="/assets/css/normalize.css" /> -->
 <link href="/assets/global/plugins/icheck/skins/all.css" rel="stylesheet"/>
-    
+<link href="/assets/sol.css" rel="stylesheet"/>
+<link rel="stylesheet" href="/assets/pqselect.dev.css" /> 
+<link href="/assets/multiple-select.css" rel="stylesheet"/>
+<link href="/assets/jquery.nstSlider.css" rel="stylesheet"/>
 @yield('css')
 
 <style type="css/text" rel="stylesheet">
@@ -325,6 +328,74 @@ body.page-boxed{
 <script type="text/javascript" src="/assets/global/plugins/jquery-validation/js/jquery.validate.min.js"></script>
 <script type="text/javascript" src="/assets/global/plugins/jquery-validation/js/additional-methods.min.js"></script>
 <script src="/assets/admin/pages/scripts/components-form-tools.js"></script>
+<script src="/assets/searchableOptionList.js"></script>
+<script src="/assets/sol.js"></script>
+<script src="/assets/multiple-select.js"></script>
+<script src = "/assets/js/jquery.mailtip.js"></script>
+<script src = "/assets/pqselect.dev.js"></script>
+<script src = "/assets/jquery.nstSlider.js"></script>
+<script src="{{ asset('/assets/ind_validation.js') }}"></script>
+<script>
+$(document).ready(function () {            
+//validation rules
+    var form = $('.change-val-mob');
+    var error = $('.alert-danger', form);
+    var success = $('.alert-success', form);
+    form.validate({
+        doNotHideMessage: true, //this option enables to show the error/success messages on tab switch.
+        errorElement: 'span', //default input error message container
+        errorClass: 'help-block help-block-error', // default input error message class
+        focusInvalid: false, // do not focus the last invalid input
+        rules: {
+            mobile_no : {
+                required : true,
+                number: true,
+                minlength: 10
+            }
+        },
+        messages: {
+            mobile_no: {
+                required: "Enter New Mobile No",
+                number: "Enter only Integer Value",
+                minlength: "Enter minimum 10 integer"
+            }
+        },
+            invalidHandler: function (event, validator) { //display error alert on form submit   
+            success.hide();
+            error.show();
+            Metronic.scrollTo(error, -200);
+        },
+
+             highlight: function(element) {
+            $(element).closest('.form-group').addClass('has-error');
+        },
+            unhighlight: function(element) {
+            $(element).closest('.form-group').removeClass('has-error');
+        },
+            errorElement: 'span',
+            errorClass: 'help-block',
+            errorPlacement: function(error, element) {
+            if(element.parent('.input-group').length) {
+                error.insertAfter(element.parent());
+            } else {
+                error.insertAfter(element);
+            }
+         },
+    });
+});
+</script>
+<script type="text/javascript">
+            $(function() {
+                
+                //initialize the pqSelect widget.
+                $("#select3").pqSelect({
+                    multiplePlaceholder: 'Select Education',
+                    checkbox: true //adds checkbox to options    
+                }).on("change", function(evt) {
+                   
+                }).pqSelect('open');
+            });
+        </script>
 <script type="text/javascript">
   $(document).ready(function() {
 
@@ -336,9 +407,11 @@ body.page-boxed{
 
       $('.toggle-display').click(function () {
         $('#nav-display').hide();   
+        $('.page-content-wrapper').hide();
       });
       $(".toggle-disp").click(function () {
-        $(".nav-disp").show();   
+        $(".nav-disp").show(); 
+        $('.page-content-wrapper').show();  
       });
 
      $('input[type="radio"]').click(function() {

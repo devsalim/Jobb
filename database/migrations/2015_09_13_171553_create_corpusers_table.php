@@ -36,6 +36,10 @@ class CreateCorpusersTable extends Migration {
             $table->string('role')->nullable();
             $table->string('state')->nullable();
             $table->string('city')->nullable();
+            $table->string('email_verify')->default(0)->nullable();
+	        $table->string('mobile_verify')->default(0)->nullable();
+	        $table->string('mobile_otp')->nullable();
+	        $table->string('email_vcode')->nullable();
 			$table->timestamps();
 		});
 	}

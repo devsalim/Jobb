@@ -6,41 +6,41 @@
 	<div class="portlet-title">
 		<div class="caption links-title">
 			<i class=""></i>
-			<span class="caption-subject font-blue-hoki bold uppercase" style="font-size:14px !important;">
-				Group: {{$group->group_name}}
+			<span class="caption-subject font-blue-hoki bold uppercase">				
+				{{$group->group_name}}   				
 			</span>
-			@foreach($users as $user)
-				@if($user->admin_id == Auth::user()->induser_id)
-				<a id="ajax-demo" href="#edit-group" data-toggle="modal" class="config" style="text-decoration: none;">
+			<a href="/group" class="group-title-info btn btn-xs btn-warning" 
+				style="text-decoration:none;border-radius: 25px !important;">
+				Group
+			</a>
+			@if($group->admin->id == Auth::user()->induser_id)
+				<a id="ajax-demo" href="#edit-group" data-toggle="modal" class="badge btn btn-xs btn-info" style="" title="Edit">
 					<i class="fa fa-edit"></i>
 				</a>
-				@endif
-			@endforeach
-		</div>
-		<div>
-			<div>
-				<input action="action" type="button" class="btn btn-default btn-responsive" value="Back" onclick="history.go(-1);" />
-			</div>
-		@foreach($users as $user)
-			@if($user->admin_id == Auth::user()->induser_id)
-				<div class="leave-del">
-					<a id="ajax-demo" href="#delete-group" data-toggle="modal" class="config btn btn-danger btn-responsive" style="text-decoration: none;">
-						Delete Group
-					</a>
-				</div>
-			@else
-				<div class="leave-del">
-					<a id="ajax-demo" href="#leave-group" data-toggle="modal" class="config btn btn-danger btn-responsive" style="text-decoration: none;">						
-						Leave Group
-					</a>
-				</div>
-			</form>
 			@endif
-		@endforeach
-	</div>
+			@if($group->admin->id == Auth::user()->induser_id)				
+				<a id="ajax-demo" href="#delete-group" data-toggle="modal" title="Delete" 
+					class="badge btn btn-xs btn-danger" style="text-decoration: none;">
+					<i class="fa fa-trash"></i>
+				</a>				
+			@else				
+				<a id="ajax-demo" href="#leave-group" data-toggle="modal" 
+					class="badge btn btn-xs" style="text-decoration: none;">						
+					<i class="fa fa-sign-out"></i>
+				</a>
+			@endif
+
+			<div class="group-admin-title pull-right">
+				<span class="group-admin-title-left">Admin</span> 
+				<a href="/profile/ind/{{$group->admin->id}}">
+				<span class="group-admin-title-right">{{$group->admin->fname}} {{$group->admin->lname}}</span>
+				</a>
+			</div>
+		</div>		
 	</div>
 	<!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
 	<!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+
 <div class="modal fade" id="edit-group" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   	<div class="modal-dialog" style="width: 300px;">
 	    <div class="modal-content">
@@ -143,7 +143,7 @@
 <div class="portlet box green col-md-7">
 	<div class="portlet-title">
 		<div class="caption">
-			<i class="icon-users"></i>
+			<i class="icon-users"></i> Members
 		</div>
 	</div>
 	<div class="portlet-body">
@@ -186,11 +186,11 @@
 						  <li class="media">
 						    <div class="media-left">
 						      <a href="#">
-						        <img class="media-object" src="@if($user->profile_pic != null){{ '/img/profile/'.$user->profile_pic }}@else{{'/assets/images/ab.png'}}@endif" alt="..." style="width:60px;padding: 3px;border: 1px solid #ddd;">
+						        <img class="media-object" src="@if($user->profile_pic != null){{ '/img/profile/'.$user->profile_pic }}@else{{'/assets/images/ab.png'}}@endif" alt="..." style="padding: 3px;border: 1px solid #ddd;">
 						      </a>
 						    </div>
 						    <div class="media-body" style="font-weight:300">
-							    <div class="media-body-left">
+							    <div class="media-body-left" style="float:left;min-width:200px">
 							      <h4 class="media-heading" style="margin-bottom:0;font-weight:300;word-break:break-word">
 							      	<a href="/profile/ind/{{$user->id}}" data-utype="ind">
 							      		{{ $user->fname }} {{ $user->lname }}</a>
@@ -210,7 +210,7 @@
 											<input type="hidden" name="_token" value="{{ csrf_token() }}">
 											<input type="hidden" name="delete_id" value="{{$user->groups_users_id}}">
 											<input type="hidden" name="delete_group_id" value="{{$user->group_id}}">
-											<button type="submit" class="btn btn-danger">
+											<button type="submit" class="btn btn-sm btn-danger">
 											<i class="glyphicon glyphicon-trash" style="font-size: 12px;background-color: white;color: black;border-radius: 10px;width: 20px;height: 20px;padding-top: 3px;"></i>
 											</button>
 										</form>
@@ -237,7 +237,7 @@
 						      </a>
 						    </div>
 						    <div class="media-body" style="font-weight:300">
-							    <div class="media-body-left">
+							    <div class="media-body-left" style="float:left;min-width:200px">
 							      <h4 class="media-heading" style="margin-bottom:0;font-weight:300;margin-bottom:0">
 								      	<a href="/profile/ind/{{$connection->id}}" data-utype="ind">
 								      		{{$connection->fname}} {{$connection->lname}}</a>
@@ -251,7 +251,7 @@
 											<input type="hidden" name="_token" value="{{ csrf_token() }}">
 											<input type="hidden" name="add_user_id" value="{{$connection->id}}">
 											<input type="hidden" name="add_group_id" value="{{$group->id}}">
-											<button type="submit" class="btn btn-success">
+											<button type="submit" class="btn btn-sm btn-success">
 											<i class="icon-plus" style="font-size: 12px;background-color: white;color: black;border-radius: 10px;width: 20px;height: 20px;padding-top: 3px;"></i>
 											</button>
 										</form>

@@ -225,10 +225,19 @@
 													<!--/span-->
 													<div class="col-md-5 col-sm-5 col-xs-12">
 														<div class="form-group">							
-															<label class=" control-label">Experience </label>&nbsp;: <input type="text" style="width: 20px;background:transparent;border:0" name="min_exp" class="min-exp">-
-															<input type="text" style="width: 14px;margin:0 4px;background:transparent;border:0" name="max_exp" class="max-exp">Years
+															<label class=" control-label">Experience </label>&nbsp;: <label type="text" style="width: 20px;background:transparent;border:0" name="min_exp" class="min-exp leftLabel"></label>-
+															<label type="text" style="width: 14px;margin:0 4px;background:transparent;border:0" name="max_exp" class="max-exp rightLabel"></label>Years
 															<div class="col-md-12">
-																<input id="range_1" type="text"  value=""/>
+																<div class="nstSlider" data-range_min="0" data-range_max="15" 
+												                       data-cur_min="2"    data-cur_max="5">
+
+															    <div class="bar"></div>
+															    <div class="leftGrip"></div>
+															    <div class="rightGrip"></div>
+															</div>
+															<div class="leftLabel"></div>
+															<div class="rightLabel"></div>
+																<!-- <input id="range_1" type="text"  value=""/> -->
 																<!-- <input type="hidden" name="min_exp" class="min-exp">
 																<input type="hidden" name="max_exp" class="max-exp"> -->
 															</div>
@@ -510,6 +519,15 @@ Demo.init(); // init demo features
 	});   
 </script>
 <script type="text/javascript">
+$('.nstSlider').nstSlider({
+    "left_grip_selector": ".leftGrip",
+    "right_grip_selector": ".rightGrip",
+    "value_bar_selector": ".bar",
+    "value_changed_callback": function(cause, leftValue, rightValue) {
+        $(this).parent().find('.leftLabel').text(leftValue);
+        $(this).parent().find('.rightLabel').text(rightValue);
+    }
+});
     $(function () {
         $("#hide-check").click(function () {
             if ($(this).is(":checked")) {

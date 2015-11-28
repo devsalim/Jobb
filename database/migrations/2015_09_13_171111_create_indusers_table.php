@@ -43,6 +43,8 @@ class CreateIndusersTable extends Migration {
                   $table->string('prefered_location')->nullable();
                   $table->string('prefered_jobtype')->nullable();
                   $table->string('about_individual')->nullable();
+                  $table->string('c_locality')->nullable();
+                  $table->string('p_locality')->nullable();
                   $table->string('email_verify')->default(0)->nullable();
                   $table->string('mobile_verify')->default(0)->nullable();
                   $table->string('mobile_otp')->nullable();

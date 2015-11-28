@@ -74,4 +74,11 @@ class Postjob extends Model {
 		return $this->belongsTo('App\Induser');
 	}
 
+	// public function magicMatch(){
+	// 	return $this->whereHas('tags', function($query){
+ //            $tagsIDs = [5,17,22];
+ //            $query->whereIn('id_tag', $tagsIDs);
+ //        })
+	// }
+
 }

@@ -1885,17 +1885,17 @@ Bootstrap Alerts
 Custom Bootstrap Badges
 ***/
 .badge {
-  font-size: 11px !important;
+  /*font-size: 11px !important;
   font-weight: 300;
   text-align: center;
   height: 18px;
-  padding: 3px 6px 3px 6px;
+  padding: 3px 6px 3px 6px;*/
   -webkit-border-radius: 12px !important;
   -moz-border-radius: 12px !important;
   border-radius: 12px !important;
-  text-shadow: none !important;
+  /*text-shadow: none !important;
   text-align: center;
-  vertical-align: middle;
+  vertical-align: middle;*/
 }
 .badge.badge-roundless {
   -webkit-border-radius: 0 !important;
@@ -1977,7 +1977,7 @@ Customized Bootstrap Buttons
 ***/
 /* Default buttons */
 .btn {
-  border-width: 0;
+  /*border-width: 0;
   padding: 7px 14px;
   font-size: 14px;
   outline: none !important;
@@ -1986,7 +1986,7 @@ Customized Bootstrap Buttons
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
   box-shadow: none;
-  text-shadow: none;
+  text-shadow: none;*/
 }
 .btn.dropdown-toggle, .btn-group .btn.dropdown-toggle, .btn:hover, .btn:disabled, .btn[disabled], .btn:focus, .btn:active, .btn.active {
   outline: none !important;

@@ -3,6 +3,7 @@
 @section('content')
 @if($title == 'home')
 <!-- Jobtip Filter Start -->
+
 <div class="row">
 	<div class="col-md-9" style=" lightgray;margin-bottom: 5px;">
 		<div class="hide-label col-md-8 col-sm-6 col-xs-10" style="padding: 5px;">
@@ -11,7 +12,11 @@
 			</label>
 		</div>
 		<div class="show-filter col-md-8 col-sm-6 col-xs-10">
-			<label style="font-weight:500; ">Filter Post you want to see </label>
+			You have selected <label style="font-weight:500;" id="job-type">
+			<input type="text" style="background:transparent;border:0;font-size:11px;" id="category-label-exp" class="min-exp">
+			<input type="text" style="background:transparent;border:0;font-size:11px; width:30px;" id="label-exp" class="min-exp">
+			<input type="text" style="background:transparent;border:0;font-size:11px;" id="label-title" class="min-exp">
+	</label>
 		</div>
 		<div class="filter-icon hide-show-filter"><i class="icon-equalizer" style="font-size:16px;"></i></div>		
 	</div>
@@ -22,19 +27,19 @@
 <div class="row show-filter">
 	<div class="col-md-12">
 		<div class="btn-group col-md-3 col-sm-2 col-xs-6 jobskill new-col-md-3" data-toggle="buttons" style="padding: 6px 14px;">
-			<label class="btn btn-default color-button check-font-size active input-responsive" style="padding:6px;">
+			<label class="btn btn-default color-button check-font-size active input-responsive" style="padding:6px; border-color:black;">
 			<input type="checkbox" name="post_type[]" value="job" class="toggle"> Jobs </label>
-			<label class="btn btn-default color-button check-font-size input-responsive" style="padding:6px;">
+			<label class="btn btn-default color-button check-font-size active input-responsive" style="padding:6px; border-color:black;">
 			<input type="checkbox" name="post_type[]" value="skill" class="toggle"> Skills </label>
 		</div>
 		<div class="col-md-2 col-sm-2 col-xs-6">
 			<div class="form-group">				
-				<input type="text" name="experience" class="form-control filter-input" placeholder="Exp">				
+				<input type="text" id="exp" name="experience" class="form-control filter-input" placeholder="Exp">				
 			</div>	
 		</div>
 		<div class="col-md-3 col-sm-3 col-xs-12">
 			<div class="form-group">
-				<input type="text" name="job_title" class="form-control filter-input" placeholder="Job Title, Role">
+				<input type="text" id="title" name="job_title" class="form-control filter-input" placeholder="Job Title, Role">
 			</div>
 		</div>
 		<div class="col-md-2 col-sm-2 col-xs-6">
@@ -76,7 +81,7 @@
 	<div class="col-md-12">
 		<div class="col-md-2 col-sm-3 col-xs-12">
 			<div class="form-group">
-				<select id="select2_sample_modal_2" placeholder="City" name="city" class="form-control select2" multiple>
+				<select id="select2_sample_modal_2" placeholder="City" name="city" class="form-control filter-input select2" multiple>
 					<option value="">select</option>
 					<optgroup label="NFC EAST">
 					<option>Hyderabad</option>
@@ -131,13 +136,13 @@
 		</div>
 		<div class="col-md-2 col-sm-2 col-xs-6">
 			<div class="form-group">				
-				{{-- <input type="hidden" placeholder="Skills" name="linked_skill" id="select2_sample5" class="form-control select2" value=""> --}}
+				{{-- <input type="hidden" placeholder="Skills" name="linked_skill" id="select2_sample5" class="form-control filter-input select2" value=""> --}}
 				{!! Form::select('skill_list[]', $skills, null, ['id'=>'skill-list', 'class'=>'form-control', 'placeholder'=>'Skills', 'multiple']) !!}				
 			</div>	
 		</div>
 		<div class="col-md-2 col-sm-2 col-xs-6">
             <div class="form-group">              
-                <select name="time_for" class="form-control" >
+                <select name="time_for" class="form-control filter-input" >
                 	<option value="">Time For</option>
 					<option value="Full Time">Full Time</option>
 					<option value="Part Time">Part Time</option>
@@ -148,15 +153,15 @@
          </div>
          <div class="col-md-2 col-sm-3 col-xs-4" >
          	 <div class="form-group"> 
-				<select name="active-expire" class="form-control">
-				  <option value="">All</option>
-                  <option value="Active" selected>Active</option>
+				<select name="active-expire" class="form-control filter-input">
+				  <option selected value="">All</option>
+                  <option value="Active" >Active</option>
                 </select>
             </div>
 		</div>
 		<div class="col-md-2 col-sm-3 col-xs-5">
 			<div class="form-group">		
-				<select class="bs-select form-control" name="education" multiple >
+				<select class="bs-select form-control filter-input" name="education" multiple >
 					<optgroup label="Posted by">
 						<option selected value=""><b>Posted by:</b> All</option>
 						<option value="individual">Individual</option>
@@ -168,7 +173,7 @@
 		</div>
 		<div class="col-md-1 col-sm-1 col-sm-2">
 			<button type="submit" class="btn btn-info" value="Search" title="Search" 
-					style="float:left;background-color:transparent !important;margin:10px -25px;">
+					style="float:left;background-color:transparent !important;margin:10px -25px; border-color: transparent;">
 				<i class="fa fa-check-square-o" style="font-size:25px;color:#3598dc;"></i>
 			</button>
 			<button type="button" class="btn" onclick="resetFilter()" title="Reset" 
@@ -212,7 +217,7 @@
 			  <button type="button" class="btn btn-default">Date</button>
 			  <div class="btn-group  btn-group-xs" role="group">
 			    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-			      Posted by
+			      posted by
 			      <span class="caret"></span>
 			    </button>
 			    <ul class="dropdown-menu">
@@ -276,24 +281,24 @@
 											?>
 											<a data-toggle="modal" href="#mod-{{$post->id}}">
 												<i class="icon-speedometer"></i> 
-												<?php
-													try{
-														if(count($postSkills) > 0){
-															$skillPer = (count($counts) / count($userSkills)) * 100;
-															if($post->role == Auth::user()->induser->role){$rolePer = 100;}else{$rolePer = 0;}
-															if($post->prof_category == Auth::user()->induser->prof_category){$jobPer = 100;}else{$jobPer = 0;}
-															if($post->min_exp == Auth::user()->induser->experience){$expPer = 100;}else{$expPer = 0;}
-															if($post->education == Auth::user()->induser->education){$eduPer = 100;}else{$eduPer = 0;}
-															if($post->city == Auth::user()->induser->city){$cityPer = 100;}else{$cityPer = 0;}
-															if($post->time_for == Auth::user()->induser->prefered_jobtype){$typePer = 100;}else{$typePer = 0;}
-															$avgPer = ($skillPer + $rolePer + $jobPer + $expPer + $eduPer + $cityPer + $typePer)/7;
-															echo round($avgPer).' %';
-														}
-													}
-													catch(\Exception $e){
+									<?php
+										try{
+											if(count($postSkills) > 0){
+												$skillPer = (count($counts) / count($userSkills)) * 100;
+												if(strcasecmp($post->role, Auth::user()->induser->role) == 0){$rolePer = 100;}else{$rolePer = 0;}
+												if($post->prof_category == Auth::user()->induser->prof_category){$jobPer = 100;}else{$jobPer = 0;}
+												if($post->min_exp == Auth::user()->induser->experience){$expPer = 100;}else{$expPer = 0;}
+												if($post->education == Auth::user()->induser->education){$eduPer = 100;}else{$eduPer = 0;}
+												if($post->city == Auth::user()->induser->city){$cityPer = 100;}else{$cityPer = 0;}
+												if($post->time_for == Auth::user()->induser->prefered_jobtype){$typePer = 100;}else{$typePer = 0;}
+												$avgPer = ($skillPer + $rolePer + $jobPer + $expPer + $eduPer + $cityPer + $typePer)/7;
+												echo round($avgPer).' %';
+											}
+										}
+										catch(\Exception $e){
 
-													}
-												?>
+										}
+									?>
 											</a>
 										</div>
 
@@ -354,7 +359,7 @@
 																				@endforeach												
 																			</td>
 																		</tr>
-																		<tr class="@if($post->role == Auth::user()->induser->role) success @else danger @endif">
+																		<tr class="@if(strcasecmp($post->role, Auth::user()->induser->role) == 0) success @else danger @endif">
 																			<td>
 																				<label class="title-color">Job Role</label>
 																			</td>
@@ -420,8 +425,8 @@
 														<a href="/profile/ind/{{$post->individual_id}}" class="link-label" data-utype="ind">
 															You have
 														</a>
-													<span class="timeline-body-time font-grey-cascade">Posted at 
-														{{ date('M d, Y', strtotime($post->created_at)) }}
+													<span class="timeline-body-time font-grey-cascade">posted  
+														{{ \Carbon\Carbon::createFromTimeStamp(strtotime($post->created_at))->diffForHumans() }}
 													</span>
 												</div>
 											@elseif(Auth::user()->corpuser_id == $post->corporate_id && $post->corporate_id != null)
@@ -429,8 +434,8 @@
 														<a href="/profile/corp/{{$post->corporate_id}}" class="link-label" data-utype="corp">
 															You have
 														</a>
-													<span class="timeline-body-time font-grey-cascade">Posted at 
-														{{ date('M d, Y', strtotime($post->created_at)) }}
+													<span class="timeline-body-time font-grey-cascade">posted 
+														{{ \Carbon\Carbon::createFromTimeStamp(strtotime($post->created_at))->diffForHumans() }}
 													</span>
 												</div>
 											@elseif($post->individual_id != null)
@@ -456,8 +461,8 @@
 													
 
 													
-													<span class="timeline-body-time font-grey-cascade">Posted at 
-														{{ date('M d, Y', strtotime($post->created_at)) }}
+													<span class="timeline-body-time font-grey-cascade">posted 
+														{{ \Carbon\Carbon::createFromTimeStamp(strtotime($post->created_at))->diffForHumans() }}
 													</span>
 												</div>
 											@elseif($post->corporate_id != null)
@@ -474,8 +479,8 @@
 														<a href="/profile/corp/{{$post->corporate_id}}" style="padding: 0px 0px 0px 32px;font-size: 15px;text-decoration:none;font-weight:600;">
 															{{ $post->corpuser->firm_name}}
 														</a>
-													<span class="timeline-body-time font-grey-cascade">Posted at 
-														{{ date('M d, Y', strtotime($post->created_at)) }}
+													<span class="timeline-body-time font-grey-cascade">posted 
+														{{ \Carbon\Carbon::createFromTimeStamp(strtotime($post->created_at))->diffForHumans() }}
 													</span>
 												</div>
 											@endif
@@ -547,52 +552,37 @@
 														
 														<div class="row">
 															@if($post->post_type == 'job')
-															<div class="col-md-12 col-sm-12 col-xs-12">
-																
-																	<label class="detail-label">Education Required :</label>
-																
-																	{{ $post->education }}
-																 
+															<div class="col-md-12 col-sm-12 col-xs-12">												
+																	<label class="detail-label">Education Required :</label>					
+																	{{ $post->education }}														 
 															</div>
 															@else
-															<div class="col-md-12 col-sm-12 col-xs-12">
-																
-																	<label class="detail-label">Qualification :</label>
-																
-																	{{ $post->education }}
-																 
+															<div class="col-md-12 col-sm-12 col-xs-12">												
+																	<label class="detail-label">Qualification :</label>								
+																	{{ $post->education }}													 
 															</div>
 															@endif
-															<div class="col-md-12 col-sm-12 col-xs-12">
-																
-																	<label class="detail-label">Role :</label>
-																
-																	{{ $post->role }}
-																
+															<div class="col-md-12 col-sm-12 col-xs-12">												
+																	<label class="detail-label">Role :</label>										
+																	{{ $post->role }}															
 															</div>
-															<div class="col-md-12 col-sm-12 col-xs-12">
-																
-																	<label class="detail-label">Job Category :</label>
-																
-																	{{ $post->prof_category }}
-																 
+															<div class="col-md-12 col-sm-12 col-xs-12">												
+																	<label class="detail-label">Job Category :</label>								
+																	{{ $post->prof_category }}													 
 															</div>
-															<div class="col-md-12 col-sm-12 col-xs-12">
-																
-																	<label class="detail-label">Skills :</label>
-																
+															<div class="col-md-12 col-sm-12 col-xs-12">											
+																	<label class="detail-label">Skills :</label>									
 																	@foreach($post->skills as $skill)
 																		{{$skill->name}},
-																	@endforeach
-																 
+																	@endforeach																 
 															</div>
 															@if($post->post_type == 'job')
-															<div class="col-md-12 col-sm-12 col-xs-12">													
+															<div class="col-md-12 col-sm-12 col-xs-12">												
 																<label class="detail-label">Salary (<i class="fa fa-rupee (alias)"></i>):</label>
 																{{ $post->min_sal }}-{{ $post->max_sal }} {{ $post->salary_type }} 
 															</div>
 															@else
-															<div class="col-md-12 col-sm-12 col-xs-12">													
+															<div class="col-md-12 col-sm-12 col-xs-12">												
 																<label class="detail-label">Expected Salary (<i class="fa fa-rupee (alias)"></i>):</label>
 																{{ $post->min_sal }}-{{ $post->max_sal }} {{ $post->salary_type }} 
 															</div>
@@ -635,40 +625,29 @@
 															</div>
 															@endif
 															@if($post->post_type == 'job' && $post->website_redirect_url != null && $post->corpuser != null)
-															<div class="col-md-12 col-sm-12 col-xs-12">
-																
-																	<label class="detail-label"><i class="glyphicon glyphicon-globe" style="color: deepskyblue;"></i> :</label>
-																{{ $post->website_url }}
-																	
-																
+															<div class="col-md-12 col-sm-12 col-xs-12">												
+																<label class="detail-label"><i class="glyphicon glyphicon-globe" style="color: deepskyblue;"></i> :</label>
+																{{ $post->website_url }}															
 															</div>
 															@endif
 															@if($post->website_redirect_url == null && $post->contact_person != null)
-															<div class="col-md-12 col-sm-12 col-xs-12">
-																
-																	<label class="detail-label"><i class="glyphicon glyphicon-user"></i> :</label>
-																
-																	{{ $post->contact_person }}
-																
+															<div class="col-md-12 col-sm-12 col-xs-12">												
+																<label class="detail-label"><i class="glyphicon glyphicon-user"></i> :</label>
+																{{ $post->contact_person }}															
 															</div>
 															@endif
 
 															@if($post->email_id != null && $post->alt_emailid != null && $post->website_redirect_url == null)
 															<div class="col-md-12 col-sm-12 col-xs-12">
 																
-																	<label class="detail-label"><i class="glyphicon glyphicon-envelope"></i> :</label>
-																
-																	
-																	{{ $post->email_id }} - {{ $post->alt_emailid }}
-																
+																	<label class="detail-label"><i class="glyphicon glyphicon-envelope"></i> :</label>																
+																	{{ $post->email_id }} - {{ $post->alt_emailid }}							
 															</div>	
 															
 															@elseif($post->email_id != null && $post->alt_emailid == null && $post->website_redirect_url == null)
 															<div class="col-md-12 col-sm-12 col-xs-12">
 																
 																	<label class="detail-label"><i class="glyphicon glyphicon-envelope"></i> :</label>
-																
-																	
 																	{{ $post->email_id }}
 																
 															</div>
@@ -676,7 +655,6 @@
 															<div class="col-md-12 col-sm-12 col-xs-12">
 																
 																	<label class="detail-label"><i class="glyphicon glyphicon-envelope"></i> :</label>
-																
 																		{{ $post->alt_emailid }}
 																 
 															</div>	
@@ -728,29 +706,34 @@
 													<form action="/job/like" method="post" id="post-like-{{$post->id}}" data-id="{{$post->id}}">						
 														<input type="hidden" name="_token" value="{{ csrf_token() }}">
 														<input type="hidden" name="like" value="{{ $post->id }}">
-														<button class="btn like-btn"  type="button" style="background-color: transparent;">
-														<i class="icon-like thanks-icon" id="like-{{$post->id}}">
-														</i>
-														</button>
-													</form>
-													
-													<span class="badge-like" id="like-count-{{ $post->id }}">
-													@if($post->postactivity->sum('thanks') > 0)
-														{{ $post->postactivity->sum('thanks') }} 
+												<button class="btn like-btn"  type="button" style="background-color: transparent;" title="Thanks">
+													@if($post->postactivity->where('user_id', Auth::user()->induser_id)->isEmpty())					
+														<i class="fa fa-thumbs-up thanks-icon" id="like-{{$post->id}}"></i>
+													@elseif($post->postactivity->where('user_id', Auth::user()->induser_id)->first()->thanks == 1) 
+														<i class="fa fa-thumbs-up thanks-icon" id="like-{{$post->id}}" style="color:burlywood"></i>
+													@else
+														<i class="fa fa-thumbs-up thanks-icon" id="like-{{$post->id}}"></i>		
 													@endif
-													{{-- {{ $post->postactivity->where('user_id', Auth::user()->induser_id)->sum('thanks') }} --}}
-													</span>
+												</button>	
+														<span class="badge-like" id="like-count-{{ $post->id }}">
+														@if($post->postactivity->sum('thanks') > 0)
+														{{ $post->postactivity->sum('thanks') }}
+														@endif
+														</span>
+													</form>
+																										
 													
-														@if($post->post_type == 'job' && Auth::user()->induser_id != $post->individual_id && Auth::user()->identifier == 1)		
+													
+							@if($post->post_type == 'job' && Auth::user()->induser_id != $post->individual_id && Auth::user()->identifier == 1)		
 													@if($post->postactivity->where('user_id', Auth::user()->induser_id)->isEmpty())
 
 														<form action="/job/apply" method="post" id="post-apply-{{$post->id}}" data-id="{{$post->id}}">	
 															<input type="hidden" name="_token" value="{{ csrf_token() }}">
 															<input type="hidden" name="apply" value="{{ $post->id }}">
 															@if($post->website_redirect_url != null)
-																<button class="btn apply-btn blue btn-sm apply-contact-btn" 
-																	onclick="window.location='{{ $post->website_redirect_url }}';"	 type="button">Apply
-																</button>	
+																<a class="btn apply-btn blue btn-sm apply-contact-btn" target="_blank" 
+																	href="{{ $post->website_redirect_url }}" type="button">Apply
+																</a>	
 															@else
 																<button class="btn apply-btn blue btn-sm apply-contact-btn" 
 																		id="apply-btn-{{$post->id}}" type="button">Apply
@@ -938,6 +921,22 @@ $(document).ready(function(){
 	    jQuery('.hide-label').toggle('hide');
     });
 
+    $("#category-list").change(function () {
+	    $("#category-label-exp").val($(this).val());
+	    //alert($(this).val()) 
+	})
+         $("#exp").change(function () {
+	    $("#label-exp").val($(this).val());
+	    //alert($(this).val()) 
+	})
+         $("#title").change(function () {
+	    $("#label-title").val($(this).val());
+	    //alert($(this).val()) 
+	})
+         $("#max-sal").change(function () {
+	    $("#max-label-sal").val($(this).val());
+	    //alert($(this).val()) 
+	})
     var displayConfirm = function() {
         $('#filter .form-control-static', form).each(function(){
             var input = $('[name="'+$(this).attr("data-display")+'"]', form);
@@ -963,11 +962,14 @@ $(document).ready(function(){
   $('.like-btn').on('click',function(event){  	    
   	event.preventDefault();
   	var post_id = $(this).parent().data('id');
-
+	
   	var formData = $('#post-like-'+post_id).serialize(); 
     var formAction = $('#post-like-'+post_id).attr('action');
 
-	$count = $('#like-count-'+post_id).text();
+	$count = $.trim($('#like-count-'+post_id).text());
+	if($count.length == 0 || $count == ""){
+		$count = 0;
+	}
     $.ajaxSetup({
 		headers: {
 			'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -985,16 +987,17 @@ $(document).ready(function(){
  			$('#like-'+post_id).css({'color':'burlywood'});
  			$('#like-count-'+post_id).removeClass('hide');
             $('#like-count-'+post_id).addClass('show');
-        }else if(data < $count){
- 			$('#like-count-'+post_id).text(data);
- 			$('#like-'+post_id).css({'color':'lightslategray'});
- 			if(data < $count && data == 0){
+        }else if(data < $count && data != 0){
+			$('#like-'+post_id).css({'color':'lightslategray'});
+			$('#like-count-'+post_id).text(data);
+			$('#like-count-'+post_id).removeClass('hide');
+            $('#like-count-'+post_id).addClass('show');
+        }
+        else if(data < $count && data == 0){
+            $('#like-'+post_id).css({'color':'lightslategray'});
             $('#like-count-'+post_id).removeClass('show');
             $('#like-count-'+post_id).addClass('hide');
-            }
-        }
-        else if(data == 0){
-            $('#like-count-'+post_id).addClass('hide');
+            $('#like-count-'+post_id).text(data);
         }
       }
     }); 
