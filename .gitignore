@@ -47,3 +47,5 @@ Temporary Items
 /vendor
 *.jpg
 resources/views/pages/home.blade.php_
+.env_gmail
+.env_jt_em
