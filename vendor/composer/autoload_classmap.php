@@ -18,6 +18,7 @@ return array(
     'CreatePostactivitiesTable' => $baseDir . '/database/migrations/2015_09_13_171856_create_postactivities_table.php',
     'CreatePostjobSkillsTable' => $baseDir . '/database/migrations/2015_09_28_182423_create_postjob_skills_table.php',
     'CreatePostjobsTable' => $baseDir . '/database/migrations/2015_09_13_171750_create_postjobs_table.php',
+    'CreateReportAbusesTable' => $baseDir . '/database/migrations/2015_11_29_181526_create_report_abuses_table.php',
     'CreateReportsTable' => $baseDir . '/database/migrations/2015_11_05_063837_create_reports_table.php',
     'CreateSkillsTable' => $baseDir . '/database/migrations/2015_09_26_092947_create_skills_table.php',
     'CreateUsersFriendsTable' => $baseDir . '/database/migrations/2015_09_29_145450_create_users_friends_table.php',

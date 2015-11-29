@@ -445,6 +445,14 @@
 														<a href="#links-follow" data-toggle="modal" class="user-link" data-linked="yes" data-utype="ind">
 															<i class="fa fa-link (alias)" style="color:salmon;"></i>
 														</a>
+														@elseif($linksPending->contains('id', $post->individual_id) )
+														<a href="#links-follow" data-toggle="modal" class="user-link" data-linked="no" data-utype="ind">
+															<i class="fa fa-question (alias)" style="color:salmon;"></i>
+														</a>
+														@elseif($linksApproval->contains('id', $post->individual_id) )
+														<a href="#links-follow" data-toggle="modal" class="user-link" data-linked="no" data-utype="ind">
+															<i class="icon-hourglass (alias)" style="color:salmon;"></i>
+														</a>
 														@elseif($following->contains('id', $post->individual_id))
 														<a class="user-link2" data-linked="yes" data-utype="ind">
 															<i class="fa fa-link (alias)" style="color:steelblue;"></i>
@@ -797,36 +805,60 @@
 
 												</div>
 												@if(Auth::user()->id != $post->individual_id)
-												<div class="report"><a class="" data-toggle="modal" href="#basic">
-													<i class="fa fa-warning (alias)" style="color:red;"></i></a>
-												</div>
-												@endif
-												<div class="modal fade" id="basic" tabindex="-1" role="basic" aria-hidden="true">
-													<div class="modal-dialog" style="width: 250px;">
-														<div class="modal-content">
-															<div class="modal-header">
-																<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-																<h4 class="modal-title">Report this Post</h4>
-																<div class="icheck-list">
-																	<label>
-																	<input type="checkbox" checked class="icheck" data-checkbox="icheckbox_line-grey" data-label="Report Abuse">
-																	</label>
-																	<label>
-																	<input type="checkbox" class="icheck" data-checkbox="icheckbox_line-grey" data-label="Spam">
-																	</label>
-																	<label>
-																	<input type="checkbox" class="icheck" data-checkbox="icheckbox_line-grey" data-label="Hide this Post">
-																	</label>
-																	<label>
-																</div>
-																<button type="submit" class="btn btn-warning">Submit</button>
-															</div>
-														</div>
-														<!-- /.modal-content -->
+													<div class="report"><a class="" data-toggle="modal" href="#basic">
+														<i class="fa fa-warning (alias)" style="color:red;"></i></a>
 													</div>
-													<!-- /.modal-dialog -->
-												</div>
-												<!-- /.modal -->
+													<div class="modal fade" id="basic" tabindex="-1" role="basic" 
+														 aria-hidden="true">
+														<div class="modal-dialog" style="width: 300px;">
+															<div class="modal-content">
+																<div class="modal-header">
+																	<button type="button" class="close" 
+																			data-dismiss="modal" aria-hidden="true">
+																	</button>
+																	<h4 class="modal-title">Report this Post</h4>				
+																</div>
+																<form action="/report-abuse" method="post" id="report-abuse-form">
+																<input type="hidden" name="_token" value="{{ csrf_token() }}">
+																<input type="hidden" name="report_post_id" value="{{ $post->id }}">
+																<div class="modal-body">
+																	<div class="icheck-list">
+																		<label>
+																			<input type="checkbox" class="icheck" 
+																					name="report-abuse-check[]"
+																					data-checkbox="icheckbox_line-grey" 
+																					data-label="Abusive post"
+																					value="Abusive post" checked>
+																		</label>												
+																		<label>
+																			<input type="checkbox" class="icheck" 
+																					name="report-abuse-check[]"
+																					data-checkbox="icheckbox_line-grey" 
+																					data-label="Abusive profile"
+																					value="Abusive profile">
+																		</label>
+																		<label>
+																			<input type="checkbox" class="icheck"
+																					name="report-abuse-check[]" 
+																					data-checkbox="icheckbox_line-grey" 
+																					data-label="Spam post"
+																					value="Spam post">
+																		</label>
+																	</div>
+																	
+																</div>
+																<div class="modal-footer">
+																	<button type="submit" class="btn btn-warning btn-xs">Submit</button>
+																	<button type="submit" class="btn btn-default btn-xs" data-dismiss="modal">Cancel</button>
+																</div>
+																</form>
+															</div>
+															<!-- /.modal-content -->
+														</div>
+														<!-- /.modal-dialog -->
+													</div>
+													<!-- /.modal -->												
+												@endif
 											</div>
 											@else
 											<div class="post-job post-icon-bar">
@@ -905,7 +937,7 @@ jQuery(document).ready(function() {
 	ComponentsIonSliders.init();    
 	ComponentsDropdowns.init();
 	ComponentsEditors.init();
-    FormWizard.init();
+    // FormWizard.init();
 });
 $('#skill-list').select2();
 $('#category-list').select2();

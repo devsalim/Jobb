@@ -713,3 +713,12 @@ form.search-form.search-form-expanded {
 .group-title-info{
     margin-left: 8px;
 }
+
+/* report abuse */
+div[class*='icheckbox_'], div[class*='iradio_'] {
+    margin-right: 0; 
+}
+
+.icheck-list > label:last-child {
+    margin-bottom: 8px; 
+}

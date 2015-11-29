@@ -128,6 +128,7 @@ Route::group(array('before' => 'auth'), function(){
 	Route::post('reset/password', 'UserController@postResetPassword');
 
 	Route::post('change/password', 'UserController@postChangePassword');
+	Route::post('report-abuse', 'JobController@repostAbuse');
 
 });
 

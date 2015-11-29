@@ -15,6 +15,7 @@ use DB;
 use Response;
 use App\Group;
 use App\Induser;
+use App\ReportAbuse;
 
 class JobController extends Controller {
 
@@ -305,6 +306,26 @@ class JobController extends Controller {
 			$post->save();
 			return redirect('/mypost');
 		}
+	}
+
+	public function repostAbuse(){
+		if(count(Input::get('report-abuse-check')) > 0){
+			$reportAbuse = ReportAbuse::where('post_id', '=', Input::get('report_post_id'))
+								  	  ->where('reported_by', '=', Auth::user()->induser_id)
+								  	  ->first();
+			$report_abuse_for = implode(', ', Input::get('report-abuse-check'));	
+			if($reportAbuse != null){
+				$reportAbuse->reported_for = $report_abuse_for;
+				$reportAbuse->save();
+			}else{
+				$reportAbuse = new ReportAbuse();
+				$reportAbuse->post_id = Input::get('report_post_id');
+				$reportAbuse->reported_by = Auth::user()->induser_id;
+				$reportAbuse->reported_for = $report_abuse_for;
+				$reportAbuse->save();		
+			}
+		}
+		return redirect('/home');
 	}
 
 }
