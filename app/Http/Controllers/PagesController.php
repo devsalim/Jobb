@@ -105,7 +105,7 @@ class PagesController extends Controller {
 				return view('pages.home', compact('posts', 'title', 'links', 'groups', 'following', 'userSkills', 'skills', 'linksApproval', 'linksPending'));
 				// return $userSkills;
 			}elseif(Auth::user()->identifier == 3){
-				$reportAbuseCount = ReportAbuse::sum('id');
+				$reportAbuseCount = ReportAbuse::count();
 				return view('pages.dashboard', compact('title', 'reportAbuseCount'));
 			}
 		}else{

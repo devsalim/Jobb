@@ -23,7 +23,7 @@
 	<div class="clearfix"></div>
 
 	<div class="row">
-		<div class="col-md-7 col-sm-7">
+		<div class="col-md-9 col-sm-9">
 			<ul class="feeds">
 				@foreach($reportAbuses as $ra)
 				<li>
