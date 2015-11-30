@@ -805,10 +805,10 @@
 
 												</div>
 												@if(Auth::user()->id != $post->individual_id)
-													<div class="report"><a class="" data-toggle="modal" href="#basic">
+													<div class="report"><a class="" data-toggle="modal" href="#basic-{{ $post->id }}">
 														<i class="fa fa-warning (alias)" style="color:red;"></i></a>
 													</div>
-													<div class="modal fade" id="basic" tabindex="-1" role="basic" 
+													<div class="modal fade" id="basic-{{ $post->id }}" tabindex="-1" role="basic" 
 														 aria-hidden="true">
 														<div class="modal-dialog" style="width: 300px;">
 															<div class="modal-content">
@@ -818,7 +818,7 @@
 																	</button>
 																	<h4 class="modal-title">Report this Post</h4>				
 																</div>
-																<form action="/report-abuse" method="post" id="report-abuse-form">
+																<form action="/report-abuse" method="post" id="report-abuse-form-{{ $post->id }}">
 																<input type="hidden" name="_token" value="{{ csrf_token() }}">
 																<input type="hidden" name="report_post_id" value="{{ $post->id }}">
 																<div class="modal-body">
@@ -849,7 +849,7 @@
 																</div>
 																<div class="modal-footer">
 																	<button type="submit" class="btn btn-warning btn-xs">Submit</button>
-																	<button type="submit" class="btn btn-default btn-xs" data-dismiss="modal">Cancel</button>
+																	<button type="button" class="btn btn-default btn-xs" data-dismiss="modal">Cancel</button>
 																</div>
 																</form>
 															</div>
