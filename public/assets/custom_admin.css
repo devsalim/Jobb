@@ -1,0 +1,5 @@
+.feeds li .col2 {
+    float: left;
+    width: 100px;
+    margin-left: -100px;
+}

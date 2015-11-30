@@ -16,6 +16,7 @@ use Auth;
 use DB;
 use Input;
 use App\Group;
+use App\ReportAbuse;
 
 class PagesController extends Controller {
 
@@ -39,68 +40,74 @@ class PagesController extends Controller {
 	public function home(){
 		if (Auth::check()) {
 			$title = 'home';
-			$skills = Skills::lists('name', 'id');
-			$posts = Postjob::orderBy('id', 'desc')->with('indUser', 'corpUser', 'postActivity', 'taggedUser', 'taggedGroup')->paginate(15);
 
-			$links = DB::select('select id from indusers
-									where indusers.id in (
-											select connections.user_id as id from connections
-											where connections.connection_user_id=?
-											 and connections.status=1
-											union 
-											select connections.connection_user_id as id from connections
-											where connections.user_id=?
-											 and connections.status=1
-								)', [Auth::user()->induser_id, Auth::user()->induser_id]);
-			$links = collect($links);
+			if(Auth::user()->identifier == 1 || Auth::user()->identifier == 2){
+				$skills = Skills::lists('name', 'id');
+				$posts = Postjob::orderBy('id', 'desc')->with('indUser', 'corpUser', 'postActivity', 'taggedUser', 'taggedGroup')->paginate(15);
 
-			$linksApproval = DB::select('select id from indusers
+				$links = DB::select('select id from indusers
 										where indusers.id in (
 												select connections.user_id as id from connections
 												where connections.connection_user_id=?
-												 and connections.status=0
-										)', [Auth::user()->induser_id]);
-			$linksApproval = collect($linksApproval);
-
-			$linksPending = DB::select('select id from indusers
-										where indusers.id in (
+												 and connections.status=1
+												union 
 												select connections.connection_user_id as id from connections
 												where connections.user_id=?
-												 and connections.status=0
+												 and connections.status=1
+									)', [Auth::user()->induser_id, Auth::user()->induser_id]);
+				$links = collect($links);
+
+				$linksApproval = DB::select('select id from indusers
+											where indusers.id in (
+													select connections.user_id as id from connections
+													where connections.connection_user_id=?
+													 and connections.status=0
+											)', [Auth::user()->induser_id]);
+				$linksApproval = collect($linksApproval);
+
+				$linksPending = DB::select('select id from indusers
+											where indusers.id in (
+													select connections.connection_user_id as id from connections
+													where connections.user_id=?
+													 and connections.status=0
+											)', [Auth::user()->induser_id]);
+				$linksPending = collect($linksPending);
+
+				$groups = Group::leftjoin('groups_users', 'groups_users.group_id', '=', 'groups.id')					
+							->where('groups.admin_id', '=', Auth::user()->induser_id)
+							->orWhere('groups_users.user_id', '=', Auth::user()->induser_id)
+							->groupBy('groups.id')
+							->get(['groups.id as id'])
+							->lists('id');
+
+				if(Auth::user()->induser_id != null){
+					$following = DB::select('select id from corpusers 
+											 where corpusers.id in (
+												select follows.corporate_id as id from follows
+												where follows.individual_id=?
 										)', [Auth::user()->induser_id]);
-			$linksPending = collect($linksPending);
-
-			$groups = Group::leftjoin('groups_users', 'groups_users.group_id', '=', 'groups.id')					
-						->where('groups.admin_id', '=', Auth::user()->induser_id)
-						->orWhere('groups_users.user_id', '=', Auth::user()->induser_id)
-						->groupBy('groups.id')
-						->get(['groups.id as id'])
-						->lists('id');
-
-			if(Auth::user()->induser_id != null){
-				$following = DB::select('select id from corpusers 
-										 where corpusers.id in (
-											select follows.corporate_id as id from follows
-											where follows.individual_id=?
-									)', [Auth::user()->induser_id]);
-				$following = collect($following);
+					$following = collect($following);
+				}
+				if(Auth::user()->corpuser_id != null){
+					$following = DB::select('select id from indusers
+											 where indusers.id in (
+												select follows.individual_id as id from follows
+												where follows.corporate_id=?
+										)', [Auth::user()->corpuser_id]);
+					$following = collect($following);
+				}
+				if(Auth::user()->identifier == 1){
+					$userSkills = Induser::where('id', '=', Auth::user()->induser_id)->first(['linked_skill']);
+					$userSkills = array_map('trim', explode(',', $userSkills->linked_skill));
+					unset ($userSkills[count($userSkills)-1]); 
+				}
+				
+				return view('pages.home', compact('posts', 'title', 'links', 'groups', 'following', 'userSkills', 'skills', 'linksApproval', 'linksPending'));
+				// return $userSkills;
+			}elseif(Auth::user()->identifier == 3){
+				$reportAbuseCount = ReportAbuse::sum('id');
+				return view('pages.dashboard', compact('title', 'reportAbuseCount'));
 			}
-			if(Auth::user()->corpuser_id != null){
-				$following = DB::select('select id from indusers
-										 where indusers.id in (
-											select follows.individual_id as id from follows
-											where follows.corporate_id=?
-									)', [Auth::user()->corpuser_id]);
-				$following = collect($following);
-			}
-			if(Auth::user()->identifier == 1){
-				$userSkills = Induser::where('id', '=', Auth::user()->induser_id)->first(['linked_skill']);
-				$userSkills = array_map('trim', explode(',', $userSkills->linked_skill));
-				unset ($userSkills[count($userSkills)-1]); 
-			}
-			
-			return view('pages.home', compact('posts', 'title', 'links', 'groups', 'following', 'userSkills', 'skills', 'linksApproval', 'linksPending'));
-			// return $userSkills;
 		}else{
 			return redirect('login');
 		}	

@@ -107,6 +107,7 @@
           @endif
         </div>
       </li>
+      @if (Auth::user()->identifier == 1 || Auth::user()->identifier == 2)
       <li class="@if($title == 'home'){{'active'}}@endif">
         <a class="" href="/home">
         <i class=" icon-home"></i>
@@ -125,6 +126,7 @@
         </span>
         </a>
       </li>
+      @endif
       @if (Auth::user()->identifier == 1)
       <li class="@if($title == 'connections'){{'active'}}@endif">
         <a class="" href="/links">
@@ -156,6 +158,7 @@
         </a>
       </li>
       @endif
+      @if (Auth::user()->identifier == 1 || Auth::user()->identifier == 2)
       <li>
         <a href="javascript:;">
         <i class="icon-eye"></i>
@@ -212,6 +215,7 @@
           </li>
         </ul>
       </li>
+      @endif
       <li>
         <a href="javascript:;">
         <i class="icon-settings"></i>

@@ -308,7 +308,7 @@ class JobController extends Controller {
 		}
 	}
 
-	public function repostAbuse(){
+	public function reportAbuse(){
 		if(count(Input::get('report-abuse-check')) > 0){
 			$reportAbuse = ReportAbuse::where('post_id', '=', Input::get('report_post_id'))
 								  	  ->where('reported_by', '=', Auth::user()->induser_id)
@@ -326,6 +326,15 @@ class JobController extends Controller {
 			}
 		}
 		return redirect('/home');
+	}
+
+	public function reportAbusePage(){
+		$reportAbuses = ReportAbuse::with('user', 'postuser')->get();
+		return view('pages.report-abuse', compact('reportAbuses'));
+	}
+
+	public function feedbacks(){		
+		return view('pages.feedbacks');
 	}
 
 }
