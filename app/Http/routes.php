@@ -130,7 +130,6 @@ Route::group(array('before' => 'auth'), function(){
 	Route::post('change/password', 'UserController@postChangePassword');
 	Route::post('report-abuse', 'JobController@reportAbuse');
 	Route::get('report-abuse', 'JobController@reportAbusePage');
-	Route::get('feedbacks', 'JobController@feedbacks');
 
 });
 

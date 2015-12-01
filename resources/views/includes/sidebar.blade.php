@@ -242,7 +242,7 @@
             </a>
           </li>
           <li>
-            <a class="ajaxify" href="feedback/create">
+            <a href="/feedback/create">
               <i class="icon-star"></i>&nbsp;Feedback
             </a>
           </li>

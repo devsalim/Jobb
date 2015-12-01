@@ -30,13 +30,13 @@
 				</div>
 				<div class="details">
 					<div class="number">
-						 1349
+						 {{$feedbackCount}}
 					</div>
 					<div class="desc">
 						 New Feedbacks
 					</div>
 				</div>
-				<a class="more" href="/feedbacks">
+				<a class="more" href="/feedback">
 				View more <i class="m-icon-swapright m-icon-white"></i>
 				</a>
 			</div>
@@ -97,6 +97,32 @@
 		</div>-->
 	</div>
 	<!-- END DASHBOARD STATS -->
+	<div class="clearfix">
+	</div>
+
+	<div class="row">
+		<div class="col-md-6">
+			<div class="portlet box purple">
+				<div class="portlet-title">
+					<div class="caption">
+						<i class="fa fa-bullhorn"></i>Feedback
+					</div>
+					<div class="tools">
+						<a href="#portlet-config" data-toggle="modal" class="config">
+						</a>
+						<a href="javascript:;" class="reload">
+						</a>
+					</div>
+				</div>
+				<div class="portlet-body">
+					<div id="pie_chart_9" class="chart">
+					</div>
+				</div>
+			</div>
+			
+		</div>
+	</div>
+
 	<div class="clearfix">
 	</div>
 				

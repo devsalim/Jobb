@@ -531,90 +531,7 @@ var ChartsFlotcharts = function() {
 
         },
 
-        initBarCharts: function() {
-
-            // bar chart:
-            var data = GenerateSeries(0);
-
-            function GenerateSeries(added) {
-                var data = [];
-                var start = 100 + added;
-                var end = 200 + added;
-
-                for (i = 1; i <= 20; i++) {
-                    var d = Math.floor(Math.random() * (end - start + 1) + start);
-                    data.push([i, d]);
-                    start++;
-                    end++;
-                }
-
-                return data;
-            }
-
-            var options = {
-                series: {
-                    bars: {
-                        show: true
-                    }
-                },
-                bars: {
-                    barWidth: 0.8,
-                    lineWidth: 0, // in pixels
-                    shadowSize: 0,
-                    align: 'left'
-                },
-
-                grid: {
-                    tickColor: "#eee",
-                    borderColor: "#eee",
-                    borderWidth: 1
-                }
-            };
-
-            if ($('#chart_1_1').size() !== 0) {
-                $.plot($("#chart_1_1"), [{
-                    data: data,
-                    lines: {
-                        lineWidth: 1,
-                    },
-                    shadowSize: 0
-                }], options);
-            }
-
-            // horizontal bar chart:
-
-            var data1 = [
-                [10, 10],
-                [20, 20],
-                [30, 30],
-                [40, 40],
-                [50, 50]
-            ];
-
-            var options = {
-                series: {
-                    bars: {
-                        show: true
-                    }
-                },
-                bars: {
-                    horizontal: true,
-                    barWidth: 6,
-                    lineWidth: 0, // in pixels
-                    shadowSize: 0,
-                    align: 'left'
-                },
-                grid: {
-                    tickColor: "#eee",
-                    borderColor: "#eee",
-                    borderWidth: 1
-                }
-            };
-
-            if ($('#chart_1_2').size() !== 0) {
-                $.plot($("#chart_1_2"), [data1], options);
-            }
-        },
+        
 
         initPieCharts: function() {
 
@@ -622,12 +539,30 @@ var ChartsFlotcharts = function() {
             var series = Math.floor(Math.random() * 10) + 1;
             series = series < 5 ? 5 : series;
 
-            for (var i = 0; i < series; i++) {
-                data[i] = {
-                    label: "Series" + (i + 1),
-                    data: Math.floor(Math.random() * 100) + 1
-                };
-            }
+
+            data[0] = {
+                        value: 300,
+                        color:"#F7464A",
+                        highlight: "#FF5A5E",
+                        label: "Experience",
+                        data: 30
+                      };
+
+            data[1] = {
+                        value: 50,
+                        color: "#46BFBD",
+                        highlight: "#5AD3D1",
+                        label: "Usability",
+                        data: 40
+                     };
+
+            data[2] = {
+                        value: 100,
+                        color: "#FDB45C",
+                        highlight: "#FFC870",
+                        label: "No Feedback",
+                        data: 30
+                      };
 
             // DEFAULT
             if ($('#pie_chart').size() !== 0) {
@@ -640,184 +575,6 @@ var ChartsFlotcharts = function() {
                 });
             }
 
-            // GRAPH 1
-            if ($('#pie_chart_1').size() !== 0) {
-                $.plot($("#pie_chart_1"), data, {
-                    series: {
-                        pie: {
-                            show: true
-                        }
-                    },
-                    legend: {
-                        show: false
-                    }
-                });
-            }
-
-            // GRAPH 2
-            if ($('#pie_chart_2').size() !== 0) {
-                $.plot($("#pie_chart_2"), data, {
-                    series: {
-                        pie: {
-                            show: true,
-                            radius: 1,
-                            label: {
-                                show: true,
-                                radius: 1,
-                                formatter: function(label, series) {
-                                    return '<div style="font-size:8pt;text-align:center;padding:2px;color:white;">' + label + '<br/>' + Math.round(series.percent) + '%</div>';
-                                },
-                                background: {
-                                    opacity: 0.8
-                                }
-                            }
-                        }
-                    },
-                    legend: {
-                        show: false
-                    }
-                });
-            }
-
-            // GRAPH 3
-            if ($('#pie_chart_3').size() !== 0) {
-                $.plot($("#pie_chart_3"), data, {
-                    series: {
-                        pie: {
-                            show: true,
-                            radius: 1,
-                            label: {
-                                show: true,
-                                radius: 3 / 4,
-                                formatter: function(label, series) {
-                                    return '<div style="font-size:8pt;text-align:center;padding:2px;color:white;">' + label + '<br/>' + Math.round(series.percent) + '%</div>';
-                                },
-                                background: {
-                                    opacity: 0.5
-                                }
-                            }
-                        }
-                    },
-                    legend: {
-                        show: false
-                    }
-                });
-            }
-
-            // GRAPH 4
-            if ($('#pie_chart_4').size() !== 0) {
-                $.plot($("#pie_chart_4"), data, {
-                    series: {
-                        pie: {
-                            show: true,
-                            radius: 1,
-                            label: {
-                                show: true,
-                                radius: 3 / 4,
-                                formatter: function(label, series) {
-                                    return '<div style="font-size:8pt;text-align:center;padding:2px;color:white;">' + label + '<br/>' + Math.round(series.percent) + '%</div>';
-                                },
-                                background: {
-                                    opacity: 0.5,
-                                    color: '#000'
-                                }
-                            }
-                        }
-                    },
-                    legend: {
-                        show: false
-                    }
-                });
-            }
-
-            // GRAPH 5
-            if ($('#pie_chart_5').size() !== 0) {
-                $.plot($("#pie_chart_5"), data, {
-                    series: {
-                        pie: {
-                            show: true,
-                            radius: 3 / 4,
-                            label: {
-                                show: true,
-                                radius: 3 / 4,
-                                formatter: function(label, series) {
-                                    return '<div style="font-size:8pt;text-align:center;padding:2px;color:white;">' + label + '<br/>' + Math.round(series.percent) + '%</div>';
-                                },
-                                background: {
-                                    opacity: 0.5,
-                                    color: '#000'
-                                }
-                            }
-                        }
-                    },
-                    legend: {
-                        show: false
-                    }
-                });
-            }
-
-            // GRAPH 6
-            if ($('#pie_chart_6').size() !== 0) {
-                $.plot($("#pie_chart_6"), data, {
-                    series: {
-                        pie: {
-                            show: true,
-                            radius: 1,
-                            label: {
-                                show: true,
-                                radius: 2 / 3,
-                                formatter: function(label, series) {
-                                    return '<div style="font-size:8pt;text-align:center;padding:2px;color:white;">' + label + '<br/>' + Math.round(series.percent) + '%</div>';
-                                },
-                                threshold: 0.1
-                            }
-                        }
-                    },
-                    legend: {
-                        show: false
-                    }
-                });
-            }
-
-            // GRAPH 7
-            if ($('#pie_chart_7').size() !== 0) {
-                $.plot($("#pie_chart_7"), data, {
-                    series: {
-                        pie: {
-                            show: true,
-                            combine: {
-                                color: '#999',
-                                threshold: 0.1
-                            }
-                        }
-                    },
-                    legend: {
-                        show: false
-                    }
-                });
-            }
-
-            // GRAPH 8
-            if ($('#pie_chart_8').size() !== 0) {
-                $.plot($("#pie_chart_8"), data, {
-                    series: {
-                        pie: {
-                            show: true,
-                            radius: 300,
-                            label: {
-                                show: true,
-                                formatter: function(label, series) {
-                                    return '<div style="font-size:8pt;text-align:center;padding:2px;color:white;">' + label + '<br/>' + Math.round(series.percent) + '%</div>';
-                                },
-                                threshold: 0.1
-                            }
-                        }
-                    },
-                    legend: {
-                        show: false
-                    }
-                });
-            }
 
             // GRAPH 9
             if ($('#pie_chart_9').size() !== 0) {

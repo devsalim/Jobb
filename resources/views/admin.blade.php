@@ -165,7 +165,7 @@ License: You must have a valid license purchased only from themeforest(the above
 				</li>
 				<li class="tooltips" data-container="body" data-placement="right" data-html="true" 
 					data-original-title="Feedback">
-					<a href="/feedbacks">
+					<a href="/feedback">
 						<i class="fa fa-comments"></i>
 						<span class="title">Feedback</span>
 					</a>
@@ -253,21 +253,8 @@ License: You must have a valid license purchased only from themeforest(the above
 <script src="../../assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js" type="text/javascript"></script>
 <!-- END CORE PLUGINS -->
 <!-- BEGIN PAGE LEVEL PLUGINS -->
-<script src="../../assets/global/plugins/jqvmap/jqvmap/jquery.vmap.js" type="text/javascript"></script>
-<script src="../../assets/global/plugins/jqvmap/jqvmap/maps/jquery.vmap.russia.js" type="text/javascript"></script>
-<script src="../../assets/global/plugins/jqvmap/jqvmap/maps/jquery.vmap.world.js" type="text/javascript"></script>
-<script src="../../assets/global/plugins/jqvmap/jqvmap/maps/jquery.vmap.europe.js" type="text/javascript"></script>
-<script src="../../assets/global/plugins/jqvmap/jqvmap/maps/jquery.vmap.germany.js" type="text/javascript"></script>
-<script src="../../assets/global/plugins/jqvmap/jqvmap/maps/jquery.vmap.usa.js" type="text/javascript"></script>
-<script src="../../assets/global/plugins/jqvmap/jqvmap/data/jquery.vmap.sampledata.js" type="text/javascript"></script>
-<script src="../../assets/global/plugins/flot/jquery.flot.min.js" type="text/javascript"></script>
-<script src="../../assets/global/plugins/flot/jquery.flot.resize.min.js" type="text/javascript"></script>
-<script src="../../assets/global/plugins/flot/jquery.flot.categories.min.js" type="text/javascript"></script>
+
 <script src="../../assets/global/plugins/jquery.pulsate.min.js" type="text/javascript"></script>
-<script src="../../assets/global/plugins/bootstrap-daterangepicker/moment.min.js" type="text/javascript"></script>
-<script src="../../assets/global/plugins/bootstrap-daterangepicker/daterangepicker.js" type="text/javascript"></script>
-<!-- IMPORTANT! fullcalendar depends on jquery-ui.min.js for drag & drop support -->
-<script src="../../assets/global/plugins/fullcalendar/fullcalendar.min.js" type="text/javascript"></script>
 <script src="../../assets/global/plugins/jquery-easypiechart/jquery.easypiechart.min.js" type="text/javascript"></script>
 <script src="../../assets/global/plugins/jquery.sparkline.min.js" type="text/javascript"></script>
 <!-- END PAGE LEVEL PLUGINS -->
@@ -279,20 +266,26 @@ License: You must have a valid license purchased only from themeforest(the above
 <script src="../../assets/admin/pages/scripts/index.js" type="text/javascript"></script>
 <script src="../../assets/admin/pages/scripts/tasks.js" type="text/javascript"></script>
 <!-- END PAGE LEVEL SCRIPTS -->
+<!-- BEGIN PAGE LEVEL PLUGINS -->
+<script src="../../assets/global/plugins/flot/jquery.flot.min.js"></script>
+<script src="../../assets/global/plugins/flot/jquery.flot.resize.min.js"></script>
+<script src="../../assets/global/plugins/flot/jquery.flot.pie.min.js"></script>
+<script src="../../assets/global/plugins/flot/jquery.flot.stack.min.js"></script>
+<script src="../../assets/global/plugins/flot/jquery.flot.crosshair.min.js"></script>
+<script src="../../assets/global/plugins/flot/jquery.flot.categories.min.js" type="text/javascript"></script>
+<!-- END PAGE LEVEL PLUGINS -->
+<script src="../../assets/admin/pages/scripts/charts-flotcharts.js"></script>
+<!-- END PAGE LEVEL SCRIPTS -->
 <script>
 jQuery(document).ready(function() {    
-   Metronic.init(); // init metronic core componets
-   Layout.init(); // init layout
-   QuickSidebar.init(); // init quick sidebar
-Demo.init(); // init demo features
-   Index.init();   
-   Index.initDashboardDaterange();
-   // Index.initJQVMAP(); // init index page's custom scripts
-   Index.initCalendar(); // init index page's custom scripts
-   Index.initCharts(); // init index page's custom scripts
-   Index.initChat();
-   Index.initMiniCharts();
-   Tasks.initDashboardWidget();
+	Metronic.init(); // init metronic core componets
+	Layout.init(); // init layout
+	QuickSidebar.init(); // init quick sidebar
+	Demo.init(); // init demo features
+	ChartsFlotcharts.init();
+	ChartsFlotcharts.initCharts();
+	ChartsFlotcharts.initPieCharts();
+	ChartsFlotcharts.initBarCharts();
 });
 </script>
 <!-- END JAVASCRIPTS -->

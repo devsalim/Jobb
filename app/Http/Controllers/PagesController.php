@@ -17,6 +17,7 @@ use DB;
 use Input;
 use App\Group;
 use App\ReportAbuse;
+use App\Feedback;
 
 class PagesController extends Controller {
 
@@ -106,7 +107,8 @@ class PagesController extends Controller {
 				// return $userSkills;
 			}elseif(Auth::user()->identifier == 3){
 				$reportAbuseCount = ReportAbuse::count();
-				return view('pages.dashboard', compact('title', 'reportAbuseCount'));
+				$feedbackCount = Feedback::count();
+				return view('pages.dashboard', compact('title', 'reportAbuseCount', 'feedbackCount'));
 			}
 		}else{
 			return redirect('login');

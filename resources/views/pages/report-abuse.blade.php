@@ -39,7 +39,13 @@
 									<b>{{$ra->user->fname}}</b> has reported 
 									<b>{{$ra->reported_for}}</b> on post id 
 									<b>{{$ra->post_id}}</b> 
-									posted by <b>{{$ra->postuser->induser->fname}}</b>
+									posted by <b>
+									@if($ra->postuser->induser != null)
+									{{$ra->postuser->induser->fname}}
+									@elseif($ra->postuser->corpuser != null)
+									{{$ra->postuser->corpuser->firm_name}}
+									@endif
+									</b>
 								</div>
 							</div>
 						</div>

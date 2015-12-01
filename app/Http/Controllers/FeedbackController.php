@@ -5,6 +5,10 @@ use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 use Auth;
+use Session;
+use Input;
+
+use App\Feedback;
 
 class FeedbackController extends Controller {
 
@@ -24,7 +28,13 @@ class FeedbackController extends Controller {
 	 */
 	public function index()
 	{
-		//
+		if(Auth::user()->identifier == 3){
+			$title = 'feedback';
+			$feedbacks = Feedback::all();
+			return view('pages.feedbacks', compact('title', 'feedbacks'));
+		}else{
+			return redirect('/home');
+		}
 	}
 
 	/**
@@ -34,7 +44,8 @@ class FeedbackController extends Controller {
 	 */
 	public function create()
 	{
-		return view('pages.feedback');
+		$title = 'feedback';
+		return view('pages.feedback', compact('title'));
 	}
 
 	/**
@@ -44,8 +55,17 @@ class FeedbackController extends Controller {
 	 */
 	public function store()
 	{
-		
-		
+		$feedback = new Feedback();
+		$feedback->user_id = Auth::user()->induser_id;
+		$feedback->experience = Input::get('experience');
+		$feedback->usability = Input::get('usability');
+		$feedback->comments = Input::get('comments');
+		$feedback->save();
+
+		Session::flash('message', 'Thanks for giving your valuable feedback!'); 
+		Session::flash('alert-class', 'alert-success'); 
+
+		return redirect('/feedback/create');
 	}
 
 	/**
