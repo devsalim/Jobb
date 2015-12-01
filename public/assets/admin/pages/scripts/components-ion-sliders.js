@@ -1,36 +1,6 @@
+
+
 var ComponentsIonSliders = function () {
-// var $range = $(".js-range-slider"),
-//     $result = $(".js-result"),
-//     $getvalues = $(".js-get-values"),
-
-//     from = 0,
-//     to = 0;
-
-// var saveResult = function (data) {
-//     from = data.fromNumber;
-//     to = data.toNumber;
-// };
-
-// var writeResult = function () {
-//     var result = "from: " + from + ", to: " + to;
-//     $result.html(result);
-// };
-
-// $range.ionRangeSlider({
-//     type: "double",
-//     min: 10,
-//     max: 50,
-//     from: from,
-//     to: to,
-//     onLoad: function (data) {
-//         saveResult(data);
-//         writeResult();
-//     },
-//     onChange: saveResult,
-//     onFinish: saveResult
-// });
-
-// $getvalues.on("click", writeResult);
     return {
         //main function to initiate the module
         init: function () {
@@ -74,10 +44,10 @@ var ComponentsIonSliders = function () {
                 onFinish: writeExp
             });
             $("#range_7").ionRangeSlider({
-                min: 5000,
+                min: 0,
                 max: 50000,
-                from: 5000,
-                to: 10000,
+                from: 100,
+                to: 30000,
                 type: 'double',
                 step: 5000,
                 postfix: "",

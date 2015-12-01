@@ -188,8 +188,10 @@
 										<span class="input-group-addon">
 											<i class="icon-note" style="color:darkcyan;"></i>
 										</span>
-										<textarea name="job_detail" class="form-control autosizeme" rows="3"></textarea>
+										<textarea name="about_individual"  onkeyup="countChar(this)" class="form-control autosizeme" rows="3">"{{ $user->about_individual }}" </textarea>
+										
 									</div>
+									<div id="charNum" style="text-align:right;"></div>
 								</div>
 							</div>
 						</div>	
@@ -399,31 +401,27 @@
 											<li></li>
 											<li></li>
 										</ul> -->	
-										<select class="form-control" id="job-category" multiple="multiple" name="prof_category">
-											
-											
+										<select class="form-control" name="prof_category" value="{{ $user->prof_category }}" >
 											<optgroup label="Accounting">
-												<option  value="Searching Job">Searching Job</option>
-												<option  value="Student">Student</option>
-												<option  value="Accounts/Finance/Tax">Accounts/Finance/Tax</option>
-												<option  value="Agent">Agent</option>
-												<option  value="Analytics & Business Intelligence">
+												<option @if($user->experience=="Accounts/Finance/Tax") {{ $selected }} @endif value="Accounts/Finance/Tax">Accounts/Finance/Tax</option>
+												<option @if($user->experience=="Agent") {{ $selected }} @endif value="Agent">Agent</option>
+												<option @if($user->experience=="Analytics & Business Intelligence") {{ $selected }} @endif value="Analytics & Business Intelligence">
 													Analytics & Business Intelligence
 												</option>
 											</optgroup>
 											<optgroup label="IT Field">
-												<option value="HR/Administration/IR">HR/Administration/IR</option>
-												<option value="IT Software - Client Server">IT Software - Client Server</option>
-												<option value="IT Software - Mainframe">IT Software - Mainframe</option>
-												<option value="IT Software - Middleware">IT Software - Middleware</option>
-												<option value="IT Software - Mobile">IT Software - Mobile</option>
-												<option value="IT Software - Other">IT Software - Other</option>
-												<option value="IT Software - System Programming">IT Software - System Programming</option>
-												<option value="IT Software - Telecom Software">IT Software - Telecom Software</option>
-												<option value="IT Software - Application Programming">IT Software - Application Programming</option>
-												<option value="IT Software - DBA/Datawarehousing">IT Software - DBA/Datawarehousing</option>
-												<option value="IT Software - E-Commerce">IT Software - E-Commerce</option>
-												<option value="IT Software - ERP/CRM">IT Software - ERP/CRM</option>
+												<option @if($user->experience=="HR/Administration/IR") {{ $selected }} @endif value="HR/Administration/IR">HR/Administration/IR</option>
+												<option @if($user->experience=="IT Software - Client Server") {{ $selected }} @endif value="IT Software - Client Server">IT Software - Client Server</option>
+												<option @if($user->experience=="IT Software - Mainframe") {{ $selected }} @endif value="IT Software - Mainframe">IT Software - Mainframe</option>
+												<option @if($user->experience=="IT Software - Middleware") {{ $selected }} @endif value="IT Software - Middleware">IT Software - Middleware</option>
+												<option @if($user->experience=="IT Software - Mobile") {{ $selected }} @endif value="IT Software - Mobile">IT Software - Mobile</option>
+												<option @if($user->experience=="IT Software - Other") {{ $selected }} @endif value="IT Software - Other">IT Software - Other</option>
+												<option @if($user->experience=="IT Software - System Programming") {{ $selected }} @endif value="IT Software - System Programming">IT Software - System Programming</option>
+												<option @if($user->experience=="IT Software - Telecom Software") {{ $selected }} @endif value="IT Software - Telecom Software">IT Software - Telecom Software</option>
+												<option @if($user->experience=="IT Software - Application Programming") {{ $selected }} @endif value="IT Software - Application Programming">IT Software - Application Programming</option>
+												<option @if($user->experience=="IT Software - DBA/Datawarehousing") {{ $selected }} @endif value="IT Software - DBA/Datawarehousing">IT Software - DBA/Datawarehousing</option>
+												<option @if($user->experience=="IT Software - E-Commerce") {{ $selected }} @endif value="IT Software - E-Commerce">IT Software - E-Commerce</option>
+												<option @if($user->experience=="IT Software - ERP/CRM") {{ $selected }} @endif value="IT Software - ERP/CRM">IT Software - ERP/CRM</option>
 											</optgroup>
 										</select>
 									</div>
@@ -639,6 +637,16 @@
 	});   
 </script>
 <script type="text/javascript">
+      function countChar(val) {
+        var len = val.value.length;
+        if (len >= 1000) {
+          val.value = val.value.substring(0, 1000);
+        } else {
+          $('#charNum').text(1000 - len);
+        }
+      };
+    </script>
+<script type="text/javascript">
 	
 
 	// function checkOption(obj) {
@@ -650,11 +658,9 @@ toggleFields();
 $('#working_status').change(function () {
 toggleFields();
 });
-
 });
 function toggleFields() {
 if ($('#working_status').val() == 'Student' || $('#working_status').val() == 'Searching Job')
-// $("#workingat").removeAttr('value');
 $("#workingat").attr('disabled','disabled').val('');
 else
 $("#workingat").removeAttr('disabled');

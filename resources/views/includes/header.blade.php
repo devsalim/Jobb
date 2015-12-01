@@ -81,6 +81,7 @@
               <li>
                 <ul class="dropdown-menu-list scroller" style="height: 275px;" data-handle-color="#637283">
                   @foreach($thanks as $thank)
+                  @if(Auth::user()->induser_id == $thank->user->id)
                   <li>
                     <a class="myactivity-post" data-toggle="modal" href="#myactivity-post">
                     <span class="photo">
@@ -88,15 +89,33 @@
                     </span>
                     <span class="subject">
                     <span class="from">
-                    {{$thank->user->fname}} </span>
+                     </span>
                     <span class="time">
-                      {{ \Carbon\Carbon::createFromTimeStamp(strtotime($thank->thanks_dtTime))->diffForHumans() }}
+                      <i class="fa fa-clock-o"></i> {{ \Carbon\Carbon::createFromTimeStamp(strtotime($thank->thanks_dtTime))->diffForHumans() }}
                     </span>
                     </span>
                     <span class="message">
-                    has thanked for Job<br> Post Id: {{$thank->unique_id}} </span>
+                    You has thanked for Job Post Id: {{$thank->unique_id}} </span>
                     </a>
                   </li>
+                  @else
+                  <li>
+                    <a class="myactivity-post" data-toggle="modal" href="#myactivity-post">
+                    <span class="photo">
+                    <img src="@if($thank->user->profile_pic != null){{ '/img/profile/'.$thank->user->profile_pic }}@else{{'/assets/images/ab.png'}}@endif" class="img-circle" width="40" height="40">
+                    </span>
+                    <span class="subject">
+                    <span class="from">
+                     </span>
+                    <span class="time">
+                      <i class="fa fa-clock-o"></i> {{ \Carbon\Carbon::createFromTimeStamp(strtotime($thank->thanks_dtTime))->diffForHumans() }}
+                    </span>
+                    </span>
+                    <span class="message">
+                    {{$thank->user->fname}} has thanked for Job Post Id: {{$thank->unique_id}} </span>
+                    </a>
+                  </li>
+                  @endif
                  @endforeach
                 </ul>
               </li>

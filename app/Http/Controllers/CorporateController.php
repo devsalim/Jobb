@@ -46,11 +46,16 @@ class CorporateController extends Controller {
 	{
 		if($request->ajax()){
 		DB::beginTransaction();
+		$vcode = "";
 		try{
 			$corpUser = new Corpuser();
 			$corpUser->firm_name = $request['firm_name'];
 			$corpUser->firm_email_id = $request['firm_email_id'];
 			$corpUser->firm_type = $request['firm_type'];
+			if($request['firm_email_id'] != null){
+					$vcode = 'C'.rand(1111,9999);
+					$corpUser->email_vcode = $vcode;
+				}
 			$corpUser->save();
 
 			$user = new User();
@@ -67,7 +72,14 @@ class CorporateController extends Controller {
 		}
 
 		DB::commit();
-
+		if($request['firm_email_id'] != null){
+				$email = $request['firm_email_id'];
+				$firm_name = $request['firm_name'];
+				$vcode = Corpuser::where('firm_email_id', '=', $request['firm_email_id'])->pluck('email_vcode');
+				Mail::send('emails.welcome', array('firm_name'=>$firm_name, 'vcode'=>$vcode), function($message) use ($email,$firm_name){
+			        $message->to($email, $firm_name)->subject('Welcome to Jobtip!')->from('admin@jobtip.in', 'JobTip');
+			    });
+			}
 		return 'login';
 	}else
 	{
@@ -77,6 +89,10 @@ class CorporateController extends Controller {
 			$corpUser->firm_name = $request['firm_name'];
 			$corpUser->firm_email_id = $request['firm_email_id'];
 			$corpUser->firm_type = $request['firm_type'];
+			if($request['firm_email_id'] != null){
+					$vcode = 'C'.rand(1111,9999);
+					$corpUser->email_vcode = $vcode;
+				}
 			$corpUser->save();
 
 			$user = new User();
@@ -93,7 +109,14 @@ class CorporateController extends Controller {
 		}
 
 		DB::commit();
-
+		if($request['firm_email_id'] != null){
+				$email = $request['firm_email_id'];
+				$firm_name = $request['firm_name'];
+				$vcode = Corpuser::where('firm_email_id', '=', $request['firm_email_id'])->pluck('email_vcode');
+				Mail::send('emails.welcome', array('firm_name'=>$firm_name, 'vcode'=>$vcode), function($message) use ($email,$firm_name){
+			        $message->to($email, $firm_name)->subject('Welcome to Jobtip!')->from('admin@jobtip.in', 'JobTip');
+			    });
+			}
 		return redirect('/login');
 	}
 	}

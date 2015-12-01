@@ -405,7 +405,7 @@
 																                    <div class="col-md-1"></div>
 															                        <div class="col-md-10">
 																                    	<div class="row">
-																	                    	<div class="col-md-2 col-sm-4 col-xs-4">
+																	                    	<div class="col-md-4 col-sm-4 col-xs-4">
 																	                    		<a data-toggle="modal" href="#post-mod-{{$post->id}}">
 																	                    			<i class="icon-speedometer"></i> 
 <?php
@@ -431,9 +431,13 @@ catch(\Exception $e){}
 																	                    	<!-- <div class="col-md-2 col-sm-4 col-xs-4">
 																	                    		Profile
 																	                    	</div> -->
-																	                    	<div class="col-md-2 col-sm-4 col-xs-4">
+																	                    	<div class="col-md-4 col-sm-4 col-xs-4">
 																	                    	<a class="viewcontact-view" data-toggle="modal" href="#viewcontact-view">
 																	                    		View Contact</a>
+																	                    	</div>
+																	                    	<div class="col-md-4 col-sm-4 col-xs-4">
+																	                    	<a class="viewcontact-view" data-toggle="modal" href="#viewcontact-view">
+																	                    		View/Download</a>
 																	                    	</div>
 																                    	</div>
 															                		</div>

@@ -6,7 +6,6 @@ var ComponentsjQueryUISliders = function () {
         init: function () {
             // basic
             $(".slider-basic").slider(); // basic sliders
-
              // vertical range sliders
             $("#slider-range").slider({
                 isRTL: Metronic.isRTL(),

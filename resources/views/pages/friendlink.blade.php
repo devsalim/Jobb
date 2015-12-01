@@ -24,6 +24,7 @@
 			<div class="tab-content">
 				<div class="tab-pane active" id="tab_5_1">							
 					<ul class="media-list">
+						 @if($linksCount > 0)
 					@foreach($connections as $connection)
 																			
 						  <li class="media ">
@@ -55,11 +56,29 @@
 						  </li>
 						
 					@endforeach
+					@else
+						 <li class="media">
+							    <div class="media-left">
+							      
+							    </div>
+							    <div class="media-body">
+							    	<div class="media-body-left">
+							    		 <h4 class="media-heading">
+							    		 	No Links
+							    		 </h4>
+										
+							    	</div>
+								</div>														     
+							  </li>
+						
+						@endif
 					</ul>
 				</div>
 				<div class="tab-pane" id="tab_5_2">
 						<ul class="media-list">
-						@foreach($linkFollow as $follow)														
+							@if($followCount > 0)
+						@foreach($linkFollow as $follow)
+																				
 							  <li class="media">
 							    <div class="media-left">
 							      <a href="#">
@@ -74,8 +93,25 @@
 										 {{ $follow->city }}, {{ $follow->operating_since }}
 							    	</div>
 								</div>														     
-							  </li>						
-						@endforeach		
+							  </li>
+							  
+							<!--   No Follow	 -->					
+						@endforeach	
+						@else
+							  <li class="media">
+							    <div class="media-left">
+							      
+							    </div>
+							    <div class="media-body">
+							    	<div class="media-body-left">
+							    		 <h4 class="media-heading">
+							    		 	 No Follow	
+							    		 </h4>
+										
+							    	</div>
+								</div>														     
+							  </li>
+							  @endif	
 						</ul>
 				</div>
 			</div>
@@ -101,6 +137,7 @@
 			<div class="tab-content">
 				<div class="tab-pane active" id="tab_5_1">
 					<ul class="media-list">
+						@if(count($followers) > 0)
 						@foreach($followers as $follower)												
 						  <li class="media">
 						    <div class="media-left">
@@ -120,6 +157,21 @@
 							</div>														     
 						  </li>						
 						@endforeach		
+						@else
+							  <li class="media">
+							    <div class="media-left">
+							      
+							    </div>
+							    <div class="media-body">
+							    	<div class="media-body-left">
+							    		 <h4 class="media-heading">
+							    		 	 No Follow	
+							    		 </h4>
+										
+							    	</div>
+								</div>														     
+							  </li>
+							  @endif	
 					</ul>
 				</div>
 			</div>

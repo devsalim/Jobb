@@ -364,6 +364,7 @@
 			<div class="tab-content">
 				<div class="tab-pane active" id="tab_5_4">
 					<ul class="media-list">
+						@if(count($followers) > 0)
 						@foreach($followers as $follower)
 																
 						  <li class="media">
@@ -382,9 +383,25 @@
 									 {{ $follower->city }}, {{ $follower->state }}
 						    	</div>						    	
 							</div>														     
-						  </li>		
-						  		
-						@endforeach		
+						  </li>				 
+						@endforeach	
+						@else	
+						  	<li class="media">
+						    <div class="media-left">
+						     
+						    </div>
+						    <div class="media-body">
+						    	<div class="media-body-left"  style="margin: 4px 0;">
+						    		 <h4 class="media-heading">
+						    		 	
+						    		 	No Follower
+						    		 	
+						    		 </h4>
+									 
+						    	</div>						    	
+							</div>														     
+						  </li>			
+						 @endif
 					</ul>
 				</div>
 			</div>

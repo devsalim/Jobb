@@ -681,7 +681,7 @@ $('#individual-register-btn').on('click',function(event){
     return false;
   });
 
-$('#corporate-register-btn').on('click',function(event){        
+$('#corporate-register-btn').on('click',function(event){       
     event.preventDefault();
 
     loader('show');
@@ -702,31 +702,91 @@ $('#corporate-register-btn').on('click',function(event){
       cache : false,
       success: function(data){
         loader('hide');
-        if(data == 'login'){
-            $('#corp-msg-reg-box').removeClass('alert alert-success');
-            $('#corp-msg-reg-box').addClass('alert alert-danger').fadeIn(1000, function(){
-                $(this).show();
-            });
-            $('#corp-reg-msg').text('Invalid user');
-        }else{
+        if(data.data.page == 'login'){
             $('#corp-msg-reg-box').removeClass('alert alert-danger');
             $('#corp-msg-reg-box').addClass('alert alert-success').fadeIn(1000, function(){
                 $(this).show();
             });
-            $('#corp-reg-msg').text('Registration success');
-            redirect(data);
+            $('#corporate-register')[0].reset();
+            $('#t-n-c').attr('checked', false); // Unchecks it
+            $('#corporate-register').hide();
+            $('#corporate-login').show();
+            $('#corp-reg-msg').html('Registration successful ! <br/>Check your Email for further instruction.');  
+        }else{
+            $('#corp-msg-reg-box').removeClass('alert alert-success');
+            $('#corp-msg-reg-box').addClass('alert alert-danger').fadeIn(1000, function(){
+                $(this).show();
+            });
+            $('#corp-reg-msg').text('Some errors occured during Registration!');
         }
       },
       error: function(data) {
         loader('hide');
-        $('#corp-msg-reg-box').addClass('alert alert-danger').fadeIn(1000, function(){
-                $(this).show();
-        });
-        $('#corp-reg-msg').text('Some error occured !');
+	    var errors = data.responseJSON;
+	    // console.log(errors);
+	    $errorsHtml = '<div class="alert alert-danger"><ul>';
+	    $.each(errors, function(index, value) {
+			 $errorsHtml += '<li>' + value[0] + '</li>';
+	    });
+ 		$errorsHtml += '</ul></div>';	            
+        $( '#corp-reg-form-errors' ).html( $errorsHtml );
+        $( '#corp-reg-form-errors' ).show();
+
+        // $('#ind-msg-reg-box').addClass('alert alert-danger').fadeIn(1000, function(){
+        //         $(this).show();
+        // });
+        // $('#ind-reg-msg').text('Some error occured !');
       }
     }); 
     return false;
   });
+
+// $('#corporate-register-btn').on('click',function(event){        
+//     event.preventDefault();
+
+//     loader('show');
+
+//     var formData = $('#corporate-register').serialize(); // form data as string
+//     var formAction = $('#corporate-register').attr('action'); // form handler url
+
+//     $.ajaxSetup({
+//         headers: {
+//             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+//         }
+//     });
+
+//     $.ajax({
+//       url: formAction,
+//       type: "post",
+//       data: formData,
+//       cache : false,
+//       success: function(data){
+//         loader('hide');
+//         if(data == 'login'){
+//             $('#corp-msg-reg-box').removeClass('alert alert-success');
+//             $('#corp-msg-reg-box').addClass('alert alert-danger').fadeIn(1000, function(){
+//                 $(this).show();
+//             });
+//             $('#corp-reg-msg').text('Invalid user');
+//         }else{
+//             $('#corp-msg-reg-box').removeClass('alert alert-danger');
+//             $('#corp-msg-reg-box').addClass('alert alert-success').fadeIn(1000, function(){
+//                 $(this).show();
+//             });
+//             $('#corp-reg-msg').text('Registration success');
+//             redirect(data);
+//         }
+//       },
+//       error: function(data) {
+//         loader('hide');
+//         $('#corp-msg-reg-box').addClass('alert alert-danger').fadeIn(1000, function(){
+//                 $(this).show();
+//         });
+//         $('#corp-reg-msg').text('Some error occured !');
+//       }
+//     }); 
+//     return false;
+//   });
 });
 
 $('#forget-password-btn').on('click',function(event){        

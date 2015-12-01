@@ -83,6 +83,9 @@ var FormWizard = function () {
                         required: true
                         // minimum: 2
                     },
+                    education2: {
+                        required: true
+                    },
                     city: {
                         required: true
                     },
@@ -91,14 +94,15 @@ var FormWizard = function () {
                     },
                     time_for:{
                         required: true
-                    }
+                    },
                     email_id:{
-                        required: false,
+                        required: true,
                         email: true
                     },
                     phone:{
-                        required: false,
-                        number: true
+                        required: true,
+                        number: true,
+                        maxlength:10
                     }
                 },
 
@@ -110,7 +114,8 @@ var FormWizard = function () {
                     email: "Enter valid Email Id"
                 },
                 phone: {
-                    number: "Enter Integer only"
+                    number: "Enter Integer only",
+                    maxlength: "Maximum 10 Integer only"
                 },
                 job_detail: {
                     required: "Enter Job Detail"
@@ -143,6 +148,10 @@ var FormWizard = function () {
                     maxlength: "Maximum Length is 20"
                 },
                 education: {
+                    required: "Select Required Education"
+                    // minimum: "Select atleast 2 option"
+                },
+                 education2: {
                     required: "Select Required Education"
                     // minimum: "Select atleast 2 option"
                 },

@@ -13,6 +13,9 @@
             education : {
                 required : true
             },
+            about_individual: {
+                // maxlength: 1000
+            },
             branch : {
                 required : true
             },
@@ -42,6 +45,9 @@
         messages: {
             education: {
                 required: "Select Education"
+            },
+            about_individual: {
+                // maxlength: "Maximum 1000 character only"
             },
             branch: {
                 required: "Select Branch"

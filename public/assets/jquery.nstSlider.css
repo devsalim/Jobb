@@ -9,7 +9,7 @@
   -moz-border-radius: 10px;
   border-radius: 10px;
   position: relative;
-  width: 300px;
+  width: 248px;
   height: 20px;
   background: #113344;
 }
@@ -22,12 +22,12 @@
 .nstSlider .rightGrip,
 .nstSlider .leftGrip {
   position: absolute;
-  -webkit-border-radius: 10px;
-  -moz-border-radius: 10px;
-  border-radius: 10px;
+  -webkit-border-radius: 10px !important;
+  -moz-border-radius: 10px !important;
+  border-radius: 10px !important;
   width: 20px;
   height: 20px;
-  background: #ffffff;
+  background: deepskyblue;
 }
 .nstSlider .bar {
   -webkit-border-radius: 10px;
@@ -50,5 +50,17 @@
   position: absolute;
   background: #e87722;
   height: 20px;
+  top: 0;
+}
+
+.newleftLabel{
+  position: absolute; 
+  left: 0;
+  top: 0;
+}
+
+.newrightLabel{
+  position: absolute; 
+  right: 0;
   top: 0;
 }

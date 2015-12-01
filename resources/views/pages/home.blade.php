@@ -423,18 +423,18 @@
 											@if(Auth::user()->induser_id == $post->individual_id && $post->individual_id != null)
 												<div class="timeline-body-head-caption">												
 														<a href="/profile/ind/{{$post->individual_id}}" class="link-label" data-utype="ind">
-															You have
+															You
 														</a>
-													<span class="timeline-body-time font-grey-cascade">posted  
+													<span class="timeline-body-time font-grey-cascade"><i class="fa fa-clock-o"></i> 
 														{{ \Carbon\Carbon::createFromTimeStamp(strtotime($post->created_at))->diffForHumans() }}
 													</span>
 												</div>
 											@elseif(Auth::user()->corpuser_id == $post->corporate_id && $post->corporate_id != null)
 												<div class="timeline-body-head-caption">													
 														<a href="/profile/corp/{{$post->corporate_id}}" class="link-label" data-utype="corp">
-															You have
+															You {{ $post->corpuser->firm_type}}
 														</a>
-													<span class="timeline-body-time font-grey-cascade">posted 
+													<span class="timeline-body-time font-grey-cascade"><i class="fa fa-clock-o"></i> 
 														{{ \Carbon\Carbon::createFromTimeStamp(strtotime($post->created_at))->diffForHumans() }}
 													</span>
 												</div>
@@ -469,7 +469,7 @@
 													
 
 													
-													<span class="timeline-body-time font-grey-cascade">posted 
+													<span class="timeline-body-time font-grey-cascade"><i class="fa fa-clock-o"></i> 
 														{{ \Carbon\Carbon::createFromTimeStamp(strtotime($post->created_at))->diffForHumans() }}
 													</span>
 												</div>
@@ -485,9 +485,9 @@
 															</a>
 														@endif														
 														<a href="/profile/corp/{{$post->corporate_id}}" style="padding: 0px 0px 0px 32px;font-size: 15px;text-decoration:none;font-weight:600;">
-															{{ $post->corpuser->firm_name}}
+															{{ $post->corpuser->firm_name}} {{ $post->corpuser->firm_type}}
 														</a>
-													<span class="timeline-body-time font-grey-cascade">posted 
+													<span class="timeline-body-time font-grey-cascade"><i class="fa fa-clock-o"></i>
 														{{ \Carbon\Carbon::createFromTimeStamp(strtotime($post->created_at))->diffForHumans() }}
 													</span>
 												</div>
@@ -584,12 +584,12 @@
 																		{{$skill->name}},
 																	@endforeach																 
 															</div>
-															@if($post->post_type == 'job')
+															@if($post->post_type == 'job' && $post->min_sal != null && $post->max_sal != null)
 															<div class="col-md-12 col-sm-12 col-xs-12">												
 																<label class="detail-label">Salary (<i class="fa fa-rupee (alias)"></i>):</label>
 																{{ $post->min_sal }}-{{ $post->max_sal }} {{ $post->salary_type }} 
 															</div>
-															@else
+															@elseif($post->post_type == 'skill' && $post->min_sal != null && $post->max_sal != null)
 															<div class="col-md-12 col-sm-12 col-xs-12">												
 																<label class="detail-label">Expected Salary (<i class="fa fa-rupee (alias)"></i>):</label>
 																{{ $post->min_sal }}-{{ $post->max_sal }} {{ $post->salary_type }} 

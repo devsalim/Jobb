@@ -246,7 +246,7 @@
 	</div>
 
 	<!-- PORTLET MAIN -->
-	@if($utype == 'ind')
+	@if($utype == 'ind' && $user->about_individual != null)
 <div class="portlet light bordered col-md-8" style="border:1px solid #e1e1e1 !important;border-radius: 5px !important;margin-top: 30px; ">
 	<div class="portlet-title">
 		<div class="caption">
@@ -279,7 +279,7 @@
 		<!-- END FORM-->
 	</div>
 </div>
-@elseif($utype == 'corp')
+@elseif($utype == 'corp' && $user->about_firm != null)
 <div class="portlet light bordered col-md-8" style="border:1px solid #e1e1e1 !important;border-radius: 5px !important;margin-top: 30px; ">
 	<div class="portlet-title">
 		<div class="caption">
@@ -334,12 +334,13 @@
 		<!-- BEGIN FORM-->
 			<div class="form-body">
 				<div class="row">
+					@if($user->education != null && Auth::user()->induser_id == $user->id)
 					<div class="col-md-6 col-sm-6 col-xs-12">
 						<div class="form-group">
 							<label class="control-label col-md-4 col-xs-6">Education:</label>
 							<div class="col-md-6 col-xs-6">
 								<p class="form-control-static view-page text-capitalize">
-									@if($user->education != null && $user->education != null)
+									@if($user->education != null && $user->branch != null)
 									{{ $user->education }} in {{ $user->branch }} 
 									@elseif($user->education == null)
 									--
@@ -348,7 +349,23 @@
 							</div>
 						</div>
 					</div>
+					@elseif($user->education != null && Auth::user()->induser_id != $user->id)
+					<div class="col-md-6 col-sm-6 col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-md-4 col-xs-6">Education:</label>
+							<div class="col-md-6 col-xs-6">
+								<p class="form-control-static view-page text-capitalize">
+									@if($user->education != null && $user->branch != null)
+									{{ $user->education }} in {{ $user->branch }} 
+									@endif
+								</p>
+							</div>
+						</div>
+					</div>
+					@elseif($user->education == null && Auth::user()->induser_id != $user->id)
+					@endif
 					<!--/span-->
+					@if($user->experience != null && Auth::user()->induser_id == $user->id)
 					<div class="col-md-6 col-sm-6 col-xs-12">
 						<div class="form-group">
 							<label class="control-label col-md-4 col-xs-6">Experience:</label>
@@ -365,10 +382,28 @@
 							</div>
 						</div>
 					</div>
+					@elseif($user->experience != null && Auth::user()->induser_id != $user->id)
+					<div class="col-md-6 col-sm-6 col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-md-4 col-xs-6">Experience:</label>
+							<div class="col-md-6 col-xs-6">
+								<p class="form-control-static view-page">
+									@if($user->experience != null && $user->experience != 0)
+									{{ $user->experience }} Years
+									@elseif($user->experience == 0 )
+									{{ $user->experience }} Year
+									@endif
+								</p>
+							</div>
+						</div>
+					</div>
+					@elseif($user->experience == null && Auth::user()->induser_id != $user->id)
+					@endif
 					<!--/span-->
 				</div>
 				<!--/row-->
 				<div class="row">
+					@if($user->working_status != null && Auth::user()->induser_id == $user->id)
 					<div class="col-md-6 col-sm-6 col-xs-12">
 						<div class="form-group">
 							<label class="control-label col-md-4 col-xs-6">Working Status:</label>
@@ -383,7 +418,25 @@
 							</div>
 						</div>
 					</div>
+					@elseif($user->working_status != null && Auth::user()->induser_id != $user->id)
+					<div class="col-md-6 col-sm-6 col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-md-4 col-xs-6">Working Status:</label>
+							<div class="col-md-6 col-xs-6">
+								<p class="form-control-static view-page">
+									@if($user->working_status != null)
+									{{ $user->working_status }}
+									@elseif($user->working_status == null)
+									--
+									@endif
+								</p>
+							</div>
+						</div>
+					</div>
+					@elseif($user->working_status == null && Auth::user()->induser_id != $user->id)
+					@endif
 					<!--/span-->
+					@if($user->working_at != null && Auth::user()->induser_id == $user->id)
 					<div class="col-md-6 col-sm-6 col-xs-12">
 						<div class="form-group">
 							<label class="control-label col-md-4 col-xs-6">Working At:</label>
@@ -398,11 +451,28 @@
 							</div>
 						</div>
 					</div>
-					<!--/span-->
-					
+					@elseif($user->working_at != null && Auth::user()->induser_id != $user->id)
+					<div class="col-md-6 col-sm-6 col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-md-4 col-xs-6">Working At:</label>
+							<div class="col-md-6 col-xs-6">
+								<p class="form-control-static view-page">
+									@if($user->working_at != null)
+									{{ $user->working_at }}
+									@elseif($user->working_at == null)
+									--
+									@endif
+								</p>
+							</div>
+						</div>
+					</div>
+					@elseif($user->working_at == null && Auth::user()->induser_id != $user->id)
+					@endif
+					<!--/span-->	
 				</div>
 				<!--/row-->
 				<div class="row">
+					@if($user->prof_category != null && Auth::user()->induser_id == $user->id)
 					<div class="col-md-6 col-sm-6 col-xs-12">
 						<div class="form-group">
 							<label class="control-label col-md-4 col-xs-6">Job Category:</label>							
@@ -417,7 +487,25 @@
 							</div>
 						</div>
 					</div>
+					@elseif($user->prof_category != null && Auth::user()->induser_id != $user->id)
+					<div class="col-md-6 col-sm-6 col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-md-4 col-xs-6">Job Category:</label>							
+							<div class="col-md-6 col-xs-6">
+								<p class="form-control-static view-page">
+									@if($user->prof_category != null)
+									{{ $user->prof_category }}
+									@elseif($user->prof_category == null)
+									--
+									@endif
+								</p>
+							</div>
+						</div>
+					</div>
+					@elseif($user->prof_category == null && Auth::user()->induser_id != $user->id)
+					@endif
 					<!--/span-->
+					@if($user->role != null && Auth::user()->induser_id == $user->id)
 					<div class="col-md-6 col-sm-6 col-xs-12">
 						<div class="form-group">
 							<label class="control-label col-md-4 col-xs-6">Job Role:</label>
@@ -432,10 +520,28 @@
 							</div>
 						</div>
 					</div>
+					@elseif($user->role != null && Auth::user()->induser_id != $user->id)
+					<div class="col-md-6 col-sm-6 col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-md-4 col-xs-6">Job Role:</label>
+							<div class="col-md-6 col-xs-6">
+								<p class="form-control-static view-page">
+									@if($user->role != null)
+									{{ $user->role }}
+									@else
+									 --
+									 @endif
+								</p>
+							</div>
+						</div>
+					</div>
+					@elseif($user->role == null && Auth::user()->induser_id != $user->id)
+					@endif
 					<!--/span-->	
 				</div>
 				<!--/row-->
 				<div class="row">
+					@if($user->resume != null && Auth::user()->induser_id == $user->id)
 					<div class="col-md-6 col-sm-6 col-xs-12">
 						<div class="form-group">
 							<label class="control-label col-md-4 col-xs-6">Resume:</label>
@@ -450,7 +556,25 @@
 							</div>
 						</div>
 					</div>
+					@elseif($user->resume != null && Auth::user()->induser_id != $user->id)
+					<div class="col-md-6 col-sm-6 col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-md-4 col-xs-6">Resume:</label>
+							<div class="col-md-6 col-xs-6">
+								<p class="form-control-static view-page">
+									@if($user->resume != null)
+									 <a href="javascript:;" class="btn btn-xs blue" style="height: 20px;"><i class="icon-eye"></i>&nbsp;View </a>
+									 @else
+									 --
+									 @endif
+								</p>
+							</div>
+						</div>
+					</div>
+					@elseif($user->role == null && Auth::user()->induser_id != $user->id)
+					@endif
 					<!--/span-->
+					@if($user->linked_skill != null && Auth::user()->induser_id == $user->id)
 					<div class="col-md-6 col-sm-6 col-xs-12">
 						<div class="form-group">
 							<label class="control-label col-md-4 col-xs-6">Key Skills:</label>
@@ -466,6 +590,24 @@
 							</div>
 						</div>
 					</div>
+					@elseif($user->linked_skill != null && Auth::user()->induser_id != $user->id)
+					<div class="col-md-6 col-sm-6 col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-md-4 col-xs-6">Key Skills:</label>
+							<div class="col-md-8 col-xs-6">
+								<p class="form-control-static view-page">
+									
+									@if($user->linked_skill != null)
+									{{ $user->linked_skill }}
+									@elseif($user->linked_skill == null)
+									--
+									@endif
+								</p>
+							</div>
+						</div>
+					</div>
+					@elseif($user->linked_skill == null && Auth::user()->induser_id != $user->id)
+					@endif
 					<!--/span-->
 				</div>
 				<!--/row-->
@@ -503,6 +645,7 @@
 						</div>
 					</div>
 					<!--/span-->
+					@if($user->slogan != null && Auth::user()->corpuser_id == $user->id)
 					<div class="col-md-6 col-sm-6 col-xs-12">
 						<div class="form-group">
 							<label class="control-label col-md-4 col-xs-12">Slogan:</label>
@@ -513,6 +656,19 @@
 							</div>
 						</div>
 					</div>
+					@elseif($user->slogan != null && Auth::user()->corpuser_id != $user->id)
+					<div class="col-md-6 col-sm-6 col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-md-4 col-xs-12">Slogan:</label>
+							<div class="col-md-6 col-xs-12">
+								<p class="form-control-static view-page">
+									 {{ $user->slogan }}
+								</p>
+							</div>
+						</div>
+					</div>
+					@elseif($user->slogan == null && Auth::user()->corpuser_id != $user->id)
+					@endif
 					<!--/span-->
 				</div>
 				<div class="row">
@@ -527,6 +683,7 @@
 						</div>
 					</div>
 					<!--/span-->
+					@if($user->operating_since != null && Auth::user()->corpuser_id == $user->id)
 					<div class="col-md-6 col-sm-6 col-xs-12">
 						<div class="form-group">
 							<label class="control-label col-md-4 col-xs-6">Operating Since:</label>
@@ -543,10 +700,30 @@
 							</div>
 						</div>
 					</div>
+					@elseif($user->operating_since != null && Auth::user()->corpuser_id != $user->id)
+					<div class="col-md-6 col-sm-6 col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-md-4 col-xs-6">Operating Since:</label>
+							<div class="col-md-6 col-xs-6">
+								<p class="form-control-static view-page">
+									@if($user->operating_since != null && $user->operating_since != "Startup")
+									{{ $user->operating_since }} Years
+									@elseif($user->operating_since == "Startup")
+									{{ $user->operating_since }}
+									@else
+									--
+									@endif
+								</p>
+							</div>
+						</div>
+					</div>
+					@elseif($user->operating_since == null && Auth::user()->corpuser_id != $user->id)
+					@endif
 					<!--/span-->
 				</div>
 				<!--/row-->
 				<div class="row">
+					@if($user->industry != null && Auth::user()->corpuser_id == $user->id)
 					<div class="col-md-6 col-sm-6 col-xs-12">
 						<div class="form-group">
 							<label class="control-label col-md-4 col-xs-6">Industry:</label>
@@ -561,7 +738,25 @@
 							</div>
 						</div>
 					</div>
+					@elseif($user->industry != null && Auth::user()->corpuser_id != $user->id)
+					<div class="col-md-6 col-sm-6 col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-md-4 col-xs-6">Industry:</label>
+							<div class="col-md-6 col-xs-6">
+								<p class="form-control-static view-page text-capitalize">
+									@if($user->industry != null)
+									 {{ $user->industry }}
+									@elseif($user->industry != null)
+									--
+									@endif
+								</p>
+							</div>
+						</div>
+					</div>
+					@elseif($user->industry == null && Auth::user()->corpuser_id != $user->id)
+					@endif
 					<!--/span-->
+					@if($user->emp_count != null && Auth::user()->corpuser_id == $user->id)
 					<div class="col-md-6 col-sm-6 col-xs-12">
 						<div class="form-group">
 							<label class="control-label col-md-4 col-xs-6">No of Employee:</label>
@@ -576,9 +771,27 @@
 							</div>
 						</div>
 					</div>
+					@elseif($user->emp_count != null && Auth::user()->corpuser_id != $user->id)
+					<div class="col-md-6 col-sm-6 col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-md-4 col-xs-6">No of Employee:</label>
+							<div class="col-md-6 col-xs-6">
+								<p class="form-control-static view-page text-capitalize">
+									@if($user->emp_count != null)
+									 {{ $user->emp_count }} Employees
+									@elseif($user->emp_count == null)
+									--
+									@endif
+								</p>
+							</div>
+						</div>
+					</div>
+					@elseif($user->emp_count == null && Auth::user()->corpuser_id != $user->id)
+					@endif
 					<!--/span-->
 				</div>
 				<div class="row">
+					@if($user->linked_skill != null && Auth::user()->corpuser_id == $user->id)
 					<div class="col-md-6 col-sm-6 col-xs-12">
 						<div class="form-group">
 							<label class="control-label col-md-4 col-xs-6">Work Area:</label>
@@ -593,7 +806,25 @@
 							</div>
 						</div>
 					</div>
+					@elseif($user->linked_skill != null && Auth::user()->corpuser_id != $user->id)
+					<div class="col-md-6 col-sm-6 col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-md-4 col-xs-6">Work Area:</label>
+							<div class="col-md-6 col-xs-6">
+								<p class="form-control-static view-page">
+									@if($user->linked_skill != null)
+									 {{ $user->linked_skill }}
+									 @elseif($user->linked_skill == null)
+									 --
+									 @endif
+								</p>
+							</div>
+						</div>
+					</div>
+					@elseif($user->linked_skill == null && Auth::user()->corpuser_id != $user->id)
+					@endif
 					<!--/span-->
+					@if($user->website_url != null && Auth::user()->corpuser_id == $user->id)
 					<div class="col-md-6 col-sm-6 col-xs-12">
 						<div class="form-group">
 							<label class="control-label col-md-4 col-xs-6">Website:</label>
@@ -608,6 +839,23 @@
 							</div>
 						</div>
 					</div>
+					@elseif($user->website_url != null && Auth::user()->corpuser_id != $user->id)
+					<div class="col-md-6 col-sm-6 col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-md-4 col-xs-6">Website:</label>
+							<div class="col-md-6 col-xs-6">
+								<p class="form-control-static view-page">
+									@if($user->website_url != null)
+									 {{ $user->website_url }}
+									 @elseif($user->website_url == null)
+									 --
+									 @endif
+								</p>
+							</div>
+						</div>
+					</div>
+					@elseif($user->website_url == null && Auth::user()->corpuser_id != $user->id)
+					@endif
 					<!--/span-->
 				</div>
 				<!--/row-->
@@ -678,6 +926,7 @@
 					<!--/span-->
 				</div>
 				<div class="row">
+					@if($user->dob != null && Auth::user()->induser_id == $user->id)
 					<div class="col-md-6 col-sm-6 col-xs-12">
 						<div class="form-group">
 							<label class="control-label col-md-4 col-xs-12">Date of Birth:</label>
@@ -692,7 +941,25 @@
 							</div>
 						</div>
 					</div>
+					@elseif($user->dob != null && Auth::user()->induser_id != $user->id)
+					<div class="col-md-6 col-sm-6 col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-md-4 col-xs-12">Date of Birth:</label>
+							<div class="col-md-8 col-xs-12">
+								<p class="form-control-static view-page">
+									@if($user->dob != null)
+									{{$user->dob }}
+									@else
+									--
+									@endif
+								</p>
+							</div>
+						</div>
+					</div>
+					@elseif($user->dob == null && Auth::user()->induser_id != $user->id)
+					@endif
 					<!--/span-->
+					@if($user->gender != null && Auth::user()->induser_id == $user->id)
 					<div class="col-md-6 col-sm-6 col-xs-12">
 						<div class="form-group">
 							<label class="control-label col-md-4 col-xs-12">Gender:</label>
@@ -707,9 +974,27 @@
 							</div>
 						</div>
 					</div>
+					@elseif($user->gender != null && Auth::user()->induser_id != $user->id)
+					<div class="col-md-6 col-sm-6 col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-md-4 col-xs-12">Gender:</label>
+							<div class="col-md-6 col-xs-12">
+								<p class="form-control-static view-page">
+									@if($user->gender != null)
+									{{ $user->gender }}
+									@else
+									--
+									@endif
+								</p>
+							</div>
+						</div>
+					</div>
+					@elseif($user->gender == null && Auth::user()->induser_id != $user->id)
+					@endif
 					<!--/span-->
 				</div>
 				<div class="row">
+					@if($user->city != null && Auth::user()->induser_id == $user->id)
 					<div class="col-md-6 col-sm-6 col-xs-12">
 						<div class="form-group">
 							<label class="control-label col-md-4 col-xs-12">City:</label>
@@ -724,7 +1009,25 @@
 							</div>
 						</div>
 					</div>
+					@elseif($user->city != null && Auth::user()->induser_id != $user->id)
+					<div class="col-md-6 col-sm-6 col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-md-4 col-xs-12">City:</label>
+							<div class="col-md-6 col-xs-12">
+								<p class="form-control-static view-page">
+									@if($user->city != null)
+									{{ $user->city }}
+									@else
+									--
+									@endif
+								</p>
+							</div>
+						</div>
+					</div>
+					@elseif($user->city == null && Auth::user()->induser_id != $user->id)
+					@endif
 					<!--/span-->
+					@if($user->state != null && Auth::user()->induser_id == $user->id)
 					<div class="col-md-6 col-sm-6 col-xs-12">
 						<div class="form-group">
 							<label class="control-label col-md-4 col-xs-12">State:</label>
@@ -739,10 +1042,28 @@
 							</div>
 						</div>
 					</div>
+					@elseif($user->state != null && Auth::user()->induser_id != $user->id)
+					<div class="col-md-6 col-sm-6 col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-md-4 col-xs-12">State:</label>
+							<div class="col-md-6 col-xs-12">
+								<p class="form-control-static view-page">
+									@if($user->state != null)
+									{{ $user->state }}
+									@else
+									--
+									@endif
+								</p>
+							</div>
+						</div>
+					</div>
+					@elseif($user->state == null && Auth::user()->induser_id != $user->id)
+					@endif
 					<!--/span-->
 				</div>
 				<!--/row-->
 				<div class="row">
+					@if($user->prefered_location != null && Auth::user()->induser_id == $user->id)
 					<div class="col-md-6 col-sm-6 col-xs-12">
 						<div class="form-group">
 							<label class="control-label col-md-4 col-xs-12">Prefered Location:</label>
@@ -757,7 +1078,25 @@
 							</div>
 						</div>
 					</div>
+					@elseif($user->prefered_location != null && Auth::user()->induser_id != $user->id)
+					<div class="col-md-6 col-sm-6 col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-md-4 col-xs-12">Prefered Location:</label>
+							<div class="col-md-6 col-xs-12">
+								<p class="form-control-static view-page">
+									@if($user->prefered_location != null)
+									{{ $user->prefered_location }}
+									@else
+									--
+									@endif
+								</p>
+							</div>
+						</div>
+					</div>
+					@elseif($user->prefered_location == null && Auth::user()->induser_id != $user->id)
+					@endif
 					<!--/span-->
+					@if($user->prefered_jobtype != null && Auth::user()->induser_id == $user->id)
 					<div class="col-md-6 col-sm-6 col-xs-12">
 						<div class="form-group">
 							<label class="control-label col-md-4 col-xs-12">Job Type:</label>
@@ -772,6 +1111,23 @@
 							</div>
 						</div>
 					</div>
+					@elseif($user->prefered_jobtype != null && Auth::user()->induser_id != $user->id)
+					<div class="col-md-6 col-sm-6 col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-md-4 col-xs-12">Job Type:</label>
+							<div class="col-md-6 col-xs-12">
+								<p class="form-control-static view-page">
+									@if($user->prefered_jobtype != null)
+									{{ $user->prefered_jobtype }}
+									@else
+									--
+									@endif
+								</p>
+							</div>
+						</div>
+					</div>
+					@elseif($user->prefered_jobtype == null && Auth::user()->induser_id != $user->id)
+					@endif
 					<!--/span-->
 				</div>
 				<!--/row-->
@@ -802,6 +1158,7 @@
 			<input type="hidden" name="_token" value="{{ csrf_token() }}">
 			<div class="form-body">
 				<div class="row">
+					@if($user->firm_address != null && Auth::user()->corpuser_id == $user->id)
 					<div class="col-md-6 col-sm-6 col-xs-12">
 						<div class="form-group">
 							<label class="control-label col-md-4 col-xs-6">Address:</label>
@@ -816,6 +1173,23 @@
 							</div>
 						</div>
 					</div>
+					@elseif($user->firm_address != null && Auth::user()->corpuser_id != $user->id)
+					<div class="col-md-6 col-sm-6 col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-md-4 col-xs-6">Address:</label>
+							<div class="col-md-8 col-xs-6">
+								<p class="form-control-static view-page">
+									@if($user->firm_address != null)
+									 {{ $user->firm_address }}
+									 @elseif($user->firm_address == null)
+									 --
+									 @endif
+								</p>
+							</div>
+						</div>
+					</div>
+					@elseif($user->firm_address == null && Auth::user()->corpuser_id != $user->id)
+					@endif
 					<!--/span-->
 					<div class="col-md-6 col-sm-6 col-xs-12">	
 					</div>
@@ -823,6 +1197,7 @@
 				</div>
 				<!--/row-->
 				<div class="row">
+					@if($user->city != null && Auth::user()->corpuser_id == $user->id)
 					<div class="col-md-6 col-sm-6 col-xs-12">
 						<div class="form-group">
 							<label class="control-label col-md-4 col-xs-12">City:</label>
@@ -837,7 +1212,25 @@
 							</div>
 						</div>
 					</div>
+					@elseif($user->city != null && Auth::user()->corpuser_id != $user->id)
+					<div class="col-md-6 col-sm-6 col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-md-4 col-xs-12">City:</label>
+							<div class="col-md-6 col-xs-12">
+								<p class="form-control-static view-page">
+									@if($user->city != null)
+									{{ $user->city }}
+									@else
+									--
+									@endif
+								</p>
+							</div>
+						</div>
+					</div>
+					@elseif($user->city == null && Auth::user()->corpuser_id != $user->id)
+					@endif
 					<!--/span-->
+					@if($user->state != null && Auth::user()->corpuser_id == $user->id)
 					<div class="col-md-6 col-sm-6 col-xs-12">
 						<div class="form-group">
 							<label class="control-label col-md-4 col-xs-12">State:</label>
@@ -852,10 +1245,28 @@
 							</div>
 						</div>
 					</div>
+					@elseif($user->state != null && Auth::user()->corpuser_id != $user->id)
+					<div class="col-md-6 col-sm-6 col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-md-4 col-xs-12">State:</label>
+							<div class="col-md-6 col-xs-12">
+								<p class="form-control-static view-page">
+									@if($user->state != null)
+									{{ $user->state }}
+									@else
+									--
+									@endif
+								</p>
+							</div>
+						</div>
+					</div>
+					@elseif($user->state == null && Auth::user()->corpuser_id != $user->id)
+					@endif
 					<!--/span-->
 				</div>
 				<!--/row-->
 				<div class="row">
+					@if($user->username != null && $user->working_as != null && Auth::user()->corpuser_id == $user->id)
 					<div class="col-md-6 col-sm-6 col-xs-12">
 						<div class="form-group">
 							<label class="control-label col-md-4 col-xs-12">Profile Handler Name:</label>
@@ -880,6 +1291,33 @@
 							</div>
 						</div>
 					</div>
+					@elseif($user->username != null && $user->working_as != null && Auth::user()->corpuser_id != $user->id)
+					<div class="col-md-6 col-sm-6 col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-md-4 col-xs-12">Profile Handler Name:</label>
+							<div class="col-md-8 col-xs-12">
+								<p class="form-control-static view-page">	
+									@if($user->username != null && $user->working_as != null)
+
+									I am {{ $user->username }} working as {{ $user->working_as }}
+
+									@elseif($user->username != null && $user->working_as == null)
+
+									{{ $user->username }}
+
+									@elseif($user->username == null && $user->working_as != null)
+
+									I am {{ $user->working_as }}
+
+									@else
+									--
+									@endif
+								</p>
+							</div>
+						</div>
+					</div>
+					@elseif($user->username == null && $user->working_as == null && Auth::user()->corpuser_id != $user->id)
+					@endif
 					<div class="col-md-6 col-sm-6 col-xs-12">
 					</div>
 				</div>
@@ -895,6 +1333,7 @@
 						</div>
 					</div>
 					<!--/span-->
+					@if($user->firm_phone != null && Auth::user()->corpuser_id == $user->id)
 					<div class="col-md-6 col-sm-6 col-xs-12">
 						<div class="form-group">
 							<label class="control-label col-md-4 col-xs-12">Mobile:</label>
@@ -905,6 +1344,19 @@
 							</div>
 						</div>
 					</div>
+					@elseif($user->firm_phone != null && Auth::user()->corpuser_id != $user->id)
+					<div class="col-md-6 col-sm-6 col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-md-4 col-xs-12">Mobile:</label>
+							<div class="col-md-6 col-xs-12">
+								<p class="form-control-static view-page">
+									 {{ $user->firm_phone }} <i class="fa fa-exclamation-circle" style="color: #cb5a5e;font-size: 16px;"></i>
+								</p>
+							</div>
+						</div>
+					</div>
+					@elseif($user->firm_phone == null && Auth::user()->corpuser_id != $user->id)
+					@endif
 					<!--/span-->
 				</div>
 

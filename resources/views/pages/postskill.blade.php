@@ -157,7 +157,7 @@
 															<div class="form-group new-margin-formgroup">
 																<label>Added Skills <span class="required">
 															* </span></label>
-															    <input type="text" readonly id="linked_skill" name="linked_skill" 
+															    <input type="text" id="linked_skill" name="linked_skill" 
 															     		class="form-control select2"
 															     		placeholder="List of skills to be added">
 															    <input type="hidden" id="linked_skill_id" name="linked_skill_id" 
@@ -179,7 +179,7 @@
 																<span class="input-group-addon">
 																	<i class="icon-graduation"></i>
 																</span>
-																<select class="bs-select form-control" name="education" multiple>
+																<select class="bs-select form-control" name="education2" multiple>
 																	<option value="Any Diploma">Any Diploma</option>
 																	<option value="Any Graduate">Any Graduate</option>
 																	<option value="Any Post Graduate">Any Post Graduate</option>
@@ -225,18 +225,18 @@
 													<!--/span-->
 													<div class="col-md-5 col-sm-5 col-xs-12">
 														<div class="form-group">							
-															<label class=" control-label">Experience </label>&nbsp;: <label type="text" style="width: 20px;background:transparent;border:0" name="min_exp" class="min-exp leftLabel"></label>-
-															<label type="text" style="width: 14px;margin:0 4px;background:transparent;border:0" name="max_exp" class="max-exp rightLabel"></label>Years
+															<label class=" control-label">Experience </label>&nbsp;: <div style="width: 20px;background:transparent;border:0" name="min_exp" class="min-exp leftLabel"></div>-
+															<div style="width: 14px;margin:0 4px;background:transparent;border:0" name="max_exp" class="max-exp rightLabel"></div>Years
 															<div class="col-md-12">
 																<div class="nstSlider" data-range_min="0" data-range_max="15" 
 												                       data-cur_min="2"    data-cur_max="5">
 
 															    <div class="bar"></div>
-															    <div class="leftGrip"></div>
-															    <div class="rightGrip"></div>
+															    <div class="leftGrip "></div>
+															    <div class="rightGrip "></div>
 															</div>
-															<div class="leftLabel"></div>
-															<div class="rightLabel"></div>
+															<div class="leftLabel newleftLabel"></div>
+															<div class="rightLabel newrightLabel"></div>
 																<!-- <input id="range_1" type="text"  value=""/> -->
 																<!-- <input type="hidden" name="min_exp" class="min-exp">
 																<input type="hidden" name="max_exp" class="max-exp"> -->
@@ -502,6 +502,7 @@
 
 
 @section('javascript')
+<!-- <script src="{{ asset('/assets/admin/pages/scripts/components-ion-sliders.js') }}" type="text/javascript"></script> -->
 <script>
 jQuery(document).ready(function() {       
    // initiate layout and plugins
