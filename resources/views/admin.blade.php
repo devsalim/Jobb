@@ -266,15 +266,7 @@ License: You must have a valid license purchased only from themeforest(the above
 <script src="../../assets/admin/pages/scripts/index.js" type="text/javascript"></script>
 <script src="../../assets/admin/pages/scripts/tasks.js" type="text/javascript"></script>
 <!-- END PAGE LEVEL SCRIPTS -->
-<!-- BEGIN PAGE LEVEL PLUGINS -->
-<script src="../../assets/global/plugins/flot/jquery.flot.min.js"></script>
-<script src="../../assets/global/plugins/flot/jquery.flot.resize.min.js"></script>
-<script src="../../assets/global/plugins/flot/jquery.flot.pie.min.js"></script>
-<script src="../../assets/global/plugins/flot/jquery.flot.stack.min.js"></script>
-<script src="../../assets/global/plugins/flot/jquery.flot.crosshair.min.js"></script>
-<script src="../../assets/global/plugins/flot/jquery.flot.categories.min.js" type="text/javascript"></script>
-<!-- END PAGE LEVEL PLUGINS -->
-<script src="../../assets/admin/pages/scripts/charts-flotcharts.js"></script>
+{{-- <script src="../../assets/admin/pages/scripts/charts-flotcharts.js"></script> --}}
 <!-- END PAGE LEVEL SCRIPTS -->
 <script>
 jQuery(document).ready(function() {    
@@ -282,12 +274,11 @@ jQuery(document).ready(function() {
 	Layout.init(); // init layout
 	QuickSidebar.init(); // init quick sidebar
 	Demo.init(); // init demo features
-	ChartsFlotcharts.init();
-	ChartsFlotcharts.initCharts();
-	ChartsFlotcharts.initPieCharts();
-	ChartsFlotcharts.initBarCharts();
 });
 </script>
+
+@yield('javascript')
+
 <!-- END JAVASCRIPTS -->
 </body>
 <!-- END BODY -->
