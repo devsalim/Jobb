@@ -368,7 +368,7 @@
 					<span class="input-group-addon">
 						<i class="icon-lock-open"></i>
 					</span>
-					<input type="password" name="rpassword" class="form-control" placeholder="Re-Type Password">
+					<input type="password" name="password_confirmation" class="form-control" placeholder="Re-Type Password">
 				</div>
 			</div>
 		</div>														
@@ -420,7 +420,8 @@
 				</ul>
 			</div>
 		@endif
-		<div id="copr-msg-reg-box" style="display:none">
+		<div id="corp-reg-form-errors" style="display:none"></div>
+		<div id="corp-msg-reg-box" style="display:none">
 			<div id="corp-reg-msg"></div>
 		</div>
 		<div class="form-group">
@@ -463,7 +464,7 @@
 					<span class="input-group-addon">
 					<i class="icon-lock-open"></i>
 					</span>
-					<input type="password" name="rpassword" class="form-control" placeholder="Re-Type Password">
+					<input type="password" name="firm_password_confirmation" class="form-control" placeholder="Re-Type Password">
 				</div>
 			</div>
 		</div>
@@ -493,7 +494,7 @@
 		</div>
 		<div class="form-group margin-top-20 margin-bottom-20">
 			<label class="check" style="font-size: 13px;">
-				<input type="checkbox" name="ctnc"/> I agree to the
+				<input type="checkbox" name="tnc"/> I agree to the
 				 <a href="javascript:;">Terms of Service </a>& <a href="javascript:;">Privacy Policy </a>
 			</label>
 			<div id="register_ctnc_error"></div>
@@ -704,13 +705,14 @@ $('#corporate-register-btn').on('click',function(event){
         loader('hide');
         if(data.data.page == 'login'){
             $('#corp-msg-reg-box').removeClass('alert alert-danger');
+            $('#corp-reg-form-errors').hide();
             $('#corp-msg-reg-box').addClass('alert alert-success').fadeIn(1000, function(){
                 $(this).show();
             });
             $('#corporate-register')[0].reset();
             $('#t-n-c').attr('checked', false); // Unchecks it
-            $('#corporate-register').hide();
-            $('#corporate-login').show();
+            // $('#corporate-register').hide();
+            // $('#corporate-login').show();
             $('#corp-reg-msg').html('Registration successful ! <br/>Check your Email for further instruction.');  
         }else{
             $('#corp-msg-reg-box').removeClass('alert alert-success');

@@ -111,9 +111,11 @@ var FormWizard = function () {
                     required: "Enter Job Title"
                 },
                 email_id: {
+                    required: "Enter Email ID",
                     email: "Enter valid Email Id"
                 },
                 phone: {
+                    required: "Enter Phone No",
                     number: "Enter Integer only",
                     maxlength: "Maximum 10 Integer only"
                 },

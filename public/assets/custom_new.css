@@ -11,7 +11,22 @@
 	color: #DADADA !important;
 }
 
+.show-details{
+  display: none;
+}
 
+.link-follow-icon{
+  position: absolute;
+    bottom: 0;
+    left: 0;
+    margin: -2px 3px;
+}
+
+.elipsis-code{
+  white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
 @media (max-width: 990px){
 .toggle-disp{
 	float: right;

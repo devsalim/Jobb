@@ -221,7 +221,7 @@
 				@endif
 				</div>
 				<div class="tab-pane" id="tab_5_2">
-					@if(count(Auth::user()->induser->friendOf) > 0)
+					@if($linkrequestCount > 0)
 						<ul class="media-list">
 						@foreach(Auth::user()->induser->friendOf as $conreq)
 							@if($conreq->pivot->status == 0)														
@@ -256,6 +256,8 @@
 							    	</div>
 								</div>														     
 							  </li>
+							  @endif
+							  @endforeach	
 							  @else							
 							  <li class="media">
 							    <div class="media-lef">
@@ -268,8 +270,6 @@
 							    	</div>
 							    </div>
 							  </li>
-							@endif
-						@endforeach		
 						</ul>
 													
 					@endif	

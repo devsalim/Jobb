@@ -82,7 +82,8 @@
 																<label>Skill Details <span class="required">
 																* </span></label>
 																<div class="" style=" padding-bottom: 10px;">
-																	<textarea name="job_detail" class="form-control autosizeme" rows="3"></textarea>
+																	<textarea name="job_detail" onkeyup="countChar(this)" class="form-control autosizeme" rows="3"></textarea>
+																	<div id="charNum" style="text-align:right;"></div>
 																</div>
 															</div>
 														</div>
@@ -512,6 +513,16 @@ Demo.init(); // init demo features
    FormWizard.init();
 });
 </script>
+<script type="text/javascript">
+      function countChar(val) {
+        var len = val.value.length;
+        if (len >= 1000) {
+          val.value = val.value.substring(0, 1000);
+        } else {
+          $('#charNum').text(1000 - len);
+        }
+      };
+    </script>
 <script>
 	jQuery(document).ready(function() { 
 	    ComponentsIonSliders.init();

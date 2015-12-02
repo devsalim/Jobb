@@ -45,80 +45,80 @@ class CorporateController extends Controller {
 	public function store(CreateCorpRequest $request)
 	{
 		if($request->ajax()){
-		DB::beginTransaction();
-		$vcode = "";
-		try{
-			$corpUser = new Corpuser();
-			$corpUser->firm_name = $request['firm_name'];
-			$corpUser->firm_email_id = $request['firm_email_id'];
-			$corpUser->firm_type = $request['firm_type'];
-			if($request['firm_email_id'] != null){
+			DB::beginTransaction();
+			$vcode = "";
+			try{
+				$corpUser = new Corpuser();
+				$corpUser->firm_name = $request['firm_name'];
+				$corpUser->firm_email_id = $request['firm_email_id'];
+				$corpUser->firm_type = $request['firm_type'];
+				if($request['firm_email_id'] != null){
 					$vcode = 'C'.rand(1111,9999);
 					$corpUser->email_vcode = $vcode;
 				}
-			$corpUser->save();
+				$corpUser->save();
 
-			$user = new User();
-			$user->name = $request['firm_name'];
-			$user->email = $request['firm_email_id'];
-			$user->password = bcrypt($request['firm_password']);
-			$user->identifier = 2;
+				$user = new User();
+				$user->name = $request['firm_name'];
+				$user->email = $request['firm_email_id'];
+				$user->password = bcrypt($request['firm_password']);
+				$user->identifier = 2;
 
-			$corpUser->user()->save($user);
-		}catch(\Exception $e)
-		{
-		   DB::rollback();
-		   throw $e;
-		}
-
-		DB::commit();
-		if($request['firm_email_id'] != null){
-				$email = $request['firm_email_id'];
-				$firm_name = $request['firm_name'];
-				$vcode = Corpuser::where('firm_email_id', '=', $request['firm_email_id'])->pluck('email_vcode');
-				Mail::send('emails.welcome', array('firm_name'=>$firm_name, 'vcode'=>$vcode), function($message) use ($email,$firm_name){
-			        $message->to($email, $firm_name)->subject('Welcome to Jobtip!')->from('admin@jobtip.in', 'JobTip');
-			    });
+				$corpUser->user()->save($user);
+			}catch(\Exception $e)
+			{
+			   DB::rollback();
+			   throw $e;
 			}
-		return 'login';
-	}else
-	{
-		DB::beginTransaction();
-		try{
-			$corpUser = new Corpuser();
-			$corpUser->firm_name = $request['firm_name'];
-			$corpUser->firm_email_id = $request['firm_email_id'];
-			$corpUser->firm_type = $request['firm_type'];
+
+			DB::commit();
+			// if($request['firm_email_id'] != null){
+			// 	$email = $request['firm_email_id'];
+			// 	$firm_name = $request['firm_name'];
+			// 	$vcode = Corpuser::where('firm_email_id', '=', $request['firm_email_id'])->pluck('email_vcode');
+			// 	Mail::send('emails.welcome', array('firm_name'=>$firm_name, 'vcode'=>$vcode), function($message) use ($email,$firm_name){
+			//         $message->to($email, $firm_name)->subject('Welcome to Jobtip!')->from('admin@jobtip.in', 'JobTip');
+			//     });
+			// }
+			$data = ['page'=>'login','vcode'=>$vcode];
+			return response()->json(['success'=>true,'data'=>$data]);
+		}else{
+			DB::beginTransaction();
+			try{
+				$corpUser = new Corpuser();
+				$corpUser->firm_name = $request['firm_name'];
+				$corpUser->firm_email_id = $request['firm_email_id'];
+				$corpUser->firm_type = $request['firm_type'];
+				if($request['firm_email_id'] != null){
+						$vcode = 'C'.rand(1111,9999);
+						$corpUser->email_vcode = $vcode;
+					}
+				$corpUser->save();
+
+				$user = new User();
+				$user->name = $request['firm_name'];
+				$user->email = $request['firm_email_id'];
+				$user->password = bcrypt($request['firm_password']);
+				$user->identifier = 2;
+
+				$corpUser->user()->save($user);
+			}catch(\Exception $e)
+			{
+			   DB::rollback();
+			   throw $e;
+			}
+
+			DB::commit();
 			if($request['firm_email_id'] != null){
-					$vcode = 'C'.rand(1111,9999);
-					$corpUser->email_vcode = $vcode;
+					$email = $request['firm_email_id'];
+					$firm_name = $request['firm_name'];
+					$vcode = Corpuser::where('firm_email_id', '=', $request['firm_email_id'])->pluck('email_vcode');
+					Mail::send('emails.welcome', array('firm_name'=>$firm_name, 'vcode'=>$vcode), function($message) use ($email,$firm_name){
+				        $message->to($email, $firm_name)->subject('Welcome to Jobtip!')->from('admin@jobtip.in', 'JobTip');
+				    });
 				}
-			$corpUser->save();
-
-			$user = new User();
-			$user->name = $request['firm_name'];
-			$user->email = $request['firm_email_id'];
-			$user->password = bcrypt($request['firm_password']);
-			$user->identifier = 2;
-
-			$corpUser->user()->save($user);
-		}catch(\Exception $e)
-		{
-		   DB::rollback();
-		   throw $e;
+			return redirect('/login');
 		}
-
-		DB::commit();
-		if($request['firm_email_id'] != null){
-				$email = $request['firm_email_id'];
-				$firm_name = $request['firm_name'];
-				$vcode = Corpuser::where('firm_email_id', '=', $request['firm_email_id'])->pluck('email_vcode');
-				Mail::send('emails.welcome', array('firm_name'=>$firm_name, 'vcode'=>$vcode), function($message) use ($email,$firm_name){
-			        $message->to($email, $firm_name)->subject('Welcome to Jobtip!')->from('admin@jobtip.in', 'JobTip');
-			    });
-			}
-		return redirect('/login');
-	}
 	}
 
 	/**

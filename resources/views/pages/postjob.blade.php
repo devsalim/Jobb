@@ -81,7 +81,8 @@
 									<div class="col-md-12">
 										<div class="form-group">
 											<label>Job Details <span class="required">*</span></label>								
-											<textarea name="job_detail" class="form-control autosizeme" rows="6"></textarea>
+											<textarea name="job_detail" onkeyup="countChar(this)" class="form-control autosizeme" rows="6"></textarea>
+											<div id="charNum" style="text-align:right;"></div>
 										</div>
 									</div>
 									</div>
@@ -824,6 +825,16 @@ jQuery(document).ready(function() {
     FormWizard.init();
 });
 </script>
+<script type="text/javascript">
+      function countChar(val) {
+        var len = val.value.length;
+        if (len >= 1000) {
+          val.value = val.value.substring(0, 1000);
+        } else {
+          $('#charNum').text(1000 - len);
+        }
+      };
+    </script>
 <script>
         $("#education").multipleSelect({
             filter: true,

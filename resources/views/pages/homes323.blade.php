@@ -258,91 +258,16 @@
 									<div class="timeline-badge" style="margin: 10px 0px;">
 										@if($post->induser != null && !empty($post->induser->profile_pic))
 										<img class="timeline-badge-userpic userpic-box" src="/img/profile/{{ $post->induser->profile_pic }}" title="{{ $post->induser->fname }}">
-										<a class="icon-userpic img-circle">@if($post->individual_id != null && Auth::user()->induser_id != $post->individual_id)
-												<div class="" data-puid="{{$post->individual_id}}">
-												
-														@if($links->contains('id', $post->individual_id) )
-														<a href="#links-follow link-follow-icon" data-toggle="modal" class="user-link" data-linked="yes" data-utype="ind">
-															<i class="fa fa-link (alias)" style="color:salmon;"></i>
-														</a>
-														@elseif($linksPending->contains('id', $post->individual_id) )
-														<a href="#links-follow link-follow-icon" data-toggle="modal" class="user-link" data-linked="no" data-utype="ind">
-															<i class="fa fa-question (alias)" style="color:salmon;"></i>
-														</a>
-														@elseif($linksApproval->contains('id', $post->individual_id) )
-														<a href="#links-follow link-follow-icon" data-toggle="modal" class="user-link" data-linked="no" data-utype="ind">
-															<i class="icon-hourglass (alias)" style="color:salmon;"></i>
-														</a>
-														@elseif($following->contains('id', $post->individual_id))
-														<a class="user-link2 link-follow-icon" data-linked="yes" data-utype="ind">
-															<i class="fa fa-link (alias)" style="color:steelblue;"></i>
-														</a>
-														@else
-														<a href="#links-follow" data-toggle="modal" class="user-link" data-linked="no" data-utype="ind">
-															<i class="fa fa-unlink (alias)" style="color:lightslategray;"></i>
-														</a>
-														@endif
-												</div>
-											@endif</a>
+										<a class="icon-userpic img-circle"><i class="glyphicon glyphicon-user" style="font-size:12px;"></i></a>
 										@elseif($post->corpuser != null && !empty($post->corpuser->logo_status))
 										<img class="" src="/img/profile/{{ $post->corpuser->logo_status }}" title="{{ $post->corpuser->firm_name }}">
-										<a class="icon-userpic">@if($post->corporate_id != null && Auth::user()->corpuser_id != $post->corporate_id)
-												<div class="" data-puid="{{$post->corporate_id}}">
-														@if($following->contains('id', $post->corporate_id))
-															<a href="#links-follow" data-toggle="modal" class="user-link link-follow-icon" data-linked="yes" data-utype="corp">
-																<i class="icon-user-following" style="color:black;"></i>
-															</a>
-														@else
-															<a href="#links-follow" data-toggle="modal" class="user-link link-follow-icon" data-linked="no" data-utype="corp">
-																<i class="icon-user-follow" style="color:lightslategray;"></i>
-															</a>
-														@endif														
-												</div>
-											@endif</a>
+										<a class="icon-userpic"><i class="fa fa-institution (alias)" style="font-size:12px;"></i></a>
 										@elseif(empty($post->corpuser->logo_status) && $post->corpuser != null)
 										<img class="" src="/assets/images/corp.png">
-										<a class="icon-userpic">@if($post->corporate_id != null && Auth::user()->corpuser_id != $post->corporate_id)
-												<div class="" data-puid="{{$post->corporate_id}}">
-														@if($following->contains('id', $post->corporate_id))
-															<a href="#links-follow" data-toggle="modal" class="user-link link-follow-icon" data-linked="yes" data-utype="corp">
-																<i class="icon-user-following" style="color:black;"></i>
-															</a>
-														@else
-															<a href="#links-follow" data-toggle="modal" class="user-link link-follow-icon" data-linked="no" data-utype="corp">
-																<i class="icon-user-follow" style="color:lightslategray;"></i>
-															</a>
-														@endif														
-												</div>
-											@endif</a>
+										<a class="icon-userpic"><i class="fa fa-institution (alias)" style="font-size:12px;"></i></a>
 										@elseif(empty($post->induser->profile_pic) && $post->induser != null)
 										<img class="timeline-badge-userpic userpic-box" src="/assets/images/ab.png">
-										<a class="icon-userpic img-circle">@if($post->individual_id != null && Auth::user()->induser_id != $post->individual_id)
-												<div class="" data-puid="{{$post->individual_id}}">
-												
-														@if($links->contains('id', $post->individual_id) )
-														<a href="#links-follow" data-toggle="modal" class="user-link link-follow-icon" data-linked="yes" data-utype="ind">
-															<i class="fa fa-link (alias)" style="color:salmon;"></i>
-														</a>
-														@elseif($linksPending->contains('id', $post->individual_id) )
-														<a href="#links-follow" data-toggle="modal" class="user-link link-follow-icon" data-linked="no" data-utype="ind">
-															<i class="fa fa-question (alias)" style="color:salmon;"></i>
-														</a>
-														@elseif($linksApproval->contains('id', $post->individual_id) )
-														<a href="#links-follow" data-toggle="modal" class="user-link link-follow-icon" data-linked="no" data-utype="ind">
-															<i class="icon-hourglass (alias)" style="color:salmon;"></i>
-														</a>
-														@elseif($following->contains('id', $post->individual_id))
-														<a class="user-link2 link-follow-icon" data-linked="yes" data-utype="ind">
-															<i class="fa fa-link (alias)" style="color:steelblue;"></i>
-														</a>
-														@else
-														<a href="#links-follow" data-toggle="modal" class="user-link link-follow-icon" data-linked="no" data-utype="ind">
-															<i class="fa fa-unlink (alias)" style="color:lightslategray;"></i>
-														</a>
-														@endif
-												</div>
-											
-											@endif</a>
+										<a class="icon-userpic img-circle"><i class="glyphicon glyphicon-user" style=" font-size:12px;"></i></a>
 										@endif
 										@if(Auth::user()->identifier == 1 && $post->post_type == 'job' && Auth::user()->induser_id != $post->individual_id)
 										<div class="match">
@@ -560,7 +485,7 @@
 															</a>
 														@endif														
 														<a href="/profile/corp/{{$post->corporate_id}}" style="padding: 0px 0px 0px 32px;font-size: 15px;text-decoration:none;font-weight:600;">
-															{{ $post->corpuser->firm_name}} <small>{{ $post->corpuser->firm_type}}</small>
+															{{ $post->corpuser->firm_name}} {{ $post->corpuser->firm_type}}
 														</a>
 													<span class="timeline-body-time font-grey-cascade"><i class="fa fa-clock-o"></i>
 														{{ \Carbon\Carbon::createFromTimeStamp(strtotime($post->created_at))->diffForHumans() }}
@@ -571,9 +496,9 @@
 										<div class="timeline-body-content">
 											<span class="font-grey-cascade">
 												@if($post->post_type == 'skill')	
-												<div class="elipsis-code" style="font-weight: 600;color: black;font-size: 16px;">{{ $post->post_title }} </div>
+												<div style="font-weight: 600;color: black;font-size: 16px;">{{ $post->post_title }} </div>
 											@elseif($post->post_type == 'job')
-												 <div class="elipsis-code" style="font-weight: 600;color: black;font-size: 16px;">{{ $post->post_title }}  </div>
+												 <div style="font-weight: 600;color: black;font-size: 16px;">{{ $post->post_title }}  </div>
 											@endif	
 											@if($post->post_compname != null && $post->post_type == 'job')
 											<div><h4 style="margin: 0 0 4px 0;"><small>Required at</small> {{ $post->post_compname }}</h4></div>
@@ -585,18 +510,15 @@
 												<!-- <div class="col-md-4 col-sm-4 col-xs-12">
 													<i class="icon-badge"></i>&nbsp;: {{ $post->role }}
 												</div> -->
-												<div class="col-md-4 col-sm-4 col-xs-4 elipsis-code">
+												<div class="col-md-4 col-sm-4 col-xs-12">
 													<i class="glyphicon glyphicon-map-marker"></i>&nbsp;: {{ $post->city }}
 												</div>
-												<div class="col-md-4 col-sm-4 col-xs-4 elipsis-code">
+												<div class="col-md-4 col-sm-4 col-xs-12">
 													<i class="icon-briefcase"></i>&nbsp;: {{ $post->min_exp}}-{{ $post->max_exp}} Years
 												</div>
-												<div id="{{ $post->id }}-{{$var}}-{{$var}}" class="col-md-4 col-sm-4 col-xs-4 hide-details">
-												    <a><i class="fa fa-angle-double-down" style="font-size:20px;"></i></a>
-												</div>
-												<div id="{{ $post->id }}-{{$var}}" class="col-md-4 col-sm-4 col-xs-4 show-details">
-												    <a><i class="fa fa-angle-double-up" style="font-size:20px;"></i></a>
-												</div>
+												<!-- <div class="col-md-4 col-sm-4 col-xs-12">
+													<i class="fa fa-rupee (alias)"></i>&nbsp;:&nbsp; {{ $post->min_sal }}-{{ $post->max_sal }}/Hours
+												</div> -->
 											</div>
 										</div>	
 										<div class="box">
@@ -616,24 +538,24 @@
 														@endif
 														@endif" 
 														id="fav-btn-{{$post->id}}" type="button">
-													<i class="fa fa-star" style="font-size: 20px;"></i>
+													<i class="icon-pin" style="font-size: 20px;"></i>
 												</button>
 												@endif
 											</form>
 											
 										</div>
 									</div>
-									<div class="portlet-body show-details" style="margin: 0 -5px;">
+									<div class="portlet-body" style="margin: 0 -5px;">
 										<div class="panel-group accordion" id="accordion{{$var}}" style="margin-bottom: 0;">
 											<div class="panel panel-default" style=" position: relative;">
 												<div class="panel-heading">
 													<h4 class="panel-title">
-													<a class="accordion-toggle accordion-toggle-styled" 
+													<a class="accordion-toggle accordion-toggle-styled collapsed" 
 													data-toggle="collapse" data-parent="#accordion{{$var}}" href="#collapse_{{$var}}_{{$var}}"  style="font-size: 15px;font-weight: 600;" >
 													Details: </a>	
 													</h4>
 												</div>
-												<div id="collapse_{{$var}}_{{$var}}" class="panel-collapse">
+												<div id="collapse_{{$var}}_{{$var}}" class="panel-collapse collapse">
 													<div class="panel-body" style="border-top: 0;padding: 4px 15px;">
 														
 														<div class="row">
@@ -678,17 +600,7 @@
 																<label class="detail-label">Job Type :</label>
 																{{ $post->time_for }}
 															</div>
-															@if($post->locality != null && $post->city !=null)
-															<div class="col-md-12 col-sm-12 col-xs-12">
-																<label class="detail-label">Locality :</label>
-																{{ $post->locality }},{{ $post->city }} 
-															</div>
-															@elseif($post->locality == null && $post->city !=null)
-															<div class="col-md-12 col-sm-12 col-xs-12">
-																<label class="detail-label">City :</label>
-																{{ $post->city }} 
-															</div>
-															@endif
+															
 														</div>
 														<?php 
 													 		$strNew = '+'.$post->post_duration.' day';
@@ -797,8 +709,30 @@
 														@endif
 													</div>
 												</div>
-												<div style="margin:27px 0 0;">
-														@if($post->post_type == 'job' && Auth::user()->induser_id != $post->individual_id && Auth::user()->identifier == 1)		
+												@if($expired != 1)
+												<div class="post-{{ $post->post_type }} post-icon-bar">
+													<form action="/job/like" method="post" id="post-like-{{$post->id}}" data-id="{{$post->id}}">						
+														<input type="hidden" name="_token" value="{{ csrf_token() }}">
+														<input type="hidden" name="like" value="{{ $post->id }}">
+												<button class="btn like-btn"  type="button" style="background-color: transparent;" title="Thanks">
+													@if($post->postactivity->where('user_id', Auth::user()->induser_id)->isEmpty())					
+														<i class="fa fa-thumbs-up thanks-icon" id="like-{{$post->id}}"></i>
+													@elseif($post->postactivity->where('user_id', Auth::user()->induser_id)->first()->thanks == 1) 
+														<i class="fa fa-thumbs-up thanks-icon" id="like-{{$post->id}}" style="color:burlywood"></i>
+													@else
+														<i class="fa fa-thumbs-up thanks-icon" id="like-{{$post->id}}"></i>		
+													@endif
+												</button>	
+														<span class="badge-like" id="like-count-{{ $post->id }}">
+														@if($post->postactivity->sum('thanks') > 0)
+														{{ $post->postactivity->sum('thanks') }}
+														@endif
+														</span>
+													</form>
+																										
+													
+													
+							@if($post->post_type == 'job' && Auth::user()->induser_id != $post->individual_id && Auth::user()->identifier == 1)		
 													@if($post->postactivity->where('user_id', Auth::user()->induser_id)->isEmpty())
 
 														<form action="/job/apply" method="post" id="post-apply-{{$post->id}}" data-id="{{$post->id}}">	
@@ -851,30 +785,6 @@
 													</form>							
 													@endif	
 												@endif
-											</div>
-											</div>
-										</div>
-									</div>
-											@if($expired != 1)
-												<div class="post-{{ $post->post_type }} post-icon-bar">
-													<form action="/job/like" method="post" id="post-like-{{$post->id}}" data-id="{{$post->id}}">						
-														<input type="hidden" name="_token" value="{{ csrf_token() }}">
-														<input type="hidden" name="like" value="{{ $post->id }}">
-												<button class="btn like-btn"  type="button" style="background-color: transparent;" title="Thanks">
-													@if($post->postactivity->where('user_id', Auth::user()->induser_id)->isEmpty())					
-														<i class="fa fa-thumbs-up thanks-icon" id="like-{{$post->id}}"></i>
-													@elseif($post->postactivity->where('user_id', Auth::user()->induser_id)->first()->thanks == 1) 
-														<i class="fa fa-thumbs-up thanks-icon" id="like-{{$post->id}}" style="color:burlywood"></i>
-													@else
-														<i class="fa fa-thumbs-up thanks-icon" id="like-{{$post->id}}"></i>		
-													@endif
-												</button>	
-														<span class="badge-like" id="like-count-{{ $post->id }}">
-														@if($post->postactivity->sum('thanks') > 0)
-														{{ $post->postactivity->sum('thanks') }}
-														@endif
-														</span>
-													</form>																								
 												<div class="btn-group dropup share-bar">
 													<div class="btn-group dropup">
 														<button class="btn dropdown-toggle" type="button" data-toggle="dropdown" style="background-color: transparent;padding: 18px 20px 7px 6px;">
@@ -894,7 +804,7 @@
 													</div>
 
 												</div>
-												@if(Auth::user()->id != $post->individual_id || Auth::user()->id != $post->corporate_id)
+												@if(Auth::user()->id != $post->individual_id)
 													<div class="report"><a class="" data-toggle="modal" href="#basic-{{ $post->id }}">
 														<i class="fa fa-warning (alias)" style="color:red;"></i></a>
 													</div>
@@ -957,6 +867,9 @@
 												</button>
 											</div>
 											@endif
+											</div>
+										</div>
+									</div>
 								</div>
 							</div>
 							<!-- END TIMELINE ITEM -->
@@ -1040,15 +953,6 @@ $(document).ready(function(){
 	    jQuery('.hide-label').toggle('hide');
     });
 
-    jQuery('.hide-details').on('click', function(event) {
-        jQuery('.show-details').toggle('show');
-        jQuery('.hide-details').toggle('hide');
-    });
-
-    jQuery('.show-details').on('click', function(event) {
-        jQuery('.show-details').toggle('hide');
-        jQuery('.hide-details').toggle('show');
-    });
     $("#category-list").change(function () {
 	    $("#category-label-exp").val($(this).val());
 	    //alert($(this).val()) 

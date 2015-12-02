@@ -24,8 +24,10 @@ class CreateCorpRequest extends Request {
 		return [
 			'firm_name'			=>	'required',
 			'firm_email_id'		=>	'required|email|unique:corpusers',
-			'firm_password'		=>	'required|min:6',
-			'firm_type'			=>	'required'
+			'firm_password'		=>	'required|min:6|confirmed',
+			'firm_password_confirmation' => 'required|min:6',
+			'firm_type'			=>	'required',
+			'tnc'		=> 'required'
 		];
 	}
 

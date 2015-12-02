@@ -62,7 +62,8 @@
 										<span class="input-group-addon">
 											<i class="fa fa-institution" style="color:darkcyan;"></i>
 										</span>
-										<textarea name="about_firm" class="form-control autosizeme" rows="3">{{ $user->about_firm }}</textarea>
+										<textarea name="about_firm" onkeyup="countChar(this)" class="form-control autosizeme" rows="3">{{ $user->about_firm }}</textarea>
+										<div id="charNum" style="text-align:right;"></div>
 									</div>
 								</div>
 							</div>
@@ -333,6 +334,16 @@
 
 @section('javascript')
 <script src="{{ asset('/assets/corp_validation.js') }}"></script>
+<script type="text/javascript">
+      function countChar(val) {
+        var len = val.value.length;
+        if (len >= 1000) {
+          val.value = val.value.substring(0, 1000);
+        } else {
+          $('#charNum').text(1000 - len);
+        }
+      };
+    </script>
 <script>
 	jQuery(document).ready(function() {
 	    ComponentsDropdowns.init();

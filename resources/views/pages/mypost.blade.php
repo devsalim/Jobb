@@ -6,23 +6,24 @@
 		<div class="caption">
 			<i class="icon-trophy"></i>My Activity
 		</div>
-	</div>
-	<div class="portlet-body">
-		<div class="tabbable-custom">
-			<ul class="nav nav-tabs" style="padding-left: 5px;">
+		<ul class="nav nav-tabs" style="padding-left: 5px;">
 				<li class="active">
-					<a href="#tab_5_1" class="label-new" data-toggle="tab">
+					<a href="#portlet_5_1" class="label-new" data-toggle="tab">
 					My Posts </a>
 				</li>
 				@if(Auth::user()->identifier == 1)
 				<li>
-					<a href="#tab_5_2" class="label-new" data-toggle="tab">
+					<a href="#portlet_5_2" class="label-new" data-toggle="tab">
 					My Updates </a>
 				</li>
 				@endif
 			</ul>
+	</div>
+	<div class="portlet-body">
+		<div class="tabbable-custom">
+			
 			<div class="tab-content">
-				<div class="tab-pane active" id="tab_5_1">
+				<div class="tab-pane active" id="portlet_5_1">
 					<div class="row">
 				@if (count($posts) > 0)
 				
@@ -758,7 +759,7 @@ catch(\Exception $e){}
 			</div>
 				</div>
 				@if(Auth::user()->identifier == 1)
-				<div class="tab-pane" id="tab_5_2">
+				<div class="tab-pane" id="portlet_5_2">
 					<div class="row">
 						@foreach($myActivities as $myActivity)								
 						<div class="col-md-9">												
