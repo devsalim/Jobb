@@ -32,7 +32,7 @@
 					<div class="timeline" >
 						<!-- TIMELINE ITEM -->
 						<div class="timeline-item time-item">
-							<div class="timeline-body" style="margin-left: 0;">
+							<div class="timeline-body" style="border-radius:15px !important">
 								<div class="timeline-body-head">
 									<div class="timeline-body-head-caption">
 										<a>	
@@ -191,7 +191,7 @@
 							<div class="box">
 										   <div class="ribbon"><span class="{{ $post->post_type }}">{{ $post->post_type }}</span></div>
 										</div>
-							<div class="portlet-body" style="margin: 0 -5px;">
+							<div class="portlet-body">
 								<div class="panel-group accordion" id="accordion{{$post->id}}" style="margin-bottom: 0;">
 									<div class="panel panel-default" style=" position: relative;">
 										<div class="panel-heading">
@@ -318,9 +318,9 @@
 									</div>
 								</div>
 							</div>
-							<div class="portlet-body" style="margin: 0 -5px;">
+							<div class="portlet-body">
 								<div class="panel-group accordion" id="accordion2_{{$post->id}}" style="margin-bottom: 0;">
-									<div class="panel panel-default" style=" position: relative;">
+									<div class="panel panel-default" style=" position: relative;border-radius: 0 0 4px 4px !important;">
 										<div class="panel-heading">
 											<h4 class="panel-title">
 											<a class="accordion-toggle accordion-toggle-styled" 
@@ -347,7 +347,10 @@
 															</li>
 															@endif
 															<li>
-																<a href="#tab_1_{{ $post->id }}_3" class="label-new" data-toggle="tab" >Thanks & Share </a>
+																<a href="#tab_1_{{ $post->id }}_3" class="label-new" data-toggle="tab" >Thanks </a>
+															</li>
+															<li>
+																<a href="#tab_1_{{ $post->id }}_4" class="label-new" data-toggle="tab" >Share </a>
 															</li>
 														</ul>
 														<div class="tab-content" style="padding: 10px 0px;">
@@ -674,6 +677,51 @@ catch(\Exception $e){}
 																	</div>
 																</div>
 															</div>
+
+															<div class="tab-pane" id="tab_1_{{ $post->id }}_4">
+																<div class="portlet light" style="padding:0px; !important">
+																	<div class="portlet-title">
+																		<div class="caption">
+																			<i class="fa fa-gift font-green-sharp"></i>
+																			<span class="caption-subject font-green-sharp ap-th-con">Shared:</span>
+																			<span class="caption-helper">
+																				<?php $i=0; ?>
+																				@foreach($post->postactivity as $pa)
+																		  			@if($pa->share == 1) <?php $i++; ?> @endif
+																		  		@endforeach
+																		  		<?php if($i>0){echo $i;} ?>
+																			</span>
+																		</div>
+																	</div>
+																	<div class="portlet-body">
+																		<ul data-handle-color="#637283" style="padding: 0">
+																		 @foreach($post->postactivity as $pa)
+																		  	@if($pa->share == 1)
+														                 	<li style="font-size:15px;">
+															                    <span class="photo">
+															                    	<img src="@if($pa->user->profile_pic != null){{ '/img/profile/'.$pa->user->profile_pic }}@else{{'/assets/images/ab.png'}}@endif" 
+															                    		 width="45" height="45" 
+															                    		 class="img-circle">
+															                    </span>
+															                    <span class="subject">
+																                    <span class="from" style="font-weight:600;color:darkcyan;">
+																                    	<a href="/profile/ind/{{$post->individual_id}}" data-utype="ind">
+																                    		{{$pa->user->fname}} {{$pa->user->lname}}</a>
+																                   	</span>
+																                    <span class="time"> </span>
+															                    </span>
+															                    <span class="message">
+															                    	has shared this post <i class=" icon-clock"></i>					                    	
+															                    	{{ \Carbon\Carbon::createFromTimeStamp(strtotime($pa->share_dtTime))->diffForHumans() }}
+															                    </span>
+														                   	</li>
+														                   	@endif									                 
+														                  @endforeach							                  
+														                </ul>
+																	</div>
+																</div>
+															</div>
+
 														</div>
 													</div>
 												</div>

@@ -255,7 +255,7 @@
 							<div class="timeline" >
 								<!-- TIMELINE ITEM -->
 								<div class="timeline-item time-item">
-									<div class="timeline-badge" style="margin: 10px 0px;">
+									<div class="timeline-badge" style="margin: 10px">
 										@if($post->induser != null && !empty($post->induser->profile_pic))
 										<img class="timeline-badge-userpic userpic-box" src="/img/profile/{{ $post->induser->profile_pic }}" title="{{ $post->induser->fname }}">
 										<a class="icon-userpic img-circle">@if($post->individual_id != null && Auth::user()->induser_id != $post->individual_id)
@@ -493,7 +493,7 @@
 											<!-- /.modal -->
 											@endif
 									</div>
-									<div class="timeline-body" style="">
+									<div class="timeline-body" style="border-radius: 15px !important;">
 										<div class="timeline-body-head">
 											@if(Auth::user()->induser_id == $post->individual_id && $post->individual_id != null)
 												<div class="timeline-body-head-caption">												
@@ -623,7 +623,7 @@
 											
 										</div>
 									</div>
-									<div class="portlet-body show-details" style="margin: 0 -5px;">
+									<div class="portlet-body show-details">
 										<div class="panel-group accordion" id="accordion{{$var}}" style="margin-bottom: 0;">
 											<div class="panel panel-default" style=" position: relative;">
 												<div class="panel-heading">
@@ -797,7 +797,7 @@
 														@endif
 													</div>
 												</div>
-												<div style="margin:27px 0 0;">
+												<div>
 														@if($post->post_type == 'job' && Auth::user()->induser_id != $post->individual_id && Auth::user()->identifier == 1)		
 													@if($post->postactivity->where('user_id', Auth::user()->induser_id)->isEmpty())
 
@@ -805,8 +805,9 @@
 															<input type="hidden" name="_token" value="{{ csrf_token() }}">
 															<input type="hidden" name="apply" value="{{ $post->id }}">
 															@if($post->website_redirect_url != null)
-																<a class="btn apply-btn blue btn-sm apply-contact-btn" target="_blank" 
-																	href="{{ $post->website_redirect_url }}" type="button">Apply
+																<a class="btn apply-btn blue btn-sm apply-contact-btn" 
+																	target="_blank" href="{{ $post->website_redirect_url }}" 
+																	type="button">Apply
 																</a>	
 															@else
 																<button class="btn apply-btn blue btn-sm apply-contact-btn" 
@@ -856,8 +857,8 @@
 										</div>
 									</div>
 											@if($expired != 1)
-												<div class="post-{{ $post->post_type }} post-icon-bar">
-													<form action="/job/like" method="post" id="post-like-{{$post->id}}" data-id="{{$post->id}}">						
+												<div class="post-{{ $post->post_type }} post-icon-bar clearfix">
+													<form action="/job/like" method="post" id="post-like-{{$post->id}}" data-id="{{$post->id}}" style="float:left">						
 														<input type="hidden" name="_token" value="{{ csrf_token() }}">
 														<input type="hidden" name="like" value="{{ $post->id }}">
 												<button class="btn like-btn"  type="button" style="background-color: transparent;" title="Thanks">
@@ -875,27 +876,41 @@
 														@endif
 														</span>
 													</form>																								
-												<div class="btn-group dropup share-bar">
-													<div class="btn-group dropup">
-														<button class="btn dropdown-toggle" type="button" data-toggle="dropdown" style="background-color: transparent;padding: 18px 20px 7px 6px;">
-														<i class="fa fa-share-square-o" style="font-size: 23px;color: darkslateblue;"></i><span class="badge-share">132</span>
-														</button>
-														<ul class="dropdown-menu pull-right" role="menu" style="min-width:0;box-shadow:0 0 !important">
-															<li style="background-color: #3b5998;">
-																<a href="/" class="facebook"><i class="fa fa-facebook post-social-icon" ></i></a>
-															</li>
-															<li style="background-color: #c32f10;">
-																<a href="/" class="google-plus"><i class="fa fa-google-plus post-social-icon"></i></a>
-															</li>
-															<li style="background-color: #00aced;">
-																<a href="/" class="linkedin"><i class="fa fa-linkedin post-social-icon" ></i></a>
-															</li>
-														</ul>
-													</div>
-
+												<div class="dropup share-bar">											
+													<button class="btn dropdown-toggle" type="button" 
+															data-toggle="dropdown" title="Share" 
+															style="background-color: transparent;border: 0;line-height: 1;padding-top: 11px;">
+														<i class="fa fa-share-alt" 
+															style="font-size: 22px;color: darkslateblue;"></i>
+														<span class="badge-share" id="share-count-{{ $post->id }}">@if($post->postactivity->sum('share') > 0){{ $post->postactivity->sum('share') }}@endif</span>
+													</button>
+													<ul class="dropdown-menu pull-right" role="menu" 
+														style="min-width:0;box-shadow:0 0 !important">
+														<li style="background-color: tan;">
+															<a href="#share-post" data-toggle="modal" class="jobtip sojt" id="sojt-{{$post->id}}" data-share-post-id="{{$post->id}}">
+																Share on Jobtip
+															</a>
+														</li>
+														<li style="background-color: #3b5998;">
+															<a href="/" class="facebook">
+																<i class="fa fa-facebook post-social-icon" ></i>
+															</a>
+														</li>
+														<li style="background-color: #c32f10;">
+															<a href="/" class="google-plus">
+																<i class="fa fa-google-plus post-social-icon"></i>
+															</a>
+														</li>
+														<li style="background-color: #00aced;">
+															<a href="/" class="linkedin">
+																<i class="fa fa-linkedin post-social-icon" ></i>
+															</a>
+														</li>
+													</ul>													
 												</div>
 												@if(Auth::user()->id != $post->individual_id || Auth::user()->id != $post->corporate_id)
-													<div class="report"><a class="" data-toggle="modal" href="#basic-{{ $post->id }}">
+													<div class="report">
+														<a class="btn" data-toggle="modal" href="#basic-{{ $post->id }}">
 														<i class="fa fa-warning (alias)" style="color:red;"></i></a>
 													</div>
 													<div class="modal fade" id="basic-{{ $post->id }}" tabindex="-1" role="basic" 
@@ -1015,6 +1030,78 @@
 	</div>
 </div>
 
+<!-- SHARE MODAL FORM-->
+<div class="modal fade" id="share-post" tabindex="-1" role="dialog" aria-labelledby="share-post" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+     <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+        <h4 class="modal-title">Share post</h4>
+      </div>
+      <form class="form-horizontal" id="modal-post-share-form" role="form" method="POST" action="{{ url('/post/share') }}">
+      <div class="modal-body">
+                  
+          <input type="hidden" name="_token" value="{{ csrf_token() }}">
+          <input type="hidden" name="share_post_id" id="modal_share_post_id" value="">
+		@if(Auth::user()->induser)
+
+		<div id="post-share-msg-box" style="display:none">
+			<div id="post-share-msg"></div>
+		</div>
+		<div id="post-share-form-errors" style="display:none"></div>
+
+		<div class="row"> 
+            <div class="col-md-6">                      
+              <h4>Who can see this Post</h4>
+            </div>
+            <div class="col-md-6">
+              <!-- <label for="tag-group-all" style="padding: 5.5px 12px;">
+                <input type="checkbox" id="tag-group-all" name="tag-group" value="all" class="md-radiobtn">
+                Public 
+              </label> -->
+              <label for="tag-group-links" style="padding: 5.5px 12px;">
+                <input type="checkbox" id="tag-group-links" name="tag-group" value="links" class="md-radiobtn" >
+                Links 
+              </label>
+              <label for="tag-group-groups" style="padding: 5.5px 12px;">
+                <input type="checkbox" id="tag-group-groups" name="tag-group" value="groups" class="md-radiobtn" >                  
+                Groups 
+              </label>
+            </div>
+		</div>          
+
+      	<div class="row"> 
+            <div class="col-md-12" id="connections-list">
+            
+            <label>Links</label>
+            {!! Form::select('share_links[]', $share_links, null, ['id'=>'connections', 'class'=>'form-control', 'multiple']) !!}               
+            </div>    
+		</div>
+		<div class="row"> 
+			<div class="col-md-12" id="groups-list">
+	            <label>Groups</label>
+	            {!! Form::select('share_groups[]', $share_groups, null, ['id'=>'groups', 'class'=>'form-control', 'multiple']) !!}  
+	        </div>             
+		</div>
+		@endif            
+     
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-sm btn-success" id="modal-post-share-btn">Share</button>
+        <button type="button" class="btn btn-sm default" data-dismiss="modal">Close</button>
+      </div>      
+      </form>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+<!-- END SHARE MODAL FORM -->
+
+<div id="loader" style="display:none;z-index:999999;background:white" class="page-loading">
+	<img src="assets/loader.gif"><span> Please wait...</span>
+</div>
 
 @stop
 
@@ -1033,7 +1120,15 @@ function resetFilter() {
 }
 </script>
 <script type="text/javascript">
+
 $(document).ready(function(){
+	function loader(arg){
+	    if(arg == 'show'){
+	        $('#loader').show();
+	    }else{
+	        $('#loader').hide();
+	    }
+	}
 
     jQuery('.hide-show-filter').on('click', function(event) {
 	    jQuery('.show-filter').toggle('show');
@@ -1252,6 +1347,152 @@ $('.apply-btn').on('click',function(event){
 	      success: function(data){
 	    	$('#links-follow-content').html(data);
 	    	$('#links-follow').modal('show');
+	      }
+	    }); 
+	    return false;
+  });
+
+	// user post sharing
+	/*$("#connections-list").hide();
+    $("#groups-list").hide();*/
+   /* $("#connections").prop('required',false);
+    $("#groups").prop('required',false);*/
+	$("#connections").prop('disabled',true);
+    $("#groups").prop('disabled',true);
+    // $("#tag-group-all").prop('checked', true);
+	$("input[name$='tag-group']").click(function() {
+        var selected = $(this).val();
+        // if(selected == 'all' && $(this).prop('checked')){
+        	/*$("#connections-list").hide();
+        	$("#groups-list").hide();
+        	$("#connections").hide();
+        	$("#groups").hide();*/
+        // 	$("#connections").prop('required',false);
+        // 	$("#groups").prop('required',false);
+        // 	$("#connections").prop('disabled',true);
+        // 	$("#groups").prop('disabled',true);
+        // 	$("#tag-group-links").prop('checked', false);
+        // 	$("#tag-group-groups").prop('checked', false);
+        // }
+        if(selected == 'links' && $(this).prop('checked')){
+        	/*$("#connections-list").show();
+        	$("#groups-list").show();
+        	$("#connections").show();
+        	$("#groups").show();*/
+        	$("#connections").prop('required',true);
+        	$("#connections").prop('disabled',false);
+        	if ($("#groups").prop('disabled') === false) {
+	        	$("#groups").prop('disabled',false);
+	        }else{
+	        	$("#groups").prop('disabled',true);
+	        }
+	        if ($("#groups").prop('required') === false) {
+	        	$("#groups").prop('required',false);
+	        }else{
+	        	$("#groups").prop('required',true);
+	        }
+        	// $("#tag-group-all").prop('checked', false);
+        }else if(selected == 'groups' && $(this).prop('checked')){
+        	/*$("#connections-list").show();
+        	$("#groups-list").show();
+        	$("#connections").show();
+        	$("#groups").show();*/
+        	$("#groups").prop('required',true);
+        	$("#groups").prop('disabled',false);
+        	if ($("#connections").prop('disabled') === false) {	        	
+        		$("#connections").prop('disabled',false);
+	        }else{
+	        	$("#connections").prop('disabled',true);
+	        }
+	        if ($("#connections").prop('required') === false) {	        	
+        		$("#connections").prop('required',false);
+	        }else{
+	        	$("#connections").prop('required',true);
+	        }
+        	// $("#tag-group-all").prop('checked', false);
+        }else if(selected == 'links' && $(this).prop('checked') === false){
+        	$("#connections").prop('disabled',true);
+        	// if($("#tag-group-groups").prop('checked') === false){
+	        // 	$("#tag-group-all").prop('checked', true);
+	        // }
+        }else if(selected == 'groups' && $(this).prop('checked') === false){
+        	$("#groups").prop('disabled',true);
+        	// if($("#tag-group-links").prop('checked') === false){
+	        // 	$("#tag-group-all").prop('checked', true);
+	        // }
+        }
+    }); 
+
+	// get post id for post share
+	$('.sojt').on('click',function(event){
+	  	var share_post_id = $(this).data('share-post-id');
+	  	$('#modal_share_post_id').val(share_post_id);
+	});
+	
+	$('#connections').select2({
+            placeholder: "Select links to share"
+        });
+    $('#groups').select2({
+            placeholder: "Select groups to share"
+        });
+
+    // share post 
+    $('#modal-post-share-btn').on('click',function(event){       
+	    event.preventDefault();
+		loader('show');
+
+		var share_post_id = $("#modal_share_post_id").val();
+	    var formData = $('#modal-post-share-form').serialize(); // form data as string
+	    var formAction = $('#modal-post-share-form').attr('action'); // form handler url
+	    // console.log(share_post_id);
+	    $.ajaxSetup({
+	        headers: {
+	            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+	        }
+	    });
+
+	    $.ajax({
+	      url: formAction,
+	      type: "post",
+	      data: formData,
+	      cache : false,
+	      success: function(data){
+	      	loader('hide');
+	        if(data.data.page == 'home'){
+	            $('#post-share-msg-box').removeClass('alert alert-danger');
+	            $('#post-share-form-errors').hide();
+	            $('#post-share-msg-box').addClass('alert alert-success').fadeIn(1000, function(){
+	                $(this).show();
+	            });
+	            $('#share-count-'+share_post_id).text(data.data.sharecount);
+	            // console.log(data.data.sharecount+" - "+share_post_id);
+	            $('#modal-post-share-form')[0].reset();
+	            $("#connections").select2("val", "");
+	            $("#groups").select2("val", "");
+	            $("#connections").prop('disabled',true);
+               	$("#groups").prop('disabled',true);
+	            $('#post-share-msg').html('Post shared successfully ! <br/>');  
+	            $("#share-post").fadeTo(2000, 500).slideUp(500, function(){	            	
+               		 $('#share-post').modal('hide');
+               		 $('#post-share-msg-box').hide();
+               		 $('#post-share-msg-box').removeClass('alert alert-success');
+               		 $('#post-share-msg-box').removeClass('alert alert-danger');               		 
+                });   
+	           
+	        }
+	      },
+	      error: function(data) {
+	        loader('hide');
+		    var errors = data.responseJSON;
+		    // console.log(errors);
+		    $errorsHtml = '<div class="alert alert-danger"><ul>';
+		    $.each(errors.errors, function(index, value) {
+		    	console.log(value);
+				 $errorsHtml += '<li>' + value[0] + '</li>';
+		    });
+	 		$errorsHtml += '</ul></div>';	            
+	        $( '#post-share-form-errors' ).html( $errorsHtml );
+	        $( '#post-share-form-errors' ).show();
 	      }
 	    }); 
 	    return false;

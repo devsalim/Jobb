@@ -207,6 +207,7 @@ body.page-boxed{
 </style>
 <!-- END THEME STYLES -->
 <link rel="shortcut icon" href="favicon.ico"/>
+@yield('css')
 </head>
 <!-- END HEAD -->
 <!-- BEGIN BODY -->

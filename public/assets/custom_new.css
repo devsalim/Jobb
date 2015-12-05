@@ -102,10 +102,10 @@ display:none !important;
 }
 
 .report{
-	float: right;
-    position: relative;
-    right: -5px;
-    bottom: 28px;
+  float: right;
+  position: relative;
+  /*right: -5px;
+  bottom: 28px;*/
 }
 
 
@@ -369,7 +369,7 @@ display: table;
 }
 .ribbon {
   position: absolute;
-  right: -11px;
+  right: -6px;
   top: -6px;
   z-index: 1;
   overflow: hidden;

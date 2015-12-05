@@ -681,7 +681,7 @@
 
 
             data[0] = {
-                        value: 300,
+                        value: 100,
                         color:"#F7464A",
                         highlight: "#FF5A5E",
                         label: "Experience",

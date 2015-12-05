@@ -2,6 +2,7 @@
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Validator;
 
 use Illuminate\Http\Request;
 use App\Postjob;
@@ -336,6 +337,87 @@ class JobController extends Controller {
 
 	public function feedbacks(){		
 		return view('pages.feedbacks');
+	}
+
+
+	public function sharePost(Request $request){
+		
+		if($request->ajax()){
+			$validator = Validator::make(
+					    ['post_id' => $request['share_post_id'], 
+					     'links' => $request['share_links'],
+					     'groups' => $request['share_groups']
+					    ],
+					    ['post_id' => 'required', 
+					     'links' => 'required_without:groups',
+					     'groups' => 'required_without:links|unique:post_group_taggings,post_id,group_id'
+					    ],
+					    ['links.required_without' => 'Either link or group is required for sharing.',
+					     'groups.required_without' => 'Either group or link is required for sharing.',
+					     'groups.unique' => 'Either group or link is required for sharing.'
+					    ]
+					);
+			if ($validator->fails()) {
+		        return response()->json(array(
+										        'success' => false,
+										        'errors' => $validator->getMessageBag()->toArray()
+										    ), 500);
+		    }else{
+				$isShared = 0;
+				$sharePostId = $request['share_post_id'];
+				
+				$post = Postjob::findOrFail($sharePostId);
+				$data = [];
+				if($post!=null){
+
+					// share to link
+					if($request['share_links'] != null){
+						$taggedUsers = $request['share_links'];
+						$post->taggeduser()->attach($taggedUsers, array('mode' => 'shared'));
+						$isShared++;
+					}
+
+					// share to group
+					if($request['share_groups'] != null){
+						$taggedGroups = $request['share_groups'];
+						$post->taggedGroup()->attach($taggedGroups, array('mode' => 'shared'));
+						$isShared++;
+					}
+
+					// myactivity update
+					if($isShared > 0){
+						$postActivity = Postactivity::where('post_id', '=', $sharePostId)
+													->where('user_id', '=', Auth::user()->induser_id)
+													->first();
+						if($postActivity == null){
+							$postActivity = new Postactivity();
+							$postActivity->post_id = $sharePostId;
+							$postActivity->user_id = Auth::user()->induser_id;
+							$postActivity->share = 1;
+							$postActivity->share_dtTime = new \DateTime();
+							$postActivity->save();
+						}elseif($postActivity != null && $postActivity->share == 0){
+							$postActivity->share = 1;
+							$postActivity->share_dtTime = new \DateTime();
+							$postActivity->save();
+						}
+
+						$sharecount = Postactivity::where('post_id', '=', $sharePostId)->sum('share');
+						$data['sharecount'] = $sharecount;
+
+						$data['page'] = 'home';
+
+					}
+
+				}	
+				return response()->json(['success'=>true,'data'=>$data]);
+				
+			}
+
+		}else{
+			return redirect("/home");
+		}
+		
 	}
 
 }
