@@ -437,7 +437,7 @@ catch(\Exception $e){}
 																	                    		View Contact</a>
 																	                    	</div>
 																	                    	<div class="col-md-4 col-sm-4 col-xs-4">
-																	                    	<a class="viewcontact-view" data-toggle="modal" href="#viewcontact-view">
+																	                    	<a class="viewcontact-view" data-toggle="modal" href="/profile/ind/{{$pa->user->id}}">
 																	                    		View/Download</a>
 																	                    	</div>
 																                    	</div>

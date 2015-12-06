@@ -10,21 +10,20 @@
 		<div class="form-body">
 			<h3 class="form-title" style="text-shadow: 0px 1px 1px blue;color: khaki;font-size: 20px;">Login As</h3>
 				<div class="row" style="margin-bottom: 25px;">
-					<div class="col-md-2"></div>
-					<div class="col-md-8">
-						<div class="input-group">
-							<span class="input-group-btn" id="loginindividual">
-								<button class="btn btn-default active" type="button" style="border-radius: 10px 0px 0px 10px;">
+					<div class="col-md-2 col-sm-2 col-xs-1"></div>
+					<div class="col-md-10 col-sm-10 col-xs-10">
+						<div class="btn-group input-group" data-toggle="buttons">
+							<label class="" id="loginindividual">
+								<button class="btn btn-default active" type="button" style="border-radius: 10px 0px 0px 10px;color: whitesmoke;background-color:darkcyan;">
 									<i class="fa fa-user" style="border-radius: 10px 0px 0px 10px;color: white;"></i>&nbsp;Individual
 								</button>
-							</span>
-							<span class="input-group-btn" id="logincorporate">
-								<button class="btn btn-default" type="button" style="border-radius: 0px 10px 10px 0px;color: darkseagreen;">
-									<i class="fa fa-university" style="color: white;"></i>&nbsp;Corporate
+							 </label>
+							 <label class="" id="logincorporate">
+							 	<button class="btn btn-default" type="button" style="border-radius: 0px 10px 10px 0px;color: wheat;">
+									<i class="fa fa-university" style="color: antiquewhite;"></i>&nbsp;Corporate
 								</button>
-							</span>
+							 </label>
 						</div>
-						<!-- /input-group -->
 					</div>
 					<!-- /.col-md-6 -->
 				</div>
@@ -102,7 +101,7 @@
 					<button type="submit" class="btn btn-default pull-left" style="margin-left: 0px; " id="individual-login-btn">
 					Login <i class="m-icon-swapright"></i>
 					</button>
-					<a href="javascript:;" id="forget-password" class="forget-password" style="font-size: 14px;/* color: gray; */text-decoration: initial;">Forgot Password ?
+					<a href="javascript:;" id="forget-password" class="forget-password" style="font-size: 14px;/* color: gray; */text-decoration: initial;color: aliceblue !important;">Forgot Password ?
 					</a>
 				</div>			
 			<div class="create-account" style="margin-top: 20px;background-color: darksalmon;" >
@@ -116,26 +115,26 @@
 	<form class="login-form-corp"  action="{{ url('/auth/login') }}" method="post" id="corporate-login">
 		<div class="form-body">
 			<h3 class="form-title" style="text-shadow: 0px 1px 1px blue;color: khaki;font-size: 20px;">Login As</h3>
-			
 				<div class="row" style="margin-bottom: 25px;">
-			<div class="col-md-2"></div>
-			<div class="col-md-8">
-				<div class="input-group">
-					<span class="input-group-btn" id="loginindividual1">
-						<button class="btn btn-default " type="button" style="border-radius: 10px 0px 0px 10px;">
-							<i class="fa fa-user" style="border-radius: 10px 0px 0px 10px;color: white;"></i>&nbsp;Individual
-						</button>
-					</span>
-					<span class="input-group-btn" id="logincorporate2">
-						<button class="btn btn-default active" type="button" style="border-radius: 0px 10px 10px 0px;color: darkseagreen;">
-							<i class="fa fa-university" style="color: white;"></i>&nbsp;Corporate
-						</button>
-					</span>
+					<div class="col-md-2 col-sm-2 col-xs-1"></div>
+					<div class="col-md-10 col-sm-10 col-xs-10">
+						<div class="btn-group input-group" data-toggle="buttons">
+							<label class="" id="loginindividual1">
+								<button class="btn btn-default " type="button" style="border-radius: 10px 0px 0px 10px;color: wheat;">
+									<i class="fa fa-user" style="border-radius: 10px 0px 0px 10px;color: antiquewhite;"></i>&nbsp;Individual
+								</button>
+							 </label>
+							 <label class="" id="logincorporate2">
+							 	<button class="btn btn-default active" type="button" style="border-radius: 0px 10px 10px 0px;color: whitesmoke;background-color:darkcyan;">
+									<i class="fa fa-university" style="color: white;"></i>&nbsp;Corporate
+								</button>
+							 </label>
+						</div>
+						
+					</div>
+					<!-- /.col-md-6 -->
 				</div>
-				<!-- /input-group -->
-			</div>
-			<!-- /.col-md-6 -->
-		</div>
+				
 
 			@if (count($errors) > 0)
 				<div class="alert alert-danger">
@@ -179,7 +178,7 @@
 				<button type="button" class="btn btn-default pull-left" style="margin-left: 0px; " id="corporate-login-btn">
 				Login <i class="m-icon-swapright"></i>
 				</button>
-				<a href="javascript:;" id="forget-password-corp" class="forget-password" style="font-size: 14px;/* color: gray; */text-decoration: initial;">Forgot Password ?
+				<a href="javascript:;" id="forget-password-corp" class="forget-password" style="font-size: 14px;text-decoration: initial;color: aliceblue !important;">Forgot Password ?
 				</a>
 			</div>			
 			<div class="create-account" style="margin-top: 20px;background-color: darksalmon;" >
@@ -263,25 +262,25 @@
 				Sign Up As
 			</h3>
 		</div>
-		<div class="row" style="margin-bottom: 22px;">
-			<div class="col-md-2"></div>
-			<div class="col-md-8">
-				<div class="input-group">
-					<span class="input-group-btn" id="corpor">
-						<button class="btn btn-default active" type="button" style="border-radius: 10px 0px 0px 10px;">
+		<div class="row" style="margin-bottom: 25px;">
+			<div class="col-md-2 col-sm-2 col-xs-1"></div>
+			<div class="col-md-10 col-sm-10 col-xs-10">
+				<div class="btn-group input-group" data-toggle="buttons">
+					<label class="" id="corpor">
+						<button class="btn btn-default active" type="button" style="border-radius: 10px 0px 0px 10px;color: whitesmoke;background-color:darkcyan;">
 							<i class="fa fa-user" style="border-radius: 10px 0px 0px 10px;color: white;"></i>&nbsp;Individual
 						</button>
-					</span>
-					<span class="input-group-btn" id="corporate1">
-						<button class="btn btn-default" type="button" style="border-radius: 0px 10px 10px 0px;color: darkseagreen;">
-							<i class="fa fa-university" style="color: white;"></i>&nbsp;Corporate
+					 </label>
+					 <label class="" id="corporate1">
+					 	<button class="btn btn-default" type="button" style="border-radius: 0px 10px 10px 0px;color: wheat;">
+							<i class="fa fa-university" style="color: antiquewhite;"></i>&nbsp;Corporate
 						</button>
-					</span>
+					 </label>
 				</div>
-				<!-- /input-group -->
 			</div>
 			<!-- /.col-md-6 -->
 		</div>
+		
 		<div class="login-options" >
 			<div class="row social">
 				<div class="col-md-4 col-xs-4 " style="padding-right:2px;">
@@ -398,16 +397,21 @@
 			</h3>
 		</div>
 		<div class="row" style="margin-bottom: 25px;">
-			<div class="col-md-8">
-				<div class="input-group" style="margin-top: 13px;">
-					<span class="input-group-btn" id="individual2">
-						<button class="btn btn-default" type="button" style="border-radius: 10px 0px 0px 10px;color: darkseagreen;"><i class="fa fa-user" style="color: white;"></i>&nbsp;Individual</button>
-					</span>
-					<span class="input-group-btn" id="individual3">
-						<button class="btn btn-default active" type="button" style="border-radius: 0px 10px 10px 0px;"><i class="fa fa-university" style="color: white;"></i>&nbsp;Corporate</button>
-					</span>
+			<div class="col-md-2 col-sm-2 col-xs-1"></div>
+			<div class="col-md-10 col-sm-10 col-xs-10">
+				<div class="btn-group input-group" data-toggle="buttons">
+					<label class="" id="individual2">
+						<button class="btn btn-default " type="button" style="border-radius: 10px 0px 0px 10px;color: wheat;">
+							<i class="fa fa-user" style="border-radius: 10px 0px 0px 10px;color: antiquewhite;"></i>&nbsp;Individual
+						</button>
+					 </label>
+					 <label class="" id="individual3">
+					 	<button class="btn btn-default active" type="button" style="border-radius: 0px 10px 10px 0px;color: whitesmoke;background-color:darkcyan;">
+							<i class="fa fa-university" style="color: white;"></i>&nbsp;Corporate
+						</button>
+					 </label>
 				</div>
-				<!-- /input-group -->
+				
 			</div>
 			<!-- /.col-md-6 -->
 		</div>
@@ -457,7 +461,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="form-group">
+		<div class="form-group" style="margin-bottom:15px;">
 			<div class="input-icon right">
 				<i class="fa"></i>
 				<div class="input-group margin-top-15">
@@ -468,11 +472,11 @@
 				</div>
 			</div>
 		</div>
-		<div class="form-group">
-			<div class="col-md-4"></div>
-			<label class="control-label col-md-6" style="">Firm Type</label>
+		<div class="form-group" style="margin-bottom:15px;">
+			<!-- <div class="col-md-4"></div> -->
+			<label class="control-label" style="float: none;margin: 0 auto;display: table; margin-bottom: 5px;">Firm Type</label>
 			<div class="col-md-12">
-				<div class="md-radio-inline" style="margin-left:22px;">
+				<div class="md-radio-inline" style="float: none;margin: 0 auto;display: table;">
 					<div class="md-radio">
 						<input type="radio" id="radio6" name="firm_type" value="company" class="md-radiobtn">
 						<label for="radio6" style="">

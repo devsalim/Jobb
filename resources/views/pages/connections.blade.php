@@ -34,7 +34,7 @@
 						
 						
 					</div>	
-					<div class="form-group col-md-10 col-sm-10 col-md-xs clearfix" style="margin-bottom:10px">	
+					<div class="form-group col-md-12 col-sm-12 col-xs-12 clearfix" style="margin-bottom:10px">	
 							<!-- BEGIN FORM-->
 							<form action="searchConnections" class="horizontal-form" method="post">
 								<input type="hidden" name="_token" value="{{ csrf_token() }}">				
@@ -57,7 +57,7 @@
 					                          </div>
 					                        </div> 
 					                      </div>
-					                      <div class="row show-firm-type">
+					                      <div class="row show-firm-type" style="margin: 0px auto; float: none; display: table;">
 					                      	<div class="btn-group col-md-12 col-sm-12 col-xs-12" style="margin:10px;" data-toggle="buttons">
 												<label class="btn btn-default color-button check-font-size active" >
 												<input type="checkbox" name="firm_type[]" value="Company" class="toggle"> Company </label>
@@ -121,12 +121,14 @@
 					                      </div>
 					                    </form>
 						          </div>
-								<div class="input-icon right normal_search">
+
+							</form>
+							<!-- <div class="col-md-1"></div> -->
+								<div class=" input-icon right normal_search">
 									<i class="fa fa-search" style="color: darkcyan;"></i>
 									<input type="text" name="keywords" id="search-input" onkeydown="down()" onkeyup="up()" class="form-control" placeholder="Search" style="border: 1px solid darkcyan;margin-bottom:0">
 									<a class="advance-search btn" style="position: absolute;right: 30px;top: 5px;">Advance</a>
 								</div>	
-							</form>
 							<!-- END FORM-->
 							<div class="col-md-12 links-title" id="search-results" style="background:#f2f2f2;max-height:200px;overflow:auto;margin-bottom:10px">
 							</div>	
@@ -144,7 +146,7 @@
 			<i class="icon-users"></i>Manage your Links
 		</div>
 	</div>
-	<div class="portlet-body">
+	<div class="portlet-body" style="padding:10px 0;">
 		<div class="tabbable-custom ">
 			<ul class="nav nav-tabs" style="padding-left: 0px;">
 				<li class="active">
@@ -162,170 +164,125 @@
 			</ul>
 			<div class="tab-content">
 				<div class="tab-pane active" id="tab_5_1">
-					@if(count(Auth::user()->induser->friends) > 0)								
-					<ul class="media-list">
-					@foreach(Auth::user()->induser->friends as $connection)
-						@if($connection->pivot->status == 1)													
-						  <li class="media ">
-						  	
-						    <div class="media-left col-md-2 col-sm-2 col-xs-2" style="padding:0">
-						      <a href="#">
-						        <img class="media-object" 
-						        src="@if($connection->profile_pic != null){{ '/img/profile/'.$connection->profile_pic }}@else{{'/assets/images/ab.png'}}@endif" 
-						      alt="DP">
-						      </a>
-						    </div>
-						    <div class="media-body col-md-4 col-sm-8 col-xs-8" style="padding:0;margin: 8px 14px; !important">
-						    	<div class="media-body-left">
-						    		 
-								      <a href="/profile/ind/{{$connection->id}}" data-utype="ind">
-								     {{ $connection->fname }} {{ $connection->lname }}</a><br>
-								    
-								      @if($connection->working_at != null && $connection->city != null)
-								     	Working at {{ $connection->working_at }} in {{ $connection->city }}
-								      @elseif($connection->working_at == null && $connection->city != null)
-								      	{{ $connection->city }}
-								      @endif		
-						    	</div>
-						    <!-- 	<div class="media-body-right">
-						    		
-						    	</div> -->
-						     
-						    </div>
-							<div class="media-body col-md-4 col-sm-2 col-xs-2" style="padding:0;margin: 10px 0;">
-								<form action="{{ url('/connections/destroy', $connection->pivot->id) }}" method="post">
-											<input type="hidden" name="_token" value="{{ csrf_token() }}">
-											<button type="submit" class="btn btn-danger btn-responsive button-style-del">
-											<i class="glyphicon glyphicon-trash icon-style-del"></i>
-											</button>
-										</form>	
+					@if(count(Auth::user()->induser->friends) > 0)
+					<div class="row" style="margin-bottom:10px;">
+						@foreach(Auth::user()->induser->friends as $connection)
+						 @if($connection->pivot->status == 1)	
+							<div class="col-md-2 col-sm-3 col-xs-2">
+								<a href="#">
+							        <img class="media-object img-circle img-link-size" 
+							        src="@if($connection->profile_pic != null){{ '/img/profile/'.$connection->profile_pic }}@else{{'/assets/images/ab.png'}}@endif" 
+							      	alt="DP">
+							     </a>
 							</div>
-						  </li>
-						@endif
-					@endforeach
-					</ul>
+							<div class="col-md-6 col-sm-6 col-xs-6">
+								 <a href="/profile/ind/{{$connection->id}}" data-utype="ind" style="font-size:15px;">
+							     {{ $connection->fname }} {{ $connection->lname }}</a><br>
+							    <small>
+							      @if($connection->working_at != null && $connection->city != null)
+							     	Working at {{ $connection->working_at }} in {{ $connection->city }}
+							      @elseif($connection->working_at == null && $connection->city != null)
+							      	{{ $connection->city }}
+							      @endif
+							      </small>
+							</div>
+							<div class="col-md-3 col-sm-3 col-xs-2" style="margin:7px 0">
+								<form action="{{ url('/connections/destroy', $connection->pivot->id) }}" method="post">
+									<input type="hidden" name="_token" value="{{ csrf_token() }}">
+									<button type="submit" class="btn btn-success btn-responsive" style="padding:2px 5px;">
+									Linked
+									</button>
+								</form>	
+							</div>
+						 @endif
+					    @endforeach
+					</div>
 					@else
-					<ul class="media-list">												
-					  <li class="media">
-					    <div class="media-lef">
-					    </div>
-					    <div class="media-body">
-					    	<div class="media-body-left">
-					    		 <h4 class="media-heading">
-							      	<i class="fa fa-frown-o" style="font-size: 16px !important;"></i> You have no Links
-							      </h4>
-					    	</div>
-					    </div>
-					  </li>
-					</ul>
-				@endif
+						<div class="row">
+							<div class="col-md-12">
+								<i class="fa fa-frown-o" style="font-size: 16px !important;"></i> You have no Links
+							</div>
+						</div>
+					@endif								
 				</div>
 				<div class="tab-pane" id="tab_5_2">
 					@if($linkrequestCount > 0)
-						<ul class="media-list">
+					<div class="row" style="margin-bottom:10px;">
 						@foreach(Auth::user()->induser->friendOf as $conreq)
-							@if($conreq->pivot->status == 0)														
-							  <li class="media">
-							    <div class="media-left">
-							      <a href="#">
-							        <img class="media-object" src="@if($conreq->profile_pic != null){{ '/img/profile/'.$conreq->profile_pic }}@else{{'/assets/images/ab.png'}}@endif" alt="DP" style="width:60px">
-							      </a>
-							    </div>
-							    <div class="media-body">
-							    	<div class="media-body-left">
-							    		 <h4 class="media-heading">
-							    		 	 <a href="/profile/ind/{{$conreq->id}}" data-utype="ind">
-							    		 	 	{{ $conreq->fname }} {{ $conreq->lname }}</a>
-							    		 </h4>
-									     {{ $conreq->working_at }}<br>
-										 {{ $conreq->city }} {{ $conreq->state }}
-							    	</div>
-							    	
-							    	<div class="media-body-right">
-							    		<span class="input-group-btn btn-right">
-											<form action="{{ url('/connections/response', $conreq->pivot->id) }}" method="post">
-												<input type="hidden" name="_token" value="{{ csrf_token() }}">
-												<button type="submit" name="action" value="accept" class="btn btn-success button-style-add">
-													<i class="fa fa-check icon-style-add"  style="font-size: 12px;background-color: white;color: black;border-radius: 10px;width: 20px;height: 20px;padding-top: 3px;"></i>&nbsp;Accept
-												</button>
-												<button type="submit" name="action" value="reject" class="btn btn-danger button-style-del">
-													<i class="glyphicon glyphicon-trash icon-style-del" style="font-size: 12px;background-color: white;color: black;border-radius: 10px;width: 20px;height: 20px;padding-top: 3px;"></i>&nbsp;Reject
-												</button>
-											</form>
-										</span>
-							    	</div>
-								</div>														     
-							  </li>
-							  @endif
-							  @endforeach	
-							  @else							
-							  <li class="media">
-							    <div class="media-lef">
-							    </div>
-							    <div class="media-body">
-							    	<div class="media-body-left">
-							    		 <h4 class="media-heading">
-									      	<i class="fa fa-frown-o" style="font-size: 16px !important;"></i> You have no Link Requests
-									      </h4>
-							    	</div>
-							    </div>
-							  </li>
-						</ul>
-													
-					@endif	
+							@if($conreq->pivot->status == 0)	
+							<div class="col-md-2 col-sm-3 col-xs-2">
+								<a href="#">
+							        <img class="media-object img-circle img-link-size" 
+							        src="@if($conreq->profile_pic != null){{ '/img/profile/'.$conreq->profile_pic }}@else{{'/assets/images/ab.png'}}@endif" 
+							      	alt="DP">
+							     </a>
+							</div>
+							<div class="col-md-5 col-sm-6 col-xs-5">
+								 <a href="/profile/ind/{{$conreq->id}}" data-utype="ind" style="font-size:15px;">
+							    		 	 	{{ $conreq->fname }} {{ $conreq->lname }}</a><br>
+							    <small>
+							     {{ $conreq->working_at }}, {{ $conreq->city }}
+							      </small>
+							</div>
+							<div class="col-md-3 col-sm-3 col-xs-5" style="margin:7px 0">
+								<form action="{{ url('/connections/response', $conreq->pivot->id) }}" method="post">
+									<input type="hidden" name="_token" value="{{ csrf_token() }}">
+									<button type="submit" name="action" value="accept" class="btn btn-success" style="padding:2px 5px;">
+										Link
+									</button>
+									<button type="submit" name="action" value="reject" class="btn btn-danger" style="padding:2px 5px;">
+										Reject
+									</button>
+								</form>
+							</div>
+						 @endif
+					    @endforeach
+					</div>
+					@else
+						<div class="row">
+							<div class="col-md-12">
+								<i class="fa fa-frown-o" style="font-size: 16px !important;"></i> You have no Link Request
+							</div>
+						</div>
+					@endif				
 				</div>
 				<div class="tab-pane" id="tab_5_3">
-						<ul class="media-list">
-							@if(count($linkFollow) > 0)
+					@if(count($linkFollow) > 0)
+					<div class="row" style="margin-bottom:10px;">
 							@foreach($linkFollow as $follow)	
-							  <li class="media">
-							    <div class="media-left">
-							      <a href="#">
-							        <img class="media-object" src="@if($follow->logo_status != null){{ '/img/profile/'.$follow->logo_status }}@else{{'/assets/images/ab.png'}}@endif" alt="DP" style="width:60px">
-							      </a>
-							    </div>
-							    <div class="media-body">
-							    	<div class="media-body-left">
-							    		 <h4 class="media-heading">
-							    		 	<a href="/profile/corp/{{$follow->id}}" class="link-label" data-utype="corp">
+							<div class="col-md-2 col-sm-2 col-xs-2">
+								<a href="#">
+							        <img class="media-object img-link-size" src="@if($follow->logo_status != null){{ '/img/profile/'.$follow->logo_status }}@else{{'/assets/images/ab.png'}}@endif" alt="DP" style="width:60px">
+							    </a>
+							</div>
+							<div class="col-md-5 col-sm-6 col-xs-6">
+								<a href="/profile/corp/{{$follow->id}}" class="link-label" data-utype="corp">
 							    		 		{{ $follow->firm_name }}
 							    		 	</a>
-							    		 	 <small>{{ $follow->firm_type }}</small>
-							    		 </h4>
-										<i class="fa fa-clock-o" style="color:darkslategray;font-size:16px;"></i>
-										 {{ $follow->operating_since }}
-										 <i class="fa fa-users" style="color:darkslategray;"></i>
-										 {{ $follow->emp_count }}<br>
-										 @if($followNewCount > 0)({{ $followNewCount }})@endif Followers
-							    	</div>
-							    	
-							    	<div class="media-body-right">
-							    		<span class="input-group-btn btn-right">
-											<form action="{{ url('links/corporate/unfollow', $follow->id) }}" method="post">
-												<input type="hidden" name="_token" value="{{ csrf_token() }}">
-												<button type="submit" name="action" value="accept" class="btn btn-success button-style-add">
-													<i class="icon-user-follow icon-style-add"  style="font-size:12px;color:white;padding-top: 3px;"></i>&nbsp;Unfollow
-												</button>
-											</form>
-										</span>
-							    	</div>
-								</div>														     
-							  </li>	
-							  @endforeach
-							   @else							
-							  <li class="media">
-							    <div class="media-lef">
-							    </div>
-							    <div class="media-body">
-							    	<div class="media-body-left">
-							    		 <h4 class="media-heading">
-									      	<i class="fa fa-frown-o" style="font-size: 16px !important;"></i> You have not Follow Anyone
-									      </h4>
-							    	</div>
-							    </div>
-							  </li>
-							@endif									
-						</ul>
+							    		 	 <small>{{ $follow->firm_type }}</small><br>
+							    <i class="fa fa-clock-o" style="color:darkslategray;font-size:16px;"></i>
+								 {{ $follow->operating_since }}
+								 <i class="fa fa-users" style="color:darkslategray;"></i>
+								 {{ $follow->emp_count }}<br>
+								 @if($followNewCount > 0)({{ $followNewCount }})@endif Followers
+							</div>
+							<div class="col-md-3 col-sm-3 col-xs-3" style="margin:7px 0">
+								<form action="{{ url('links/corporate/unfollow', $follow->id) }}" method="post">
+									<input type="hidden" name="_token" value="{{ csrf_token() }}">
+									<button type="submit" name="action" value="accept" class="btn btn-success" style="padding:2px 7px;" >
+										Following
+									</button>
+								</form>
+							</div>
+					    @endforeach
+					</div>
+					@else
+					<div class="row">
+						<div class="col-md-12">
+							<i class="fa fa-frown-o" style="font-size: 16px !important;"></i> You have not Follow anyone!
+						</div>
+					</div>
+					@endif				
 				</div>
 			</div>
 		</div>

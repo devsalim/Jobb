@@ -8,7 +8,7 @@ New Timeline
 /* Cubic Bezier Transition */
 .timeline {
   margin: 0;
-  padding: 0;
+  padding: 6px;
   position: relative;
   margin-bottom: 0px;
 }

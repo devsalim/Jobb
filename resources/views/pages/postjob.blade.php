@@ -496,6 +496,23 @@
 								</div>
 								<div class="tab-pane" id="tab3">
 									<div class="row">
+										<div class="col-md-12">
+											<div class="form-group">
+												<div class="input-icon right">
+													<i class="fa"></i>
+													<label>Locality</label>
+													<div class="input-group">
+														<span class="input-group-addon">
+															<i class="fa fa-map-marker" style="color:darkcyan;"></i>
+														</span>
+														<input type="text" name="locality" class="form-control" 
+															   placeholder="Locality">
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="row">
 										<div class="col-md-5 col-sm-5 col-xs-12">
 											<div class="form-group new-margin-formgroup">
 												<label>Job Location <span class="required">

@@ -1313,3 +1313,42 @@ $('.matching-criteria').on('click',function(event){
 });
 
 });
+
+
+
+
+
+
+
+
+
+
+@if($connection->working_at->working_status == "Student")
+                                
+                                     {{ $connection->education }} in {{ $connection->branch }}, {{ $connection->city }}
+                                
+                                @elseif($connection->working_status == "Searching Job")
+                                
+                                     {{ $connection->working_status }} in {{ $connection->prof_category }}, {{ $connection->city }}
+                                
+                                @elseif($connection->working_status == "Freelanching")
+                                
+                                     {{ $connection->role }} {{ $connection->working_status }}, {{ $connection->city }}
+                                
+                                @elseif($connection->role != null && $connection->working_at !=null && $connection->working_status == "Working")
+                                
+                                     {{ $connection->role }} @ {{ $connection->working_at }} 
+                            
+                                @elseif($connection->role != null && $connection->working_at ==null && $connection->working_status == "Working")
+                                
+                                     {{ $connection->role }}, {{ $connection->city }}
+                                
+                                @elseif($connection->role == null && $connection->working_at !=null && $connection->working_status == "Working")
+                                
+                                     {{ $connection->woring_at }}, {{ $connection->city }}
+                                
+                                @elseif($connection->role == null && $connection->working_at ==null && $connection->working_status == "Working")
+                                
+                                   {{ $connection->prof_category }}, {{ $connection->city }}
+                               
+                                @endif

@@ -12,7 +12,7 @@ Login page
 
 .login .logo {
   margin: 0 auto;
-  margin-top: 60px;
+  margin-top: 5px;
   padding: 15px;
   text-align: center;
 }
@@ -28,7 +28,7 @@ Login page
   -o-border-radius: 7px;
   border-radius: 7px;
   width: 400px;
-  margin: 40px auto 10px auto;
+  margin: 15px auto 10px auto;
   padding: 30px;
   padding-top: 10px;
   overflow: hidden;
@@ -184,7 +184,7 @@ Login page
 .login .content .form-actions .btn-default {
   font-weight: 600;
     padding: 8px 18px !important;
-    color: darkcyan;
+    color: darkslategray;
     background-color: transparent;
     border: 1px solid darkcyan;
     margin-left: 10px;
@@ -252,7 +252,7 @@ Login page
   }
 
   .login .content {
-    width: 280px;
+    width: 350px;
     margin-top: 10px;
   }
 .login .contentP {

@@ -486,7 +486,7 @@
 								<div class="form-group">
 									<label>Added Skills <span class="required">
 													* </span></label>
-								    <input type="text" readonly id="linked_skill" value="{{ $user->linked_skill }}" name="linked_skill" 
+								    <input type="text" id="linked_skill" value="{{ $user->linked_skill }}" name="linked_skill" 
 								     		class="form-control select2"
 								     		placeholder="List of skills to be added">
 								    <input type="hidden" id="linked_skill_id" name="linked_skill_id" 
@@ -559,7 +559,7 @@
 												<i class="icon-paper-clip" style="color: white;"></i>
 												<span class="fileinput-new">Select File </span> 
 												<span class="fileinput-exists">Upload New Resume </span>
-												<input type="file" name="resume">
+												<input type="file" name="resume" accept='application/pdf,application/msword'>
 											</span>
 											<br>
 											<span class="fileinput-new"></span>

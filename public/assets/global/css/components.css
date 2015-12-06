@@ -2734,7 +2734,7 @@ Dropdown Menu
 .dropdown-menu .active > a:hover {
   text-decoration: none;
   background-image: none;
-  background-color: transparent;
+  background-color: whitesmoke;
   color: #555;
   filter: none;
 }
