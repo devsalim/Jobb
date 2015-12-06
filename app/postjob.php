@@ -67,7 +67,15 @@ class Postjob extends Model {
 	}
 
 	public function groupTagged(){
-		return $this->hasMany('App\PostGroupTagging', 'post_id', 'id')->select('group_id');
+		return $this->hasMany('App\PostGroupTagging', 'post_id', 'id')->select('group_id', 'mode', 'tag_share_by');
+	}
+
+	public function sharedGroupBy(){
+		return $this->belongsToMany('App\Induser', 'post_group_taggings', 'post_id', 'tag_share_by')->select('group_id', 'mode', 'tag_share_by', 'fname', 'lname');
+	}
+
+	public function sharedToGroup(){
+		return $this->belongsToMany('App\Group', 'post_group_taggings', 'post_id', 'group_id')->select('group_id', 'mode', 'tag_share_by', 'group_name');
 	}
 
 	public function user(){

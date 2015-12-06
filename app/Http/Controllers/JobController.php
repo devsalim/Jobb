@@ -95,11 +95,11 @@ class JobController extends Controller {
 
 		if($request['connections'] != null){
 			$taggedUsers = $request['connections'];
-			$post->taggeduser()->attach($taggedUsers);
+			$post->taggeduser()->attach($taggedUsers, array('mode' => 'tagged', 'tag_share_by' => Auth::user()->induser_id));
 		}
 		if($request['groups'] != null){
 			$taggedGroups = $request['groups'];
-			$post->taggedGroup()->attach($taggedGroups);
+			$post->taggedGroup()->attach($taggedGroups, array('mode' => 'tagged', 'tag_share_by' => Auth::user()->induser_id));
 		}		
 
 		return redirect("/home");
@@ -373,14 +373,14 @@ class JobController extends Controller {
 					// share to link
 					if($request['share_links'] != null){
 						$taggedUsers = $request['share_links'];
-						$post->taggeduser()->attach($taggedUsers, array('mode' => 'shared'));
+						$post->taggeduser()->attach($taggedUsers, array('mode' => 'shared', 'tag_share_by' => Auth::user()->induser_id));
 						$isShared++;
 					}
 
 					// share to group
 					if($request['share_groups'] != null){
 						$taggedGroups = $request['share_groups'];
-						$post->taggedGroup()->attach($taggedGroups, array('mode' => 'shared'));
+						$post->taggedGroup()->attach($taggedGroups, array('mode' => 'shared', 'tag_share_by' => Auth::user()->induser_id));
 						$isShared++;
 					}
 
