@@ -736,6 +736,8 @@ class PagesController extends Controller {
 				$msg = 'Invalid OTP';
 			}else if(strlen(trim(Input::get('mobileOTP'))) == 5){
 				$msg = 'Invalid Verification code';
+			}else{
+				$msg = 'Invalid OTP/Verification code';
 			}			
 			return redirect('/verify')
 					->with('flash_message', $msg)
@@ -810,11 +812,14 @@ class PagesController extends Controller {
 		}	
 	}
 
-		public function viewContact($id)
-	{		
+	public function viewContact($id){		
 		$title = 'profile';
 		$user = Induser::findOrFail($id);
 		return view('pages.viewcontact', compact('title','user'));
+	}
+
+	public function resendOTP(){
+
 	}
 
 
