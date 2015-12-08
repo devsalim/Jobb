@@ -5,6 +5,7 @@ use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Contracts\Auth\Registrar;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 use Illuminate\Http\Request;
+use App\User;
 
 class AuthController extends Controller {
 
@@ -45,20 +46,58 @@ class AuthController extends Controller {
     	$request->merge([$field => $request->input('email')]);
 
     	$credentials = $request->only($field, 'password');
-    	if($field == 'email'){
+    	$data = [];
+    	$data['email_verify'] = 0;
+    	$data['mobile_verify'] = 0;
+		if($field == 'email'){
+	    	$email_verify = User::where('email', '=', $request->input('email'))->pluck('email_verify');
+	    	if($email_verify == '1'){
+	    		$credentials = array_add($credentials, 'email_verify', '1');
+	    		$data['page'] = 'home';
+	    		$data['email_verify'] = 1;
+	    	}else{
+	    		//error - email not verified
+	    		$data['email_verify'] = 0;
+	    		$data['page'] = 'login';
+	    		$data['message'] = 'email not verified';
+	    	}
+	    }
+	    if($field == 'mobile'){
+	    	$mobile_verify = User::where('mobile', '=', $request->input('email'))->pluck('mobile_verify');
+	    	if($mobile_verify == '1'){
+	    		$credentials = array_add($credentials, 'mobile_verify', '1');
+	    		$data['page'] = 'home';
+	    		$data['mobile_verify'] = 1;
+	    	}else{
+	    		//error - mobile not verified
+	    		$data['mobile_verify'] = 0;
+	    		$data['page'] = 'login';
+	    		$data['message'] = 'mobile not verified';
+	    	}
+	    }
+
+    	/*if($field == 'email'){
     		 $credentials = array_add($credentials, 'email_verify', '1');
     	}elseif($field == 'mobile'){
     		 $credentials = array_add($credentials, 'mobile_verify', '1');
-    	}
+    	}*/
 		if($request->ajax()){
-			if ($this->auth->attempt($credentials))
-		    {
-		        return $this->redirectPath();
-		    }
-		    return $this->loginPath();
-		}else{
-			if ($this->auth->attempt($credentials))
-		    {
+			if(($data['page'] == 'home') && ($data['email_verify'] == 1 || $data['mobile_verify'] == 1)){
+				if ($this->auth->attempt($credentials)){
+			        // return $this->redirectPath();
+			        $data['message'] = 'login success';
+			        return response()->json(['success'=>true,'data'=>$data]);
+			    }else{
+			    	$data['page'] = 'login';
+			    	$data['user'] = 'invalid';
+	    			$data['message'] = 'invalid login info';
+			    }
+			}
+		    // return $this->loginPath();
+		    return response()->json(['success'=>false,'data'=>$data]);
+		}
+		/*else{
+			if ($this->auth->attempt($credentials)){
 		        return redirect()->intended($this->redirectPath());
 		    }
 		    return redirect($this->loginPath())
@@ -66,7 +105,7 @@ class AuthController extends Controller {
 					->withErrors([
 						'email' => $this->getFailedLoginMessage(),
 					]);
-		}
+		}*/
 
     	$this->validate($request, [
 			'email' => 'required', 'password' => 'required',

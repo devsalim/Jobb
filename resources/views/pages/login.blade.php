@@ -241,7 +241,7 @@
 				<i class="fa"></i>
 				<div class="input-group margin-top-10">
 					<span class="input-group-addon"><i class="icon-envelope"></i></span>
-					<input type="password" name="mobileOTP" class="form-control" placeholder="Enter OTP here" required>
+					<input type="password" name="mobileOTP" class="form-control" maxlength="5" placeholder="Enter OTP here"  required>
 				</div>
 			</div>
 		</div>
@@ -553,19 +553,49 @@ $(document).ready(function(){
       cache : false,
       success: function(data){
         loader('hide');
-        if(data == 'login'){            
+        // console.log(data)
+        if(data.data.page == 'login' && data.data.user == 'invalid'){            
             $('#ind-msg-box').removeClass('alert alert-success');
             $('#ind-msg-box').addClass('alert alert-danger').fadeIn(1000, function(){
                 $(this).show();
             });
-            $('#ind-msg').text('Invalid user');
-        }else{          
-            // $('#ind-msg-box').removeClass('alert alert-danger');
-            // $('#ind-msg-box').addClass('alert alert-success').fadeIn(1000, function(){
-            //     $(this).show();
-            // });
-            // $('#ind-msg').text('Login success');
-            redirect(data);
+            $('#ind-msg').text(data.data.message);
+        }
+        else if(data.data.page == 'login' && data.data.email_verify == 0){
+        	$('#ind-msg-box').removeClass('alert alert-success');
+            $('#ind-msg-box').addClass('alert alert-danger').fadeIn(1000, function(){
+                $(this).show();
+            });
+            $('#ind-msg').text(data.data.message);
+
+            $('#individual-login').hide();
+            $('#mobile-otp-form').show();
+            $('#ind-reg-msg').html(data.data.message);
+
+            $('#ind-msg-reg-box').removeClass('alert alert-success');
+            $('#ind-msg-reg-box').addClass('alert alert-danger').fadeIn(1000, function(){
+                $(this).show();
+            });
+        }
+        else if(data.data.page == 'login' && data.data.mobile_verify == 0){
+        	$('#ind-msg-box').removeClass('alert alert-success');
+            $('#ind-msg-box').addClass('alert alert-danger').fadeIn(1000, function(){
+                $(this).show();
+            });
+            $('#ind-msg').text(data.data.message);
+
+            $('#individual-login').hide();
+            $('#mobile-otp-form').show();
+            $('#ind-reg-msg').html(data.data.message);  
+            $('#ind-msg-reg-box').show();
+
+            $('#ind-msg-reg-box').removeClass('alert alert-success');
+            $('#ind-msg-reg-box').addClass('alert alert-danger').fadeIn(1000, function(){
+                $(this).show();
+            });
+        }
+        else{          
+            redirect(data.data.page);
         }
       },
       error: function(data) {
@@ -660,16 +690,32 @@ $('#individual-register-btn').on('click',function(event){
 	            $('#mobile-otp-form').show();
 	            $('#ind-reg-msg').html('Registration successful ! <br/>Check your mobile/email for further instruction. <br/>Your otp: <b>'+data.data.otp+'</b> to verify mobile.');  
 	            // console.log('both');
+
+	            $('#ind-msg-reg-box').removeClass('alert alert-danger');
+	            $('#ind-msg-reg-box').addClass('alert alert-success').fadeIn(1000, function(){
+	                $(this).show();
+	            });
+
 	        }else if(data.data.vcode != null && data.data.otp == null){
 	        	$('#individual-register').hide();
 	            $('#mobile-otp-form').show();
 	        	$('#ind-reg-msg').html('Registration successful ! <br/>Check your email for further instruction.');  
 	        	// console.log('email');
+
+	        	$('#ind-msg-reg-box').removeClass('alert alert-danger');
+	            $('#ind-msg-reg-box').addClass('alert alert-success').fadeIn(1000, function(){
+	                $(this).show();
+	            });
 	        }else if(data.data.otp != null && data.data.vcode == null){
 	        	$('#individual-register').hide();
 	            $('#mobile-otp-form').show();
 	        	$('#ind-reg-msg').html('Registration successful ! <br/>Check your mobile for further instruction. <br/>	        		Your otp: <b>'+data.data.otp+'</b> to verify mobile.');  
 	        	// console.log('mobile');
+
+	        	$('#ind-msg-reg-box').removeClass('alert alert-danger');
+	            $('#ind-msg-reg-box').addClass('alert alert-success').fadeIn(1000, function(){
+	                $(this).show();
+	            });
 	        }
         }else{
             $('#ind-msg-reg-box').removeClass('alert alert-success');

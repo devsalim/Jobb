@@ -240,10 +240,14 @@
 	<div class="portlet-body form">
 			<div class="form-body">
 				<div class="row">
+
+
 					@if (count($posts) > 0)
 						<?php $var = 1; ?>
 						@foreach($posts as $post)
+
 						
+
 						<?php $groupsTagged = array(); ?>
 						@foreach($post->groupTagged as $gt)
 							<?php $groupsTagged[] = $gt->group_id; ?>
@@ -265,7 +269,7 @@
 						?>
 						<?php
 							$crossCheck = array_intersect($groupsTagged, $groups);
-							$elements  = array_count_values($crossCheck); ?>
+							$elements = array_count_values($crossCheck); ?>
 
 						@if($post->tagged->contains('user_id', Auth::user()->induser_id) || 
 							$post->individual_id == Auth::user()->induser_id || 
@@ -529,7 +533,17 @@
 									<div class="timeline-body" style="">
 										<div class="timeline-body-head">
 											@if(Auth::user()->induser_id == $post->individual_id && $post->individual_id != null)
-												<div class="timeline-body-head-caption">												
+												<div class="timeline-body-head-caption">							
+
+						<!-- Post shared by user -->						
+						@if(count($post->groupTagged) > 0)
+							@if($post->sharedGroupBy->first()->mode == 'shared')
+							<div class="shared-by">
+						{{$post->sharedGroupBy->first()->mode}} by <b>{{$post->sharedGroupBy->first()->fname}} {{$post->sharedGroupBy->first()->lname}}</b> to <b>{{$post->sharedToGroup->first()->group_name}}</b> group<br/>
+							</div>
+							@endif
+						@endif
+
 														<a href="/profile/ind/{{$post->individual_id}}" class="link-label" data-utype="ind">
 															<small>You</small>
 														</a>
@@ -549,9 +563,18 @@
 											@elseif($post->individual_id != null)
 												<div class="timeline-body-head-caption" data-puid="{{$post->individual_id}}">
 												
-														
-														
-														<a href="/profile/ind/{{$post->individual_id}}" style="font-size: 13px;text-decoration:none;">
+												<!-- Post shared by user -->						
+						@if(count($post->groupTagged) > 0)
+							@if($post->sharedGroupBy->first()->mode == 'shared')
+							<div class="shared-by">
+						{{$post->sharedGroupBy->first()->mode}} by <b>{{$post->sharedGroupBy->first()->fname}} {{$post->sharedGroupBy->first()->lname}}</b> to <b>{{$post->sharedToGroup->first()->group_name}}</b> group<br/>
+							</div>
+							@endif
+						@endif
+
+						
+														<a href="/profile/ind/{{$post->individual_id}}" style="font-size: 15px;text-decoration:none;font-weight:600;">
+
 															{{ $post->induser->fname}} {{ $post->induser->lname}}
 														</a>
 													
