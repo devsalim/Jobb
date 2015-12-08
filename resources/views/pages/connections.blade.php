@@ -258,7 +258,36 @@
 								 <a href="/profile/ind/{{$conreq->id}}" data-utype="ind" style="font-size:15px;">
 							    		 	 	{{ $conreq->fname }} {{ $conreq->lname }}</a><br>
 							    <small>
-							     {{ $conreq->working_at }}, {{ $conreq->city }}
+                                
+						          @if($conreq->working_status == "Student")
+                                
+                                     {{ $conreq->education }} in {{ $conreq->branch }}, {{ $conreq->city }}
+                                
+                                @elseif($conreq->working_status == "Searching Job")
+                                
+                                     {{ $conreq->working_status }} in {{ $conreq->prof_category }}, {{ $conreq->city }}
+                                
+                                @elseif($conreq->working_status == "Freelanching")
+                                
+                                     {{ $conreq->role }} {{ $conreq->working_status }}, {{ $conreq->city }}
+                                
+                                @elseif($conreq->role != null && $conreq->working_at !=null && $conreq->working_status == "Working")
+                                
+                                     {{ $conreq->role }} @ {{ $conreq->working_at }} 
+                            
+                                @elseif($conreq->role != null && $conreq->working_at ==null && $conreq->working_status == "Working")
+                                
+                                     {{ $conreq->role }}, {{ $conreq->city }}
+                                
+                                @elseif($conreq->role == null && $conreq->working_at !=null && $conreq->working_status == "Working")
+                                
+                                     {{ $conreq->woring_at }}, {{ $conreq->city }}
+                                
+                                @elseif($conreq->role == null && $conreq->working_at ==null && $conreq->working_status == "Working")
+                                
+                                   {{ $conreq->prof_category }}, {{ $conreq->city }}
+                               
+                                @endif
 							      </small>
 							</div>
 							<div class="col-md-3 col-sm-3 col-xs-5" style="margin:7px 0">

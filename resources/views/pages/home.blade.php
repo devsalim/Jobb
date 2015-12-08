@@ -1241,6 +1241,7 @@ $(document).ready(function(){
     // });
 
     jQuery('.new-hide').on('click', function(event) {
+    	
         jQuery('.show-details').toggle('show');
         jQuery('.hide-details').toggle('hide');
     });
