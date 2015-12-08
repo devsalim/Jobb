@@ -131,6 +131,8 @@ Route::group(array('before' => 'auth'), function(){
 	Route::post('report-abuse', 'JobController@reportAbuse');
 	Route::get('report-abuse', 'JobController@reportAbusePage');
 
+	Route::post('post/share', 'JobController@sharePost');
+
 });
 
 

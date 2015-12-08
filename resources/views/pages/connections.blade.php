@@ -3,15 +3,14 @@
 @section('content')
 @if(Auth::user()->identifier == 1)
 <div class="portlet light bordered col-md-7">
-	<div class="portlet-title">
-		<div class="caption links-title">
-			<i class=""></i>
-			<span class="caption-subject font-blue-hoki bold uppercase">Links</span>
+	<div class="portlet-title" style="min-height:0 !important;">
+		<div class="caption links-title" style="float:none !important;margin:0 auto; display:table;line-height:0 !important;">
+			<span class="caption-subject font-blue-hoki bold uppercase">Manage your Links</span>
 		</div>
 	</div>
 	<div class="portlet-body form">
 		
-			<div class="form-body">
+			<div class="form-body" style="padding:0;">
 				<label style="font-size: 16px;text-align: center;width: 100%;">Invite Your Friends on JobTip & Share Job Information</label>
 				<div class="row">
 					<div class="col-md-12" style="margin-bottom:15px;">
@@ -125,12 +124,12 @@
 							</form>
 							<!-- <div class="col-md-1"></div> -->
 								<div class=" input-icon right normal_search">
-									<i class="fa fa-search" style="color: darkcyan;"></i>
-									<input type="text" name="keywords" id="search-input" onkeydown="down()" onkeyup="up()" class="form-control" placeholder="Search" style="border: 1px solid darkcyan;margin-bottom:0">
-									<a class="advance-search btn" style="position: absolute;right: 30px;top: 5px;">Advance</a>
+									<i class="fa fa-search" style="color: darkcyan;right:80px;"></i>
+									<input type="text" name="keywords" id="search-input" onkeydown="down()" onkeyup="up()" class="form-control" placeholder="Search Name or Email id" style="border: 1px solid darkcyan;margin:0 8px">
+									<a class="advance-search btn search-advance-tool">Advance</a>
 								</div>	
 							<!-- END FORM-->
-							<div class="col-md-12 links-title" id="search-results" style="background:#f2f2f2;max-height:200px;overflow:auto;margin-bottom:10px">
+							<div class="col-md-12 links-title" id="search-results" style="background:#f2f2f2;max-height:200px;overflow:auto;margin:0 8px">
 							</div>	
 						</div>
 
@@ -140,34 +139,44 @@
 			</div>
 	</div>
 </div>
+
 <div class="portlet box green col-md-7">
-	<div class="portlet-title">
-		<div class="caption">
-			<i class="icon-users"></i>Manage your Links
-		</div>
-	</div>
-	<div class="portlet-body" style="padding:10px 0;">
-		<div class="tabbable-custom ">
-			<ul class="nav nav-tabs" style="padding-left: 0px;">
+	<div class="portlet-title" style="float:left;">
+		
+		<ul class="nav nav-tabs" style="padding-left: 0px;">
 				<li class="active">
-					<a href="#tab_5_1" class="label-new" data-toggle="tab">
-					Linked @if($linksCount > 0)({{ $linksCount }})@endif</a>
+					<a href="#tab_5_1" class="label-new" data-toggle="tab" style="padding:8px;">
+					Linked 
+					@if($linksCount > 0)
+						<span class="badge" style="background-color: dodgerblue;">{{$linksCount}} </span>
+					@endif</a>
+					
 				</li>
 				<li>
 					<a href="#tab_5_2" class="label-new" data-toggle="tab">
-					Link Requests @if($linkrequestCount > 0)({{ $linkrequestCount }})@endif</a>
+					Link Requests
+					@if($linkrequestCount > 0)
+						<span class="badge" style="background-color: lightcoral;">{{$linkrequestCount}} </span>
+					@endif</a>
 				</li>
 				<li>
 					<a href="#tab_5_3" class="label-new" data-toggle="tab">
-					Following @if($followCount > 0)({{ $followCount }})@endif</a>
+					Following
+					@if($followCount > 0)
+						<span class="badge" style="background-color: lightseagreen;">{{$followCount}} </span>
+					@endif</a>
 				</li>
 			</ul>
+	</div>
+	<div class="portlet-body" style="padding:10px 0;">
+		<div class="tabbable-custom ">
+			
 			<div class="tab-content">
 				<div class="tab-pane active" id="tab_5_1">
 					@if(count(Auth::user()->induser->friends) > 0)
-					<div class="row" style="margin-bottom:10px;">
-						@foreach(Auth::user()->induser->friends as $connection)
-						 @if($connection->pivot->status == 1)	
+					@foreach(Auth::user()->induser->friends as $connection)
+						 @if($connection->pivot->status == 1)
+					<div class="row search-user-tool" style="margin-bottom:10px;">					
 							<div class="col-md-2 col-sm-3 col-xs-2">
 								<a href="#">
 							        <img class="media-object img-circle img-link-size" 
@@ -179,11 +188,36 @@
 								 <a href="/profile/ind/{{$connection->id}}" data-utype="ind" style="font-size:15px;">
 							     {{ $connection->fname }} {{ $connection->lname }}</a><br>
 							    <small>
-							      @if($connection->working_at != null && $connection->city != null)
-							     	Working at {{ $connection->working_at }} in {{ $connection->city }}
-							      @elseif($connection->working_at == null && $connection->city != null)
-							      	{{ $connection->city }}
-							      @endif
+                                
+						          @if($connection->working_status == "Student")
+                                
+                                     {{ $connection->education }} in {{ $connection->branch }}, {{ $connection->city }}
+                                
+                                @elseif($connection->working_status == "Searching Job")
+                                
+                                     {{ $connection->working_status }} in {{ $connection->prof_category }}, {{ $connection->city }}
+                                
+                                @elseif($connection->working_status == "Freelanching")
+                                
+                                     {{ $connection->role }} {{ $connection->working_status }}, {{ $connection->city }}
+                                
+                                @elseif($connection->role != null && $connection->working_at !=null && $connection->working_status == "Working")
+                                
+                                     {{ $connection->role }} @ {{ $connection->working_at }} 
+                            
+                                @elseif($connection->role != null && $connection->working_at ==null && $connection->working_status == "Working")
+                                
+                                     {{ $connection->role }}, {{ $connection->city }}
+                                
+                                @elseif($connection->role == null && $connection->working_at !=null && $connection->working_status == "Working")
+                                
+                                     {{ $connection->woring_at }}, {{ $connection->city }}
+                                
+                                @elseif($connection->role == null && $connection->working_at ==null && $connection->working_status == "Working")
+                                
+                                   {{ $connection->prof_category }}, {{ $connection->city }}
+                               
+                                @endif
 							      </small>
 							</div>
 							<div class="col-md-3 col-sm-3 col-xs-2" style="margin:7px 0">
@@ -194,9 +228,10 @@
 									</button>
 								</form>	
 							</div>
-						 @endif
-					    @endforeach
+						 				    
 					</div>
+					@endif	
+					 @endforeach
 					@else
 						<div class="row">
 							<div class="col-md-12">
@@ -207,9 +242,11 @@
 				</div>
 				<div class="tab-pane" id="tab_5_2">
 					@if($linkrequestCount > 0)
-					<div class="row" style="margin-bottom:10px;">
-						@foreach(Auth::user()->induser->friendOf as $conreq)
-							@if($conreq->pivot->status == 0)	
+					@foreach(Auth::user()->induser->friendOf as $conreq)
+					@if($conreq->pivot->status == 0)
+					<div class="row search-user-tool" style="margin-bottom:10px;">
+						
+								
 							<div class="col-md-2 col-sm-3 col-xs-2">
 								<a href="#">
 							        <img class="media-object img-circle img-link-size" 
@@ -228,16 +265,17 @@
 								<form action="{{ url('/connections/response', $conreq->pivot->id) }}" method="post">
 									<input type="hidden" name="_token" value="{{ csrf_token() }}">
 									<button type="submit" name="action" value="accept" class="btn btn-success" style="padding:2px 5px;">
-										Link
+										Accept
 									</button>
 									<button type="submit" name="action" value="reject" class="btn btn-danger" style="padding:2px 5px;">
-										Reject
+										Ignore
 									</button>
 								</form>
 							</div>
-						 @endif
-					    @endforeach
+						 
 					</div>
+					@endif
+					@endforeach
 					@else
 						<div class="row">
 							<div class="col-md-12">
@@ -248,11 +286,12 @@
 				</div>
 				<div class="tab-pane" id="tab_5_3">
 					@if(count($linkFollow) > 0)
-					<div class="row" style="margin-bottom:10px;">
-							@foreach($linkFollow as $follow)	
+					@foreach($linkFollow as $follow)
+					<div class="row search-user-tool" style="margin-bottom:10px;">
+								
 							<div class="col-md-2 col-sm-2 col-xs-2">
 								<a href="#">
-							        <img class="media-object img-link-size" src="@if($follow->logo_status != null){{ '/img/profile/'.$follow->logo_status }}@else{{'/assets/images/ab.png'}}@endif" alt="DP" style="width:60px">
+							        <img class="media-object img-link-size" src="@if($follow->logo_status != null){{ '/img/profile/'.$follow->logo_status }}@else{{'/assets/images/corpnew.jpg'}}@endif" alt="DP" style="width:60px">
 							    </a>
 							</div>
 							<div class="col-md-5 col-sm-6 col-xs-6">
@@ -260,11 +299,10 @@
 							    		 		{{ $follow->firm_name }}
 							    		 	</a>
 							    		 	 <small>{{ $follow->firm_type }}</small><br>
-							    <i class="fa fa-clock-o" style="color:darkslategray;font-size:16px;"></i>
-								 {{ $follow->operating_since }}
-								 <i class="fa fa-users" style="color:darkslategray;"></i>
-								 {{ $follow->emp_count }}<br>
-								 @if($followNewCount > 0)({{ $followNewCount }})@endif Followers
+
+								 @if($follow->emp_count != null)
+								Employees ({{ $follow->emp_count }})  @endif, 
+								 @if($followNewCount > 0)Followers ({{ $followNewCount }})@endif 
 							</div>
 							<div class="col-md-3 col-sm-3 col-xs-3" style="margin:7px 0">
 								<form action="{{ url('links/corporate/unfollow', $follow->id) }}" method="post">
@@ -274,8 +312,9 @@
 									</button>
 								</form>
 							</div>
-					    @endforeach
+					    
 					</div>
+					@endforeach
 					@else
 					<div class="row">
 						<div class="col-md-12">

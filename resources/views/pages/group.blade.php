@@ -34,28 +34,28 @@
 				</div>			
 			</div>
 
-			<div class="row">
-				<div class="col-md-8 links-title">
-					@if(count($groups)>0)
-					@foreach($groups as $group)
-					<!-- <div class="col-md-6 col-sm-6 col-xs-12"> -->
-						<div class="form-group form-md-line-input">
-							<div class="input-group">
-								<div class="input-group-control">
-									<label class=" control-label" for="form_control_1" style="font-weight:500 !important;">
-										<a href="/group/{{ $group->id }}">{{ $group->group_name }}</a>
-										({{$group->posts_count}})
-										<i class="icon-users"></i> {{count($group->users)}}  <i class="icon-shield"></i> {{$group->admin()->first()->fname}}
-									</label>
-								</div>
-							</div>
-						</div>
-					<!-- </div>	 -->
-
-					@endforeach
-					@endif
+			@if(count($groups)>0)
+			@foreach($groups as $group)
+			<div class="row" style="
+    border: 1px dotted lightgray;
+    padding: 10px 0px;
+    margin: 10px 0px;
+">
+				<div class="col-md-4">
+					<a href="/group/{{ $group->id }}">{{ $group->group_name }}</a>
+				</div>
+				<div class="col-md-2">
+					({{$group->posts_count}})
+				</div>
+				<div class="col-md-2">
+					<i class="icon-users"></i> {{count($group->users)}}
+				</div>
+				<div class="col-md-4">
+					<i class="icon-shield"></i> {{$group->admin()->first()->fname}}
 				</div>
 			</div>
+			@endforeach
+			@endif
 		</div>
 	 </div>
 

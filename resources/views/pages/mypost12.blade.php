@@ -1,39 +1,38 @@
 @extends('master')
 
 @section('content')
-<div class="myactivity-head col-md-9">
-	<i class="icon-trophy"></i> My Activity
-</div>
-<div class="portlet box blue col-md-9">
-	<div class="portlet-title" style="float:left;">
-		
-		<ul class="nav nav-tabs" style="padding-left: 5px;">
-				<li class="active">
-					<a href="#portlet_5_1" class="label-new" data-toggle="tab">
-					<i class="icon-note"></i> My Posts </a>
-				</li>
-				@if(Auth::user()->identifier == 1)
-				<li>
-					<a href="#portlet_5_2" class="label-new" data-toggle="tab">
-					<i class="icon-list"></i> My Updates </a>
-				</li>
-				@endif
-			</ul>
+
+<div class="portlet box blue">
+	<div class="portlet-title">
+		<div class="caption">
+			<i class="icon-trophy"></i>My Activity
+		</div>
 	</div>
 	<div class="portlet-body">
 		<div class="tabbable-custom">
-			
+			<ul class="nav nav-tabs" style="padding-left: 5px;">
+				<li class="active">
+					<a href="#tab_5_1" class="label-new" data-toggle="tab">
+					My Posts </a>
+				</li>
+				@if(Auth::user()->identifier == 1)
+				<li>
+					<a href="#tab_5_2" class="label-new" data-toggle="tab">
+					My Updates </a>
+				</li>
+				@endif
+			</ul>
 			<div class="tab-content">
-				<div class="tab-pane active" id="portlet_5_1">
+				<div class="tab-pane active" id="tab_5_1">
 					<div class="row">
 				@if (count($posts) > 0)
 				
 				@foreach($posts as $post)	
-				<div class="" style="padding:0;">												
+				<div class="col-md-9" style="">												
 					<div class="timeline" >
 						<!-- TIMELINE ITEM -->
 						<div class="timeline-item time-item">
-							<div class="timeline-body" style="border-radius:15px !important;margin-left: 0;">
+							<div class="timeline-body" style="margin-left: 0;">
 								<div class="timeline-body-head">
 									<div class="timeline-body-head-caption">
 										<a>	
@@ -52,10 +51,17 @@
 										@if($post->post_type == 'skill')	
 										<div style="font-weight: 600;color: black;font-size: 16px;">{{ $post->post_title }} </div>
 									@elseif($post->post_type == 'job')
-										 <div style="font-weight: 600;color: black;font-size: 16px;">{{ $post->post_title }}  </div>
+										 <div style="font-weight: 600;color: black;font-size: 16px;">{{ $post->post_title }}<div> <h4 style="margin: 0 0 4px 0;"><small>Required at</small> {{ $post->post_compname }}</h4></div>  </div>
 									@endif					 							
 									</span>
-									
+									<div class="row" style="margin-top: 15px;">
+										<div class="col-md-3 col-sm-3 col-xs-6">
+											<i class="glyphicon glyphicon-map-marker"></i>&nbsp;: {{ $post->city }}
+										</div>
+										<div class="col-md-3 col-sm-3 col-xs-6">
+											<i class="glyphicon glyphicon-briefcase"></i>&nbsp;: {{ $post->min_exp}}-{{ $post->max_exp}} Years
+										</div>
+									</div>
 									<?php 
 								 		$strNew = '+'.$post->post_duration.' day';
 								 		$strOld = $post->created_at;
@@ -185,7 +191,7 @@
 							<div class="box">
 										   <div class="ribbon"><span class="{{ $post->post_type }}">{{ $post->post_type }}</span></div>
 										</div>
-							<div class="portlet-body">
+							<div class="portlet-body" style="margin: 0 -5px;">
 								<div class="panel-group accordion" id="accordion{{$post->id}}" style="margin-bottom: 0;">
 									<div class="panel panel-default" style=" position: relative;">
 										<div class="panel-heading">
@@ -197,11 +203,7 @@
 										</div>
 										<div id="collapse_{{$post->id}}_{{$post->id}}" class="panel-collapse collapse">
 											<div class="panel-body" style="border-top: 0;padding: 4px 15px;">
-												<div class="row">				
-													<div class="col-md-12 col-sm-12 col-xs-12">														
-														<label class="detail-label">Required at :</label>														
-														{{ $post->post_compname }}														 
-													</div>
+												<div class="row">
 													<div class="col-md-12 col-sm-12 col-xs-12">														
 														<label class="detail-label">Education Required :</label>														
 														{{ $post->education }}														 
@@ -215,26 +217,15 @@
 														{{ $post->prof_category }}
 													</div>
 													<div class="col-md-12 col-sm-12 col-xs-12">
-														<label class="detail-label">Skills :</label>
-
-														<?php $postSkills = array(); ?>														
+														<label class="detail-label">Skills :</label>														
 														@foreach($post->skills as $skill)
-															<?php $postSkills[] = $skill->name; ?>
 															{{$skill->name}},
-														@endforeach		
-									 
+														@endforeach												 
 													</div>
 													<div class="col-md-12 col-sm-12 col-xs-12">														
 														<label class="detail-label">Salary (<i class="fa fa-rupee (alias)"></i>):</label>														
 														{{ $post->min_sal }}-{{ $post->max_sal }} {{ $post->salary_type }} 
 													</div>
-													<div class="col-md-12 col-sm-12 col-xs-12">
-														<i class="glyphicon glyphicon-map-marker"></i>&nbsp;: {{ $post->city }}
-													</div>
-													<div class="col-md-12 col-sm-12 col-xs-12">
-														<i class="glyphicon glyphicon-briefcase"></i>&nbsp;: {{ $post->min_exp}}-{{ $post->max_exp}} Years
-													</div>
-													
 												</div>
 												<div class="skill-display">Description : </div>
 												{{ $post->job_detail }}
@@ -323,17 +314,17 @@
 									</div>
 								</div>
 							</div>
-							<div class="portlet-body">
+							<div class="portlet-body" style="margin: 0 -5px;">
 								<div class="panel-group accordion" id="accordion2_{{$post->id}}" style="margin-bottom: 0;">
-									<div class="panel panel-default" style=" position: relative;border-radius: 0 0 4px 4px !important;">
+									<div class="panel panel-default" style=" position: relative;">
 										<div class="panel-heading">
 											<h4 class="panel-title">
-											<a class="accordion-toggle accordion-toggle-styled" 
+											<a class="accordion-toggle accordion-toggle-styled collapsed" 
 											data-toggle="collapse" data-parent="#accordion2_{{$post->id}}" href="#collapse2_{{$post->id}}_{{$post->id}}"  style="font-size: 15px;font-weight: 600;">
 											Post Activity :</a>	
 											</h4>
 										</div>
-										<div id="collapse2_{{$post->id}}_{{$post->id}}" class="panel-collapse">
+										<div id="collapse2_{{$post->id}}_{{$post->id}}" class="panel-collapse collapse">
 											<div class="panel-body" style="border-top: 0;padding: 0;">
 												
 												<div class="portlet box">
@@ -352,10 +343,7 @@
 															</li>
 															@endif
 															<li>
-																<a href="#tab_1_{{ $post->id }}_3" class="label-new" data-toggle="tab" >Thanks </a>
-															</li>
-															<li>
-																<a href="#tab_1_{{ $post->id }}_4" class="label-new" data-toggle="tab" >Share </a>
+																<a href="#tab_1_{{ $post->id }}_3" class="label-new" data-toggle="tab" >Thanks & Share </a>
 															</li>
 														</ul>
 														<div class="tab-content" style="padding: 10px 0px;">
@@ -371,11 +359,7 @@
 																				@foreach($post->postactivity as $pa)
 																		  			@if($pa->apply == 1) <?php $i++; ?> @endif
 																		  		@endforeach
-																		  		<?php 
-																			  		if($i>0){
-																			  			echo $i;
-																			  		} 
-																			  	?>
+																		  		<?php echo $i; ?>
 																			</span>
 																		</div>		
 																	</div>
@@ -397,174 +381,177 @@
 																                    <span class="from" >
 																                    	<a href="/profile/ind/{{$pa->user->id}}" data-utype="ind">
 																                    		{{$pa->user->fname}} {{$pa->user->lname}}</a> has applied for this post <i class=" icon-clock"></i>
-															                    	{{ \Carbon\Carbon::createFromTimeStamp(strtotime($pa->apply_dtTime))->diffForHumans() }}
+															                    	{{$pa->apply_dtTime}}
 																                   	</span>
 																                  <!--   <span class="time"> </span> -->
 															                    </span>
-															                   <?php
-															                    $userSkills = array_map('trim', explode(',', $pa->user->linked_skill));
-															                    unset ($userSkills[count($userSkills)-1]); 
-															                    ?>
-																				<?php 
-																					$overlap = array_intersect($postSkills, $userSkills);
-																					$counts  = array_count_values($overlap);
-																				?>
-
+															                   
 															                    <div class="row">
 																                    <div class="col-md-1"></div>
 															                        <div class="col-md-10">
 																                    	<div class="row">
-																	                    	<div class="col-md-4 col-sm-4 col-xs-4">
-																	                    		<a data-toggle="modal" href="#post-mod-{{$post->id}}">
-																	                    			<i class="icon-speedometer"></i> 
-<?php
-try{
-	if(count($postSkills) > 0){
-		$skillPer = (count($counts) / count($postSkills)) * 100;
-		if(strcasecmp($post->role, Auth::user()->induser->role) == 0){$rolePer = 100;}else{$rolePer = 0;}
-		if($post->prof_category == Auth::user()->induser->prof_category){$jobPer = 100;}else{$jobPer = 0;}
-		if($post->min_exp == Auth::user()->induser->experience){$expPer = 100;}else{$expPer = 0;}
-		if($post->education == Auth::user()->induser->education){$eduPer = 100;}else{$eduPer = 0;}
-		if($post->city == Auth::user()->induser->city){$cityPer = 100;}else{$cityPer = 0;}
-		if($post->time_for == Auth::user()->induser->prefered_jobtype){$typePer = 100;}else{$typePer = 0;}
-		$avgPer = ($skillPer + $rolePer + $jobPer + $expPer + $eduPer + $cityPer + $typePer)/7;
-		echo round($avgPer).' %';
-	}
-}
-catch(\Exception $e){}
-?>
-
-
-																	                    		</a>
+																	                    	<div class="col-md-2 col-sm-4 col-xs-4">
+																	                    		<a data-toggle="modal" href="#{{$post->id}}">
+																	                    			<i class="icon-speedometer"></i> 49%</a>
 																	                    	</div>
 																	                    	<!-- <div class="col-md-2 col-sm-4 col-xs-4">
 																	                    		Profile
 																	                    	</div> -->
-																	                    	<div class="col-md-4 col-sm-4 col-xs-4">
-																	                    	<a class="viewcontact-view" data-toggle="modal" href="#viewcontact-view">
-																	                    		View Contact</a>
-																	                    	</div>
-																	                    	<div class="col-md-4 col-sm-4 col-xs-4">
-																	                    	<a class="viewcontact-view" data-toggle="modal" href="/profile/ind/{{$pa->user->id}}">
-																	                    		View/Download</a>
+																	                    	<div class="col-md-2 col-sm-4 col-xs-4">
+																	                    		Contact
 																	                    	</div>
 																                    	</div>
 															                		</div>
 															               		</div>
-															               		<div id="oval"></div>
-										<!-- Modal for Matching Percentage -->
-										<div class="modal fade" id="post-mod-{{$post->id}}" tabindex="-1" role="basic" aria-hidden="true">
-											<div class="modal-dialog">
-												<div class="modal-content">
-													<div class="modal-header">
-														<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-													   <h4 class="modal-title">
-													   		<i class="icon-speedometer" style="font-size:16px;"></i> Match 
-													   		<?php
-																try{
-																	echo round($avgPer).'%';
-																} 
-																catch(\Exception $e){
-																}
-															?>
-													   	</h4>
-													</div>
-													<div class="modal-body">
+															               		<!-- Modal for Matching Percentage -->
+															               		<div class="modal fade" id="{{$post->id}}" tabindex="-1" role="basic" aria-hidden="true">
+																					<div class="modal-dialog">
+																						<div class="modal-content">
+																							<div class="modal-header" style=" padding: 10px !important;">
+																								<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+																								<div class="modal-body" style=" padding:10px 0 !important;">
+																									
+																										<!-- BEGIN BORDERED TABLE PORTLET-->
+																										<div class="portlet box">
+																											<div class="portlet-title">
+																												<div class="caption links-title">
+																													<i class="icon-speedometer" style="font-size:16px;"></i> 56% Match
+																												</div>
+																											</div>
+																											<div class="portlet-body" style=" padding: 0 !important;">
+																												<div class="table-scrollable">
+																													<table class="table table-bordered table-hover">
+																													<thead>
+																													<tr>
 
-														<!-- BEGIN BORDERED TABLE PORTLET-->
-														<div class="portlet box">
-															<div class="portlet-body" style=" padding: 0 !important;">
-																<div class="table-scrollable">
-																	<table class="table table-bordered table-hover">
-																	<thead style="border:0 !important;">
-																	<tr style="border:0 !important;">
-																		<th class="col-md-4 col-sm-4 col-xs-6 matching-criteria-align">
-																			 Criteria
-																		</th>
-																		<th class="col-md-4 col-sm-4 col-xs-6 matching-criteria-align">
-																			 Required Profile
-																		</th>
-																		<th class="col-md-4 col-sm-4 col-xs-6 matching-criteria-align">
-																			 User's Profile
-																		</th>
-																	</tr>
-																	</thead>
+																														<th class="col-md-6 col-sm-6 col-xs-6 matching-criteria-align">
+																															 Required Profile
+																														</th>
+																														<th class="col-md-6 col-sm-6 col-xs-6 matching-criteria-align">
+																															 My Profile
+																														</th>
+																														
+																													</tr>
+																													</thead>
 
-																	<tbody>
-																		<tr class="@if(count($counts) > 0) success @else danger @endif">
-																			<td>
-																				<label class="title-color">
-																					Skills <i class="badge">{{count($counts)}}</i> 
-																				</label>
-																			</td>
-																			<td>
-																				@foreach($post->skills as $skill)
-																					{{$skill->name}},
-																				@endforeach
-																			</td>
-																			<td>
-																				@foreach($userSkills as $myskill)
-																					{{$myskill}},
-																				@endforeach												
-																			</td>
-																		</tr>
-																		<tr class="@if(strcasecmp($post->role, Auth::user()->induser->role) == 0) success @else danger @endif">
-																			<td>
-																				<label class="title-color">Job Role</label>
-																			</td>
-																			<td>{{ $post->role }}</td>
-																			<td>{{ Auth::user()->induser->role }}</td>
-																		</tr>
-																		<tr class="@if($post->prof_category == Auth::user()->induser->prof_category) success @else danger @endif">
-																			<td>
-																				 <label class="title-color">Job Category</label>
-																			</td>																		
-																			<td>{{ $post->prof_category }}</td>
-																			<td>{{ Auth::user()->induser->prof_category }}</td>
-																		</tr>
-																		<tr class="@if($post->min_exp == Auth::user()->induser->experience) success @else danger @endif">
-																			<td>
-																				<label class="title-color">Experience</label>
-																			</td>
-																			<td>{{ $post->min_exp }}-{{ $post->max_exp }}</td>
-																			<td>{{ Auth::user()->induser->experience }}</td>
-																		</tr>
-																		<tr class="@if($post->education == Auth::user()->induser->education) success @else danger @endif">
-																			<td>
-																				<label class="title-color">Education</label>
-																			</td>
-																			<td>{{ $post->education }}</td>
-																			<td>{{ Auth::user()->induser->education }}</td>
-																		</tr>
-																		<tr class="@if($post->city == Auth::user()->induser->city) success @else danger @endif">
-																			<td>
-																				<label class="title-color">Location</label>			
-																			</td>															
-																			<td>{{ $post->city }}</td>
-																			<td>{{ Auth::user()->induser->city }}</td>
-																		</tr>
-																		<tr class="@if($post->time_for == Auth::user()->induser->prefered_jobtype || ($post->time_for == 'Part Time' && Auth::user()->induser->prefered_jobtype == 'Full Time')) success @else danger @endif">
-																			<td>						
-																				<label class="title-color">Job Type
-																				</label>
-																			</td>															
-																			<td>{{ $post->time_for }}</td>
-																			<td>{{ Auth::user()->induser->prefered_jobtype }}</td>
-																		</tr>
-																	</tbody>
-																	</table>
-																</div>
-															</div>
-														</div>
-														<!-- END BORDERED TABLE PORTLET-->
-														<!-- </div> -->	
-													</div>
-												</div>
-												<!-- /.modal-content -->
-											</div>
-											<!-- /.modal-dialog -->
-											</div>
-											<!-- /.modal -->
+																													<tbody>
+																														<tr>
+																															<td colspan="2" class="col-md-12 col-sm-12 col-xs-12 matching-criteria-align">
+																																<label>Skill</label>
+																															</td>
+																														</tr>
+																														<tr>
+																															<td class="col-md-6 col-sm-6 col-xs-6 matching-criteria-align">
+																																@foreach($post->skills as $skill)
+																																	{{$skill->name}},
+																																@endforeach
+																															</td>
+																															<td class="col-md-6 col-sm-6 col-xs-6 matching-criteria-align">
+																																@foreach($post->skills as $skill)
+																																	{{$skill->name}},
+																																@endforeach
+																															</td>
+																														</tr>
+																														<tr>
+																															<td colspan="2" class="col-md-12 col-sm-12 col-xs-12 matching-criteria-align success">
+																																<i class="glyphicon glyphicon-ok" style="color:#01b070;font-size:16px;"></i>
+																																<label> Job Role</label>
+																															</td>
+																														</tr>
+																														<tr>
+																															<td class="col-md-6 col-sm-6 col-xs-6 success matching-criteria-align">
+																																{{ $post->role }}
+																															</td>
+																															<td class="col-md-6 col-sm-6 col-xs-6 success matching-criteria-align">
+																																{{ $post->role }}
+																															</td>
+																														</tr>
+																														<tr>
+																															<td colspan="2" class="col-md-12 col-sm-12 col-xs-12 matching-criteria-align danger">
+																																 <i class="glyphicon glyphicon-remove" style="color:red;font-size:16px;"></i>
+																																 <label> Job Category</label>
+																															</td>
+																														</tr>
+																														<tr>
+																															<td class="col-md-6 col-sm-6 col-xs-6 danger matching-criteria-align">
+																																{{ $post->prof_category }}
+																															</td>
+																															<td class="col-md-6 col-sm-6 col-xs-6 danger matching-criteria-align">
+																																Programmer
+																															</td>
+																														</tr>
+																														<tr>
+																															<td colspan="2" class="col-md-12 col-sm-12 col-xs-12 matching-criteria-align success">
+																																<i class="glyphicon glyphicon-ok" style="color:#01b070;font-size:16px;"></i> 
+																																<label>Experience</label>
+																															</td>
+																														</tr>
+																														<tr>
+																															<td class="col-md-6 col-sm-6 col-xs-6 success matching-criteria-align">
+																																{{ $post->min_exp }}-{{ $post->max_exp }}
+																															</td>
+																															<td class="col-md-6 col-sm-6 col-xs-6 success matching-criteria-align">
+																																{{ $post->min_exp }}-{{ $post->max_exp }}
+																															</td>
+																														</tr>
+																														<tr>
+																															<td colspan="2" class="col-md-12 col-sm-12 col-xs-12 matching-criteria-align danger">
+																																<i class="glyphicon glyphicon-remove" style="color:red;font-size:16px;"></i>
+																																<label> Education</label>
+																															</td>
+																														</tr>
+																														<tr>
+																															<td class="col-md-6 col-sm-6 col-xs-6 danger matching-criteria-align">
+																																{{ $post->education }}
+																															</td>
+																															<td class="col-md-6 col-sm-6 col-xs-6 danger matching-criteria-align">
+																																{{ $post->education }}
+																															</td>
+																														</tr>
+																														<tr>
+																															<td colspan="2" class="col-md-12 col-sm-12 col-xs-12 matching-criteria-align success">
+																																<i class="glyphicon glyphicon-ok" style="color:#01b070;font-size:16px;"></i> 
+																																<label>Location</label>
+																															</td>
+																														</tr>
+																														<tr>
+																															<td class="col-md-6 col-sm-6 col-xs-6 success matching-criteria-align">
+																																{{ $post->city }}
+																															</td>
+																															<td class="col-md-6 col-sm-6 col-xs-6 success matching-criteria-align">
+																																{{ $post->city }}
+																															</td>
+																														</tr>
+																														<tr>
+																															<td colspan="2" class="col-md-12 col-sm-12 col-xs-12 matching-criteria-align danger">
+																																<i class="glyphicon glyphicon-remove" style="color:red;font-size:16px;"></i>
+																																<label> Job Type</label>
+																															</td>
+																														</tr>
+																														<tr>
+																															<td class="col-md-6 col-sm-6 col-xs-6 danger matching-criteria-align">
+																																{{ $post->time_for }}
+																															</td>
+																															<td class="col-md-6 col-sm-6 col-xs-6 danger matching-criteria-align">
+																																{{ $post->jobtype }}
+																															</td>
+																														</tr>
+																													</tbody>
+																													</table>
+																												</div>
+																											</div>
+																										</div>
+																										<!-- END BORDERED TABLE PORTLET-->
+																									<!-- </div> -->
+																								
+																								</div>
+																							</div>
+																						</div>
+																						<!-- /.modal-content -->
+																					</div>
+																					<!-- /.modal-dialog -->
+																				</div>
+																				<!-- /.modal -->
 														                   	</li>
 														                   	@endif									                 
 														                  @endforeach									                  
@@ -586,12 +573,7 @@ catch(\Exception $e){}
 																				@foreach($post->postactivity as $pa)
 																		  			@if($pa->contact_view == 1) <?php $i++; ?> @endif
 																		  		@endforeach
-																		  		<?php 
-																			  		if($i>0){
-																			  			echo $i;
-																			  		} 
-																			  	?>
-																			 </span>
+																		  		<?php echo $i; ?></span>
 																		</div>		
 																	</div>
 																	<div class="portlet-body">													
@@ -609,7 +591,7 @@ catch(\Exception $e){}
 																                    <span class="from" style="font-weight:600;color:darkcyan;">
 																                    	<a href="/profile/ind/{{$pa->user->id}}" data-utype="ind">
 																                    		{{$pa->user->fname}} {{$pa->user->lname}}</a> has contacted for this post <i class=" icon-clock"></i>
-															                    	{{ \Carbon\Carbon::createFromTimeStamp(strtotime($pa->contact_view_dtTime))->diffForHumans() }}
+															                    	{{$pa->contact_view_dtTime}}
 																                   	</span>
 																                    <span class="time"> </span>
 															                    </span>
@@ -621,8 +603,7 @@ catch(\Exception $e){}
 															                        <div class="col-md-10">
 																                    	<div class="row">
 																	                    	<div class="col-md-3 col-sm-4 col-xs-4">
-																	                    		<a href="/profile/ind/{{$pa->user->id}}" data-utype="ind">
-																	                    		Contact</a>
+																	                    		Contact
 																	                    	</div>
 																                    	</div>
 															                		</div>
@@ -646,11 +627,7 @@ catch(\Exception $e){}
 																				@foreach($post->postactivity as $pa)
 																		  			@if($pa->thanks == 1) <?php $i++; ?> @endif
 																		  		@endforeach
-																		  		<?php 
-																			  		if($i>0){
-																			  			echo $i;
-																			  		} 
-																			  	?>
+																		  		<?php echo $i; ?>
 																			</span>
 																		</div>
 																	</div>
@@ -672,8 +649,8 @@ catch(\Exception $e){}
 																                    <span class="time"> </span>
 															                    </span>
 															                    <span class="message">
-															                    	has thanked this post <i class=" icon-clock"></i>					                    	
-															                    	{{ \Carbon\Carbon::createFromTimeStamp(strtotime($pa->thanks_dtTime))->diffForHumans() }}
+															                    	has thanked this post <i class=" icon-clock"></i>
+															                    	{{$pa->thanks_dtTime}}
 															                    </span>
 														                   	</li>
 														                   	@endif									                 
@@ -682,51 +659,6 @@ catch(\Exception $e){}
 																	</div>
 																</div>
 															</div>
-
-															<div class="tab-pane" id="tab_1_{{ $post->id }}_4">
-																<div class="portlet light" style="padding:0px; !important">
-																	<div class="portlet-title">
-																		<div class="caption">
-																			<i class="fa fa-gift font-green-sharp"></i>
-																			<span class="caption-subject font-green-sharp ap-th-con">Shared:</span>
-																			<span class="caption-helper">
-																				<?php $i=0; ?>
-																				@foreach($post->postactivity as $pa)
-																		  			@if($pa->share == 1) <?php $i++; ?> @endif
-																		  		@endforeach
-																		  		<?php if($i>0){echo $i;} ?>
-																			</span>
-																		</div>
-																	</div>
-																	<div class="portlet-body">
-																		<ul data-handle-color="#637283" style="padding: 0">
-																		 @foreach($post->postactivity as $pa)
-																		  	@if($pa->share == 1)
-														                 	<li style="font-size:15px;">
-															                    <span class="photo">
-															                    	<img src="@if($pa->user->profile_pic != null){{ '/img/profile/'.$pa->user->profile_pic }}@else{{'/assets/images/ab.png'}}@endif" 
-															                    		 width="45" height="45" 
-															                    		 class="img-circle">
-															                    </span>
-															                    <span class="subject">
-																                    <span class="from" style="font-weight:600;color:darkcyan;">
-																                    	<a href="/profile/ind/{{$post->individual_id}}" data-utype="ind">
-																                    		{{$pa->user->fname}} {{$pa->user->lname}}</a>
-																                   	</span>
-																                    <span class="time"> </span>
-															                    </span>
-															                    <span class="message">
-															                    	has shared this post <i class=" icon-clock"></i>					                    	
-															                    	{{ \Carbon\Carbon::createFromTimeStamp(strtotime($pa->share_dtTime))->diffForHumans() }}
-															                    </span>
-														                   	</li>
-														                   	@endif									                 
-														                  @endforeach							                  
-														                </ul>
-																	</div>
-																</div>
-															</div>
-
 														</div>
 													</div>
 												</div>
@@ -741,7 +673,20 @@ catch(\Exception $e){}
 				<!-- END TIMELINE ITEM -->	
 				</div>
 			</div>
-			
+			<div class="col-md-3">
+				<div class="portlet box red-sunglo">
+					<div class="portlet-title">
+					</div>
+					<div class="portlet-body">
+						<ul>
+							<li>
+								 Lorem ipsum dolor sit amet
+							</li>
+														
+						</ul>
+					</div>
+				</div>
+			</div>	
 			<!-- END TIMELINE ITEM -->
 
 <!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
@@ -794,12 +739,12 @@ catch(\Exception $e){}
 
 	 @endforeach
 	 @else
-	 ---- You haven't Post Anything ! ----
+	 You haven't Post Anything!!
 	@endif
 			</div>
 				</div>
 				@if(Auth::user()->identifier == 1)
-				<div class="tab-pane" id="portlet_5_2">
+				<div class="tab-pane" id="tab_5_2">
 					<div class="row">
 						@foreach($myActivities as $myActivity)								
 						<div class="col-md-9">												
@@ -816,36 +761,11 @@ catch(\Exception $e){}
 		</div>
 	</div>
 </div>
-<div class="col-md-3">
-	<div class="portlet box red-sunglo">
-		<div class="portlet-title">
-		</div>
-		<div class="portlet-body">
-			<ul>
-				<li>
-					 Lorem ipsum dolor sit amet
-				</li>
-											
-			</ul>
-		</div>
-	</div>
-</div>	
+
 <div class="modal fade" id="myactivity-post" tabindex="-1" role="basic" aria-hidden="true">
 	<div class="modal-dialog-new">
 		<div class="modal-content">
 			<div id="myactivity-post-content">
-				My Activity Post 
-			</div>
-		</div>
-		<!-- /.modal-content -->
-	</div>
-	<!-- /.modal-dialog -->
-</div>
-<!-- /.modal -->
-<div class="modal fade" id="viewcontact-view" tabindex="-1" role="basic" aria-hidden="true">
-	<div class="modal-dialog-new">
-		<div class="modal-content">
-			<div id="viewcontact-view-content">
 				My Activity Post 
 			</div>
 		</div>
@@ -934,29 +854,6 @@ $('.myactivity-post').on('click',function(event){
       success: function(data){
     	$('#myactivity-post-content').html(data);
     	$('#myactivity-post').modal('show');
-      }
-    }); 
-    return false;
-});
-
-$('.viewcontact').on('click',function(event){  	    
-  	event.preventDefault();
-  	var post_id = $(this).parent().data('postid');
-
-    $.ajaxSetup({
-		headers: {
-			'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-		}
-	});
-
-    $.ajax({
-      url: "/viewcontact/view",
-      type: "post",
-      data: {post_id: post_id},
-      cache : false,
-      success: function(data){
-    	$('#viewcontact-view-content').html(data);
-    	$('#viewcontact-view').modal('show');
       }
     }); 
     return false;

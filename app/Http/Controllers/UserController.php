@@ -85,6 +85,7 @@ class UserController extends Controller {
 			}
 			
 			DB::commit();
+			$data = array();
 			if($request['email'] != null){
 				$email = $request['email'];
 				$fname = $request['fname'];
@@ -92,9 +93,14 @@ class UserController extends Controller {
 				Mail::send('emails.welcome', array('fname'=>$fname, 'vcode'=>$vcode), function($message) use ($email,$fname){
 			        $message->to($email, $fname)->subject('Welcome to Jobtip!')->from('admin@jobtip.in', 'JobTip');
 			    });
+			    $data['vcode'] = $vcode;
 			}
 
-			$data = ['page'=>'login','vcode'=>$vcode,'otp'=>$otp];
+			if($request['mobile'] != null){
+				$data['otp'] = $otp;
+			}
+
+			$data['page'] = 'login';
 			return response()->json(['success'=>true,'data'=>$data]);
 
 			// return 'login';

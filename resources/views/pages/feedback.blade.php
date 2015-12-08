@@ -44,13 +44,13 @@
 								<h4 class="block">Using Jobtip is...</h4>
 								<div class="btn-toolbar margin-bottom-10">
 									<div data-toggle="buttons">
-									  <label class="btn btn-primary btn-circlenew" style="height:auto">
+									  <label class="btn btn-primary btn-circlenew" style="line-height:3.3;">
 									    <input type="radio" name="usability" value="Hard" class="toggle"> Hard
 									  </label>
-									  <label class="btn btn-primary btn-circlenew1" style="height:auto">
+									  <label class="btn btn-primary btn-circlenew1" style="line-height:3.3;">
 									    <input type="radio" name="usability" value="Okay" class="toggle btn btn-circlenew1 btn-default"> Okay
 									  </label>
-									  <label class="btn btn-primary btn-circlenew2" style="height:auto">
+									  <label class="btn btn-primary btn-circlenew2" style="line-height:3.3;">
 									    <input type="radio" name="usability" value="Easy" class="toggle btn btn-circlenew2 btn-default"> Easy
 									  </label>
 									</div>

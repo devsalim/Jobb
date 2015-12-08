@@ -24,13 +24,30 @@
 }
 
 .img-link-size{
-  max-width: 75%;
+  max-width: 90%;
+  border: 3px solid lightgray;
 }
 
 .search-user-tool{
   margin:10px 0; 
   border-bottom:1px dotted lightgrey;
   padding: 5px 0;
+}
+
+.myactivity-head{
+  text-align: center;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.search-advance-tool{
+  position: absolute;
+    right: -5px;
+    top: 3px;
+    padding: 3px 10px;
+    /* line-height: 1.4; */
+    background-color: lightgrey;
+    color: firebrick;
 }
 
 @media (max-width: 767px){
@@ -120,10 +137,10 @@ display:none !important;
 }
 
 .report{
-	float: right;
-    position: relative;
-    right: -5px;
-    bottom: 28px;
+  float: right;
+  position: relative;
+  /*right: -5px;
+  bottom: 28px;*/
 }
 
 
@@ -388,7 +405,7 @@ display: table;
 }
 .ribbon {
   position: absolute;
-  right: -11px;
+  right: -6px;
   top: -6px;
   z-index: 1;
   overflow: hidden;
@@ -700,7 +717,7 @@ display: table;
 
 .ribbon2:before {
   bottom: 0;
-  left: -.5em;
+  left: -.2em;
   width: .5em;
   height: 2em;
   border-radius: 0 0 0 .7em;
@@ -708,13 +725,13 @@ display: table;
 }
 
 .ribbon2:after {
-  top: -1em;
-  left: -.5em;
-  width: .5em;
-  height: 1em;
-  border-radius: .5em 0 0 .5em;
-  background-image: linear-gradient(to right, rgba(0,0,0,0) 0%, rgba(0,0,0,.2) 100%);
-  box-shadow: 0 .062em 0 rgba(255,255,255,.6);
+  top: -0.9em;
+    left: -0.1em;
+    width: .5em;
+    height: 1em;
+    border-radius: 0.5em 0 0 0.5em;
+    background-image: linear-gradient(to right, rgba(0,0,0,0) 0%, rgba(0,0,0,.2) 100%);
+    /* box-shadow: 0 .062em 0 rgba(255,255,255,.6); */
 }
 
 
@@ -722,4 +739,131 @@ display: table;
 
 .ribbon-container:hover .ribbon {
   background-color: #7acc29;
+}
+
+
+
+
+
+/* ribbon style */
+
+ .ribbon-wrapper3 {
+  position: relative;
+}
+  .ribbon-front3 {
+  background-color: #0077FF;
+    height: 22px;
+    width: 88px;
+    position: relative;
+    left: -10px;
+    z-index: 2;
+}
+
+  .ribbon-front3,
+  .ribbon-back-left3,
+  .ribbon-back-right3
+{
+  -moz-box-shadow: 0px 0px 4px rgba(0,0,0,0.55);
+  -khtml-box-shadow: 0px 0px 4px rgba(0,0,0,0.55);
+  -webkit-box-shadow: 0px 0px 4px rgba(0,0,0,0.55);
+  -o-box-shadow: 0px 0px 4px rgba(0,0,0,0.55);
+}
+
+  .ribbon-edge-topleft3,
+  .ribbon-edge-topright3,
+  .ribbon-edge-bottomleft3,
+  .ribbon-edge-bottomright3{
+  position: absolute;
+  z-index: 1;
+  border-style:solid;
+  height:0px;
+  width:0px;
+}
+
+  .ribbon-edge-topleft3,
+  .ribbon-edge-topright3 {
+}
+
+  .ribbon-edge-bottomleft3,
+  .ribbon-edge-bottomright3 {
+  top: 40px;
+}
+
+  .ribbon-edge-topleft3,
+  .ribbon-edge-bottomleft3 {
+  left: -10px;
+  border-color: transparent #0000B3 transparent transparent;
+}
+
+  .ribbon-edge-topleft3 {
+  top: -9px;
+    border-width: 10px 6px 0 0;
+}
+  .ribbon-edge-bottomleft3 {
+  border-width: 0 20px 0px 0;
+}
+
+  .ribbon-edge-topright3,
+  .ribbon-edge-bottomright3 {
+  left: 80px;
+  border-color: transparent transparent transparent #0000B3;
+}
+
+  .ribbon-edge-topright3 {
+  top: -10px;
+  border-width: 10px 0 0 0px;
+}
+  .ribbon-edge-bottomright3 {
+  border-width: 0 0 0px 0px;
+}
+
+  .ribbon-back-left3 {
+  position: absolute;
+  top: -10px;
+  left: 0px;
+  width: 0px;
+  height: 40px;
+    z-index: 0;
+}
+
+  .ribbon-back-right3 {
+  position: absolute;
+  top: -10px;
+  right: 0px;
+  width: 0px;
+  height: 40px;
+    z-index: 0;
+}
+
+.applied-css{
+  position: absolute;
+    font-size: 10px;
+    margin: 1px 2px;
+}
+
+@media (max-width: 767px){
+
+.ribbon-front3 {
+    background-color: #0077FF;
+    height: 18px;
+    width: 65px;
+    position: relative;
+    left: -9px;
+    z-index: 2;
+    top: 21px;
+}
+
+.ribbon-edge-topleft3 {
+    top: 11px;
+    border-width: 10px 6px 0 0;
+}
+.ribbon-edge-topleft3, .ribbon-edge-bottomleft3 {
+    left: -9px;
+    border-color: transparent #0000B3 transparent transparent;
+}
+
+.magic-font{
+  font-size: 10px;
+}
+
 }

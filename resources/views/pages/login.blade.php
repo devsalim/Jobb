@@ -654,9 +654,23 @@ $('#individual-register-btn').on('click',function(event){
             });
             $('#individual-register')[0].reset();
             $('#t-n-c').attr('checked', false); // Unchecks it
-            $('#individual-register').hide();
-            $('#mobile-otp-form').show();
-            $('#ind-reg-msg').html('Registration successful ! <br/>Check your mobile/email for further instruction. <br/>Your otp: <b>'+data.data.otp+'</b> to verify mobile.');  
+
+            if(data.data.otp != null && data.data.vcode != null ){
+	            $('#individual-register').hide();
+	            $('#mobile-otp-form').show();
+	            $('#ind-reg-msg').html('Registration successful ! <br/>Check your mobile/email for further instruction. <br/>Your otp: <b>'+data.data.otp+'</b> to verify mobile.');  
+	            // console.log('both');
+	        }else if(data.data.vcode != null && data.data.otp == null){
+	        	$('#individual-register').hide();
+	            $('#mobile-otp-form').show();
+	        	$('#ind-reg-msg').html('Registration successful ! <br/>Check your email for further instruction.');  
+	        	// console.log('email');
+	        }else if(data.data.otp != null && data.data.vcode == null){
+	        	$('#individual-register').hide();
+	            $('#mobile-otp-form').show();
+	        	$('#ind-reg-msg').html('Registration successful ! <br/>Check your mobile for further instruction. <br/>	        		Your otp: <b>'+data.data.otp+'</b> to verify mobile.');  
+	        	// console.log('mobile');
+	        }
         }else{
             $('#ind-msg-reg-box').removeClass('alert alert-success');
             $('#ind-msg-reg-box').addClass('alert alert-danger').fadeIn(1000, function(){

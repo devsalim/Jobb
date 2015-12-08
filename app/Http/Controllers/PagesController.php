@@ -102,8 +102,30 @@ class PagesController extends Controller {
 					$userSkills = array_map('trim', explode(',', $userSkills->linked_skill));
 					unset ($userSkills[count($userSkills)-1]); 
 				}
+
+				if(Auth::user()->identifier == 1){
+					$share_links=Induser::whereRaw('indusers.id in (
+													select connections.user_id as id from connections
+													where connections.connection_user_id=?
+													 and connections.status=1
+													union 
+													select connections.connection_user_id as id from connections
+													where connections.user_id=?
+													 and connections.status=1
+										)', [Auth::user()->induser_id, Auth::user()->induser_id])
+									->get(['id','fname'])
+									->lists('fname','id');
+
+					$share_groups = Group::leftjoin('groups_users', 'groups_users.group_id', '=', 'groups.id')					
+								->where('groups.admin_id', '=', Auth::user()->induser_id)
+								->orWhere('groups_users.user_id', '=', Auth::user()->induser_id)
+								->groupBy('groups.id')
+								->get(['groups.id as id', 'groups.group_name as name'])
+								->lists('name', 'id');
+
+				}
 				
-				return view('pages.home', compact('posts', 'title', 'links', 'groups', 'following', 'userSkills', 'skills', 'linksApproval', 'linksPending'));
+				return view('pages.home', compact('posts', 'title', 'links', 'groups', 'following', 'userSkills', 'skills', 'linksApproval', 'linksPending', 'share_links', 'share_groups'));
 				// return $userSkills;
 			}elseif(Auth::user()->identifier == 3){
 				$reportAbuseCount = ReportAbuse::count();
@@ -127,6 +149,11 @@ class PagesController extends Controller {
 										join postjobs pj on pj.id = pa.post_id
 										where pa.user_id=? and pa.thanks = 1)
 										union
+										(select pa.id,pa.user_id,pa.post_id,"Shared" as identifier,pa.share as share, pa.share_dtTime as time,pj.unique_id, pj.post_title, pj.post_compname
+										from postactivities pa 
+										join postjobs pj on pj.id = pa.post_id
+										where pa.user_id=? and pa.share = 1)
+										union
 										(select pa.id,pa.user_id,pa.post_id,"Applied" as identifier,pa.apply as activity, pa.apply_dtTime as time,pj.unique_id,pj.post_title, pj.post_compname
 										from postactivities pa 
 										join postjobs pj on pj.id = pa.post_id
@@ -136,7 +163,7 @@ class PagesController extends Controller {
 										from postactivities pa 
 										join postjobs pj on pj.id = pa.post_id
 										where pa.user_id=? and pa.contact_view = 1)
-										order by time desc', [Auth::user()->induser_id,Auth::user()->induser_id,Auth::user()->induser_id]);
+										order by time desc', [Auth::user()->induser_id,Auth::user()->induser_id,Auth::user()->induser_id,Auth::user()->induser_id]);
 				$myActivities = collect($myActivities);
 				// return $myActivities;
 			}else if(Auth::user()->identifier == 2){
@@ -414,7 +441,29 @@ class PagesController extends Controller {
 				$following = collect($following);
 			}
 
-			return view('pages.home', compact('posts', 'title', 'links', 'groups', 'following', 'userSkills', 'skills'));
+			if(Auth::user()->identifier == 1){
+				$share_links=Induser::whereRaw('indusers.id in (
+												select connections.user_id as id from connections
+												where connections.connection_user_id=?
+												 and connections.status=1
+												union 
+												select connections.connection_user_id as id from connections
+												where connections.user_id=?
+												 and connections.status=1
+									)', [Auth::user()->induser_id, Auth::user()->induser_id])
+								->get(['id','fname'])
+								->lists('fname','id');
+
+				$share_groups = Group::leftjoin('groups_users', 'groups_users.group_id', '=', 'groups.id')					
+							->where('groups.admin_id', '=', Auth::user()->induser_id)
+							->orWhere('groups_users.user_id', '=', Auth::user()->induser_id)
+							->groupBy('groups.id')
+							->get(['groups.id as id', 'groups.group_name as name'])
+							->lists('name', 'id');
+
+			}
+
+			return view('pages.home', compact('posts', 'title', 'links', 'groups', 'following', 'userSkills', 'skills', 'share_links', 'share_groups'));
 			// return $posts;
 		}else{
 			return redirect('login');
@@ -606,8 +655,30 @@ class PagesController extends Controller {
 				$userSkills = array_map('trim', explode(',', $userSkills->linked_skill));
 				unset ($userSkills[count($userSkills)-1]); 
 			}
+
+			if(Auth::user()->identifier == 1){
+				$share_links=Induser::whereRaw('indusers.id in (
+												select connections.user_id as id from connections
+												where connections.connection_user_id=?
+												 and connections.status=1
+												union 
+												select connections.connection_user_id as id from connections
+												where connections.user_id=?
+												 and connections.status=1
+									)', [Auth::user()->induser_id, Auth::user()->induser_id])
+								->get(['id','fname'])
+								->lists('fname','id');
+
+				$share_groups = Group::leftjoin('groups_users', 'groups_users.group_id', '=', 'groups.id')					
+							->where('groups.admin_id', '=', Auth::user()->induser_id)
+							->orWhere('groups_users.user_id', '=', Auth::user()->induser_id)
+							->groupBy('groups.id')
+							->get(['groups.id as id', 'groups.group_name as name'])
+							->lists('name', 'id');
+
+			}
 			
-			return view('pages.home', compact('posts', 'title', 'links', 'groups', 'following', 'userSkills', 'skills'));
+			return view('pages.home', compact('posts', 'title', 'links', 'groups', 'following', 'userSkills', 'skills', 'share_links', 'share_groups'));
 			// return $posts;
 		}else{
 			return redirect('login');

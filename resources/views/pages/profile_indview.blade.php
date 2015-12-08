@@ -14,7 +14,7 @@
 				</div>
 				@elseif($utype == 'corp')
 				<div class="profile-userpic-corp">
-					<img  src="@if($user->logo_status != null){{ '/img/profile/'.$user->logo_status }}@else{{'/assets/images/corp.png'}}@endif">
+					<img  src="@if($user->logo_status != null){{ '/img/profile/'.$user->logo_status }}@else{{'/assets/images/corpnew.jpg'}}@endif">
 				</div>
 				@endif
 				<!-- END SIDEBAR USERPIC -->
