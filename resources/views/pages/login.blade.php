@@ -245,10 +245,16 @@
 				</div>
 			</div>
 		</div>
-		<div class="form-actions" style="margin-top:25px;border-bottom: none;">
-			<label id="resend-otp-btn" style="margin-left: 39px;cursor: pointer;">Resend OTP</label>
-			<button type="submit" class="btn btn-default pull-left" style="margin-left: 0px; ">Submit <i class="m-icon-swapright"></i></button>
+		<div class="form-actions" style="margin-top:25px;border-bottom: none;">			
+			<button type="submit" class="btn btn-default pull-left" style="margin-left: 0px; ">Submit 
+				<i class="m-icon-swapright"></i>
+			</button>
 		</div>
+	</form>
+	<form id="resend-otp-form" action="/resendOTP" method="post" style="display:none">
+		<input type="hidden" name="_token" value="{{ csrf_token() }}">
+		<input type="hidden" name="otp_mob" id="otpformob">
+		<button type="submit" id="resend-otp-btn" class="btn btn-default pull-right" style="margin-left: 39px;cursor: pointer;color:darkslategray">Resend OTP</button>
 	</form>
 	<!-- END OTP VERIFICATIO FORM -->
 	
@@ -553,7 +559,7 @@ $(document).ready(function(){
       cache : false,
       success: function(data){
         loader('hide');
-        // console.log(data)
+        console.log(data)
         if(data.data.page == 'login' && data.data.user == 'invalid'){            
             $('#ind-msg-box').removeClass('alert alert-success');
             $('#ind-msg-box').addClass('alert alert-danger').fadeIn(1000, function(){
@@ -586,6 +592,10 @@ $(document).ready(function(){
 
             $('#individual-login').hide();
             $('#mobile-otp-form').show();
+
+            $('#resend-otp-form').show();
+        	$('#otpformob').val(data.data.mobile); 
+
             $('#ind-reg-msg').html(data.data.message);  
             $('#ind-msg-reg-box').show();
 
@@ -902,6 +912,55 @@ $('#forget-password-btn').on('click',function(event){
     return false;
   }); 
 
+$('#resend-otp-btn').on('click',function(event){        
+    event.preventDefault();
+
+    loader('show');
+
+    var formData = $('#resend-otp-form').serialize(); // form data as string
+    var formAction = $('#resend-otp-form').attr('action'); // form handler url
+
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
+    $.ajax({
+      url: formAction,
+      type: "post",
+      data: formData,
+      cache : false,
+      success: function(data){
+        loader('hide');
+        // console.log(data)
+        if(data.data.page == 'login' && data.data.mobile_verify == 0 && data.data.success_status){        	
+            disableOTP();
+        	$('#ind-msg-reg-box').removeClass('alert alert-danger');
+            $('#ind-reg-msg').html(data.data.message);  
+            $('#ind-msg-reg-box').addClass('alert alert-success').fadeIn(1000, function(){
+                $(this).show();
+            });
+        }
+        else if(data.data.page == 'login' && data.data.mobile_verify == 0 && !data.data.success_status){
+        	$('#ind-msg-reg-box').removeClass('alert alert-success');           
+            $('#ind-reg-msg').html(data.data.message);   
+            $('#ind-msg-reg-box').addClass('alert alert-danger').fadeIn(1000, function(){
+                $(this).show();
+            });
+        }
+      },
+      error: function(data) {
+        loader('hide');
+        $('#ind-msg-reg-box').addClass('alert alert-danger').fadeIn(1000, function(){
+                $(this).show();
+        });
+        $('#ind-reg-msg').text('Some error occured !');
+      }
+    }); 
+    return false;
+}); 
+
 $('#individual-login').bind('keydown', function(e){         
     if (e.which == 13){
        $('#individual-login-btn').trigger('click'); 
@@ -923,5 +982,31 @@ $('#forgot-password').bind('keydown', function(e){
    }     
 });
 
+</script>
+<script type="text/javascript">
+    // setTimeout (function(){
+    // document.getElementById('resend-otp-btn').disabled = null;
+    // },60000);
+
+    var countdownNum = 60;
+    // incTimer();
+
+    function disableOTP(){
+    	document.getElementById('resend-otp-btn').disabled = true;
+    	incTimer()
+    }
+
+    function incTimer(){    	    	
+	    setTimeout (function(){
+	        if(countdownNum != 0){
+		        countdownNum--;
+		        document.getElementById('resend-otp-btn').innerHTML = 'Wait for ' + countdownNum + ' seconds';
+		        incTimer();
+	        } else {
+	        	document.getElementById('resend-otp-btn').innerHTML = 'Resend OTP';
+	        	document.getElementById('resend-otp-btn').disabled = false;
+	        }
+	    },1000);
+    }
 </script>
 @stop

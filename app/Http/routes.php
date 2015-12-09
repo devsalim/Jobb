@@ -133,6 +133,8 @@ Route::group(array('before' => 'auth'), function(){
 
 	Route::post('post/share', 'JobController@sharePost');
 
+	Route::post('/resendOTP', 'PagesController@resendOTP');
+
 });
 
 

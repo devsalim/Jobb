@@ -78,6 +78,15 @@ class UserController extends Controller {
 				$user->password = bcrypt($request['password']);
 				$user->identifier = 1;
 
+				if($request['email'] != null){
+					// $vcode = 'A'.rand(1111,9999);
+					$user->email_vcode = $vcode;
+				}
+				if($request['mobile'] != null){
+					// $otp = rand(1111,9999);
+					$user->mobile_otp = $otp;
+				}
+
 				$indUser->user()->save($user);
 			}catch(\Exception $e){
 			   DB::rollback();

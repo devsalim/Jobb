@@ -3,7 +3,7 @@
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-use Request;
+use Illuminate\Http\Request;
 use App\Induser;
 use App\Corpuser;
 use App\Postjob;
@@ -694,8 +694,8 @@ class PagesController extends Controller {
 			$user = Induser::where('email_vcode', '=', $id)->first(['id']);
 		}
 		if($user != null){
-			Induser::where('email_vcode', '=', $id)->update(['email_verify' => 1]);
-			User::where('induser_id', '=', $user->id)->update(['email_verify' => 1]);
+			Induser::where('email_vcode', '=', $id)->update(['email_verify' => 1, 'email_vcode' => null]);
+			User::where('induser_id', '=', $user->id)->update(['email_verify' => 1, 'email_vcode' => null]);
 			$msg = 'Email verified successfully. Now you can login with your registered email id.';
 
 			return redirect('/login')
@@ -725,7 +725,7 @@ class PagesController extends Controller {
 					->with('flash_type', 'alert-success');
 		}else if($user != null && strlen(trim(Input::get('mobileOTP'))) == 5){
 			Induser::where('email_vcode', '=', Input::get('mobileOTP'))->update(['email_verify' => 1, 'email_vcode' => null]);
-			User::where('induser_id', '=', $user->id)->update(['email_verify' => 1]);
+			User::where('induser_id', '=', $user->id)->update(['email_verify' => 1, 'email_vcode' => null, 'email_vcode_expiry' => null]);
 			$msg = 'Email verified successfully. Now you can login with your email.';
 
 			return redirect('/login')
@@ -818,8 +818,53 @@ class PagesController extends Controller {
 		return view('pages.viewcontact', compact('title','user'));
 	}
 
-	public function resendOTP(){
+	public function resendOTP(Request $request){
+		// check resend atttempt n send new otp
+		if($request->ajax()){
+			$data = [];
+			$mobile = $request->input('otp_mob');
+			if($request->input('otp_mob') != null){
+				$userForMobile = User::where('mobile', '=', $mobile)->first(['name', 'mobile_verify', 'mobile_otp', 'mobile_otp_expiry', 'mobile_otp_attempt']);
+				if($userForMobile != null && $userForMobile->mobile_verify == 0){
+	    			$mobile_otp_expiry = new \Carbon\Carbon($userForMobile->mobile_otp_expiry, 'Asia/Kolkata');
+					$now = \Carbon\Carbon::now(new \DateTimeZone('Asia/Kolkata'));
+					$difference = $now->diffInMinutes($mobile_otp_expiry);
 
+					/*$data['now'] = $now;
+					$data['mobile_otp_expiry'] = $mobile_otp_expiry;
+					$data['diff'] = $difference;*/
+					$data['success_status'] = true;
+					if($difference < 15 && $userForMobile->mobile_otp_attempt < 3){
+						// send old otp n increment the attempt
+						$mobile_otp_attemptInc = $userForMobile->mobile_otp_attempt + 1;
+						User::where('mobile', '=', $mobile)->update(['mobile_otp_attempt' => $mobile_otp_attemptInc]);
+
+						$data['resend_status'] = 'otpsent';
+						$data['mobile_verify'] = 0;
+			    		$data['page'] = 'login';
+			    		$data['message'] = 'OTP sent to your registered mobile number. '.$userForMobile->mobile_otp;
+					}else if($difference >= 15 && $userForMobile->mobile_otp_attempt < 3){
+						// regenerate otp, update otp, reset attempt n mobile_otp_expiry
+						$otp = rand(1111,9999);
+						$new_mobile_otp_expiry = \Carbon\Carbon::now(new \DateTimeZone('Asia/Kolkata'))->addMinutes(15);
+						User::where('mobile', '=', $mobile)->update(['mobile_otp' => $otp,'mobile_otp_attempt' => 0, 'mobile_otp_expiry' => $new_mobile_otp_expiry]);
+						Induser::where('mobile', '=', $mobile)->update(['mobile_otp' => $otp]);
+
+						$data['resend_status'] = 'otpgeneratednsent';
+						$data['mobile_verify'] = 0;
+			    		$data['page'] = 'login';
+			    		$data['message'] = 'OTP sent to your registered mobile number. '.$otp;
+					}else if($userForMobile->mobile_otp_attempt == 3){
+						$data['resend_status'] = 'maxlimit';
+						$data['mobile_verify'] = 0;
+			    		$data['page'] = 'login';
+			    		$data['message'] = 'You have reached to maximum limit. Try after sometime.';
+			    		$data['success_status'] = false;
+					}
+	    		}
+			}
+			return response()->json(['success'=>$data['success_status'],'data'=>$data]);
+		}
 	}
 
 
