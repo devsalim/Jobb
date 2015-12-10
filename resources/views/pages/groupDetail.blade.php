@@ -10,10 +10,13 @@
 				{{$group->group_name}}   				
 			</span>
 			<a href="/group" class="group-title-info btn btn-xs btn-warning" 
-				style="text-decoration:none;border-radius: 25px !important;">
-				Group
+				style="text-decoration:none;border-radius: 25px !important;float:left;margin:0 5px;">
+				Back
 			</a>
-			@if($group->admin->id == Auth::user()->induser_id)
+			
+
+			<div class="group-admin-title pull-right">
+				@if($group->admin->id == Auth::user()->induser_id)
 				<a id="ajax-demo" href="#edit-group" data-toggle="modal" class="badge btn btn-xs btn-info" style="" title="Edit">
 					<i class="fa fa-edit"></i>
 				</a>
@@ -21,16 +24,14 @@
 			@if($group->admin->id == Auth::user()->induser_id)				
 				<a id="ajax-demo" href="#delete-group" data-toggle="modal" title="Delete" 
 					class="badge btn btn-xs btn-danger" style="text-decoration: none;">
-					<i class="fa fa-trash"></i>
+					<i class="fa fa-trash"></i> Delete
 				</a>				
 			@else				
 				<a id="ajax-demo" href="#leave-group" data-toggle="modal" 
 					class="badge btn btn-xs" style="text-decoration: none;">						
-					<i class="fa fa-sign-out"></i>
+					<i class="fa fa-sign-out"></i> Leave Group
 				</a>
 			@endif
-
-			<div class="group-admin-title pull-right">
 				<span class="group-admin-title-left">Admin</span> 
 				<a href="/profile/ind/{{$group->admin->id}}">
 				<span class="group-admin-title-right">{{$group->admin->fname}} {{$group->admin->lname}}</span>
@@ -145,6 +146,16 @@
 		<div class="caption">
 			<i class="icon-users"></i> Members
 		</div>
+		<div class="done-show" style="float:right;margin:10px 0;">
+			<button class="btn" style="padding: 0px 5px;background-color: darkslategrey;color: white;">
+				Delete
+			</button>
+		</div>
+		<div class="add-done-show" style="float:right;margin:10px 0;">
+			<button class="btn" style="padding: 0px 5px;background-color: darkslategrey;color: white;">
+				Done
+			</button>
+		</div>
 	</div>
 	<div class="portlet-body">
 		<div class="tabbable-custom ">
@@ -158,7 +169,7 @@
 							<input type="hidden" name="_token" value="{{ csrf_token() }}">				
 							<div class="input-icon right">
 								<i class="fa fa-search" style="color: darkcyan;"></i>
-								<input type="text" name="keywords" id="search-input" onkeydown="down()" onkeyup="up()" class="form-control" placeholder="Search" style="border: 1px solid darkcyan;">
+								<input type="text" name="keywords" id="search-input " onkeydown="down()" onkeyup="up()" class="form-control" placeholder="Search" style="border: 1px solid darkcyan;">
 							</div>	
 						</form>
 						<!-- END FORM-->
@@ -180,91 +191,95 @@
 			</ul>
 			<div class="tab-content">
 				<div class="tab-pane active" id="tab_5_1">
-					<ul class="media-list">
 					@if(count($users) > 0)
 					@foreach($users as $user)
-						  <li class="media">
-						    <div class="media-left">
-						      <a href="#">
-						        <img class="media-object" src="@if($user->profile_pic != null){{ '/img/profile/'.$user->profile_pic }}@else{{'/assets/images/ab.png'}}@endif" alt="..." style="padding: 3px;border: 1px solid #ddd;">
-						      </a>
-						    </div>
-						    <div class="media-body" style="font-weight:300">
-							    <div class="media-body-left" style="float:left;min-width:200px">
-							      <h4 class="media-heading" style="margin-bottom:0;font-weight:300;word-break:break-word">
-							      	<a href="/profile/ind/{{$user->id}}" data-utype="ind">
-							      		{{ $user->fname }} {{ $user->lname }}</a>
-								      @if($user->id == $user->admin_id && $user->id != null)
-								      	<span class="btn btn-xs btn-warning" style="border-radius:25px !important;margin:0 10px">
-								      		Admin
-								      	</span>
-								      @endif
-							      </h4>
-							     {{ $user->working_at }}<br>
-								 {{ $user->city }} {{ $user->state }}
-								</div>
-								<div class="media-body-right">
-								 	<span class="input-group-btn btn-right">
-									 	@if($user->admin_id == Auth::user()->induser_id)
-										<form action="{{ url('/group/deleteuser') }}" method="post">
-											<input type="hidden" name="_token" value="{{ csrf_token() }}">
-											<input type="hidden" name="delete_id" value="{{$user->groups_users_id}}">
-											<input type="hidden" name="delete_group_id" value="{{$user->group_id}}">
-											<button type="submit" class="btn btn-sm btn-danger">
-											<i class="glyphicon glyphicon-trash" style="font-size: 12px;background-color: white;color: black;border-radius: 10px;width: 20px;height: 20px;padding-top: 3px;"></i>
-											</button>
-										</form>
-										@endif								
-									</span>								 	
-								</div>							
-						    </div>
-						  </li>								
+					<div class="row" style="border-bottom:1px dotted lightgrey;">
+						
+						<div class="col-md-2 col-sm-2 col-xs-2">
+							<a href="#">
+						        <img class="media-object img-circle" src="@if($user->profile_pic != null){{ '/img/profile/'.$user->profile_pic }}@else{{'/assets/images/ab.png'}}@endif" alt="..." style="padding: 3px;border: 1px solid #ddd;">
+						    </a>
+						</div>
+						<div class="col-md-7 col-sm-7 col-xs-6">
+							<a href="/profile/ind/{{$user->id}}" data-utype="ind">
+				      			{{ $user->fname }} {{ $user->lname }}</a>
+						     	 @if($user->id == $user->admin_id && $user->id != null)
+						      	<span class="btn btn-xs btn-warning" style="border-radius:25px !important;margin:0 10px">
+						      		Admin
+						      	</span>
+					      @endif
+					      {{ $user->working_at }}<br>
+							 {{ $user->city }} {{ $user->state }}
+						</div>
+						<div class="col-md-2 col-sm-2 col-xs-2">
+							<span class="input-group-btn btn-right">
+							 	@if($user->admin_id == Auth::user()->induser_id)
+								<form action="{{ url('/group/deleteuser') }}" method="post">
+									<input type="hidden" name="_token" value="{{ csrf_token() }}">
+									<input type="hidden" name="delete_id" value="{{$user->groups_users_id}}">
+									<input type="hidden" name="delete_group_id" value="{{$user->group_id}}">
+									<button type="submit" class="btn btn-sm btn-danger">
+									<i class="glyphicon glyphicon-trash" style="font-size: 12px;background-color: white;color: black;border-radius: 10px;width: 20px;height: 20px;padding-top: 3px;"></i>
+									</button>
+								</form>
+								@endif								
+							</span>
+						</div>
+						<div class="col-md-1 col-sm-1 col-xs-1">
+						<!-- <div class="checkboxFour"> -->
+							<label>
+								<input type="checkbox" id="" class="group-done" data-checkbox="icheckbox_square-grey" onchange="valueChanged()">
+							</label>
+						<!-- </div> -->
+						</div>
+					</div>
 					@endforeach
 					@else
-					<li>No user</li>
+					No Group Members
 					@endif
-					</ul>
+
 				</div>
 				<div class="tab-pane" id="tab_5_2">
-					<ul class="media-list">
 					@if(count($connections) > 0)
 					@foreach($connections as $connection)	
-						@if($connection->id != $group->admin_id)						
-						  <li class="media">
-						    <div class="media-left">
-						      <a href="#">
-						        <img class="media-object" src="@if($connection->profile_pic != null){{ '/img/profile/'.$connection->profile_pic }}@else{{'/assets/images/ab.png'}}@endif" alt="..." style="width:60px;padding: 3px;border: 1px solid #ddd;">
-						      </a>
-						    </div>
-						    <div class="media-body" style="font-weight:300">
-							    <div class="media-body-left" style="float:left;min-width:200px">
-							      <h4 class="media-heading" style="margin-bottom:0;font-weight:300;margin-bottom:0">
-								      	<a href="/profile/ind/{{$connection->id}}" data-utype="ind">
+						@if($connection->id != $group->admin_id)
+						<div class="row" style="border-bottom:1px dotted lightgrey;">
+							
+							<div class="col-md-2 col-sm-2 col-xs-2">
+								<a href="#">
+							        <img class="media-object" src="@if($connection->profile_pic != null){{ '/img/profile/'.$connection->profile_pic }}@else{{'/assets/images/ab.png'}}@endif" alt="..." style="width:60px;padding: 3px;border: 1px solid #ddd;">
+							     </a>
+							</div>
+							<div class="col-md-7 col-sm-7 col-xs-6">
+								<a href="/profile/ind/{{$connection->id}}" data-utype="ind">
 								      		{{$connection->fname}} {{$connection->lname}}</a>
-							      </h4>
 							     {{ $connection->working_at }}<br>
 								 {{ $connection->city }} {{ $connection->state }}
-								 </div>
-								 <div class="media-body-right">
-								 	<span class="input-group-btn btn-right">
-										<form action="{{ url('/group/adduser') }}" method="post">
-											<input type="hidden" name="_token" value="{{ csrf_token() }}">
-											<input type="hidden" name="add_user_id" value="{{$connection->id}}">
-											<input type="hidden" name="add_group_id" value="{{$group->id}}">
-											<button type="submit" class="btn btn-sm btn-success">
-											<i class="icon-plus" style="font-size: 12px;background-color: white;color: black;border-radius: 10px;width: 20px;height: 20px;padding-top: 3px;"></i>
-											</button>
-										</form>
-									</span>								 	
-								 </div>
-						    </div>
-						  </li>		
+							</div>
+							<div class="col-md-2 col-sm-2 col-xs-2">
+								<span class="input-group-btn btn-right">
+									<form action="{{ url('/group/adduser') }}" method="post">
+										<input type="hidden" name="_token" value="{{ csrf_token() }}">
+										<input type="hidden" name="add_user_id" value="{{$connection->id}}">
+										<input type="hidden" name="add_group_id" value="{{$group->id}}">
+										<button type="submit" class="btn btn-sm btn-success">
+										<i class="icon-plus" style="font-size: 12px;background-color: white;color: black;border-radius: 10px;width: 20px;height: 20px;padding-top: 3px;"></i>
+										</button>
+									</form>
+								</span>
+							</div>
+							<div class="col-md-1 col-sm-1 col-xs-1">
+							<label>
+								<input type="checkbox" id="" class="add-done" data-checkbox="icheckbox_square-grey" onchange="valueChange()">
+							 </label>
+							</div>
+						</div>						
+						
 						  @endif						
 					@endforeach
 					@else
-					<li>No user</li>
+					No user
 					@endif
-					</ul>
 				</div>
 			</div>
 		</div>
@@ -274,6 +289,24 @@
 
 
 @section('javascript')
+<script type="text/javascript">
+function valueChanged()
+{
+    if($('.group-done').is(":checked"))   
+        $(".done-show").show();
+    else
+        $(".done-show").hide();
+}
+</script>
+<script type="text/javascript">
+function valueChange()
+{
+    if($('.add-done').is(":checked"))   
+        $(".add-done-show").show();
+    else
+        $(".add-done-show").hide();
+}
+</script>
 <script>
 	jQuery(document).ready(function() { 
 	    ComponentsIonSliders.init();

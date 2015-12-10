@@ -319,7 +319,7 @@
 											<option @if($user->working_status=="Student") {{ $selected }} @endif value="Student">Student</option>
 											<option @if($user->working_status=="Searching Job") {{ $selected }} @endif value="Searching Job">Searching Job</option>
 											<option @if($user->working_status=="Working") {{ $selected }} @endif value="Working">Working</option>
-											<option @if($user->working_status=="Freelanching") {{ $selected }} @endif value="Freelanching">Freelanching</option>
+											<option @if($user->working_status=="Freelancing") {{ $selected }} @endif value="Freelancing">Freelancing</option>
 										</select>
 									</div>
 								</div>

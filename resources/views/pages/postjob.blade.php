@@ -362,17 +362,6 @@
 									</div>
 								</div>
 									<!--/span-->
-									<div class="row">
-									<div class="col-md-12">
-										<div class="form-group">
-											<!-- <label>Job Title</label> -->
-											<div class="input-group">
-												<input type="checkbox" id="resume-check" name="resume_required" value="1" class="form-control">
-												<label>Resume Required to apply for this Job</label>
-											</div>
-										</div>
-									</div>
-								</div>
 								<div class="row">
 									<div class="col-md-2 col-sm-2 col-xs-6">
 										<div class="form-group">							
@@ -495,23 +484,7 @@
 									</div>
 								</div>
 								<div class="tab-pane" id="tab3">
-									<div class="row">
-										<div class="col-md-12">
-											<div class="form-group">
-												<div class="input-icon right">
-													<i class="fa"></i>
-													<label>Locality</label>
-													<div class="input-group">
-														<span class="input-group-addon">
-															<i class="fa fa-map-marker" style="color:darkcyan;"></i>
-														</span>
-														<input type="text" name="locality" class="form-control" 
-															   placeholder="Locality">
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
+									
 									<div class="row">
 										<div class="col-md-5 col-sm-5 col-xs-12">
 											<div class="form-group new-margin-formgroup">
@@ -578,6 +551,44 @@
 										<div class="col-md-2 col-sm-2 col-xs-2"></div>
 										<div class="col-md-5 col-sm-5 col-xs-12">
 											<div class="form-group new-margin-formgroup">
+												<div class="input-icon right">
+													<i class="fa"></i>
+													<label>Locality</label>
+													<div class="input-group">
+														<span class="input-group-addon">
+															<i class="fa fa-map-marker" style="color:darkcyan;"></i>
+														</span>
+														<input type="text" name="locality" class="form-control" 
+															   placeholder="Locality">
+													</div>
+												</div>
+											</div>	
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-5 col-sm-5 col-xs-12">
+											<div class="form-group">
+											<label style="margin-left: -5px;"><input id="hide-apply" name="apply-check" type="checkbox"></label><label>&nbsp;Apply On Company Website</label>
+											<div id="" class="input-group show-apply">
+												<span class="input-group-addon">
+													<i class="icon-info"style="color:darkcyan;"></i>
+												</span>
+												<input type="text" name="website_redirect_url" class="form-control" value="" placeholder="http://">
+											</div>
+											</div>
+										</div>
+										<div class="col-md-2 col-sm-2"></div>
+										<div class="col-md-5 col-sm-5 col-xs-12 show-apply-email">
+											<div class="form-group">
+											<!-- <label>Job Title</label> -->
+												<div class="input-group">
+													<input type="checkbox" id="resume-check" name="resume_required" value="1" class="form-control">
+													<label>Resume Required to apply for this Job</label>
+												</div>
+											</div>
+										</div>
+										<div class="col-md-5 col-sm-5 col-xs-12">
+											<div class="form-group new-margin-formgroup">
 												<label>Post Duration <span class="required">
 													* </span></label>
 												<div class="input-group">
@@ -594,46 +605,35 @@
 												</div>
 											</div>
 										</div>
-									</div>
-								<div class="row">
-									<div class="col-md-5">
-										<div class="form-group">
-											<label style="margin-left: -5px;"><input id="hide-apply" name="apply-check" type="checkbox"></label><label>&nbsp;Apply On Company Website</label>
-											<div id="" class="input-group show-apply">
+									<!-- </div> -->
+									<!-- <div class="row"> -->
+										<div class="col-md-2"></div>
+										@if(Auth::user()->identifier == 2)
+										<div class="col-md-5 show-apply-email">
+											<div class="form-group">
+												<label>Contact Person</label>
+												<div class="input-group">
 												<span class="input-group-addon">
-													<i class="icon-info"style="color:darkcyan;"></i>
+												<i class="glyphicon glyphicon-user" style="color:darkcyan;"></i>
 												</span>
-												<input type="text" name="website_redirect_url" class="form-control" value="" placeholder="http://">
+												<input type="text" name="contact_person" value="{{ Auth::user()->corpuser->username }}" class="form-control" placeholder="Contact Person">
+												</div>
 											</div>
 										</div>
-									</div>
-									<div class="col-md-2"></div>
-									@if(Auth::user()->identifier == 2)
-									<div class="col-md-5 show-apply-email">
-										<div class="form-group">
-											<label>Contact Person</label>
-											<div class="input-group">
-											<span class="input-group-addon">
-											<i class="glyphicon glyphicon-user" style="color:darkcyan;"></i>
-											</span>
-											<input type="text" name="contact_person" value="{{ Auth::user()->corpuser->username }}" class="form-control" placeholder="Contact Person">
+										@else
+										<div class="col-md-5 show-apply-email">
+											<div class="form-group">
+												<label>Contact Person</label>
+												<div class="input-group">
+												<span class="input-group-addon">
+												<i class="glyphicon glyphicon-user" style="color:darkcyan;"></i>
+												</span>
+												<input type="text" name="contact_person" value="{{ Auth::user()->name }}" class="form-control" placeholder="Contact Person">
+												</div>
 											</div>
 										</div>
+										@endif
 									</div>
-									@else
-									<div class="col-md-5 show-apply-email">
-										<div class="form-group">
-											<label>Contact Person</label>
-											<div class="input-group">
-											<span class="input-group-addon">
-											<i class="glyphicon glyphicon-user" style="color:darkcyan;"></i>
-											</span>
-											<input type="text" name="contact_person" value="{{ Auth::user()->name }}" class="form-control" placeholder="Contact Person">
-											</div>
-										</div>
-									</div>
-									@endif
-								</div>
 										<!--/span-->
 									<div class="row show-apply-email">
 											<div class="col-md-5">

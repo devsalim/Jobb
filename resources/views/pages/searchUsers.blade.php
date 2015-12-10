@@ -44,10 +44,10 @@
 		<div class="col-md-3 col-sm-3 col-xs-2">
 			@if($user->id != Auth::user()->induser_id)
 				@if($links->contains('id', $user->id))
-		 			<div class="btn btn-success" style="padding:2px 5px;">Linked</div>
+		 			<div class="btn btn-success apply-ignore-font" style="padding:2px 5px;">Linked</div>
 		 		@else
-		 			<button type="submit" class="btn btn-success" style="padding:2px 5px;">
-						Link
+		 			<button type="submit" class="btn btn-success apply-ignore-font" style="padding:2px 5px;">
+						Add Link
 					</button>
 				@endif
 			@endif
@@ -74,9 +74,9 @@
 		</div>
 		<div class="col-md-3 col-sm-3 col-xs-2">
 			@if($follows->contains('id', $corp->id))
-		 			<div class="btn btn-success" style="padding:2px 5px;">Following</div>
+		 			<div class="btn btn-success apply-ignore-font" style="padding:2px 5px;">Following</div>
 	 		@else
-	 			<button type="submit" class="btn btn-success" style="padding:2px 5px;">
+	 			<button type="submit" class="btn btn-success apply-ignore-font" style="padding:2px 5px;">
 				<i class="glyphicon glyphicon-plus-sign" style="font-size: 12px;"></i> 
 				Follow</button>
 			@endif

@@ -16,48 +16,63 @@
 	</div>
 	<div class="portlet-body form">
 		<div class="form-body">
-			<div class="row">
-				<div class="col-md-12" style="">
-					<div class="form-group clearfix" style="margin-bottom:0">	
-						<!-- BEGIN FORM-->
-						<form action="searchConnections" class="horizontal-form" method="post">
-							<input type="hidden" name="_token" value="{{ csrf_token() }}">				
-							<div class="input-icon right">
-								<i class="fa fa-search" style="color: darkcyan;"></i>
-								<input type="text" name="keywords" id="search-input" onkeydown="down()" onkeyup="up()" class="form-control" placeholder="Search" style="border: 1px solid darkcyan;">
-							</div>	
-						</form>
-						<!-- END FORM-->
-					</div>
-
-					<div class="col-md-12" id="search-results" style="background:#f2f2f2;max-height:200px;overflow:auto;margin-bottom:10px"></div>
-				</div>			
-			</div>
 
 			@if(count($groups)>0)
 			@foreach($groups as $group)
-			<div class="row" style="
-    border: 1px dotted lightgray;
-    padding: 10px 0px;
-    margin: 10px 0px;
-">
-				<div class="col-md-4">
-					<a href="/group/{{ $group->id }}">{{ $group->group_name }}</a>
+			<div style="border: 1px dotted lightgray; margin:10px 0">
+				<div class="row" style="margin: 7px 0;padding: 7px 0px 0 0px;">
+					<div class="col-md-12 col-sm-12 col-xs-12">
+						<a href="/group/{{ $group->id }}" style="font-weight:600;">
+							{{ $group->group_name }}
+						</a>
+						@if($group->posts_count == 1)
+						<button class="btn btn-success" style="padding: 0 8px;    border-radius: 15px !important; background-color: deepskyblue;border-color: deepskyblue;">
+							<a href="/home" style="color:white;">
+								{{$group->posts_count}} Post
+							</a>
+						</button>
+						@elseif($group->posts_count > 1)
+						<button class="btn btn-success" style="padding: 0 8px;    border-radius: 15px !important; background-color: deepskyblue;border-color: deepskyblue;">
+							<a href="/home" style="color:white;">
+								{{$group->posts_count}} Posts
+							</a>
+						</button>
+						@else
+						<button class="btn btn-success" style="padding: 0 10px;">
+							No Post
+						</button>
+						@endif
+					</div>
 				</div>
-				<div class="col-md-2">
-					({{$group->posts_count}})
-				</div>
-				<div class="col-md-2">
-					<i class="icon-users"></i> {{count($group->users)}}
-				</div>
-				<div class="col-md-4">
-					<i class="icon-shield"></i> {{$group->admin()->first()->fname}}
+				<div class="row" style="margin:10px 0">
+					<div class="col-md-4 col-sm-4 col-xs-3">
+						<i class="fa fa-users"></i> ({{count($group->users)}})
+					</div>
+					<div class="col-md-4 col-sm-4 col-xs-5 group-align">
+						<i class="icon-shield"></i> {{$group->admin()->first()->fname}}
+					</div>
+					@if($group->admin->id == Auth::user()->induser_id)
+					<div class="col-md-4 col-sm-4 col-xs-4 group-align">
+							<a href="/group/{{ $group->id }}">
+								<i class="fa fa-edit (alias)"></i> Edit
+							</a>
+					</div>
+					@else
+					<div class="col-md-4 col-sm-4 col-xs-4 group-align">
+						
+							<a href="/group/{{ $group->id }}" style="">
+								<i class="fa fa-plus-circle"></i> Add
+							</a>
+						
+					</div>
+					@endif
 				</div>
 			</div>
 			@endforeach
 			@endif
 		</div>
 	 </div>
+</div>
 
 
 <!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->

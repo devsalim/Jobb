@@ -710,16 +710,14 @@
 															<input type="hidden" name="_token" value="{{ csrf_token() }}">
 															<input type="hidden" name="fav_post" value="{{ $post->id }}">
 
-															<button class=" 
-																	@if(!$post->postactivity->where('user_id', Auth::user()->induser_id)->isEmpty())
-																	@if($post->postactivity->where('user_id', Auth::user()->induser_id)->first()->fav_post == 1) 
-																		
-																	@endif
-																	@endif" 
-
-																	id="fav-btn-{{$post->id}}" type="button" style="background-color: transparent; border: 0;">
-																	<i class="fa fa-star" id="" style="font-size: 20px;"></i>
-																
+															<button class="" style="background-color: transparent;padding:0 10px;border:0">
+																@if(!$post->postactivity->where('user_id', Auth::user()->induser_id)->isEmpty())
+																<i class="fa fa-star" id="fav-btn-{{$post->id}}" style="font-size: 20px;"></i>
+																@elseif($post->postactivity->where('user_id', Auth::user()->induser_id)->first()->fav_post == 1) 
+																<i class="fa fa-star" id="fav-btn-{{$post->id}}" style="font-size: 20px;color:burlywood"></i>
+																@else
+																<i class="fa fa-star" id="fav-btn-{{$post->id}}" style="font-size: 20px;"></i>
+																@endif	
 															</button>	
 														</form>
 														@endif
@@ -994,9 +992,68 @@
 												</div>
 												@if($expired != 1)
 												<div style="margin:27px 0 0;">
-													@if($post->post_type == 'job' && Auth::user()->induser->resume != null && Auth::user()->induser_id != $post->individual_id && Auth::user()->identifier == 1)		
-														@if($post->postactivity->where('user_id', Auth::user()->induser_id)->isEmpty() && $expired != 1)
+													<!-- if corporate_id not null -->
+													@if($post->post_type == 'job' && Auth::user()->induser_id != $post->individual_id && Auth::user()->identifier == 1)		
+														@if($post->postactivity->where('user_id', Auth::user()->induser_id)->isEmpty() && $expired != 1 && $post->website_redirect_url != null)
+															<form action="/job/apply" method="post" id="post-apply-{{$post->id}}" data-id="{{$post->id}}">	
+																<input type="hidden" name="_token" value="{{ csrf_token() }}">
+																<input type="hidden" name="apply" value="{{ $post->id }}">
+																	<a class="btn apply-btn blue btn-sm apply-contact-btn" target="_blank" 
+																		href="{{ $post->website_redirect_url }}" type="button"><i class="icon-globe"></i> Apply
+																	</a>	
+															</form>	
+																
+														@elseif($expired != 1 && $post->website_redirect_url == null && $post->corporate_id != null)
+														<form action="/job/apply" method="post" id="post-apply-{{$post->id}}" data-id="{{$post->id}}">	
+															<input type="hidden" name="_token" value="{{ csrf_token() }}">
+															<input type="hidden" name="apply" value="{{ $post->id }}">
+															<button class="btn apply-btn blue btn-sm apply-contact-btn" 
+																	id="apply-btn-{{$post->id}}" type="button">Apply
+															</button>
+														</form>	
+														@elseif($expired != 1 && $post->website_redirect_url == null && $post->corporate_id == null && $post->individual_id != null)
+														<form action="/job/contact" method="post" id="post-contact-{{$post->id}}" data-id="{{$post->id}}">	
+															<input type="hidden" name="_token" value="{{ csrf_token() }}">
+															<input type="hidden" name="contact" value="{{ $post->id }}">
+															<button class="btn contact-btn green btn-sm apply-contact-btn" 
+																	id="contact-btn-{{$post->id}}" type="button">Contact
+															</button>
+														</form>	
+														@elseif($post->postactivity->where('user_id', Auth::user()->induser_id)->first()->apply == 1 && Auth::user()->identifier == 1 && $expired != 1 && $post->website_redirect_url != null) 
+															<button type="button" class="btn btn-sm bg-grey-steel apply-contact-btn" disabled="true">
+																<i class="icon-check icon-check-css"></i> Applied 
+															</button>
+														@elseif($post->postactivity->where('user_id', Auth::user()->induser_id)->first()->apply == 1 &&  Auth::user()->identifier == 1 && $expired != 1 && $post->website_redirect_url == null && $post->corporate_id == null && $post->individual_id != null) 
+														<button type="button" class="btn btn-sm bg-grey-steel apply-contact-btn" disabled="true">
+															<i class="icon-check icon-check-css"></i> Contacted 
+														</button>								
+														@endif
 
+													<!-- if corporate_id is null	 -->
+													@elseif($post->corporate_id == null && $post->individual_id != null && $post->website_redirect_url != null && Auth::user()->induser_id != $post->individual_id && Auth::user()->identifier == 1)		
+														@if($post->postactivity->where('user_id', Auth::user()->induser_id)->isEmpty() && $expired != 1)
+															<form action="/job/apply" method="post" id="post-apply-{{$post->id}}" data-id="{{$post->id}}">	
+																<input type="hidden" name="_token" value="{{ csrf_token() }}">
+																<input type="hidden" name="apply" value="{{ $post->id }}">
+																<a class="btn apply-btn blue btn-sm apply-contact-btn" target="_blank" 
+																	href="{{ $post->website_redirect_url }}" type="button"><i class="icon-globe"></i> Apply
+																</a>
+															</form>		
+														@elseif($post->postactivity->where('user_id', Auth::user()->induser_id)->first()->apply == 1 && $post->website_redirect_url != null && Auth::user()->identifier == 1 && $expired != 1) 
+															<button type="button" class="btn btn-sm bg-grey-steel apply-contact-btn" disabled="true">
+																<i class="icon-check icon-check-css"></i> Applied 
+															</button>		
+														@elseif($expired != 1)
+															<form action="/job/apply" method="post" id="post-apply-{{$post->id}}" data-id="{{$post->id}}">	
+																<input type="hidden" name="_token" value="{{ csrf_token() }}">
+																<input type="hidden" name="apply" value="{{ $post->id }}">
+																<button class="btn apply-btn blue btn-sm apply-contact-btn" 
+																		id="apply-btn-{{$post->id}}" type="button">Apply
+																</button>
+															</form>									
+														@endif	
+													@elseif($post->post_type == 'job' && Auth::user()->induser->resume == null && $post->resume_required == 0 && Auth::user()->induser_id != $post->individual_id && Auth::user()->identifier == 1)		
+														@if($post->postactivity->where('user_id', Auth::user()->induser_id)->isEmpty() && $expired != 1)
 															<form action="/job/apply" method="post" id="post-apply-{{$post->id}}" data-id="{{$post->id}}">	
 																<input type="hidden" name="_token" value="{{ csrf_token() }}">
 																<input type="hidden" name="apply" value="{{ $post->id }}">
@@ -1010,25 +1067,25 @@
 																	</button>
 																	@endif
 															</form>	
-														@elseif($post->postactivity->where('user_id', Auth::user()->induser_id)->first()->apply == 1 && Auth::user()->identifier == 1 && $expired != 1) 
-															<button type="button" class="btn btn-sm bg-grey-steel apply-contact-btn" disabled="true">
-																Applied 
-															</button>
-																
-																
-															@elseif($expired != 1)
-														<form action="/job/apply" method="post" id="post-apply-{{$post->id}}" data-id="{{$post->id}}">	
-															<input type="hidden" name="_token" value="{{ csrf_token() }}">
-															<input type="hidden" name="apply" value="{{ $post->id }}">
-															<button class="btn apply-btn blue btn-sm apply-contact-btn" 
-																	id="apply-btn-{{$post->id}}" type="button">Apply
-															</button>
-														</form>									
-													@endif	
-													@elseif($post->post_type == 'job' && Auth::user()->induser->resume == null && Auth::user()->induser_id != $post->individual_id && Auth::user()->identifier == 1)
+															@elseif($post->postactivity->where('user_id', Auth::user()->induser_id)->first()->apply == 1 && Auth::user()->identifier == 1 && $expired != 1) 
+																<button type="button" class="btn btn-sm bg-grey-steel apply-contact-btn" disabled="true">
+																	Applied 
+																</button>
+																	
+																	
+																@elseif($expired != 1)
+															<form action="/job/apply" method="post" id="post-apply-{{$post->id}}" data-id="{{$post->id}}">	
+																<input type="hidden" name="_token" value="{{ csrf_token() }}">
+																<input type="hidden" name="apply" value="{{ $post->id }}">
+																<button class="btn apply-btn blue btn-sm apply-contact-btn" 
+																		id="apply-btn-{{$post->id}}" type="button">Apply
+																</button>
+															</form>									
+														@endif	
+													@elseif($post->post_type == 'job' && Auth::user()->induser->resume == null && $post->resume_required == 1 && Auth::user()->induser_id != $post->individual_id && Auth::user()->identifier == 1)
 														Resume is Required to Apply this Post
 
-												@endif	
+													@endif	
 												@if($post->post_type == 'skill' && Auth::user()->induser_id != $post->individual_id && Auth::user()->identifier == 1)		
 													@if($post->postactivity->where('user_id', Auth::user()->induser_id)->isEmpty())
 														<form action="/job/contact" method="post" id="post-contact-{{$post->id}}" data-id="{{$post->id}}">	

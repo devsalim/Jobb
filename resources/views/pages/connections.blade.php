@@ -17,15 +17,15 @@
 						<div class="portlet light col-md-12 clearfix" style="background-color: transparent;">
 							<div class="row social" style="margin: 5px auto;display: table;">
 								<div class="col-md-4 col-xs-4 ">
-									<a  class="btn btn-lg btn-facebook btn-block" href="" style="background: #3b5998;color: white;border-radius: 25px !important;height: 35px;">
+									<a  class="btn btn-lg btn-facebook btn-block share-media-icon" href="" style="background: #3b5998;color: white;border-radius: 25px !important;">
 									<i class="fa fa-facebook "></i><span class="hidden-xs" style="font-size:14px"> &nbsp;Facebook</span></a>	
 								</div>
 								<div class="col-md-4 col-xs-4 ">
-									  <a  class="btn btn-lg btn-google btn-block" href="" style="background: #c32f10;color: white;border-radius: 25px !important;height: 35px;">
+									  <a  class="btn btn-lg btn-google btn-block share-media-icon" href="" style="background: #c32f10;color: white;border-radius: 25px !important;">
 									  <i class="fa fa-google-plus"></i><span class="hidden-xs"style="font-size:14px"> &nbsp;Google+</span></a>
 								</div>
 								<div class="col-md-4 col-xs-4 ">
-									  <a class="btn btn-lg btn-linkedin btn-block" style="background: #00aced;color: white;border-radius: 25px !important;height: 35px;">
+									  <a class="btn btn-lg btn-linkedin btn-block share-media-icon" style="background: #00aced;color: white;border-radius: 25px !important;">
 									  <i class="fa fa fa-linkedin"></i><span class="hidden-xs"style="font-size:14px"> &nbsp;Linkedin</span></a>
 								</div>
 							</div>
@@ -123,14 +123,7 @@
 
 							</form>
 							<!-- <div class="col-md-1"></div> -->
-								<div class=" input-icon right normal_search">
-									<i class="fa fa-search" style="color: darkcyan;right:80px;"></i>
-									<input type="text" name="keywords" id="search-input" onkeydown="down()" onkeyup="up()" class="form-control" placeholder="Search Name or Email id" style="border: 1px solid darkcyan;margin:0 8px">
-									<a class="advance-search btn search-advance-tool">Advance</a>
-								</div>	
-							<!-- END FORM-->
-							<div class="col-md-12 links-title" id="search-results" style="background:#f2f2f2;max-height:200px;overflow:auto;margin:0 8px">
-							</div>	
+								
 						</div>
 
 							
@@ -139,31 +132,41 @@
 			</div>
 	</div>
 </div>
-
-<div class="portlet box green col-md-7">
+<div class="row" style="margin:0 !important;">
+	<div class="col-md-7" style="padding-left:0 !important;">
+		<div class=" input-icon right normal_search">
+			<i class="fa fa-search" style="color: darkcyan;right:80px;"></i>
+			<input type="text" name="keywords" id="search-input" onkeydown="down()" onkeyup="up()" class="form-control" placeholder="Search Name or Email id" style="border: 1px solid darkcyan;margin:0 8px">
+			<a class="advance-search btn search-advance-tool">Advance</a>
+		</div>	
+		<div class="col-md-12 links-title" id="search-results" style="background:#f2f2f2;max-height:200px;overflow:auto;margin:0 8px">
+		</div>	
+	</div>
+</div>
+<div class="portlet box green col-md-7 col-xs-12 col-sm-8">
 	<div class="portlet-title" style="float:left;">
 		
 		<ul class="nav nav-tabs" style="padding-left: 0px;">
 				<li class="active">
-					<a href="#tab_5_1" class="label-new" data-toggle="tab" style="padding:8px;">
+					<a href="#tab_5_1" class="label-new" data-toggle="tab" style="font-size: 12px !important;padding: 11px;">
 					Linked 
 					@if($linksCount > 0)
-						<span class="badge" style="background-color: dodgerblue;">{{$linksCount}} </span>
+						<span class="badge" style="background-color: deepskyblue;">{{$linksCount}} </span>
 					@endif</a>
 					
 				</li>
 				<li>
-					<a href="#tab_5_2" class="label-new" data-toggle="tab">
+					<a href="#tab_5_2" class="label-new" data-toggle="tab" style="font-size: 12px !important;padding: 11px;">
 					Link Requests
 					@if($linkrequestCount > 0)
 						<span class="badge" style="background-color: lightcoral;">{{$linkrequestCount}} </span>
 					@endif</a>
 				</li>
 				<li>
-					<a href="#tab_5_3" class="label-new" data-toggle="tab">
+					<a href="#tab_5_3" class="label-new" data-toggle="tab" style="font-size: 12px !important;padding: 11px;">
 					Following
 					@if($followCount > 0)
-						<span class="badge" style="background-color: lightseagreen;">{{$followCount}} </span>
+						<span class="badge" style="background-color: dimgrey;">{{$followCount}} </span>
 					@endif</a>
 				</li>
 			</ul>
@@ -176,7 +179,7 @@
 					@if(count(Auth::user()->induser->friends) > 0)
 					@foreach(Auth::user()->induser->friends as $connection)
 						 @if($connection->pivot->status == 1)
-					<div class="row search-user-tool" style="margin-bottom:10px;">					
+					<div class="row search-user-tool" style="margin: 0px 7px 0px -16px;">					
 							<div class="col-md-2 col-sm-3 col-xs-2">
 								<a href="#">
 							        <img class="media-object img-circle img-link-size" 
@@ -223,7 +226,7 @@
 							<div class="col-md-3 col-sm-3 col-xs-2" style="margin:7px 0">
 								<form action="{{ url('/connections/destroy', $connection->pivot->id) }}" method="post">
 									<input type="hidden" name="_token" value="{{ csrf_token() }}">
-									<button type="submit" class="btn btn-success btn-responsive" style="padding:2px 5px;">
+									<button type="submit" class="btn btn-success btn-responsive apply-ignore-font" style="padding:2px 5px;">
 									Linked
 									</button>
 								</form>	
@@ -244,7 +247,7 @@
 					@if($linkrequestCount > 0)
 					@foreach(Auth::user()->induser->friendOf as $conreq)
 					@if($conreq->pivot->status == 0)
-					<div class="row search-user-tool" style="margin-bottom:10px;">
+					<div class="row" style="margin: 0px -35px 0px -9px;">
 						
 								
 							<div class="col-md-2 col-sm-3 col-xs-2">
@@ -254,7 +257,7 @@
 							      	alt="DP">
 							     </a>
 							</div>
-							<div class="col-md-5 col-sm-6 col-xs-5">
+							<div class="col-md-5 col-sm-6 col-xs-6" style="    border-bottom: 1px dotted lightgrey;padding: 0px 7px 7px 2px;">
 								 <a href="/profile/ind/{{$conreq->id}}" data-utype="ind" style="font-size:15px;">
 							    		 	 	{{ $conreq->fname }} {{ $conreq->lname }}</a><br>
 							    <small>
@@ -290,14 +293,14 @@
                                 @endif
 							      </small>
 							</div>
-							<div class="col-md-3 col-sm-3 col-xs-5" style="margin:7px 0">
+							<div class="col-md-3 col-sm-3 col-xs-4" style="margin:4px 0">
 								<form action="{{ url('/connections/response', $conreq->pivot->id) }}" method="post">
 									<input type="hidden" name="_token" value="{{ csrf_token() }}">
-									<button type="submit" name="action" value="accept" class="btn btn-success" style="padding:2px 5px;">
-										Accept
+									<button type="submit" name="action" value="accept" class="btn apply-ignore-font" style="padding: 0px 3px; background-color: white;">
+										<i class="icon-check icon-check-css"></i>
 									</button>
-									<button type="submit" name="action" value="reject" class="btn btn-danger" style="padding:2px 5px;">
-										Ignore
+									<button type="submit" name="action" value="reject" class="btn apply-ignore-font" style="padding: 0px 3px; background-color: white;">
+										<i class="icon-close icon-close-css"></i>
 									</button>
 								</form>
 							</div>
@@ -316,27 +319,25 @@
 				<div class="tab-pane" id="tab_5_3">
 					@if(count($linkFollow) > 0)
 					@foreach($linkFollow as $follow)
-					<div class="row search-user-tool" style="margin-bottom:10px;">
+					<div class="row search-user-tool" style="margin: 0px 7px 0px -16px;">
 								
 							<div class="col-md-2 col-sm-2 col-xs-2">
 								<a href="#">
 							        <img class="media-object img-link-size" src="@if($follow->logo_status != null){{ '/img/profile/'.$follow->logo_status }}@else{{'/assets/images/corpnew.jpg'}}@endif" alt="DP" style="width:60px">
 							    </a>
 							</div>
-							<div class="col-md-5 col-sm-6 col-xs-6">
+							<div class="col-md-5 col-sm-6 col-xs-7">
 								<a href="/profile/corp/{{$follow->id}}" class="link-label" data-utype="corp">
 							    		 		{{ $follow->firm_name }}
 							    		 	</a>
 							    		 	 <small>{{ $follow->firm_type }}</small><br>
 
-								 @if($follow->emp_count != null)
-								Employees ({{ $follow->emp_count }})  @endif, 
-								 @if($followNewCount > 0)Followers ({{ $followNewCount }})@endif 
+								
 							</div>
 							<div class="col-md-3 col-sm-3 col-xs-3" style="margin:7px 0">
 								<form action="{{ url('links/corporate/unfollow', $follow->id) }}" method="post">
 									<input type="hidden" name="_token" value="{{ csrf_token() }}">
-									<button type="submit" name="action" value="accept" class="btn btn-success" style="padding:2px 7px;" >
+									<button type="submit" name="action" value="accept" class="btn btn-success apply-ignore-font" style="padding:2px 7px;" >
 										Following
 									</button>
 								</form>
@@ -405,7 +406,9 @@
 						    		 	{{ $follower->fname }} {{ $follower->lname }}
 						    		 	</a>
 						    		 </h4>
-									 {{ $follower->city }}, {{ $follower->state }}
+									@if($follower->emp_count != null)
+									Employees ({{ $follower->emp_count }})@endif 
+									@if($follower->followers > 0)Followers ({{ $follower->followers }})@endif 
 						    	</div>						    	
 							</div>														     
 						  </li>				 

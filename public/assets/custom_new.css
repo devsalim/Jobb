@@ -42,13 +42,28 @@
 
 .search-advance-tool{
   position: absolute;
-    right: -5px;
-    top: 3px;
-    padding: 3px 10px;
-    /* line-height: 1.4; */
-    background-color: lightgrey;
-    color: firebrick;
+  right: -5px;
+  top: 3px;
+  padding: 3px 10px;
+  /* line-height: 1.4; */
+  background-color: darkcyan;
+  color: whitesmoke;
+  box-shadow: 0 1px 2px lightslategray;
 }
+
+.group-align{
+  text-align: center;
+  font-size: 12px;
+}
+
+.done-show{
+  display: none;
+}
+
+.add-done-show{
+  display: none;
+}
+
 
 @media (max-width: 767px){
 .elipsis-city-code{
@@ -56,6 +71,12 @@
     overflow: hidden;
     text-overflow: ellipsis;
     
+}
+
+.share-media-icon{
+  height: 40px;
+  width: 40px;
+  line-height: 1.4;
 }
 
 .img-link-size{
@@ -232,8 +253,9 @@ display:none !important;
 }
 }
 .portlet.light{
-    padding: 0px 20px 0px 10px !important ;
+    padding: 0px 20px 0px 20px !important ;
 }
+
 
 .back-btn {
     margin-bottom: -30px;
@@ -841,6 +863,10 @@ display: table;
     margin: 1px 2px;
 }
 
+.apply-ignore-font{
+  font-size: 12px !important;
+}
+
 @media (max-width: 767px){
 
 .ribbon-front3 {
@@ -866,4 +892,42 @@ display: table;
   font-size: 10px;
 }
 
+}
+
+
+.checkboxFour {
+width: 35px;
+    height: 35px;
+    background: #ddd;
+    margin: 18px 0;
+    border-radius: 100% !important;
+    position: relative;
+    -webkit-box-shadow: 0px 1px 3px rgba(0,0,0,0.5);
+    -moz-box-shadow: 0px 1px 3px rgba(0,0,0,0.5);
+    box-shadow: 0px 1px 3px rgba(0,0,0,0.5);
+}
+
+.checkboxFour label {
+display: block;
+    width: 25px;
+    height: 25px;
+    border-radius: 100px !important;
+    -webkit-transition: all .5s ease;
+    -moz-transition: all .5s ease;
+    -o-transition: all .5s ease;
+    -ms-transition: all .5s ease;
+    transition: all .5s ease;
+    cursor: pointer;
+    position: absolute;
+        top: 5px;
+    left: 5px;
+    z-index: 1;
+    background: #333;
+    -webkit-box-shadow: inset 0px 1px 3px rgba(0,0,0,0.5);
+    -moz-box-shadow: inset 0px 1px 3px rgba(0,0,0,0.5);
+    box-shadow: inset 0px 1px 3px rgba(0,0,0,0.5);
+}
+
+.checkboxFour input[type=checkbox]:checked + label {
+background: #26ca28;
 }
