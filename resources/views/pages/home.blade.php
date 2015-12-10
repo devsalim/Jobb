@@ -1460,13 +1460,13 @@ $('.apply-btn').on('click',function(event){
     return false;
   });
 	
-	$('.contact-btn').on('click',function(event){  	    
+$('.contact-btn').on('click',function(event){  	    
   	event.preventDefault();
   	var post_id = $(this).parent().data('id');
 
   	var formData = $('#post-contact-'+post_id).serialize(); 
     var formAction = $('#post-contact-'+post_id).attr('action');
-
+	// console.log(post_id);
     $.ajaxSetup({
 		headers: {
 			'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -1479,11 +1479,15 @@ $('.apply-btn').on('click',function(event){
       data: formData,
       cache : false,
       success: function(data){
-        if(data == "contacted"){
+      	// console.log("s:"+data);
+        if(data.data.contact_status == "contacted"){
         	$('#contact-btn-'+post_id).prop('disabled', true);
  			$('#contact-btn-'+post_id).text('Contacted');
         }
-      }
+      },
+      error: function(data) {
+	        console.log("e:"+data);
+	   }
     }); 
     return false;
   });

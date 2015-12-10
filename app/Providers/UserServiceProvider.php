@@ -5,6 +5,7 @@ use Auth;
 use App\Induser;
 use App\Corpuser;
 use App\Postactivity;
+use App\Notification;
 
 class UserServiceProvider extends ServiceProvider {
 
@@ -72,12 +73,17 @@ class UserServiceProvider extends ServiceProvider {
 											->where('postactivities.apply', '=', 1)
 											->orderBy('postactivities.id', 'desc')
 											->sum('postactivities.apply');
+
+				$notifications = Notification::with('fromUser', 'toUser')->take(5)->get();
+				$notificationsCount = Notification::where('to_user', '=', Auth::user()->id)->count();
 			}
 			$view->with('applications', $applications)
 			  	 ->with('thanks', $thanks)
 			  	 ->with('favourites', $favourites)
 			  	 ->with('thanksCount', $thanksCount)
-			  	 ->with('applicationsCount', $applicationsCount);	
+			  	 ->with('applicationsCount', $applicationsCount)
+			  	 ->with('notifications', $notifications)
+			  	 ->with('notificationsCount', $notificationsCount);	
 		});
 	}
 

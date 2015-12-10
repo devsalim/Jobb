@@ -17,6 +17,8 @@ use Response;
 use App\Group;
 use App\Induser;
 use App\ReportAbuse;
+use App\User;
+use App\Notification;
 
 class JobController extends Controller {
 
@@ -285,23 +287,91 @@ class JobController extends Controller {
 
 	public function postContact(Request $request){
 		$contact = Postactivity::where('post_id', '=', $request['contact'])
-							->where('user_id', '=', Auth::user()->induser_id)
+							->where('user_id', '=', Auth::user()->id)
 							->first();
+
+		$post_id = $request['contact'];
+		$data = [];
+		$data['pa'] = $contact;
+		$data['post_user_info'] = null;
 		if($contact == null){
 			$contact = new Postactivity();
-			$contact->post_id = $request['contact'];
-			$contact->user_id = Auth::user()->induser_id;
+			$contact->post_id = $post_id;
+			$contact->user_id = Auth::user()->id;
 			$contact->contact_view = 1;
 			$contact->contact_view_dtTime = new \DateTime();
 			$contact->save();
-			return "contacted";
+
+			$data['contact_status'] = 'contacted';
+			// Notification entry
+			if($post_id != null){
+				$to_user = 0;
+				$post_user_info = Postjob::where('id', '=', $post_id)->first(['id', 'individual_id', 'corporate_id']);
+
+		$data['post_user_info'] = $post_user_info;
+				if($post_user_info != null){
+
+					if($post_user_info->individual_id != null){
+						$to_user = User::where('induser_id', '=', $post_user_info->individual_id)->pluck('id');
+					}
+					
+					if($post_user_info->corporate_id != null){
+						$to_user = User::where('corpuser_id', '=', $post_user_info->corporate_id)->pluck('id');
+					}
+
+					$notification = new Notification();
+					$notification->from_user = Auth::user()->id;
+					$notification->to_user = $to_user;
+					$notification->remark = 'has contacted for your post id: '.$post_id;
+					$notification->operation = 'job contact';
+					$notification->save();
+
+					$data['notification_status'] = 'notified';
+
+				}
+
+
+			}
+
+			// return response()->json(['success'=>true,'data'=>$data]);
 		}elseif($contact != null && $contact->contact_view == 0){
 			$contact->contact_view = 1;
 			$contact->contact_view_dtTime = new \DateTime();
 			$contact->save();
-			return "contacted";
-		}
 
+			$data['contact_status'] = 'contacted';
+
+			// Notification entry
+			if($post_id != null){
+				$to_user = 0;
+				$post_user_info = Postjob::where('id', '=', $post_id)->first(['id', 'individual_id', 'corporate_id']);
+				$data['post_user_info'] = $post_user_info;
+				if($post_user_info != null){
+
+					if($post_user_info->individual_id != null){
+						$to_user = User::where('induser_id', '=', $post_user_info->individual_id)->pluck('id');
+					}
+					
+					if($post_user_info->corporate_id != null){
+						$to_user = User::where('corpuser_id', '=', $post_user_info->corporate_id)->pluck('id');
+					}
+
+					$notification = new Notification();
+					$notification->from_user = Auth::user()->id;
+					$notification->to_user = $to_user;
+					$notification->remark = 'has contacted for your post id: '.$post_id;
+					$notification->operation = 'job contact';
+					$notification->save();
+
+					$data['notification_status'] = 'notified';
+
+				}
+
+			}
+
+			
+		}
+		return response()->json(['success'=>true,'data'=>$data]);
 	}
 
 	public function skillSearch(){
