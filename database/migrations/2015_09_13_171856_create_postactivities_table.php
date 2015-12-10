@@ -25,6 +25,10 @@ class CreatePostactivitiesTable extends Migration {
             $table->dateTime('fav_post_dtTime');
             $table->string('apply');
             $table->dateTime('apply_dtTime');
+
+            $table->string('share');
+            $table->dateTime('share_dtTime');
+            
             $table->foreign('post_id')->references('id')->on('postjobs');
             $table->foreign('user_id')->references('id')->on('users');
 			$table->timestamps();

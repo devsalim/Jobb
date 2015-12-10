@@ -90,9 +90,9 @@ class AuthController extends Controller {
 						$email = $request->input('email');
 						$fname = $emailObj->name;
 
-						// Mail::send('emails.welcome', array('fname'=>$fname, 'vcode'=>$vcode), function($message) use ($email,$fname){
-					 //        $message->to($email, $fname)->subject('Welcome to Jobtip!')->from('admin@jobtip.in', 'JobTip');
-					 //    });
+						Mail::send('emails.welcome', array('fname'=>$fname, 'vcode'=>$vcode), function($message) use ($email,$fname){
+					        $message->to($email, $fname)->subject('Welcome to Jobtip!')->from('admin@jobtip.in', 'JobTip');
+					    });
 
 					    $data['email_verify'] = 0;
 			    		$data['page'] = 'login';
@@ -120,9 +120,9 @@ class AuthController extends Controller {
 					$now = \Carbon\Carbon::now(new \DateTimeZone('Asia/Kolkata'));
 					$difference = $now->diffInMinutes($mobile_otp_expiry);
 
-					/*$data['now'] = $now;
+					$data['now'] = $now;
 					$data['mobile_otp_expiry'] = $mobile_otp_expiry;
-					$data['diff'] = $difference;*/
+					$data['diff'] = $difference;
 					$data['mobile'] = $request->input('email');
 					if($difference < 15 && $userForMobile->mobile_otp_attempt < 3){
 						// send old otp n increment the attempt
@@ -143,6 +143,9 @@ class AuthController extends Controller {
 			    		$data['page'] = 'login';
 			    		$data['message'] = 'OTP sent to your registered mobile number. '.$otp;
 					}else if($userForMobile->mobile_otp_attempt == 3){
+						if($difference >= 30){
+							User::where('mobile', '=', $request->input('email'))->update(['mobile_otp_attempt' => 0]);
+						}
 						$data['mobile_verify'] = 0;
 			    		$data['page'] = 'login';
 			    		$data['message'] = 'You have reached to maximum limit. Try after sometime.';
@@ -158,7 +161,15 @@ class AuthController extends Controller {
     		 $credentials = array_add($credentials, 'mobile_verify', '1');
     	}*/
 		if($request->ajax()){
-			if(($data['page'] == 'home') && ($data['email_verify'] == 1 || $data['mobile_verify'] == 1)){
+			$everify = 0;
+			$mverify = 0;
+			if( array_key_exists ( 'email_verify' , $data) ){
+				$everify = $data['email_verify'];
+			}
+			if( array_key_exists ( 'mobile_verify' , $data) ){
+				$mverify = $data['mobile_verify'];
+			}
+			if(($data['page'] == 'home') && ($everify == 1 || $mverify == 1)){
 				if ($this->auth->attempt($credentials)){
 			        // return $this->redirectPath();
 			        $data['message'] = 'login success';

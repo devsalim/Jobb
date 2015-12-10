@@ -559,7 +559,7 @@ $(document).ready(function(){
       cache : false,
       success: function(data){
         loader('hide');
-        console.log(data)
+        // console.log(data);
         if(data.data.page == 'login' && data.data.user == 'invalid'){            
             $('#ind-msg-box').removeClass('alert alert-success');
             $('#ind-msg-box').addClass('alert alert-danger').fadeIn(1000, function(){
@@ -933,7 +933,7 @@ $('#resend-otp-btn').on('click',function(event){
       cache : false,
       success: function(data){
         loader('hide');
-        // console.log(data)
+        // console.log(data);
         if(data.data.page == 'login' && data.data.mobile_verify == 0 && data.data.success_status){        	
             disableOTP();
         	$('#ind-msg-reg-box').removeClass('alert alert-danger');
@@ -984,16 +984,16 @@ $('#forgot-password').bind('keydown', function(e){
 
 </script>
 <script type="text/javascript">
-    // setTimeout (function(){
-    // document.getElementById('resend-otp-btn').disabled = null;
-    // },60000);
+    setTimeout (function(){
+    document.getElementById('resend-otp-btn').disabled = null;
+    },60000);
 
     var countdownNum = 60;
-    // incTimer();
-
+    
     function disableOTP(){
     	document.getElementById('resend-otp-btn').disabled = true;
-    	incTimer()
+    	incTimer();
+    	countdownNum = 60;
     }
 
     function incTimer(){    	    	

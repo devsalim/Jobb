@@ -213,18 +213,71 @@ class JobController extends Controller {
 		$apply = Postactivity::where('post_id', '=', $request['apply'])
 							->where('user_id', '=', Auth::user()->induser_id)
 							->first();
+		$post_id = $request['apply'];
 		if($apply == null){
 			$apply = new Postactivity();
-			$apply->post_id = $request['apply'];
+			$apply->post_id = $post_id;
 			$apply->user_id = Auth::user()->induser_id;
 			$apply->apply = 1;
 			$apply->apply_dtTime = new \DateTime();
 			$apply->save();
+
+			// Notification entry
+			if($post_id != null){
+				$to_user = 0;
+				$post_user_info = Postjob::where('id', '=', $post_id)->first(['id', 'individual_id', 'corporate_id']);
+				if($post_user_info != null){
+
+					if($post_user_info->individual_id != null){
+						$to_user = User::where('induser_id', '=', $post_user_info->individual_id)->pluck('id');
+					}
+
+					if($post_user_info->corporate_id != null){
+						$to_user = User::where('corpuser_id', '=', $post_user_info->corporate_id)->pluck('id');
+					}
+
+					$notification = new Notification();
+					$notification->from_user = Auth::user()->id;
+					$notification->to_user = $to_user;
+					$notification->remark = 'has applied for your post id: '.$post_id;
+					$notification->operation = 'job apply';
+					$notification->save();
+
+				}
+
+			}			
+
 			return "applied";
 		}elseif($apply != null && $apply->apply == 0){
 			$apply->apply = 1;
 			$apply->apply_dtTime = new \DateTime();
 			$apply->save();
+
+			// Notification entry
+			if($post_id != null){
+				$to_user = 0;
+				$post_user_info = Postjob::where('id', '=', $post_id)->first(['id', 'individual_id', 'corporate_id']);
+				if($post_user_info != null){
+
+					if($post_user_info->individual_id != null){
+						$to_user = User::where('induser_id', '=', $post_user_info->individual_id)->pluck('id');
+					}
+					
+					if($post_user_info->corporate_id != null){
+						$to_user = User::where('corpuser_id', '=', $post_user_info->corporate_id)->pluck('id');
+					}
+
+					$notification = new Notification();
+					$notification->from_user = Auth::user()->id;
+					$notification->to_user = $to_user;
+					$notification->remark = 'has applied for your post id: '.$post_id;
+					$notification->operation = 'job apply';
+					$notification->save();
+
+				}
+
+			}
+
 			return "applied";
 		}
 

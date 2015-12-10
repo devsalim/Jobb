@@ -22,8 +22,16 @@ class CreateUsersTable extends Migration {
 			$table->unsignedInteger('corpuser_id')->nullable();
 			$table->unsignedInteger('induser_id')->nullable();
 			$table->unsignedInteger('identifier');
+			
+			$table->string('reset_code', 100);
 			$table->string('email_verify')->default(0)->nullable();
-            $table->string('mobile_verify')->default(0)->nullable();	
+            $table->string('mobile_verify')->default(0)->nullable();
+			$table->string('mobile_otp')->nullable();
+			$table->string('email_vcode')->nullable();
+			$table->unsignedInteger('mobile_otp_attempt')->default(0);
+			$table->dateTime('mobile_otp_expiry');
+			$table->dateTime('email_vcode_expiry');
+
             $table->rememberToken();
 			$table->timestamps();		
 			$table->foreign('corpuser_id')->references('id')->on('corpusers');

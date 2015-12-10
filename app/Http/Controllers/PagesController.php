@@ -717,7 +717,7 @@ class PagesController extends Controller {
 		}
 		if($user != null && strlen(trim(Input::get('mobileOTP'))) == 4){
 			Induser::where('mobile_otp', '=', Input::get('mobileOTP'))->update(['mobile_verify' => 1, 'mobile_otp' => null]);
-			User::where('induser_id', '=', $user->id)->update(['mobile_verify' => 1]);
+			User::where('induser_id', '=', $user->id)->update(['mobile_verify' => 1, 'mobile_otp' => null, 'mobile_otp_attempt' => 0, 'mobile_otp_expiry' => null]);
 			$msg = 'Mobile no. verified successfully. Now you can login with your mobile no.';
 
 			return redirect('/login')
@@ -830,9 +830,9 @@ class PagesController extends Controller {
 					$now = \Carbon\Carbon::now(new \DateTimeZone('Asia/Kolkata'));
 					$difference = $now->diffInMinutes($mobile_otp_expiry);
 
-					/*$data['now'] = $now;
+					$data['now'] = $now;
 					$data['mobile_otp_expiry'] = $mobile_otp_expiry;
-					$data['diff'] = $difference;*/
+					$data['diff'] = $difference;
 					$data['success_status'] = true;
 					if($difference < 15 && $userForMobile->mobile_otp_attempt < 3){
 						// send old otp n increment the attempt
@@ -855,6 +855,9 @@ class PagesController extends Controller {
 			    		$data['page'] = 'login';
 			    		$data['message'] = 'OTP sent to your registered mobile number. '.$otp;
 					}else if($userForMobile->mobile_otp_attempt == 3){
+						if($difference >= 30){
+							User::where('mobile', '=', $mobile)->update(['mobile_otp_attempt' => 0]);
+						}
 						$data['resend_status'] = 'maxlimit';
 						$data['mobile_verify'] = 0;
 			    		$data['page'] = 'login';
