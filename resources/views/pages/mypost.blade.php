@@ -78,7 +78,7 @@
 									<div class="row" style="margin-top: 15px;">
 										@if($expired != 1)
 											@if($remainingDays >= 2)
-											<div class="col-md-5 col-sm-3 col-xs-12">
+											<div class="col-md-6 col-sm-6 col-xs-8">
 												<div class="">Post Expires in: {{ $remainingDays }} days
 													@if($post->post_duration_extend == 0)
 														<a href="#extend-job-expiry-{{ $post->id }}" data-toggle="modal" 
@@ -89,7 +89,7 @@
 												</div>
 											</div>
 											@elseif( $remainingDays == 1)
-											<div class="col-md-6 col-sm-3 col-xs-12">
+											<div class="col-md-6 col-sm-6 col-xs-8">
 												<div class="">Post Expires : Tomorrow
 													@if($post->post_duration_extend == 0)
 													<a href="#extend-job-expiry-{{ $post->id }}" data-toggle="modal" 
@@ -100,7 +100,7 @@
 												</div>
 											</div>
 											@elseif($remainingDays == 0 && $remainingHours > 10)
-											<div class="col-md-6 col-sm-3 col-xs-12">
+											<div class="col-md-6 col-sm-6 col-xs-8">
 												<div class="">Post Expires : Today
 													@if($post->post_duration_extend == 0)
 													<a href="#extend-job-expiry-{{ $post->id }}" data-toggle="modal" 
@@ -111,7 +111,7 @@
 												</div>
 											</div>
 											@elseif($remainingHours < 10)
-											<div class="col-md-6 col-sm-3 col-xs-12">
+											<div class="col-md-6 col-sm-6 col-xs-8">
 												<div class="">Post Expires in: {{ $remainingHours }} Hours
 													@if($post->post_duration_extend == 0)
 													<a href="#extend-job-expiry-{{ $post->id }}" data-toggle="modal" 
@@ -125,7 +125,7 @@
 
 										@endif
 										@if($expired != 1)
-										<div class="col-md-3 col-sm-3 col-xs-12">
+										<div class="col-md-6 col-sm-6 col-xs-4">
 											<a class="btn btn-sm btn-danger" data-toggle="modal" href="#expire">
 												Expire
 											</a>
@@ -155,7 +155,7 @@
 											<!-- /.modal -->
 										</div>
 										@elseif($expired == 1)
-										<div class="col-md-3 col-sm-3 col-xs-12">
+										<div class="col-md-3 col-sm-3 col-xs-8">
 											<a class="btn btn-sm btn-danger" disabled data-toggle="modal" href="#expire">
 												Expired
 											</a>
@@ -385,22 +385,19 @@
 
 														                  @foreach($post->postactivity as $pa)
 																		  	@if($pa->apply == 1)
-														                 	<li style="font-size:15px;">
-														                 		<!-- <div class="mypost-match"><i class="icon-speedometer"></i> 49%</div> -->
-															                    <span class="photo mypost-photo">
-															                    	<img src="@if($pa->user->profile_pic != null){{ '/img/profile/'.$pa->user->profile_pic }}@else{{'/assets/images/ab.png'}}@endif" 
+																		  	<div class="row">
+																		  		<div class="col-md-3 col-sm-4 col-xs-3">
+																		  			<img src="@if($pa->user->profile_pic != null){{ '/img/profile/'.$pa->user->profile_pic }}@else{{'/assets/images/ab.png'}}@endif" 
 															                    		 width="45" height="45" 
 															                    		 class="img-circle">
-															                    		 
-															                    </span>
-															                    <span class="subject mypost-subject" >
-																                    <span class="from" >
-																                    	<a href="/profile/ind/{{$pa->user->id}}" data-utype="ind">
+																		  		</div>
+																		  		<div class="col-md-8 col-sm-8 col-xs-9">
+																		  			<a href="/profile/ind/{{$pa->user->id}}" data-utype="ind">
 																                    		{{$pa->user->fname}} {{$pa->user->lname}}</a> has applied for this post <i class=" icon-clock"></i>
 															                    	{{ \Carbon\Carbon::createFromTimeStamp(strtotime($pa->apply_dtTime))->diffForHumans() }}
-																                   	</span>
-																                  <!--   <span class="time"> </span> -->
-															                    </span>
+																		  		</div>
+																		  	</div>
+
 															                   <?php
 															                    $userSkills = array_map('trim', explode(',', $pa->user->linked_skill));
 															                    unset ($userSkills[count($userSkills)-1]); 
@@ -409,48 +406,52 @@
 																					$overlap = array_intersect($postSkills, $userSkills);
 																					$counts  = array_count_values($overlap);
 																				?>
-
-															                    <div class="row">
-																                    <div class="col-md-1"></div>
-															                        <div class="col-md-10">
-																                    	<div class="row">
-																	                    	<div class="col-md-4 col-sm-4 col-xs-4">
-																	                    		<a data-toggle="modal" href="#post-mod-{{$post->id}}">
-																	                    			<i class="icon-speedometer"></i> 
-<?php
-try{
-	if(count($postSkills) > 0){
-		$skillPer = (count($counts) / count($postSkills)) * 100;
-		if(strcasecmp($post->role, Auth::user()->induser->role) == 0){$rolePer = 100;}else{$rolePer = 0;}
-		if($post->prof_category == Auth::user()->induser->prof_category){$jobPer = 100;}else{$jobPer = 0;}
-		if($post->min_exp == Auth::user()->induser->experience){$expPer = 100;}else{$expPer = 0;}
-		if($post->education == Auth::user()->induser->education){$eduPer = 100;}else{$eduPer = 0;}
-		if($post->city == Auth::user()->induser->city){$cityPer = 100;}else{$cityPer = 0;}
-		if($post->time_for == Auth::user()->induser->prefered_jobtype){$typePer = 100;}else{$typePer = 0;}
-		$avgPer = ($skillPer + $rolePer + $jobPer + $expPer + $eduPer + $cityPer + $typePer)/7;
-		echo round($avgPer).' %';
-	}
-}
-catch(\Exception $e){}
-?>
+																		  	<div class="row">
+														                    	<div class="col-md-4 col-sm-4 col-xs-4">
+														                    		<a data-toggle="modal" href="#post-mod-{{$post->id}}">
+														                    			<i class="icon-speedometer"></i> 
+																						<?php
+																						try{
+																							if(count($postSkills) > 0){
+																								$skillPer = (count($counts) / count($postSkills)) * 100;
+																								if(strcasecmp($post->role, Auth::user()->induser->role) == 0){$rolePer = 100;}else{$rolePer = 0;}
+																								if($post->prof_category == Auth::user()->induser->prof_category){$jobPer = 100;}else{$jobPer = 0;}
+																								if($post->min_exp == Auth::user()->induser->experience){$expPer = 100;}else{$expPer = 0;}
+																								if($post->education == Auth::user()->induser->education){$eduPer = 100;}else{$eduPer = 0;}
+																								if($post->city == Auth::user()->induser->city){$cityPer = 100;}else{$cityPer = 0;}
+																								if($post->time_for == Auth::user()->induser->prefered_jobtype){$typePer = 100;}else{$typePer = 0;}
+																								$avgPer = ($skillPer + $rolePer + $jobPer + $expPer + $eduPer + $cityPer + $typePer)/7;
+																								echo round($avgPer).' %';
+																							}
+																						}
+																						catch(\Exception $e){}
+																						?>
 
 
-																	                    		</a>
-																	                    	</div>
-																	                    	<!-- <div class="col-md-2 col-sm-4 col-xs-4">
-																	                    		Profile
-																	                    	</div> -->
-																	                    	<div class="col-md-4 col-sm-4 col-xs-4">
-																	                    	<a class="viewcontact-view" data-toggle="modal" href="#viewcontact-view">
-																	                    		View Contact</a>
-																	                    	</div>
-																	                    	<div class="col-md-4 col-sm-4 col-xs-4">
-																	                    	<a class="viewcontact-view" data-toggle="modal" href="/profile/ind/{{$pa->user->id}}">
-																	                    		View/Download</a>
-																	                    	</div>
-																                    	</div>
-															                		</div>
-															               		</div>
+														                    		</a>
+														                    	</div>
+														                    	<!-- <div class="col-md-2 col-sm-4 col-xs-4">
+														                    		Profile
+														                    	</div> -->
+														                    	<div class="col-md-4 col-sm-4 col-xs-4">
+														                    	<a class="viewcontact-view" data-toggle="modal" href="#viewcontact-view">
+														                    		<i class="icon-call-end"></i> <span class="hidden-sm hidden-xs">View Contact</span></a>
+														                    	</div>
+														                    	<div class="col-md-4 col-sm-4 col-xs-4">
+														                    	<a class="viewcontact-view" data-toggle="modal" href="/profile/ind/{{$pa->user->id}}">
+														                    		<i class="icon-eye"></i> <span class="hidden-sm hidden-xs">View/Resume</span></a>
+														                    	</div>
+													                    	</div>
+														                 	
+														                 		<!-- <div class="mypost-match"><i class="icon-speedometer"></i> 49%</div> -->
+															                  
+
+															                    <!-- <div class="row"> -->
+																                    <!-- <div class="col-md-1"></div> -->
+															                        <!-- <div class="col-md-12"> -->
+																                    	
+															                		<!-- </div> -->
+															               		<!-- </div> -->
 															               		<div id="oval"></div>
 										<!-- Modal for Matching Percentage -->
 										<div class="modal fade" id="post-mod-{{$post->id}}" tabindex="-1" role="basic" aria-hidden="true">
@@ -565,7 +566,7 @@ catch(\Exception $e){}
 											<!-- /.modal-dialog -->
 											</div>
 											<!-- /.modal -->
-														                   	</li>
+														                   	
 														                   	@endif									                 
 														                  @endforeach									                  
 														                </ul>											

@@ -18,27 +18,28 @@
 			<div class="group-admin-title pull-right">
 				@if($group->admin->id == Auth::user()->induser_id)
 				<a id="ajax-demo" href="#edit-group" data-toggle="modal" class="badge btn btn-xs btn-info" style="" title="Edit">
-					<i class="fa fa-edit"></i>
+					<i class="fa fa-edit"></i><span class="hidden-sm hidden-xs"> Edit</span>
 				</a>
 			@endif
 			@if($group->admin->id == Auth::user()->induser_id)				
 				<a id="ajax-demo" href="#delete-group" data-toggle="modal" title="Delete" 
 					class="badge btn btn-xs btn-danger" style="text-decoration: none;">
-					<i class="fa fa-trash"></i> Delete
+					<i class="fa fa-trash"></i><span class="hidden-sm hidden-xs"> Delete Group</span>
 				</a>				
 			@else				
 				<a id="ajax-demo" href="#leave-group" data-toggle="modal" 
 					class="badge btn btn-xs" style="text-decoration: none;">						
-					<i class="fa fa-sign-out"></i> Leave Group
+					<i class="fa fa-sign-out"></i><span class="hidden-sm hidden-xs"> Leave Group</span>
 				</a>
 			@endif
-				<span class="group-admin-title-left">Admin</span> 
-				<a href="/profile/ind/{{$group->admin->id}}">
-				<span class="group-admin-title-right">{{$group->admin->fname}} {{$group->admin->lname}}</span>
-				</a>
+				
 			</div>
 		</div>		
 	</div>
+	<span class="group-admin-title-left">Admin</span> 
+				<a href="/profile/ind/{{$group->admin->id}}">
+				<span class="group-admin-title-right">{{$group->admin->fname}} {{$group->admin->lname}}</span>
+				</a>
 	<!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
 	<!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
 
@@ -218,9 +219,12 @@
 									<input type="hidden" name="_token" value="{{ csrf_token() }}">
 									<input type="hidden" name="delete_id" value="{{$user->groups_users_id}}">
 									<input type="hidden" name="delete_group_id" value="{{$user->group_id}}">
-									<button type="submit" class="btn btn-sm btn-danger">
-									<i class="glyphicon glyphicon-trash" style="font-size: 12px;background-color: white;color: black;border-radius: 10px;width: 20px;height: 20px;padding-top: 3px;"></i>
+									<button type="submit" name="action" value="reject" class="btn apply-ignore-font" style="padding: 0px 3px; background-color: white;">
+										<i class="icon-close icon-close-css"></i>
 									</button>
+									<!-- <button type="submit" class="btn btn-sm btn-danger">
+									<i class="glyphicon glyphicon-trash" style="font-size: 12px;background-color: white;color: black;border-radius: 10px;width: 20px;height: 20px;padding-top: 3px;"></i>
+									</button> -->
 								</form>
 								@endif								
 							</span>
@@ -262,9 +266,12 @@
 										<input type="hidden" name="_token" value="{{ csrf_token() }}">
 										<input type="hidden" name="add_user_id" value="{{$connection->id}}">
 										<input type="hidden" name="add_group_id" value="{{$group->id}}">
-										<button type="submit" class="btn btn-sm btn-success">
-										<i class="icon-plus" style="font-size: 12px;background-color: white;color: black;border-radius: 10px;width: 20px;height: 20px;padding-top: 3px;"></i>
+										<button type="submit" name="action" value="accept" class="btn apply-ignore-font" style="padding: 0px 3px; background-color: white;">
+											<i class="icon-check icon-check-css"></i>
 										</button>
+										<!-- <button type="submit" class="btn btn-sm btn-success">
+										<i class="icon-plus" style="font-size: 12px;background-color: white;color: black;border-radius: 10px;width: 20px;height: 20px;padding-top: 3px;"></i>
+										</button> -->
 									</form>
 								</span>
 							</div>
