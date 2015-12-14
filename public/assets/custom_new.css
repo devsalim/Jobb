@@ -15,7 +15,10 @@
   display: none;
 }
 
-
+/*input:focus::-webkit-input-placeholder { font-size: 12px !important; }
+input:focus:-moz-placeholder { font-size: 12px !important; } 
+input:focus::-moz-placeholder { font-size: 12px !important; } 
+input:focus:-ms-input-placeholder { font-size: 12px !important; } */
 
 .elipsis-code{
   white-space: nowrap;
@@ -296,11 +299,15 @@ display:none !important;
 }
 
 .filter-icon{
-    float: right;
-    right: 10px;
+    float: left;
+    left: 10px;
     top: 8px;
     position: relative;
-    cursor:pointer;
+    cursor: pointer;
+}
+
+.sort-by-css{
+  float: right;
 }
 
 .filter-input{
@@ -326,6 +333,10 @@ display:none !important;
 @media (min-width: 992px){
 .new-col-md-3 {
     width: 16%;
+}
+
+.new-col-md-2 {
+    width: 13%;
 }
 .nav-tab-new{
   float: none !important;
@@ -374,13 +385,15 @@ display: table;
 }
 
 
-.color-button:active:hover, .color-button.active:hover{
+
+.color-button-job:active, .color-button-job.active{
   background-color: #61b3de !important;
+  color:white !important;
 }
 
-
-.color-button:active, .color-button.active{
-  background-color: #61b3de !important;
+.color-button-skill:active, .color-button-skill.active{
+  background-color: #19B751 !important;
+  color:white !important;
 }
 
 .show-filter{

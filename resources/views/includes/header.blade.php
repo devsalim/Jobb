@@ -47,11 +47,11 @@
                     <a href="#">
                     <span class="photo">
                     <img src="" class="img-circle" width="40" height="40">
-                    <div class="match"><i class="icon-speedometer"></i> 55%</div>
+                    <div class=""><i class="icon-speedometer"></i> 55%</div>
                     </span>
                     <span class="subject">
                     <span class="from">
-                    {{$notification->touser->first()->name}} </span>
+                    {{$notification->fromuser->first()->name}} </span>
                     <span class="time">
                       {{ \Carbon\Carbon::createFromTimeStamp(strtotime($notification->created_at))->diffForHumans() }}
                     </span>
@@ -127,7 +127,7 @@
           <!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
           <li class="dropdown dropdown-extended dropdown-tasks thank-fav-icon" id="header_task_bar">
             <a href="/favourite" data-utype="fav" class="dropdown-toggle @if($title == 'notify_view'){{'active'}}@endif"  data-close-others="true">
-              <i class="icon-pin icon-color"></i>              
+              <i class="fa fa-star icon-color"></i>              
               <span class="badge badge-default @if(count($favourites) > 0) show @else hide @endif" 
                     id="myfavcount">{{count($favourites)}}
               </span>              

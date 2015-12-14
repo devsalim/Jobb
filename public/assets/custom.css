@@ -476,8 +476,22 @@ background-color:white;
     position: relative;
     /*padding: 0px 5px 0px 5px;*/
     box-shadow: 4px 4px 4px rgb(222, 222, 222);
+    /*border-radius: 6px !important;*/
+    background-color: white;
+}
+
+.time-item-ex{
+    border: 1px solid #61b3de;
+    margin: 0;
+    position: relative;
+    /*padding: 0px 5px 0px 5px;*/
+    box-shadow: 4px 4px 4px rgb(222, 222, 222);
     border-radius: 6px !important;
-    background: white;
+    background-color: whitesmoke;
+}
+
+.new-timeline-body{
+    background-color: whitesmoke !important;
 }
 
 .pin-bar{

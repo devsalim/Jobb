@@ -6,7 +6,7 @@ class Postactivity extends Model {
 
 	public function user()
     {
-        return $this->belongsTo('App\Induser')->select('id', 'fname', 'profile_pic', 'linked_skill');
+        return $this->belongsTo('App\User');
     }
 
     public function post()

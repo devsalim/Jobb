@@ -45,6 +45,9 @@ var FormWizard = function () {
                     role: {
                         required: true
                     },
+                    website_redirect_url: {
+                        required:true
+                    },
                     job_detail: {
                         minlength: 20,
                         required: true
@@ -97,6 +100,9 @@ var FormWizard = function () {
                 },
                 prof_category: {
                     required: "Select Job Category"
+                },
+                website_redirect_url:{
+                    required: "Enter website URL"
                 },
                 role: {
                     required: "Select Job Role"

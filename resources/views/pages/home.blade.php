@@ -6,19 +6,40 @@
 
 <div class="row">
 	<div class="col-md-9" style=" lightgray;margin-bottom: 5px;">
-		<div class="hide-label col-md-8 col-sm-6 col-xs-10" style="padding: 5px;">
-			<label style="font-weight:500; ">
-				Showing all Jobs, Skills posted by Individuals & Corporates
-			</label>
+		<div class="filter-icon hide-show-filter"><i class="fa fa-filter" style="font-size:16px;"></i> Filter</div>
+	
+		<div class="row sort-by-css hide-label">
+			<div class="col-md-12">
+				<div class="btn-group">
+					<button class="btn btn-default btn-sm dropdown-toggle" type="button" data-toggle="dropdown" style="border: 0;border-bottom: 1px solid lightgray;">
+					<i class="glyphicon glyphicon-sort"></i> Sort by <i class="fa fa-angle-down"></i>
+					</button>
+					<ul class="dropdown-menu" role="menu">
+						<li>
+							<a href="javascript:;">
+							Date </a>
+						</li>
+						<li>
+							<a href="javascript:;">
+							Magic Match </a>
+						</li>
+						<li>
+							<a href="javascript:;">
+							Individual Post </a>
+						</li>
+						<li>
+							<a href="javascript:;">
+							corporate Post </a>
+						</li>
+					</ul>
+				</div>
+			</div>
 		</div>
-		<div class="show-filter col-md-8 col-sm-6 col-xs-10">
-			You have selected <label style="font-weight:500;" id="job-type">
-			<input type="text" style="background:transparent;border:0;font-size:11px;" id="category-label-exp" class="min-exp">
-			<input type="text" style="background:transparent;border:0;font-size:11px; width:30px;" id="label-exp" class="min-exp">
-			<input type="text" style="background:transparent;border:0;font-size:11px;" id="label-title" class="min-exp">
-	</label>
-		</div>
-		<div class="filter-icon hide-show-filter"><i class="icon-equalizer" style="font-size:16px;"></i></div>		
+		<div class="row sort-by-css show-filter">
+			<div class="col-md-12 col-sm-12 col-xs-12 ">
+				<a class="show-more" style="font-size:12px;font-weight:400;">Show more</a>
+			</div>
+		</div>		
 	</div>
 </div>
 <form id="home-filter" name="filter_form" action="/home" method="post">
@@ -26,62 +47,44 @@
 
 <div class="row show-filter">
 	<div class="col-md-12">
-		<div class="btn-group col-md-3 col-sm-2 col-xs-6 jobskill new-col-md-3" data-toggle="buttons" style="padding: 6px 14px;">
-			<label class="btn btn-default color-button check-font-size active input-responsive" style="padding:6px; border-color:black;">
+		<div class="btn-group col-md-2 col-sm-3 col-xs-6 jobskill new-col-md-2" data-toggle="buttons" style="padding: 7px 15px;">
+			<label class="btn btn-default color-button-job check-font-size active input-responsive" style="padding: 3px 8px;background-color: lightgray;border-right: 1px solid white;">
 			<input type="checkbox" name="post_type[]" value="job" class="toggle"> Jobs </label>
-			<label class="btn btn-default color-button check-font-size active input-responsive" style="padding:6px; border-color:black;">
+			<label class="btn btn-default color-button-skill check-font-size active input-responsive" style="padding: 3px 8px;background-color: lightgray;border-left: 1px solid white;">
 			<input type="checkbox" name="post_type[]" value="skill" class="toggle"> Skills </label>
 		</div>
-		<div class="col-md-2 col-sm-2 col-xs-6">
-			<div class="form-group">				
-				<input type="text" id="exp" name="experience" class="form-control filter-input" placeholder="Exp">				
+		<div class="col-md-2 col-sm-3 col-xs-6">
+			<div class="form-group">	
+				<select name="experience" class="form-control filter-input" style="height: 25px;padding: 0;margin: 7px 0px;">
+                	<option value="">Exp</option>
+					<option value="1-2">1-2</option>
+					<option value="2-4">2-4</option>
+					<option value="4-6">4-6</option>
+					<option value="6-8">6-8</option>
+					<option value="8-10">8-10</option>
+                </select>		
+				<!-- <input type="text" id="exp" name="experience" class="form-control filter-input" placeholder="Exp" style="height: 25px;margin: 7px 0px;">				 -->
 			</div>	
 		</div>
-		<div class="col-md-3 col-sm-3 col-xs-12">
-			<div class="form-group">
-				<input type="text" id="title" name="job_title" class="form-control filter-input" placeholder="Job Title, Role">
-			</div>
-		</div>
-		<div class="col-md-2 col-sm-2 col-xs-6">
-			<div class="form-group">				
-				<input type="text" name="unique_id" class="form-control filter-input" placeholder="Unique id">				
-			</div>	
-		</div>
-		<div class="col-md-3 col-sm-3 col-xs-6">
-			<div class="form-group">
-				<select id="category-list" class="form-control filter-input check-font-size" name="prof_category">
-					<option value="">Category</option>
-					<optgroup label="Accounting">
-						<option value="Accounts/Finance/Tax">Accounts/Finance/Tax</option>
-						<option value="Agent">Agent</option>
-						<option value="Analytics & Business Intelligence">
-							Analytics & Business Intelligence
-						</option>
-					</optgroup>
-					<optgroup label="IT Field">
-						<option value="HR/Administration/IR">HR/Administration/IR</option>
-						<option value="IT Software - Client Server">IT Software - Client Server</option>
-						<option value="IT Software - Mainframe">IT Software - Mainframe</option>
-						<option value="IT Software - Middleware">IT Software - Middleware</option>
-						<option value="IT Software - Mobile">IT Software - Mobile</option>
-						<option value="IT Software - Other">IT Software - Other</option>
-						<option value="IT Software - System Programming">IT Software - System Programming</option>
-						<option value="IT Software - Telecom Software">IT Software - Telecom Software</option>
-						<option value="IT Software - Application Programming">IT Software - Application Programming</option>
-						<option value="IT Software - DBA/Datawarehousing">IT Software - DBA/Datawarehousing</option>
-						<option value="IT Software - E-Commerce">IT Software - E-Commerce</option>
-						<option value="IT Software - ERP/CRM">IT Software - ERP/CRM</option>
-					</optgroup>
-				</select>
-			</div>
-		</div>
-	</div>
-</div>
-<div class="row show-filter" style="margin-top:10px;">
-	<div class="col-md-12">
 		<div class="col-md-2 col-sm-3 col-xs-12">
 			<div class="form-group">
-				<select id="select2_sample_modal_2" placeholder="City" name="city" class="form-control filter-input select2" multiple>
+				<input type="text" id="title" name="job_title" class="form-control filter-input" placeholder="Job Title, Role" style="height: 25px;margin: 7px 0px;">
+			</div>
+		</div>
+		<div class="col-md-2 col-sm-2 col-xs-6">
+            <div class="form-group">              
+                <select name="time_for" class="form-control filter-input" style="height: 25px;padding: 0;margin: 7px 0px;">
+                	<option value="">Emp Type</option>
+					<option value="Full Time">Full Time</option>
+					<option value="Part Time">Part Time</option>
+					<option value="Freelancer">Freelancer</option>
+					<option value="Work from Home">Work from Home</option>
+                </select>
+            </div>  
+         </div>
+		<div class="col-md-2 col-sm-3 col-xs-6">
+			<div class="form-group">
+				<select id="" placeholder="City" name="city" style="height: 25px;padding: 0;margin: 7px 0px;" class="bs-select form-control filter-input" multiple >
 					<option value="">select</option>
 					<optgroup label="NFC EAST">
 					<option>Hyderabad</option>
@@ -134,59 +137,88 @@
 				</select>
 			</div>	
 		</div>
-		<div class="col-md-2 col-sm-2 col-xs-6">
+		<div class="col-md-3 col-sm-3 col-xs-6 extra-show done-show">
+			<div class="form-group">
+				<select id="category-list" class="form-control filter-input check-font-size" name="prof_category" style="height: 25px;padding: 0;margin: 7px 0px;">
+					<option value="">Category</option>
+					<optgroup label="Accounting">
+						<option value="Accounts/Finance/Tax">Accounts/Finance/Tax</option>
+						<option value="Agent">Agent</option>
+						<option value="Analytics & Business Intelligence">
+							Analytics & Business Intelligence
+						</option>
+					</optgroup>
+					<optgroup label="IT Field">
+						<option value="HR/Administration/IR">HR/Administration/IR</option>
+						<option value="IT Software - Client Server">IT Software - Client Server</option>
+						<option value="IT Software - Mainframe">IT Software - Mainframe</option>
+						<option value="IT Software - Middleware">IT Software - Middleware</option>
+						<option value="IT Software - Mobile">IT Software - Mobile</option>
+						<option value="IT Software - Other">IT Software - Other</option>
+						<option value="IT Software - System Programming">IT Software - System Programming</option>
+						<option value="IT Software - Telecom Software">IT Software - Telecom Software</option>
+						<option value="IT Software - Application Programming">IT Software - Application Programming</option>
+						<option value="IT Software - DBA/Datawarehousing">IT Software - DBA/Datawarehousing</option>
+						<option value="IT Software - E-Commerce">IT Software - E-Commerce</option>
+						<option value="IT Software - ERP/CRM">IT Software - ERP/CRM</option>
+					</optgroup>
+				</select>
+			</div>
+		</div>
+		<div class="col-md-2 col-sm-3 col-xs-6 extra-show done-show">
 			<div class="form-group">				
 				{{-- <input type="hidden" placeholder="Skills" name="linked_skill" id="select2_sample5" class="form-control filter-input select2" value=""> --}}
 				{!! Form::select('skill_list[]', $skills, null, ['id'=>'skill-list', 'class'=>'form-control', 'placeholder'=>'Skills', 'multiple']) !!}				
 			</div>	
 		</div>
-		<div class="col-md-2 col-sm-2 col-xs-6">
-            <div class="form-group">              
-                <select name="time_for" class="form-control filter-input" >
-                	<option value="">Time For</option>
-					<option value="Full Time">Full Time</option>
-					<option value="Part Time">Part Time</option>
-					<option value="Freelancer">Freelancer</option>
-					<option value="Work from Home">Work from Home</option>
-                </select>
-            </div>  
-         </div>
-         <div class="col-md-2 col-sm-3 col-xs-4" >
-         	 <div class="form-group"> 
-				<select name="active-expire" class="form-control filter-input">
-				  <option selected value="">All</option>
-                  <option value="Active" >Active</option>
-                </select>
-            </div>
-		</div>
-		<div class="col-md-2 col-sm-3 col-xs-5">
-			<div class="form-group">		
-				<select class="bs-select form-control filter-input" name="education" multiple >
-					<optgroup label="Posted by">
-						<option selected value=""><b>Posted by:</b> All</option>
-						<option value="individual">Individual</option>
-						<option value="company">Company</option>
-						<option value="consultancy">Consultancy</option>
-					</optgroup>
-				</select>
+		
+         <div class="col-md-2 col-sm-2 col-xs-6 extra-show done-show" >
+         	<div class="form-group">
+	         	 <label style="font-size:13px;">
+					<input type="checkbox" checked class="icheck" data-checkbox="icheckbox_square-grey"> Expired
+				</label>
 			</div>
 		</div>
-		<div class="col-md-1 col-sm-1 col-sm-2">
-			<button type="submit" class="btn btn-info" value="Search" title="Search" 
-					style="float:left;background-color:transparent !important;margin:10px -25px; border-color: transparent;">
-				<i class="fa fa-check-square-o" style="font-size:25px;color:#3598dc;"></i>
-			</button>
-			<button type="button" class="btn" onclick="resetFilter()" title="Reset" 
-					style="background-color:transparent !important;margin:8px 1px;" >
-				<i class="icon-refresh" style="font-size:22px;"></i>
-			</button>
+		
+		<div class="col-md-2 col-sm-3 col-xs-6 extra-show done-show" >
+			<div class="form-group">				
+				<input type="text" name="unique_id" class="form-control filter-input" placeholder="Unique id" style="height: 25px;padding: 0;margin: 7px 0px;"> 				
+			</div>	
+		</div> 
+	<div class="col-md-2 col-sm-3 col-xs-6 extra-show done-show">
+		<div class="form-group">		
+			<select class="bs-select form-control filter-input" name="education" multiple style="height: 25px;padding: 0;margin: 7px 0px;">
+				<optgroup label="Posted by">
+					<option selected value=""><b>Posted by:</b> All</option>
+					<option value="individual">Individual</option>
+					<option value="company">Company</option>
+					<option value="consultancy">Consultancy</option>
+				</optgroup>
+			</select>
 		</div>
 	</div>
+	<div class="col-md-1 col-sm-4 col-sm-6">
+		<button type="submit" class="btn btn-info" value="Search" title="Search" 
+				style="float:left;background-color:transparent !important;margin:10px -25px; border-color: transparent;">
+			<i class="fa fa-check-square-o" style="font-size:20px;color:#3598dc;"></i>
+		</button>
+		<button type="button" class="btn" onclick="resetFilter()" title="Reset" 
+				style="background-color:transparent !important;margin:8px 1px;" >
+			<i class="icon-refresh" style="font-size:18px;"></i>
+		</button>
+	</div>
+	</div>
 </div>
-<!-- <div id="filter">
-	<p class="form-control-static" data-display="experience"></p>
-	<p class="form-control-static" data-display="job_title"></p>
-</div> -->
+<div class="row show-filter" style="margin-top:10px;">
+	<div class="col-md-12">
+
+	</div>
+</div>
+<div class="row show-filter">
+	<div class="col-md-12">
+	
+</div>
+</div>
 </form>
 <!-- Jobtip Filter End-->
 @elseif($title == 'favourite')
@@ -208,33 +240,7 @@
 	</div>
 </div>
 @endif
-<div class="row">
-	<div class="col-md-9">
-		<div class="btn-group">
-			<button class="btn btn-default btn-sm dropdown-toggle" type="button" data-toggle="dropdown">
-			Sort by <i class="fa fa-angle-down"></i>
-			</button>
-			<ul class="dropdown-menu" role="menu">
-				<li>
-					<a href="javascript:;">
-					Date </a>
-				</li>
-				<li>
-					<a href="javascript:;">
-					Magic Match </a>
-				</li>
-				<li>
-					<a href="javascript:;">
-					Individual Post </a>
-				</li>
-				<li>
-					<a href="javascript:;">
-					corporate Post </a>
-				</li>
-			</ul>
-		</div>
-	</div>
-</div>
+
 
 <div class="portlet light bordered" style="border: none !important;background:transparent;padding:0 !important">										
 	<div class="portlet-body form">
@@ -279,7 +285,11 @@
 
 							<div class="timeline" >
 								<!-- TIMELINE ITEM -->
+								@if($expired == 1)
+								<div class="timeline-item time-item-ex">
+								@else
 								<div class="timeline-item time-item">
+									@endif
 									<div class="timeline-badge" style="margin: 10px 3px;">
 										@if($post->induser != null && !empty($post->induser->profile_pic))
 										<img class="timeline-badge-userpic userpic-box" src="/img/profile/{{ $post->induser->profile_pic }}" title="{{ $post->induser->fname }}">
@@ -530,7 +540,11 @@
 											<!-- /.modal -->
 											@endif
 									</div>
-									<div class="timeline-body" style="">
+									@if($expired == 1)
+									<div class="timeline-body new-timeline-body">
+										@else
+									<div class="timeline-body ">
+										@endif
 										<div class="timeline-body-head">
 											@if(Auth::user()->induser_id == $post->individual_id && $post->individual_id != null)
 												<div class="timeline-body-head-caption">							
@@ -614,7 +628,7 @@
 												<!-- <div class="col-md-4 col-sm-4 col-xs-12">
 													<i class="icon-badge"></i>&nbsp;: {{ $post->role }}
 												</div> -->
-												<div class="col-md-4 col-sm-4 col-xs-6 elipsis-code elipsis-city-code">
+												<div class="col-md-4 col-sm-4 col-xs-6 elipsis-code elipsis-city-code" style="padding:0 12px;">
 												<small>	<i class="glyphicon glyphicon-map-marker"></i>&nbsp;: {{ $post->city }}</small>
 												</div>
 												@if( $post->min_exp != null && $post->max_exp != null)
@@ -638,26 +652,15 @@
 										@if($expired != 1)
 										
 											<div class="row">	
-												@if($post->post_type == 'job' && Auth::user()->induser_id != $post->individual_id && Auth::user()->identifier == 1)										
-													
-													@if($post->postactivity->where('user_id', Auth::user()->induser_id)->isEmpty() && $expired != 1)
-													<div class="col-md-3 col-sm-3 col-xs-3">													
-														 
-													</div>
-													@elseif($post->postactivity->where('user_id', Auth::user()->induser_id)->first()->apply == 1 && $expired != 1)
-													<div class="col-md-3 col-sm-3 col-xs-3">													
-														<i class="fa fa-check-square-o" style="font-size:15px;"></i><span class="applied-css"> Applied</span> 
-													</div>
-													@endif
-												@endif
-												<div class="col-md-3 col-sm-3 col-xs-3">
+												
+												<div class="col-md-3 col-sm-3 col-xs-3" style="padding:0 8px;">
 													<form action="/job/like" method="post" id="post-like-{{$post->id}}" data-id="{{$post->id}}">						
 														<input type="hidden" name="_token" value="{{ csrf_token() }}">
 														<input type="hidden" name="like" value="{{ $post->id }}">
 												<button class="btn like-btn"  type="button" style="background-color: transparent;padding:0 10px;" title="Thanks">
-													@if($post->postactivity->where('user_id', Auth::user()->induser_id)->isEmpty())					
+													@if($post->postactivity->where('user_id', Auth::user()->id)->isEmpty())					
 														 <i class="fa fa-thumbs-up thanks-icon" id="like-{{$post->id}}"></i>
-													@elseif($post->postactivity->where('user_id', Auth::user()->induser_id)->first()->thanks == 1) 
+													@elseif($post->postactivity->where('user_id', Auth::user()->id)->first()->thanks == 1) 
 														 <i class="fa fa-thumbs-up thanks-icon" id="like-{{$post->id}}" style="color:burlywood"></i>
 													@else
 														 <i class="fa fa-thumbs-up thanks-icon" id="like-{{$post->id}}"></i>		
@@ -670,6 +673,35 @@
 														</span>
 													</form>	
 												</div>
+												<div class="col-md-3 col-sm-3 col-xs-3 ">
+													@if(Auth::user()->induser_id != $post->individual_id )
+													<form action="/job/fav" method="post" id="post-fav-{{$post->id}}" data-id="{{$post->id}}">
+														<input type="hidden" name="_token" value="{{ csrf_token() }}">
+														<input type="hidden" name="fav_post" value="{{ $post->id }}">
+
+														<button class="btn fav-btn" type="button" style="background-color: transparent;padding:0 10px;border:0">
+															@if($post->postactivity->where('user_id', Auth::user()->id)->isEmpty())
+															<i class="fa fa-star" id="fav-btn-{{$post->id}}" style="font-size: 20px;color:lightslategray;"></i>
+															@elseif($post->postactivity->where('user_id', Auth::user()->id)->first()->fav_post == 1) 
+															<i class="fa fa-star" id="fav-btn-{{$post->id}}" style="font-size: 20px;color:#E26A6A"></i>
+															@else
+															<i class="fa fa-star" id="fav-btn-{{$post->id}}" style="font-size: 20px;color:lightslategray;"></i>
+															@endif	
+														</button>	
+													</form>
+													@endif
+												</div>
+												@if($post->post_type == 'job' && Auth::user()->induser_id != $post->individual_id && Auth::user()->identifier == 1)										
+													
+													@if($post->postactivity->where('user_id', Auth::user()->id)->isEmpty())
+													<div class="col-md-3 col-sm-3 col-xs-3">
+													</div>
+													@elseif($post->postactivity->where('user_id', Auth::user()->id)->first()->apply == 1)
+													<div class="col-md-3 col-sm-3 col-xs-3">													
+														<i class="fa fa-check-square-o" style="font-size:15px;"></i><span class="applied-css"> Applied</span> 
+													</div>
+													@endif
+												@endif
 												<div  class="col-md-3 col-sm-3 col-xs-3">
 												    <div class="dropup ">											
 														<button class="btn dropdown-toggle" type="button" 
@@ -704,46 +736,46 @@
 														</ul>													
 													</div>
 												</div>
-												<div class="col-md-3 col-sm-3 col-xs-3 ">
-													@if(Auth::user()->induser_id != $post->individual_id )
-														<form action="/job/fav" method="post" id="post-fav-{{$post->id}}" data-id="{{$post->id}}">
-															<input type="hidden" name="_token" value="{{ csrf_token() }}">
-															<input type="hidden" name="fav_post" value="{{ $post->id }}">
-
-															<button class="" style="background-color: transparent;padding:0 10px;border:0">
-																@if(!$post->postactivity->where('user_id', Auth::user()->induser_id)->isEmpty())
-																<i class="fa fa-star" id="fav-btn-{{$post->id}}" style="font-size: 20px;"></i>
-																@elseif($post->postactivity->where('user_id', Auth::user()->induser_id)->first()->fav_post == 1) 
-																<i class="fa fa-star" id="fav-btn-{{$post->id}}" style="font-size: 20px;color:burlywood"></i>
-																@else
-																<i class="fa fa-star" id="fav-btn-{{$post->id}}" style="font-size: 20px;"></i>
-																@endif	
-															</button>	
-														</form>
-														@endif
-												</div>
+												
 													
 											</div>
 										
 											@else
 											<div class="row">
+												<div class="col-md-3 col-sm-3 col-xs-4">
+												<div class="expired-css">													
+													<i class="glyphicon glyphicon-ban-circle"></i> Expired
+												</div>
+												</div>
+												<div class="col-md-3 col-sm-3 col-xs-4 ">
+													@if(Auth::user()->induser_id != $post->individual_id )
+													<form action="/job/fav" method="post" id="post-fav-{{$post->id}}" data-id="{{$post->id}}">
+														<input type="hidden" name="_token" value="{{ csrf_token() }}">
+														<input type="hidden" name="fav_post" value="{{ $post->id }}">
+
+														<button class="btn fav-btn" type="button" style="background-color: transparent;padding:0 10px;border:0">
+															@if($post->postactivity->where('user_id', Auth::user()->id)->isEmpty())
+															<i class="fa fa-star" id="fav-btn-{{$post->id}}" style="font-size: 20px;color:lightslategray;"></i>
+															@elseif($post->postactivity->where('user_id', Auth::user()->id)->first()->fav_post == 1) 
+															<i class="fa fa-star" id="fav-btn-{{$post->id}}" style="font-size: 20px;color:#E26A6A"></i>
+															@else
+															<i class="fa fa-star" id="fav-btn-{{$post->id}}" style="font-size: 20px;color:lightslategray;"></i>
+															@endif	
+														</button>	
+													</form>
+													@endif
+												</div>
 												@if($post->post_type == 'job' && Auth::user()->induser_id != $post->individual_id && Auth::user()->identifier == 1)											
-													@if($post->postactivity->where('user_id', Auth::user()->induser_id)->isEmpty())
-													<div class="col-md-6 col-sm-6 col-xs-6">														 
-													</div>
-													@elseif($post->postactivity->where('user_id', Auth::user()->induser_id)->first()->apply == 1)
-													<div class="col-md-6 col-sm-6 col-xs-6">													
+													@if($post->postactivity->where('user_id', Auth::user()->id)->isEmpty())
+													
+													@elseif($post->postactivity->where('user_id', Auth::user()->id)->first()->apply == 1)
+													<div class="col-md-3 col-sm-3 col-xs-4">													
 														<i class="fa fa-check-square-o"></i><span class="hidden-sm hidden-xs"> Applied</span> 
 													</div>
 													@endif
 												@endif
-												<div class="col-md-6 col-sm-6 col-xs-6">													
-													<!-- <div class="post-job"> -->
-														
-															<i class="glyphicon glyphicon-ban-circle"></i> Expired
-														
-													<!-- </div> -->
-												</div>
+												
+												
 											</div>											
 											@endif
 
@@ -990,143 +1022,106 @@
 														@endif
 													</div>
 												</div>
-												@if($expired != 1)
+
+												@if($expired != 1 && Auth::user()->identifier == 1)
 												<div style="margin:27px 0 0;">
-													<!-- if corporate_id not null -->
-													@if($post->post_type == 'job' && Auth::user()->induser_id != $post->individual_id && Auth::user()->identifier == 1)		
-														@if($post->postactivity->where('user_id', Auth::user()->induser_id)->isEmpty() && $expired != 1 && $post->website_redirect_url != null)
-															<form action="/job/apply" method="post" id="post-apply-{{$post->id}}" data-id="{{$post->id}}">	
-																<input type="hidden" name="_token" value="{{ csrf_token() }}">
-																<input type="hidden" name="apply" value="{{ $post->id }}">
-																	<a class="btn apply-btn blue btn-sm apply-contact-btn" target="_blank" 
-																		href="{{ $post->website_redirect_url }}" type="button"><i class="icon-globe"></i> Apply
-																	</a>	
-															</form>	
-																
-														@elseif($expired != 1 && $post->website_redirect_url == null && $post->corporate_id != null)
-														<form action="/job/apply" method="post" id="post-apply-{{$post->id}}" data-id="{{$post->id}}">	
-															<input type="hidden" name="_token" value="{{ csrf_token() }}">
-															<input type="hidden" name="apply" value="{{ $post->id }}">
-															<button class="btn apply-btn blue btn-sm apply-contact-btn" 
-																	id="apply-btn-{{$post->id}}" type="button">Apply
-															</button>
-														</form>	
-														@elseif($expired != 1 && $post->website_redirect_url == null && $post->corporate_id == null && $post->individual_id != null)
-														<form action="/job/contact" method="post" id="post-contact-{{$post->id}}" data-id="{{$post->id}}">	
-															<input type="hidden" name="_token" value="{{ csrf_token() }}">
-															<input type="hidden" name="contact" value="{{ $post->id }}">
-															<button class="btn contact-btn green btn-sm apply-contact-btn" 
-																	id="contact-btn-{{$post->id}}" type="button">Contact
-															</button>
-														</form>	
-														@elseif($post->postactivity->where('user_id', Auth::user()->induser_id)->first()->apply == 1 && Auth::user()->identifier == 1 && $expired != 1 && $post->website_redirect_url != null) 
-															<button type="button" class="btn btn-sm bg-grey-steel apply-contact-btn" disabled="true">
-																<i class="icon-check icon-check-css"></i> Applied 
-															</button>
-														@elseif($post->postactivity->where('user_id', Auth::user()->induser_id)->first()->apply == 1 &&  Auth::user()->identifier == 1 && $expired != 1 && $post->website_redirect_url == null && $post->corporate_id == null && $post->individual_id != null) 
-														<button type="button" class="btn btn-sm bg-grey-steel apply-contact-btn" disabled="true">
-															<i class="icon-check icon-check-css"></i> Contacted 
-														</button>								
-														@endif
+												    <!-- if corporate_id not null -->
+												    @if($post->post_type == 'job' && Auth::user()->induser_id != $post->individual_id && Auth::user()->identifier == 1)     
+												        @if($post->postactivity->where('user_id', Auth::user()->id)->isEmpty() && $post->website_redirect_url != null)
+												            <form action="/job/apply" method="post" id="post-apply-{{$post->id}}" data-id="{{$post->id}}">  
+												                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+												                <input type="hidden" name="apply" value="{{ $post->id }}">
+												                    <a class="btn apply-btn blue btn-sm apply-contact-btn" target="_blank" 
+												                        href="{{ $post->website_redirect_url }}" type="button"><i class="icon-globe"></i> Apply
+												                    </a>    
+												            </form> 
+												                
+												        @elseif($post->website_redirect_url == null && $post->corporate_id != null)
+												        <form action="/job/apply" method="post" id="post-apply-{{$post->id}}" data-id="{{$post->id}}">  
+												            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+												            <input type="hidden" name="apply" value="{{ $post->id }}">
+												            <button class="btn apply-btn blue btn-sm apply-contact-btn" 
+												                    id="apply-btn-{{$post->id}}" type="button">Apply
+												            </button>
+												        </form> 
+												        @elseif($post->website_redirect_url == null && $post->individual_id != null)
+												        <form action="/job/contact" method="post" id="post-contact-{{$post->id}}" data-id="{{$post->id}}">  
+												            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+												            <input type="hidden" name="contact" value="{{ $post->id }}">
+												            <button class="btn contact-btn green btn-sm apply-contact-btn" 
+												                    id="contact-btn-{{$post->id}}" type="button">Contact
+												            </button>
+												        </form> 
+												        @elseif($post->postactivity->where('user_id', Auth::user()->id)->first()->apply == 1 && Auth::user()->identifier == 1 && $expired != 1 && $post->website_redirect_url != null) 
+												            <button type="button" class="btn btn-sm bg-grey-steel apply-contact-btn" disabled="true">
+												                <i class="icon-check icon-check-css"></i> Applied 
+												            </button>
+												        @elseif($post->postactivity->where('user_id', Auth::user()->id)->first()->apply == 1 &&  Auth::user()->identifier == 1 && $expired != 1 && $post->website_redirect_url == null && $post->individual_id != null) 
+												        <button type="button" class="btn btn-sm bg-grey-steel apply-contact-btn" disabled="true">
+												            <i class="icon-check icon-check-css"></i> Contacted 
+												        </button>                               
+												        @endif
 
-													<!-- if corporate_id is null	 -->
-													@elseif($post->corporate_id == null && $post->individual_id != null && $post->website_redirect_url != null && Auth::user()->induser_id != $post->individual_id && Auth::user()->identifier == 1)		
-														@if($post->postactivity->where('user_id', Auth::user()->induser_id)->isEmpty() && $expired != 1)
-															<form action="/job/apply" method="post" id="post-apply-{{$post->id}}" data-id="{{$post->id}}">	
-																<input type="hidden" name="_token" value="{{ csrf_token() }}">
-																<input type="hidden" name="apply" value="{{ $post->id }}">
-																<a class="btn apply-btn blue btn-sm apply-contact-btn" target="_blank" 
-																	href="{{ $post->website_redirect_url }}" type="button"><i class="icon-globe"></i> Apply
-																</a>
-															</form>		
-														@elseif($post->postactivity->where('user_id', Auth::user()->induser_id)->first()->apply == 1 && $post->website_redirect_url != null && Auth::user()->identifier == 1 && $expired != 1) 
-															<button type="button" class="btn btn-sm bg-grey-steel apply-contact-btn" disabled="true">
-																<i class="icon-check icon-check-css"></i> Applied 
-															</button>		
-														@elseif($expired != 1)
-															<form action="/job/apply" method="post" id="post-apply-{{$post->id}}" data-id="{{$post->id}}">	
-																<input type="hidden" name="_token" value="{{ csrf_token() }}">
-																<input type="hidden" name="apply" value="{{ $post->id }}">
-																<button class="btn apply-btn blue btn-sm apply-contact-btn" 
-																		id="apply-btn-{{$post->id}}" type="button">Apply
-																</button>
-															</form>									
-														@endif	
-													@elseif($post->post_type == 'job' && Auth::user()->induser->resume == null && $post->resume_required == 0 && Auth::user()->induser_id != $post->individual_id && Auth::user()->identifier == 1)		
-														@if($post->postactivity->where('user_id', Auth::user()->induser_id)->isEmpty() && $expired != 1)
-															<form action="/job/apply" method="post" id="post-apply-{{$post->id}}" data-id="{{$post->id}}">	
-																<input type="hidden" name="_token" value="{{ csrf_token() }}">
-																<input type="hidden" name="apply" value="{{ $post->id }}">
-																@if($post->website_redirect_url != null)
-																	<a class="btn apply-btn blue btn-sm apply-contact-btn" target="_blank" 
-																		href="{{ $post->website_redirect_url }}" type="button">Apply
-																	</a>	
-																@else
-																	<button class="btn apply-btn blue btn-sm apply-contact-btn" 
-																			id="apply-btn-{{$post->id}}" type="button">Apply
-																	</button>
-																	@endif
-															</form>	
-															@elseif($post->postactivity->where('user_id', Auth::user()->induser_id)->first()->apply == 1 && Auth::user()->identifier == 1 && $expired != 1) 
-																<button type="button" class="btn btn-sm bg-grey-steel apply-contact-btn" disabled="true">
-																	Applied 
-																</button>
-																	
-																	
-																@elseif($expired != 1)
-															<form action="/job/apply" method="post" id="post-apply-{{$post->id}}" data-id="{{$post->id}}">	
-																<input type="hidden" name="_token" value="{{ csrf_token() }}">
-																<input type="hidden" name="apply" value="{{ $post->id }}">
-																<button class="btn apply-btn blue btn-sm apply-contact-btn" 
-																		id="apply-btn-{{$post->id}}" type="button">Apply
-																</button>
-															</form>									
-														@endif	
-													@elseif($post->post_type == 'job' && Auth::user()->induser->resume == null && $post->resume_required == 1 && Auth::user()->induser_id != $post->individual_id && Auth::user()->identifier == 1)
-														Resume is Required to Apply this Post
+												    <!-- if corporate_id is null     -->
+												    @elseif($post->individual_id != null && Auth::user()->induser_id != $post->individual_id && Auth::user()->identifier == 1)        
+												        @if($post->postactivity->where('user_id', Auth::user()->id)->isEmpty() && $post->resume_required == 1)
+												            <form action="/job/contact" method="post" id="post-contact-{{$post->id}}" data-id="{{$post->id}}">  
+												                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+												                <input type="hidden" name="contact" value="{{ $post->id }}">
+												                <button class="btn contact-btn green btn-sm apply-contact-btn" 
+												                        id="contact-btn-{{$post->id}}" type="button">Contact
+												                </button>
+												            </form>     
+												        @elseif($post->postactivity->where('user_id', Auth::user()->id)->first()->apply == 1 && Auth::user()->identifier == 1 && $post->resume_required == 1) 
+												            <button type="button" class="btn btn-sm bg-grey-steel apply-contact-btn" disabled="true">
+												            <i class="icon-check icon-check-css"></i> Contacted 
+												        </button>                                     
+												        @endif   
+												   
 
-													@endif	
-												@if($post->post_type == 'skill' && Auth::user()->induser_id != $post->individual_id && Auth::user()->identifier == 1)		
-													@if($post->postactivity->where('user_id', Auth::user()->induser_id)->isEmpty())
-														<form action="/job/contact" method="post" id="post-contact-{{$post->id}}" data-id="{{$post->id}}">	
-															<input type="hidden" name="_token" value="{{ csrf_token() }}">
-															<input type="hidden" name="contact" value="{{ $post->id }}">
-															<button class="btn contact-btn green btn-sm apply-contact-btn" 
-																	id="contact-btn-{{$post->id}}" type="button">Contact
-															</button>
-														</form>	
-													@elseif($post->postactivity->where('user_id', Auth::user()->induser_id)->first()->contact_view == 1) 
-														<button type="button" class="btn btn-sm bg-grey-steel apply-contact-btn" disabled="true">
-															<i class="glyphicon glyphicon-ok"></i> Contacted
-														</button>
-														@else
-													<form action="/job/contact" method="post" id="post-contact-{{$post->id}}" data-id="{{$post->id}}">	
-														<input type="hidden" name="_token" value="{{ csrf_token() }}">
-														<input type="hidden" name="contact" value="{{ $post->id }}">
-														<button class="btn contact-btn green btn-sm apply-contact-btn" 
-																id="contact-btn-{{$post->id}}" type="button">Contact
-														</button>
-													</form>							
-													@endif	
+												    @endif  
+												@if($post->post_type == 'skill' && Auth::user()->induser_id != $post->individual_id && Auth::user()->identifier == 1)       
+												    @if($post->postactivity->where('user_id', Auth::user()->id)->isEmpty())
+												        <form action="/job/contact" method="post" id="post-contact-{{$post->id}}" data-id="{{$post->id}}">  
+												            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+												            <input type="hidden" name="contact" value="{{ $post->id }}">
+												            <button class="btn contact-btn green btn-sm apply-contact-btn" 
+												                    id="contact-btn-{{$post->id}}" type="button">Contact
+												            </button>
+												        </form> 
+												    @elseif($post->postactivity->where('user_id', Auth::user()->id)->first()->contact_view == 1) 
+												        <button type="button" class="btn btn-sm bg-grey-steel apply-contact-btn" disabled="true">
+												            <i class="glyphicon glyphicon-ok"></i> Contacted
+												        </button>
+												        @else
+												    <form action="/job/contact" method="post" id="post-contact-{{$post->id}}" data-id="{{$post->id}}">  
+												        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+												        <input type="hidden" name="contact" value="{{ $post->id }}">
+												        <button class="btn contact-btn green btn-sm apply-contact-btn" 
+												                id="contact-btn-{{$post->id}}" type="button">Contact
+												        </button>
+												    </form>                         
+												    @endif  
 												@endif
-											</div>
-											@elseif($expired == 1 && $post->post_type == 'job')
+												</div>
+												@elseif($expired == 1 && $post->post_type == 'job')
 												<div class="row" style="text-align:center;">
-													@if($post->post_type == 'job' && Auth::user()->induser_id != $post->individual_id && Auth::user()->identifier == 1)	
-														@if($post->postactivity->where('user_id', Auth::user()->induser_id)->isEmpty())	
-															<div class="col-md-4 col-sm-4 col-xs-4">
-															</div>
-														@elseif($post->postactivity->where('user_id', Auth::user()->induser_id)->first()->apply == 1 && Auth::user()->identifier == 1) 
-															<div class="col-md-4 col-sm-4 col-xs-4">
-																<i class="fa fa-check-square-o"></i><span class="hidden-sm hidden-xs"> Applied</span> 
-															</div>
-														@endif
-													<div class="col-md-4 col-sm-4 col-xs-4">
-														<i class="glyphicon glyphicon-ban-circle"></i> Expired
-													</div>
-													@endif
-												</div>										
+												    @if($post->post_type == 'job' && Auth::user()->induser_id != $post->individual_id && Auth::user()->identifier == 1) 
+												        @if($post->postactivity->where('user_id', Auth::user()->id)->isEmpty()) 
+												            <div class="col-md-4 col-sm-4 col-xs-4">
+												            </div>
+												        @elseif($post->postactivity->where('user_id', Auth::user()->id)->first()->apply == 1 && Auth::user()->identifier == 1) 
+												            <div class="col-md-4 col-sm-4 col-xs-4">
+												                <i class="fa fa-check-square-o"></i><span class="hidden-sm hidden-xs"> Applied</span> 
+												            </div>
+												        @endif
+												    <div class="col-md-4 col-sm-4 col-xs-4">
+												        <i class="glyphicon glyphicon-ban-circle"></i> Expired
+												    </div>
+												    @endif
+												</div>                                      
 												@endif
+
 											</div>
 										</div>
 										<div style="float: right; right: 15px; position: absolute; bottom: 3px;"><a class="hide-detail">Hide Details</a></div>
@@ -1292,6 +1287,10 @@ $(document).ready(function(){
 	    jQuery('.hide-label').toggle('hide');
     });
 
+    jQuery('.show-more').on('click', function(event) {
+	    jQuery('.extra-show').toggle('show');
+    });
+
     // jQuery('.hide-details').on('click', function(event) {
     //     jQuery('.show-details').toggle('show');
     //     jQuery('.hide-details').toggle('hide');
@@ -1396,7 +1395,10 @@ $(document).ready(function(){
 
   	var formData = $('#post-fav-'+post_id).serialize(); 
     var formAction = $('#post-fav-'+post_id).attr('action');
-    $count = $('#myfavcount').text();
+    $count = $.trim($('#myfavcount').text());
+    if($count.length == 0 || $count == ""){
+		$count = 0;
+	}
     $.ajaxSetup({
 		headers: {
 			'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -1412,7 +1414,7 @@ $(document).ready(function(){
       success: function(data){
       	if(data > $count){
  			$('#myfavcount').text(data);
- 			$('#fav-btn-'+post_id).css({'color':'burlywood'});
+ 			$('#fav-btn-'+post_id).css({'color':'#E26A6A'});
  			$('#myfavcount').removeClass('hide');
             $('#myfavcount').addClass('show');
         }else if(data < $count && data != 0){

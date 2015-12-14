@@ -18,27 +18,28 @@
 			<div class="group-admin-title pull-right">
 				@if($group->admin->id == Auth::user()->induser_id)
 				<a id="ajax-demo" href="#edit-group" data-toggle="modal" class="badge btn btn-xs btn-info" style="" title="Edit">
-					<i class="fa fa-edit"></i>
+					<i class="fa fa-edit"></i><span class="hidden-sm hidden-xs"> Edit</span>
 				</a>
 			@endif
 			@if($group->admin->id == Auth::user()->induser_id)				
 				<a id="ajax-demo" href="#delete-group" data-toggle="modal" title="Delete" 
 					class="badge btn btn-xs btn-danger" style="text-decoration: none;">
-					<i class="fa fa-trash"></i> Delete
+					<i class="fa fa-trash"></i><span class="hidden-sm hidden-xs"> Delete Group</span>
 				</a>				
 			@else				
 				<a id="ajax-demo" href="#leave-group" data-toggle="modal" 
 					class="badge btn btn-xs" style="text-decoration: none;">						
-					<i class="fa fa-sign-out"></i> Leave Group
+					<i class="fa fa-sign-out"></i><span class="hidden-sm hidden-xs"> Leave Group</span>
 				</a>
 			@endif
-				<span class="group-admin-title-left">Admin</span> 
-				<a href="/profile/ind/{{$group->admin->id}}">
-				<span class="group-admin-title-right">{{$group->admin->fname}} {{$group->admin->lname}}</span>
-				</a>
+				
 			</div>
 		</div>		
 	</div>
+	<span class="group-admin-title-left">Admin</span> 
+				<a href="/profile/ind/{{$group->admin->id}}">
+				<span class="group-admin-title-right">{{$group->admin->fname}} {{$group->admin->lname}}</span>
+				</a>
 	<!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
 	<!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
 
@@ -122,45 +123,8 @@
 </div>
 <!-- /.modal -->
 	<div class="portlet-body form">
-		<div class="form-body">	
-<!-- 			<span class="input-group-btn btn-right">
-				<form action="{{ url('/group/destroy', $group->id) }}" method="post">
-					<input type="hidden" name="_token" value="{{ csrf_token() }}">
-					<div>
-						<button type="submit" class="btn yellow">
-							<i class="glyphicon glyphicon-edit" style="font-size: 12px;background-color: white;color: black;border-radius: 10px;width: 20px;height: 20px;padding-top: 3px;"></i>
-						</button>
-					</div>
-					<div>
-						<button type="submit" class="btn btn-danger">
-							<i class="glyphicon glyphicon-trash" style="font-size: 12px;background-color: white;color: black;border-radius: 10px;width: 20px;height: 20px;padding-top: 3px;"></i>
-						</button>
-					</div>
-				</form>
-			</span> -->
-		</div>
-	</div>
-</div>
-<div class="portlet box green col-md-7">
-	<div class="portlet-title">
-		<div class="caption">
-			<i class="icon-users"></i> Members
-		</div>
-		<div class="done-show" style="float:right;margin:10px 0;">
-			<button class="btn" style="padding: 0px 5px;background-color: darkslategrey;color: white;">
-				Delete
-			</button>
-		</div>
-		<div class="add-done-show" style="float:right;margin:10px 0;">
-			<button class="btn" style="padding: 0px 5px;background-color: darkslategrey;color: white;">
-				Done
-			</button>
-		</div>
-	</div>
-	<div class="portlet-body">
-		<div class="tabbable-custom ">
-
-			<div class="row">
+		<div class="form-body" style="padding:20px 0;">	
+<div class="row">
 				<div class="col-md-1"></div>
 				<div class="col-md-10" style="">
 					<div class="form-group clearfix" style="margin-bottom:0">	
@@ -175,25 +139,56 @@
 						<!-- END FORM-->
 					</div>
 
-					<div class="col-md-12" id="search-results" style="background:#f2f2f2;max-height:200px;overflow:auto;margin-bottom:10px"></div>
+					<div class="col-md-12" id="search-results" style="background:#f2f2f2;max-height:200px;overflow:auto;margin-bottom:10px">
+					</div>
 				</div>			
 			</div>
-
-			<ul class="nav nav-tabs" style="padding-left: 0;">
-				<li class="active">
-					<a href="#tab_5_1" class="label-new" data-toggle="tab">
-					Group Members </a>
-				</li>
-				<li>
-					<a href="#tab_5_2" class="label-new" data-toggle="tab">
-					Add Members </a>
-				</li>
-			</ul>
+		</div>
+	</div>
+</div>
+<div class="portlet box green col-md-7">
+	<div class="portlet-title">
+		<ul class="nav nav-tabs" style="padding-left: 0;float:left;">
+			<li class="active">
+				<a href="#tab_5_1" class="label-new" data-toggle="tab" style="border-left:0;">
+					Group Members 
+					@if(count($users) > 0)
+						<span class="badge" style="background-color: deepskyblue;"> 
+							{{count($users)}}
+						</span>
+					 @endif
+				</a>
+			</li>
+			<li>
+				<a href="#tab_5_2" class="label-new" data-toggle="tab">
+					Add Members 
+					@if(count($connections) > 0) 
+						<span class="badge" style="background-color: lightcoral;">
+							{{count($connections)}}
+						</span>
+					@endif
+				</a>
+			</li>
+		</ul>
+		<div class="done-show" style="float:right;margin:10px 0;">
+			<button class="btn" style="padding: 0px 5px;background-color: darkslategrey;color: white;">
+				<i class="icon-close"></i> Remove
+			</button>
+		</div>
+		<div class="add-done-show" style="float:right;margin:10px 0;">
+			<button class="btn" style="padding: 0px 5px;background-color: darkslategrey;color: white;">
+				<i class="icon-plus"></i> Add
+			</button>
+		</div>
+	</div>
+	<div class="portlet-body">
+		<div class="tabbable-custom ">
+			
 			<div class="tab-content">
 				<div class="tab-pane active" id="tab_5_1">
 					@if(count($users) > 0)
 					@foreach($users as $user)
-					<div class="row" style="border-bottom:1px dotted lightgrey;">
+					<div class="row" style="border-bottom:1px dotted lightgrey;padding: 5px 0;">
 						
 						<div class="col-md-2 col-sm-2 col-xs-2">
 							<a href="#">
@@ -218,9 +213,12 @@
 									<input type="hidden" name="_token" value="{{ csrf_token() }}">
 									<input type="hidden" name="delete_id" value="{{$user->groups_users_id}}">
 									<input type="hidden" name="delete_group_id" value="{{$user->group_id}}">
-									<button type="submit" class="btn btn-sm btn-danger">
-									<i class="glyphicon glyphicon-trash" style="font-size: 12px;background-color: white;color: black;border-radius: 10px;width: 20px;height: 20px;padding-top: 3px;"></i>
+									<button type="submit" name="action" value="reject" class="btn apply-ignore-font" style="padding: 0px 3px; background-color: white;">
+										<i class="icon-close icon-close-css"></i>
 									</button>
+									<!-- <button type="submit" class="btn btn-sm btn-danger">
+									<i class="glyphicon glyphicon-trash" style="font-size: 12px;background-color: white;color: black;border-radius: 10px;width: 20px;height: 20px;padding-top: 3px;"></i>
+									</button> -->
 								</form>
 								@endif								
 							</span>
@@ -243,11 +241,11 @@
 					@if(count($connections) > 0)
 					@foreach($connections as $connection)	
 						@if($connection->id != $group->admin_id)
-						<div class="row" style="border-bottom:1px dotted lightgrey;">
+						<div class="row" style="border-bottom:1px dotted lightgrey;padding: 5px 0;">
 							
 							<div class="col-md-2 col-sm-2 col-xs-2">
 								<a href="#">
-							        <img class="media-object" src="@if($connection->profile_pic != null){{ '/img/profile/'.$connection->profile_pic }}@else{{'/assets/images/ab.png'}}@endif" alt="..." style="width:60px;padding: 3px;border: 1px solid #ddd;">
+							        <img class="media-object img-circle" src="@if($connection->profile_pic != null){{ '/img/profile/'.$connection->profile_pic }}@else{{'/assets/images/ab.png'}}@endif" alt="..." style="width:60px;padding: 3px;border: 1px solid #ddd;">
 							     </a>
 							</div>
 							<div class="col-md-7 col-sm-7 col-xs-6">
@@ -262,9 +260,12 @@
 										<input type="hidden" name="_token" value="{{ csrf_token() }}">
 										<input type="hidden" name="add_user_id" value="{{$connection->id}}">
 										<input type="hidden" name="add_group_id" value="{{$group->id}}">
-										<button type="submit" class="btn btn-sm btn-success">
-										<i class="icon-plus" style="font-size: 12px;background-color: white;color: black;border-radius: 10px;width: 20px;height: 20px;padding-top: 3px;"></i>
+										<button type="submit" name="action" value="accept" class="btn apply-ignore-font" style="padding: 0px 3px; background-color: white;">
+											<i class="icon-check icon-check-css"></i>
 										</button>
+										<!-- <button type="submit" class="btn btn-sm btn-success">
+										<i class="icon-plus" style="font-size: 12px;background-color: white;color: black;border-radius: 10px;width: 20px;height: 20px;padding-top: 3px;"></i>
+										</button> -->
 									</form>
 								</span>
 							</div>

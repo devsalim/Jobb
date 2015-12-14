@@ -50,6 +50,7 @@ Route::group(array('before' => 'auth'), function(){
 	Route::post('job/apply', 'JobController@postApply');
 	Route::post('job/contact', 'JobController@postContact');
 	Route::post('job/extend', 'JobController@postExtend');
+	Route::post('job/extended', 'JobController@postExtended');
 	Route::post('job/expire', 'JobController@postExpire');
 	Route::post('job/newskill', 'JobController@addNewSkills');
 
