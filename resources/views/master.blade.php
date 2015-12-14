@@ -206,7 +206,7 @@ body.page-boxed{
 }
 </style>
 <!-- END THEME STYLES -->
-<link rel="shortcut icon" href="favicon.ico"/>
+{{-- <link rel="shortcut icon" href="favicon.ico"/> --}}
 @yield('css')
 </head>
 <!-- END HEAD -->
@@ -329,7 +329,7 @@ body.page-boxed{
 <script type="text/javascript" src="/assets/global/plugins/jquery-validation/js/jquery.validate.min.js"></script>
 <script type="text/javascript" src="/assets/global/plugins/jquery-validation/js/additional-methods.min.js"></script>
 <script src="/assets/admin/pages/scripts/components-form-tools.js"></script>
-<script src="/assets/searchableOptionList.js"></script>
+{{-- <script src="/assets/searchableOptionList.js"></script> --}}
 <script src="/assets/sol.js"></script>
 <script src="/assets/multiple-select.js"></script>
 <script src = "/assets/js/jquery.mailtip.js"></script>

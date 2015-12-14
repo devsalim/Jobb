@@ -577,7 +577,7 @@
 											@elseif($post->individual_id != null)
 												<div class="timeline-body-head-caption" data-puid="{{$post->individual_id}}">
 												
-												<!-- Post shared by user -->						
+						<!-- Post shared by user -->						
 						@if(count($post->groupTagged) > 0)
 							@if($post->sharedGroupBy->first()->mode == 'shared')
 							<div class="shared-by">
@@ -586,7 +586,14 @@
 							@endif
 						@endif
 
-						
+						<!-- Post shared by user -->						
+						@if($post->tagged->contains('user_id', Auth::user()->induser_id) && 
+							$post->sharedBy->first()->mode == 'shared')
+							
+							{{$post->sharedBy->first()->mode}} by 
+							<b>{{$post->sharedBy->first()->fname}} {{$post->sharedBy->first()->lname}}</b><br/>
+
+						@endif
 														<a href="/profile/ind/{{$post->individual_id}}" style="font-size: 15px;text-decoration:none;font-weight:600;">
 
 															{{ $post->induser->fname}} {{ $post->induser->lname}}
