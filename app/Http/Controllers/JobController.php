@@ -155,12 +155,12 @@ class JobController extends Controller {
 
 	public function postLike(Request $request){
 		$like = Postactivity::where('post_id', '=', $request['like'])
-							->where('user_id', '=', Auth::user()->induser_id)
+							->where('user_id', '=', Auth::user()->id)
 							->first();
 		if($like == null){
 			$like = new Postactivity();
 			$like->post_id = $request['like'];
-			$like->user_id = Auth::user()->induser_id;
+			$like->user_id = Auth::user()->id;
 			$like->thanks = 1;
 			$like->thanks_dtTime = new \DateTime();
 			$like->save();
@@ -184,28 +184,28 @@ class JobController extends Controller {
 
 	public function postFav(Request $request){
 		$fav = Postactivity::where('post_id', '=', $request['fav_post'])
-							->where('user_id', '=', Auth::user()->induser_id)
+							->where('user_id', '=', Auth::user()->id)
 							->first();
 		if($fav == null){
 			$fav = new Postactivity();
 			$fav->post_id = $request['fav_post'];
-			$fav->user_id = Auth::user()->induser_id;
+			$fav->user_id = Auth::user()->id;
 			$fav->fav_post = 1;
 			$fav->fav_post_dtTime = new \DateTime();
 			$fav->save();
-			$favCount = Postactivity::where('user_id', '=', Auth::user()->induser_id)->sum('fav_post');
+			$favCount = Postactivity::where('user_id', '=', Auth::user()->id)->sum('fav_post');
 			return $favCount;
 		}elseif($fav != null && $fav->fav_post == 0){
 			$fav->fav_post = 1;
 			$fav->fav_post_dtTime = new \DateTime();
 			$fav->save();
-			$favCount = Postactivity::where('user_id', '=', Auth::user()->induser_id)->sum('fav_post');
+			$favCount = Postactivity::where('user_id', '=', Auth::user()->id)->sum('fav_post');
 			return $favCount;
 		}elseif($fav != null && $fav->fav_post == 1){
 			$fav->fav_post = 0;
 			$fav->fav_post_dtTime = new \DateTime();
 			$fav->save();
-			$favCount = Postactivity::where('user_id', '=', Auth::user()->induser_id)->sum('fav_post');
+			$favCount = Postactivity::where('user_id', '=', Auth::user()->id)->sum('fav_post');
 			return $favCount;
 		}
 
@@ -407,6 +407,26 @@ class JobController extends Controller {
 			return redirect('/mypost')
 					->withErrors([
 						'errors' => 'Duration extended successfully. Post will expire on '.$newDate,
+					]);
+		}else if($post != null && $post->post_duration_extend == 1){
+			return redirect('/mypost')
+					->withErrors([
+						'post_duration' => 'Duration cannot be extended. You have already extended once.',
+					]);
+		}
+
+	}
+
+	public function postExtended(Request $request){
+		$post = Postjob::findOrFail($request['post_id']);
+		if($post != null && $post->post_duration_extend == 0){
+			$post->post_extended = $request['post_duration'];
+			$post->post_duration_extend = 1;
+			$post->post_extended_Dt = new \DateTime();
+			$post->save();
+			return redirect('/mypost')
+					->withErrors([
+						'errors' => 'Duration extended successfully.',
 					]);
 		}else if($post != null && $post->post_duration_extend == 1){
 			return redirect('/mypost')

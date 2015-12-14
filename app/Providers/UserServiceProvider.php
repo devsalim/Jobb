@@ -24,7 +24,7 @@ class UserServiceProvider extends ServiceProvider {
 
 				$favouritesCount = Postactivity::with('user')
 									      ->where('fav_post', '=', 1)
-									      ->where('user_id', '=', Auth::user()->induser_id)
+									      ->where('user_id', '=', Auth::user()->id)
 									      ->orderBy('id', 'desc')
 								          ->sum('postactivities.fav_post');
 				$thanksCount = Postactivity::with('user', 'post')
@@ -58,7 +58,7 @@ class UserServiceProvider extends ServiceProvider {
 								      ->get(['postactivities.id', 'postjobs.unique_id', 'postactivities.thanks', 'postactivities.thanks_dtTime', 'postactivities.user_id', 'postactivities.post_id']);
 				$favourites = Postactivity::with('user')
 									      ->where('fav_post', '=', 1)
-									      ->where('user_id', '=', Auth::user()->induser_id)
+									      ->where('user_id', '=', Auth::user()->id)
 									      ->orderBy('id', 'desc')
 								          ->get(['id', 'fav_post', 'fav_post_dtTime', 'user_id', 'post_id']);
 				$thanksCount = Postactivity::with('user', 'post')
@@ -74,7 +74,7 @@ class UserServiceProvider extends ServiceProvider {
 											->orderBy('postactivities.id', 'desc')
 											->sum('postactivities.apply');
 
-				$notifications = Notification::with('fromUser', 'toUser')->take(5)->get();
+				$notifications = Notification::with('fromUser', 'toUser')->where('to_user', '=', Auth::user()->id)->take(5)->get();
 				$notificationsCount = Notification::where('to_user', '=', Auth::user()->id)->count();
 			}
 			$view->with('applications', $applications)
