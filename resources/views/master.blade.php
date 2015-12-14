@@ -237,7 +237,7 @@ body.page-boxed{
 
     <!-- BEGIN CONTENT -->
     <div class="page-content-wrapper">
-      <div class="page-content">
+      <div class="page-content clearfix">
 
         <!-- customizer -->
 
