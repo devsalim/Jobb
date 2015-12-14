@@ -711,7 +711,7 @@
 															<input type="hidden" name="fav_post" value="{{ $post->id }}">
 
 															<button class="" style="background-color: transparent;padding:0 10px;border:0">
-																@if(!$post->postactivity->where('user_id', Auth::user()->induser_id)->isEmpty())
+																@if($post->postactivity->where('user_id', Auth::user()->induser_id)->isEmpty())
 																<i class="fa fa-star" id="fav-btn-{{$post->id}}" style="font-size: 20px;"></i>
 																@elseif($post->postactivity->where('user_id', Auth::user()->induser_id)->first()->fav_post == 1) 
 																<i class="fa fa-star" id="fav-btn-{{$post->id}}" style="font-size: 20px;color:burlywood"></i>
