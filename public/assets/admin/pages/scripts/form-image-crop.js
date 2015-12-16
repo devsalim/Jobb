@@ -464,7 +464,7 @@ var FormImageCrop = function () {
     }
 
     var demo8 = function() {
-        $('#demo8').Jcrop({
+        $('#img-crop').Jcrop({
           aspectRatio: 1,
           onSelect: updateCoords
         });

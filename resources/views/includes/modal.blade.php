@@ -3,7 +3,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       @if(Auth::user()->induser_id !=null)
-      {!! Form::open(array('url' => 'user/imgUpload', 'files'=> true)) !!}
+      {!! Form::open(array('url' => 'user/imgUpload', 'files'=> true, 'id'=> 'profile-img-upload-form')) !!}
       @elseif(Auth::user()->corpuser_id !=null)
       {!! Form::open(array('url' => 'corporate/imgUpload', 'files'=> true)) !!}
       @endif
@@ -12,11 +12,23 @@
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
         <h4 class="modal-title">Add profile image</h4>
       </div>
-      <div class="modal-body">       
-        {!! Form::file('profile_pic') !!}
+      <div class="modal-body" id="img-area">       
+        {!! Form::file('profile_pic', ['class'=>'profile-image']) !!}
       </div>
       <div class="modal-footer">        
-        {!! Form::submit('upload',['class'=>'btn btn-info']) !!}
+        {{-- {!! Form::submit('upload',['class'=>'btn btn-info']) !!} --}}
+        <button type="button" class="btn btn-info upload-img">Upload</button>{{-- 
+        <button type="button" class="btn btn-warning cropnsave-img" >Crop & Save</button> --}}
+
+        <form action="user/imgUpload" target="_blank" method="post" id="demo8_form">
+          <input type="hidden" id="crop_x" name="x"/>
+          <input type="hidden" id="crop_y" name="y"/>
+          <input type="hidden" id="crop_w" name="w"/>
+          <input type="hidden" id="crop_h" name="h"/>
+          <input type="hidden" id="fn" name="filename"/>
+          <input type="submit" value="Crop & Save" class="btn btn-large green cropnsave-img" style="display:none"/>
+        </form>
+
         <button type="button" class="btn default" data-dismiss="modal">Cancel</button>
       </div>
       {!!Form::close() !!}
