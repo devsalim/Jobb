@@ -59,7 +59,11 @@ class Postjob extends Model {
 	}
 
 	public function tagged(){
-		return $this->hasMany('App\PostUserTagging', 'post_id', 'id')->select('user_id');
+		return $this->hasMany('App\PostUserTagging', 'post_id', 'id');
+	}
+
+	public function sharedBy(){
+		return $this->belongsToMany('App\Induser', 'post_user_taggings', 'post_id', 'tag_share_by')->select('user_id', 'mode', 'tag_share_by', 'fname', 'lname');
 	}
 
 	public function taggedGroup(){

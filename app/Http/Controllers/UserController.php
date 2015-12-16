@@ -251,22 +251,44 @@ class UserController extends Controller {
 		}
 	}
 
-	public function imgUpload(){
-		if(Input::file('profile_pic')->isValid()) {
-			$oldProfilePic = Induser::where('id', '=', Auth::user()->induser_id)->pluck('profile_pic');
-			$destinationPath = 'img/profile/';
-			$extension = Input::file('profile_pic')->getClientOriginalExtension();
-			$fileName = rand(11111,99999).'.'.$extension;
-			$path = $destinationPath.$fileName;
-			Input::file('profile_pic')->move($destinationPath, $fileName);
-			Image::make($path)->resize(200, 200)->save($path);
-			Induser::where('id', '=', Auth::user()->induser_id)->update(['profile_pic' => $fileName]);
+	public function imgUpload(Request $request){
 
-			if($oldProfilePic != null){
-				\File::delete($destinationPath.$oldProfilePic);
+		// if($request->hasFile('profile_pic')) {
+			
+			if($request->ajax()){
+				$data = [];
+				$destinationPath = 'img/profile/temp/';
+				$extension = \Illuminate\Support\Facades\Request::file('profile_pic')->getClientOriginalExtension();
+				$fileName = rand(11111,99999).'.'.$extension;
+				$path = $destinationPath.$fileName;
+				\Illuminate\Support\Facades\Request::file('profile_pic')->move($destinationPath, $fileName);
+				Image::make($path)->save($path);
+
+				$data['pfimg'] = '<img src="img/profile/temp/'.$fileName.'" id="img-crop" style="margin:auto;display:table;"/>';
+				$data['uplBtn'] = 'hide';
+				$data['filename'] = $fileName;
+				return response()->json(['success'=>true,'data'=>$data]);
+			}else{
+				$oldProfilePic = Induser::where('id', '=', Auth::user()->induser_id)->pluck('profile_pic');
+				$destinationPath = 'img/profile/';
+				// $extension = Input::file('profile_pic')->getClientOriginalExtension();
+				// $fileName = rand(11111,99999).'.'.$extension;
+				// $path = $destinationPath.$fileName;
+				// Input::file('profile_pic')->move($destinationPath, $fileName);
+
+				$fileName = $request['filename'];
+				$path = $destinationPath.$fileName;
+				$img = 'img/profile/temp/'.$fileName;
+				Image::make($img)->crop($request['w'], $request['h'], [$request['x'], $request['y']])->resize(200,200)->save($path);
+				Induser::where('id', '=', Auth::user()->induser_id)->update(['profile_pic' => $fileName]);
+
+				if($oldProfilePic != null){
+					\File::delete($destinationPath.$oldProfilePic);
+				}
+				return redirect('/home');
 			}
-			return redirect('/home');
-	    }
+			
+	    // }
 	}
 
 	public function edit_me(){

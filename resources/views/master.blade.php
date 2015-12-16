@@ -72,6 +72,10 @@
 <link rel="stylesheet" href="/assets/pqselect.dev.css" /> 
 <link href="/assets/multiple-select.css" rel="stylesheet"/>
 <link href="/assets/jquery.nstSlider.css" rel="stylesheet"/>
+
+<link href="../../assets/global/plugins/jcrop/css/jquery.Jcrop.min.css" rel="stylesheet"/>
+<link href="../../assets/admin/pages/css/image-crop.css" rel="stylesheet"/>
+
 @yield('css')
 
 <style type="css/text" rel="stylesheet">
@@ -206,7 +210,7 @@ body.page-boxed{
 }
 </style>
 <!-- END THEME STYLES -->
-<link rel="shortcut icon" href="favicon.ico"/>
+{{-- <link rel="shortcut icon" href="favicon.ico"/> --}}
 @yield('css')
 </head>
 <!-- END HEAD -->
@@ -329,15 +333,21 @@ body.page-boxed{
 <script type="text/javascript" src="/assets/global/plugins/jquery-validation/js/jquery.validate.min.js"></script>
 <script type="text/javascript" src="/assets/global/plugins/jquery-validation/js/additional-methods.min.js"></script>
 <script src="/assets/admin/pages/scripts/components-form-tools.js"></script>
-<script src="/assets/searchableOptionList.js"></script>
+{{-- <script src="/assets/searchableOptionList.js"></script> --}}
 <script src="/assets/sol.js"></script>
 <script src="/assets/multiple-select.js"></script>
 <script src = "/assets/js/jquery.mailtip.js"></script>
 <script src = "/assets/pqselect.dev.js"></script>
 <script src = "/assets/jquery.nstSlider.js"></script>
 <script src="{{ asset('/assets/ind_validation.js') }}"></script>
+
 <script src="/assets/admin/pages/scripts/form-icheck.js"></script>
 <script src="/assets/global/plugins/icheck/icheck.min.js"></script>
+
+<script src="../../assets/global/plugins/jcrop/js/jquery.color.js"></script>
+<script src="../../assets/global/plugins/jcrop/js/jquery.Jcrop.min.js"></script>
+<script src="../../assets/admin/pages/scripts/form-image-crop.js"></script>
+
 <script>
 $(document).ready(function () {            
 //validation rules
@@ -406,7 +416,8 @@ $(document).ready(function () {
     Layout.init(); // init current layout
     Demo.init(); // init demo features
     ComponentsKnobDials.init();
-    FormValidation.init();
+    FormValidation.init();    
+    
 
       $('.toggle-display').click(function () {
         $('#nav-display').hide();   
@@ -448,6 +459,41 @@ $(document).ready(function () {
       }); 
       return false;
   });
+
+    // imcrp
+    $('.upload-img').on('click',function(event){
+      // document.getElementById("img-area").innerHTML = "Please wait..."
+      // select the form and submit      
+      // var formData = $('#profile-img-upload-form').serialize(); // form data as string
+      var formAction = $('#profile-img-upload-form').attr('action'); // form handler url
+
+      var formData = new FormData($("#profile-img-upload-form")[0]);
+
+      $.ajaxSetup({
+        headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+      });
+      // console.log(formData);
+      $.ajax({
+        url: formAction,
+        type: "POST",
+        data: formData,
+        processData: false,
+        contentType: false,
+        success: function (data) {
+          console.log(data);
+          if(data.data.uplBtn == 'hide'){
+              $(".upload-img").hide();
+              $(".cropnsave-img").show();
+              $("#img-area").html(data.data.pfimg); 
+              $("#fn").val(data.data.filename);
+              FormImageCrop.init();           
+          }
+        }
+      });
+      
+    });
 
 });
 </script>
