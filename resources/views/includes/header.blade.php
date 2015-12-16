@@ -42,24 +42,34 @@
               </li>
               <li>
                 <ul class="dropdown-menu-list scroller" style="height: 275px;" data-handle-color="#637283">
-                  @foreach($notifications as $notification)
+                  @foreach($notifications as $not)
+                  
                   <li>
-                    <a href="#">
-                    <span class="photo">
-                    <img src="" class="img-circle" width="40" height="40">
-                    <div class=""><i class="icon-speedometer"></i> 55%</div>
-                    </span>
-                    <span class="subject">
-                    <span class="from">
-                    {{$notification->fromuser->first()->name}} </span>
-                    <span class="time">
-                      {{ \Carbon\Carbon::createFromTimeStamp(strtotime($notification->created_at))->diffForHumans() }}
-                    </span>
-                    </span>
-                    <span class="message">
-                    {{$notification->remark}} </span>
+                    <a href="#" class="notification-link">
+                      <span class="photo">
+                      @if($not->fromuser->first()->induser != null)
+                        
+                        <img src="@if($not->fromuser->first()->induser->profile_pic != null){{ '/img/profile/'.$not->fromuser->first()->induser->profile_pic }}@else{{'/assets/images/ab.png'}}@endif" class="img-circle" width="40" height="40">                        
+                        
+                      @elseif($not->fromuser->first()->corpuser != null)
+                        
+                        <img src="@if($not->fromuser->first()->corpuser->logo_status != null){{ '/img/profile/'.$not->fromuser->first()->corpuser->logo_status }}@else{{'/assets/images/ab.png'}}@endif" class="img-circle" width="40" height="40">
+                        {{-- <div class=""><i class="icon-speedometer"></i> 55%</div> --}}
+                       
+                      @endif
+                      </span>
+                      <span class="subject">
+                      <span class="from">
+                      {{$not->fromuser->first()->name}} </span>
+                      <span class="time">
+                        {{ \Carbon\Carbon::createFromTimeStamp(strtotime($not->created_at))->diffForHumans() }}
+                      </span>
+                      </span>
+                      <span class="message">
+                      {{$not->remark}} </span>
                     </a>
                   </li>
+              
                  @endforeach
                 </ul>
               </li>

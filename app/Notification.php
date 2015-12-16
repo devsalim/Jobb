@@ -5,7 +5,7 @@ use Illuminate\Database\Eloquent\Model;
 class Notification extends Model {
 
 	public function fromUser(){
-		return $this->hasMany('App\User', 'id', 'from_user')->select('id', 'name', 'identifier');
+		return $this->hasMany('App\User', 'id', 'from_user');
 	}
 
 	public function toUser(){
