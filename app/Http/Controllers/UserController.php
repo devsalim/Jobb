@@ -262,7 +262,7 @@ class UserController extends Controller {
 				$fileName = rand(11111,99999).'.'.$extension;
 				$path = $destinationPath.$fileName;
 				\Illuminate\Support\Facades\Request::file('profile_pic')->move($destinationPath, $fileName);
-				Image::make($path)->save($path);
+				Image::make($path)->resize(442, null, function ($constraint) {$constraint->aspectRatio();})->save($path);
 
 				$data['pfimg'] = '<img src="img/profile/temp/'.$fileName.'" id="img-crop" style="margin:auto;display:table;"/>';
 				$data['uplBtn'] = 'hide';
@@ -279,11 +279,13 @@ class UserController extends Controller {
 				$fileName = $request['filename'];
 				$path = $destinationPath.$fileName;
 				$img = 'img/profile/temp/'.$fileName;
-				Image::make($img)->crop($request['w'], $request['h'], $request['x'], $request['y'])->resize(200,200)->save($path);
+
+				Image::make($img)->crop($request['w'], $request['h'], $request['x'], $request['y'])->save($path);
 				Induser::where('id', '=', Auth::user()->induser_id)->update(['profile_pic' => $fileName]);
 
 				if($oldProfilePic != null){
 					\File::delete($destinationPath.$oldProfilePic);
+					\File::delete($img);
 				}
 				return redirect('/home');
 			}
