@@ -140,7 +140,7 @@ class ConnectionsController extends Controller {
 			$notification = new Notification();
 			$notification->from_user = Auth::user()->id;
 			$notification->to_user = $to_user;
-			$notification->remark = 'has send link request.';
+			$notification->remark = 'has sent link request.';
 			$notification->operation = 'link request';
 			$notification->save();
 		}
