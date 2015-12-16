@@ -1284,9 +1284,6 @@
 <!-- /.modal -->
 <!-- END SHARE MODAL FORM -->
 
-<div id="loader" style="display:none;z-index:999999;background:white" class="page-loading">
-	<img src="assets/loader.gif"><span> Please wait...</span>
-</div>
 @stop
 
 @section('javascript')
@@ -1305,14 +1302,7 @@ function resetFilter() {
 </script>
 <script type="text/javascript">
 $(document).ready(function(){
-	function loader(arg){
-	    if(arg == 'show'){
-	        $('#loader').show();
-	    }else{
-	        $('#loader').hide();
-	    }
-	}
-
+	
     jQuery('.hide-show-filter').on('click', function(event) {
 	    jQuery('.show-filter').toggle('show');
 	    jQuery('.hide-label').toggle('hide');

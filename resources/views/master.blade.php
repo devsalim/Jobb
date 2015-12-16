@@ -260,6 +260,10 @@ body.page-boxed{
   <!-- END CONTAINER -->
 
   @include('includes.footer')
+
+  <div id="loader" style="display:none;z-index:999999;background:white" class="page-loading">
+    <img src="assets/loader.gif"><span> Please wait...</span>
+  </div>
 </div>
 
 <!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
@@ -349,7 +353,15 @@ body.page-boxed{
 <script src="../../assets/admin/pages/scripts/form-image-crop.js"></script>
 
 <script>
-$(document).ready(function () {            
+function loader(arg){
+    if(arg == 'show'){
+        $('#loader').show();
+    }else{
+        $('#loader').hide();
+    }
+}
+$(document).ready(function () {  
+
 //validation rules
     var form = $('.change-val-mob');
     var error = $('.alert-danger', form);
@@ -462,6 +474,7 @@ $(document).ready(function () {
 
     // imcrp
     $('.upload-img').on('click',function(event){
+      loader('show');
       // document.getElementById("img-area").innerHTML = "Please wait..."
       // select the form and submit      
       // var formData = $('#profile-img-upload-form').serialize(); // form data as string
@@ -488,7 +501,8 @@ $(document).ready(function () {
               $(".cropnsave-img").show();
               $("#img-area").html(data.data.pfimg); 
               $("#fn").val(data.data.filename);
-              FormImageCrop.init();           
+              FormImageCrop.init();
+              loader('hide');           
           }
         }
       });

@@ -12,6 +12,8 @@ use App\Connections;
 use App\Follow;
 use Auth;
 use DB;
+use App\User;
+use App\Notification;
 
 class ConnectionsController extends Controller {
 
@@ -129,9 +131,20 @@ class ConnectionsController extends Controller {
 	public function inviteFriend($id)
 	{
 		$connections = new Connections();
-		$connections->user_id=Auth::user()->induser_id;
-		$connections->connection_user_id=$id;
+		$connections->user_id = Auth::user()->induser_id;
+		$connections->connection_user_id = $id;
 		$connections->save();
+
+		$to_user = User::where('induser_id', '=', $id)->pluck('id');
+		if($to_user != null){
+			$notification = new Notification();
+			$notification->from_user = Auth::user()->id;
+			$notification->to_user = $to_user;
+			$notification->remark = 'has send link request.';
+			$notification->operation = 'link request';
+			$notification->save();
+		}
+
 		return redirect('/links');
 	}
 
