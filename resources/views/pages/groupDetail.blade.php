@@ -226,7 +226,7 @@
 						<div class="col-md-1 col-sm-1 col-xs-1">
 						<!-- <div class="checkboxFour"> -->
 							<label>
-								<input type="checkbox" id="" class="group-done" data-checkbox="icheckbox_square-grey" onchange="valueChanged()">
+								<input type="checkbox" id="" class="group-done icheck" data-checkbox="icheckbox_square-grey" onchange="valueChanged()">
 							</label>
 						<!-- </div> -->
 						</div>
@@ -271,7 +271,7 @@
 							</div>
 							<div class="col-md-1 col-sm-1 col-xs-1">
 							<label>
-								<input type="checkbox" id="" class="add-done" data-checkbox="icheckbox_square-grey" onchange="valueChange()">
+								<input type="checkbox" id="" class="add-done icheck" data-checkbox="icheckbox_square-grey" onchange="valueChange()">
 							 </label>
 							</div>
 						</div>						
@@ -313,6 +313,7 @@ function valueChange()
 	    ComponentsIonSliders.init();
 	    ComponentsDropdowns.init();
 	    ComponentsEditors.init();
+	    FormiCheck.init();
 	});   
 </script>
 <script type="text/javascript">

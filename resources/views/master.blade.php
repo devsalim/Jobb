@@ -336,6 +336,8 @@ body.page-boxed{
 <script src = "/assets/pqselect.dev.js"></script>
 <script src = "/assets/jquery.nstSlider.js"></script>
 <script src="{{ asset('/assets/ind_validation.js') }}"></script>
+<script src="/assets/admin/pages/scripts/form-icheck.js"></script>
+<script src="/assets/global/plugins/icheck/icheck.min.js"></script>
 <script>
 $(document).ready(function () {            
 //validation rules
