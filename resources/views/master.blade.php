@@ -79,6 +79,7 @@
 @yield('css')
 
 <style type="css/text" rel="stylesheet">
+* { margin: 0; padding: 0; position: relative; }
 body.page-boxed{
   background-attachment: fixed !important;
 }

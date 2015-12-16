@@ -135,6 +135,7 @@ class ConnectionsController extends Controller {
 		$connections->connection_user_id = $id;
 		$connections->save();
 
+		// notification
 		$to_user = User::where('induser_id', '=', $id)->pluck('id');
 		if($to_user != null){
 			$notification = new Notification();
@@ -194,6 +195,19 @@ class ConnectionsController extends Controller {
 	{
 		if(Input::get('action') == 'accept'){
 			Connections::where('id', '=', $id)->update(['status' => 1]);
+
+			// notification
+			$cuid = Connections::where('id', '=', $id)->pluck('user_id');
+			$to_user = User::where('induser_id', '=', $cuid)->pluck('id');
+			if($to_user != null){
+				$notification = new Notification();
+				$notification->from_user = Auth::user()->id;
+				$notification->to_user = $to_user;
+				$notification->remark = 'has accepted your link request.';
+				$notification->operation = 'link response';
+				$notification->save();
+			}
+
 		}elseif(Input::get('action') == 'reject'){
 			Connections::where('id', '=', $id)->update(['status' => 2]);
 		}
