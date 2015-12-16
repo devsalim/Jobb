@@ -466,6 +466,9 @@ var FormImageCrop = function () {
     var demo8 = function() {
         $('#img-crop').Jcrop({
           aspectRatio: 1,
+          minSize: [150, 150], // min crop size
+          maxSize: [200, 200], // max crop size          
+          setSelect: [ 150, 150, 50, 50 ],
           onSelect: updateCoords
         });
 

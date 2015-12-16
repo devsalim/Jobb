@@ -12,8 +12,9 @@
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
         <h4 class="modal-title">Add profile image</h4>
       </div>
-      <div class="modal-body" id="img-area">       
+      <div class="modal-body">       
         {!! Form::file('profile_pic', ['class'=>'profile-image']) !!}
+        <div id="img-area" style="margin: 5px 0;"></div>
       </div>
       <div class="modal-footer">        
         {{-- {!! Form::submit('upload',['class'=>'btn btn-info']) !!} --}}
