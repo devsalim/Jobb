@@ -11,7 +11,7 @@
 		<div class="row sort-by-css hide-label">
 			<div class="col-md-12">
 				<div class="btn-group">
-					<button class="btn btn-default btn-sm dropdown-toggle" type="button" data-toggle="dropdown" style="border: 0;border-bottom: 1px solid lightgray;">
+					<button class="btn btn-default btn-sm dropdown-toggle" type="button" data-toggle="dropdown" style="border: 0;">
 					<i class="glyphicon glyphicon-sort"></i> Sort by <i class="fa fa-angle-down"></i>
 					</button>
 					<ul class="dropdown-menu" role="menu">
@@ -35,9 +35,13 @@
 				</div>
 			</div>
 		</div>
-		<div class="row sort-by-css show-filter">
-			<div class="col-md-12 col-sm-12 col-xs-12 ">
+		<div class="row sort-by-css show-filter" style="margin-right:18px;">
+			<div class="col-md-8 col-sm-8 col-xs-8 ">
 				<a class="show-more" style="font-size:12px;font-weight:400;">Show more</a>
+			</div>
+			<div class="col-md-4 col-sm-4 col-xs-4 ">
+				<!-- <a class="show-more" style="font-size:12px;font-weight:400;">Show more</a> -->
+				<button class="btn btn-success" style="padding:0 5px;">Save</button>
 			</div>
 		</div>		
 	</div>
@@ -47,16 +51,17 @@
 
 <div class="row show-filter">
 	<div class="col-md-12">
-		<div class="btn-group col-md-2 col-sm-3 col-xs-6 jobskill new-col-md-2" data-toggle="buttons" style="padding: 7px 15px;">
-			<label class="btn btn-default color-button-job check-font-size active input-responsive" style="padding: 3px 8px;background-color: lightgray;border-right: 1px solid white;">
-			<input type="checkbox" name="post_type[]" value="job" class="toggle"> Jobs </label>
-			<label class="btn btn-default color-button-skill check-font-size active input-responsive" style="padding: 3px 8px;background-color: lightgray;border-left: 1px solid white;">
-			<input type="checkbox" name="post_type[]" value="skill" class="toggle"> Skills </label>
+		<div class="btn-group col-md-2 col-sm-3 col-xs-6 jobskill" data-toggle="buttons" style="padding: 7px 15px;">
+			<label class="btn btn-default color-button-job check-font-size active input-responsive" style="padding: 7px 8px;background-color: lightgray;border-right: 1px solid white;">
+			<input type="checkbox" name="post_type[]" value="job" class="toggle"><i class="fa fa-check icon-color"></i> Jobs </label>
+			<label class="btn btn-default color-button-skill check-font-size active input-responsive" style="padding: 7px 8px;background-color: lightgray;border-left: 1px solid white;">
+			<input type="checkbox" name="post_type[]" value="skill" class="toggle"><i class="fa fa-check icon-color"></i> Skills </label>
 		</div>
 		<div class="col-md-2 col-sm-3 col-xs-6">
 			<div class="form-group">	
-				<select name="experience" class="form-control filter-input" style="height: 25px;padding: 0;margin: 7px 0px;">
+				<select name="experience" class="form-control filter-input" style="padding: 0;margin: 7px 0px;">
                 	<option value="">Exp</option>
+                	<option value="0-1">0-1</option>
 					<option value="1-2">1-2</option>
 					<option value="2-4">2-4</option>
 					<option value="4-6">4-6</option>
@@ -66,14 +71,14 @@
 				<!-- <input type="text" id="exp" name="experience" class="form-control filter-input" placeholder="Exp" style="height: 25px;margin: 7px 0px;">				 -->
 			</div>	
 		</div>
-		<div class="col-md-2 col-sm-3 col-xs-12">
+		<div class="col-md-3 col-sm-3 col-xs-12">
 			<div class="form-group">
-				<input type="text" id="title" name="job_title" class="form-control filter-input" placeholder="Job Title, Role" style="height: 25px;margin: 7px 0px;">
+				<input type="text" id="title" name="job_title" class="form-control filter-input" placeholder="Job Title, Role" style="margin: 7px 0px;">
 			</div>
 		</div>
 		<div class="col-md-2 col-sm-2 col-xs-6">
             <div class="form-group">              
-                <select name="time_for" class="form-control filter-input" style="height: 25px;padding: 0;margin: 7px 0px;">
+                <select name="time_for" class="bs-select form-control filter-input" multiple style="padding: 0;margin: 7px 0px;">
                 	<option value="">Emp Type</option>
 					<option value="Full Time">Full Time</option>
 					<option value="Part Time">Part Time</option>
@@ -82,9 +87,9 @@
                 </select>
             </div>  
          </div>
-		<div class="col-md-2 col-sm-3 col-xs-6">
+		<div class="col-md-3 col-sm-3 col-xs-6">
 			<div class="form-group">
-				<select id="" placeholder="City" name="city" style="height: 25px;padding: 0;margin: 7px 0px;" class="bs-select form-control filter-input" multiple >
+				<select id="" placeholder="City" name="city" style="padding: 0;margin: 7px 0px;" class="bs-select form-control filter-input" multiple >
 					<option value="">select</option>
 					<optgroup label="NFC EAST">
 					<option>Hyderabad</option>
@@ -137,78 +142,83 @@
 				</select>
 			</div>	
 		</div>
-		<div class="col-md-3 col-sm-3 col-xs-6 extra-show done-show">
-			<div class="form-group">
-				<select id="category-list" class="form-control filter-input check-font-size" name="prof_category" style="height: 25px;padding: 0;margin: 7px 0px;">
-					<option value="">Category</option>
-					<optgroup label="Accounting">
-						<option value="Accounts/Finance/Tax">Accounts/Finance/Tax</option>
-						<option value="Agent">Agent</option>
-						<option value="Analytics & Business Intelligence">
-							Analytics & Business Intelligence
-						</option>
-					</optgroup>
-					<optgroup label="IT Field">
-						<option value="HR/Administration/IR">HR/Administration/IR</option>
-						<option value="IT Software - Client Server">IT Software - Client Server</option>
-						<option value="IT Software - Mainframe">IT Software - Mainframe</option>
-						<option value="IT Software - Middleware">IT Software - Middleware</option>
-						<option value="IT Software - Mobile">IT Software - Mobile</option>
-						<option value="IT Software - Other">IT Software - Other</option>
-						<option value="IT Software - System Programming">IT Software - System Programming</option>
-						<option value="IT Software - Telecom Software">IT Software - Telecom Software</option>
-						<option value="IT Software - Application Programming">IT Software - Application Programming</option>
-						<option value="IT Software - DBA/Datawarehousing">IT Software - DBA/Datawarehousing</option>
-						<option value="IT Software - E-Commerce">IT Software - E-Commerce</option>
-						<option value="IT Software - ERP/CRM">IT Software - ERP/CRM</option>
-					</optgroup>
-				</select>
+	</div>
+	</div>
+	<div class="row show-filter">
+		<div class="col-md-12">
+				<div class="col-md-3 col-sm-3 col-xs-6 extra-show done-show" style="">
+					<div class="form-group">
+						<select id="category-list" class="form-control filter-input check-font-size" name="prof_category" style="padding: 0;margin: 7px 0px;">
+							<option value="">Category</option>
+							<optgroup label="Accounting">
+								<option value="Accounts/Finance/Tax">Accounts/Finance/Tax</option>
+								<option value="Agent">Agent</option>
+								<option value="Analytics & Business Intelligence">
+									Analytics & Business Intelligence
+								</option>
+							</optgroup>
+							<optgroup label="IT Field">
+								<option value="HR/Administration/IR">HR/Administration/IR</option>
+								<option value="IT Software - Client Server">IT Software - Client Server</option>
+								<option value="IT Software - Mainframe">IT Software - Mainframe</option>
+								<option value="IT Software - Middleware">IT Software - Middleware</option>
+								<option value="IT Software - Mobile">IT Software - Mobile</option>
+								<option value="IT Software - Other">IT Software - Other</option>
+								<option value="IT Software - System Programming">IT Software - System Programming</option>
+								<option value="IT Software - Telecom Software">IT Software - Telecom Software</option>
+								<option value="IT Software - Application Programming">IT Software - Application Programming</option>
+								<option value="IT Software - DBA/Datawarehousing">IT Software - DBA/Datawarehousing</option>
+								<option value="IT Software - E-Commerce">IT Software - E-Commerce</option>
+								<option value="IT Software - ERP/CRM">IT Software - ERP/CRM</option>
+							</optgroup>
+						</select>
+					</div>
+				</div>
+				<div class="col-md-2 col-sm-3 col-xs-6 extra-show done-show" style="margin: 7px 0;">
+					<div class="form-group">				
+						{{-- <input type="hidden" placeholder="Skills" name="linked_skill" id="select2_sample5" class="form-control filter-input select2" value=""> --}}
+						{!! Form::select('skill_list[]', $skills, null, ['id'=>'skill-list', 'class'=>'form-control', 'placeholder'=>'Skills', 'multiple']) !!}				
+					</div>	
+				</div>
+				
+		         <div class="col-md-2 col-sm-2 col-xs-6 extra-show done-show" style="margin: 12px 0;">
+		         	<div class="form-group">
+			         	 <label style="font-size:13px;">
+							<input type="checkbox" checked class="icheck" data-checkbox="icheckbox_square-grey"> Expired Post
+						</label>
+					</div>
+				</div>
+				
+				<div class="col-md-2 col-sm-3 col-xs-6 extra-show done-show" style="margin: 7px 0;">
+					<div class="form-group">				
+						<input type="text" name="unique_id" class="form-control filter-input" placeholder="Post Id" style="margin: 7px 0px;"> 				
+					</div>	
+				</div> 
+			<div class="col-md-2 col-sm-3 col-xs-6 extra-show done-show" style="margin: 7px 0;">
+				<div class="form-group">		
+					<select class="bs-select form-control filter-input" name="education" multiple style="padding: 0;margin: 7px 0px;">
+						<optgroup label="Posted by">
+							<option selected value=""><b>Posted by:</b> All</option>
+							<option value="individual">Individual</option>
+							<option value="company">Company</option>
+							<option value="consultancy">Consultancy</option>
+						</optgroup>
+					</select>
+				</div>
+			</div>
+			<div class="col-md-1 col-sm-4 col-sm-6">
+				<button type="submit" class="btn btn-info" value="Search" title="Search" 
+						style="float:left;background-color:transparent !important;margin:10px -25px; border-color: transparent;">
+					<i class="fa fa-check-square-o" style="font-size:20px;color:#3598dc;"></i>
+				</button>
+				<button type="button" class="btn" onclick="resetFilter()" title="Reset" 
+						style="background-color:transparent !important;margin:8px 1px;" >
+					<i class="icon-refresh" style="font-size:18px;"></i>
+				</button>
 			</div>
 		</div>
-		<div class="col-md-2 col-sm-3 col-xs-6 extra-show done-show">
-			<div class="form-group">				
-				{{-- <input type="hidden" placeholder="Skills" name="linked_skill" id="select2_sample5" class="form-control filter-input select2" value=""> --}}
-				{!! Form::select('skill_list[]', $skills, null, ['id'=>'skill-list', 'class'=>'form-control', 'placeholder'=>'Skills', 'multiple']) !!}				
-			</div>	
-		</div>
-		
-         <div class="col-md-2 col-sm-2 col-xs-6 extra-show done-show" >
-         	<div class="form-group">
-	         	 <label style="font-size:13px;">
-					<input type="checkbox" checked class="icheck" data-checkbox="icheckbox_square-grey"> Expired
-				</label>
-			</div>
-		</div>
-		
-		<div class="col-md-2 col-sm-3 col-xs-6 extra-show done-show" >
-			<div class="form-group">				
-				<input type="text" name="unique_id" class="form-control filter-input" placeholder="Unique id" style="height: 25px;padding: 0;margin: 7px 0px;"> 				
-			</div>	
-		</div> 
-	<div class="col-md-2 col-sm-3 col-xs-6 extra-show done-show">
-		<div class="form-group">		
-			<select class="bs-select form-control filter-input" name="education" multiple style="height: 25px;padding: 0;margin: 7px 0px;">
-				<optgroup label="Posted by">
-					<option selected value=""><b>Posted by:</b> All</option>
-					<option value="individual">Individual</option>
-					<option value="company">Company</option>
-					<option value="consultancy">Consultancy</option>
-				</optgroup>
-			</select>
-		</div>
 	</div>
-	<div class="col-md-1 col-sm-4 col-sm-6">
-		<button type="submit" class="btn btn-info" value="Search" title="Search" 
-				style="float:left;background-color:transparent !important;margin:10px -25px; border-color: transparent;">
-			<i class="fa fa-check-square-o" style="font-size:20px;color:#3598dc;"></i>
-		</button>
-		<button type="button" class="btn" onclick="resetFilter()" title="Reset" 
-				style="background-color:transparent !important;margin:8px 1px;" >
-			<i class="icon-refresh" style="font-size:18px;"></i>
-		</button>
-	</div>
-	</div>
-</div>
+
 <div class="row show-filter" style="margin-top:10px;">
 	<div class="col-md-12">
 
@@ -225,7 +235,7 @@
 <div class="portlet light bordered col-md-9">
 	<div class="portlet-title">
 		<div class="caption links-title">
-			<i class=""></i>
+			<i class="fa fa-star"></i>
 			<span class="caption-subject font-blue-hoki bold uppercase">My Favourite Posts</span>
 		</div>
 	</div>
@@ -290,7 +300,7 @@
 								@else
 								<div class="timeline-item time-item">
 									@endif
-									<div class="timeline-badge" style="margin: 10px 3px;">
+									<div class="timeline-badge" style="margin: 4px 3px;">
 										@if($post->induser != null && !empty($post->induser->profile_pic))
 										<img class="timeline-badge-userpic userpic-box" src="/img/profile/{{ $post->induser->profile_pic }}" title="{{ $post->induser->fname }}">
 										<a class=" img-circle">
@@ -581,7 +591,7 @@
 						@if(count($post->groupTagged) > 0)
 							@if($post->sharedGroupBy->first()->mode == 'shared')
 							<div class="shared-by">
-						{{$post->sharedGroupBy->first()->mode}} by <b>{{$post->sharedGroupBy->first()->fname}} {{$post->sharedGroupBy->first()->lname}}</b> to <b>{{$post->sharedToGroup->first()->group_name}}</b> group<br/>
+						<small>{{$post->sharedGroupBy->first()->mode}} by {{$post->sharedGroupBy->first()->fname}} {{$post->sharedGroupBy->first()->lname}}</small> to <small>{{$post->sharedToGroup->first()->group_name}}</small> group<br/>
 							</div>
 							@endif
 						@endif
@@ -590,11 +600,11 @@
 						@if($post->tagged->contains('user_id', Auth::user()->induser_id) && 
 							$post->sharedBy->first()->mode == 'shared')
 							
-							{{$post->sharedBy->first()->mode}} by 
-							<b>{{$post->sharedBy->first()->fname}} {{$post->sharedBy->first()->lname}}</b><br/>
+						<small>	{{$post->sharedBy->first()->mode}} by 
+							{{$post->sharedBy->first()->fname}} {{$post->sharedBy->first()->lname}}</small><br/>
 
 						@endif
-														<a href="/profile/ind/{{$post->individual_id}}" style="font-size: 15px;text-decoration:none;font-weight:600;">
+														<a href="/profile/ind/{{$post->individual_id}}" style="font-size: 13px;text-decoration:none;font-weight:500;">
 
 															{{ $post->induser->fname}} {{ $post->induser->lname}}
 														</a>
@@ -619,8 +629,8 @@
 										</div>
 										<!--  -->
 										<div class="timeline-body-content new-hide" style="cursor:pointer;">
-											<span class="font-grey-cascade">
-												@if($post->post_type == 'skill')	
+											
+											@if($post->post_type == 'skill')	
 												<div class="elipsis-code" style="font-weight: 600;color: black;font-size: 13px;">{{ $post->post_title }} </div>
 											@elseif($post->post_type == 'job')
 												 <div class="elipsis-code" style="font-weight: 600;color: black;font-size: 13px;">{{ $post->post_title }}  </div>
@@ -630,27 +640,22 @@
 											@elseif($post->post_compname != null && $post->post_type == 'skill')
 											<div><h4 style="margin: 0 0 4px 0;"><small>Working at {{ $post->post_compname }} </small></h4></div>
 											@endif				 							
-											</span>
+											
 											<div class="row" style="cursor:pointer;">
 												<!-- <div class="col-md-4 col-sm-4 col-xs-12">
 													<i class="icon-badge"></i>&nbsp;: {{ $post->role }}
 												</div> -->
-												<div class="col-md-4 col-sm-4 col-xs-6 elipsis-code elipsis-city-code" style="padding:0 12px;">
+												<div class="col-md-4 col-sm-4 col-xs-4 elipsis-code elipsis-city-code" style="padding:0 12px;">
 												<small>	<i class="glyphicon glyphicon-map-marker"></i>&nbsp;: {{ $post->city }}</small>
 												</div>
-												@if( $post->min_exp != null && $post->max_exp != null)
-												<div class="col-md-4 col-sm-4 col-xs-4 elipsis-code" style="float: none;margin: 0 auto;display: table;">
-												<small>	<i class="icon-briefcase"></i>&nbsp;: {{ $post->min_exp}}-{{ $post->max_exp}} Yr</small>
+												
+												<div class="col-md-4 col-sm-4 col-xs-4 elipsis-code" style="float: none;margin:0;display: table;">
+												<small>	<i class="glyphicon glyphicon-briefcase"></i>&nbsp;: {{ $post->min_exp}}-{{ $post->max_exp}} Yr</small>
 												</div>
-												@else
-												<div class="col-md-4 col-sm-4 col-xs-2 elipsis-code" style="float: none;margin: 0 auto;display: table;">
-													<small>	<i class="icon-briefcase"></i>&nbsp;: Not Provided </small>
-												</div>
-												@endif
-												<div id="{{ $post->id }}-{{$var}}-{{$var}}" class="col-md-4 col-sm-4 col-xs-4 hide-details" style="float: right;right: -60px;bottom: 18px;">
+												<div id="{{ $post->id }}-{{$var}}-{{$var}}" class="col-md-4 col-sm-4 col-xs-4 hide-details" style="float: right;right: -40px;bottom: 16px;">
 												    <a><i class="fa fa-angle-double-down" style="font-size:20px;"></i></a>
 												</div>
-												<div id="{{ $post->id }}-{{$var}}" class="col-md-4 col-sm-4 col-xs-4 show-details" style="float: right;right: -60px;bottom: 18px;">
+												<div id="{{ $post->id }}-{{$var}}" class="col-md-4 col-sm-4 col-xs-4 show-details" style="float: right;right: -40px;bottom: 16px;">
 												    <a><i class="fa fa-angle-double-up" style="font-size:20px;"></i></a>
 												</div>
 											</div>
@@ -658,7 +663,7 @@
 										</div>	
 										@if($expired != 1)
 										
-											<div class="row">	
+											<div class="row" style="">	
 												
 												<div class="col-md-3 col-sm-3 col-xs-3" style="padding:0 8px;">
 													<form action="/job/like" method="post" id="post-like-{{$post->id}}" data-id="{{$post->id}}">						
@@ -698,18 +703,28 @@
 													</form>
 													@endif
 												</div>
-												@if($post->post_type == 'job' && Auth::user()->induser_id != $post->individual_id && Auth::user()->identifier == 1)										
+												@if(Auth::user()->induser_id != $post->individual_id && Auth::user()->identifier == 1)										
 													
 													@if($post->postactivity->where('user_id', Auth::user()->id)->isEmpty())
 													<div class="col-md-3 col-sm-3 col-xs-3">
 													</div>
 													@elseif($post->postactivity->where('user_id', Auth::user()->id)->first()->apply == 1)
-													<div class="col-md-3 col-sm-3 col-xs-3">													
+													<div class="col-md-3 col-sm-3 col-xs-3"  style="">													
 														<i class="fa fa-check-square-o" style="font-size:15px;"></i><span class="applied-css"> Applied</span> 
 													</div>
 													@endif
 												@endif
-												<div  class="col-md-3 col-sm-3 col-xs-3">
+												@if(Auth::user()->induser_id != $post->individual_id && Auth::user()->identifier == 1)											
+													@if($post->postactivity->where('user_id', Auth::user()->id)->isEmpty())
+													<div class="col-md-3 col-sm-3 col-xs-3">
+													</div>
+													@elseif($post->postactivity->where('user_id', Auth::user()->id)->first()->contact_view == 1)
+													<div class="col-md-3 col-sm-3 col-xs-3"  style="">													
+														<i class="fa fa-check-square-o"></i><span class="hidden-sm hidden-xs"> Contacted</span> 
+													</div>
+													@endif
+												@endif
+												<div  class="col-md-3 col-sm-3 col-xs-3" style="">
 												    <div class="dropup ">											
 														<button class="btn dropdown-toggle" type="button" 
 																data-toggle="dropdown" title="Share" 
@@ -748,7 +763,7 @@
 											</div>
 										
 											@else
-											<div class="row">
+											<div class="row" style="">
 												<div class="col-md-3 col-sm-3 col-xs-4">
 												<div class="expired-css">													
 													<i class="glyphicon glyphicon-ban-circle"></i> Expired
@@ -772,12 +787,21 @@
 													</form>
 													@endif
 												</div>
-												@if($post->post_type == 'job' && Auth::user()->induser_id != $post->individual_id && Auth::user()->identifier == 1)											
+												@if(Auth::user()->induser_id != $post->individual_id && Auth::user()->identifier == 1)											
 													@if($post->postactivity->where('user_id', Auth::user()->id)->isEmpty())
 													
 													@elseif($post->postactivity->where('user_id', Auth::user()->id)->first()->apply == 1)
 													<div class="col-md-3 col-sm-3 col-xs-4">													
 														<i class="fa fa-check-square-o"></i><span class="hidden-sm hidden-xs"> Applied</span> 
+													</div>
+													@endif
+												@endif
+												@if(Auth::user()->induser_id != $post->individual_id && Auth::user()->identifier == 1)											
+													@if($post->postactivity->where('user_id', Auth::user()->id)->isEmpty())
+													
+													@elseif($post->postactivity->where('user_id', Auth::user()->id)->first()->contact_view == 1)
+													<div class="col-md-3 col-sm-3 col-xs-4">													
+														<i class="fa fa-check-square-o"></i><span class="hidden-sm hidden-xs"> Contacted</span> 
 													</div>
 													@endif
 												@endif
@@ -792,7 +816,7 @@
 										<div class="post-job-skill-bar">
 											 @if($expired != 1 && Auth::user()->induser_id != $post->individual_id || Auth::user()->corpuser_id != $post->corporate_id)
 													<div class=""><a class="" data-toggle="modal" href="#basic-{{ $post->id }}">
-														<i class="fa fa-warning (alias)" style="color:red;"></i></a>
+														<i class="fa  fa-ellipsis-v" style="color:red;"></i></a>
 													</div>										
 												@endif
 											<div class="modal fade" id="basic-{{ $post->id }}" tabindex="-1" role="basic" 
@@ -1033,7 +1057,7 @@
 												@if($expired != 1 && Auth::user()->identifier == 1)
 												<div style="margin:27px 0 0;">
 												    <!-- if corporate_id not null -->
-												    @if($post->post_type == 'job' && Auth::user()->induser_id != $post->individual_id && Auth::user()->identifier == 1)     
+												    @if($post->post_type == 'job' && Auth::user()->induser_id != $post->individual_id)     
 												        @if($post->postactivity->where('user_id', Auth::user()->id)->isEmpty() && $post->website_redirect_url != null)
 												            <form action="/job/apply" method="post" id="post-apply-{{$post->id}}" data-id="{{$post->id}}">  
 												                <input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -1063,7 +1087,7 @@
 												            <button type="button" class="btn btn-sm bg-grey-steel apply-contact-btn" disabled="true">
 												                <i class="icon-check icon-check-css"></i> Applied 
 												            </button>
-												        @elseif($post->postactivity->where('user_id', Auth::user()->id)->first()->apply == 1 &&  Auth::user()->identifier == 1 && $expired != 1 && $post->website_redirect_url == null && $post->individual_id != null) 
+												        @elseif($post->postactivity->where('user_id', Auth::user()->id)->first()->contact_view == 1 &&  Auth::user()->identifier == 1 && $expired != 1 && $post->website_redirect_url == null && $post->individual_id != null) 
 												        <button type="button" class="btn btn-sm bg-grey-steel apply-contact-btn" disabled="true">
 												            <i class="icon-check icon-check-css"></i> Contacted 
 												        </button>                               
@@ -1079,7 +1103,7 @@
 												                        id="contact-btn-{{$post->id}}" type="button">Contact
 												                </button>
 												            </form>     
-												        @elseif($post->postactivity->where('user_id', Auth::user()->id)->first()->apply == 1 && Auth::user()->identifier == 1 && $post->resume_required == 1) 
+												        @elseif($post->postactivity->where('user_id', Auth::user()->id)->first()->contact_view == 1 && Auth::user()->identifier == 1 && $post->resume_required == 1) 
 												            <button type="button" class="btn btn-sm bg-grey-steel apply-contact-btn" disabled="true">
 												            <i class="icon-check icon-check-css"></i> Contacted 
 												        </button>                                     
@@ -1313,6 +1337,7 @@ $(document).ready(function(){
         jQuery('.show-details').toggle('hide');
         jQuery('.hide-details').toggle('show');
     });
+
     $("#category-list").change(function () {
 	    $("#category-label-exp").val($(this).val());
 	    //alert($(this).val()) 

@@ -1,4 +1,60 @@
 
+<div class="row">
+                                                @if($post->post_type == 'skill')
+                                                <div class="col-md-12 col-sm-12 col-xs-12 elipsis-code">
+                                                    {{ $post->post_title }}
+                                                </div>
+                                                @elseif($post->post_type == 'job')
+                                                <div class="col-md-12 col-sm-12 col-xs-12 elipsis-code">
+                                                    {{ $post->post_title }}
+                                                </div>
+                                                @endif
+                                                @if($post->post_compname != null && $post->post_type == 'job')
+                                                <div class="col-md-12 col-sm-12 col-xs-12 elipsis-code">
+                                                    <small>Required at {{ $post->post_compname }}</small>
+                                                </div>
+                                                @elseif($post->post_compname != null && $post->post_type == 'skill')
+                                                <div class="col-md-12 col-sm-12 col-xs-12 elipsis-code">
+                                                    <small>Working at {{ $post->post_compname }} </small>
+                                                </div>
+                                                @endif
+                                            </div>
+
+
+
+
+@if($title == 'applications')
+            @foreach($notificationList as $application)
+                
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="col-md-2 col-sm-2 col-xs-2">
+                            <img src="@if($application->user->profile_pic != null){{ '/img/profile/'.$application->user->profile_pic }}@else{{'/assets/images/ab.png'}}@endif" class="img-circle" width="40" height="40">
+                        </div>
+                        <div class="col-md-10 col-sm-10 col-xs-10">
+                            {{$application->user->fname}} has applied your Job Post Id: {{$application->unique_id}} {{$application->apply_dtTime}}
+                        </div>
+                    </div>
+                </div>
+                
+            @endforeach
+        @elseif($title == 'thanks')
+             @foreach($notificationList as $thank)
+                
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="col-md-2 col-sm-2 col-xs-2">
+                            <img src="@if($thank->user->profile_pic != null){{ '/img/profile/'.$thank->user->profile_pic }}@else{{'/assets/images/ab.png'}}@endif" class="img-circle" width="40" height="40">
+                        </div>
+                        <div class="col-md-10 col-sm-10 col-xs-10">
+                            {{$thank->user->fname}} has thanked your Job Post Id: {{$thank->unique_id}} {{$thank->thanks_dtTime}}
+                        </div>
+                    </div>
+                </div>
+                
+            @endforeach
+        @endif
+
 @if($expired != 1)
 <div style="margin:27px 0 0;">
     <!-- if corporate_id not null -->

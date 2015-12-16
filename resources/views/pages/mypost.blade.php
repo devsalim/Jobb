@@ -352,18 +352,16 @@
 												<div class="portlet box">
 													<div class="portlet-body" style="padding: 0px 3px;">
 													<div class="tabbable-custom ">
-														<ul class="nav nav-tabs" style="padding-left: 0px;">
-															
-															
+														<ul class="nav nav-tabs" style="padding-left: 0px;">		
+															@if(Auth::user()->identifier == 2)
 															<li  class="active">	
 																<a href="#tab_1_{{ $post->id }}_1" class="label-new" data-toggle="tab" style="border-left: 0;">Applied </a>
 															</li>
-															
-															
+															@elseif(Auth::user()->identifier == 1)
 															<li class="active">
 																<a href="#tab_1_{{ $post->id }}_2" class="label-new" data-toggle="tab" style="border-left: 0;">Contacted</a>
 															</li>
-															
+															@endif
 															<li>
 																<a href="#tab_1_{{ $post->id }}_3" class="label-new" data-toggle="tab" >Thanks </a>
 															</li>
@@ -372,7 +370,7 @@
 															</li>
 														</ul>
 														<div class="tab-content" style="padding: 0px 0px;margin: -7px 0px;">
-															
+															@if(Auth::user()->identifier == 2)
 															<div class="tab-pane" id="tab_1_{{ $post->id }}_1">
 																<div class="portlet light" style="padding:0px; !important">
 																	<div class="portlet-title" style=" min-height: 0; margin-bottom: 0;">
@@ -589,7 +587,7 @@
 																</div>
 															</div>
 															
-															
+															@elseif(Auth::user()->identifier == 1)
 															<div class="tab-pane active" id="tab_1_{{ $post->id }}_2">
 																<div class="portlet light" style="padding:0px; !important">
 																	<div class="portlet-title">
@@ -639,7 +637,7 @@
 																	</div>
 																</div>
 															</div>
-															
+															@endif
 															<div class="tab-pane" id="tab_1_{{ $post->id }}_3">
 																<div class="portlet light" style="padding:0px; !important">
 																	<div class="portlet-title">

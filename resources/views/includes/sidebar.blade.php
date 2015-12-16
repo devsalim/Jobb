@@ -22,7 +22,7 @@
       </div>
       <div class="col-md-4 col-sm-4 col-xs-4">
         <a href="/favourite" class="icon-btn" style="border: 0 !important;background-color: transparent !important;">
-          <i class="icon-pin" style="color:yellow"></i>
+          <i class="fa fa-star" style="color:yellow;font-size:20px"></i>
           <div style="color: whitesmoke;">
            Favourites
           </div>

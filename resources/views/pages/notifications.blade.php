@@ -5,79 +5,55 @@
 <div class="portlet light bg-inverse">
 	<div class="portlet-title">
 		<div class="caption">
-			<i class="icon-settings font-purple-studio"></i>
-			 <span class="caption-subject bold font-purple-studio uppercase"> {{$title}}</span>
+			<i class="icon-like "></i>
+			 <span class="caption-subject  uppercase"> {{$title}} Recieved</span>
 		</div>
-		<ul class="pagination pagination-circle">
-			<li>
-				<a href="javascript:;">
-				<i class="fa fa-angle-left"></i>
-				</a>
-			</li>
-			<li>
-				<a href="javascript:;">
-				1 </a>
-			</li>
-			<li>
-				<a href="javascript:;">
-				2 </a>
-			</li>
-			<li>
-				<a href="javascript:;">
-				3 </a>
-			</li>
-			<li>
-				<a href="javascript:;">
-				<i class="fa fa-angle-right"></i>
-				</a>
-			</li>
-		</ul>
 	</div>
 	<div class="portlet-body">
-		<div class="" >
-			<h4></h4>
-			<p>
-				@if($title == 'applications')
-				  <ul class="" data-handle-color="#637283">
-            @foreach($notificationList as $application)
-              <li>
-                <a href="#">
-                  <span class="photo">
-                    <img src="@if($application->user->profile_pic != null){{ '/img/profile/'.$application->user->profile_pic }}@else{{'/assets/images/ab.png'}}@endif" class="img-circle" width="40" height="40">
-                  </span>
-                  <span class="subject">
-                    <span class="from">{{$application->user->fname}} </span>
-                    <span class="time">{{$application->apply_dtTime}}</span>
-                  </span>
-                  <span class="message">
-                    has applied your Job Post Id: {{$application->unique_id}} 
-                  </span>
-                </a>
-              </li>
+		@if($title == 'applications')
+            @foreach($notificationList as $application)  
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="col-md-2 col-sm-2 col-xs-4">
+                            <img src="@if($application->user->profile_pic != null){{ '/img/profile/'.$application->user->profile_pic }}@else{{'/assets/images/ab.png'}}@endif" class="img-circle" width="40" height="40">
+                        </div>
+                        <div class="col-md-10 col-sm-10 col-xs-8">
+                            {{$application->user->fname}} has applied your Job Post Id: {{$application->unique_id}} -
+                            {{ \Carbon\Carbon::createFromTimeStamp(strtotime($application->apply_dtTime))->diffForHumans() }}
+                        </div>
+                    </div>
+                </div>   
             @endforeach
-          </ul>
         @elseif($title == 'thanks')
-          <ul class="" data-handle-color="#637283">
-            @foreach($notificationList as $thank)
-              <li>
-                <a href="#">
-                  <span class="photo">
-                    <img src="@if($thank->user->profile_pic != null){{ '/img/profile/'.$thank->user->profile_pic }}@else{{'/assets/images/ab.png'}}@endif" class="img-circle" width="40" height="40">
-                  </span>
-                  <span class="subject">
-                    <span class="from">{{$thank->user->fname}} </span>
-                    <span class="time">{{$thank->thanks_dtTime}}</span>
-                  </span>
-                  <span class="message">has thanked your Job Post Id: {{$thank->unique_id}} </span>
-                </a>
-              </li>
+             @foreach($notificationList as $thank) 
+             @if($thank->user->induser != null)  
+                <div class="row" style="border-bottom:1px dotted darkcyan;">
+                    <div class="col-md-8" >
+                        <div class="col-md-2 col-sm-2 col-xs-4">
+                            <img src="@if($thank->user->induser->profile_pic != null){{ '/img/profile/'.$thank->user->induser->profile_pic }}@else{{'/assets/images/ab.png'}}@endif" class="img-circle" width="40" height="40">
+                        </div>
+                        <div class="col-md-10 col-sm-10 col-xs-8">
+                            {{$thank->user->induser->fname}} has thanked your Job Post Id: {{$thank->unique_id}} -
+                            {{ \Carbon\Carbon::createFromTimeStamp(strtotime($thank->thanks_dtTime))->diffForHumans() }}
+                        </div>
+                    </div>
+                </div> 
+                @elseif($thank->user->corpuser != null) 
+                <div class="row" style="border-bottom:1px dotted darkcyan;">
+                    <div class="col-md-8" >
+                        <div class="col-md-2 col-sm-2 col-xs-4">
+                            <img src="@if($thank->user->corpuser->logo_status != null){{ '/img/profile/'.$thank->user->corpuser->logo_status }}@else{{'/assets/images/ab.png'}}@endif" class="img-circle" width="40" height="40">
+                        </div>
+                        <div class="col-md-10 col-sm-10 col-xs-8">
+                            {{$thank->user->corpuser->firm_name}} has thanked your Job Post Id: {{$thank->unique_id}} -
+                            {{ \Carbon\Carbon::createFromTimeStamp(strtotime($thank->thanks_dtTime))->diffForHumans() }}
+                        </div>
+                    </div>
+                </div> 
+                @endif
             @endforeach
-          </ul>
         @endif
-			</p>
-		</div>
+
 	</div>
 </div>
-
-
 @stop

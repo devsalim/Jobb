@@ -279,7 +279,7 @@ class UserController extends Controller {
 				$fileName = $request['filename'];
 				$path = $destinationPath.$fileName;
 				$img = 'img/profile/temp/'.$fileName;
-				Image::make($img)->crop($request['w'], $request['h'], [$request['x'], $request['y']])->resize(200,200)->save($path);
+				Image::make($img)->crop($request['w'], $request['h'], $request['x'], $request['y'])->resize(200,200)->save($path);
 				Induser::where('id', '=', Auth::user()->induser_id)->update(['profile_pic' => $fileName]);
 
 				if($oldProfilePic != null){

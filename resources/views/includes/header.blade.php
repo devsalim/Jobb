@@ -32,8 +32,8 @@
           
           <li class="dropdown dropdown-extended dropdown-inbox" id="header_inbox_bar">
             <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"  data-close-others="true">
-            <i class="icon-bulb icon-color"></i>
-            <span class="badge badge-default @if($notificationsCount > 0) show @else hide @endif" style="background-color: darkorchid !important;">{{$notificationsCount}}</span>
+            <i class="icon-bell icon-color"></i>
+            <span class="badge badge-default @if($notificationsCount > 0) show @else hide @endif" style="background-color: darkseagreen !important;">{{$notificationsCount}}</span>
             </a>
             <ul class="dropdown-menu">
               <li class="external">
@@ -69,57 +69,10 @@
           <!-- BEGIN INBOX DROPDOWN -->
           <!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
           <li class="dropdown dropdown-extended dropdown-inbox thank-fav-icon" id="header_inbox_bar">
-            <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"  data-close-others="true">
+            <a class="dropdown-toggle @if($title == 'notify_view'){{'active'}}@endif" href="/notify/thanks/@if(Auth::user()->identifier==1){{'ind'}}@elseif(Auth::user()->identifier==2){{'corp'}}@endif/{{Auth::user()->induser_id}}{{Auth::user()->corpuser_id}}" data-utype="thank">
             <i class="icon-like icon-color"></i>
             <span class="badge badge-default  @if($thanksCount > 0) show @else hide @endif" id="like-count" style="background-color:lightcoral !important;">{{$thanksCount}}</span>
             </a>
-            <ul class="dropdown-menu">
-              <li class="external">
-                <h3>You have <span class="bold">{{$thanksCount}}</span> Messages</h3>
-                <a class="@if($title == 'notify_view'){{'active'}}@endif" href="/notify/thanks/@if(Auth::user()->identifier==1){{'ind'}}@elseif(Auth::user()->identifier==2){{'corp'}}@endif/{{Auth::user()->induser_id}}{{Auth::user()->corpuser_id}}" data-utype="thank" style="color: darkblue;">view all</a>
-              </li>
-              <li>
-                <ul class="dropdown-menu-list scroller" style="height: 275px;" data-handle-color="#637283">
-                  @foreach($thanks as $thank)
-                  @if(Auth::user()->induser_id == $thank->user->id)
-                  <li>
-                    <a class="myactivity-post" data-toggle="modal" href="#myactivity-post">
-                    <span class="photo">
-                    <img src="@if($thank->user->profile_pic != null){{ '/img/profile/'.$thank->user->profile_pic }}@else{{'/assets/images/ab.png'}}@endif" class="img-circle" width="40" height="40">
-                    </span>
-                    <span class="subject">
-                    <span class="from">
-                     </span>
-                    <span class="time">
-                      <i class="fa fa-clock-o"></i> {{ \Carbon\Carbon::createFromTimeStamp(strtotime($thank->thanks_dtTime))->diffForHumans() }}
-                    </span>
-                    </span>
-                    <span class="message">
-                    You has thanked for Job Post Id: {{$thank->unique_id}} </span>
-                    </a>
-                  </li>
-                  @else
-                  <li>
-                    <a class="myactivity-post" data-toggle="modal" href="#myactivity-post">
-                    <span class="photo">
-                    <img src="@if($thank->user->profile_pic != null){{ '/img/profile/'.$thank->user->profile_pic }}@else{{'/assets/images/ab.png'}}@endif" class="img-circle" width="40" height="40">
-                    </span>
-                    <span class="subject">
-                    <span class="from">
-                     </span>
-                    <span class="time">
-                      <i class="fa fa-clock-o"></i> {{ \Carbon\Carbon::createFromTimeStamp(strtotime($thank->thanks_dtTime))->diffForHumans() }}
-                    </span>
-                    </span>
-                    <span class="message">
-                    {{$thank->user->fname}} has thanked for Job Post Id: {{$thank->unique_id}} </span>
-                    </a>
-                  </li>
-                  @endif
-                 @endforeach
-                </ul>
-              </li>
-            </ul>
           </li>
          
           <!-- END INBOX DROPDOWN -->

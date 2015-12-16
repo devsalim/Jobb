@@ -28,7 +28,7 @@ input:focus:-ms-input-placeholder { font-size: 12px !important; } */
 
 .img-link-size{
   max-width: 90%;
-  border: 3px solid lightgray;
+  border: 2px solid lightgray;
 }
 
 .search-user-tool{
@@ -55,7 +55,7 @@ input:focus:-ms-input-placeholder { font-size: 12px !important; } */
 }
 
 .group-align{
-  text-align: center;
+  /*text-align: center;*/
   font-size: 12px;
 }
 
@@ -73,7 +73,7 @@ input:focus:-ms-input-placeholder { font-size: 12px !important; } */
   white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    
+    width: 120px;
 }
 
 .share-media-icon{
@@ -83,7 +83,7 @@ input:focus:-ms-input-placeholder { font-size: 12px !important; } */
 }
 
 .img-link-size{
-  max-width: 125%;
+  max-width: 160%;
 }
 }
 @media (max-width: 990px){
@@ -396,6 +396,10 @@ display: table;
   color:white !important;
 }
 
+.icon-color{
+  color:lightgray !important;
+}
+
 .show-filter{
   display: none;
 }
@@ -554,7 +558,7 @@ display: table;
 }
 
 .row{
-  margin-right: -10px;
+  /*margin-right: -10px;*/
   /*margin-left: -10px;*/
 }
 

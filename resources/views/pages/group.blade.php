@@ -38,7 +38,7 @@
 							</a>
 						</button>
 						@else
-						<button class="btn btn-success" style="padding: 0 10px;">
+						<button class="btn btn-success" style="border-radius: 15px !important; background-color: darkgray; padding: 0 8px;border-color: darkgray !important;">
 							No Post
 						</button>
 						@endif
@@ -49,18 +49,22 @@
 						<i class="fa fa-users"></i> ({{count($group->users)}})
 					</div>
 					<div class="col-md-4 col-sm-4 col-xs-5 group-align">
-						<i class="icon-shield"></i> {{$group->admin()->first()->fname}}
+						@if($group->admin->id == Auth::user()->induser_id)
+						<i class="icon-shield"></i> You
+						@else
+						<a href="/profile/ind/{{$group->admin()->first()->id}}"><i class="icon-shield"></i> {{$group->admin()->first()->fname}}</a>
+						@endif
 					</div>
 					@if($group->admin->id == Auth::user()->induser_id)
 					<div class="col-md-4 col-sm-4 col-xs-4 group-align">
-							<a href="/group/{{ $group->id }}">
+							<a href="/group/{{ $group->id }}" style="color: dodgerblue;font-weight: 600;">
 								<i class="fa fa-edit (alias)"></i> Edit
 							</a>
 					</div>
 					@else
 					<div class="col-md-4 col-sm-4 col-xs-4 group-align">
 						
-							<a href="/group/{{ $group->id }}" style="">
+							<a href="/group/{{ $group->id }}" style="color: dodgerblue;font-weight: 600;">
 								<i class="fa fa-plus-circle"></i> Add
 							</a>
 						

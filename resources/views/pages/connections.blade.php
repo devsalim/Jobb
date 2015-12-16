@@ -179,7 +179,7 @@
 					@if(count(Auth::user()->induser->friends) > 0)
 					@foreach(Auth::user()->induser->friends as $connection)
 						 @if($connection->pivot->status == 1)
-					<div class="row search-user-tool" style="margin: 0px 7px 0px -16px;">					
+					<div class="row search-user-tool" style="margin:0;">					
 							<div class="col-md-2 col-sm-3 col-xs-2">
 								<a href="#">
 							        <img class="media-object img-circle img-link-size" 
@@ -319,14 +319,14 @@
 				<div class="tab-pane" id="tab_5_3">
 					@if(count($linkFollow) > 0)
 					@foreach($linkFollow as $follow)
-					<div class="row search-user-tool" style="margin: 0px 7px 0px -16px;">
+					<div class="row search-user-tool" style="margin:0;">
 								
 							<div class="col-md-2 col-sm-2 col-xs-2">
 								<a href="#">
 							        <img class="media-object img-link-size" src="@if($follow->logo_status != null){{ '/img/profile/'.$follow->logo_status }}@else{{'/assets/images/corpnew.jpg'}}@endif" alt="DP" style="width:60px">
 							    </a>
 							</div>
-							<div class="col-md-5 col-sm-6 col-xs-7">
+							<div class="col-md-5 col-sm-6 col-xs-6">
 								<a href="/profile/corp/{{$follow->id}}" class="link-label" data-utype="corp">
 							    		 		{{ $follow->firm_name }}
 							    		 	</a>
