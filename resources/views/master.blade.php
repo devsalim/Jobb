@@ -512,6 +512,31 @@ $(document).ready(function () {
 
 });
 
+$(document).on('click', 'a', function(event, ui) {
+    var nid = $(this).data('nid');
+    var lnk_type = $(this).data('lnkt');
+    var anchor = "/"+$(this).data('anchor');
+
+    $.ajaxSetup({
+        headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+      });
+
+    if(lnk_type == 'notification'){
+      event.preventDefault();
+      $.ajax({  
+        url: "/notification/mark-as-read/"+nid,
+        type: "POST",
+        success: function (data) {
+          if(data.success == true){
+            window.location = anchor;
+          }
+        }
+      });
+    }
+});
+
 </script>
 
 @yield('javascript')

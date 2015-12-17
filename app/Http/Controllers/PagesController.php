@@ -18,6 +18,7 @@ use Input;
 use App\Group;
 use App\ReportAbuse;
 use App\Feedback;
+use App\Notification;
 
 class PagesController extends Controller {
 
@@ -183,14 +184,9 @@ class PagesController extends Controller {
   	public function notification($type, $utype, $id){
         $title = $type;
         if($utype == 'ind'){
-	        if($type == 'applications'){
-	            $notificationList = Postactivity::with('user', 'post')
-												->join('postjobs', 'postjobs.id', '=', 'postactivities.post_id')
-												->where('postjobs.individual_id', '=', $id)
-												->where('postactivities.apply', '=', 1)
-												->orderBy('postactivities.id', 'desc')
-												->take(25)
-												->get(['postactivities.id','postjobs.unique_id', 'postactivities.apply', 'postactivities.apply_dtTime', 'postactivities.user_id', 'postactivities.post_id']);
+	        if($type == 'notification'){
+	            $notificationList = Notification::with('fromUser', 'toUser')->where('to_user', '=', Auth::user()->id)
+										     ->orderBy('id', 'desc')->paginate(20);
 			}elseif($type == 'thanks'){
 	            $notificationList = Postactivity::with('user', 'post')
 												->join('postjobs', 'postjobs.id', '=', 'postactivities.post_id')

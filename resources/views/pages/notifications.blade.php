@@ -10,16 +10,20 @@
 		</div>
 	</div>
 	<div class="portlet-body">
-		@if($title == 'applications')
-            @foreach($notificationList as $application)  
+		@if($title == 'notification')
+            @foreach($notificationList as $not)  
                 <div class="row">
                     <div class="col-md-8">
                         <div class="col-md-2 col-sm-2 col-xs-4">
-                            <img src="@if($application->user->profile_pic != null){{ '/img/profile/'.$application->user->profile_pic }}@else{{'/assets/images/ab.png'}}@endif" class="img-circle" width="40" height="40">
+                            @if($not->fromuser->first()->induser != null)                          
+                              <img src="@if($not->fromuser->first()->induser->profile_pic != null){{ '/img/profile/'.$not->fromuser->first()->induser->profile_pic }}@else{{'/assets/images/ab.png'}}@endif" class="img-circle" width="40" height="40">        
+                            @elseif($not->fromuser->first()->corpuser != null)                             
+                              <img src="@if($not->fromuser->first()->corpuser->logo_status != null){{ '/img/profile/'.$not->fromuser->first()->corpuser->logo_status }}@else{{'/assets/images/ab.png'}}@endif" class="img-circle" width="40" height="40">
+                            @endif
                         </div>
                         <div class="col-md-10 col-sm-10 col-xs-8">
-                            {{$application->user->fname}} has applied your Job Post Id: {{$application->unique_id}} -
-                            {{ \Carbon\Carbon::createFromTimeStamp(strtotime($application->apply_dtTime))->diffForHumans() }}
+                            {{$not->fromuser->first()->name}} {{$not->remark}} -
+                            {{ \Carbon\Carbon::createFromTimeStamp(strtotime($not->created_at))->diffForHumans() }}
                         </div>
                     </div>
                 </div>   
