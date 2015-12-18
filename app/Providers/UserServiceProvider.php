@@ -74,8 +74,9 @@ class UserServiceProvider extends ServiceProvider {
 											->orderBy('postactivities.id', 'desc')
 											->sum('postactivities.apply');
 
-				$notifications = Notification::with('fromUser', 'toUser')->where('to_user', '=', Auth::user()->id)->take(5)->get();
-				$notificationsCount = Notification::where('to_user', '=', Auth::user()->id)->count();
+				$notifications = Notification::with('fromUser', 'toUser')->where('to_user', '=', Auth::user()->id)
+										     ->orderBy('id', 'desc')->take(5)->get();
+				$notificationsCount = Notification::where('to_user', '=', Auth::user()->id)->where('view_status', '=', 0)->count();
 			}
 			$view->with('applications', $applications)
 			  	 ->with('thanks', $thanks)

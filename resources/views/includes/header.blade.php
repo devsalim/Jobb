@@ -38,32 +38,42 @@
             <ul class="dropdown-menu">
               <li class="external">
                 <h3>You have <span class="bold">{{$notificationsCount}}</span> Messages</h3>
-                <a class="@if($title == 'notify_view'){{'active'}}@endif" href="/notify/applications/@if(Auth::user()->identifier==1){{'ind'}}@elseif(Auth::user()->identifier==2){{'corp'}}@endif/{{Auth::user()->induser_id}}{{Auth::user()->corpuser_id}}" data-utype="app" style="color: darkblue;">view all</a>
+                <a class="@if($title == 'notify_view'){{'active'}}@endif" 
+                    href="/notify/notification/@if(Auth::user()->identifier==1){{'ind'}}@elseif(Auth::user()->identifier==2){{'corp'}}@endif/{{Auth::user()->induser_id}}{{Auth::user()->corpuser_id}}" 
+                    data-utype="app" style="color: darkblue;">view all</a>
               </li>
               <li>
-                <ul class="dropdown-menu-list scroller" style="height: 275px;" data-handle-color="#637283">
+                <ul class="dropdown-menu-list scroller" style="height: 275px;" data-handle-color="#637283" id="notification-list">
                   @foreach($notifications as $not)
                   
                   <li>
-                    <a href="#" class="notification-link">
+
+                    @if($not->operation == 'link request' || $not->operation == 'link response')
+                    <a href="#" data-nid="{{$not->id}}" data-lnkt="notification" data-anchor="links" 
+                      @if($not->view_status == 0)style="background:#f8f9fa"@endif>
+                    @elseif($not->operation == 'job contact')
+                    <a href="#" data-nid="{{$not->id}}" data-lnkt="notification" data-anchor="mypost" 
+                      @if($not->view_status == 0)style="background:#f8f9fa"@endif>
+                    @endif
+
                       <span class="photo">
-                      @if($not->fromuser->first()->induser != null)
-                        
-                        <img src="@if($not->fromuser->first()->induser->profile_pic != null){{ '/img/profile/'.$not->fromuser->first()->induser->profile_pic }}@else{{'/assets/images/ab.png'}}@endif" class="img-circle" width="40" height="40">                        
-                        
-                      @elseif($not->fromuser->first()->corpuser != null)
-                        
-                        <img src="@if($not->fromuser->first()->corpuser->logo_status != null){{ '/img/profile/'.$not->fromuser->first()->corpuser->logo_status }}@else{{'/assets/images/ab.png'}}@endif" class="img-circle" width="40" height="40">
-                        {{-- <div class=""><i class="icon-speedometer"></i> 55%</div> --}}
-                       
-                      @endif
+                        @if($not->fromuser->first()->induser != null)
+                          
+                          <img src="@if($not->fromuser->first()->induser->profile_pic != null){{ '/img/profile/'.$not->fromuser->first()->induser->profile_pic }}@else{{'/assets/images/ab.png'}}@endif" class="img-circle" width="40" height="40">                        
+                          
+                        @elseif($not->fromuser->first()->corpuser != null)
+                          
+                          <img src="@if($not->fromuser->first()->corpuser->logo_status != null){{ '/img/profile/'.$not->fromuser->first()->corpuser->logo_status }}@else{{'/assets/images/ab.png'}}@endif" class="img-circle" width="40" height="40">
+                          {{-- <div class=""><i class="icon-speedometer"></i> 55%</div> --}}
+                         
+                        @endif
                       </span>
                       <span class="subject">
-                      <span class="from">
-                      {{$not->fromuser->first()->name}} </span>
-                      <span class="time">
-                        {{ \Carbon\Carbon::createFromTimeStamp(strtotime($not->created_at))->diffForHumans() }}
-                      </span>
+                        <span class="from">
+                        {{$not->fromuser->first()->name}} </span>
+                        <span class="time">
+                          {{ \Carbon\Carbon::createFromTimeStamp(strtotime($not->created_at))->diffForHumans() }}
+                        </span>
                       </span>
                       <span class="message">
                       {{$not->remark}} </span>

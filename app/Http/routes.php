@@ -136,6 +136,8 @@ Route::group(array('before' => 'auth'), function(){
 
 	Route::post('/resendOTP', 'PagesController@resendOTP');
 
+	Route::post('/notification/mark-as-read/{id}', 'NotificationController@update');
+
 });
 
 
