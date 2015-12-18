@@ -551,8 +551,11 @@ class PagesController extends Controller {
 											where follows.individual_id=?
 									)', [Auth::user()->induser_id]);
 				$following = collect($following);
+				$followCount = Follow::where('corporate_id', '=', Auth::user()->induser_id)
+								->orWhere('individual_id', '=', Auth::user()->induser_id)
+								->count('id');
 
-				return view('pages.profileSearch', compact('users', 'title', 'following', 'type'));
+				return view('pages.profileSearch', compact('users', 'title', 'following', 'type', 'followCount'));
 			}
 		
 		}

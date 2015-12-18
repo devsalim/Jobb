@@ -35,8 +35,8 @@
 					</div>	
 					<div class="form-group col-md-12 col-sm-12 col-xs-12 clearfix" style="margin-bottom:10px">	
 							<!-- BEGIN FORM-->
-							<form action="searchConnections" class="horizontal-form" method="post">
-								<input type="hidden" name="_token" value="{{ csrf_token() }}">				
+							<!-- <form action="searchConnections" class="horizontal-form" method="post">
+								<input type="hidden" name="_token" value="{{ csrf_token() }}">	 -->			
 								<!--  <span class="">
 						            <a class="advance-search btn">Click for Advance Search</a>
 						          </span> -->
@@ -121,7 +121,7 @@
 					                    </form>
 						          </div>
 
-							</form>
+							<!-- </form> -->
 							<!-- <div class="col-md-1"></div> -->
 								
 						</div>
@@ -180,11 +180,11 @@
 					@foreach(Auth::user()->induser->friends as $connection)
 						 @if($connection->pivot->status == 1)
 					<div class="row search-user-tool" style="margin:0;">					
-							<div class="col-md-2 col-sm-3 col-xs-2">
+							<div class="col-md-2 col-sm-3 col-xs-3">
 								<a href="#">
-							        <img class="media-object img-circle img-link-size" 
+							        <img class="media-object img-circle" 
 							        src="@if($connection->profile_pic != null){{ '/img/profile/'.$connection->profile_pic }}@else{{'/assets/images/ab.png'}}@endif" 
-							      	alt="DP">
+							      	alt="DP" style="width:100%">
 							     </a>
 							</div>
 							<div class="col-md-6 col-sm-6 col-xs-6">
@@ -192,7 +192,7 @@
 							     {{ $connection->fname }} {{ $connection->lname }}</a><br>
 							    <small>
                                 
-						          @if($connection->working_status == "Student")
+						        @if($connection->working_status == "Student")
                                 
                                      {{ $connection->education }} in {{ $connection->branch }}, {{ $connection->city }}
                                 
@@ -250,11 +250,11 @@
 					<div class="row" style="margin: 0px -35px 0px -9px;">
 						
 								
-							<div class="col-md-2 col-sm-3 col-xs-2">
+							<div class="col-md-2 col-sm-3 col-xs-3">
 								<a href="#">
-							        <img class="media-object img-circle img-link-size" 
+							        <img class="media-object img-circle " 
 							        src="@if($conreq->profile_pic != null){{ '/img/profile/'.$conreq->profile_pic }}@else{{'/assets/images/ab.png'}}@endif" 
-							      	alt="DP">
+							      	alt="DP" style="width:100%">
 							     </a>
 							</div>
 							<div class="col-md-5 col-sm-6 col-xs-6" style="    border-bottom: 1px dotted lightgrey;padding: 0px 7px 7px 2px;">
@@ -293,7 +293,7 @@
                                 @endif
 							      </small>
 							</div>
-							<div class="col-md-3 col-sm-3 col-xs-4" style="margin:4px 0">
+							<div class="col-md-3 col-sm-3 col-xs-3" style="margin:4px 0">
 								<form action="{{ url('/connections/response', $conreq->pivot->id) }}" method="post">
 									<input type="hidden" name="_token" value="{{ csrf_token() }}">
 									<button type="submit" name="action" value="accept" class="btn apply-ignore-font" style="padding: 0px 3px; background-color: white;">
@@ -321,9 +321,9 @@
 					@foreach($linkFollow as $follow)
 					<div class="row search-user-tool" style="margin:0;">
 								
-							<div class="col-md-2 col-sm-2 col-xs-2">
+							<div class="col-md-2 col-sm-2 col-xs-3">
 								<a href="#">
-							        <img class="media-object img-link-size" src="@if($follow->logo_status != null){{ '/img/profile/'.$follow->logo_status }}@else{{'/assets/images/corpnew.jpg'}}@endif" alt="DP" style="width:60px">
+							        <img class="media-object" style="width:100%" src="@if($follow->logo_status != null){{ '/img/profile/'.$follow->logo_status }}@else{{'/assets/images/corpnew.jpg'}}@endif" alt="DP" style="width:60px">
 							    </a>
 							</div>
 							<div class="col-md-5 col-sm-6 col-xs-6">

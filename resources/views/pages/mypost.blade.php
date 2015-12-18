@@ -33,7 +33,7 @@
 					<div class="timeline" >
 						<!-- TIMELINE ITEM -->
 						<div class="timeline-item time-item">
-							<div class="timeline-body" style="border-radius:15px !important;margin-left: 0;">
+							<div class="timeline-body" style="border-radius:15px !important;margin-left: 10px;">
 								<div class="timeline-body-head">
 									<div class="timeline-body-head-caption">
 										<a>	
@@ -95,7 +95,7 @@
 								  		</div>
 								  		@endif
 								  	</div>
-									<div class="row" style="margin-top: 15px;">
+									<div class="row" style="margin: 15px;">
 										@if($expired != 1)
 											@if($remainingDays >= 2)
 											<div class="col-md-4 col-sm-6 col-xs-8">
@@ -419,6 +419,7 @@
 																					$counts  = array_count_values($overlap);
 																				?>
 																		  	<div class="row" style="border-bottom:1px dotted lightgrey;">
+																		  		
 														                    	<div class="col-md-4 col-sm-4 col-xs-4" style="font-size:12px;">
 														                    		<a data-toggle="modal" href="#post-mod-{{$post->id}}">
 														                    			<i class="icon-speedometer" style="font-size:12px;"></i> 
@@ -442,6 +443,7 @@
 
 														                    		</a>
 														                    	</div>
+														                    	
 														                    	<!-- <div class="col-md-2 col-sm-4 col-xs-4">
 														                    		Profile
 														                    	</div> -->
@@ -449,10 +451,12 @@
 														                    	<a class="viewcontact-view" style="font-size:12px;" data-toggle="modal" href="#viewcontact-view">
 														                    		<i class="icon-call-end" style="font-size:12px;"></i> <span class="hidden-sm hidden-xs">View Contact</span></a>
 														                    	</div>
+														                    	
 														                    	<div class="col-md-4 col-sm-4 col-xs-5" >
 														                    	<a class="viewcontact-view" style="font-size:12px;" data-toggle="modal" href="/profile/ind/{{$pa->user->id}}">
 														                    		<i class="icon-eye" style="font-size:12px;"></i> Resume</a>
 														                    	</div>
+														                    	
 													                    	</div>
 														                 	
 														                 		<!-- <div class="mypost-match"><i class="icon-speedometer"></i> 49%</div> -->
@@ -616,20 +620,60 @@
 																		  	@if($pa->user->induser != null)
 																		  	<div class="row">
 																				<div class="col-md-3 col-sm-3 col-xs-3">
-																					<img src="@if($pa->user->profile_pic != null){{ '/img/profile/'.$pa->user->profile_pic }}@else{{'/assets/images/ab.png'}}@endif" 
+																					<img src="@if($pa->user->induser->profile_pic != null){{ '/img/profile/'.$pa->user->induser->profile_pic }}@else{{'/assets/images/ab.png'}}@endif" 
 															                    		 width="45" height="45" 
 															                    		 class="img-circle">
 																				</div>
 																				<div class="col-md-9 col-sm-9 col-xs-9">
 																					<a href="/profile/ind/{{$pa->user->id}}" data-utype="ind">
-																                    		{{$pa->user->induser->first()->fname}}</a> has contacted for this post <i class=" icon-clock"></i>
+																                    		{{$pa->user->induser->fname}}</a> has contacted for this post <i class=" icon-clock"></i>
 															                    	{{ \Carbon\Carbon::createFromTimeStamp(strtotime($pa->contact_view_dtTime))->diffForHumans() }}
 																				</div>
-																				<div class="col-md-12">
+																				<!-- <div class="col-md-12">
 																					<a href="/profile/ind/{{$pa->user->id}}" data-utype="ind">
 																	                    		Contact</a>
-																				</div>
+																				</div> -->
 																			</div>
+																			<div class="row" style="border-bottom:1px dotted lightgrey;margin:10px 0">
+																				@if($post->post_type == 'job')
+														                    	<div class="col-md-4 col-sm-4 col-xs-4" style="font-size:12px;">
+														                    		<a data-toggle="modal" href="#post-mod-{{$post->id}}">
+														                    			<i class="icon-speedometer" style="font-size:12px;"></i> 
+																						<?php
+																						try{
+																							if(count($postSkills) > 0){
+																								$skillPer = (count($counts) / count($postSkills)) * 100;
+																								if(strcasecmp($post->role, $pa->user->induser->role) == 0){$rolePer = 100;}else{$rolePer = 0;}
+																								if($post->prof_category == $pa->user->induser->prof_category){$jobPer = 100;}else{$jobPer = 0;}
+																								if($post->min_exp == $pa->user->induser->experience){$expPer = 100;}else{$expPer = 0;}
+																								if($post->education == $pa->user->induser->education){$eduPer = 100;}else{$eduPer = 0;}
+																								if($post->city == $pa->user->induser->city){$cityPer = 100;}else{$cityPer = 0;}
+																								if($post->time_for == $pa->user->induser->prefered_jobtype){$typePer = 100;}else{$typePer = 0;}
+																								$avgPer = ($skillPer + $rolePer + $jobPer + $expPer + $eduPer + $cityPer + $typePer)/7;
+																								echo round($avgPer).' %';
+																							}
+																						}
+																						catch(\Exception $e){}
+																						?>
+
+
+														                    		</a>
+														                    	</div>
+														                    	@endif
+														                    	<!-- <div class="col-md-2 col-sm-4 col-xs-4">
+														                    		Profile
+														                    	</div> -->
+														                    	<div class="col-md-4 col-sm-4 col-xs-3">
+														                    	<a class="viewcontact-view" style="font-size:12px;" data-toggle="modal" href="#viewcontact-view">
+														                    		<i class="icon-call-end" style="font-size:12px;"></i> <span class="hidden-sm hidden-xs">View Contact</span></a>
+														                    	</div>
+														                    	@if($post->post_type == 'job' && $post->resume_required == 1)
+														                    	<div class="col-md-4 col-sm-4 col-xs-5" >
+														                    	<a class="viewcontact-view" style="font-size:12px;" data-toggle="modal" href="/profile/ind/{{$pa->user->id}}">
+														                    		<i class="icon-eye" style="font-size:12px;"></i> Resume</a>
+														                    	</div>
+														                    	@endif
+													                    	</div>
 														                 	@endif
 														                   	@endif									                 
 														                  @endforeach									                  

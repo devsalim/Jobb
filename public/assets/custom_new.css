@@ -404,6 +404,26 @@ display: table;
   display: none;
 }
 
+::-webkit-input-placeholder {
+   color: darkslategrey !important;
+}
+
+:-moz-placeholder { /* Firefox 18- */
+   color: darkslategrey !important;  
+}
+
+::-moz-placeholder {  /* Firefox 19+ */
+   color: darkslategrey !important;  
+}
+
+:-ms-input-placeholder {  
+   color: darkslategrey !important;  
+}
+
+.font-group{
+  font-weight: 500;
+}
+
 .modal-border{
     border-top: 0;
     border-right: 0;

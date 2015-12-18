@@ -6,11 +6,11 @@
 	<div class="portlet-title">
 		<div class="caption links-title">
 			<i class=""></i>
-			<span class="caption-subject font-blue-hoki bold uppercase">				
+			<span class="caption-subject capitalize" style="margin:0 30px;line-height: 1.5;">				
 				{{$group->group_name}}   				
 			</span>
 			<a href="/group" class="group-title-info btn btn-xs btn-warning" 
-				style="text-decoration:none;border-radius: 25px !important;float:left;margin:0 5px;">
+				style="text-decoration:none;border-radius: 4px !important;float:left;margin:0 -15px;">
 				Back
 			</a>
 			
@@ -18,28 +18,26 @@
 			<div class="group-admin-title pull-right">
 				@if($group->admin->id == Auth::user()->induser_id)
 				<a id="ajax-demo" href="#edit-group" data-toggle="modal" class="badge btn btn-xs btn-info" style="" title="Edit">
-					<i class="fa fa-edit"></i><span class="hidden-sm hidden-xs"> Edit</span>
+					<i class="fa fa-edit"></i><span class="hidden-sm hidden-xs font-group"> Edit</span>
 				</a>
 			@endif
 			@if($group->admin->id == Auth::user()->induser_id)				
 				<a id="ajax-demo" href="#delete-group" data-toggle="modal" title="Delete" 
 					class="badge btn btn-xs btn-danger" style="text-decoration: none;">
-					<i class="fa fa-trash"></i><span class="hidden-sm hidden-xs"> Delete Group</span>
+					<i class="fa fa-trash"></i><span class="hidden-sm hidden-xs font-group"> Delete Group</span>
 				</a>				
 			@else				
 				<a id="ajax-demo" href="#leave-group" data-toggle="modal" 
 					class="badge btn btn-xs" style="text-decoration: none;">						
-					<i class="fa fa-sign-out"></i><span class="hidden-sm hidden-xs"> Leave Group</span>
+					<i class="fa fa-sign-out"></i><span class="hidden-sm hidden-xs font-group"> Leave Group</span>
 				</a>
 			@endif
 				
 			</div>
 		</div>		
 	</div>
-	<span class="group-admin-title-left">Admin</span> 
-				<a href="/profile/ind/{{$group->admin->id}}">
-				<span class="group-admin-title-right">{{$group->admin->fname}} {{$group->admin->lname}}</span>
-				</a>
+	
+
 	<!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
 	<!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
 
@@ -124,7 +122,7 @@
 <!-- /.modal -->
 	<div class="portlet-body form">
 		<div class="form-body" style="padding:20px 0;">	
-<div class="row">
+			<div class="row">
 				<div class="col-md-1"></div>
 				<div class="col-md-10" style="">
 					<div class="form-group clearfix" style="margin-bottom:0">	
@@ -145,13 +143,32 @@
 			</div>
 		</div>
 	</div>
+	<div class="portlet-body form">
+		<div class="form-body" style="padding:0px 0;">	
+			<div class="row">
+				<div class="col-md-10" style="margin:0 -10px;">
+					@if($group->admin->id == Auth::user()->induser_id)
+						<span class="group-admin-title-left"><i class="icon-shield"></i> Admin</span> 
+						<a href="/profile/ind/{{$group->admin->id}}">
+						<span class="group-admin-title-right">You</span>
+						</a>
+						@else
+						<span class="group-admin-title-left"><i class="icon-shield"></i> Admin</span> 
+						<a href="/profile/ind/{{$group->admin->id}}">
+						<span class="group-admin-title-right">{{$group->admin->fname}} {{$group->admin->lname}}</span>
+						</a>
+						@endif
+				</div>			
+			</div>
+		</div>
+	</div>
 </div>
 <div class="portlet box green col-md-7">
 	<div class="portlet-title">
 		<ul class="nav nav-tabs" style="padding-left: 0;float:left;">
 			<li class="active">
 				<a href="#tab_5_1" class="label-new" data-toggle="tab" style="border-left:0;">
-					Group Members 
+					<span class="hidden-xs hidden-sm">Group</span> Members 
 					@if(count($users) > 0)
 						<span class="badge" style="background-color: deepskyblue;"> 
 							{{count($users)}}
@@ -161,12 +178,7 @@
 			</li>
 			<li>
 				<a href="#tab_5_2" class="label-new" data-toggle="tab">
-					Add Members 
-					@if(count($connections) > 0) 
-						<span class="badge" style="background-color: lightcoral;">
-							{{count($connections)}}
-						</span>
-					@endif
+					Add <span class="hidden-xs hidden-sm">Members</span> 
 				</a>
 			</li>
 		</ul>
@@ -190,7 +202,7 @@
 					@foreach($users as $user)
 					<div class="row" style="border-bottom:1px dotted lightgrey;padding: 5px 0;">
 						
-						<div class="col-md-2 col-sm-2 col-xs-2">
+						<div class="col-md-2 col-sm-2 col-xs-3">
 							<a href="#">
 						        <img class="media-object img-circle" src="@if($user->profile_pic != null){{ '/img/profile/'.$user->profile_pic }}@else{{'/assets/images/ab.png'}}@endif" alt="..." style="padding: 3px;border: 1px solid #ddd;">
 						    </a>
@@ -203,8 +215,8 @@
 						      		Admin
 						      	</span>
 					      @endif
-					      {{ $user->working_at }}<br>
-							 {{ $user->city }} {{ $user->state }}
+					      <br>{{ $user->working_at }}
+							 {{ $user->city }}
 						</div>
 						<div class="col-md-2 col-sm-2 col-xs-2">
 							<span class="input-group-btn btn-right">
@@ -226,7 +238,7 @@
 						<div class="col-md-1 col-sm-1 col-xs-1">
 						<!-- <div class="checkboxFour"> -->
 							<label>
-								<input type="checkbox" id="" class="group-done icheck" data-checkbox="icheckbox_square-grey" onchange="valueChanged()">
+								<input type="checkbox" id="" class="group-done" data-checkbox="icheckbox_square-grey" onchange="valueChanged()">
 							</label>
 						<!-- </div> -->
 						</div>
@@ -243,7 +255,7 @@
 						@if($connection->id != $group->admin_id)
 						<div class="row" style="border-bottom:1px dotted lightgrey;padding: 5px 0;">
 							
-							<div class="col-md-2 col-sm-2 col-xs-2">
+							<div class="col-md-2 col-sm-2 col-xs-3">
 								<a href="#">
 							        <img class="media-object img-circle" src="@if($connection->profile_pic != null){{ '/img/profile/'.$connection->profile_pic }}@else{{'/assets/images/ab.png'}}@endif" alt="..." style="width:60px;padding: 3px;border: 1px solid #ddd;">
 							     </a>
@@ -271,7 +283,7 @@
 							</div>
 							<div class="col-md-1 col-sm-1 col-xs-1">
 							<label>
-								<input type="checkbox" id="" class="add-done icheck" data-checkbox="icheckbox_square-grey" onchange="valueChange()">
+								<input type="checkbox" id="" class="add-done" data-checkbox="icheckbox_square-grey" onchange="valueChange()">
 							 </label>
 							</div>
 						</div>						

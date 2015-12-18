@@ -209,6 +209,8 @@ body.page-boxed{
   -o-box-shadow: none !important;
   box-shadow: none !important;
 }
+
+
 </style>
 <!-- END THEME STYLES -->
 {{-- <link rel="shortcut icon" href="favicon.ico"/> --}}

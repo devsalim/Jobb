@@ -188,7 +188,7 @@
 										<span class="input-group-addon">
 											<i class="icon-note" style="color:darkcyan;"></i>
 										</span>
-										<textarea name="about_individual"  onkeyup="countChar(this)" class="form-control autosizeme" rows="3">"{{ $user->about_individual }}" </textarea>
+										<textarea name="about_individual"  onkeyup="countChar(this)" class="form-control autosizeme" rows="3">{{ $user->about_individual }} </textarea>
 										
 									</div>
 									<div id="charNum" style="text-align:right;"></div>

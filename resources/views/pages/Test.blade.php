@@ -1,4 +1,25 @@
 
+<div class="input-group col-md-2 col-sm-3 col-xs-6 jobskill" >
+                <div class="icheck-inline">
+                    <label>
+                        <input type="checkbox" class="icheck" 
+                                name="post_type[]"
+                                data-checkbox="icheckbox_line-grey" 
+                                data-label="Job"
+                                value="job" checked>
+                    </label>                                                
+                    <label>
+                        <input type="checkbox" class="icheck" 
+                                name="post_type[]"
+                                data-checkbox="icheckbox_line-grey" 
+                                data-label="Skill"
+                                value="skill" checked>
+                    </label>
+                </div>
+            </div>
+
+
+
 <div class="row">
                                                 @if($post->post_type == 'skill')
                                                 <div class="col-md-12 col-sm-12 col-xs-12 elipsis-code">

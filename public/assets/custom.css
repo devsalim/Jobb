@@ -486,7 +486,7 @@ background-color:white;
     position: relative;
     /*padding: 0px 5px 0px 5px;*/
     box-shadow: 4px 4px 4px rgb(222, 222, 222);
-    border-radius: 6px !important;
+    /*border-radius: 6px !important;*/
     background-color: whitesmoke;
 }
 
@@ -544,7 +544,7 @@ background-color:white;
 /* View Page */
 .view-page{
     padding-top: 2px;
-    font-size: 14px;
+    font-size: 13px;
 }
 
 ul{
@@ -779,15 +779,17 @@ form.search-form.search-form-expanded {
 }
 
 .group-admin-title-left {
-    background: #ddd;
+    background: cadetblue;
     padding: 2px 4px;
     float: left;
+    color: white;
 }
 
 .group-admin-title-right {
-    background: rgba(221, 221, 221, 0.5);
+    background: lavender;
     padding: 2px 4px;
     float: left;
+    color: darkslategray;
 }
 
 .group-title-info{

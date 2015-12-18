@@ -360,7 +360,7 @@
     position: relative;
     display: block;
     margin: 0;
-    padding: 5px 15px 5px 38px;
+    padding: 5px 15px 5px 22px;
     font-size: 13px;
     line-height: 17px;
     color: #fff;
@@ -375,7 +375,7 @@
     .iradio_line-grey .icheck_line-icon {
         position: absolute;
         top: 50%;
-        left: 13px;
+        left: 6px;
         width: 13px;
         height: 11px;
         margin: -5px 0 0 0;

@@ -3,7 +3,8 @@
 @section('content')
 @if($title == 'home')
 <!-- Jobtip Filter Start -->
-
+<form id="home-filter" name="filter_form" action="/home" method="post">
+<input type="hidden" name="_token" value="{{ csrf_token() }}">
 <div class="row">
 	<div class="col-md-9" style=" lightgray;margin-bottom: 5px;">
 		<div class="filter-icon hide-show-filter"><i class="fa fa-filter" style="font-size:16px;"></i> Filter</div>
@@ -41,45 +42,77 @@
 			</div>
 			<div class="col-md-4 col-sm-4 col-xs-4 ">
 				<!-- <a class="show-more" style="font-size:12px;font-weight:400;">Show more</a> -->
-				<button class="btn btn-success" style="padding:0 5px;">Save</button>
+				<button type="submit" class="btn btn-info" value="Search" title="Search" 
+						style="background-color:transparent !important; border-color: transparent;">
+						<i class="glyphicon glyphicon-floppy-disk" style="color:dodgerblue;font-size:16px;"></i>
+					</button>
 			</div>
 		</div>		
 	</div>
 </div>
-<form id="home-filter" name="filter_form" action="/home" method="post">
-<input type="hidden" name="_token" value="{{ csrf_token() }}">
+
 
 <div class="row show-filter">
 	<div class="col-md-12">
-		<div class="btn-group col-md-2 col-sm-3 col-xs-6 jobskill" data-toggle="buttons" style="padding: 7px 15px;">
+		<div class="col-md-2 col-sm-3 col-xs-6" style="margin:10px 0">
+			<div class="input-group" >
+                <div class="icheck-inline">
+                    <label style="max-width:40%">
+                        <input type="checkbox" class="icheck" 
+                                name="post_type[]"
+                                data-checkbox="icheckbox_line-grey" 
+                                data-label="Job"
+                                value="job" checked>
+                    </label>                                                
+                    <label style="max-width:45%">
+                        <input type="checkbox" class="icheck" 
+                                name="post_type[]"
+                                data-checkbox="icheckbox_line-grey" 
+                                data-label="Skill"
+                                value="skill" checked>
+                    </label>
+                </div>
+            </div>
+		</div>
+		<!-- <div class="btn-group col-md-2 col-sm-3 col-xs-6 jobskill" data-toggle="buttons" style="padding: 7px 15px;">
 			<label class="btn btn-default color-button-job check-font-size active input-responsive" style="padding: 7px 8px;background-color: lightgray;border-right: 1px solid white;">
 			<input type="checkbox" name="post_type[]" value="job" class="toggle"><i class="fa fa-check icon-color"></i> Jobs </label>
 			<label class="btn btn-default color-button-skill check-font-size active input-responsive" style="padding: 7px 8px;background-color: lightgray;border-left: 1px solid white;">
 			<input type="checkbox" name="post_type[]" value="skill" class="toggle"><i class="fa fa-check icon-color"></i> Skills </label>
-		</div>
-		<div class="col-md-2 col-sm-3 col-xs-6">
+		</div> -->
+		<div class="col-md-1 col-sm-3 col-xs-6">
 			<div class="form-group">	
-				<select name="experience" class="form-control filter-input" style="padding: 0;margin: 7px 0px;">
+				<select name="experience" class="form-control filter-input" style="padding: 0;margin: 7px 0px;border: 1px solid darkcyan !important;">
                 	<option value="">Exp</option>
-                	<option value="0-1">0-1</option>
-					<option value="1-2">1-2</option>
-					<option value="2-4">2-4</option>
-					<option value="4-6">4-6</option>
-					<option value="6-8">6-8</option>
-					<option value="8-10">8-10</option>
+                	<option value="0">0</option>
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option value="4">4</option>
+					<option value="5">5</option>
+					<option value="6">6</option>
+					<option value="7">7</option>
+					<option value="8">8</option>
+					<option value="9">9</option>
+					<option value="10">10</option>
+					<option value="11">11</option>
+					<option value="12">12</option>
+					<option value="13">13</option>
+					<option value="14">14</option>
+					<option value="15">15</option>
                 </select>		
 				<!-- <input type="text" id="exp" name="experience" class="form-control filter-input" placeholder="Exp" style="height: 25px;margin: 7px 0px;">				 -->
 			</div>	
 		</div>
-		<div class="col-md-3 col-sm-3 col-xs-12">
+		<div class="col-md-2 col-sm-3 col-xs-12">
 			<div class="form-group">
-				<input type="text" id="title" name="job_title" class="form-control filter-input" placeholder="Job Title, Role" style="margin: 7px 0px;">
+				<input type="text" id="title" name="job_title" class="form-control filter-input" placeholder="Job Title, Role" style="border: 1px solid darkcyan !important;margin: 7px 0px;">
 			</div>
 		</div>
 		<div class="col-md-2 col-sm-2 col-xs-6">
             <div class="form-group">              
                 <select name="time_for" class="bs-select form-control filter-input" multiple style="padding: 0;margin: 7px 0px;">
-                	<option value="">Emp Type</option>
+                	<option selected value="">Emp Type</option>
 					<option value="Full Time">Full Time</option>
 					<option value="Part Time">Part Time</option>
 					<option value="Freelancer">Freelancer</option>
@@ -87,12 +120,12 @@
                 </select>
             </div>  
          </div>
-		<div class="col-md-3 col-sm-3 col-xs-6">
+		<div class="col-md-2 col-sm-3 col-xs-6">
 			<div class="form-group">
 				<select id="" placeholder="City" name="city" style="padding: 0;margin: 7px 0px;" class="bs-select form-control filter-input" multiple >
-					<option value="">select</option>
-					<optgroup label="NFC EAST">
-					<option>Hyderabad</option>
+					
+					<optgroup label="City">
+					<option selected>Hyderabad</option>
 					<option>Bangalore</option>
 					<option>Philadelphia Eagles</option>
 					<option>Washington Redskins</option>
@@ -148,8 +181,8 @@
 		<div class="col-md-12">
 				<div class="col-md-3 col-sm-3 col-xs-6 extra-show done-show" style="">
 					<div class="form-group">
-						<select id="category-list" class="form-control filter-input check-font-size" name="prof_category" style="padding: 0;margin: 7px 0px;">
-							<option value="">Category</option>
+						<select id="category-list" class="form-control filter-input check-font-size" name="prof_category" style="border: 1px solid darkcyan !important;padding: 0;margin: 7px 0px;">
+							<option value="">Job Category</option>
 							<optgroup label="Accounting">
 								<option value="Accounts/Finance/Tax">Accounts/Finance/Tax</option>
 								<option value="Agent">Agent</option>
@@ -180,33 +213,25 @@
 						{!! Form::select('skill_list[]', $skills, null, ['id'=>'skill-list', 'class'=>'form-control', 'placeholder'=>'Skills', 'multiple']) !!}				
 					</div>	
 				</div>
-				
-		         <div class="col-md-2 col-sm-2 col-xs-6 extra-show done-show" style="margin: 12px 0;">
-		         	<div class="form-group">
-			         	 <label style="font-size:13px;">
-							<input type="checkbox" checked class="icheck" data-checkbox="icheckbox_square-grey"> Expired Post
-						</label>
-					</div>
-				</div>
-				
 				<div class="col-md-2 col-sm-3 col-xs-6 extra-show done-show" style="margin: 7px 0;">
 					<div class="form-group">				
-						<input type="text" name="unique_id" class="form-control filter-input" placeholder="Post Id" style="margin: 7px 0px;"> 				
+						<input type="text" name="unique_id" class="form-control filter-input" placeholder="Post Id" style="border: 1px solid darkcyan !important;margin: 7px 0px;"> 				
 					</div>	
 				</div> 
-			<div class="col-md-2 col-sm-3 col-xs-6 extra-show done-show" style="margin: 7px 0;">
-				<div class="form-group">		
-					<select class="bs-select form-control filter-input" name="education" multiple style="padding: 0;margin: 7px 0px;">
-						<optgroup label="Posted by">
-							<option selected value=""><b>Posted by:</b> All</option>
-							<option value="individual">Individual</option>
-							<option value="company">Company</option>
-							<option value="consultancy">Consultancy</option>
-						</optgroup>
-					</select>
+				<div class="col-md-2 col-sm-3 col-xs-6 extra-show done-show" style="margin: 7px 0;">
+					<div class="form-group">		
+						<select class="bs-select form-control filter-input" name="education" multiple style="padding: 0;margin: 7px 0px;">
+							<optgroup label="Posted by">
+								<option selected value=""><b>Posted by:</b> All</option>
+								<option value="individual">Individual</option>
+								<option value="company">Company</option>
+								<option value="consultancy">Consultancy</option>
+							</optgroup>
+						</select>
+					</div>
 				</div>
-			</div>
-			<div class="col-md-1 col-sm-4 col-sm-6">
+				 
+			<!-- <div class="col-md-1 col-sm-4 col-sm-6">
 				<button type="submit" class="btn btn-info" value="Search" title="Search" 
 						style="float:left;background-color:transparent !important;margin:10px -25px; border-color: transparent;">
 					<i class="fa fa-check-square-o" style="font-size:20px;color:#3598dc;"></i>
@@ -215,6 +240,17 @@
 						style="background-color:transparent !important;margin:8px 1px;" >
 					<i class="icon-refresh" style="font-size:18px;"></i>
 				</button>
+			</div> -->
+		</div>
+	</div>
+	<div class="row show-filter">
+		<div class="col-md-12">
+			<div class="col-md-3 col-sm-6 col-xs-12 extra-show done-show" style="margin: 12px 0;">
+	         	<div class="form-group">
+		         	 <label style="font-size:13px;">
+						<input type="checkbox" checked class="icheck" data-checkbox="icheckbox_square-grey"> Do not include Expired Post
+					</label>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -763,11 +799,11 @@
 											</div>
 										
 											@else
-											<div class="row" style="">
-												<div class="col-md-3 col-sm-3 col-xs-4">
-												<div class="expired-css">													
+											<div class="row" style="padding:5px 0">
+												<div class="col-md-3 col-sm-3 col-xs-4" style="font-size:12px;">
+												<!-- <div class="expired-css">													 -->
 													<i class="glyphicon glyphicon-ban-circle"></i> Expired
-												</div>
+												<!-- </div> -->
 												</div>
 												<div class="col-md-3 col-sm-3 col-xs-4 ">
 													@if(Auth::user()->induser_id != $post->individual_id )
@@ -1090,7 +1126,8 @@
 												        @elseif($post->postactivity->where('user_id', Auth::user()->id)->first()->contact_view == 1 &&  Auth::user()->identifier == 1 && $expired != 1 && $post->website_redirect_url == null && $post->individual_id != null) 
 												        <button type="button" class="btn btn-sm bg-grey-steel apply-contact-btn" disabled="true">
 												            <i class="icon-check icon-check-css"></i> Contacted 
-												        </button>                               
+												        </button>
+
 												        @endif
 
 												    <!-- if corporate_id is null     -->
@@ -1288,6 +1325,7 @@
 
 @section('javascript')
 <script>
+
 jQuery(document).ready(function() {       
 	ComponentsIonSliders.init();    
 	ComponentsDropdowns.init();

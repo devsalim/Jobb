@@ -885,20 +885,20 @@
 		<form action="individual/create" class="horizontal-form" method="post">
 			<input type="hidden" name="_token" value="{{ csrf_token() }}">
 			<div class="form-body">
-				<div class="row">
+				<div class="row" style="margin:0 -35px;">
 					<div class="col-md-6 col-sm-6 col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-md-4 col-xs-12">Email Id:</label>
-							<div class="col-md-8 col-xs-12">
+							<label class="control-label col-md-4 col-sm-4 col-xs-4" style="font-size:13px;">Email Id:</label>
+							<div class="col-md-8 col-sm-8 col-xs-8">
 								<p class="form-control-static view-page">
 									{{ $user->email }} 
 									@if($user->email_verify == 0)
 									<a>
 										<i class="fa fa-exclamation-circle" 
-										style="color: #cb5a5e;font-size: 16px;"></i>
+										style="color: #cb5a5e;"></i>
 									</a>
 									@elseif($user->email_verify == 1)
-										<i class="glyphicon glyphicon-ok-circle" style="color: #1EC71E;font-size: 16px;"></i>
+										<i class="glyphicon glyphicon-ok-circle" style="color: #1EC71E;"></i>
 									@endif
 								</p>
 							</div>
@@ -907,8 +907,8 @@
 					<!--/span-->
 					<div class="col-md-6 col-sm-6 col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-md-4 col-xs-12">Mobile:</label>
-							<div class="col-md-6 col-xs-12">
+							<label class="control-label col-md-4 col-sm-4 col-xs-4">Mobile:</label>
+							<div class="col-md-6 col-sm-8 col-xs-8">
 								<p class="form-control-static view-page">
 									{{ $user->mobile }} 
 									@if($user->mobile_verify == 0)
@@ -925,12 +925,12 @@
 					</div>
 					<!--/span-->
 				</div>
-				<div class="row">
+				<div class="row" style="margin:0 -35px;">
 					@if($user->dob != null && Auth::user()->induser_id == $user->id)
 					<div class="col-md-6 col-sm-6 col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-md-4 col-xs-12">Date of Birth:</label>
-							<div class="col-md-8 col-xs-12">
+							<label class="control-label col-md-4 col-sm-4 col-xs-4">Date of Birth:</label>
+							<div class="col-md-8 col-sm-8 col-xs-8">
 								<p class="form-control-static view-page">
 									@if($user->dob != null)
 									{{$user->dob }}
@@ -944,8 +944,8 @@
 					@elseif($user->dob != null && Auth::user()->induser_id != $user->id)
 					<div class="col-md-6 col-sm-6 col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-md-4 col-xs-12">Date of Birth:</label>
-							<div class="col-md-8 col-xs-12">
+							<label class="control-label col-md-4 col-sm-4 col-xs-4">Date of Birth:</label>
+							<div class="col-md-8 col-sm-8 col-xs-8">
 								<p class="form-control-static view-page">
 									@if($user->dob != null)
 									{{$user->dob }}
@@ -962,8 +962,8 @@
 					@if($user->gender != null && Auth::user()->induser_id == $user->id)
 					<div class="col-md-6 col-sm-6 col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-md-4 col-xs-12">Gender:</label>
-							<div class="col-md-6 col-xs-12">
+							<label class="control-label col-md-4 col-sm-4 col-xs-4">Gender:</label>
+							<div class="col-md-8 col-sm-8 col-xs-8">
 								<p class="form-control-static view-page">
 									@if($user->gender != null)
 									{{ $user->gender }}
@@ -977,8 +977,8 @@
 					@elseif($user->gender != null && Auth::user()->induser_id != $user->id)
 					<div class="col-md-6 col-sm-6 col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-md-4 col-xs-12">Gender:</label>
-							<div class="col-md-6 col-xs-12">
+							<label class="control-label col-md-4 col-sm-4 col-xs-4">Gender:</label>
+							<div class="col-md-8 col-sm-8 col-xs-8">
 								<p class="form-control-static view-page">
 									@if($user->gender != null)
 									{{ $user->gender }}
@@ -993,12 +993,12 @@
 					@endif
 					<!--/span-->
 				</div>
-				<div class="row">
+				<div class="row" style="margin:0 -35px;">
 					@if($user->city != null && Auth::user()->induser_id == $user->id)
 					<div class="col-md-6 col-sm-6 col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-md-4 col-xs-12">City:</label>
-							<div class="col-md-6 col-xs-12">
+							<label class="control-label col-md-4 col-sm-4 col-xs-4">City:</label>
+							<div class="col-md-8 col-sm-8 col-xs-8">
 								<p class="form-control-static view-page">
 									@if($user->city != null)
 									{{ $user->city }}
@@ -1012,8 +1012,8 @@
 					@elseif($user->city != null && Auth::user()->induser_id != $user->id)
 					<div class="col-md-6 col-sm-6 col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-md-4 col-xs-12">City:</label>
-							<div class="col-md-6 col-xs-12">
+							<label class="control-label col-md-4 col-sm-4 col-xs-4">City:</label>
+							<div class="col-md-8 col-sm-8 col-xs-8">
 								<p class="form-control-static view-page">
 									@if($user->city != null)
 									{{ $user->city }}
@@ -1030,8 +1030,8 @@
 					@if($user->state != null && Auth::user()->induser_id == $user->id)
 					<div class="col-md-6 col-sm-6 col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-md-4 col-xs-12">State:</label>
-							<div class="col-md-6 col-xs-12">
+							<label class="control-label col-md-4 col-sm-4 col-xs-4">State:</label>
+							<div class="col-md-8 col-sm-8 col-xs-8">
 								<p class="form-control-static view-page">
 									@if($user->state != null)
 									{{ $user->state }}
@@ -1045,8 +1045,8 @@
 					@elseif($user->state != null && Auth::user()->induser_id != $user->id)
 					<div class="col-md-6 col-sm-6 col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-md-4 col-xs-12">State:</label>
-							<div class="col-md-6 col-xs-12">
+							<label class="control-label col-md-4 col-sm-4 col-xs-4">State:</label>
+							<div class="col-md-8 col-sm-8 col-xs-8">
 								<p class="form-control-static view-page">
 									@if($user->state != null)
 									{{ $user->state }}
@@ -1062,12 +1062,12 @@
 					<!--/span-->
 				</div>
 				<!--/row-->
-				<div class="row">
+				<div class="row" style="margin:0 -35px;">
 					@if($user->prefered_location != null && Auth::user()->induser_id == $user->id)
 					<div class="col-md-6 col-sm-6 col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-md-4 col-xs-12">Prefered Location:</label>
-							<div class="col-md-6 col-xs-12">
+							<label class="control-label col-md-4 col-sm-4 col-xs-4">Prefered Location:</label>
+							<div class="col-md-8 col-sm-8 col-xs-8">
 								<p class="form-control-static view-page">
 									@if($user->prefered_location != null)
 									{{ $user->prefered_location }}
@@ -1081,8 +1081,8 @@
 					@elseif($user->prefered_location != null && Auth::user()->induser_id != $user->id)
 					<div class="col-md-6 col-sm-6 col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-md-4 col-xs-12">Prefered Location:</label>
-							<div class="col-md-6 col-xs-12">
+							<label class="control-label col-md-4 col-sm-4 col-xs-4">Prefered Location:</label>
+							<div class="col-md-8 col-sm-8 col-xs-8">
 								<p class="form-control-static view-page">
 									@if($user->prefered_location != null)
 									{{ $user->prefered_location }}
@@ -1099,8 +1099,8 @@
 					@if($user->prefered_jobtype != null && Auth::user()->induser_id == $user->id)
 					<div class="col-md-6 col-sm-6 col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-md-4 col-xs-12">Job Type:</label>
-							<div class="col-md-6 col-xs-12">
+							<label class="control-label col-md-4 col-sm-4 col-xs-4">Job Type:</label>
+							<div class="col-md-8 col-sm-8 col-xs-8">
 								<p class="form-control-static view-page">
 									@if($user->prefered_jobtype != null)
 									{{ $user->prefered_jobtype }}
@@ -1114,8 +1114,8 @@
 					@elseif($user->prefered_jobtype != null && Auth::user()->induser_id != $user->id)
 					<div class="col-md-6 col-sm-6 col-xs-12">
 						<div class="form-group">
-							<label class="control-label col-md-4 col-xs-12">Job Type:</label>
-							<div class="col-md-6 col-xs-12">
+							<label class="control-label col-md-4  col-xs-4">Job Type:</label>
+							<div class="col-md-8  col-xs-8">
 								<p class="form-control-static view-page">
 									@if($user->prefered_jobtype != null)
 									{{ $user->prefered_jobtype }}
