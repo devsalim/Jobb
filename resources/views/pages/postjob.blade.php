@@ -740,10 +740,11 @@
 <script>
 jQuery(document).ready(function() {       
 	ComponentsIonSliders.init();  
-	ComponentsjQueryUISliders.init();  
+	 
 	ComponentsDropdowns.init();
 	ComponentsEditors.init();
     FormWizard.init();
+    ComponentsjQueryUISliders.init(); 
 });
 </script>
 <script type="text/javascript">

@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use App\Http\Requests\CreateCorpRequest;
 use App\Http\Requests\CreateImgUploadRequest;
+use Mail;
 
 class CorporateController extends Controller {
 
@@ -75,10 +76,10 @@ class CorporateController extends Controller {
 			$data = array();
 			if($request['firm_email_id'] != null){
 				$firm_email_id = $request['firm_email_id'];
-				$firm_name = $request['firm_name'];
+				$fname = $request['firm_name'];
 				$vcode = Corpuser::where('firm_email_id', '=', $request['firm_email_id'])->pluck('email_vcode');
-				Mail::send('emails.welcome', array('firm_name'=>$firm_name, 'vcode'=>$vcode), function($message) use ($firm_email_id,$firm_name){
-			        $message->to($firm_email_id, $firm_name)->subject('Welcome to Jobtip!')->from('admin@jobtip.in', 'JobTip');
+				Mail::send('emails.welcome', array('fname'=>$fname, 'vcode'=>$vcode), function($message) use ($firm_email_id,$fname){
+			        $message->to($firm_email_id, $fname)->subject('Welcome to Jobtip!')->from('admin@jobtip.in', 'JobTip');
 			    });
 			    $data['vcode'] = $vcode;
 			}

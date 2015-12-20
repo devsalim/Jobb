@@ -71,10 +71,6 @@ var ComponentsjQueryUISliders = function () {
 
                 slide: function (event, ui) {
                     $("#slider-range-amount").text("Min-Sal Rs " + ui.values[0] + " - Max-Sal Rs " + ui.values[1]);
-                    var min-sal = ui.values[ 0 ];
-                    var max-sal = ui.values[ 1 ];
-                    $( "#min-sal" ).val(min-sal);
-                    $( "#max-sal" ).val(max-sal);
                 }
 
             });
