@@ -7,6 +7,8 @@ use Auth;
 use Redirect;
 use App\Groups_users;
 use App\Induser;
+use App\User;
+use App\Notification;
 use Input;
 use DB;
 
@@ -184,6 +186,17 @@ class GroupController extends Controller {
 	public function addUser(Request $request){
 		$group = Group::findOrFail($request['add_group_id']);
 		$group->users()->attach($request['add_user_id']);
+
+		$to_user = User::where('induser_id', '=', $request['add_user_id'])->pluck('id');
+		if($to_user != null){
+			$notification = new Notification();
+			$notification->from_user = Auth::user()->id;
+			$notification->to_user = $to_user;
+			$notification->remark = 'has added you to group: '.$group->group_name;
+			$notification->operation = 'added to group';
+			$notification->save();
+		}
+
 		return redirect('/group/'.$request['add_group_id']);
 	}
 

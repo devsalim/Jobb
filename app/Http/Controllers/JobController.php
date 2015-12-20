@@ -98,6 +98,21 @@ class JobController extends Controller {
 		if($request['connections'] != null){
 			$taggedUsers = $request['connections'];
 			$post->taggeduser()->attach($taggedUsers, array('mode' => 'tagged', 'tag_share_by' => Auth::user()->induser_id));
+
+			$induserIds = implode(', ', $taggedUsers);
+			$userIds = User::whereRaw('induser_id in ('.$induserIds.')')->get(['id']);
+			foreach($userIds as $r){
+			    $to_user = $r->id;
+				if($to_user != null){
+					$notification = new Notification();
+					$notification->from_user = Auth::user()->id;
+					$notification->to_user = $to_user;
+					$notification->remark = 'has tagged you to post: '.$request['unique_id'];
+					$notification->operation = 'job post tagging';
+					$notification->save();
+				}
+			}
+
 		}
 		if($request['groups'] != null){
 			$taggedGroups = $request['groups'];
@@ -106,6 +121,7 @@ class JobController extends Controller {
 
 		return redirect("/home");
 		// return $taggedUsers;
+		// return $userIds;
 	}
 
 	/**
@@ -238,10 +254,11 @@ class JobController extends Controller {
 						$to_user = User::where('corpuser_id', '=', $post_user_info->corporate_id)->pluck('id');
 					}
 
+					$post_unique_id = Postjob::where('id', '=', $post_id)->pluck('unique_id');
 					$notification = new Notification();
 					$notification->from_user = Auth::user()->id;
 					$notification->to_user = $to_user;
-					$notification->remark = 'has applied for your post id: '.$post_id;
+					$notification->remark = 'has applied for your post id: '.$post_unique_id;
 					$notification->operation = 'job apply';
 					$notification->save();
 
@@ -308,7 +325,7 @@ class JobController extends Controller {
 				$to_user = 0;
 				$post_user_info = Postjob::where('id', '=', $post_id)->first(['id', 'individual_id', 'corporate_id']);
 
-		$data['post_user_info'] = $post_user_info;
+				$data['post_user_info'] = $post_user_info;
 				if($post_user_info != null){
 
 					if($post_user_info->individual_id != null){
@@ -319,10 +336,11 @@ class JobController extends Controller {
 						$to_user = User::where('corpuser_id', '=', $post_user_info->corporate_id)->pluck('id');
 					}
 
+					$post_unique_id = Postjob::where('id', '=', $post_id)->pluck('unique_id');
 					$notification = new Notification();
 					$notification->from_user = Auth::user()->id;
 					$notification->to_user = $to_user;
-					$notification->remark = 'has contacted for your post id: '.$post_id;
+					$notification->remark = 'has contacted for your post id: '.$post_unique_id;
 					$notification->operation = 'job contact';
 					$notification->save();
 
@@ -517,6 +535,21 @@ class JobController extends Controller {
 					if($request['share_links'] != null){
 						$taggedUsers = $request['share_links'];
 						$post->taggeduser()->attach($taggedUsers, array('mode' => 'shared', 'tag_share_by' => Auth::user()->induser_id));
+
+						$induserIds = implode(', ', $taggedUsers);
+						$userIds = User::whereRaw('induser_id in ('.$induserIds.')')->get(['id']);
+						foreach($userIds as $r){
+						    $to_user = $r->id;
+							if($to_user != null){
+								$notification = new Notification();
+								$notification->from_user = Auth::user()->id;
+								$notification->to_user = $to_user;
+								$notification->remark = 'has shared post: '.$post->unique_id;
+								$notification->operation = 'job post sharing';
+								$notification->save();
+							}
+						}
+
 						$isShared++;
 					}
 
@@ -562,5 +595,34 @@ class JobController extends Controller {
 		}
 		
 	}
+
+
+
+	public function expiringToday(){
+		$tz = new \DateTimeZone('Asia/Kolkata');
+		$today = \Carbon\Carbon::now($tz)->format('Y-m-d');
+
+		$posts = PostJob::where(DB::raw('date(created_at)'), '=', $today)->get(['id', 'unique_id', 'individual_id', 'corporate_id']);
+
+		foreach ($posts as $post) {
+			if($post->individual_id != null){
+				$uid = User::where('induser_id', '=', $post->individual_id)->pluck('id');
+			}else if($post->corporate_id != null){
+				$uid = User::where('corpuser_id', '=', $post->corporate_id)->pluck('id');
+			}
+
+			$notification = new Notification();
+			$notification->from_user = null;
+			$notification->to_user = $uid;			
+			$notification->remark = 'Your post - '.$post->unique_id.' getting expired today.';
+			$notification->operation = 'job expire';
+			$notification->save();
+
+
+		}
+
+		return $posts;
+	}
+
 
 }

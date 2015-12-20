@@ -138,6 +138,11 @@ Route::group(array('before' => 'auth'), function(){
 
 	Route::post('/notification/mark-as-read/{id}', 'NotificationController@update');
 
+
+	Route::get('post/expire', 'JobController@expiringToday');
+
+	Route::post('jobcategory/roles', 'JobRoleController@roleByCategories');
+
 });
 
 

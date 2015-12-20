@@ -95,8 +95,8 @@
 													<span class="input-group-addon">
 													<i class="fa fa-cubes" style="color:darkcyan;"></i>
 													</span>
-													<select class="form-control" id="job_categories" multiple=multiple name="prof_category">
-<!-- 														Automotive/ Ancillaries
+													<select class="form-control" id="job_categories" multiple name="prof_category">
+<!-- 													Automotive/ Ancillaries
 														Banking/ Financial Services
 														Bio Technology & Life Sciences
 														Chemicals/Petrochemicals
@@ -135,18 +135,8 @@
 														Fertilizer/ Pesticides
 														Food & Packaged Food
 														Textiles / Yarn / Fabrics / Garments
-														
-														
-														
-														
-														
-														
-														
-														
 														Mining
 														NGO
-														
-														
 														Public Relations (PR)
 														Travel/ Tourism
 														Other -->
@@ -197,10 +187,8 @@
 													<span class="input-group-addon">
 														<i class="fa fa-cube" style="color:darkcyan;"></i>
 													</span>
-													<select name="role" class="form-control" style="z-index:0;">
-														<option value="">-- select --</option>
-														<option value="Web Developer">Web Developer</option>
-														<option value="Software Developer">Software Developer</option>
+													<select name="role" id="job_roles" class="form-control" style="z-index:0;">
+														<option value="">-- select --</option>						
 													</select>
 												</div>
 											</div>
@@ -843,36 +831,79 @@ jQuery(document).ready(function() {
 });
 </script>
 <script type="text/javascript">
-      function countChar(val) {
-        var len = val.value.length;
-        if (len >= 1000) {
-          val.value = val.value.substring(0, 1000);
-        } else {
-          $('#charNum').text(1000 - len);
-        }
-      };
-    </script>
-<script>
-        $("#education").multipleSelect({
-            filter: true,
-            multiple: true
-        });
+	function countChar(val) {
+		var len = val.value.length;
+		if (len >= 1000) {
+			val.value = val.value.substring(0, 1000);
+		} else {
+			$('#charNum').text(1000 - len);
+		}
+	};
+   
+    $("#education").multipleSelect({
+        filter: true,
+        multiple: true
+    });
 
-         $("#job_categories").multipleSelect();
+    var job_categories = new Array();
+	function addRole(val){
+		job_categories.push(val);		
+		// console.log(job_categories); 
+	}
 
-        $("#min-exp").change(function () {
+	function removeRole(val){
+		job_categories.splice( job_categories.indexOf(val), 1 );
+		// console.log(job_categories); 
+	}
+    
+	$("#job_categories").multipleSelect({
+		onClick: function(view) {
+			view.checked ? addRole(view.value) : removeRole(view.value);
+		},
+		onClose: function() {	
+			if(job_categories.length > 0){
+				$.ajaxSetup({
+			        headers: {
+			            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+			        }
+			    });
+				$.ajax({
+					url: '/jobcategory/roles',
+					type: "post",
+					data: {category: job_categories},
+					cache : false,
+					success:function(data){
+						var $select = $('#job_roles');
+						$select.html(' ');
+						$.each(data.role, function(key, val){
+						  $select.append('<option id="' + val.job_role + '">' + val.job_role + '</option>');
+						})
+					},
+					error:function(data){
+						console.log(data);
+					}
+				});
+			}else{
+				var $select = $('#job_roles');
+				$select.html(' ');
+				$select.append('<option id="">Please select job category</option>');
+			}
+		}	
+	});
+
+    $("#min-exp").change(function () {
 	    $("#min-label-exp").val($(this).val());
 	    //alert($(this).val()) 
 	})
-         $("#max-exp").change(function () {
+	$("#max-exp").change(function () {
 	    $("#max-label-exp").val($(this).val());
 	    //alert($(this).val()) 
 	})
-         $("#min-sal").change(function () {
+ 	$("#min-sal").change(function () {
 	    $("#min-label-sal").val($(this).val());
 	    //alert($(this).val()) 
 	})
-         $("#max-sal").change(function () {
+	$("#max-sal").change(function () {
 	    $("#max-label-sal").val($(this).val());
 	    //alert($(this).val()) 
 	})
@@ -1103,5 +1134,33 @@ $(document).ready(function(){
     }); 
 
 });
+
+
+
+
+
+
+
+
+
+
+// var values = new Array();
+// $("#job_categories").change(function() {
+
+// 	// alert('Selected values: ' + $('#job_categories').multipleSelect('getSelects'));
+
+// 	var val = $('#job_categories').multipleSelect('getSelects');
+// 	values.push(val);
+//     console.log(values);   
+
+//  //    if(this.checked) { 
+//  //        values.push($(this).val());
+//  //      	console.log(values);       
+//  //    }
+//  //    if(!this.checked){
+//  //    		values.pop($(this).val());
+//  //      	console.log(values); 
+//  //    }
+// });
 </script>
 @stop
