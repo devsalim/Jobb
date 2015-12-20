@@ -37,7 +37,11 @@
             </a>
             <ul class="dropdown-menu">
               <li class="external">
-                <h3>You have <span class="bold">{{$notificationsCount}}</span> Messages</h3>
+                @if($notificationsCount > 0)
+                <h3 style="color: darkblue;font-weight: 500;">You have {{$notificationsCount}} Messages</h3>
+                @else
+                <h3 style="color: darkblue;font-weight: 500;">You have no New Messages</h3>
+                @endif
                 <a class="@if($title == 'notify_view'){{'active'}}@endif" 
                     href="/notify/notification/@if(Auth::user()->identifier==1){{'ind'}}@elseif(Auth::user()->identifier==2){{'corp'}}@endif/{{Auth::user()->induser_id}}{{Auth::user()->corpuser_id}}" 
                     data-utype="app" style="color: darkblue;">view all</a>

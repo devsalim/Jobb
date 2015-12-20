@@ -5,7 +5,7 @@
 <!-- Jobtip Filter Start -->
 <form id="home-filter" name="filter_form" action="/home" method="post">
 <input type="hidden" name="_token" value="{{ csrf_token() }}">
-<div class="row">
+<div class="row" style="margin: -18px -15px 0;">
 	<div class="col-md-9" style=" lightgray;margin-bottom: 5px;">
 		<div class="filter-icon hide-show-filter"><i class="fa fa-filter" style="font-size:16px;"></i> Filter</div>
 	
@@ -36,11 +36,11 @@
 				</div>
 			</div>
 		</div>
-		<div class="row sort-by-css show-filter" style="margin-right:18px;">
-			<div class="col-md-8 col-sm-8 col-xs-8 ">
+		<div class="row sort-by-css show-filter" style="margin-right:8px;">
+			<div class="col-md-8 col-sm-8 col-xs-7" style="margin:5px 0;">
 				<a class="show-more" style="font-size:12px;font-weight:400;">Show more</a>
 			</div>
-			<div class="col-md-4 col-sm-4 col-xs-4 ">
+			<div class="col-md-4 col-sm-4 col-xs-5">
 				<!-- <a class="show-more" style="font-size:12px;font-weight:400;">Show more</a> -->
 				<button type="submit" class="btn btn-info" value="Search" title="Search" 
 						style="background-color:transparent !important; border-color: transparent;">
@@ -57,6 +57,7 @@
 		<div class="col-md-2 col-sm-3 col-xs-6" style="margin:10px 0">
 			<div class="input-group" >
                 <div class="icheck-inline">
+                	@if(Auth::user()->identifier == 1)
                     <label style="max-width:40%">
                         <input type="checkbox" class="icheck" 
                                 name="post_type[]"
@@ -71,6 +72,22 @@
                                 data-label="Skill"
                                 value="skill" checked>
                     </label>
+                    @elseif(Auth::user()->identifier == 2)
+                    <label style="max-width:40%">
+                        <input type="checkbox" class="icheck" 
+                                name="post_type[]"
+                                data-checkbox="icheckbox_line-grey" 
+                                data-label="Job"
+                                value="job">
+                    </label>                                                
+                    <label style="max-width:45%">
+                        <input type="checkbox" class="icheck" 
+                                name="post_type[]"
+                                data-checkbox="icheckbox_line-grey" 
+                                data-label="Skill"
+                                value="skill" checked>
+                    </label>
+                    @endif
                 </div>
             </div>
 		</div>
@@ -82,7 +99,7 @@
 		</div> -->
 		<div class="col-md-1 col-sm-3 col-xs-6">
 			<div class="form-group">	
-				<select name="experience" class="form-control filter-input" style="padding: 0;margin: 7px 0px;border: 1px solid darkcyan !important;">
+				<select name="experience" class="form-control filter-input input-sm" style="padding: 0;margin: 7px 0px;border: 1px solid darkcyan !important;">
                 	<option value="">Exp</option>
                 	<option value="0">0</option>
 					<option value="1">1</option>
@@ -106,12 +123,12 @@
 		</div>
 		<div class="col-md-2 col-sm-3 col-xs-12">
 			<div class="form-group">
-				<input type="text" id="title" name="job_title" class="form-control filter-input" placeholder="Job Title, Role" style="border: 1px solid darkcyan !important;margin: 7px 0px;">
+				<input type="text" id="title" name="job_title" class="form-control filter-input input-sm" placeholder="Job Title, Role" style="border: 1px solid darkcyan !important;margin: 7px 0px;">
 			</div>
 		</div>
 		<div class="col-md-2 col-sm-2 col-xs-6">
             <div class="form-group">              
-                <select name="time_for" class="bs-select form-control filter-input" multiple style="padding: 0;margin: 7px 0px;">
+                <select name="time_for" class="bs-select form-control input-sm filter-input" multiple style="padding: 0;margin: 7px 0px;">
                 	<option selected value="">Emp Type</option>
 					<option value="Full Time">Full Time</option>
 					<option value="Part Time">Part Time</option>
@@ -122,7 +139,7 @@
          </div>
 		<div class="col-md-2 col-sm-3 col-xs-6">
 			<div class="form-group">
-				<select id="" placeholder="City" name="city" style="padding: 0;margin: 7px 0px;" class="bs-select form-control filter-input" multiple >
+				<select id="" placeholder="City" name="city" style="padding: 0;margin: 7px 0px;" class="input-sm bs-select form-control filter-input" multiple >
 					
 					<optgroup label="City">
 					<option selected>Hyderabad</option>
@@ -181,7 +198,7 @@
 		<div class="col-md-12">
 				<div class="col-md-3 col-sm-3 col-xs-6 extra-show done-show" style="">
 					<div class="form-group">
-						<select id="category-list" class="form-control filter-input check-font-size" name="prof_category" style="border: 1px solid darkcyan !important;padding: 0;margin: 7px 0px;">
+						<select id="category-list" class="form-control input-sm filter-input check-font-size" name="prof_category" style="border: 1px solid darkcyan !important;padding: 0;margin: 7px 0px;">
 							<option value="">Job Category</option>
 							<optgroup label="Accounting">
 								<option value="Accounts/Finance/Tax">Accounts/Finance/Tax</option>
@@ -209,18 +226,18 @@
 				</div>
 				<div class="col-md-2 col-sm-3 col-xs-6 extra-show done-show" style="margin: 7px 0;">
 					<div class="form-group">				
-						{{-- <input type="hidden" placeholder="Skills" name="linked_skill" id="select2_sample5" class="form-control filter-input select2" value=""> --}}
+						{{-- <input type="hidden" placeholder="Skills" name="linked_skill" id="select2_sample5" class="form-control input-sm filter-input select2" value=""> --}}
 						{!! Form::select('skill_list[]', $skills, null, ['id'=>'skill-list', 'class'=>'form-control', 'placeholder'=>'Skills', 'multiple']) !!}				
 					</div>	
 				</div>
 				<div class="col-md-2 col-sm-3 col-xs-6 extra-show done-show" style="margin: 7px 0;">
 					<div class="form-group">				
-						<input type="text" name="unique_id" class="form-control filter-input" placeholder="Post Id" style="border: 1px solid darkcyan !important;margin: 7px 0px;"> 				
+						<input type="text" name="unique_id" class="form-control filter-input input-sm" placeholder="Post Id" style="border: 1px solid darkcyan !important;margin: 7px 0px;"> 				
 					</div>	
 				</div> 
 				<div class="col-md-2 col-sm-3 col-xs-6 extra-show done-show" style="margin: 7px 0;">
 					<div class="form-group">		
-						<select class="bs-select form-control filter-input" name="education" multiple style="padding: 0;margin: 7px 0px;">
+						<select class="bs-select form-control input-sm filter-input" name="education" multiple style="padding: 0;margin: 7px 0px;">
 							<optgroup label="Posted by">
 								<option selected value=""><b>Posted by:</b> All</option>
 								<option value="individual">Individual</option>
@@ -340,35 +357,38 @@
 										@if($post->induser != null && !empty($post->induser->profile_pic))
 										<img class="timeline-badge-userpic userpic-box" src="/img/profile/{{ $post->induser->profile_pic }}" title="{{ $post->induser->fname }}">
 										<a class=" img-circle">
-											@if($post->individual_id != null && Auth::user()->induser_id != $post->individual_id)
+											@if($post->individual_id != null && Auth::user()->induser_id != $post->individual_id && Auth::user()->identifier == 1)
 												<div class="" data-puid="{{$post->individual_id}}">
 												
 														@if($links->contains('id', $post->individual_id) )
-														<a href="#links-follow link-follow-icon" data-toggle="modal" class="user-link" data-linked="yes" data-utype="ind">
+														<a href="#links-follow" data-toggle="modal" class="user-link link-follow-icon" data-linked="yes" data-utype="ind">
 															<i class="fa fa-link (alias) icon-size" style="color:chartreuse;"></i>
 														</a>
 														@elseif($linksPending->contains('id', $post->individual_id) )
-														<a href="#links-follow link-follow-icon" data-toggle="modal" class="user-link" data-linked="no" data-utype="ind">
+														<a href="#links-follow" data-toggle="modal" class="user-link link-follow-icon" data-linked="no" data-utype="ind">
 															<i class="icon-hourglass (alias) icon-size" style="color:chartreuse;"></i>
 														</a>
 														@elseif($linksApproval->contains('id', $post->individual_id) )
-														<a href="#links-follow link-follow-icon" data-toggle="modal" class="user-link" data-linked="no" data-utype="ind">
+														<a href="#links-follow " data-toggle="modal" class="user-link link-follow-icon" data-linked="no" data-utype="ind">
 															<i class=" fa fa-question (alias) icon-size" style="color:chartreuse;"></i>
 														</a>
 														@elseif($following->contains('id', $post->individual_id))
-														<a class="user-link2 link-follow-icon" data-linked="yes" data-utype="ind">
+														<a href="#links-follow" class="user-link2 link-follow-icon" data-toggle="modal" data-linked="yes" data-utype="ind">
 															<i class="fa fa-link (alias) icon-size" style="color:steelblue;"></i>
 														</a>
 														@else
 														<a href="#links-follow" data-toggle="modal" class="user-link3" data-linked="no" data-utype="ind">
 															<i class="fa fa-unlink (alias) icon-size" style="color:darkslategray;"></i>
 														</a>
+
 														@endif
 												</div>
+												
 											@endif</a>
 										@elseif($post->corpuser != null && !empty($post->corpuser->logo_status))
 										<img class="" src="/img/profile/{{ $post->corpuser->logo_status }}" title="{{ $post->corpuser->firm_name }}">
-										<a class="icon-userpic">@if($post->corporate_id != null && Auth::user()->corpuser_id != $post->corporate_id)
+										@if($post->corporate_id != null && Auth::user()->corpuser_id != $post->corporate_id  && Auth::user()->identifier == 1)
+												<a class="icon-userpic">
 												<div class="" data-puid="{{$post->corporate_id}}">
 														@if($following->contains('id', $post->corporate_id))
 															<a href="#links-follow" data-toggle="modal" class="user-link link-follow-icon" data-linked="yes" data-utype="corp">
@@ -379,11 +399,12 @@
 																<i class="icon-user-follow icon-size" style="color:darkslategray;"></i>
 															</a>
 														@endif														
-												</div>
-											@endif</a>
-										@elseif(empty($post->corpuser->logo_status) && $post->corpuser != null)
+												</div></a>
+											@endif
+										@elseif(empty($post->corpuser->logo_status) && $post->corpuser != null )
 										<img class="" src="/assets/images/corpnew.jpg">
-										<a class="icon-userpic">@if($post->corporate_id != null && Auth::user()->corpuser_id != $post->corporate_id)
+										@if($post->corporate_id != null && Auth::user()->corpuser_id != $post->corporate_id  && Auth::user()->identifier == 1)
+												<a class="icon-userpic">
 												<div class="" data-puid="{{$post->corporate_id}}">
 														@if($following->contains('id', $post->corporate_id))
 															<a href="#links-follow" data-toggle="modal" class="user-link link-follow-icon" data-linked="yes" data-utype="corp">
@@ -394,28 +415,28 @@
 																<i class="icon-user-follow icon-size" style="color:darkslategray;"></i>
 															</a>
 														@endif														
-												</div>
-											@endif</a>
+												</div></a>
+											@endif
 										@elseif(empty($post->induser->profile_pic) && $post->induser != null)
 										<img class="timeline-badge-userpic userpic-box" src="/assets/images/ab.png">
 										<a class=" img-circle">
-											@if($post->individual_id != null && Auth::user()->induser_id != $post->individual_id)
+											@if($post->individual_id != null && Auth::user()->induser_id != $post->individual_id  && Auth::user()->identifier == 1)
 												<div class="" data-puid="{{$post->individual_id}}">
 												
 														@if($links->contains('id', $post->individual_id) )
-														<a href="#links-follow link-follow-icon" data-toggle="modal" class="user-link" data-linked="yes" data-utype="ind">
+														<a href="#links-follow" data-toggle="modal" class="user-link link-follow-icon" data-linked="yes" data-utype="ind">
 															<i class="fa fa-link (alias) icon-size" style="color:chartreuse;"></i>
 														</a>
 														@elseif($linksPending->contains('id', $post->individual_id) )
-														<a href="#links-follow link-follow-icon" data-toggle="modal" class="user-link" data-linked="no" data-utype="ind">
+														<a href="#links-follow" data-toggle="modal" class="user-link link-follow-icon" data-linked="no" data-utype="ind">
 															<i class="icon-hourglass (alias) icon-size" style="color:chartreuse;"></i>
 														</a>
 														@elseif($linksApproval->contains('id', $post->individual_id) )
-														<a href="#links-follow link-follow-icon" data-toggle="modal" class="user-link" data-linked="no" data-utype="ind">
+														<a href="#links-follow" data-toggle="modal" class="user-link link-follow-icon" data-linked="no" data-utype="ind">
 															<i class=" fa fa-question (alias) icon-size" style="color:chartreuse;"></i>
 														</a>
 														@elseif($following->contains('id', $post->individual_id))
-														<a class="user-link2 link-follow-icon" data-linked="yes" data-utype="ind">
+														<a href="#links-follow" class="user-link2 link-follow-icon" data-linked="yes" data-utype="ind">
 															<i class="fa fa-link (alias) icon-size" style="color:darkslategray;"></i>
 														</a>
 														@else
@@ -615,7 +636,7 @@
 												<div class="timeline-body-head-caption">													
 														<a href="/profile/corp/{{$post->corporate_id}}" class="link-label" data-utype="corp">
 															<small>You</small>
-														</a><small>{{ $post->corpuser->firm_type}}</small>
+														</a>
 													<span class="timeline-body-time font-grey-cascade"><i class="fa fa-clock-o" style="font-size: 11px;"></i> 
 														<small>{{ \Carbon\Carbon::createFromTimeStamp(strtotime($post->created_at))->diffForHumans() }}</small>
 													</span>
@@ -656,7 +677,7 @@
 																										
 														<a href="/profile/corp/{{$post->corporate_id}}" style="font-size: 13px;text-decoration:none;">
 															{{ $post->corpuser->firm_name}}
-														</a><small>{{ $post->corpuser->firm_type}}</small>
+														</a><span class="label label-sm label-success">{{ $post->corpuser->firm_type}}</span>
 													<span class="timeline-body-time font-grey-cascade"><small><i class="fa fa-clock-o" style="font-size: 11px;"></i>
 														{{ \Carbon\Carbon::createFromTimeStamp(strtotime($post->created_at))->diffForHumans() }}</small>
 													</span>
@@ -953,7 +974,7 @@
 															</div>
 															@if( $post->min_exp != null && $post->max_exp != null)
 															<div class="col-md-12 col-sm-12 col-xs-12">												
-																	<label class="detail-label"><i class="icon-briefcase"></i> :</label>										
+																	<label class="detail-label">Experience :</label>										
 																	{{ $post->min_exp}}-{{ $post->max_exp}} Years															
 															</div>
 															@else
@@ -1000,13 +1021,14 @@
 														<div class="skill-display">Description : </div>
 														{{ $post->job_detail }}
 														
-														@if($post->post_type == 'job')
+														@if($post->post_type == 'job' && $post->reference_id != null)
 														<div class="skill-display">Reference Id&nbsp;: {{ $post->reference_id }} </div>	
 														@endif
 
-														@if($expired != 1)
-														<div class="skill-display">Contact Details : </div> 
-														<div class="row">
+														@if($expired != 1 && $post->postactivity->where('user_id', Auth::user()->id)->isEmpty())
+														@elseif($expired != 1 && $post->postactivity->where('user_id', Auth::user()->id)->first()->contact_view == 1)
+														<div  class="skill-display ">Contact Details : </div> 
+														<div id="show-hide-contacts" class="row">
 															@if($post->post_type == 'job' && $post->website_redirect_url != null)
 															<div class="col-md-12 col-sm-12 col-xs-12">
 																Click on Apply, it will redirect you to Company Website.
@@ -1073,10 +1095,12 @@
 																		{{ $post->alt_phone }}
 																
 															</div>	
-															@endif											
+															@endif										
 														</div>
 														@endif
+
 														<div class="skill-display">Post Id&nbsp;: {{ $post->unique_id }} </div>
+
 
 														@if($expired != 1)
 															 <div class="skill-display">Post expires on: 										 
@@ -1098,62 +1122,75 @@
 												            <form action="/job/apply" method="post" id="post-apply-{{$post->id}}" data-id="{{$post->id}}">  
 												                <input type="hidden" name="_token" value="{{ csrf_token() }}">
 												                <input type="hidden" name="apply" value="{{ $post->id }}">
-												                    <a class="btn apply-btn blue btn-sm apply-contact-btn" target="_blank" 
+												                    <a class="btn apply-btn blue btn-sm apply-contact-btn show-contact" target="_blank" 
 												                        href="{{ $post->website_redirect_url }}" type="button"><i class="icon-globe"></i> Apply
 												                    </a>    
 												            </form> 
 												                
-												        @elseif($post->website_redirect_url == null && $post->corporate_id != null)
+												        @elseif($post->postactivity->where('user_id', Auth::user()->id)->isEmpty() && $post->website_redirect_url == null && $post->corporate_id != null)
 												        <form action="/job/apply" method="post" id="post-apply-{{$post->id}}" data-id="{{$post->id}}">  
 												            <input type="hidden" name="_token" value="{{ csrf_token() }}">
 												            <input type="hidden" name="apply" value="{{ $post->id }}">
-												            <button class="btn apply-btn blue btn-sm apply-contact-btn" 
+												            <button class="btn apply-btn blue btn-sm apply-contact-btn show-contact" 
 												                    id="apply-btn-{{$post->id}}" type="button">Apply
 												            </button>
 												        </form> 
-												        @elseif($post->website_redirect_url == null && $post->individual_id != null)
+												        @elseif($post->postactivity->where('user_id', Auth::user()->id)->isEmpty() && $post->website_redirect_url == null && $post->individual_id != null)
 												        <form action="/job/contact" method="post" id="post-contact-{{$post->id}}" data-id="{{$post->id}}">  
 												            <input type="hidden" name="_token" value="{{ csrf_token() }}">
 												            <input type="hidden" name="contact" value="{{ $post->id }}">
-												            <button class="btn contact-btn green btn-sm apply-contact-btn" 
+												            <button class="btn contact-btn green btn-sm apply-contact-btn show-contact" 
 												                    id="contact-btn-{{$post->id}}" type="button">Contact
 												            </button>
 												        </form> 
 												        @elseif($post->postactivity->where('user_id', Auth::user()->id)->first()->apply == 1 && Auth::user()->identifier == 1 && $expired != 1 && $post->website_redirect_url != null) 
-												            <button type="button" class="btn btn-sm bg-grey-steel apply-contact-btn" disabled="true">
+												            <button type="button" class="btn btn-sm bg-grey-steel apply-contact-btn" disabled="true" style="padding: 4px 10px; line-height: 1.4;">
 												                <i class="icon-check icon-check-css"></i> Applied 
 												            </button>
+
+												            <div class="center-css">{{ date('M d, Y', strtotime($post->postactivity->where('user_id', Auth::user()->id)->first()->apply_dtTime)) }}
+												            </div>
 												        @elseif($post->postactivity->where('user_id', Auth::user()->id)->first()->contact_view == 1 &&  Auth::user()->identifier == 1 && $expired != 1 && $post->website_redirect_url == null && $post->individual_id != null) 
-												        <button type="button" class="btn btn-sm bg-grey-steel apply-contact-btn" disabled="true">
+												        <button type="button" class="btn btn-sm bg-grey-steel apply-contact-btn" disabled="true" style="padding: 4px 10px; line-height: 1.4;">
 												            <i class="icon-check icon-check-css"></i> Contacted 
 												        </button>
-
+												        <div class="center-css">
+												        	{{ date('M d, Y', strtotime($post->postactivity->where('user_id', Auth::user()->id)->first()->contact_view_dtTime)) }}
+												        </div>
+												       
 												        @endif
 
 												    <!-- if corporate_id is null     -->
-												    @elseif($post->individual_id != null && Auth::user()->induser_id != $post->individual_id && Auth::user()->identifier == 1)        
+												    @elseif($post->post_type == 'job' && $post->individual_id != null && Auth::user()->induser_id != $post->individual_id && Auth::user()->identifier == 1)        
 												        @if($post->postactivity->where('user_id', Auth::user()->id)->isEmpty() && $post->resume_required == 1)
 												            <form action="/job/contact" method="post" id="post-contact-{{$post->id}}" data-id="{{$post->id}}">  
 												                <input type="hidden" name="_token" value="{{ csrf_token() }}">
 												                <input type="hidden" name="contact" value="{{ $post->id }}">
-												                <button class="btn contact-btn green btn-sm apply-contact-btn" 
+												                <button class="btn contact-btn green btn-sm apply-contact-btn show-contact" 
 												                        id="contact-btn-{{$post->id}}" type="button">Contact
 												                </button>
 												            </form>     
 												        @elseif($post->postactivity->where('user_id', Auth::user()->id)->first()->contact_view == 1 && Auth::user()->identifier == 1 && $post->resume_required == 1) 
 												            <button type="button" class="btn btn-sm bg-grey-steel apply-contact-btn" disabled="true">
 												            <i class="icon-check icon-check-css"></i> Contacted 
-												        </button>                                     
+												        </button> 
+												        <div class="center-css">
+												        	{{ date('M d, Y', strtotime($post->postactivity->where('user_id', Auth::user()->id)->first()->contact_view_dtTime)) }}
+												        </div>                                    
 												        @endif   
 												   
 
 												    @endif  
-												@if($post->post_type == 'skill' && Auth::user()->induser_id != $post->individual_id && Auth::user()->identifier == 1)       
+												
+												</div>
+												@elseif($expired != 1)
+												<div style="margin:27px 0 0;">
+													@if($post->post_type == 'skill' && Auth::user()->induser_id != $post->individual_id)       
 												    @if($post->postactivity->where('user_id', Auth::user()->id)->isEmpty())
 												        <form action="/job/contact" method="post" id="post-contact-{{$post->id}}" data-id="{{$post->id}}">  
 												            <input type="hidden" name="_token" value="{{ csrf_token() }}">
 												            <input type="hidden" name="contact" value="{{ $post->id }}">
-												            <button class="btn contact-btn green btn-sm apply-contact-btn" 
+												            <button class="btn contact-btn green btn-sm apply-contact-btn show-contact" 
 												                    id="contact-btn-{{$post->id}}" type="button">Contact
 												            </button>
 												        </form> 
@@ -1161,6 +1198,9 @@
 												        <button type="button" class="btn btn-sm bg-grey-steel apply-contact-btn" disabled="true">
 												            <i class="glyphicon glyphicon-ok"></i> Contacted
 												        </button>
+												        <div class="center-css">
+												        	{{ date('M d, Y', strtotime($post->postactivity->where('user_id', Auth::user()->id)->first()->contact_view_dtTime)) }}
+												        </div>
 												        @else
 												    <form action="/job/contact" method="post" id="post-contact-{{$post->id}}" data-id="{{$post->id}}">  
 												        <input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -1172,15 +1212,19 @@
 												    @endif  
 												@endif
 												</div>
-												@elseif($expired == 1 && $post->post_type == 'job')
+												@elseif($expired == 1)
 												<div class="row" style="text-align:center;">
-												    @if($post->post_type == 'job' && Auth::user()->induser_id != $post->individual_id && Auth::user()->identifier == 1) 
+												    @if(Auth::user()->induser_id != $post->individual_id && Auth::user()->identifier == 1) 
 												        @if($post->postactivity->where('user_id', Auth::user()->id)->isEmpty()) 
 												            <div class="col-md-4 col-sm-4 col-xs-4">
 												            </div>
-												        @elseif($post->postactivity->where('user_id', Auth::user()->id)->first()->apply == 1 && Auth::user()->identifier == 1) 
+												        @elseif($post->postactivity->where('user_id', Auth::user()->id)->first()->apply == 1) 
 												            <div class="col-md-4 col-sm-4 col-xs-4">
 												                <i class="fa fa-check-square-o"></i><span class="hidden-sm hidden-xs"> Applied</span> 
+												            </div>
+												        @elseif($post->postactivity->where('user_id', Auth::user()->id)->first()->contact_view == 1) 
+												            <div class="col-md-4 col-sm-4 col-xs-4">
+												                <i class="fa fa-check-square-o"></i><span class="hidden-sm hidden-xs"> Contacted</span> 
 												            </div>
 												        @endif
 												    <div class="col-md-4 col-sm-4 col-xs-4">
@@ -1336,6 +1380,14 @@ $('#skill-list').select2();
 $('#category-list').select2();
 function resetFilter() {
     document.getElementById("home-filter").reset();
+}
+</script>
+<script type="text/javascript">
+$(document).ready(function(){
+	// jQuery('.show-contact').on('click', function(event) {
+
+	// 	jQuery('.show-hide-contact').toggle('show');
+	// }
 }
 </script>
 <script type="text/javascript">
@@ -1516,6 +1568,7 @@ $('.apply-btn').on('click',function(event){
         if(data == "applied"){
         	$('#apply-btn-'+post_id).prop('disabled', true);
  			$('#apply-btn-'+post_id).text('Applied');
+ 			$('#show-hide-contacts').addClass('show-hide-new');
         }
       }
     }); 
@@ -1545,6 +1598,7 @@ $('.contact-btn').on('click',function(event){
         if(data.data.contact_status == "contacted"){
         	$('#contact-btn-'+post_id).prop('disabled', true);
  			$('#contact-btn-'+post_id).text('Contacted');
+ 			$('#show-hide-contacts').addClass('show-hide-new');
         }
       },
       error: function(data) {
@@ -1556,6 +1610,62 @@ $('.contact-btn').on('click',function(event){
 
 	// user-link
 	$('.user-link').on('click',function(event){  	    
+	  	event.preventDefault();
+	  	var post_user_id = $(this).parent().data('puid');
+	  	var post_user_linked = $(this).data('linked');
+	  	var post_user_type = $(this).data('utype');
+
+	  	// var formData = $('#post-apply-'+post_id).serialize(); 
+	   //  var formAction = $('#post-apply-'+post_id).attr('action');
+
+	    $.ajaxSetup({
+			headers: {
+				'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+			}
+		});
+
+	    $.ajax({
+	      url: "/follow-modal",
+	      type: "post",
+	      data: {puid: post_user_id, linked: post_user_linked, utype: post_user_type},
+	      cache : false,
+	      success: function(data){
+	    	$('#links-follow-content').html(data);
+	    	$('#links-follow').modal('show');
+	      }
+	    }); 
+	    return false;
+  });
+
+	$('.user-link2').on('click',function(event){  	    
+	  	event.preventDefault();
+	  	var post_user_id = $(this).parent().data('puid');
+	  	var post_user_linked = $(this).data('linked');
+	  	var post_user_type = $(this).data('utype');
+
+	  	// var formData = $('#post-apply-'+post_id).serialize(); 
+	   //  var formAction = $('#post-apply-'+post_id).attr('action');
+
+	    $.ajaxSetup({
+			headers: {
+				'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+			}
+		});
+
+	    $.ajax({
+	      url: "/follow-modal",
+	      type: "post",
+	      data: {puid: post_user_id, linked: post_user_linked, utype: post_user_type},
+	      cache : false,
+	      success: function(data){
+	    	$('#links-follow-content').html(data);
+	    	$('#links-follow').modal('show');
+	      }
+	    }); 
+	    return false;
+  });
+
+	$('.user-link3').on('click',function(event){  	    
 	  	event.preventDefault();
 	  	var post_user_id = $(this).parent().data('puid');
 	  	var post_user_linked = $(this).data('linked');

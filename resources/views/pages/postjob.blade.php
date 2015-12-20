@@ -351,118 +351,33 @@
 								</div>
 									<!--/span-->
 								<div class="row">
-									<div class="col-md-2 col-sm-2 col-xs-6">
+									<div class="ccol-md-5 col-sm-5 col-xs-12">
 										<div class="form-group">							
-											<label class=" control-label">Min Exp </label>&nbsp;: 
-											<input type="text" style="width: 20px;background:transparent;border:0" id="min-label-exp" class="min-exp">
-											<div class="input-group">
-												<select name="min_exp" id="min-exp" style="z-index:0;" class="form-control positionTypes" >
-													<option value="">Select</option>					
-													<option value="1">1</option>
-													<option value="2">2 </option>
-													<option value="3">3</option>
-													<option value="4">4</option>
-													<option value="5">5</option>
-													<option value="6">6</option>
-													<option value="7">7</option>
-													<option value="8">8</option>
-													<option value="9">9</option>
-													<option value="10">10</option>
-													<option value="11">11</option>
-													<option value="12">12</option>
-												</select>
-											</div>
+											<label class=" control-label">Salary </label>&nbsp;: 
+											<!-- <input type="text" style="width: 20px;background:transparent;border:0" id="min-label-exp" class="min-exp">
+												<input id="range_2" type="text" name="range_2" value="1000;100000" data-type="double" data-step="500" data-postfix=" &euro;" data-from="30000" data-to="90000" data-hasgrid="true"/> -->
+												<div>
+													<span id="slider-range-amount">
+													</span>
+												</div>
+											<div id="slider-range" class="slider bg-blue">
+												</div>
+												
 										</div>
 									</div>
-									<div class="col-md-2 col-sm-2 col-xs-6">
-										<div class="form-group">	
-										<label class=" control-label">Max Exp </label>&nbsp;:
-										<input type="text" style="width: 20px;background:transparent;border:0" id="max-label-exp" class="max-exp">							
-											<div class="input-group">
-												<select name="max_exp" id="max-exp" style="z-index:0;" class="form-control positionTypes" >
-													<option value="">Select</option>					
-													<option value="1">1</option>
-													<option value="2">2 </option>
-													<option value="3">3</option>
-													<option value="4">4</option>
-													<option value="5">5</option>
-													<option value="6">6</option>
-													<option value="7">7</option>
-													<option value="8">8</option>
-													<option value="9">9</option>
-													<option value="10">10</option>
-													<option value="11">11</option>
-													<option value="12">12</option>
-												</select>
-											</div>
-										</div>
-									</div>
-									<!--/span-->
-									<!-- <div class="col-md-2 col-sm-2 col-xs-2"></div> -->
-									<div class="col-md-4 col-sm-4 col-xs-6">
+									<div class="col-md-2 col-sm-2 col-xs-2"></div>
+									<div class="ccol-md-5 col-sm-5 col-xs-12">
 										<div class="form-group">							
-											<label class=" control-label"><input type="checkbox" id="hide-check">&nbsp;Min Sal 
-											</label>&nbsp;
-											 <i class="fa fa-rupee (alias)"></i>
-											 <input type="text" style="width: 50px;margin:0 6px;background:transparent;border:0" id="min-label-sal" class="min-sal">
-											<div  class="input-group hide-sal">
-												<!-- <select  >
-													<option value="">Select</option>					
-													<option value="100">100</option>
-													<option value="500">500</option>
-													<option value="1000">1000</option>
-													<option value="1500">1500</option>
-													<option value="2000">2000</option>
-													<option value="3000">3000</option>
-													<option value="5000">5000</option>
-													<option value="7000">7000</option>
-													<option value="10000">10000</option>
-													<option value="15000">15000</option>
-													<option value="20000">20000</option>
-													<option value="25000">25000</option>
-													<option value="30000">30000</option>
-													<option value="50000">50000</option>
-													<option value="50000+">50000+</option>
-												</select> -->
-												<input name="min_sal" number id="min-sal" style="z-index:0;" class="form-control positionTypes">
-											</div>
-										</div>
-									</div>
-									<div class="col-md-4 col-sm-4 col-xs-6">
-										<div class="form-group">							
-											<label class=" control-label">Max Sal 
-											</label>&nbsp;:
-											<input type="text" style="width:50px;margin:0 6px;background:transparent;border:0" id="max-label-sal" class="max-sal">
-											<select name="salary_type" style="border-top: 0px;border-left: 0;border-right: 0;">									
-													<option value="">Select</option>
-													<option value="Monthly">Monthly</option>
-													<option value="Weekly">Weekly</option>
-													<option value="Daily">Daily</option>
-													<option value="Hourly">Hourly</option>
-													<option value="Per Visit">Per Visit</option>	
-												</select>
-											  
-											<div  class="input-group hide-sal">
-												<!-- <select name="max_sal" id="max-sal" class="form-control positionTypes" >
-													<option value="">Select</option>					
-													<option value="100">100</option>
-													<option value="500">500</option>
-													<option value="1000">1000</option>
-													<option value="1500">1500</option>
-													<option value="2000">2000</option>
-													<option value="3000">3000</option>
-													<option value="5000">5000</option>
-													<option value="7000">7000</option>
-													<option value="10000">10000</option>
-													<option value="15000">15000</option>
-													<option value="20000">20000</option>
-													<option value="25000">25000</option>
-													<option value="30000">30000</option>
-													<option value="50000">50000</option>
-													<option value="50000+">50000+</option>
-												</select> -->
-												<input name="max_sal" number id="max-sal" style="z-index:0;" class="form-control positionTypes">
-											</div>
+											<label class=" control-label">Experience </label>&nbsp;: 
+											<!-- <input type="text" style="width: 20px;background:transparent;border:0" id="min-label-exp" class="min-exp">
+												<input id="range_2" type="text" name="range_2" value="1000;100000" data-type="double" data-step="500" data-postfix=" &euro;" data-from="30000" data-to="90000" data-hasgrid="true"/> -->
+												<div>
+													<span id="slider-range-amount-exp">
+													</span>
+												</div>
+											<div id="slider-range-exp" class="slider bg-blue">
+												</div>
+												
 										</div>
 									</div>
 								</div>
@@ -824,7 +739,8 @@
 
 <script>
 jQuery(document).ready(function() {       
-	ComponentsIonSliders.init();    
+	ComponentsIonSliders.init();  
+	ComponentsjQueryUISliders.init();  
 	ComponentsDropdowns.init();
 	ComponentsEditors.init();
     FormWizard.init();

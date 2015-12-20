@@ -70,8 +70,13 @@
               <i class="fa fa-edit (alias)"></i>
             </a>
             @else
-            <a style="color: deepskyblue;text-decoration:none;" class="" href="/profile/corp/{{$session_user->id}}" data-utype="corp">  {{ $session_user->firm_name }} <i class="fa fa-edit (alias)"></i>
+            <a style="color: deepskyblue;text-decoration:none;font-size:14px;" class="" href="/profile/corp/{{$session_user->id}}" data-utype="corp"> 
+             {{ $session_user->firm_name }} <i class="fa fa-edit (alias)"></i>
             </a>
+            <br>
+           <div> <label style="font-size:12px;">
+             <span class="badge badge-default @if($followCount > 0) show @else hide @endif" style="font-weight:500;background-color: darkseagreen !important;">
+              {{$followCount}} Followers </span></label></div>
             @endif
           </h3>
           @if(Auth::user()->identifier == 1)

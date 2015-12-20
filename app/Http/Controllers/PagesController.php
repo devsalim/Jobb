@@ -557,6 +557,10 @@ class PagesController extends Controller {
 		}
 	}
 
+	public function viewContact(){		
+		$post = Postjob::with('indUser', 'corpUser', 'postActivity')->where('id', '=', Input::get('post_id'))->first();
+		return view('pages.viewcontact', compact('title','user'));
+	}
 
 	public function post(){
 		if (Auth::check()) {
@@ -811,11 +815,7 @@ class PagesController extends Controller {
 		}	
 	}
 
-	public function viewContact($id){		
-		$title = 'profile';
-		$user = Induser::findOrFail($id);
-		return view('pages.viewcontact', compact('title','user'));
-	}
+	
 
 	public function resendOTP(Request $request){
 		// check resend atttempt n send new otp

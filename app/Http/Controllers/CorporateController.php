@@ -72,16 +72,19 @@ class CorporateController extends Controller {
 			}
 
 			DB::commit();
-			// if($request['firm_email_id'] != null){
-			// 	$email = $request['firm_email_id'];
-			// 	$firm_name = $request['firm_name'];
-			// 	$vcode = Corpuser::where('firm_email_id', '=', $request['firm_email_id'])->pluck('email_vcode');
-			// 	Mail::send('emails.welcome', array('firm_name'=>$firm_name, 'vcode'=>$vcode), function($message) use ($email,$firm_name){
-			//         $message->to($email, $firm_name)->subject('Welcome to Jobtip!')->from('admin@jobtip.in', 'JobTip');
-			//     });
-			// }
-			$data = ['page'=>'login','vcode'=>$vcode];
+			$data = array();
+			if($request['firm_email_id'] != null){
+				$firm_email_id = $request['firm_email_id'];
+				$firm_name = $request['firm_name'];
+				$vcode = Corpuser::where('firm_email_id', '=', $request['firm_email_id'])->pluck('email_vcode');
+				Mail::send('emails.welcome', array('firm_name'=>$firm_name, 'vcode'=>$vcode), function($message) use ($firm_email_id,$firm_name){
+			        $message->to($firm_email_id, $firm_name)->subject('Welcome to Jobtip!')->from('admin@jobtip.in', 'JobTip');
+			    });
+			    $data['vcode'] = $vcode;
+			}
+			$data['page'] = 'login';
 			return response()->json(['success'=>true,'data'=>$data]);
+
 		}else{
 			DB::beginTransaction();
 			try{

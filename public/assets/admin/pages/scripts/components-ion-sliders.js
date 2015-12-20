@@ -61,7 +61,7 @@ var ComponentsIonSliders = function () {
                 onFinish: writeSalary
             });    
 
-            // $("#range_2").ionRangeSlider();
+            $("#range_2").ionRangeSlider();
 
             // $("#range_5").ionRangeSlider({
             //     min: 0,

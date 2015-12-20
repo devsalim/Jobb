@@ -20,45 +20,45 @@
 				<!-- END SIDEBAR USERPIC -->
 				<!-- SIDEBAR USER TITLE -->
 				<div class="profile-usertitle usertitle-profile" >
-					<div class="profile-usertitle-name text-capitalize" style="font-size: 18px;font-weight: 600;">
+					<div class="profile-usertitle-name text-capitalize" style="font-size: 18px;font-weight: 600;color:#5a7391;">
 						 {{ $user->fname }} {{ $user->lname }} {{ $user->firm_name }}
 					</div>
 					@if($user->working_status == "Student")
-					<div class="profile-usertitle-job text-capitalize" style="font-size: 15px;font-weight: 500;">
+					<div class="profile-usertitle-job capitalize individual-detail">
 						 {{ $user->education }} in {{ $user->branch }}, {{ $user->city }}
 					</div>
 					@elseif($user->working_status == "Searching Job")
-					<div class="profile-usertitle-job text-capitalize" style="font-size: 15px;font-weight: 500;">
+					<div class="profile-usertitle-job capitalize individual-detail" >
 						 {{ $user->working_status }} in {{ $user->prof_category }}, {{ $user->city }}
 					</div>
 					@elseif($user->working_status == "Freelanching")
-					<div class="profile-usertitle-job text-capitalize" style="font-size: 15px;font-weight: 500;">
+					<div class="profile-usertitle-job capitalize individual-detail" >
 						 {{ $user->role }} {{ $user->working_status }}, {{ $user->city }}
 					</div>
 					@elseif($user->role != null && $user->working_at !=null && $user->working_status == "Working")
-					<div class="profile-usertitle-job text-capitalize" style="font-size: 15px;font-weight: 500;">
+					<div class="profile-usertitle-job capitalize individual-detail" >
 						 {{ $user->role }} @ {{ $user->working_at }} 
 					</div>
 					@elseif($user->role != null && $user->working_at ==null && $user->working_status == "Working")
-					<div class="profile-usertitle-job text-capitalize" style="font-size: 15px;font-weight: 500;">
+					<div class="profile-usertitle-job capitalize individual-detail">
 						 {{ $user->role }}, {{ $user->city }}
 					</div>
 					@elseif($user->role == null && $user->working_at !=null && $user->working_status == "Working")
-					<div class="profile-usertitle-job text-capitalize" style="font-size: 15px;font-weight: 500;">
+					<div class="profile-usertitle-job capitalize individual-detail" >
 						 {{ $user->woring_at }}, {{ $user->city }}
 					</div>
 					@elseif($user->role == null && $user->working_at ==null && $user->working_status == "Working")
-		            <div class="profile-usertitle-job text-capitalize" style="font-size: 15px;font-weight: 500;">
+		            <div class="profile-usertitle-job capitalize individual-detail" >
 		               {{ $user->prof_category }}, {{ $user->city }}
 		            </div>
 					@endif
 
 					@if($user->operating_since != null && $user->operating_since != "Startup")
-					<div class="profile-usertitle-job" style="font-size: 15px;font-weight: 500;">
+					<div class="profile-usertitle-job capitalize individual-detail">
 						Established Since: {{ $user->operating_since }}  Years, {{ $user->emp_count }} Employee
 					</div>
 					@elseif($user->operating_since != null && $user->operating_since == "Startup")
-					<div class="profile-usertitle-job" style="font-size: 15px;font-weight: 500;">
+					<div class="profile-usertitle-job capitalize individual-detail">
 						Established Since: {{ $user->operating_since }}, {{ $user->emp_count }} Employee
 					</div>
 					@elseif($user->operating_since != null)
@@ -67,35 +67,38 @@
 
 					<!-- Connection status -->
 					@if($connectionStatus == 'friend' && Auth::user()->induser_id != $user->id)
-						<a href="/links" class="btn btn-success btn-responsive btn-xs">Friend</a>
+						<a href="/links" class="btn btn-success btn-responsive btn-xs btn-small" style="padding:4px 10px;border-radius:15px !important;">
+							<i class="fa fa-link (alias) icon-size"></i> Linked</a>
 					@elseif($connectionStatus == 'pendingrequest')
-						<a href="/links" class="btn btn-warning btn-responsive btn-xs">Pending link request</a>
+						<a href="/links" class="btn btn-warning btn-responsive btn-xs" style="padding:4px 10px;border-radius:15px !important;">Pending link request</a>
 						<form action="{{ url('/connections/response', $connectionId) }}" method="post">
 							<input type="hidden" name="_token" value="{{ csrf_token() }}">
-							<button type="submit" name="action" value="accept" class="btn btn-success btn-xs">
+							<button type="submit" name="action" value="accept" class="btn btn-success btn-xs" style="padding:4px 10px;border-radius:15px !important;">
 								<i class="fa fa-check" ></i>&nbsp;Accept
 							</button>
-							<button type="submit" name="action" value="reject" class="btn btn-danger btn-xs">
+							<button type="submit" name="action" value="reject" class="btn btn-danger btn-xs" style="padding:4px 10px;border-radius:15px !important;">
 								<i class="glyphicon glyphicon-trash"></i>&nbsp;Ignore
 							</button>
 						</form>
 					@elseif($connectionStatus == 'requestsent' && Auth::user()->induser_id != $user->id)
-						<a href="/links" class="btn btn-danger btn-responsive btn-xs">Link request sent</a>
+						<button class="btn btn-responsive link-request-label">
+							<i class="icon-hourglass (alias) icon-size" style="color: chartreuse;"></i> Link requested</button>
 						@elseif($connectionStatus == 'add' && Auth::user()->induser_id != $user->id)
-						<form action="{{ url('/connections/inviteFriend', $user->id) }}" method="post">
+						<form action="{{ url('/connections/inviteFriend', $user->id) }}" method="post" style="padding:4px 10px;border-radius:15px !important;">
 							<input type="hidden" name="_token" value="{{ csrf_token() }}">
-						<button type="submit" name="action" value="accept" class="btn btn-success btn-xs">
+						<button type="submit" name="action" value="accept" class="btn btn-success btn-xs" style="padding:4px 10px;border-radius:15px !important;">
 							<i class="fa fa-check" ></i>&nbsp;Add Links
 						</button>
 						</form>
 					@elseif($connectionStatus == 'following')
-						<a href="/links" class="btn btn-success btn-responsive btn-xs">Following</a>
-						<form action="{{ url('/corporate/unfollow', $connectionId) }}" method="post">
+						<a href="/links" class="btn btn-success btn-responsive btn-xs" style="padding:4px 10px;border-radius:15px !important;">
+							<i class="icon-user-following icon-size" style="color: chartreuse;"></i> Following</a>
+						<!-- <form action="{{ url('/corporate/unfollow', $connectionId) }}" method="post">
 							<input type="hidden" name="_token" value="{{ csrf_token() }}">
 							<button type="submit" name="action" value="accept" class="btn btn-danger btn-xs">
 								<i class="icon-user-follow"></i>&nbsp;Unfollow
 							</button>
-						</form>
+						</form> -->
 					@endif
 					<!-- end Connection status -->
 
@@ -173,7 +176,7 @@
 					@if($utype == 'ind')
 					<div class="col-md-4 col-sm-4 col-xs-4 @if($title == 'friendLink'){{'active'}}@endif">
 						<a href="/connections/friendlink/ind/{{$user->id}}" class="icon-btn">
-							<i class="icon-link"></i>
+							<i class="fa fa-link (alias)" ></i>
 							<div>
 								 Links
 							</div>

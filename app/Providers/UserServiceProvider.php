@@ -4,6 +4,7 @@ use Illuminate\Support\ServiceProvider;
 use Auth;
 use App\Induser;
 use App\Corpuser;
+use App\Follow;
 use App\Postactivity;
 use App\Notification;
 
@@ -19,6 +20,7 @@ class UserServiceProvider extends ServiceProvider {
 		view()->composer('includes.sidebar', function($view){
 			$favouritesCount = 0;
 			$thanksCount = 0;
+			$followCount = 0;
 			if(Auth::user()->identifier == 1){
 				$user = Induser::where('id', '=', Auth::user()->induser_id)->first();
 
@@ -36,8 +38,13 @@ class UserServiceProvider extends ServiceProvider {
 
 			}else if(Auth::user()->identifier == 2){
 				$user = Corpuser::where('id', '=', Auth::user()->corpuser_id)->first();
+				$followCount = Follow::where('corporate_id', '=', 1)
+								->orWhere('individual_id', '=', 1)
+								->count('id');
 			}
-			$view->with('session_user', $user)->with('favouritesCount', $favouritesCount)->with('thanksCount', $thanksCount);
+			$view->with('session_user', $user)->with('favouritesCount', $favouritesCount)
+											  ->with('thanksCount', $thanksCount)
+											  ->with('followCount', $followCount);
 		});
 
 		view()->composer('includes.header', function($view){

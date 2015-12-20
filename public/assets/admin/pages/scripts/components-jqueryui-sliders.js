@@ -4,6 +4,36 @@ var ComponentsjQueryUISliders = function () {
     return {
         //main function to initiate the module
         init: function () {
+
+                minSal = 0,
+                maxSal = 0,
+                minExp = 0,
+                maxExp = 0;
+                var saveExp = function (data) {
+                    minExp = data.fromNumber;
+                    maxExp = data.toNumber;
+                };
+                 var saveSal = function (data) {
+                    minSal = data.fromNumber;
+                    maxSal = data.toNumber;
+                };
+                var writeExp = function () {
+                    $(".min-exp").val(minExp);
+                    $(".max-exp").val(maxExp);
+                };
+                var writeSalary = function () {
+                    $(".min-sal").val(minSal);
+                    $(".max-sal").val(maxSal);
+                };
+
+                // onLoad: function (data) {
+                //     saveSal(data);
+                //     writeSalary();
+                // },
+                // onChange: saveSal,
+                // onFinish: writeSalary,
+
+
             // basic
             $(".slider-basic").slider(); // basic sliders
              // vertical range sliders
@@ -35,14 +65,49 @@ var ComponentsjQueryUISliders = function () {
                 isRTL: Metronic.isRTL(),
                 range: true,
                 min: 0,
-                max: 500,
-                values: [75, 300],
+                max: 50000,
+                step: 500,
+                values: [100, 5000],
+
                 slide: function (event, ui) {
-                    $("#slider-range-amount").text("$" + ui.values[0] + " - $" + ui.values[1]);
+                    $("#slider-range-amount").text("Min-Sal Rs " + ui.values[0] + " - Max-Sal Rs " + ui.values[1]);
+                    var min-sal = ui.values[ 0 ];
+                    var max-sal = ui.values[ 1 ];
+                    $( "#min-sal" ).val(min-sal);
+                    $( "#max-sal" ).val(max-sal);
                 }
+
             });
 
-            $("#slider-range-amount").text("$" + $("#slider-range").slider("values", 0) + " - $" + $("#slider-range").slider("values", 1));
+    //                    $( "#amount1" ).val( "THB " + ui.values[ 0 ] );
+    //         $( "#amount2" ).val( "THB " + ui.values[ 1 ] );
+    //         var price1 = ui.values[ 0 ];
+    //         var price2 = ui.values[ 1 ];
+    //         //alert(price1 + " " + price2); 
+    //         $( "#price1" ).value = price1;
+    //     }
+    // });
+    // $( "#amount1" ).val( "THB " + $( "#sliderranger" ).slider( "values", 0 ));
+    // $( "#amount2" ).val( "THB " + $( "#sliderranger" ).slider( "values", 1 ));
+
+            $("#slider-range-amount").text("Min-Sal Rs " + $("#slider-range").slider("values", 0) + " - Max-Sal Rs " + $("#slider-range").slider("values", 1));
+            
+            // range slider
+            $("#slider-range-exp").slider({
+                isRTL: Metronic.isRTL(),
+                range: true,
+                min: 0,
+                max: 15,
+                step: 1,
+                values: [0, 2],
+
+                slide: function (event, ui) {
+                    $("#slider-range-amount-exp").text("Min-Exp " + ui.values[0] + " - Max-Exp " + ui.values[1]);
+                }
+
+            });
+
+            $("#slider-range-amount-exp").text("Min-Exp " + $("#slider-range-exp").slider("values", 0) + " - Max-Exp " + $("#slider-range-exp").slider("values", 1));
             
             
             //range max

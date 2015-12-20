@@ -76,7 +76,7 @@
 								 		$remainingHours = $difference->format('%h');
 
 								 		$dateExpire= $expiryDate->format('d M Y');
-
+								 		$dayExpire = $difference->format('%d');
 								 		if($currentDate >= $fresh){
 								 			$expired = 1;
 								 		}else{
@@ -86,7 +86,7 @@
 								  	<div class="row">
 								  		@if($expired == 0)
 								  		<div class="col-md-12">
-								  			Post expires in {{ $post->post_duration + $post->post_extended }} Days<br>
+								  			Post expires in {{($post->post_duration + $post->post_extended) - $dayExpire}} Days<br>
 								  			
 								  		</div>
 								  		@elseif($expired == 1 && $post->post_duration_extend == 0 || $post->post_duration_extend != 1)
@@ -593,11 +593,43 @@
 															
 															@elseif(Auth::user()->identifier == 1)
 															<div class="tab-pane active" id="tab_1_{{ $post->id }}_2">
-																<div class="portlet light" style="padding:0px; !important">
+																<div class="portlet light" style="padding:0px !important;">
+
 																	<div class="portlet-title">
+																		<div class="btn-group" style="float:right;margin:7px;">
+																				<button class="btn btn-default btn-sm dropdown-toggle" type="button" data-toggle="dropdown" style="border: 0;">
+																				<i class="glyphicon glyphicon-sort"></i> Sort by <i class="fa fa-angle-down"></i>
+																				</button>
+																				<ul class="dropdown-menu" role="menu">
+																					<li>
+																						<a href="javascript:;">
+																						Date </a>
+																					</li>
+																					@if($post->post_type == 'job')
+																					<li>
+																						<a href="javascript:;">
+																						Magic Match </a>
+																					</li>
+																					@elseif($post->post_type == 'skill')
+																					<li>
+																						<a href="javascript:;">
+																						Individual Post </a>
+																					</li>
+																					<li>
+																						<a href="javascript:;">
+																						Company Post </a>
+																					</li>
+																					<li>
+																						<a href="javascript:;">
+																						Consultancy Post </a>
+																					</li>
+																					@endif
+																				</ul>
+																			</div>
 																		<div class="caption">
 																			<i class="fa fa-gift font-green-sharp"></i>
 																			<span class="caption-subject font-green-sharp ap-th-con">Contacted:</span>
+
 																			<span class="caption-helper">
 																				<?php $i=0; ?>
 																				@foreach($post->postactivity as $pa)
@@ -614,30 +646,31 @@
 																	<div class="portlet-body">		
 
 																		<!-- <ul class="" data-handle-color="#637283"> 	 -->			                  
-																		
-														                  @foreach($post->postactivity as $pa)
-																		  	@if($pa->contact_view == 1)
+																		@foreach($post->postactivity as $pa)
+																		  	@if($pa->apply == 1)
 																		  	@if($pa->user->induser != null)
-																		  	<div class="row">
-																				<div class="col-md-3 col-sm-3 col-xs-3">
-																					<img src="@if($pa->user->induser->profile_pic != null){{ '/img/profile/'.$pa->user->induser->profile_pic }}@else{{'/assets/images/ab.png'}}@endif" 
-															                    		 width="45" height="45" 
-															                    		 class="img-circle">
+
+																		  		<div class="row" style="font-size:13px;border-bottom:1px dotted lightgrey;">
+																		  		<div class="col-md-10">
+																					<div class="col-md-2 col-sm-3 col-xs-3">
+																						<img src="@if($pa->user->induser->profile_pic != null){{ '/img/profile/'.$pa->user->induser->profile_pic }}@else{{'/assets/images/ab.png'}}@endif" 
+																                    		 width="45" height="45" 
+																                    		 class="img-circle">
+																					</div>
+																					<div class="col-md-6 col-sm-6 col-xs-6">
+																						<a href="/profile/ind/{{$pa->user->id}}" data-utype="ind">
+																	                    		{{$pa->user->induser->fname}}</a> has applied for this post 
+																                    	
+																					</div>
+																					<div class="col-md-3 col-sm-3 col-xs-3">
+																						<i class=" icon-clock" style="font-size:12px;"></i> {{ \Carbon\Carbon::createFromTimeStamp(strtotime($pa->apply_dtTime))->diffForHumans() }}
+																					</div>
 																				</div>
-																				<div class="col-md-9 col-sm-9 col-xs-9">
-																					<a href="/profile/ind/{{$pa->user->id}}" data-utype="ind">
-																                    		{{$pa->user->induser->fname}}</a> has contacted for this post <i class=" icon-clock"></i>
-															                    	{{ \Carbon\Carbon::createFromTimeStamp(strtotime($pa->contact_view_dtTime))->diffForHumans() }}
-																				</div>
-																				<!-- <div class="col-md-12">
-																					<a href="/profile/ind/{{$pa->user->id}}" data-utype="ind">
-																	                    		Contact</a>
-																				</div> -->
 																			</div>
 																			<div class="row" style="border-bottom:1px dotted lightgrey;margin:10px 0">
 																				@if($post->post_type == 'job')
-														                    	<div class="col-md-4 col-sm-4 col-xs-4" style="font-size:12px;">
-														                    		<a data-toggle="modal" href="#post-mod-{{$post->id}}">
+														                    	<div class="col-md-2 col-sm-4 col-xs-4" style="font-size:12px;">
+														                    		<a data-toggle="modal" class="btn-success" href="#post-mod-{{$post->id}}" style="padding: 3px 10px;border-radius: 15px !important;">
 														                    			<i class="icon-speedometer" style="font-size:12px;"></i> 
 																						<?php
 																						try{
@@ -664,12 +697,76 @@
 														                    		Profile
 														                    	</div> -->
 														                    	<div class="col-md-4 col-sm-4 col-xs-3">
-														                    	<a class="viewcontact-view" style="font-size:12px;" data-toggle="modal" href="#viewcontact-view">
+														                    	<a class="viewcontact-view btn-success" style="font-size:12px;padding: 3px 10px;border-radius: 15px !important;" data-toggle="modal" href="#viewcontact-view">
 														                    		<i class="icon-call-end" style="font-size:12px;"></i> <span class="hidden-sm hidden-xs">View Contact</span></a>
 														                    	</div>
 														                    	@if($post->post_type == 'job' && $post->resume_required == 1)
 														                    	<div class="col-md-4 col-sm-4 col-xs-5" >
-														                    	<a class="viewcontact-view" style="font-size:12px;" data-toggle="modal" href="/profile/ind/{{$pa->user->id}}">
+														                    	<a class="btn-success" style="font-size:12px;padding: 3px 10px;border-radius: 15px !important;" data-toggle="modal" href="/profile/ind/{{$pa->user->id}}">
+														                    		<i class="icon-eye" style="font-size:12px;"></i> Resume</a>
+														                    	</div>
+														                    	@endif
+													                    	</div>
+
+																		  		@endif
+														                   	@endif									                 
+														                  @endforeach	
+														                  @foreach($post->postactivity as $pa)
+																		  	@if($pa->contact_view == 1)
+																		  	@if($pa->user->induser != null)
+																		  	<div class="row" style="font-size:13px;">
+																		  		<div class="col-md-10">
+																					<div class="col-md-2 col-sm-3 col-xs-3">
+																						<img src="@if($pa->user->induser->profile_pic != null){{ '/img/profile/'.$pa->user->induser->profile_pic }}@else{{'/assets/images/ab.png'}}@endif" 
+																                    		 width="45" height="45" 
+																                    		 class="img-circle">
+																					</div>
+																					<div class="col-md-6 col-sm-6 col-xs-6">
+																						<a href="/profile/ind/{{$pa->user->id}}" data-utype="ind">
+																	                    		{{$pa->user->induser->fname}}</a> has contacted for this post 
+																                    	
+																					</div>
+																					<div class="col-md-3 col-sm-3 col-xs-3">
+																						<i class=" icon-clock" style="font-size:12px;"></i> {{ \Carbon\Carbon::createFromTimeStamp(strtotime($pa->contact_view_dtTime))->diffForHumans() }}
+																					</div>
+																				</div>
+																			</div>
+																			<div class="row" style="border-bottom:1px dotted lightgrey;margin:10px 0">
+																				@if($post->post_type == 'job')
+														                    	<div class="col-md-2 col-sm-4 col-xs-4" style="font-size:12px;">
+														                    		<a data-toggle="modal" class="btn-success" href="#post-mod-{{$post->id}}" style="padding: 3px 10px;border-radius: 15px !important;">
+														                    			<i class="icon-speedometer" style="font-size:12px;"></i> 
+																						<?php
+																						try{
+																							if(count($postSkills) > 0){
+																								$skillPer = (count($counts) / count($postSkills)) * 100;
+																								if(strcasecmp($post->role, $pa->user->induser->role) == 0){$rolePer = 100;}else{$rolePer = 0;}
+																								if($post->prof_category == $pa->user->induser->prof_category){$jobPer = 100;}else{$jobPer = 0;}
+																								if($post->min_exp == $pa->user->induser->experience){$expPer = 100;}else{$expPer = 0;}
+																								if($post->education == $pa->user->induser->education){$eduPer = 100;}else{$eduPer = 0;}
+																								if($post->city == $pa->user->induser->city){$cityPer = 100;}else{$cityPer = 0;}
+																								if($post->time_for == $pa->user->induser->prefered_jobtype){$typePer = 100;}else{$typePer = 0;}
+																								$avgPer = ($skillPer + $rolePer + $jobPer + $expPer + $eduPer + $cityPer + $typePer)/7;
+																								echo round($avgPer).' %';
+																							}
+																						}
+																						catch(\Exception $e){}
+																						?>
+
+
+														                    		</a>
+														                    	</div>
+														                    	@endif
+														                    	<!-- <div class="col-md-2 col-sm-4 col-xs-4">
+														                    		Profile
+														                    	</div> -->
+														                    	<div class="col-md-4 col-sm-4 col-xs-3">
+														                    	<a class="viewcontact-view btn-success" style="font-size:12px;padding: 3px 10px;border-radius: 15px !important;" data-toggle="modal" href="#viewcontact-view">
+														                    		<i class="icon-call-end" style="font-size:12px;"></i> <span class="hidden-sm hidden-xs">View Contact</span></a>
+														                    	</div>
+														                    	@if($post->post_type == 'job' && $post->resume_required == 1)
+														                    	<div class="col-md-4 col-sm-4 col-xs-5" >
+														                    	<a class="btn-success" style="font-size:12px;padding: 3px 10px;border-radius: 15px !important;" data-toggle="modal" href="/profile/ind/{{$pa->user->id}}">
 														                    		<i class="icon-eye" style="font-size:12px;"></i> Resume</a>
 														                    	</div>
 														                    	@endif
@@ -683,7 +780,7 @@
 															</div>
 															@endif
 															<div class="tab-pane" id="tab_1_{{ $post->id }}_3">
-																<div class="portlet light" style="padding:0px; !important">
+																<div class="portlet light" style="padding:0px !important;">
 																	<div class="portlet-title">
 																		<div class="caption">
 																			<i class="fa fa-gift font-green-sharp"></i>
@@ -706,43 +803,43 @@
 																		 @foreach($post->postactivity as $pa)
 																		  	@if($pa->thanks == 1)
 																			  	@if($pa->user->induser != null)
-															                 	<li style="font-size:15px;border-bottom:1px dotted lightgrey;">
-																                    <span class="photo">
-																                    	<img src="@if($pa->user->induser->profile_pic != null){{ '/img/profile/'.$pa->user->induser->profile_pic }}@else{{'/assets/images/ab.png'}}@endif" 
-																                    		 width="45" height="45" 
-																                    		 class="img-circle">
-																                    </span>
-																                    <span class="subject">
-																	                    <span class="from" style="font-weight:600;color:darkcyan;">
-																	                    	<a href="/profile/ind/{{$pa->user->induser->id}}" data-utype="ind">
-																	                    		{{$pa->user->induser->fname}}</a>
-																	                   	</span>
-																	                    <span class="time"> </span>
-																                    </span>
-																                    <span class="message">
-																                    	has thanked this post <i class=" icon-clock"></i>					                    	
-																                    	{{ \Carbon\Carbon::createFromTimeStamp(strtotime($pa->thanks_dtTime))->diffForHumans() }}
-																                    </span>
-															                   	</li>
+																			  	<div class="row" style="font-size:13px;border-bottom:1px dotted lightgrey;">
+																			  		<div class="col-md-8">
+																				  		<div class="col-md-2 col-sm-3 col-xs-3">
+																				  			<img src="@if($pa->user->induser->profile_pic != null){{ '/img/profile/'.$pa->user->induser->profile_pic }}@else{{'/assets/images/ab.png'}}@endif" 
+																	                    		 width="45" height="45" 
+																	                    		 class="img-circle">
+																				  		</div>
+																				  		<div class="col-md-6 col-sm-6 col-xs-6">
+																				  			<a href="/profile/ind/{{$pa->user->induser->id}}" data-utype="ind">
+																		                    		{{$pa->user->induser->fname}}</a> has thanked this post
+																				  		</div>
+																				  		<div class="col-md-4 col-sm-3 col-xs-3">
+																				  			<i class=" icon-clock" style="font-size:12px;"></i>					                    	
+																	                    	{{ \Carbon\Carbon::createFromTimeStamp(strtotime($pa->thanks_dtTime))->diffForHumans() }}
+																				  		</div>
+																				  	</div>
+																			  	</div>
+															                 	
 															                   	@elseif($pa->user->corpuser != null)
-															                   	<li style="font-size:15px;border-bottom:1px dotted lightgrey;">
-																                    <span class="photo">
-																                    	<img src="@if($pa->user->corpuser->logo_status != null){{ '/img/profile/'.$pa->user->corpuser->logo_status }}@else{{'/assets/images/ab.png'}}@endif" 
+															                   	<div class="row" style="font-size:13px;border-bottom:1px dotted lightgrey;">
+																			  		<div class="col-md-8" >
+																				  		<div class="col-md-2 col-sm-3 col-xs-3">
+																				  			<img src="@if($pa->user->corpuser->logo_status != null){{ '/img/profile/'.$pa->user->corpuser->logo_status }}@else{{'/assets/images/ab.png'}}@endif" 
 																                    		 width="45" height="45" 
 																                    		 class="img-circle">
-																                    </span>
-																                    <span class="subject">
-																	                    <span class="from" style="font-weight:600;color:darkcyan;">
-																	                    	<a href="/profile/corp/{{$pa->user->corpuser->id}}" data-utype="ind">
-																	                    		 {{$pa->user->corpuser->firm_name}}</a>
-																	                   	</span>
-																	                    <span class="time"> </span>
-																                    </span>
-																                    <span class="message">
-																                    	has thanked this post <i class=" icon-clock"></i>					                    	
+																				  		</div>
+																				  		<div class="col-md-6 col-sm-3 col-xs-6">
+																				  			<a href="/profile/corp/{{$pa->user->corpuser->id}}" data-utype="ind">
+																	                    		 {{$pa->user->corpuser->firm_name}}</a> has thanked this post
+																				  		</div>
+																				  		<div class="col-md-4 col-sm-3 col-xs-3">
+																				  			<i class=" icon-clock" style="font-size:12px;"></i>					                    	
 																                    	{{ \Carbon\Carbon::createFromTimeStamp(strtotime($pa->thanks_dtTime))->diffForHumans() }}
-																                    </span>
-															                   	</li>
+																				  		</div>
+																				  	</div>
+																			  	</div>
+															                   	
 															                   	@endif
 														                   	@endif									                 
 														                  @endforeach							                  
@@ -752,7 +849,7 @@
 															</div>
 
 															<div class="tab-pane" id="tab_1_{{ $post->id }}_4">
-																<div class="portlet light" style="padding:0px; !important">
+																<div class="portlet light" style="padding:0px !important;">
 																	<div class="portlet-title">
 																		<div class="caption">
 																			<i class="fa fa-gift font-green-sharp"></i>
@@ -770,45 +867,46 @@
 																		<ul data-handle-color="#637283" style="padding: 0">
 																		 @foreach($post->postactivity as $pa)
 																		  	@if($pa->share == 1)
-																			  	@if($pa->user->induser != null)
-															                 	<li style="font-size:15px;">
-																                    <span class="photo">
-																                    	<img src="@if($pa->user->induser->profile_pic != null){{ '/img/profile/'.$pa->user->induser->profile_pic }}@else{{'/assets/images/ab.png'}}@endif" 
-																                    		 width="45" height="45" 
-																                    		 class="img-circle">
-																                    </span>
-																                    <span class="subject">
-																	                    <span class="from" style="font-weight:600;color:darkcyan;">
-																	                    	<a href="/profile/ind/{{$pa->user->induser->id}}" data-utype="ind">
-																	                    		{{$pa->user->induser->fname}} {{$pa->user->induser->lname}}</a>
-																	                   	</span>
-																	                    <span class="time"> </span>
-																                    </span>
-																                    <span class="message">
-																                    	has shared this post <i class=" icon-clock"></i>					                    	
-																                    	{{ \Carbon\Carbon::createFromTimeStamp(strtotime($pa->share_dtTime))->diffForHumans() }}
-																                    </span>
-															                   	</li>
+																		  	@if($pa->user->induser != null)
+																			  	<div class="row" style="font-size:13px;border-bottom:1px dotted lightgrey;">
+																			  		<div class="col-md-8">
+																				  		<div class="col-md-2 col-sm-3 col-xs-3">
+																				  			<img src="@if($pa->user->induser->profile_pic != null){{ '/img/profile/'.$pa->user->induser->profile_pic }}@else{{'/assets/images/ab.png'}}@endif" 
+																	                    		 width="45" height="45" 
+																	                    		 class="img-circle">
+																				  		</div>
+																				  		<div class="col-md-6 col-sm-6 col-xs-6">
+																				  			<a href="/profile/ind/{{$pa->user->induser->id}}" data-utype="ind">
+																		                    		{{$pa->user->induser->fname}}</a> has shared this post
+																				  		</div>
+																				  		<div class="col-md-4 col-sm-3 col-xs-3">
+																				  			<i class=" icon-clock" style="font-size:12px;"></i>					                    	
+																	                    	{{ \Carbon\Carbon::createFromTimeStamp(strtotime($pa->share_dtTime))->diffForHumans() }}
+																				  		</div>
+																				  	</div>
+																			  	</div>
+															                 	
 															                   	@elseif($pa->user->corpuser != null)
-															                   	<li style="font-size:15px;">
-																                    <span class="photo">
-																                    	<img src="@if($pa->user->corpuser->profile_pic != null){{ '/img/profile/'.$pa->user->corpuser->profile_pic }}@else{{'/assets/images/ab.png'}}@endif" 
+															                   	<div class="row" style="font-size:13px;border-bottom:1px dotted lightgrey;">
+																			  		<div class="col-md-8" >
+																				  		<div class="col-md-2 col-sm-3 col-xs-3">
+																				  			<img src="@if($pa->user->corpuser->logo_status != null){{ '/img/profile/'.$pa->user->corpuser->logo_status }}@else{{'/assets/images/ab.png'}}@endif" 
 																                    		 width="45" height="45" 
 																                    		 class="img-circle">
-																                    </span>
-																                    <span class="subject">
-																	                    <span class="from" style="font-weight:600;color:darkcyan;">
-																	                    	<a href="/profile/corp/{{$pa->user->corpuser->id}}" data-utype="ind">
-																	                    		{{$pa->user->corpuser->firm_name}}</a>
-																	                   	</span>
-																	                    <span class="time"> </span>
-																                    </span>
-																                    <span class="message">
-																                    	has shared this post <i class=" icon-clock"></i>					                    	
+																				  		</div>
+																				  		<div class="col-md-6 col-sm-3 col-xs-6">
+																				  			<a href="/profile/corp/{{$pa->user->corpuser->id}}" data-utype="ind">
+																	                    		 {{$pa->user->corpuser->firm_name}}</a> has shared this post
+																				  		</div>
+																				  		<div class="col-md-4 col-sm-3 col-xs-3">
+																				  			<i class=" icon-clock" style="font-size:12px;"></i>					                    	
 																                    	{{ \Carbon\Carbon::createFromTimeStamp(strtotime($pa->share_dtTime))->diffForHumans() }}
-																                    </span>
-															                   	</li>
+																				  		</div>
+																				  	</div>
+																			  	</div>
+															                   	
 															                   	@endif
+																			  	
 														                   	@endif									                 
 														                  @endforeach							                  
 														                </ul>
@@ -1028,7 +1126,7 @@ $('.myactivity-post').on('click',function(event){
     return false;
 });
 
-$('.viewcontact').on('click',function(event){  	    
+$('.viewcontact-view').on('click',function(event){  	    
   	event.preventDefault();
   	var post_id = $(this).parent().data('postid');
 

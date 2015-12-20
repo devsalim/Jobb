@@ -1,80 +1,163 @@
 
-<div class="input-group col-md-2 col-sm-3 col-xs-6 jobskill" >
-                <div class="icheck-inline">
-                    <label>
-                        <input type="checkbox" class="icheck" 
-                                name="post_type[]"
-                                data-checkbox="icheckbox_line-grey" 
-                                data-label="Job"
-                                value="job" checked>
-                    </label>                                                
-                    <label>
-                        <input type="checkbox" class="icheck" 
-                                name="post_type[]"
-                                data-checkbox="icheckbox_line-grey" 
-                                data-label="Skill"
-                                value="skill" checked>
-                    </label>
-                </div>
-            </div>
-
-
-
-<div class="row">
-                                                @if($post->post_type == 'skill')
-                                                <div class="col-md-12 col-sm-12 col-xs-12 elipsis-code">
-                                                    {{ $post->post_title }}
-                                                </div>
-                                                @elseif($post->post_type == 'job')
-                                                <div class="col-md-12 col-sm-12 col-xs-12 elipsis-code">
-                                                    {{ $post->post_title }}
-                                                </div>
-                                                @endif
-                                                @if($post->post_compname != null && $post->post_type == 'job')
-                                                <div class="col-md-12 col-sm-12 col-xs-12 elipsis-code">
-                                                    <small>Required at {{ $post->post_compname }}</small>
-                                                </div>
-                                                @elseif($post->post_compname != null && $post->post_type == 'skill')
-                                                <div class="col-md-12 col-sm-12 col-xs-12 elipsis-code">
-                                                    <small>Working at {{ $post->post_compname }} </small>
-                                                </div>
-                                                @endif
-                                            </div>
+<div class="skill-display">Contact Date/Time&nbsp;: {{ $post->postactivity->where('user_id', Auth::user()->id)->first()->contact_view_dtTime }} </div>
 
 
 
 
-@if($title == 'applications')
-            @foreach($notificationList as $application)
-                
+
+
+
+
+
+
+@elseif($post->individual_id != null && Auth::user()->induser_id != $post->individual_id && Auth::user()->identifier == 2)
+    <div class="" data-puid="{{$post->corporate_id}}">
+        @if($following->contains('id', $post->individual_id))
+            <a href="" data-toggle="modal" class="user-link link-follow-icon" data-linked="yes" data-utype="corp">
+                <i class="icon-user-following icon-size" style="color:chartreuse;"></i>
+            </a>
+        @else
+            <a href="" data-toggle="modal" class="user-link3 link-follow-icon" data-linked="no" data-utype="corp">
+                <i class="icon-user-follow icon-size" style="color:darkslategray;"></i>
+            </a>
+        @endif                                                      
+</div>
+
+
+
+
+@extends('master')
+
+@section('content')
+
+<div class="portlet light bg-inverse col-md-7" style="margin:0 3px;">
+    <div class="portlet-title">
+        @if($title == 'thanks')
+        @if($notificationList != null)
+        <div class="caption">
+            <i class="icon-like "></i>
+             <span class="caption-subject capitalize"> {{$title}} Recieved</span>
+        </div>
+        @else
+        <div class="caption">
+            <i class="icon-like "></i>
+             <span class="caption-subject capitalize"> No Thanks Recieved</span>
+        </div>
+        @endif
+        @elseif($title == 'applications')
+        @if($notificationList != null)
+        <div class="caption">
+            <i class="icon-like "></i>
+             <span class="caption-subject capitalize"> {{$title}} Recieved</span>
+        </div>
+        @else
+        <div class="caption">
+            <i class="icon-like "></i>
+             <span class="caption-subject capitalize"> No Application Recieved</span>
+        </div>
+        @endif
+        @endif
+    </div>
+    <div class="portlet-body">
+<<<<<<< HEAD
+        @if($title == 'applications')
+            @foreach($notificationList as $application)  
+            @if($thank->user->induser != null)  
                 <div class="row">
                     <div class="col-md-8">
-                        <div class="col-md-2 col-sm-2 col-xs-2">
-                            <img src="@if($application->user->profile_pic != null){{ '/img/profile/'.$application->user->profile_pic }}@else{{'/assets/images/ab.png'}}@endif" class="img-circle" width="40" height="40">
+                        <div class="col-md-2 col-sm-2 col-xs-3">
+                            <img src="@if($application->user->induser->profile_pic != null){{ '/img/profile/'.$application->user->induser->profile_pic }}@else{{'/assets/images/ab.png'}}@endif" class="img-circle" width="50" height="50">
                         </div>
-                        <div class="col-md-10 col-sm-10 col-xs-10">
-                            {{$application->user->fname}} has applied your Job Post Id: {{$application->unique_id}} {{$application->apply_dtTime}}
+                        <div class="col-md-7 col-sm-10 col-xs-6">
+                            {{$application->user->induser->fname}} has applied your Job Post Id: {{$application->unique_id}}
+                            
+                        </div>
+                        <div class="col-md-3 col-sm-2 col-xs-3" style="font-size:12px;">
+                            {{ \Carbon\Carbon::createFromTimeStamp(strtotime($application->apply_dtTime))->diffForHumans() }}
                         </div>
                     </div>
                 </div>
-                
+                  @elseif($thank->user->corpuser != null)
+                  <div class="row">
+                    <div class="col-md-8">
+                        <div class="col-md-2 col-sm-2 col-xs-3">
+                            <img src="@if($application->user->corpuser->logo_status != null){{ '/img/profile/'.$application->user->corpuser->logo_status }}@else{{'/assets/images/ab.png'}}@endif" class="img-circle" width="50" height="50">
+                        </div>
+                        <div class="col-md-7 col-sm-10 col-xs-6">
+                            {{$application->user->corpuser->firm_name}} has applied your Job Post Id: {{$application->unique_id}}
+                            
+                        </div>
+                        <div class="col-md-3 col-sm-2 col-xs-3" style="font-size:12px;">
+                            {{ \Carbon\Carbon::createFromTimeStamp(strtotime($application->apply_dtTime))->diffForHumans() }}
+=======
+        @if($title == 'notification')
+            @foreach($notificationList as $not)  
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="col-md-2 col-sm-2 col-xs-4">
+                            @if($not->fromuser->first()->induser != null)                          
+                              <img src="@if($not->fromuser->first()->induser->profile_pic != null){{ '/img/profile/'.$not->fromuser->first()->induser->profile_pic }}@else{{'/assets/images/ab.png'}}@endif" class="img-circle" width="40" height="40">        
+                            @elseif($not->fromuser->first()->corpuser != null)                             
+                              <img src="@if($not->fromuser->first()->corpuser->logo_status != null){{ '/img/profile/'.$not->fromuser->first()->corpuser->logo_status }}@else{{'/assets/images/ab.png'}}@endif" class="img-circle" width="40" height="40">
+                            @endif
+                        </div>
+                        <div class="col-md-10 col-sm-10 col-xs-8">
+                            {{$not->fromuser->first()->name}} {{$not->remark}} -
+                            {{ \Carbon\Carbon::createFromTimeStamp(strtotime($not->created_at))->diffForHumans() }}
+>>>>>>> origin/master
+                        </div>
+                    </div>
+                </div>
+                  @endif  
             @endforeach
         @elseif($title == 'thanks')
-             @foreach($notificationList as $thank)
-                
-                <div class="row">
-                    <div class="col-md-8">
-                        <div class="col-md-2 col-sm-2 col-xs-2">
-                            <img src="@if($thank->user->profile_pic != null){{ '/img/profile/'.$thank->user->profile_pic }}@else{{'/assets/images/ab.png'}}@endif" class="img-circle" width="40" height="40">
+             @foreach($notificationList as $thank) 
+             @if($thank->user->induser != null)  
+             <a>
+                <div class="row" style="border-bottom:1px dotted darkcyan;margin-bottom: 5px;">
+                    <div class="" >
+                        <div class="col-md-2 col-sm-2 col-xs-3" style="margin-bottom: 5px;">
+                            <img src="@if($thank->user->induser->profile_pic != null){{ '/img/profile/'.$thank->user->induser->profile_pic }}@else{{'/assets/images/ab.png'}}@endif" class="img-circle" width="50" height="50">
                         </div>
-                        <div class="col-md-10 col-sm-10 col-xs-10">
-                            {{$thank->user->fname}} has thanked your Job Post Id: {{$thank->unique_id}} {{$thank->thanks_dtTime}}
+                        <div class="col-md-7 col-sm-8 col-xs-6" style="font-size:12px;">
+                            {{$thank->user->induser->fname}} has thanked your Job Post Id: {{$thank->unique_id}}
+                            
+                        </div>
+                        <div class="col-md-3 col-sm-2 col-xs-3" style="font-size:12px;">
+                            {{ \Carbon\Carbon::createFromTimeStamp(strtotime($thank->thanks_dtTime))->diffForHumans() }}
                         </div>
                     </div>
-                </div>
-                
+                </div> 
+            </a>
+                @elseif($thank->user->corpuser != null) 
+            <a>
+                <div class="row" style="border-bottom:1px dotted darkcyan;margin-bottom: 5px;">
+                    <div class="" >
+                        <div class="col-md-2 col-sm-2 col-xs-3" style="margin-bottom: 5px;">
+                            <img src="@if($thank->user->corpuser->logo_status != null){{ '/img/profile/'.$thank->user->corpuser->logo_status }}@else{{'/assets/images/ab.png'}}@endif" class="img-circle" width="50" height="50">
+                        </div>
+                        <div class="col-md-7 col-sm-8 col-xs-6" style="font-size:12px;">
+                            {{$thank->user->corpuser->firm_name}} has thanked your Job Post Id: {{$thank->unique_id}}
+                            
+                        </div>
+                        <div class="col-md-3 col-sm-2 col-xs-3" style="font-size:12px;">
+                            {{ \Carbon\Carbon::createFromTimeStamp(strtotime($thank->thanks_dtTime))->diffForHumans() }}
+                        </div>
+                    </div>
+                </div> 
+            </a>
+                @endif
             @endforeach
         @endif
+
+    </div>
+</div>
+@stop
+
+
+
+
+
 
 @if($expired != 1)
 <div style="margin:27px 0 0;">
