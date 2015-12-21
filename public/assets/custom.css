@@ -817,3 +817,20 @@ div[class*='icheckbox_'], div[class*='iradio_'] {
     line-height: 1.3;
     color: darkgrey;
 }
+
+.input-sal-width{
+    width: 32px;
+    border:0;
+    font-size: 11px;
+}
+
+.input-sal-exp-label{
+    font-size: 12px;
+    font-weight: 400;
+}
+
+.input-exp-width{
+    width: 15px;
+    border:0;
+    font-size: 11px;
+}

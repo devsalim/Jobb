@@ -27,7 +27,7 @@ class Kernel extends ConsoleKernel {
 				 ->hourly();
 
 		$schedule->command('postexpiring:notify')
-				 ->dailyAt('12:00');
+				 ->everyFiveMinutes();
 
 	}
 

@@ -5,8 +5,9 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
 
 use App\Notification;
-use App\PostJob;
+use App\Postjob;
 use App\User;
+use DB;
 
 class PostExpiringTodayNotification extends Command {
 
@@ -41,10 +42,11 @@ class PostExpiringTodayNotification extends Command {
 	 */
 	public function fire()
 	{
+		\Log::info('Expire notification started @ ' . \Carbon\Carbon::now());
 		$tz = new \DateTimeZone('Asia/Kolkata');
 		$today = \Carbon\Carbon::now($tz)->format('Y-m-d');
 
-		$posts = PostJob::where(DB::raw('date(created_at)'), '=', $today)->get(['id', 'unique_id', 'individual_id', 'corporate_id']);
+		$posts = Postjob::where(DB::raw('date(post_expire_Dt)'), '=', $today)->get(['id', 'unique_id', 'individual_id', 'corporate_id']);
 
 		foreach ($posts as $post) {
 			if($post->individual_id != null){
@@ -59,6 +61,7 @@ class PostExpiringTodayNotification extends Command {
 			$notification->operation = 'job expire';
 			$notification->save();
 		}
+		\Log::info('Expire notification ended @ ' . \Carbon\Carbon::now());
 	}
 
 	/**

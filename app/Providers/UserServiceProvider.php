@@ -28,7 +28,7 @@ class UserServiceProvider extends ServiceProvider {
 									      ->where('fav_post', '=', 1)
 									      ->where('user_id', '=', Auth::user()->id)
 									      ->orderBy('id', 'desc')
-								          ->sum('postactivities.fav_post');
+								          ->get(['id', 'fav_post', 'fav_post_dtTime', 'user_id', 'post_id']);
 				$thanksCount = Postactivity::with('user', 'post')
 								      ->join('postjobs', 'postjobs.id', '=', 'postactivities.post_id')
 									  ->where('postjobs.individual_id', '=', Auth::user()->induser_id)

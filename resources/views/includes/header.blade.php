@@ -58,6 +58,21 @@
                     @elseif($not->operation == 'job contact')
                     <a href="#" data-nid="{{$not->id}}" data-lnkt="notification" data-anchor="mypost" 
                       @if($not->view_status == 0)style="background:#f8f9fa"@endif>
+                    @elseif($not->operation == 'group')
+                    <a href="#" data-nid="{{$not->id}}" data-lnkt="notification" data-anchor="group" 
+                      @if($not->view_status == 0)style="background:#f8f9fa"@endif>
+                    @elseif($not->operation == 'user tagging')
+                    <a href="#" data-nid="{{$not->id}}" data-lnkt="notification" data-anchor="home" 
+                      @if($not->view_status == 0)style="background:#f8f9fa"@endif>
+                    @elseif($not->operation == 'post sharing')
+                    <a href="#" data-nid="{{$not->id}}" data-lnkt="notification" data-anchor="home" 
+                      @if($not->view_status == 0)style="background:#f8f9fa"@endif>
+                    @elseif($not->operation == 'job expire')
+                    <a href="#" data-nid="{{$not->id}}" data-lnkt="notification" data-anchor="home" 
+                      @if($not->view_status == 0)style="background:#f8f9fa"@endif>
+                    @else
+                    <a href="#" data-nid="{{$not->id}}" data-lnkt="notification" data-anchor="home" 
+                      @if($not->view_status == 0)style="background:#f8f9fa"@endif>
                     @endif
 
                       <span class="photo">
@@ -73,8 +88,11 @@
                         @endif
                       </span>
                       <span class="subject">
+                        @if($not->fromuser != null && $not->touser != null)
                         <span class="from">
-                        {{$not->fromuser->first()->name}} </span>
+                          {{$not->fromuser->first()->name}} 
+                        </span>
+                        @endif
                         <span class="time">
                           {{ \Carbon\Carbon::createFromTimeStamp(strtotime($not->created_at))->diffForHumans() }}
                         </span>

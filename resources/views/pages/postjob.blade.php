@@ -142,6 +142,7 @@
 														Other -->
 														<option value="">-- select --</option>
 														<!-- <optgroup label="Accounting"> -->
+														<option value="Automotive/ Ancillaries">Automotive/ Ancillaries</option>
 														<option value="Accounts/Finance/Tax">Accounts/Finance/Tax</option>
 														<option value="Agent">Agent</option>
 														<option value="Analytics & Business Intelligence">Analytics & Business Intelligence</option>
@@ -353,31 +354,33 @@
 								<div class="row">
 									<div class="ccol-md-5 col-sm-5 col-xs-12">
 										<div class="form-group">							
-											<label class=" control-label">Salary </label>&nbsp;: 
-											<!-- <input type="text" style="width: 20px;background:transparent;border:0" id="min-label-exp" class="min-exp">
-												<input id="range_2" type="text" name="range_2" value="1000;100000" data-type="double" data-step="500" data-postfix=" &euro;" data-from="30000" data-to="90000" data-hasgrid="true"/> -->
-												<div>
-													<span id="slider-range-amount">
-													</span>
-												</div>
-											<div id="slider-range" class="slider bg-blue">
+											<label class=" control-label">Experience </label>&nbsp;: 
+													<input type="text" readonly id="slider-range-exp1" name="min_exp" class="input-exp-width" /> - 
+													<input type="text" readonly id="slider-range-exp2" name="max_exp" class="input-exp-width" /> Years
+											<div id="slider-range-exp" class="slider bg-gray">
 												</div>
 												
 										</div>
 									</div>
 									<div class="col-md-2 col-sm-2 col-xs-2"></div>
+									
 									<div class="ccol-md-5 col-sm-5 col-xs-12">
 										<div class="form-group">							
-											<label class=" control-label">Experience </label>&nbsp;: 
-											<!-- <input type="text" style="width: 20px;background:transparent;border:0" id="min-label-exp" class="min-exp">
-												<input id="range_2" type="text" name="range_2" value="1000;100000" data-type="double" data-step="500" data-postfix=" &euro;" data-from="30000" data-to="90000" data-hasgrid="true"/> -->
-												<div>
-													<span id="slider-range-amount-exp">
-													</span>
-												</div>
-											<div id="slider-range-exp" class="slider bg-blue">
-												</div>
-												
+											<label class=" control-label"><input type="checkbox" id="hide-check"> Salary </label>&nbsp;: 
+													<label class="hide-sal input-sal-exp-label"><i class="fa fa-rupee (alias)" style="font-size:12px;"></i></label>
+													<input type="text" readonly id="slider-range-amount1" name="min_sal" class="input-sal-width hide-sal" />
+													<label class="hide-sal input-sal-exp-label">- <i class="fa fa-rupee (alias)" style="font-size:12px;"></i></label>
+													<input type="text" readonly id="slider-range-amount2" name="max_sal" class="input-sal-width hide-sal" />
+											<select name="salary_type" class="hide-sal input-sal-exp-label" style="border-top: 0px;border-left: 0;border-right: 0;width:75px">									
+												<option value="Monthly">Monthly</option>
+												<option value="Weekly">Weekly</option>
+												<option value="Daily">Daily</option>
+												<option value="Hourly">Hourly</option>
+												<option value="Per Visit">Per Visit</option>	
+											</select>
+											<div class="hide-sal">
+												<div id="slider-range" class="slider bg-gray"></div>
+											</div>
 										</div>
 									</div>
 								</div>
@@ -732,6 +735,10 @@
 	</div>
 	</div>
 
+<div id="loader" style="display:none;z-index:9999;background:white" class="page-loading">
+	<img src="/assets/loader.gif"><span> Please wait...</span>
+</div>
+
 @stop
 
 
@@ -748,6 +755,13 @@ jQuery(document).ready(function() {
 });
 </script>
 <script type="text/javascript">
+function loader(arg){
+    if(arg == 'show'){
+        $('#loader').show();
+    }else{
+        $('#loader').hide();
+    }
+}
 	function countChar(val) {
 		var len = val.value.length;
 		if (len >= 1000) {
@@ -779,6 +793,7 @@ jQuery(document).ready(function() {
 		},
 		onClose: function() {	
 			if(job_categories.length > 0){
+				loader('show');
 				$.ajaxSetup({
 			        headers: {
 			            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -794,10 +809,12 @@ jQuery(document).ready(function() {
 						$select.html(' ');
 						$.each(data.role, function(key, val){
 						  $select.append('<option id="' + val.job_role + '">' + val.job_role + '</option>');
-						})
+						});
+						loader('hide');
 					},
 					error:function(data){
 						console.log(data);
+						loader('hide');
 					}
 				});
 			}else{
@@ -807,29 +824,6 @@ jQuery(document).ready(function() {
 			}
 		}	
 	});
-
-    $("#min-exp").change(function () {
-	    $("#min-label-exp").val($(this).val());
-	    //alert($(this).val()) 
-	})
-	$("#max-exp").change(function () {
-	    $("#max-label-exp").val($(this).val());
-	    //alert($(this).val()) 
-	})
- 	$("#min-sal").change(function () {
-	    $("#min-label-sal").val($(this).val());
-	    //alert($(this).val()) 
-	})
-	$("#max-sal").change(function () {
-	    $("#max-label-sal").val($(this).val());
-	    //alert($(this).val()) 
-	})
-    $("select.positionTypes").change(function () {
-    $("select.positionTypes option[value='" + $(this).data('index') + "']").prop('disabled', false); //reset others on change everytime
-    $(this).data('index', this.value);
-    $("select.positionTypes option[value='" + this.value + "']:not([value=''])").prop('disabled', true);
-    $(this).find("option[value='" + this.value + "']:not([value=''])").prop('disabled', false); // Do not apply the logic to the current one
-});
     </script>
 <script type="text/javascript">
     $(function () {

@@ -193,7 +193,7 @@ class GroupController extends Controller {
 			$notification->from_user = Auth::user()->id;
 			$notification->to_user = $to_user;
 			$notification->remark = 'has added you to group: '.$group->group_name;
-			$notification->operation = 'added to group';
+			$notification->operation = 'group';
 			$notification->save();
 		}
 

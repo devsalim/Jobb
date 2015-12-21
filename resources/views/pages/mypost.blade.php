@@ -458,7 +458,18 @@
 														                    	</div>
 														                    	
 													                    	</div>
-														                 	
+														                 	<div class="row" style="border-bottom:1px dotted lightgrey;margin:10px 0">
+													                    		@if($pa->user->induser->email != null)
+													                    		<div class="col-md-6 hide-contact show-hide-contact">
+														                    		<label style="font-size:13px;font-weight:500;">Email Id: {{ $pa->user->induser->email }}</label>
+														                    	</div>
+														                    	@endif
+														                    	@if($pa->user->induser->mobile != null)
+														                    	<div class="col-md-6 hide-contact show-hide-contact">
+														                    		<label style="font-size:13px;font-weight:500;">Phone No: {{ $pa->user->induser->mobile }}</label>
+														                    	</div>
+														                    	@endif
+													                    	</div>
 														                 		<!-- <div class="mypost-match"><i class="icon-speedometer"></i> 49%</div> -->
 															                  
 
@@ -649,7 +660,14 @@
 																		@foreach($post->postactivity as $pa)
 																		  	@if($pa->apply == 1)
 																		  	@if($pa->user->induser != null)
-
+																		  	<?php
+															                    $userSkills = array_map('trim', explode(',', $pa->user->induser->linked_skill));
+															                    unset ($userSkills[count($userSkills)-1]); 
+															                    ?>
+																				<?php 
+																					$overlap = array_intersect($postSkills, $userSkills);
+																					$counts  = array_count_values($overlap);
+																				?>
 																		  		<div class="row" style="font-size:13px;border-bottom:1px dotted lightgrey;">
 																		  		<div class="col-md-10">
 																					<div class="col-md-2 col-sm-3 col-xs-3">
@@ -667,7 +685,7 @@
 																					</div>
 																				</div>
 																			</div>
-																			<div class="row" style="border-bottom:1px dotted lightgrey;margin:10px 0">
+																			<div class="row">
 																				@if($post->post_type == 'job')
 														                    	<div class="col-md-2 col-sm-4 col-xs-4" style="font-size:12px;">
 														                    		<a data-toggle="modal" class="btn-success" href="#post-mod-{{$post->id}}" style="padding: 3px 10px;border-radius: 15px !important;">
@@ -706,7 +724,135 @@
 														                    		<i class="icon-eye" style="font-size:12px;"></i> Resume</a>
 														                    	</div>
 														                    	@endif
+														                    	
 													                    	</div>
+													                    	<div class="row" style="border-bottom:1px dotted lightgrey;margin:10px 0">
+													                    		@if($pa->user->induser->email != null)
+													                    		<div class="col-md-6 hide-contact show-hide-contact">
+														                    		<label style="font-size:13px;font-weight:500;">Email Id: {{ $pa->user->induser->email }}</label>
+														                    	</div>
+														                    	@endif
+														                    	@if($pa->user->induser->mobile != null)
+														                    	<div class="col-md-6 hide-contact show-hide-contact">
+														                    		<label style="font-size:13px;font-weight:500;">Phone No: {{ $pa->user->induser->mobile }}</label>
+														                    	</div>
+														                    	@endif
+													                    	</div>
+
+
+													                    											<!-- Modal for Matching Percentage -->
+										<div class="modal fade" id="post-mod-{{$post->id}}" tabindex="-1" role="basic" aria-hidden="true">
+											<div class="modal-dialog">
+												<div class="modal-content">
+													<div class="modal-header">
+														<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+													   <h4 class="modal-title">
+													   		<i class="icon-speedometer" style="font-size:16px;"></i> Match 
+													   		<?php
+																try{
+																	echo round($avgPer).'%';
+																} 
+																catch(\Exception $e){
+																}
+															?>
+													   	</h4>
+													</div>
+													<div class="modal-body">
+
+														<!-- BEGIN BORDERED TABLE PORTLET-->
+														<div class="portlet box">
+															<div class="portlet-body" style=" padding: 0 !important;">
+																<div class="table-scrollable">
+																	<table class="table table-bordered table-hover">
+																	<thead style="border:0 !important;">
+																	<tr style="border:0 !important;">
+																		<th class="col-md-4 col-sm-4 col-xs-6 matching-criteria-align">
+																			 Criteria
+																		</th>
+																		<th class="col-md-4 col-sm-4 col-xs-6 matching-criteria-align">
+																			 Required Profile
+																		</th>
+																		<th class="col-md-4 col-sm-4 col-xs-6 matching-criteria-align">
+																			 User's Profile
+																		</th>
+																	</tr>
+																	</thead>
+
+																	<tbody>
+																		<tr class="@if(count($counts) > 0) success @else danger @endif">
+																			<td>
+																				<label class="title-color">
+																					Skills <i class="badge">{{count($counts)}}</i> 
+																				</label>
+																			</td>
+																			<td>
+																				@foreach($post->skills as $skill)
+																					{{$skill->name}},
+																				@endforeach
+																			</td>
+																			<td>
+																				@foreach($userSkills as $myskill)
+																					{{$myskill}},
+																				@endforeach												
+																			</td>
+																		</tr>
+																		<tr class="@if($post->role  == $pa->user->induser->role) success @else danger @endif">
+																			<td>
+																				<label class="title-color">Job Role</label>
+																			</td>
+																			<td>{{ $post->role }}</td>
+																			<td>{{ $pa->user->induser->role }}</td>
+																		</tr>
+																		<tr class="@if($post->prof_category == $pa->user->induser->prof_category) success @else danger @endif">
+																			<td>
+																				 <label class="title-color">Job Category</label>
+																			</td>																		
+																			<td>{{ $post->prof_category }}</td>
+																			<td>{{ $pa->user->induser->prof_category }}</td>
+																		</tr>
+																		<tr class="@if($post->min_exp == $pa->user->induser->experience) success @else danger @endif">
+																			<td>
+																				<label class="title-color">Experience</label>
+																			</td>
+																			<td>{{ $post->min_exp }}-{{ $post->max_exp }}</td>
+																			<td>{{ $pa->user->induser->experience }}</td>
+																		</tr>
+																		<tr class="@if($post->education == $pa->user->induser->education) success @else danger @endif">
+																			<td>
+																				<label class="title-color">Education</label>
+																			</td>
+																			<td>{{ $post->education }}</td>
+																			<td>{{ $pa->user->induser->education }}</td>
+																		</tr>
+																		<tr class="@if($post->city == $pa->user->induser->city) success @else danger @endif">
+																			<td>
+																				<label class="title-color">Location</label>			
+																			</td>															
+																			<td>{{ $post->city }}</td>
+																			<td>{{ $pa->user->induser->city }}</td>
+																		</tr>
+																		<tr class="@if($post->time_for == $pa->user->induser->prefered_jobtype || ($post->time_for == 'Part Time' && $pa->user->induser->prefered_jobtype == 'Full Time')) success @else danger @endif">
+																			<td>						
+																				<label class="title-color">Job Type
+																				</label>
+																			</td>															
+																			<td>{{ $post->time_for }}</td>
+																			<td>{{ $pa->user->induser->prefered_jobtype }}</td>
+																		</tr>
+																	</tbody>
+																	</table>
+																</div>
+															</div>
+														</div>
+														<!-- END BORDERED TABLE PORTLET-->
+														<!-- </div> -->	
+													</div>
+												</div>
+												<!-- /.modal-content -->
+											</div>
+											<!-- /.modal-dialog -->
+											</div>
+											<!-- /.modal -->
 
 																		  		@endif
 														                   	@endif									                 
@@ -714,6 +860,14 @@
 														                  @foreach($post->postactivity as $pa)
 																		  	@if($pa->contact_view == 1)
 																		  	@if($pa->user->induser != null)
+																		  	<?php
+															                    $userSkills = array_map('trim', explode(',', $pa->user->induser->linked_skill));
+															                    unset ($userSkills[count($userSkills)-1]); 
+															                    ?>
+																				<?php 
+																					$overlap = array_intersect($postSkills, $userSkills);
+																					$counts  = array_count_values($overlap);
+																				?>
 																		  	<div class="row" style="font-size:13px;">
 																		  		<div class="col-md-10">
 																					<div class="col-md-2 col-sm-3 col-xs-3">
@@ -731,7 +885,7 @@
 																					</div>
 																				</div>
 																			</div>
-																			<div class="row" style="border-bottom:1px dotted lightgrey;margin:10px 0">
+																			<div class="row" style="margin: 6px 7px;">
 																				@if($post->post_type == 'job')
 														                    	<div class="col-md-2 col-sm-4 col-xs-4" style="font-size:12px;">
 														                    		<a data-toggle="modal" class="btn-success" href="#post-mod-{{$post->id}}" style="padding: 3px 10px;border-radius: 15px !important;">
@@ -761,7 +915,7 @@
 														                    		Profile
 														                    	</div> -->
 														                    	<div class="col-md-4 col-sm-4 col-xs-3">
-														                    	<a class="viewcontact-view btn-success" style="font-size:12px;padding: 3px 10px;border-radius: 15px !important;" data-toggle="modal" href="#viewcontact-view">
+														                    	<a id="" class="show-contact btn-success" style="font-size:12px;padding: 3px 10px;border-radius: 15px !important;" >
 														                    		<i class="icon-call-end" style="font-size:12px;"></i> <span class="hidden-sm hidden-xs">View Contact</span></a>
 														                    	</div>
 														                    	@if($post->post_type == 'job' && $post->resume_required == 1)
@@ -770,7 +924,137 @@
 														                    		<i class="icon-eye" style="font-size:12px;"></i> Resume</a>
 														                    	</div>
 														                    	@endif
+														                    	
 													                    	</div>
+													                    	<div class="row" style="border-bottom:1px dotted lightgrey;margin:10px 0">
+													                    		<div class="col-md-12" id="hide-contact-{{$post->id}}">
+														                    		@if($pa->user->induser->email != null)
+														                    		<div class="col-md-6  show-hide-contact">
+															                    		<label style="font-size:13px;font-weight:500;">Email Id: {{ $pa->user->induser->email }}</label>
+															                    	</div>
+															                    	@endif
+															                    	@if($pa->user->induser->mobile != null)
+															                    	<div class="col-md-6 show-hide-contact">
+															                    		<label style="font-size:13px;font-weight:500;">Phone No: {{ $pa->user->induser->mobile }}</label>
+															                    	</div>
+															                    	@endif
+															                    </div>
+													                    	</div>
+
+
+													                    											<!-- Modal for Matching Percentage -->
+										<div class="modal fade" id="post-mod-{{$post->id}}" tabindex="-1" role="basic" aria-hidden="true">
+											<div class="modal-dialog">
+												<div class="modal-content">
+													<div class="modal-header">
+														<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+													   <h4 class="modal-title">
+													   		<i class="icon-speedometer" style="font-size:16px;"></i> Match 
+													   		<?php
+																try{
+																	echo round($avgPer).'%';
+																} 
+																catch(\Exception $e){
+																}
+															?>
+													   	</h4>
+													</div>
+													<div class="modal-body">
+
+														<!-- BEGIN BORDERED TABLE PORTLET-->
+														<div class="portlet box">
+															<div class="portlet-body" style=" padding: 0 !important;">
+																<div class="table-scrollable">
+																	<table class="table table-bordered table-hover">
+																	<thead style="border:0 !important;">
+																	<tr style="border:0 !important;">
+																		<th class="col-md-4 col-sm-4 col-xs-6 matching-criteria-align">
+																			 Criteria
+																		</th>
+																		<th class="col-md-4 col-sm-4 col-xs-6 matching-criteria-align">
+																			 Required Profile
+																		</th>
+																		<th class="col-md-4 col-sm-4 col-xs-6 matching-criteria-align">
+																			 User's Profile
+																		</th>
+																	</tr>
+																	</thead>
+
+																	<tbody>
+																		<tr class="@if(count($counts) > 0) success @else danger @endif">
+																			<td>
+																				<label class="title-color">
+																					Skills <i class="badge">{{count($counts)}}</i> 
+																				</label>
+																			</td>
+																			<td>
+																				@foreach($post->skills as $skill)
+																					{{$skill->name}},
+																				@endforeach
+																			</td>
+																			<td>
+																				@foreach($userSkills as $myskill)
+																					{{$myskill}},
+																				@endforeach												
+																			</td>
+																		</tr>
+																		<tr class="@if($post->role  == $pa->user->induser->role) success @else danger @endif">
+																			<td>
+																				<label class="title-color">Job Role</label>
+																			</td>
+																			<td>{{ $post->role }}</td>
+																			<td>{{ $pa->user->induser->role }}</td>
+																		</tr>
+																		<tr class="@if($post->prof_category == $pa->user->induser->prof_category) success @else danger @endif">
+																			<td>
+																				 <label class="title-color">Job Category</label>
+																			</td>																		
+																			<td>{{ $post->prof_category }}</td>
+																			<td>{{ $pa->user->induser->prof_category }}</td>
+																		</tr>
+																		<tr class="@if($post->min_exp == $pa->user->induser->experience) success @else danger @endif">
+																			<td>
+																				<label class="title-color">Experience</label>
+																			</td>
+																			<td>{{ $post->min_exp }}-{{ $post->max_exp }}</td>
+																			<td>{{ $pa->user->induser->experience }}</td>
+																		</tr>
+																		<tr class="@if($post->education == $pa->user->induser->education) success @else danger @endif">
+																			<td>
+																				<label class="title-color">Education</label>
+																			</td>
+																			<td>{{ $post->education }}</td>
+																			<td>{{ $pa->user->induser->education }}</td>
+																		</tr>
+																		<tr class="@if($post->city == $pa->user->induser->city) success @else danger @endif">
+																			<td>
+																				<label class="title-color">Location</label>			
+																			</td>															
+																			<td>{{ $post->city }}</td>
+																			<td>{{ $pa->user->induser->city }}</td>
+																		</tr>
+																		<tr class="@if($post->time_for == $pa->user->induser->prefered_jobtype || ($post->time_for == 'Part Time' && $pa->user->induser->prefered_jobtype == 'Full Time')) success @else danger @endif">
+																			<td>						
+																				<label class="title-color">Job Type
+																				</label>
+																			</td>															
+																			<td>{{ $post->time_for }}</td>
+																			<td>{{ $pa->user->induser->prefered_jobtype }}</td>
+																		</tr>
+																	</tbody>
+																	</table>
+																</div>
+															</div>
+														</div>
+														<!-- END BORDERED TABLE PORTLET-->
+														<!-- </div> -->	
+													</div>
+												</div>
+												<!-- /.modal-content -->
+											</div>
+											<!-- /.modal-dialog -->
+											</div>
+											<!-- /.modal -->
 														                 	@endif
 														                   	@endif									                 
 														                  @endforeach									                  
@@ -1049,6 +1333,14 @@
 	jQuery(document).ready(function(){ 
 	    jQuery('#hide-social').on('click', function(event) {
 	    jQuery('#show-social').toggle('show');
+	    });
+	});
+
+	$(document).ready(function(){ 
+		
+	    $('.show-contact').on('click', function(event) {
+	    var post_id = $(this).parent().data('id');
+	    $('#hide-contact-'+post_id).show();
 	    });
 	});
 

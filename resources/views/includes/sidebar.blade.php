@@ -26,8 +26,8 @@
           <div style="color: whitesmoke;">
            Favourites
           </div>
-          <span class="badge badge-danger @if($favouritesCount > 0) show @else hide @endif" style="background-color: #26a69a;right:15px !important;">
-          {{$favouritesCount}} </span>
+          <span id="myfavcount" class="badge badge-danger @if(count($favouritesCount) > 0) show @else hide @endif" style="background-color: #26a69a;right:15px !important;">
+          {{count($favouritesCount)}} </span>
         </a>
       </div>
     </div>
@@ -152,17 +152,7 @@
         </a>
       </li>
       @endif
-      @if (Auth::user()->identifier == 2)
-      <li class="@if($title == 'profile'){{'active'}}@endif">
-        <a class="" href="/followers">
-        <i class=" icon-note"></i>
-        <span class="title">
-        Followers</span>
-        <span class="selected">
-        </span>
-        </a>
-      </li>
-      @endif
+      
       @if (Auth::user()->identifier == 1 || Auth::user()->identifier == 2)
       <li>
         <a href="javascript:;">

@@ -70,13 +70,13 @@
 						<a href="/links" class="btn btn-success btn-responsive btn-xs btn-small" style="padding:4px 10px;border-radius:15px !important;">
 							<i class="fa fa-link (alias) icon-size"></i> Linked</a>
 					@elseif($connectionStatus == 'pendingrequest')
-						<a href="/links" class="btn btn-warning btn-responsive btn-xs" style="padding:4px 10px;border-radius:15px !important;">Pending link request</a>
+						<a href="/links" class="btn btn-warning btn-responsive btn-xs" style="margin:5px 0;padding:4px 10px;border-radius:15px !important;">Pending link request</a>
 						<form action="{{ url('/connections/response', $connectionId) }}" method="post">
 							<input type="hidden" name="_token" value="{{ csrf_token() }}">
-							<button type="submit" name="action" value="accept" class="btn btn-success btn-xs" style="padding:4px 10px;border-radius:15px !important;">
+							<button type="submit" name="action" value="accept" class="btn btn-success btn-xs" style="padding:4px 10px;border-radius:15px !important;background-color:#34bf49;">
 								<i class="fa fa-check" ></i>&nbsp;Accept
 							</button>
-							<button type="submit" name="action" value="reject" class="btn btn-danger btn-xs" style="padding:4px 10px;border-radius:15px !important;">
+							<button type="submit" name="action" value="reject" class="btn btn-danger btn-xs" style="padding:4px 10px;border-radius:15px !important;background-color:#4d4f53;border-color: #4d4f53;">
 								<i class="glyphicon glyphicon-trash"></i>&nbsp;Ignore
 							</button>
 						</form>
@@ -91,7 +91,7 @@
 						</button>
 						</form>
 					@elseif($connectionStatus == 'following')
-						<a href="/links" class="btn btn-success btn-responsive btn-xs" style="padding:4px 10px;border-radius:15px !important;">
+						<a href="/links" class="btn btn-success btn-responsive btn-xs" style="background-color: #2e9df7;padding:4px 10px;border-radius:15px !important;">
 							<i class="icon-user-following icon-size" style="color: chartreuse;"></i> Following</a>
 						<!-- <form action="{{ url('/corporate/unfollow', $connectionId) }}" method="post">
 							<input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -139,7 +139,7 @@
 					</div>
 					@elseif($utype == 'corp')
 					<div class="col-md-4 col-sm-4 col-xs-4 @if($title == 'connections'){{'active'}}@endif">
-						<a href="/connections/friendlink/corp/{{$user->id}}" class="icon-btn">
+						<a href="" class="icon-btn">
 							<i class="icon-user-following"></i>
 							<div>
 								 Followers
@@ -206,7 +206,7 @@
 					</div>
 					@elseif($utype == 'corp')
 					<div class="col-md-4 col-sm-4 col-xs-4 @if($title == 'friendLink'){{'active'}}@endif">
-						<a href="/connections/friendlink/corp/{{$user->id}}" class="icon-btn">
+						<a href="" class="icon-btn">
 							<i class="icon-user-following"></i>
 							<div>
 								 Followers

@@ -70,24 +70,19 @@ var ComponentsjQueryUISliders = function () {
                 values: [100, 5000],
 
                 slide: function (event, ui) {
-                    $("#slider-range-amount").text("Min-Sal Rs " + ui.values[0] + " - Max-Sal Rs " + ui.values[1]);
+                    $("#slider-range-amount1").val(ui.values[0]);
+                    $("#slider-range-amount2").val(ui.values[1]);
+
+                    // var min-sal = ui.values[0];
+                    // var max-sal = ui.values[1];
+                    // $( "#min-sal" ).val(min-sal);
+                    // $( "#max-sal" ).val(max-sal);
                 }
 
             });
-
-    //                    $( "#amount1" ).val( "THB " + ui.values[ 0 ] );
-    //         $( "#amount2" ).val( "THB " + ui.values[ 1 ] );
-    //         var price1 = ui.values[ 0 ];
-    //         var price2 = ui.values[ 1 ];
-    //         //alert(price1 + " " + price2); 
-    //         $( "#price1" ).value = price1;
-    //     }
-    // });
-    // $( "#amount1" ).val( "THB " + $( "#sliderranger" ).slider( "values", 0 ));
-    // $( "#amount2" ).val( "THB " + $( "#sliderranger" ).slider( "values", 1 ));
-
-            $("#slider-range-amount").text("Min-Sal Rs " + $("#slider-range").slider("values", 0) + " - Max-Sal Rs " + $("#slider-range").slider("values", 1));
-            
+            $('#slider-range-amount1').val($("#slider-range").slider("values", 0));
+            $('#slider-range-amount2').val($("#slider-range").slider("values", 1));
+  
             // range slider
             $("#slider-range-exp").slider({
                 isRTL: Metronic.isRTL(),
@@ -98,12 +93,15 @@ var ComponentsjQueryUISliders = function () {
                 values: [0, 2],
 
                 slide: function (event, ui) {
-                    $("#slider-range-amount-exp").text("Min-Exp " + ui.values[0] + " - Max-Exp " + ui.values[1]);
+                     $("#slider-range-exp1").val(ui.values[0]);
+                    $("#slider-range-exp2").val(ui.values[1]);
+                    // $("#slider-range-amount-exp").text("Min-Exp " + ui.values[0] + " - Max-Exp " + ui.values[1]);
                 }
 
             });
-
-            $("#slider-range-amount-exp").text("Min-Exp " + $("#slider-range-exp").slider("values", 0) + " - Max-Exp " + $("#slider-range-exp").slider("values", 1));
+            $('#slider-range-exp1').val($("#slider-range-exp").slider("values", 0));
+            $('#slider-range-exp2').val($("#slider-range-exp").slider("values", 1));
+            // $("#slider-range-amount-exp").text("Min-Exp " + $("#slider-range-exp").slider("values", 0) + " - Max-Exp " + $("#slider-range-exp").slider("values", 1));
             
             
             //range max

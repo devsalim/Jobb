@@ -442,7 +442,7 @@ display: table;
     background-color: #656565;
     border-color: #656565;
     color: white;
-    padding: 2px 10px;
+    padding: 4px 10px;
 }
 
 .link-request-label.focus, .link-request-label:focus, .link-request-label:hover{
@@ -450,6 +450,7 @@ display: table;
     background-color: #656565;
     border-color: #656565;
     color: white;
+    padding: 2px 8px;
 }
 
 .modal-border{

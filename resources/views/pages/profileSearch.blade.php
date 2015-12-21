@@ -61,14 +61,14 @@
 										 	<div class="col-md-3 col-sm-3 col-xs-3">
 									 		@if($links->contains('id', $user->id))
 									 			<!-- <div class="btn btn-success btn-sm">Linked</div> -->
-									 			<form action="{{ url('/users/removeLink', $user->id) }}" method="post" 
+									 			<form action="{{ url('/connections/removeLink', $user->id) }}" method="post" 
 									 					>				
 													<input type="hidden" name="_token" value="{{ csrf_token() }}">	
 													<button type="submit" class="btn btn-success btn-sm" style="padding:2px 5px;">Linked</button>
 												</form>			
 									 		@else
 									 		
-									 			<form action="{{ url('/users/inviteFriend', $user->id) }}" method="post">
+									 			<form action="{{ url('/connections/inviteFriend', $user->id) }}" method="post">
 													<input type="hidden" name="_token" value="{{ csrf_token() }}">
 													<button type="submit" class="btn btn-success apply-ignore-font" style="padding:2px 5px;">
 														Add Link

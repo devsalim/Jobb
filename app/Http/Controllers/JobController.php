@@ -108,7 +108,7 @@ class JobController extends Controller {
 					$notification->from_user = Auth::user()->id;
 					$notification->to_user = $to_user;
 					$notification->remark = 'has tagged you to post: '.$request['unique_id'];
-					$notification->operation = 'job post tagging';
+					$notification->operation = 'user tagging';
 					$notification->save();
 				}
 			}
@@ -545,7 +545,7 @@ class JobController extends Controller {
 								$notification->from_user = Auth::user()->id;
 								$notification->to_user = $to_user;
 								$notification->remark = 'has shared post: '.$post->unique_id;
-								$notification->operation = 'job post sharing';
+								$notification->operation = 'post sharing';
 								$notification->save();
 							}
 						}
@@ -563,12 +563,12 @@ class JobController extends Controller {
 					// myactivity update
 					if($isShared > 0){
 						$postActivity = Postactivity::where('post_id', '=', $sharePostId)
-													->where('user_id', '=', Auth::user()->induser_id)
+													->where('user_id', '=', Auth::user()->id)
 													->first();
 						if($postActivity == null){
 							$postActivity = new Postactivity();
 							$postActivity->post_id = $sharePostId;
-							$postActivity->user_id = Auth::user()->induser_id;
+							$postActivity->user_id = Auth::user()->id;
 							$postActivity->share = 1;
 							$postActivity->share_dtTime = new \DateTime();
 							$postActivity->save();
@@ -602,7 +602,7 @@ class JobController extends Controller {
 		$tz = new \DateTimeZone('Asia/Kolkata');
 		$today = \Carbon\Carbon::now($tz)->format('Y-m-d');
 
-		$posts = PostJob::where(DB::raw('date(created_at)'), '=', $today)->get(['id', 'unique_id', 'individual_id', 'corporate_id']);
+		$posts = Postjob::where(DB::raw('date(post_expire_Dt)'), '=', $today)->get(['id', 'unique_id', 'individual_id', 'corporate_id']);
 
 		foreach ($posts as $post) {
 			if($post->individual_id != null){

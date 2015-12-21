@@ -129,7 +129,7 @@
 		<div class="col-md-2 col-sm-2 col-xs-6">
             <div class="form-group">              
                 <select name="time_for" class="bs-select form-control input-sm filter-input" multiple style="padding: 0;margin: 7px 0px;">
-                	<option selected value="">Emp Type</option>
+                	<option selected value="">All Emp Type</option>
 					<option value="Full Time">Full Time</option>
 					<option value="Part Time">Part Time</option>
 					<option value="Freelancer">Freelancer</option>
@@ -142,7 +142,7 @@
 				<select id="" placeholder="City" name="city" style="padding: 0;margin: 7px 0px;" class="input-sm bs-select form-control filter-input" multiple >
 					
 					<optgroup label="City">
-					<option selected>Hyderabad</option>
+					<option selected>All</option>
 					<option>Bangalore</option>
 					<option>Philadelphia Eagles</option>
 					<option>Washington Redskins</option>
@@ -1382,14 +1382,7 @@ function resetFilter() {
     document.getElementById("home-filter").reset();
 }
 </script>
-<script type="text/javascript">
-$(document).ready(function(){
-	// jQuery('.show-contact').on('click', function(event) {
 
-	// 	jQuery('.show-hide-contact').toggle('show');
-	// }
-}
-</script>
 <script type="text/javascript">
 $(document).ready(function(){
 	
