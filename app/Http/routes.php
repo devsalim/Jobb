@@ -143,6 +143,8 @@ Route::group(array('before' => 'auth'), function(){
 
 	Route::post('jobcategory/roles', 'JobRoleController@roleByCategories');
 
+	Route::get('post/jobroles', 'JobController@jobRoles');
+
 });
 
 

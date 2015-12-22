@@ -76,6 +76,7 @@
                     @endif
 
                       <span class="photo">
+                      @if($not->fromuser != null)
                         @if($not->fromuser->first()->induser != null)
                           
                           <img src="@if($not->fromuser->first()->induser->profile_pic != null){{ '/img/profile/'.$not->fromuser->first()->induser->profile_pic }}@else{{'/assets/images/ab.png'}}@endif" class="img-circle" width="40" height="40">                        
@@ -86,12 +87,17 @@
                           {{-- <div class=""><i class="icon-speedometer"></i> 55%</div> --}}
                          
                         @endif
+                      @else
+                        <img src="/assets/images/ab.png" class="img-circle" width="40" height="40">                 
+                      @endif
                       </span>
                       <span class="subject">
                         @if($not->fromuser != null && $not->touser != null)
                         <span class="from">
                           {{$not->fromuser->first()->name}} 
                         </span>
+                        @else
+                          Jobtip
                         @endif
                         <span class="time">
                           {{ \Carbon\Carbon::createFromTimeStamp(strtotime($not->created_at))->diffForHumans() }}

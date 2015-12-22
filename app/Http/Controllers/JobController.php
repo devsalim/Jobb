@@ -625,4 +625,21 @@ class JobController extends Controller {
 	}
 
 
+	public function jobRoles(){
+		$roles = DB::select(DB::raw('select ifar.id, r.name as role, fa.name as "functional area", i.name as industry 
+							from industry_functional_area_role_mapping ifar
+							join industry_functional_area_mapping ifa
+							on ifar.industry_functional_area = ifa.id
+							join roles r
+							on ifar.role=r.id
+							join functional_area fa
+							on ifa.functional_area=fa.id
+							join industry i
+							on ifa.industry=i.id
+							where r.name like "%manager%"
+							order by id'));
+		return $roles;
+	}
+
+
 }
