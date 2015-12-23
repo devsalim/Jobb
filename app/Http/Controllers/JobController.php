@@ -70,7 +70,9 @@ class JobController extends Controller {
 						->get(['groups.id as id', 'groups.group_name as name'])
 						->lists('name', 'id');
 
-			return view('pages.postjob', compact('title', 'skills', 'connections', 'groups'));
+			$roles = DB::select(DB::raw('select id, name from roles'));
+
+			return view('pages.postjob', compact('title', 'skills', 'connections', 'groups', 'roles'));
 		}else{
 			return view('pages.postjob', compact('title', 'skills'));
 		}
@@ -617,16 +619,13 @@ class JobController extends Controller {
 			$notification->remark = 'Your post - '.$post->unique_id.' getting expired today.';
 			$notification->operation = 'job expire';
 			$notification->save();
-
-
 		}
-
 		return $posts;
 	}
 
 
 	public function jobRoles(){
-		$roles = DB::select(DB::raw('select ifar.id, r.name as role, fa.name as "functional area", i.name as industry 
+		$roles = DB::select(DB::raw('select ifar.id as id, r.name as role, fa.name as "functional_area", i.name as industry 
 							from industry_functional_area_role_mapping ifar
 							join industry_functional_area_mapping ifa
 							on ifar.industry_functional_area = ifa.id
@@ -636,8 +635,8 @@ class JobController extends Controller {
 							on ifa.functional_area=fa.id
 							join industry i
 							on ifa.industry=i.id
-							where r.name like "%manager%"
-							order by id'));
+							where r.name like ?
+							order by id'), ["%".Input::get('q')."%"]);
 		return $roles;
 	}
 

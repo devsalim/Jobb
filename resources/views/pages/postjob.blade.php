@@ -86,6 +86,30 @@
 										</div>
 									</div>
 									</div>
+
+
+									<div class="row">
+										<div class="col-md-12">
+											<div class="form-group">
+												<label>
+													Job Role <span class="required">*</span>
+												</label>
+
+												<div class="input-group">	
+													<span class="input-group-addon">
+														<i class="fa fa-cube" style="color:darkcyan;"></i>
+													</span>			
+													<select class="job-role-ajax form-control" id="jobrole">
+												  		<option value="0" selected="selected"></option>
+													</select>													
+												</div>
+												example: manager, admin, secretory <a href="#all-roles" data-toggle="modal" >see all</a>
+
+												<div id="charNum" style="text-align:right;"></div>
+											</div>
+										</div>
+									</div>
+
 									<div class="row">
 										<div class="col-md-5 col-sm-5 col-xs-12">
 											<div class="form-group">
@@ -735,6 +759,34 @@
 	</div>
 	</div>
 
+
+<!-- BEGIN ROLE MODAL-->
+<div class="modal fade" id="all-roles" tabindex="-1" role="dialog" aria-labelledby="Roles" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+     <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+        <h4 class="modal-title">Roles</h4>
+      </div>
+      <div class="modal-body">
+	      <ol>
+	      	@foreach($roles as $role)
+	      	<li><a href="#" data-jrole="{{$role->name}}">{{$role->name}}</a></li>
+	      	@endforeach
+	      </ol>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+<!-- END ROLE MODAL -->
+
+
 <div id="loader" style="display:none;z-index:9999;background:white" class="page-loading">
 	<img src="/assets/loader.gif"><span> Please wait...</span>
 </div>
@@ -1073,5 +1125,72 @@ $(document).ready(function(){
 //  //      	console.log(values); 
 //  //    }
 // });
+
+$(".job-role-ajax").select2({
+	placeholder: 'Enter a role',
+  ajax: {
+    url: "/post/jobroles/",
+    dataType: 'json',
+    delay: 250,
+    data: function (params) {
+      return {
+        q: params.term, // search term
+        page: params.page
+      };
+    },
+    processResults: function (data, params) {
+      return {
+        results: data
+      };
+    },
+    cache: true
+  },
+  escapeMarkup: function (markup) { return markup; }, // let our custom formatter work
+  minimumInputLength: 2,
+  templateResult: formatRepo, // omitted for brevity, see the source of this page
+  templateSelection: formatRepoSelection // omitted for brevity, see the source of this page
+});
+
+function formatRepo (repo) {
+      if (repo.loading) return repo.text;
+
+      var markup = "<div class='select2-result-repository clearfix'>" +
+        "<div class='select2-result-repository__meta'>" +
+          "<div class='select2-result-repository__title'><b>Role</b>: " + repo.role + "</div>";
+
+      markup += "<div class='select2-result-repository__statistics'>" +
+        "<div class='select2-result-repository__forks'><b>Functional area: </b> " + repo.functional_area + " Forks</div>" +
+        "<div class='select2-result-repository__stargazers'><b>Industry</b>: " + repo.industry + " Stars</div>" +
+      "</div>" +
+      "</div></div>";
+
+      return markup;
+    }
+
+    function formatRepoSelection (repo) {
+      return repo.role;
+    }
+
+$(document).on('click', 'a', function(event, ui) {
+    var jrole = $(this).data('jrole');
+
+    $.ajaxSetup({
+        headjroleers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+      });
+
+    if(jrole != null){
+      event.preventDefault();
+      $('#all-roles').modal('hide');
+      $('#jobrole').select2('open');
+      $('.select2-search__field').val(jrole);
+      $('.select2-search__field').trigger('keyup');
+       // $('.select2-dropdown').hide();
+    }
+});
+
+ 
+
 </script>
 @stop
