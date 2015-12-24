@@ -440,6 +440,10 @@ background-color:white;
     left: 0px;
 }
 
+.home-post{
+       margin: 0px -10px; 
+}
+
 .link-follow-icon{
   position: absolute;
     bottom: 0;

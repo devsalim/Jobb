@@ -242,10 +242,10 @@
 														{{ $post->min_sal }}-{{ $post->max_sal }} {{ $post->salary_type }} 
 													</div>
 													<div class="col-md-12 col-sm-12 col-xs-12">
-														<i class="glyphicon glyphicon-map-marker"></i>&nbsp;: {{ $post->city }}
+														City&nbsp;: {{ $post->city }}
 													</div>
 													<div class="col-md-12 col-sm-12 col-xs-12">
-														<i class="glyphicon glyphicon-briefcase"></i>&nbsp;: {{ $post->min_exp}}-{{ $post->max_exp}} Years
+														Experience&nbsp;: {{ $post->min_exp}}-{{ $post->max_exp}} Years
 													</div>
 													
 												</div>
