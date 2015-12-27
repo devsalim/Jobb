@@ -86,11 +86,22 @@ class Postjob extends Model {
 		return $this->belongsTo('App\Induser');
 	}
 
-	// public function magicMatch(){
-	// 	return $this->whereHas('tags', function($query){
- //            $tagsIDs = [5,17,22];
- //            $query->whereIn('id_tag', $tagsIDs);
- //        })
-	// }
+	public function magicMatch(){
+		 
+		if (array_key_exists('linked_skill', $this->attributes))
+	    {
+	        return $this->attributes['linked_skill'];
+	    }
+
+				// $postSkills = $this->indUser();
+				// $userSkills = $this->ind_user->linked_skill;
+
+				// $postSkillCount = count($postSkills);
+				// $userSkillCount = count($userSkills);
+
+				// return $postSkills;
+
+		
+	}
 
 }
