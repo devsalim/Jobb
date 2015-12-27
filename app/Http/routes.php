@@ -145,6 +145,8 @@ Route::group(array('before' => 'auth'), function(){
 
 	Route::get('post/jobroles', 'JobController@jobRoles');
 
+	Route::get('search/', 'PagesController@search');
+
 });
 
 

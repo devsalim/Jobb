@@ -19,6 +19,7 @@ use App\Group;
 use App\ReportAbuse;
 use App\Feedback;
 use App\Notification;
+use Session;
 
 class PagesController extends Controller {
 
@@ -129,8 +130,8 @@ class PagesController extends Controller {
 
 				}
 				
-				// return view('pages.home', compact('posts', 'title', 'links', 'groups', 'following', 'userSkills', 'skills', 'linksApproval', 'linksPending', 'share_links', 'share_groups'));
-				return $posts;
+				return view('pages.home', compact('posts', 'title', 'links', 'groups', 'following', 'userSkills', 'skills', 'linksApproval', 'linksPending', 'share_links', 'share_groups'));
+				// return $posts;
 			}elseif(Auth::user()->identifier == 3){
 				$reportAbuseCount = ReportAbuse::count();
 				$feedbackCount = Feedback::count();
@@ -891,6 +892,49 @@ class PagesController extends Controller {
 			}
 			return response()->json(['success'=>$data['success_status'],'data'=>$data]);
 		}
+	}
+
+	public function search(){
+		$title = 'Search';
+
+		if (Session::has('search_query'))
+        	$searchQuery = Session::get('search_query');
+        
+        if(Input::get('query') != null)
+			$searchQuery = Input::get('query');
+
+		Session::flash('search_query', $searchQuery);
+
+		if($searchQuery != null){
+			$searchResultForInd = Induser::where('fname', 'like', '%'.$searchQuery.'%')
+										 ->orWhere('lname', 'like', '%'.$searchQuery.'%')
+										 ->orWhere('email', '=', $searchQuery)
+										 ->orWhere('mobile', '=', $searchQuery)
+										 ->paginate(10);
+
+			$searchResultForCorp = Corpuser::where('firm_name', 'like', '%'.$searchQuery.'%')
+										   ->orWhere('firm_email_id', '=', $searchQuery)
+										   ->orWhere('firm_phone', '=', $searchQuery)
+										   ->paginate(10);
+
+			$searchResultForJob = Postjob::where('post_title', 'like', '%'.$searchQuery.'%')
+										 ->where('post_type', '=', 'job')
+										 ->orWhere('linked_skill', 'like', '%'.$searchQuery.'%')
+									 	 ->paginate(10);
+
+			$searchResultForSkill = Postjob::where('post_title', 'like', '%'.$searchQuery.'%')
+									       ->where('post_type', '=', 'skill')
+									 	   ->paginate(10);
+
+			return view('pages.search', compact('title', 
+												'searchQuery', 
+												'searchResultForInd', 
+												'searchResultForCorp',
+												'searchResultForJob',
+												'searchResultForSkill'
+											   ));
+		}
+		
 	}
 
 

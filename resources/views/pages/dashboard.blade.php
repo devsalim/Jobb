@@ -672,9 +672,7 @@
             chart4();
             chart5();
 
-        },
-
-        
+        },        
 
         initPieCharts: function() {
 
@@ -682,7 +680,6 @@
             var usabilityData = [];
             var series = Math.floor(Math.random() * 10) + 1;
             series = series < 5 ? 5 : series;
-
 
             experienceData[0] = {
                         value: 100,

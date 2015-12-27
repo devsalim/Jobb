@@ -161,9 +161,13 @@
         </ul>
       </div>
       </div>
-      <form class="search-form search-form-expanded" method="GET">
+
+      <!-- Search -->
+      <form class="search-form search-form-expanded" action="/search/" method="GET">
         <div class="input-group search-input-box">
-          <input type="text" class="form-control search-field" placeholder="Search..." name="query">
+          <input type="text" class="form-control search-field" 
+                 placeholder="Search..." name="query" pattern=".{3,}" required title="3 characters minimum"
+                 autocomplete="off">
           <!-- <span class="input-group-btn as-span">
             <a class="advance-search btn" data-toggle="modal" href="#advance">Advance</a>
           </span> -->
@@ -172,6 +176,8 @@
           </span>
         </div>
       </form>
+      <!-- end Search -->
+
       <!-- <form class="search-form" action="extra_search.html" method="GET">
         <div class="input-group">
           <input type="text" class="form-control input-sm" placeholder="Search..." name="query">
