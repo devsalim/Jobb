@@ -22,7 +22,261 @@
 	<div class="portlet-body" style="background-color:whitesmoke;">
 		<div class="tab-content">
 			<div class="tab-pane active" id="portlet_tab1">
-				
+				@if($title == 'home')
+					<!-- Jobtip Filter Start -->
+					<form id="home-filter" name="filter_form" action="/home" method="post">
+					<input type="hidden" name="_token" value="{{ csrf_token() }}">
+					<div class="row" style="margin: -8px -10px 10px;">
+						<div class="col-md-12" style=" lightgray;margin-bottom: 5px;">
+							<div class="filter-icon hide-show-filter" style="color:#8c8c8c;"><i class="fa fa-filter" style="font-size:16px;color:#8c8c8c;"></i> Filter</div>
+						
+							<div class="row sort-by-css hide-label">
+								<div class="col-md-12">
+									<div class="btn-group">
+										<button class="btn btn-default btn-sm dropdown-toggle" type="button" data-toggle="dropdown" style="border: 0;color:#8c8c8c;background:transparent;">
+										<i class="glyphicon glyphicon-sort"></i> Sort by <i class="fa fa-angle-down"></i>
+										</button>
+										<ul class="dropdown-menu dropdown-menu-sort" role="menu" style="min-width: 130px;margin: 4px -25px;">
+											<li >
+												<a href="javascript:;">
+												Date </a>
+											</li>
+											<li>
+												<a href="javascript:;">
+												Magic Match </a>
+											</li>
+											<li>
+												<a href="javascript:;">
+												Individual Post </a>
+											</li>
+											<li>
+												<a href="javascript:;">
+												corporate Post </a>
+											</li>
+										</ul>
+									</div>
+								</div>
+							</div>
+							<div class="row sort-by-css show-filter" style="margin-right:8px;">
+								<div class="col-md-8 col-sm-8 col-xs-7" style="margin:5px 0;">
+									<a class="show-more" style="font-size:12px;font-weight:400;">Show more</a>
+								</div>
+								<div class="col-md-4 col-sm-4 col-xs-5">
+									<!-- <a class="show-more" style="font-size:12px;font-weight:400;">Show more</a> -->
+									<button type="submit" class="btn btn-info" value="Search" title="Search" 
+											style="background-color:transparent !important; border-color: transparent;">
+											<i class="glyphicon glyphicon-floppy-disk" style="color:dodgerblue;font-size:16px;"></i>
+										</button>
+								</div>
+							</div>		
+						</div>
+					</div>
+
+
+					<div class="row show-filter">
+						<div class="col-md-12">
+							<input type="hidden" name="post_type" value="job" >
+							<div class="col-md-4 col-sm-3 col-xs-12" style="margin:-7px 0;">
+								<label style="font-size:13px;font-weight:500;">Title or Role</label>
+								<div class="form-group">
+									<input type="text" id="title" name="job_title" class="form-control filter-input " placeholder="Job Title, Role" style="border: 1px solid darkcyan !important;margin: 7px 0px;">
+								</div>
+							</div>
+							<div class="col-md-4 col-sm-6 col-xs-8">
+								<label style="font-size:13px;font-weight:500;">Job Type</label>
+								<div class="form-group">
+									<select multiple="multiple" name="time_for"  placeholder="Select" class="SlectBox">
+								       <option selected value="Full Time">Full Time</option>
+										<option selected value="Part Time">Part Time</option>
+										<option selected value="Freelancer">Freelancer</option>
+										<option selected value="Work from Home">Work from Home</option>
+								    </select>		
+								</div>
+					         </div>
+							<div class="col-md-4 col-sm-8 col-xs-7">
+								<label style="font-size:13px;font-weight:500;">Experience</label>
+								<div class="form-group">	
+									<select name="experience" placeholder="Select" class="SlectBox">
+					                	<option value="">{{ Auth::user()->induser->experience }}</option>
+					                	<option value="0">Fresher</option>
+										<option value="1">1 Year</option>
+										<option value="2">2 Years</option>
+										<option value="3">3 Years</option>
+										<option value="4">4 Years</option>
+										<option value="5">5 Years</option>
+										<option value="6">6 Years</option>
+										<option value="7">7 Years</option>
+										<option value="8">8 Years</option>
+										<option value="9">9 Years</option>
+										<option value="10">10 Years</option>
+										<option value="11">11 Years</option>
+										<option value="12">12 Years</option>
+										<option value="13">13 Years</option>
+										<option value="14">14 Years</option>
+										<option value="15">15 Years</option>
+					                </select>		
+									<!-- <input type="text" id="exp" name="experience" class="form-control filter-input" placeholder="Exp" style="height: 25px;margin: 7px 0px;">				 -->
+								</div>	
+							</div>
+							
+							
+							<div class="col-md-4 col-sm-12 col-xs-12">
+								<label style="font-size:13px;font-weight:500;">City</label>
+								<div class="form-group">
+									<select id="" placeholder="City" name="city" style="padding: 0;margin: 7px 0px;" class="input-sm bs-select form-control filter-input" multiple >
+										<option value="">{{ Auth::user()->induser->city }}</option>
+										<optgroup label="City">
+										<option selected>All</option>
+										<option>Bangalore</option>
+										<option>Philadelphia Eagles</option>
+										<option>Washington Redskins</option>
+										</optgroup>
+										<optgroup label="NFC NORTH">
+										<option>Chicago Bears</option>
+										<option>Detroit Lions</option>
+										<option>Green Bay Packers</option>
+										<option>Minnesota Vikings</option>
+										</optgroup>
+										<optgroup label="NFC SOUTH">
+										<option>Patna</option>
+										<option>Mumbai</option>
+										<option>New Orleans Saints</option>
+										<option>Tampa Bay Buccaneers</option>
+										</optgroup>
+										<optgroup label="NFC WEST">
+										<option>Delhi</option>
+										<option>Chennai</option>
+										<option>San Francisco 49ers</option>
+										<option>Seattle Seahawks</option>
+										</optgroup>
+										<optgroup label="AFC EAST">
+										<option>Buffalo Bills</option>
+										<option>Miami Dolphins</option>
+										<option>New England Patriots</option>
+										<option>New York Jets</option>
+										</optgroup>
+										<optgroup label="AFC NORTH">
+										<option>Baltimore Ravens</option>
+										<option>Cincinnati Bengals</option>
+										<option>Cleveland Browns</option>
+										<option>Pittsburgh Steelers</option>
+										</optgroup>
+										<optgroup label="AFC SOUTH">
+										<option>Houston Texans</option>
+										<option>Indianapolis Colts</option>
+										<option>Jacksonville Jaguars</option>
+										<option>Tennessee Titans</option>
+										</optgroup>
+										<optgroup label="AFC WEST">
+										<option>Denver Broncos</option>
+										<option>Kansas City Chiefs</option>
+										<option>Oakland Raiders</option>
+										<option>San Diego Chargers</option>
+										</optgroup>
+									</select>
+								</div>	
+							</div>
+						</div>
+						</div>
+						<div class="row show-filter">
+							<div class="col-md-12">
+									<div class="col-md-3 col-sm-3 col-xs-6 extra-show done-show" style="">
+										<div class="form-group">
+											<select id="category-list" class="form-control input-sm filter-input check-font-size" name="prof_category" style="border: 1px solid darkcyan !important;padding: 0;margin: 7px 0px;">
+												<option value="">Job Category</option>
+												<optgroup label="Accounting">
+													<option value="Accounts/Finance/Tax">Accounts/Finance/Tax</option>
+													<option value="Agent">Agent</option>
+													<option value="Analytics & Business Intelligence">
+														Analytics & Business Intelligence
+													</option>
+												</optgroup>
+												<optgroup label="IT Field">
+													<option value="HR/Administration/IR">HR/Administration/IR</option>
+													<option value="IT Software - Client Server">IT Software - Client Server</option>
+													<option value="IT Software - Mainframe">IT Software - Mainframe</option>
+													<option value="IT Software - Middleware">IT Software - Middleware</option>
+													<option value="IT Software - Mobile">IT Software - Mobile</option>
+													<option value="IT Software - Other">IT Software - Other</option>
+													<option value="IT Software - System Programming">IT Software - System Programming</option>
+													<option value="IT Software - Telecom Software">IT Software - Telecom Software</option>
+													<option value="IT Software - Application Programming">IT Software - Application Programming</option>
+													<option value="IT Software - DBA/Datawarehousing">IT Software - DBA/Datawarehousing</option>
+													<option value="IT Software - E-Commerce">IT Software - E-Commerce</option>
+													<option value="IT Software - ERP/CRM">IT Software - ERP/CRM</option>
+												</optgroup>
+											</select>
+										</div>
+									</div>
+									<div class="col-md-3 col-sm-3 col-xs-6 extra-show done-show" style="margin: 7px 0;">
+										<div class="form-group">				
+											{{-- <input type="hidden" placeholder="Skills" name="linked_skill" id="select2_sample5" class="form-control input-sm filter-input select2" value=""> --}}
+											{!! Form::select('skill_list[]', $skills, null, ['id'=>'skill-list', 'class'=>'form-control', 'placeholder'=>'Skills', 'multiple']) !!}				
+										</div>	
+									</div>
+									<div class="col-md-3 col-sm-3 col-xs-6 extra-show done-show" style="margin: 7px 0;">
+										<div class="form-group">				
+											<input type="text" name="unique_id" class="form-control filter-input input-sm" placeholder="Post Id" style="border: 1px solid darkcyan !important;margin: 7px 0px;"> 				
+										</div>	
+									</div> 
+									<div class="col-md-3 col-sm-3 col-xs-6 extra-show done-show" style="margin: 7px 0;">
+										<div class="form-group">		
+											<select class="bs-select form-control input-sm filter-input" name="education" multiple style="padding: 0;margin: 7px 0px;">
+												<optgroup label="Posted by">
+													<option selected value=""><b>Posted by:</b> All</option>
+													<option value="individual">Individual</option>
+													<option value="company">Company</option>
+													<option value="consultancy">Consultancy</option>
+												</optgroup>
+											</select>
+										</div>
+									</div>
+									 
+								<!-- <div class="col-md-1 col-sm-4 col-sm-6">
+									<button type="submit" class="btn btn-info" value="Search" title="Search" 
+											style="float:left;background-color:transparent !important;margin:10px -25px; border-color: transparent;">
+										<i class="fa fa-check-square-o" style="font-size:20px;color:#3598dc;"></i>
+									</button>
+									<button type="button" class="btn" onclick="resetFilter()" title="Reset" 
+											style="background-color:transparent !important;margin:8px 1px;" >
+										<i class="icon-refresh" style="font-size:18px;"></i>
+									</button>
+								</div> -->
+							</div>
+						</div>
+						<div class="row show-filter">
+							<div class="col-md-12">
+								<div class="col-md-6 col-sm-6 col-xs-12 extra-show done-show" style="margin: 12px 0;">
+						         	<div class="form-group">
+							         	 <label style="font-size:13px;">
+											<input type="checkbox" checked class="icheck" data-checkbox="icheckbox_square-grey"> Do not include Expired Post
+										</label>
+									</div>
+								</div>
+							</div>
+						</div>
+
+					</form>
+					<!-- Jobtip Filter End-->
+					@elseif($title == 'favourite')
+					<div class="portlet light bordered col-md-9">
+						<div class="portlet-title">
+							<div class="caption links-title">
+								<i class="fa fa-star"></i>
+								<span class="caption-subject font-blue-hoki bold uppercase">My Favourite Posts</span>
+							</div>
+						</div>
+					</div>
+					@elseif($title == 'postByUser')
+					<div class="portlet light bordered col-md-9">
+						<div class="portlet-title">
+							<div class="caption links-title">
+								<i class=""></i>
+								<span class="caption-subject font-blue-hoki bold uppercase">Posts by "<span style="color: orangered;"> {{$postuser->firm_name}}{{$postuser->fname}} {{$postuser->lname}} </span>"</span>
+							</div>
+						</div>
+					</div>
+					@endif
 					
 
 				@if (count($jobPosts) > 0)
@@ -1223,6 +1477,274 @@
 				<!-- /.modal -->
 			</div>
 			<div class="tab-pane" id="portlet_tab2">
+				@if($title == 'home')
+					<!-- Jobtip Filter Start -->
+					<form id="home-filter" name="filter_form" action="/home" method="post">
+					<input type="hidden" name="_token" value="{{ csrf_token() }}">
+					<div class="row" style="margin: -8px -10px 10px;">
+						<div class="col-md-12" style=" lightgray;margin-bottom: 5px;">
+							<div class="filter-icon hide-show-filter" style="color:#8c8c8c;"><i class="fa fa-filter" style="font-size:16px;color:#8c8c8c;"></i> Filter</div>
+						
+							<div class="row sort-by-css hide-label">
+								<div class="col-md-12">
+									<div class="btn-group">
+										<button class="btn btn-default btn-sm dropdown-toggle" type="button" data-toggle="dropdown" style="border: 0;color:#8c8c8c;background:transparent;">
+										<i class="glyphicon glyphicon-sort"></i> Sort by <i class="fa fa-angle-down"></i>
+										</button>
+										<ul class="dropdown-menu dropdown-menu-sort" role="menu" style="min-width: 130px;margin: 4px -25px;">
+											<li >
+												<a href="javascript:;">
+												Date </a>
+											</li>
+											<li>
+												<a href="javascript:;">
+												Magic Match </a>
+											</li>
+											<li>
+												<a href="javascript:;">
+												Individual Post </a>
+											</li>
+											<li>
+												<a href="javascript:;">
+												corporate Post </a>
+											</li>
+										</ul>
+									</div>
+								</div>
+							</div>
+							<div class="row sort-by-css show-filter" style="margin-right:8px;">
+								<div class="col-md-8 col-sm-8 col-xs-7" style="margin:5px 0;">
+									<a class="show-more" style="font-size:12px;font-weight:400;">Show more</a>
+								</div>
+								<div class="col-md-4 col-sm-4 col-xs-5">
+									<!-- <a class="show-more" style="font-size:12px;font-weight:400;">Show more</a> -->
+									<button type="submit" class="btn btn-info" value="Search" title="Search" 
+											style="background-color:transparent !important; border-color: transparent;">
+											<i class="glyphicon glyphicon-floppy-disk" style="color:dodgerblue;font-size:16px;"></i>
+										</button>
+								</div>
+							</div>		
+						</div>
+					</div>
+
+
+					<div class="row show-filter">
+						<div class="col-md-12">
+							<input type="hidden" name="post_type" value="job" >
+							<div class="col-md-3 col-sm-6 col-xs-8">
+								<label style="font-size:13px;font-weight:500;">Job Type</label>
+								<div class="form-group">
+												<select multiple="multiple" name="time_for"  placeholder="Select" class="SlectBox">
+											       <option selected value="Full Time">Full Time</option>
+													<option selected value="Part Time">Part Time</option>
+													<option selected value="Freelancer">Freelancer</option>
+													<option selected value="Work from Home">Work from Home</option>
+											    </select>
+											
+										</div>
+					         </div>
+							<div class="col-md-2 col-sm-8 col-xs-7">
+								<label style="font-size:13px;font-weight:500;">Experience</label>
+								<div class="form-group">	
+									<select name="experience" placeholder="Select" class="SlectBox">
+					                	<option value="">{{ Auth::user()->induser->experience }}</option>
+					                	<option value="0">Fresher</option>
+										<option value="1">1 Year</option>
+										<option value="2">2 Years</option>
+										<option value="3">3 Years</option>
+										<option value="4">4 Years</option>
+										<option value="5">5 Years</option>
+										<option value="6">6 Years</option>
+										<option value="7">7 Years</option>
+										<option value="8">8 Years</option>
+										<option value="9">9 Years</option>
+										<option value="10">10 Years</option>
+										<option value="11">11 Years</option>
+										<option value="12">12 Years</option>
+										<option value="13">13 Years</option>
+										<option value="14">14 Years</option>
+										<option value="15">15 Years</option>
+					                </select>		
+									<!-- <input type="text" id="exp" name="experience" class="form-control filter-input" placeholder="Exp" style="height: 25px;margin: 7px 0px;">				 -->
+								</div>	
+							</div>
+							<div class="col-md-3 col-sm-3 col-xs-12">
+								<div class="form-group">
+									<input type="text" id="title" name="job_title" class="form-control filter-input " placeholder="Job Title, Role" style="border: 1px solid darkcyan !important;margin: 7px 0px;">
+								</div>
+							</div>
+							
+							<div class="col-md-3 col-sm-3 col-xs-6">
+								<div class="form-group">
+									<select id="" placeholder="City" name="city" style="padding: 0;margin: 7px 0px;" class="input-sm bs-select form-control filter-input" multiple >
+										
+										<optgroup label="City">
+										<option selected>All</option>
+										<option>Bangalore</option>
+										<option>Philadelphia Eagles</option>
+										<option>Washington Redskins</option>
+										</optgroup>
+										<optgroup label="NFC NORTH">
+										<option>Chicago Bears</option>
+										<option>Detroit Lions</option>
+										<option>Green Bay Packers</option>
+										<option>Minnesota Vikings</option>
+										</optgroup>
+										<optgroup label="NFC SOUTH">
+										<option>Patna</option>
+										<option>Mumbai</option>
+										<option>New Orleans Saints</option>
+										<option>Tampa Bay Buccaneers</option>
+										</optgroup>
+										<optgroup label="NFC WEST">
+										<option>Delhi</option>
+										<option>Chennai</option>
+										<option>San Francisco 49ers</option>
+										<option>Seattle Seahawks</option>
+										</optgroup>
+										<optgroup label="AFC EAST">
+										<option>Buffalo Bills</option>
+										<option>Miami Dolphins</option>
+										<option>New England Patriots</option>
+										<option>New York Jets</option>
+										</optgroup>
+										<optgroup label="AFC NORTH">
+										<option>Baltimore Ravens</option>
+										<option>Cincinnati Bengals</option>
+										<option>Cleveland Browns</option>
+										<option>Pittsburgh Steelers</option>
+										</optgroup>
+										<optgroup label="AFC SOUTH">
+										<option>Houston Texans</option>
+										<option>Indianapolis Colts</option>
+										<option>Jacksonville Jaguars</option>
+										<option>Tennessee Titans</option>
+										</optgroup>
+										<optgroup label="AFC WEST">
+										<option>Denver Broncos</option>
+										<option>Kansas City Chiefs</option>
+										<option>Oakland Raiders</option>
+										<option>San Diego Chargers</option>
+										</optgroup>
+									</select>
+								</div>	
+							</div>
+						</div>
+						</div>
+						<div class="row show-filter">
+							<div class="col-md-12">
+									<div class="col-md-3 col-sm-3 col-xs-6 extra-show done-show" style="">
+										<div class="form-group">
+											<select id="category-list" class="form-control input-sm filter-input check-font-size" name="prof_category" style="border: 1px solid darkcyan !important;padding: 0;margin: 7px 0px;">
+												<option value="">Job Category</option>
+												<optgroup label="Accounting">
+													<option value="Accounts/Finance/Tax">Accounts/Finance/Tax</option>
+													<option value="Agent">Agent</option>
+													<option value="Analytics & Business Intelligence">
+														Analytics & Business Intelligence
+													</option>
+												</optgroup>
+												<optgroup label="IT Field">
+													<option value="HR/Administration/IR">HR/Administration/IR</option>
+													<option value="IT Software - Client Server">IT Software - Client Server</option>
+													<option value="IT Software - Mainframe">IT Software - Mainframe</option>
+													<option value="IT Software - Middleware">IT Software - Middleware</option>
+													<option value="IT Software - Mobile">IT Software - Mobile</option>
+													<option value="IT Software - Other">IT Software - Other</option>
+													<option value="IT Software - System Programming">IT Software - System Programming</option>
+													<option value="IT Software - Telecom Software">IT Software - Telecom Software</option>
+													<option value="IT Software - Application Programming">IT Software - Application Programming</option>
+													<option value="IT Software - DBA/Datawarehousing">IT Software - DBA/Datawarehousing</option>
+													<option value="IT Software - E-Commerce">IT Software - E-Commerce</option>
+													<option value="IT Software - ERP/CRM">IT Software - ERP/CRM</option>
+												</optgroup>
+											</select>
+										</div>
+									</div>
+									<div class="col-md-3 col-sm-3 col-xs-6 extra-show done-show" style="margin: 7px 0;">
+										<div class="form-group">				
+											{{-- <input type="hidden" placeholder="Skills" name="linked_skill" id="select2_sample5" class="form-control input-sm filter-input select2" value=""> --}}
+											{!! Form::select('skill_list[]', $skills, null, ['id'=>'skill-list', 'class'=>'form-control', 'placeholder'=>'Skills', 'multiple']) !!}				
+										</div>	
+									</div>
+									<div class="col-md-3 col-sm-3 col-xs-6 extra-show done-show" style="margin: 7px 0;">
+										<div class="form-group">				
+											<input type="text" name="unique_id" class="form-control filter-input input-sm" placeholder="Post Id" style="border: 1px solid darkcyan !important;margin: 7px 0px;"> 				
+										</div>	
+									</div> 
+									<div class="col-md-3 col-sm-3 col-xs-6 extra-show done-show" style="margin: 7px 0;">
+										<div class="form-group">		
+											<select class="bs-select form-control input-sm filter-input" name="education" multiple style="padding: 0;margin: 7px 0px;">
+												<optgroup label="Posted by">
+													<option selected value=""><b>Posted by:</b> All</option>
+													<option value="individual">Individual</option>
+													<option value="company">Company</option>
+													<option value="consultancy">Consultancy</option>
+												</optgroup>
+											</select>
+										</div>
+									</div>
+									 
+								<!-- <div class="col-md-1 col-sm-4 col-sm-6">
+									<button type="submit" class="btn btn-info" value="Search" title="Search" 
+											style="float:left;background-color:transparent !important;margin:10px -25px; border-color: transparent;">
+										<i class="fa fa-check-square-o" style="font-size:20px;color:#3598dc;"></i>
+									</button>
+									<button type="button" class="btn" onclick="resetFilter()" title="Reset" 
+											style="background-color:transparent !important;margin:8px 1px;" >
+										<i class="icon-refresh" style="font-size:18px;"></i>
+									</button>
+								</div> -->
+							</div>
+						</div>
+						<div class="row show-filter">
+							<div class="col-md-12">
+								<div class="col-md-6 col-sm-6 col-xs-12 extra-show done-show" style="margin: 12px 0;">
+						         	<div class="form-group">
+							         	 <label style="font-size:13px;">
+											<input type="checkbox" checked class="icheck" data-checkbox="icheckbox_square-grey"> Do not include Expired Post
+										</label>
+									</div>
+								</div>
+							</div>
+						</div>
+
+					</form>
+					<!-- Jobtip Filter End-->
+					@elseif($title == 'favourite')
+					<div class="portlet light bordered col-md-9">
+						<div class="portlet-title">
+							<div class="caption links-title">
+								<i class="fa fa-star"></i>
+								<span class="caption-subject font-blue-hoki bold uppercase">My Favourite Posts</span>
+							</div>
+						</div>
+					</div>
+					@elseif($title == 'postByUser')
+					<div class="portlet light bordered col-md-9">
+						<div class="portlet-title">
+							<div class="caption links-title">
+								<i class=""></i>
+								<span class="caption-subject font-blue-hoki bold uppercase">Posts by "<span style="color: orangered;"> {{$postuser->firm_name}}{{$postuser->fname}} {{$postuser->lname}} </span>"</span>
+							</div>
+						</div>
+					</div>
+					@endif
+					<!-- <div class="row hide-label" style="text-align:center;">
+						<div class="col-md-12 col-sm-12 col-xs-12" style="margin:3px 0;">
+							Jobs not matching to your skill set?
+						</div>
+						<div class="col-md-12 col-sm-12 col-xs-12" style="margin:3px 0;">
+							<a href="/skill/create">
+								<button class="btn btn-success" style="padding: 3px 8px;border-radius: 20px !important;">
+									Post Skill
+								</button>
+							</a>
+						</div>
+						<div class="col-md-12 col-sm-12 col-xs-12">
+							Highlight your talent and get job tips for free!!!
+						</div>
+					</div> -->
 
 				@if (count($skillPosts) > 0)
 					<?php $var = 1; ?>
