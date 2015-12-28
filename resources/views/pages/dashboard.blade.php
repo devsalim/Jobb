@@ -97,34 +97,37 @@
 		</div>-->
 	</div>
 	<!-- END DASHBOARD STATS -->
-	<div class="clearfix">
-	</div>
+	<div class="clearfix"></div>
 
 	<div class="row">
-		<div class="col-md-6">
+		<div class="col-md-12">
 			<div class="portlet box purple">
 				<div class="portlet-title">
 					<div class="caption">
 						<i class="fa fa-bullhorn"></i>Feedback
 					</div>
 					<div class="tools">
-						<a href="#portlet-config" data-toggle="modal" class="config">
-						</a>
-						<a href="javascript:;" class="reload">
-						</a>
+						<a href="#portlet-config" data-toggle="modal" class="config"></a>
+						<a href="javascript:;" class="reload"></a>
 					</div>
 				</div>
-				<div class="portlet-body">
-					<div id="pie_chart_9" class="chart">
-					</div>
+				<div class="portlet-body clearfix">
+                    <div class="col-md-6">
+                        <div id="pie_chart_8" class="chart"></div>
+                        <p style="text-align: center;font-size: 14px;text-transform: uppercase;font-weight: bold;  color: #888;">Usability</p>
+                    </div>
+                    <div class="col-md-6">
+					   <div id="pie_chart_9" class="chart"></div>
+                       <p style="text-align: center;font-size: 14px;text-transform: uppercase;font-weight: bold;  color: #888;">Experience</p>
+                    </div>
 				</div>
 			</div>
 			
 		</div>
-	</div>
+	
+    </div>
 
-	<div class="clearfix">
-	</div>
+    <div class="clearfix"></div>
 				
 @stop
 
@@ -675,38 +678,79 @@
 
         initPieCharts: function() {
 
-            var data = [];
+            var experienceData = [];
+            var usabilityData = [];
             var series = Math.floor(Math.random() * 10) + 1;
             series = series < 5 ? 5 : series;
 
 
-            data[0] = {
+            experienceData[0] = {
                         value: 100,
-                        color:"#F7464A",
-                        highlight: "#FF5A5E",
-                        label: "Experience",
-                        data: 30
+                        color:"#FF0000",
+                        highlight: "#FF0000",
+                        label: "1",
+                        data: {{$expFeedCounts[0]->one}}
                       };
 
-            data[1] = {
-                        value: 50,
+            experienceData[1] = {
+                        value: 100,
                         color: "#46BFBD",
                         highlight: "#5AD3D1",
-                        label: "Usability",
-                        data: 40
+                        label: "2",
+                        data: {{$expFeedCounts[0]->two}}
                      };
 
-            data[2] = {
+            experienceData[2] = {
                         value: 100,
-                        color: "#FDB45C",
-                        highlight: "#FFC870",
-                        label: "No Feedback",
-                        data: 30
+                        color: "#FDC55B",
+                        highlight: "#FDC55B",
+                        label: "3",
+                        data: {{$expFeedCounts[0]->three}}
+                      };
+
+            experienceData[3] = {
+                        value: 100,
+                        color: "#FF7F00",
+                        highlight: "#FF7F00",
+                        label: "4",
+                        data: {{$expFeedCounts[0]->four}}
+                      };
+
+            experienceData[4] = {
+                        value: 100,
+                        color: "#07FF88",
+                        highlight: "#07FF88",
+                        label: "5",
+                        data: {{$expFeedCounts[0]->five}}
+                      };
+
+            usabilityData[0] = {
+                        value: 100,
+                        color:"#fb5f61",
+                        highlight: "#fb5f61",
+                        label: "Hard",
+                        data: {{$useFeedCounts[0]->hard}}
+                      };
+
+            usabilityData[1] = {
+                        value: 100,
+                        color: "#eab124",
+                        highlight: "#eab124",
+                        label: "Okay",
+                        data: {{$useFeedCounts[0]->okay}}
+                     };
+
+            usabilityData[2] = {
+                        value: 100,
+                        color: "#1bb54d",
+                        highlight: "#1bb54d",
+                        label: "Easy",
+                        data: {{$useFeedCounts[0]->easy}}
                       };
 
             // DEFAULT
             if ($('#pie_chart').size() !== 0) {
-                $.plot($("#pie_chart"), data, {
+                $.plot($("#pie_chart"), experienceData, {
                     series: {
                         pie: {
                             show: true
@@ -715,10 +759,9 @@
                 });
             }
 
-
             // GRAPH 9
-            if ($('#pie_chart_9').size() !== 0) {
-                $.plot($("#pie_chart_9"), data, {
+            if ($('#pie_chart_8').size() !== 0) {
+                $.plot($("#pie_chart_8"), usabilityData, {
                     series: {
                         pie: {
                             show: true,
@@ -728,7 +771,37 @@
                                 show: true,
                                 radius: 1,
                                 formatter: function(label, series) {
-                                    return '<div style="font-size:8pt;text-align:center;padding:2px;color:white;">' + label + '<br/>' + Math.round(series.percent) + '%</div>';
+                                    return '<div style="font-size:8pt;text-align:center;padding:2px 4px;color:white;">' + label + '<br/>' + Math.round(series.percent) + '%</div>';
+                                },
+                                background: {
+                                    opacity: 0.8
+                                }
+                            },
+                            combine: {
+                                color: '#999',
+                                threshold: 0.1
+                            }
+                        }
+                    },
+                    legend: {
+                        show: false
+                    }
+                });
+            }
+
+            // GRAPH 9
+            if ($('#pie_chart_9').size() !== 0) {
+                $.plot($("#pie_chart_9"), experienceData, {
+                    series: {
+                        pie: {
+                            show: true,
+                            radius: 1,
+                            tilt: 0.5,
+                            label: {
+                                show: true,
+                                radius: 1,
+                                formatter: function(label, series) {
+                                    return '<div style="font-size:8pt;text-align:center;padding:2px 4px;color:white;">' + label + '<br/>' + Math.round(series.percent) + '%</div>';
                                 },
                                 background: {
                                     opacity: 0.8

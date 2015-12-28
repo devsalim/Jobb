@@ -53,6 +53,7 @@ class PagesController extends Controller {
 									 ->with('indUser', 'corpUser', 'postActivity', 'taggedUser', 'taggedGroup')
 									 ->where('post_type', '=', 'skill')
 									 ->paginate(15);
+
 				$links = DB::select('select id from indusers
 										where indusers.id in (
 												select connections.user_id as id from connections
@@ -134,10 +135,32 @@ class PagesController extends Controller {
 				
 				return view('pages.home', compact('jobPosts', 'skillPosts', 'title', 'links', 'groups', 'following', 'userSkills', 'skills', 'linksApproval', 'linksPending', 'share_links', 'share_groups'));
 				// return $userSkills;
+
 			}elseif(Auth::user()->identifier == 3){
 				$reportAbuseCount = ReportAbuse::count();
 				$feedbackCount = Feedback::count();
-				return view('pages.dashboard', compact('title', 'reportAbuseCount', 'feedbackCount'));
+				$expFeedCounts = DB::select(
+									DB::raw('
+										select 
+											(select count(experience) from feedbacks f where f.experience = 5) as five, 
+											(select count(experience) from feedbacks f where f.experience = 4) as four,
+											(select count(experience) from feedbacks f where f.experience = 3) as three,
+											(select count(experience) from feedbacks f where f.experience = 2) as two,
+											(select count(experience) from feedbacks f where f.experience = 1) as one
+										from dual;
+									')
+								);
+				$useFeedCounts = DB::select(
+									DB::raw('
+										select 
+											(select count(usability) from feedbacks f where f.usability = "Hard") as hard, 
+											(select count(usability) from feedbacks f where f.usability = "Okay") as okay,
+											(select count(usability) from feedbacks f where f.usability = "Easy") as easy
+										from dual;
+									')
+								);
+				// return $expFeedCounts;
+				return view('pages.dashboard', compact('title', 'reportAbuseCount', 'feedbackCount', 'expFeedCounts', 'useFeedCounts'));
 			}
 		}else{
 			return redirect('login');
