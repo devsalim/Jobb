@@ -1,3 +1,268 @@
+<div class="timeline-body-head-caption" style="width:100%;margin:5px;">
+                                                                @if(Auth::user()->induser_id == $post->individual_id && $post->individual_id != null)
+                                                                @if(count($post->groupTagged) > 0)
+                                                                @if($post->sharedGroupBy->first()->mode == 'shared')
+                                                                <div class="row">
+                                                                    <div class="col-md-12">
+                                                                        <!-- Post shared by user -->                        
+                                                                        
+                                                                            <div class="shared-by">
+                                                                                {{$post->sharedGroupBy->first()->mode}} by 
+                                                                                <b>{{$post->sharedGroupBy->first()->fname}} 
+                                                                                {{$post->sharedGroupBy->first()->lname}}</b>
+                                                                                to <b>{{$post->sharedToGroup->first()->group_name}}</b> group<br/>
+                                                                            </div>
+                                                                        
+                                                                    </div>
+                                                                </div>
+                                                                @endif
+                                                            @endif
+                                                            <div class="row">
+                                                                <div class="col-md-4 col-sm-4 col-xs-6">
+                                                                    <a href="/profile/ind/{{$post->individual_id}}" class="link-label" data-utype="ind">
+                                                                        <small>You</small>
+                                                                    </a>
+                                                                </div>
+                                                                <div class="col-md-4 col-sm-4 col-xs-6 elipsis-code">
+                                                                    <i class="fa fa-clock-o" style="font-size: 11px;"></i> 
+                                                                    <small>{{ \Carbon\Carbon::createFromTimeStamp(strtotime($post->created_at))->diffForHumans() }}</small>
+                                                                </div>
+                                                            </div>
+                                                            @elseif(Auth::user()->corpuser_id == $post->corporate_id && $post->corporate_id != null)
+                                                            <div class="row">
+                                                                <div class="col-md-4 col-sm-4 col-xs-6">
+                                                                    <a href="/profile/ind/{{$post->individual_id}}" class="link-label" data-utype="ind">
+                                                                        <small>You</small>
+                                                                    </a>
+                                                                </div>
+                                                                <div class="col-md-4 col-sm-4 col-xs-6 elipsis-code">
+                                                                    <i class="fa fa-clock-o" style="font-size: 11px;"></i> 
+                                                                    <small>{{ \Carbon\Carbon::createFromTimeStamp(strtotime($post->created_at))->diffForHumans() }}</small>
+                                                                </div>
+                                                            </div>
+                                                            @elseif($post->individual_id != null)
+                                                                @if(count($post->groupTagged) > 0)
+                                                                @if($post->sharedGroupBy->first()->mode == 'shared')
+                                                                <div class="row">
+                                                                    <div class="col-md-12">
+                                                                        <!-- Post shared by user -->                        
+                                                                        
+                                                                            <div class="shared-by">
+                                                                                <small>{{$post->sharedGroupBy->first()->mode}} by {{$post->sharedGroupBy->first()->fname}} {{$post->sharedGroupBy->first()->lname}}</small> to <small>{{$post->sharedToGroup->first()->group_name}}</small> group<br/>
+                                                                            </div>
+                                                                        
+                                                                    </div>
+                                                                </div>
+                                                                @endif
+                                                            @endif
+                                                            @if($post->tagged->contains('user_id', Auth::user()->induser_id) && 
+                                                                $post->sharedBy->first()->mode == 'shared')
+                                                                
+                                                            <small> {{$post->sharedBy->first()->mode}} by 
+                                                                {{$post->sharedBy->first()->fname}} {{$post->sharedBy->first()->lname}}</small><br/>
+
+                                                            @endif
+                                                            <div class="row">
+                                                                <div class="col-md-6 col-sm-6 col-xs-6">
+                                                                    <a href="/profile/ind/{{$post->individual_id}}" style="font-size: 13px;text-decoration:none;font-weight:500;">
+                                                                        {{ $post->induser->fname}} {{ $post->induser->lname}}
+                                                                    </a>
+                                                                </div>
+                                                                <div class="col-md-4 col-sm-4 col-xs-6 elipsis-code">
+                                                                    <i class="fa fa-clock-o" style="font-size: 11px;"></i> 
+                                                                    <small>{{ \Carbon\Carbon::createFromTimeStamp(strtotime($post->created_at))->diffForHumans() }}</small>
+                                                                </div>
+                                                            </div>
+                                                            @elseif($post->corporate_id != null)
+                                                            <div class="row">
+                                                                <div class="col-md-6 col-sm-6 col-xs-8">
+                                                                    <a href="/profile/corp/{{$post->corporate_id}}" style="font-size: 13px;text-decoration:none;">
+                                                                        {{ $post->corpuser->firm_name}}
+                                                                    </a><span class="label label-sm label-success">{{ $post->corpuser->firm_type}}</span>
+                                                                </div>
+                                                                <div class="col-md-4 col-sm-4 col-xs-4 elipsis-code">
+                                                                    <i class="fa fa-clock-o" style="font-size: 11px;"></i> 
+                                                                    <small>{{ \Carbon\Carbon::createFromTimeStamp(strtotime($post->created_at))->diffForHumans() }}</small>
+                                                                </div>
+                                                            </div>
+                                                            @endif
+                                                            </div>                                                      
+                                                        </div>
+                                                        <!--  -->
+                                                        <div class="timeline-body-content">
+                                                            <div class="row new-hide post-postision" style="cursor:pointer;">
+                                                                <div class="col-md-12">
+                                                                    <div class="" style="font-weight: 600;color: black;font-size: 13px;">{{ $post->post_title }} </div>
+                                                                
+                                                                </div>
+                                                                @if($post->post_compname != null && $post->post_type == 'job')
+                                                                <div class="col-md-12">
+                                                                    <div><h4 style="margin: 0 0 4px 0;"><small>Required at {{ $post->post_compname }}</small></h4></div>
+                                                                </div>
+                                                                 @elseif($post->post_compname != null && $post->post_type == 'skill')
+                                                                 <div class="col-md-12">
+                                                                    <div><h4 style="margin: 0 0 4px 0;"><small>Working at {{ $post->post_compname }} </small></h4></div>
+                                                                </div>   
+                                                                @endif
+                                                            
+                                                            <div class="row" style="margin-left: 0;margin-right: 0;">
+                                                                <div class="col-md-4 col-sm-4 col-xs-4 elipsis-code elipsis-city-code" style="padding:0 12px;">
+                                                                <small> <i class="glyphicon glyphicon-map-marker"></i>&nbsp;: {{ $post->city }}</small>
+                                                                </div>
+                                                                
+                                                                <div class="col-md-4 col-sm-4 col-xs-4 elipsis-code" style="float: none;margin:0;display: table;">
+                                                                <small> <i class="glyphicon glyphicon-briefcase"></i>&nbsp;: {{ $post->min_exp}}-{{ $post->max_exp}} Yr</small>
+                                                                </div>
+                                                                <div id="{{ $post->id }}-{{$var}}-{{$var}}" class="col-md-4 col-sm-4 col-xs-4 hide-details" style="float: right;right: -40px;bottom: 16px;">
+                                                                    <a><i class="fa fa-angle-double-down" style="font-size:20px;"></i></a>
+                                                                </div>
+                                                                <div id="{{ $post->id }}-{{$var}}" class="col-md-4 col-sm-4 col-xs-4 show-details" style="float: right;right: -40px;bottom: 16px;">
+                                                                    <a><i class="fa fa-angle-double-up" style="font-size:20px;"></i></a>
+                                                                </div>
+                                                            </div>
+                                                            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+elseif($post_type == 'skill'){
+            if($role != null){
+                $skillPosts->where('role', 'like', '%'.$role.'%');
+            }
+            if($unique_id != null){
+                $skillPosts->where('unique_id', 'like', '%'.$unique_id.'%');
+            }
+            if($post_title != null){
+                $skillPosts->where('post_title', 'like', '%'.$post_title.'%');
+            }
+            if($city != null){
+                $pattern = '/\s*,\s*/';
+                $replace = ',';
+                $city = preg_replace($pattern, $replace, $city);
+                $cityArray = explode(',', $city);
+                $skillPosts->whereIn('city', $cityArray);
+            }
+            if($prof_category != null){
+                $skillPosts->where('prof_category', 'like', '%'.$prof_category.'%');
+            }
+            if($experience != null){
+                $skillPosts->whereRaw("$experience between min_exp and max_exp");
+            }
+            if($time_for != null){
+                $skillPosts->where('time_for', '=', $time_for);
+            }
+            // if(count($post_type) > 0){
+            //  if(in_array("job", $post_type)){
+            //      $jobPosts->where('post_type', '=', $post_type[0]);
+            //  }elseif(in_array("skill", $post_type)){
+            //      $jobPosts->where('post_type', '=', $post_type[0]);
+            //  }
+            // }
+            if($post_type == 'skill'){
+                $skillPosts->where('post_type', '=', $post_type);
+            }
+            if(count($posted_by) > 0) {
+                if(in_array("individual", $posted_by)) {
+                    $skillPosts->where('individual_id', '!=', 0);
+                }elseif(in_array("company", $posted_by)) {
+                    $skillPosts->where('corporate_id', '!=', 0);
+                }
+            }
+
+            $skillPosts = $skillPosts->paginate(15);
+            if(Auth::user()->identifier == 1){
+                $userSkills = Induser::where('id', '=', Auth::user()->induser_id)->first(['linked_skill']);
+                $userSkills = array_map('trim', explode(',', $userSkills->linked_skill));
+                unset ($userSkills[count($userSkills)-1]); 
+            }
+            $links = DB::select('select id from indusers
+                                    where indusers.id in (
+                                            select connections.user_id as id from connections
+                                            where connections.connection_user_id=?
+                                             and connections.status=1
+                                            union 
+                                            select connections.connection_user_id as id from connections
+                                            where connections.user_id=?
+                                             and connections.status=1
+                                )', [Auth::user()->induser_id, Auth::user()->induser_id]);
+            $links = collect($links);
+
+            $groups = Group::leftjoin('groups_users', 'groups_users.group_id', '=', 'groups.id')                    
+                        ->where('groups.admin_id', '=', Auth::user()->induser_id)
+                        ->orWhere('groups_users.user_id', '=', Auth::user()->induser_id)
+                        ->groupBy('groups.id')
+                        ->get(['groups.id as id'])
+                        ->lists('id');
+
+            if(Auth::user()->induser_id != null){
+                $following = DB::select('select id from corpusers 
+                                         where corpusers.id in (
+                                            select follows.corporate_id as id from follows
+                                            where follows.individual_id=?
+                                    )', [Auth::user()->induser_id]);
+                $following = collect($following);
+            }
+            if(Auth::user()->corpuser_id != null){
+                $following = DB::select('select id from indusers
+                                         where indusers.id in (
+                                            select follows.individual_id as id from follows
+                                            where follows.corporate_id=?
+                                    )', [Auth::user()->corpuser_id]);
+                $following = collect($following);
+            }
+
+            if(Auth::user()->identifier == 1){
+                $share_links=Induser::whereRaw('indusers.id in (
+                                                select connections.user_id as id from connections
+                                                where connections.connection_user_id=?
+                                                 and connections.status=1
+                                                union 
+                                                select connections.connection_user_id as id from connections
+                                                where connections.user_id=?
+                                                 and connections.status=1
+                                    )', [Auth::user()->induser_id, Auth::user()->induser_id])
+                                ->get(['id','fname'])
+                                ->lists('fname','id');
+
+                $share_groups = Group::leftjoin('groups_users', 'groups_users.group_id', '=', 'groups.id')                  
+                                    ->where('groups.admin_id', '=', Auth::user()->induser_id)
+                                    ->orWhere('groups_users.user_id', '=', Auth::user()->induser_id)
+                                    ->groupBy('groups.id')
+                                    ->get(['groups.id as id', 'groups.group_name as name'])
+                                    ->lists('name', 'id');
+
+            }
+            $jobPosts = Postjob::orderBy('id', 'desc')
+                                     ->with('indUser', 'corpUser', 'postActivity', 'taggedUser', 'taggedGroup')
+                                     ->where('post_type', '=', 'job')
+                                     ->paginate(15);
+        }
+
+
+
+
+
+
+
+
 ->dailyAt('12:00');
 
 

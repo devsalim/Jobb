@@ -45,8 +45,14 @@ class PagesController extends Controller {
 
 			if(Auth::user()->identifier == 1 || Auth::user()->identifier == 2){
 				$skills = Skills::lists('name', 'id');
-				$posts = Postjob::orderBy('id', 'desc')->with('indUser', 'corpUser', 'postActivity', 'taggedUser', 'taggedGroup')->paginate(15);
-
+				$jobPosts = Postjob::orderBy('id', 'desc')
+								   ->with('indUser', 'corpUser', 'postActivity', 'taggedUser', 'taggedGroup')
+								   ->where('post_type', '=', 'job')
+								   ->paginate(15);
+				$skillPosts = Postjob::orderBy('id', 'desc')
+									 ->with('indUser', 'corpUser', 'postActivity', 'taggedUser', 'taggedGroup')
+									 ->where('post_type', '=', 'skill')
+									 ->paginate(15);
 				$links = DB::select('select id from indusers
 										where indusers.id in (
 												select connections.user_id as id from connections
@@ -126,7 +132,7 @@ class PagesController extends Controller {
 
 				}
 				
-				return view('pages.home', compact('posts', 'title', 'links', 'groups', 'following', 'userSkills', 'skills', 'linksApproval', 'linksPending', 'share_links', 'share_groups'));
+				return view('pages.home', compact('jobPosts', 'skillPosts', 'title', 'links', 'groups', 'following', 'userSkills', 'skills', 'linksApproval', 'linksPending', 'share_links', 'share_groups'));
 				// return $userSkills;
 			}elseif(Auth::user()->identifier == 3){
 				$reportAbuseCount = ReportAbuse::count();
@@ -164,13 +170,34 @@ class PagesController extends Controller {
 										from postactivities pa 
 										join postjobs pj on pj.id = pa.post_id
 										where pa.user_id=? and pa.contact_view = 1)
-										order by time desc', [Auth::user()->induser_id,Auth::user()->induser_id,Auth::user()->induser_id,Auth::user()->induser_id]);
+										order by time desc', [Auth::user()->id,Auth::user()->id,Auth::user()->id,Auth::user()->id]);
 				$myActivities = collect($myActivities);
+				if(Auth::user()->identifier == 1){
+					$share_links=Induser::whereRaw('indusers.id in (
+													select connections.user_id as id from connections
+													where connections.connection_user_id=?
+													 and connections.status=1
+													union 
+													select connections.connection_user_id as id from connections
+													where connections.user_id=?
+													 and connections.status=1
+										)', [Auth::user()->induser_id, Auth::user()->induser_id])
+									->get(['id','fname'])
+									->lists('fname','id');
+
+					$share_groups = Group::leftjoin('groups_users', 'groups_users.group_id', '=', 'groups.id')					
+								->where('groups.admin_id', '=', Auth::user()->induser_id)
+								->orWhere('groups_users.user_id', '=', Auth::user()->induser_id)
+								->groupBy('groups.id')
+								->get(['groups.id as id', 'groups.group_name as name'])
+								->lists('name', 'id');
+
+				}
 				// return $myActivities;
 			}else if(Auth::user()->identifier == 2){
 				$posts = Postjob::with('corpuser')->where('corporate_id', '=', Auth::user()->corpuser_id)->orderBy('id', 'desc')->get();
 			}
-			return view('pages.mypost', compact('posts', 'title', 'myActivities'));
+			return view('pages.mypost', compact('posts', 'title', 'myActivities', 'share_links', 'share_groups'));
 		}else{
 			return redirect('login');
 		}	
@@ -353,49 +380,53 @@ class PagesController extends Controller {
 			$unique_id = Input::get('unique_id');
 			$role = Input::get('role');
 
-			$posts = Postjob::orderBy('id', 'desc')->with('indUser', 'corpUser', 'postActivity');
+			if($post_type == 'job'){
+			$jobPosts = Postjob::orderBy('id', 'desc')->with('indUser', 'corpUser', 'postActivity');
 
 			if($role != null){
-				$posts->where('role', 'like', '%'.$role.'%');
+				$jobPosts->where('role', 'like', '%'.$role.'%');
 			}
 			if($unique_id != null){
-				$posts->where('unique_id', 'like', '%'.$unique_id.'%');
+				$jobPosts->where('unique_id', 'like', '%'.$unique_id.'%');
 			}
 			if($post_title != null){
-				$posts->where('post_title', 'like', '%'.$post_title.'%');
+				$jobPosts->where('post_title', 'like', '%'.$post_title.'%');
 			}
 			if($city != null){
 				$pattern = '/\s*,\s*/';
 				$replace = ',';
 				$city = preg_replace($pattern, $replace, $city);
 				$cityArray = explode(',', $city);
-				$posts->whereIn('city', $cityArray);
+				$jobPosts->whereIn('city', $cityArray);
 			}
 			if($prof_category != null){
-				$posts->where('prof_category', 'like', '%'.$prof_category.'%');
+				$jobPosts->where('prof_category', 'like', '%'.$prof_category.'%');
 			}
 			if($experience != null){
-				$posts->whereRaw("$experience between min_exp and max_exp");
+				$jobPosts->whereRaw("$experience between min_exp and max_exp");
 			}
 			if($time_for != null){
-				$posts->where('time_for', '=', $time_for);
+				$jobPosts->where('time_for', '=', $time_for);
 			}
-			if(count($post_type) > 0){
-				if(in_array("job", $post_type)){
-					$posts->where('post_type', '=', $post_type[0]);
-				}elseif(in_array("skill", $post_type)){
-					$posts->where('post_type', '=', $post_type[0]);
-				}
+			// if(count($post_type) > 0){
+			// 	if(in_array("job", $post_type)){
+			// 		$jobPosts->where('post_type', '=', $post_type[0]);
+			// 	}elseif(in_array("skill", $post_type)){
+			// 		$jobPosts->where('post_type', '=', $post_type[0]);
+			// 	}
+			// }
+			if($post_type == 'job'){
+				$jobPosts->where('post_type', '=', $post_type);
 			}
 			if(count($posted_by) > 0) {
 				if(in_array("individual", $posted_by)) {
-				    $posts->where('individual_id', '!=', 0);
+				    $jobPosts->where('individual_id', '!=', 0);
 				}elseif(in_array("company", $posted_by)) {
-				    $posts->where('corporate_id', '!=', 0);
+				    $jobPosts->where('corporate_id', '!=', 0);
 				}
 			}
 
-			$posts = $posts->paginate(15);
+			$jobPosts = $jobPosts->paginate(15);
 			if(Auth::user()->identifier == 1){
 				$userSkills = Induser::where('id', '=', Auth::user()->induser_id)->first(['linked_skill']);
 				$userSkills = array_map('trim', explode(',', $userSkills->linked_skill));
@@ -458,8 +489,13 @@ class PagesController extends Controller {
 							->lists('name', 'id');
 
 			}
+			$skillPosts = Postjob::orderBy('id', 'desc')
+									 ->with('indUser', 'corpUser', 'postActivity', 'taggedUser', 'taggedGroup')
+									 ->where('post_type', '=', 'skill')
+									 ->paginate(15);
+		}
 
-			return view('pages.home', compact('posts', 'title', 'links', 'groups', 'following', 'userSkills', 'skills', 'share_links', 'share_groups'));
+			return view('pages.home', compact('jobPosts', 'skillPosts', 'title', 'links', 'groups', 'following', 'userSkills', 'skills', 'share_links', 'share_groups'));
 			// return $posts;
 		}else{
 			return redirect('login');
@@ -562,6 +598,17 @@ class PagesController extends Controller {
 		return view('pages.viewcontact', compact('title','user'));
 	}
 
+	public function postDetail(){
+		if (Auth::check()) {		
+			$post = Postjob::with('indUser', 'corpUser', 'postActivity')->where('id', '=', Input::get('postid'))->first();
+			
+			return view('pages.postDetails', compact('post'));
+			// return $post;
+		}else{
+			return redirect('login');
+		}	
+	}
+
 	public function post(){
 		if (Auth::check()) {
 			$post = Postjob::with('indUser', 'corpUser', 'postActivity')->where('id', '=', Input::get('post_id'))->first();
@@ -613,10 +660,20 @@ class PagesController extends Controller {
 			$title = 'favourite';
 			$skills = Skills::lists('name', 'id');
 
-			$posts = Postjob::orderBy('id', 'desc')							
+			$post_type = Input::get('post_type');
+			if($post_type == 'job'){
+			$jobPosts = Postjob::orderBy('id', 'desc')							
 							->with('indUser', 'corpUser', 'postActivity', 'taggedUser', 'taggedGroup')
+							->where('post_type', '=', 'job')
 							->whereRaw('id in (select post_id from postactivities where user_id = '.Auth::user()->induser_id.' and fav_post = 1)')
 							->paginate(15);
+			}elseif($post_type == 'skill'){
+			$skillPosts = Postjob::orderBy('id', 'desc')							
+							->with('indUser', 'corpUser', 'postActivity', 'taggedUser', 'taggedGroup')
+							->where('post_type', '=', 'skill')
+							->whereRaw('id in (select post_id from postactivities where user_id = '.Auth::user()->induser_id.' and fav_post = 1)')
+							->paginate(15);	
+			}
 
 			$links = DB::select('select id from indusers
 									where indusers.id in (
@@ -681,7 +738,7 @@ class PagesController extends Controller {
 
 			}
 			
-			return view('pages.home', compact('posts', 'title', 'links', 'groups', 'following', 'userSkills', 'skills', 'share_links', 'share_groups'));
+			return view('pages.home', compact('jobPosts', 'skillPosts', 'title', 'links', 'groups', 'following', 'userSkills', 'skills', 'share_links', 'share_groups'));
 			// return $posts;
 		}else{
 			return redirect('login');

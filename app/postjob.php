@@ -6,8 +6,7 @@ class Postjob extends Model {
 
 	protected $fillable =  ['post_title', 
 							'post_type',
-							'post_compname', 
-							'prof_category', 
+							'post_compname',  
 							'role', 
 							'city', 
 							'state', 

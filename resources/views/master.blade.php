@@ -75,6 +75,8 @@
 
 <link href="../../assets/global/plugins/jcrop/css/jquery.Jcrop.min.css" rel="stylesheet"/>
 <link href="../../assets/admin/pages/css/image-crop.css" rel="stylesheet"/>
+ 
+    <link href="/assets/sumoselect.css" rel="stylesheet" />
 
 @yield('css')
 
@@ -354,7 +356,7 @@ body.page-boxed{
 <script src="../../assets/global/plugins/jcrop/js/jquery.color.js"></script>
 <script src="../../assets/global/plugins/jcrop/js/jquery.Jcrop.min.js"></script>
 <script src="../../assets/admin/pages/scripts/form-image-crop.js"></script>
-
+<script src="/assets/jquery.sumoselect.js"></script>
 <script>
 function loader(arg){
     if(arg == 'show'){

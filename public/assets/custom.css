@@ -106,7 +106,7 @@
 .post-job-skill-bar{
     position: absolute;
     right: 7px;
-    bottom: 8px;
+    bottom: -20px;
 }
 
 .job{
@@ -304,8 +304,20 @@ background-color:white;
     line-height: 1.8;
     font-weight: 500;
     float: left;
-    bottom: 0px;
-    left: 55px;
+    bottom: 2px;
+    left: 37px;
+}
+
+.badge-like-skill{
+    position: absolute;
+    color: darkslategray;
+    font-size: 14px;
+    text-align: center;
+    line-height: 1.8;
+    font-weight: 500;
+    float: left;
+    bottom: 2px;
+    left: 63px;
 }
 
 .badge-share{
@@ -372,8 +384,23 @@ background-color:white;
     display:none;
 }
 
+.post-name-css{
+    font-size: 15px;
+    text-decoration: none !important;
+    font-weight: 500;
+    color: dimgray !important;
+}
+
+.post-time-css{
+    color: dimgray;
+}
+
+.post-icon-color{
+    color: dimgray;
+}
+
 .user-link, .user-link2{
-    position: absolute;
+    /*position: absolute;
     width: 25px;
     height: 25px;
     background-color: darkslategrey;
@@ -383,11 +410,11 @@ background-color:white;
     box-shadow: 0px 1px 1px;
     border: 2px solid white;
     bottom: -6px;
-    left: 4px;
+    left: 4px;*/
 }
 
 .user-link3, .user-link4{
-    position: absolute;
+    /*position: absolute;
     width: 25px;
     height: 25px;
     background-color: lightgray;
@@ -397,7 +424,7 @@ background-color:white;
     box-shadow: 0px 1px 1px;
     border: 2px solid white;
         bottom: -6px;
-    left: 4px;
+    left: 4px;*/
 }
 
 .link-follow-icon{
@@ -413,7 +440,7 @@ background-color:white;
 
 @media (max-width: 768px){
    .user-link, .user-link2{
-    position: absolute;
+    /*position: absolute;
     width: 25px;
     height: 25px;
     background-color: darkslategrey;
@@ -423,11 +450,11 @@ background-color:white;
     border: 2px solid white;
     box-shadow: 0px 1px 1px;
     bottom: -10px;
-    left: 0px;
+    left: 0px;*/
 }
 
 .user-link3, .user-link4{
-    position: absolute;
+    /*position: absolute;
     width: 25px;
     height: 25px;
     background-color: lightgray;
@@ -437,7 +464,7 @@ background-color:white;
     box-shadow: 0px 1px 1px;
     border: 2px solid white;
     bottom: -10px;
-    left: 0px;
+    left: 0px;*/
 }
 
 .home-post{
@@ -475,27 +502,39 @@ background-color:white;
 }
 
 .time-item{
-    border: 1px solid #61b3de;
+    /*border: 1px solid #61b3de;*/
     margin: 0;
     position: relative;
     /*padding: 0px 5px 0px 5px;*/
-    box-shadow: 4px 4px 4px rgb(222, 222, 222);
+    box-shadow: 0px 2px 3px rgb(222, 222, 222);
     /*border-radius: 6px !important;*/
     background-color: white;
 }
 
 .time-item-ex{
-    border: 1px solid #61b3de;
+    /*border: 1px solid #61b3de;*/
     margin: 0;
     position: relative;
     /*padding: 0px 5px 0px 5px;*/
-    box-shadow: 4px 4px 4px rgb(222, 222, 222);
+    box-shadow: 0px 2px 3px rgb(222, 222, 222);
     /*border-radius: 6px !important;*/
-    background-color: whitesmoke;
+    background-color: #E8E8E8;
 }
 
 .new-timeline-body{
-    background-color: whitesmoke !important;
+    background-color: #E8E8E8 !important;
+}
+
+.fav-dir {
+    position: absolute;
+    right: 0;
+    top: 30px;
+}
+
+button.report-button-css {
+    width: 30px;
+    border: 0;
+    background-color: transparent;
 }
 
 .pin-bar{
@@ -518,8 +557,8 @@ background-color:white;
 }
 
 .userpic-box{
-    border: 1px darkgrey solid;
-    /*box-shadow: 2px 0px darkgrey;*/
+    /*border: 1px darkgrey solid;*/
+    box-shadow: 0px 2px 1px darkgrey;
 }
 
 .share-bar{
@@ -800,6 +839,24 @@ form.search-form.search-form-expanded {
     margin-left: 8px;
 }
 
+/*company/consultancy title*/
+.firm-type-left {
+    background: darkgrey;
+    padding: 2px 4px;
+    margin: 2px 0;
+    float: left;
+    color: white;
+}
+
+.follow-icon-right {
+    background: lavender;
+    padding: 2px 4px;
+    float: left;
+    color: darkslategray;
+}
+
+
+
 /* report abuse */
 div[class*='icheckbox_'], div[class*='iradio_'] {
     margin-right: 0; 
@@ -837,4 +894,131 @@ div[class*='icheckbox_'], div[class*='iradio_'] {
     width: 15px;
     border:0;
     font-size: 11px;
+}
+
+
+.home-tab-width-job{
+   width: 130px;
+    }
+
+.home-tab-width-skill{
+    width: 130px;
+    }
+
+.job-skill-tab{
+    font-size: 15px !important;
+    text-align: center;
+}
+
+.portlet > .portlet-title-home > .nav-tabs > li.active > a, .portlet > .portlet-title-home > .nav-tabs > li:hover > a {
+    color: #34bf49;
+    font-weight: 600;
+    background: white;
+    border-bottom: 4px solid #34bf49;
+}
+
+
+.portlet > .portlet-title-home > .nav-tabs > li > a {
+    background: none;
+    margin: 5px 0 0 1px;
+    border: 0;
+    padding: 8px 10px;
+    color: #9E9E9E;
+    border-bottom: 4px solid #E6E6E6;
+}
+
+.btn-success-new {
+    color: #fff;
+    background-color: #95A0A0;
+    border-color: #95A0A0;
+}
+
+.magic-match-css{
+    padding: 0px 5px;
+    margin: 0px 10px;
+    /*border-radius: 10px !important;*/
+    font-size: 12px;
+    background-color: dodgerblue;
+    border-color: dodgerblue;
+}
+
+.dropdown-menu-sort:before, .dropdown-toggle > .dropdown-menu-sort:before, .btn-group > .dropdown-menu-sort:before {
+    position: absolute;
+    top: -8px;
+    left: 60px;
+    right: auto;
+    display: inline-block !important;
+    border-right: 8px solid transparent;
+    border-bottom: 8px solid #e0e0e0;
+    border-left: 8px solid transparent;
+    content: '';
+}
+
+.dropdown > .dropdown-menu-sort:after, .dropdown-toggle > .dropdown-menu-sort:after, .btn-group > .dropdown-menu-sort:after {
+    position: absolute;
+    top: -7px;
+    left: 61px;
+    right: auto;
+    display: inline-block !important;
+    border-right: 7px solid transparent;
+    border-bottom: 7px solid #fff;
+    border-left: 7px solid transparent;
+    content: '';
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 1000;
+    display: none;
+    float: left;
+    min-width: 160px;
+    padding: 5px 0;
+    margin: 2px 0 0;
+    font-size: 12px;
+    text-align: left;
+    list-style: none;
+    background-color: #fff;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+    border: 1px solid #ccc;
+    border: 1px solid rgba(0,0,0,.15);
+    border-radius: 4px;
+    -webkit-box-shadow: 0 6px 12px rgba(0,0,0,.175);
+    box-shadow: 0 6px 12px rgba(0,0,0,.175);
+}
+
+button.btn.btn-xs.link-follow-icon-css{
+    font-size: 12px;
+    color: white;
+    background: #3f729b;
+    padding: 0 5px;
+}
+
+button.btn.btn-xs.unlink-follow-icon-css {
+    color: dimgrey;
+    background: whitesmoke;
+    border: 1px solid lightgrey;
+    font-size: 12px;
+}
+
+button.btn.btn-xs.linkrequest-follow-icon-css {
+    font-size: 12px;
+    color: dimgrey;
+    background: lightblue;
+    border: 1px solid lightgrey;
+}
+
+.report-css{
+    float: right;
+    position: absolute;
+    right: 10px;
+    bottom: 8px;
+}
+
+.job-type-skill-css{
+    padding:1px 4px;
+    color: white;
+    
 }

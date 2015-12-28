@@ -8,7 +8,7 @@ New Timeline
 /* Cubic Bezier Transition */
 .timeline {
   margin: 0;
-  padding: 6px;
+  padding: 9px;
   position: relative;
   margin-bottom: 0px;
 }
@@ -18,7 +18,7 @@ New Timeline
   position: absolute;
   display: block;
   width: 4px;
-  background: #f5f6fa;
+  /*background: #f5f6fa;*/
   top: 0px;
   bottom: 0px;
   margin-left: 38px;
@@ -32,14 +32,13 @@ New Timeline
 .timeline-badge {
   float: left;
   position: relative;
-  
-  height: 80px;
-  width: 80px;
+  height: 60px;
+  width: 60px;
 }
 
 .timeline-badge-userpic {
-  width: 80px;
-  border: 4px #f5f6fa solid;
+  width: 55px;
+  border: 2px #f5f6fa solid;
   -webkit-border-radius: 50% !important;
   -moz-border-radius: 50% !important;
   border-radius: 50% !important;
@@ -71,7 +70,7 @@ New Timeline
   position: relative;
   padding: 0;
 /*  margin-top: 10px;*/
-  margin-left: 100px;
+  margin-left: 84px;
   background-color: #f5f6fa;
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
@@ -131,7 +130,7 @@ New Timeline
 
 .timeline-body-content {
   font-size: 14px;
-  margin-top: 24px;
+  margin-top: 30px;
 }
 
 .timeline-body-img {
@@ -141,11 +140,11 @@ New Timeline
 }
 
 .page-container-bg-solid .timeline:before {
-  background: #fff;
+  /*background: #fff;*/
 }
 
 .page-container-bg-solid .timeline-badge-userpic {
-  border-color: cornflowerblue;
+  /*border-color: cornflowerblue;*/
 }
 
 .page-container-bg-solid .timeline-icon {
@@ -198,7 +197,7 @@ New Timeline
   }
 
   .timeline-body {
-    margin-left: 62px;
+    margin-left: 64px;
   }
 
   .timeline-body-arrow {

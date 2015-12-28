@@ -328,10 +328,16 @@
 					<span class="input-group-addon">
 						<i class="glyphicon glyphicon-font"></i>
 					</span>	
-					<input type="text" name="fname" class="form-control" placeholder="Full Name" value="{{ old('fname') }}">
+					<input type="text" id="name" name="fullname" class="form-control" placeholder="Full Name" value="{{ old('fullname') }}">
 				</div>
 			</div>
 		</div>
+	
+		<input type="hidden"  name="fname" id="first_name" class="form-control">
+	
+
+		<input type="hidden"  name="lname" id="last_name" class="form-control">
+				
 		<div class="form-group">
 			<div class="input-icon right">
 				<i class="fa"></i>
@@ -526,6 +532,28 @@
 
 
 @section('javascript')
+
+<script type="text/javascript">
+$(document).ready(function() {
+  
+  $('#name').blur(function(){
+  
+    var nameVal = $('#name').val()
+    var nameLength = nameVal.length;
+    var nameSplit = nameVal.split(" ");
+    var lastLength = nameLength - nameSplit[0].length;
+    var lastNameLength = nameSplit[0].length + 1;
+    var lastName = nameVal.slice(lastNameLength);
+    
+    $('#first_name').val(nameSplit[0]);
+    $('#last_name').val(lastName);
+    
+    return false;
+  });
+	
+});
+</script>
+
 <script type="text/javascript">
 function loader(arg){
     if(arg == 'show'){

@@ -99,7 +99,7 @@
 													<span class="input-group-addon">
 														<i class="fa fa-cube" style="color:darkcyan;"></i>
 													</span>			
-													<select class="job-role-ajax form-control" id="jobrole">
+													<select class="job-role-ajax form-control" name="role" id="jobrole">
 												  		<option value="0" selected="selected"></option>
 													</select>													
 												</div>
@@ -109,116 +109,8 @@
 											</div>
 										</div>
 									</div>
+									<input type="hidden" name="prof_category" value="prof_category">
 
-									<div class="row">
-										<div class="col-md-5 col-sm-5 col-xs-12">
-											<div class="form-group">
-												<label>Job Category <span class="required">
-												* </span></label>
-												<div class="input-group">
-													<span class="input-group-addon">
-													<i class="fa fa-cubes" style="color:darkcyan;"></i>
-													</span>
-													<select class="form-control" id="job_categories" multiple name="prof_category">
-<!-- 													Automotive/ Ancillaries
-														Banking/ Financial Services
-														Bio Technology & Life Sciences
-														Chemicals/Petrochemicals
-														Construction
-														FMCG
-														Education
-														Entertainment/ Media/ Publishing
-														Insurance
-														ITES/BPO
-														IT/ Computers - Hardware
-														IT/ Computers - Software
-														KPO/Analytics
-														Machinery/ Equipment Mfg.
-														Oil/ Gas/ Petroleum
-														Pharmaceuticals
-														Plastic/ Rubber
-														Power/Energy
-														Real Estate
-														Retailing
-														Telecom
-														Advertising/PR/Events
-														Agriculture/ Dairy Based
-														Aviation/Aerospace
-														Beauty/Fitness/PersonalCare/SPA
-														Beverages/ Liquor
-														Cement
-														Ceramics & Sanitary Ware
-														Consultancy
-														Courier/ Freight/ Transportation
-														Law Enforcement/Security Services
-														E-Learning
-														Shipping/ Marine Services
-														Engineering, Procurement, Construction
-														Environmental Service
-														Facility management
-														Fertilizer/ Pesticides
-														Food & Packaged Food
-														Textiles / Yarn / Fabrics / Garments
-														Mining
-														NGO
-														Public Relations (PR)
-														Travel/ Tourism
-														Other -->
-														<option value="">-- select --</option>
-														<!-- <optgroup label="Accounting"> -->
-														<option value="Automotive/ Ancillaries">Automotive/ Ancillaries</option>
-														<option value="Accounts/Finance/Tax">Accounts/Finance/Tax</option>
-														<option value="Agent">Agent</option>
-														<option value="Analytics & Business Intelligence">Analytics & Business Intelligence</option>
-														<!-- </optgroup>
-														<optgroup label="IT Field"> -->
-														<option value="HR/Administration/IR">HR/Administration/IR</option>
-														<option value="IT Software - Client Server">IT Software - Client Server</option>
-														<option value="IT Software - Mainframe">IT Software - Mainframe</option>
-														<option value="IT Software - Middleware">IT Software - Middleware</option>
-														<option value="IT Software - Mobile">IT Software - Mobile</option>
-														<option value="IT Software - Other">IT Software - Other</option>
-														<option value="IT Software - System Programming">IT Software - System Programming</option>
-														<option value="IT Software - Telecom Software">IT Software - Telecom Software</option>
-														<option value="IT Software - Application Programming">IT Software - Application Programming</option>
-														<option value="IT Software - DBA/Datawarehousing">IT Software - DBA/Datawarehousing</option>
-														<option value="IT Software - E-Commerce">IT Software - E-Commerce</option>
-														<option value="IT Software - ERP/CRM">IT Software - ERP/CRM</option>
-														<option value="IT Software - ERP/CRM">IT Software - ERP/CRM</option>
-														<option value="IT Software - ERP/CRM">IT Software - ERP/CRM</option>
-														<!-- </optgroup> -->
-														<option value="Travel/ Tourism">Travel/ Tourism</option>
-														<option value="Public Relations (PR)">Public Relations (PR)</option>
-														<option value="Printing/ Packaging">Printing/ Packaging</option>
-														<option value="Medical Transcription">Medical Transcription</option>
-														<option value="Market Research">Market Research</option>
-														<option value="Import / Export">Import / Export</option>
-														<option value="Hotels/ Restaurant">Hotels/ Restaurant</option>
-														<option value="Hospitals/ Health Care">Hospitals/ Health Care</option>
-														<option value="Consumer Electronics/Appliances">Consumer Electronics/Appliances</option>
-														<option value="Government/ PSU/ Defence">Government/ PSU/ Defence</option>
-														<option value="Gems & Jewellery">Gems & Jewellery</option>
-													</select>
-												</div>
-											</div>
-										</div>
-										<!--/span-->
-										<div class="col-md-2 col-sm-2 col-xs-2"></div>
-										<div class="col-md-5 col-sm-5 col-xs-12">
-											<div class="form-group">
-												<label>Job Role <span class="required">
-												* </span></label>
-												<div class="input-group">
-													<span class="input-group-addon">
-														<i class="fa fa-cube" style="color:darkcyan;"></i>
-													</span>
-													<select name="role" id="job_roles" class="form-control" style="z-index:0;">
-														<option value="">-- select --</option>						
-													</select>
-												</div>
-											</div>
-										</div>
-									</div>
 									@if(Auth::user()->identifier == 1)
 									<div class="row">
 										<div class="col-md-5 col-sm-5 col-xs-12">
