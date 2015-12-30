@@ -1451,30 +1451,8 @@
 					</div>
 				</div>
 
-				<div class="modal fade bs-modal-sm" id="links-follow" tabindex="-1" role="dialog" aria-hidden="true">
-					<div class="modal-dialog modal-sm">
-						<div class="modal-content" id="links-follow">
-							<div id="links-follow-content">
-								Links Follow
-							</div>
-						</div>
-						<!-- /.modal-content -->
-					</div>
-					<!-- /.modal-dialog -->
-				</div>
-				<!-- /.modal -->
-				<div class="modal fade" id="myactivity-posts" tabindex="-1" role="basic" aria-hidden="true">
-					<div class="modal-dialog">
-						<div class="modal-content">
-							<div id="myactivity-posts-content">
-								My Activity Post 
-							</div>
-						</div>
-						<!-- /.modal-content -->
-					</div>
-					<!-- /.modal-dialog -->
-				</div>
-				<!-- /.modal -->
+				
+				
 			</div>
 			<div class="tab-pane" id="portlet_tab2">
 				@if($title == 'home')
@@ -1969,18 +1947,19 @@
 															@endif
 														</div>
 													</div>
+
 													@if($expired == 1)
-													<div class="post-hover-exp">
+													<div class="post-hover-exp" data-postid="{{$post->id}}"><a class="myactivity-posts" data-toggle="modal" href="#myactivity-posts">
 														@else
-													<div class="post-hover-act">
+													<div class="post-hover-act" data-postid="{{$post->id}}"><a class="myactivity-posts" data-toggle="modal" href="#myactivity-posts">
 														@endif
-														<div class="row new-hide post-postision" style="cursor:pointer;">
+														<div class="row  post-postision" style="cursor:pointer;">
 	                                                        <div class="col-md-12">
 	                                                            <div class="" style="font-weight: 500;color: dodgerblue;font-size: 15px;">{{ $post->post_title }} </div>
 	                                                        </div>
 	                                                        @if($post->post_compname != null && $post->post_type == 'skill')
 	                                                         <div class="col-md-12">
-	                                                            <div><small style="font-size:13px;">Working at {{ $post->post_compname }}</div>
+	                                                            <div><small style="font-size:13px;">Working at {{ $post->post_compname }}</small></div>
 	                                                        </div>   
 	                                                        @endif
 	                                                   	</div>
@@ -2001,7 +1980,7 @@
                                                             <a><i class="fa fa-angle-double-up post-icon-color" style="font-size:20px;"></i></a>
                                                         </div>
                                                     </div>
-                                                </div>
+                                                </a></div>
 													<div class="row" style="margin: 5px 0px; border-top: 1px solid whitesmoke;">
 														<div class="col-md-12" style="margin: 3px 0px;">
 
@@ -2440,19 +2419,6 @@
 						<?php echo $skillPosts->render(); ?>
 					</div>
 				</div>
-
-				<div class="modal fade bs-modal-sm" id="links-follow" tabindex="-1" role="dialog" aria-hidden="true">
-					<div class="modal-dialog modal-sm">
-						<div class="modal-content" id="links-follow">
-							<div id="links-follow-content">
-								Links Follow
-							</div>
-						</div>
-						<!-- /.modal-content -->
-					</div>
-					<!-- /.modal-dialog -->
-				</div>
-				<!-- /.modal -->
 			</div>
 			<!-- <div class="tab-pane" id="portlet_tab3">
 				
@@ -2484,6 +2450,30 @@
 </div>	
 <!-- END TIMELINE ITEM -->
 <!-- SHARE MODAL FORM-->
+<div class="modal fade" id="myactivity-posts" tabindex="-1" role="basic" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div id="myactivity-posts-content">
+				My Activity Post 
+			</div>
+		</div>
+		<!-- /.modal-content -->
+	</div>
+	<!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+<div class="modal fade bs-modal-sm" id="links-follow" tabindex="-1" role="dialog" aria-hidden="true">
+	<div class="modal-dialog modal-sm">
+		<div class="modal-content" id="links-follow">
+			<div id="links-follow-content">
+				Links Follow
+			</div>
+		</div>
+		<!-- /.modal-content -->
+	</div>
+	<!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
 <div class="modal fade" id="share-post" tabindex="-1" role="dialog" aria-labelledby="share-post" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">

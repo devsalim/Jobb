@@ -1,3 +1,48 @@
+<div class="btn-group" style="float:right;margin:7px;">
+    <button class="btn btn-default btn-sm dropdown-toggle" type="button" data-toggle="dropdown" style="border: 0;">
+    <i class="glyphicon glyphicon-sort"></i> Sort by <i class="fa fa-angle-down"></i>
+    </button>
+    <ul class="dropdown-menu" role="menu">
+        <li>
+            <a href="javascript:;">
+            Date </a>
+        </li>
+        @if($post->post_type == 'job')
+        <li>
+            <a href="javascript:;">
+            Magic Match </a>
+        </li>
+        @elseif($post->post_type == 'skill')
+        <li>
+            <a href="javascript:;">
+            Individual Post </a>
+        </li>
+        <li>
+            <a href="javascript:;">
+            Company Post </a>
+        </li>
+        <li>
+            <a href="javascript:;">
+            Consultancy Post </a>
+        </li>
+        @endif
+    </ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <div class="timeline-body-head-caption" style="width:100%;margin:5px;">
                                                                 @if(Auth::user()->induser_id == $post->individual_id && $post->individual_id != null)
                                                                 @if(count($post->groupTagged) > 0)

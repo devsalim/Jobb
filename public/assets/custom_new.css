@@ -1043,3 +1043,39 @@ display: block;
 .checkboxFour input[type=checkbox]:checked + label {
 background: #26ca28;
 }
+
+
+.row.search-user-tool:hover {
+    background-color: #00bce4;
+    color: white;
+}
+
+
+.dropdown-menu-share {
+    position: absolute;
+    top: 100%;
+    left: -32px;
+    z-index: 1000;
+    display: none;
+    float: left;
+    min-width: 160px;
+    padding: 5px 0;
+    margin: 2px 0 0;
+    font-size: 12px;
+    text-align: left;
+    list-style: none;
+    background-color: #fff;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+    border: 1px solid #ccc;
+    border: 1px solid rgba(0,0,0,.15);
+    border-radius: 4px;
+    -webkit-box-shadow: 0 6px 12px rgba(0,0,0,.175);
+    box-shadow: 0 6px 12px rgba(0,0,0,.175);
+}
+
+.sort-css {
+    position: absolute;
+    right: 14px;
+    top: 18px;
+}

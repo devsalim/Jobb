@@ -203,8 +203,42 @@
 											</div>
 											<!-- /.modal -->
 										</div>
+										<div class="col-md-4 col-md-4 col-md-8">
+											<div class="dropdown ">											
+												<button class="btn dropdown-toggle" type="button" 
+														data-toggle="dropdown" title="Share" 
+														style="">
+													<i class="fa fa-share-square-o" 
+														style="font-size: 18px;color: darkslateblue;"></i> Share
+													<span class="badge-share" id="share-count-{{ $post->id }}">@if($post->postactivity->sum('share') > 0){{ $post->postactivity->sum('share') }}@endif</span>
+												</button>
+												<ul class="dropdown-menu dropdown-menu-share pull-left" role="menu" 
+													style="min-width:0;box-shadow:0 0 !important">
+													<li style="background-color: tan;">
+														<a href="#share-post" data-toggle="modal" class="jobtip sojt" id="sojt-{{$post->id}}" data-share-post-id="{{$post->id}}">
+															Share on Jobtip
+														</a>
+													</li>
+													<li style="background-color: #3b5998;">
+														<a href="/" class="facebook">
+															<i class="fa fa-facebook post-social-icon" ></i>
+														</a>
+													</li>
+													<li style="background-color: #c32f10;">
+														<a href="/" class="google-plus">
+															<i class="fa fa-google-plus post-social-icon"></i>
+														</a>
+													</li>
+													<li style="background-color: #00aced;">
+														<a href="/" class="linkedin">
+															<i class="fa fa-linkedin post-social-icon" ></i>
+														</a>
+													</li>
+												</ul>													
+											</div>
+										</div>
 										@elseif($expired == 1)
-										<div class="col-md-3 col-sm-3 col-xs-8">
+										<div class="col-md-4 col-sm-4 col-xs-8">
 											<a class="btn btn-sm btn-danger" disabled data-toggle="modal" href="#expire">
 												 Expired
 											</a>
@@ -221,38 +255,7 @@
 								</div>
 								<div class="post-hover-act" data-postid="{{$post->id}}"><a class="myactivity-posts" data-toggle="modal" href="#myactivity-posts"> Details</a></div>
 								<div class="share-mypost">
-									<div class="dropdown ">											
-										<button class="btn dropdown-toggle" type="button" 
-												data-toggle="dropdown" title="Share" 
-												style="background-color: transparent;border: 0;margin: 0px;">
-											<i class="fa fa-share-square-o" 
-												style="font-size: 19px;color: darkslateblue;"></i>
-											<span class="badge-share" id="share-count-{{ $post->id }}">@if($post->postactivity->sum('share') > 0){{ $post->postactivity->sum('share') }}@endif</span>
-										</button>
-										<ul class="dropdown-menu pull-right" role="menu" 
-											style="min-width:0;box-shadow:0 0 !important">
-											<li style="background-color: tan;">
-												<a href="#share-post" data-toggle="modal" class="jobtip sojt" id="sojt-{{$post->id}}" data-share-post-id="{{$post->id}}">
-													Share on Jobtip
-												</a>
-											</li>
-											<li style="background-color: #3b5998;">
-												<a href="/" class="facebook">
-													<i class="fa fa-facebook post-social-icon" ></i>
-												</a>
-											</li>
-											<li style="background-color: #c32f10;">
-												<a href="/" class="google-plus">
-													<i class="fa fa-google-plus post-social-icon"></i>
-												</a>
-											</li>
-											<li style="background-color: #00aced;">
-												<a href="/" class="linkedin">
-													<i class="fa fa-linkedin post-social-icon" ></i>
-												</a>
-											</li>
-										</ul>													
-									</div>
+									
 								</div>		
 							</div>
 
@@ -416,16 +419,83 @@
 															</li>
 															@elseif(Auth::user()->identifier == 1)
 															<li class="active">
-																<a href="#tab_1_{{ $post->id }}_2" class="label-new" data-toggle="tab" style="border-left: 0;">Contacted</a>
+																<a href="#tab_1_{{ $post->id }}_2" class="label-new" data-toggle="tab" style="border-left: 0;padding:10px 6px;">
+																	Contacted 
+																	<span class="badge" style="background-color: deepskyblue;"><?php $i=0; ?>
+																				@foreach($post->postactivity as $pa)
+																		  			@if($pa->contact_view == 1) <?php $i++; ?> @endif
+																		  		@endforeach
+																		  		<?php 
+																			  		if($i>0){
+																			  			echo $i;
+																			  		} 
+																			  	?> 
+																	</span>
+																	
+																</a>
+															
 															</li>
 															@endif
 															<li>
-																<a href="#tab_1_{{ $post->id }}_3" class="label-new" data-toggle="tab" >Thanks </a>
+																<a href="#tab_1_{{ $post->id }}_3" class="label-new" data-toggle="tab" style="border-left: 0;padding:10px 6px;">
+																	Thanks 
+																	<?php $i=0; ?>
+																				@foreach($post->postactivity as $pa)
+																		  			@if($pa->thanks == 1) <?php $i++; ?> @endif
+																		  		@endforeach
+
+																	<span class="badge" style="background-color: deepskyblue;">
+																		
+																		  		<?php 
+																			  		if($i>0){
+																			  			echo $i;
+																			  		} 
+																			  	?>
+																	</span>
+																</a>
 															</li>
 															<li>
-																<a href="#tab_1_{{ $post->id }}_4" class="label-new" data-toggle="tab" >Share </a>
+																<a href="#tab_1_{{ $post->id }}_4" class="label-new" data-toggle="tab" style="border-left: 0;padding:10px 6px;">
+																	Share 
+																	<span class="badge" style="background-color: deepskyblue;">
+																		<?php $i=0; ?>
+																				@foreach($post->postactivity as $pa)
+																		  			@if($pa->share == 1) <?php $i++; ?> @endif
+																		  		@endforeach
+																		  		<?php 
+																			  		if($i>0){
+																			  			echo $i;
+																			  		} 
+																			  	?>
+																	</span>
+																</a>
 															</li>
 														</ul>
+														<div class="sort-css">
+															<div class="btn-group">
+																<button class="btn btn-default btn-sm dropdown-toggle" type="button" data-toggle="dropdown" style="border: 0;color:#8c8c8c;background:transparent;">
+																<i class="glyphicon glyphicon-sort"></i> Sort by <i class="fa fa-angle-down"></i>
+																</button>
+																<ul class="dropdown-menu dropdown-menu-sort" role="menu" style="min-width: 130px;margin: 4px -25px;">
+																	<li >
+																		<a href="javascript:;">
+																		Date </a>
+																	</li>
+																	<li>
+																		<a href="javascript:;">
+																		Magic Match </a>
+																	</li>
+																	<li>
+																		<a href="javascript:;">
+																		Individual Post </a>
+																	</li>
+																	<li>
+																		<a href="javascript:;">
+																		corporate Post </a>
+																	</li>
+																</ul>
+															</div>
+														</div>
 														<div class="tab-content" style="padding: 0px 0px;margin: -7px 0px;">
 															@if(Auth::user()->identifier == 2)
 															<div class="tab-pane" id="tab_1_{{ $post->id }}_1">
@@ -569,7 +639,7 @@
 																							 Required Profile
 																						</th>
 																						<th class="col-md-6 col-sm-6 col-xs-6 matching-criteria-align">
-																							 My Profile
+																							{{ $pa->user->induser->fname }} Profile
 																						</th>
 																					</tr>
 																					</thead>
@@ -711,54 +781,7 @@
 															<div class="tab-pane active" id="tab_1_{{ $post->id }}_2">
 																<div class="portlet light" style="padding:0px !important;">
 
-																	<div class="portlet-title">
-																		<div class="btn-group" style="float:right;margin:7px;">
-																				<button class="btn btn-default btn-sm dropdown-toggle" type="button" data-toggle="dropdown" style="border: 0;">
-																				<i class="glyphicon glyphicon-sort"></i> Sort by <i class="fa fa-angle-down"></i>
-																				</button>
-																				<ul class="dropdown-menu" role="menu">
-																					<li>
-																						<a href="javascript:;">
-																						Date </a>
-																					</li>
-																					@if($post->post_type == 'job')
-																					<li>
-																						<a href="javascript:;">
-																						Magic Match </a>
-																					</li>
-																					@elseif($post->post_type == 'skill')
-																					<li>
-																						<a href="javascript:;">
-																						Individual Post </a>
-																					</li>
-																					<li>
-																						<a href="javascript:;">
-																						Company Post </a>
-																					</li>
-																					<li>
-																						<a href="javascript:;">
-																						Consultancy Post </a>
-																					</li>
-																					@endif
-																				</ul>
-																			</div>
-																		<div class="caption">
-																			<i class="fa fa-gift font-green-sharp"></i>
-																			<span class="caption-subject font-green-sharp ap-th-con">Contacted:</span>
-
-																			<span class="caption-helper">
-																				<?php $i=0; ?>
-																				@foreach($post->postactivity as $pa)
-																		  			@if($pa->contact_view == 1) <?php $i++; ?> @endif
-																		  		@endforeach
-																		  		<?php 
-																			  		if($i>0){
-																			  			echo $i;
-																			  		} 
-																			  	?>
-																			 </span>
-																		</div>		
-																	</div>
+																
 																	<div class="portlet-body">		
 
 																		<!-- <ul class="" data-handle-color="#637283"> 	 -->			                  
@@ -877,7 +900,7 @@
 																							 Required Profile
 																						</th>
 																						<th class="col-md-6 col-sm-6 col-xs-6 matching-criteria-align">
-																							 My Profile
+																							 {{ $pa->user->induser->fname }} Profile
 																						</th>
 																					</tr>
 																					</thead>
@@ -1126,7 +1149,7 @@
 																							 Required Profile
 																						</th>
 																						<th class="col-md-6 col-sm-6 col-xs-6 matching-criteria-align">
-																							 My Profile
+																							 {{ $pa->user->induser->fname }} Profile
 																						</th>
 																					</tr>
 																					</thead>
