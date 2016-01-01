@@ -300,44 +300,4 @@ class ConnectionsController extends Controller {
 		return view('pages.connections', compact('title', 'followers'));	
 	}
 
-	public function searchLinks()
-	{
-		$keywords = Input::get('keywords');
-		/*$users = Induser::where('email', '=', $keywords)
-						->where('id', '<>', Auth::user()->induser_id)
-						->orWhere('fname', 'like', '%'.$keywords.'%')
-						->where('id', '<>', Auth::user()->induser_id)
-						->orWhere('lname', 'like', '%'.$keywords.'%')
-						->where('id', '<>', Auth::user()->induser_id)
-						->orWhere('working_at', 'like', '%'.$keywords.'%')
-						->where('id', '<>', Auth::user()->induser_id)
-					    ->get();
-*/
-		$users = Induser::whereRaw('indusers.id in (
-										select connections.user_id as id from connections
-										where connections.connection_user_id=?
-										 and connections.status=1 
-										union 
-										select connections.connection_user_id as id from connections
-										where connections.user_id=?
-										 and connections.status=1
-									)', [Auth::user()->induser_id, Auth::user()->induser_id])
-						->whereRaw('fname like '.'%'.$keywords.'%')						
-						->get(['id','fname', 'lname', 'working_at', 'city', 'state', 'profile_pic']);
-		
-		/*$links = DB::select('select id from indusers
-									where indusers.id in (
-											select connections.user_id as id from connections
-											where connections.connection_user_id=?
-											 and connections.status=1
-											union 
-											select connections.connection_user_id as id from connections
-											where connections.user_id=?
-											 and connections.status=1
-								)', [Auth::user()->induser_id, Auth::user()->induser_id]);
-		$links = collect($links);*/
-
-		// return view('pages.searchUsers', compact('users', 'links', 'corps', 'follows'));
-		return $users;
-	}
 }

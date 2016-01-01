@@ -94,7 +94,7 @@ Route::group(array('before' => 'auth'), function(){
 	Route::post('feedback/home', 'FeedbackController@report');
 
 	Route::post('searchConnections', 'ConnectionsController@searchConnections');
-	Route::get('searchLinks', 'ConnectionsController@searchLinks');
+	Route::post('searchLinks', 'GroupController@searchLinks');
 
 	Route::get('individual_view', 'ViewpageController@index');
 	Route::get('individual_view/create', 'ViewpageController@create');

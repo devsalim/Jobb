@@ -212,5 +212,41 @@ class GroupController extends Controller {
 		return redirect('/group');
 	}
 
+	public function searchLinks(){
+
+		$keywords = Input::get('keywords');
+		$groupId = Input::get('groupid');
+
+		$users = Induser::whereRaw('indusers.id in (
+										select connections.user_id as id from connections
+										where connections.connection_user_id=?
+										 and connections.status=1 
+										union 
+										select connections.connection_user_id as id from connections
+										where connections.user_id=?
+										 and connections.status=1
+										union
+										select groups.admin_id as id from groups
+										where groups.id=?
+									)', [Auth::user()->induser_id, Auth::user()->induser_id, $groupId])
+						->where('fname', 'like', '%'.$keywords.'%')
+						->orWhere('lname', 'like', '%'.$keywords.'%')						
+						->get(['id','fname', 'lname', 'working_at', 'city', 'state', 'profile_pic']);
+
+		$groupAdmin = Induser::whereRaw('indusers.id in (select admin_id from groups where id='.$groupId.')')->get(['id']);
+		$groupAdmin = collect($groupAdmin);
+
+		$groupUsers = Induser::whereRaw('indusers.id in (select user_id from groups_users where group_id='.$groupId.' 
+														  union
+														 select groups.admin_id from groups where groups.id='.$groupId.' )'
+										)->get(['id']);
+		$groupUsers = collect($groupUsers);
+
+		return view('pages.search.searchUsersForGroup', compact('users', 'groupUsers', 'groupId', 'groupAdmin'));
+		// return $users;
+		// return $groupUsers;
+
+	}
+
 
 }

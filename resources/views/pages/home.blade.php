@@ -307,8 +307,8 @@
 
 <div class="portlet light bordered" style="border: none !important;background:transparent;padding:0 !important">										
 	<div class="portlet-body form">
-			<div class="form-body">
-				<div class="row">
+			<div class="form-body" id="posts">
+				<div class="row" id="post-items">
 
 
 					@if (count($posts) > 0)
@@ -344,7 +344,7 @@
 							$post->individual_id == Auth::user()->induser_id || 
 							count($elements) > 0 || 
 							(count($groupsTagged) == 0 && count($post->tagged) == 0))
-						<div class="col-md-9">
+						<div class="col-md-9 post-item">
 
 							<div class="timeline" >
 								<!-- TIMELINE ITEM -->
@@ -1370,7 +1370,6 @@
 
 @section('javascript')
 <script>
-
 jQuery(document).ready(function() {       
 	ComponentsIonSliders.init();    
 	ComponentsDropdowns.init();
@@ -1833,6 +1832,20 @@ $('.contact-btn').on('click',function(event){
 	    return false;
   });
 });
-</script>
 
+</script>
+<style type="text/css">
+.pagination{
+	display: none;
+}
+#infscr-loading{
+    text-align: center;
+    display: block;
+    clear: both;
+    padding: 10px 0;
+    width: 75%;
+}
+</style>
+<script src = "/assets/js/jquery.infinitescroll.min.js"></script>
+<script src = "/assets/js/myinfinite.js"></script>
 @stop

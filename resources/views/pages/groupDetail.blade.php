@@ -12,8 +12,7 @@
 			<a href="/group" class="group-title-info btn btn-xs btn-warning" 
 				style="text-decoration:none;border-radius: 4px !important;float:left;margin:0 -15px;">
 				Back
-			</a>
-			
+			</a>			
 
 			<div class="group-admin-title pull-right">
 				@if($group->admin->id == Auth::user()->induser_id)
@@ -127,17 +126,21 @@
 				<div class="col-md-10" style="">
 					<div class="form-group clearfix" style="margin-bottom:0">	
 						<!-- BEGIN FORM-->
-						<form action="searchConnections" class="horizontal-form" method="post">
+						<form action="/searchLinks" class="horizontal-form" method="post">
 							<input type="hidden" name="_token" value="{{ csrf_token() }}">				
 							<div class="input-icon right">
 								<i class="fa fa-search" style="color: darkcyan;"></i>
-								<input type="text" name="keywords" id="search-input " onkeydown="down()" onkeyup="up()" class="form-control" placeholder="Search" style="border: 1px solid darkcyan;">
+								<input type="text" name="keywords" id="search-input" 
+										onkeydown="down()" 
+										onkeyup="up()" class="form-control" 
+										placeholder="Search" style="border: 1px solid darkcyan;" />
 							</div>	
 						</form>
 						<!-- END FORM-->
 					</div>
 
-					<div class="col-md-12" id="search-results" style="background:#f2f2f2;max-height:200px;overflow:auto;margin-bottom:10px">
+					<div class="col-md-12" id="search-results" 
+						 style="background:#f2f2f2;max-height:200px;overflow:auto;margin-bottom:10px">
 					</div>
 				</div>			
 			</div>
@@ -339,27 +342,21 @@ $.ajaxSetup({
 });
 
 var timer;
-function up()
-{
-	timer=setTimeout(function()
-		{
+function up(){
+	timer=setTimeout(function(){
 			var keywords = $('#search-input').val();
-			if(keywords.length>2)
-			{
-				$.post('/searchConnections', {keywords: keywords}, function(markup)
-				{
+			var group_id = {{$group->id}};
+			if(keywords.length>2){
+				$.post('/searchLinks', {keywords: keywords, groupid: group_id}, function(markup){
 					$('#search-results').html(markup);
 				});
-			}
-			else
-			{
+			}else{
 				$('#search-results').empty();
 			}
 		}, 500);
 }
 
-function down()
-{
+function down(){
 	clearTimeout(timer);
 }
 </script>

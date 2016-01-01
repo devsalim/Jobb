@@ -265,7 +265,7 @@ body.page-boxed{
   @include('includes.footer')
 
   <div id="loader" style="display:none;z-index:999999;background:white" class="page-loading">
-    <img src="assets/loader.gif"><span> Please wait...</span>
+    <img src="/assets/loader.gif"><span> Please wait...</span>
   </div>
 </div>
 

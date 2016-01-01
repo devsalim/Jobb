@@ -503,16 +503,15 @@
 										<span class="input-group-addon">
 											<i class="fa fa-map-marker"></i>
 										</span>
-										<select id="select2_sample_modal_2" value="{{ $user->prefered_location }}" placeholder="Prefered Location" name="prefered_location" class="form-control select2" multiple>
-											<option value="">&nbsp;</option>
-											<option @if($user->prefered_location=="Hyderabad") {{ $selected }} @endif value="Hyderabad">Hyderabad</option>
-											<option @if($user->prefered_location=="Bangalore") {{ $selected }} @endif value="Bangalore">Bangalore</option>
-											<option @if($user->prefered_location=="Patna") {{ $selected }} @endif value="Patna">Patna</option>
-											<option @if($user->prefered_location=="Mumbai") {{ $selected }} @endif value="Mumbai">Mumbai</option>
-											<option @if($user->prefered_location=="Delhi") {{ $selected }} @endif value="Delhi">Delhi</option>
-											<option @if($user->prefered_location=="Chennai") {{ $selected }} @endif value="Chennai">Chennai</option>
-										</select>
+
+										<input type="text" id="pref_loc" name="pref_loc" class="form-control" placeholder="Preferred location">
+
+										
+										
 									</div>
+
+									<input type="text" id="prefered_location" name="prefered_location" class="form-control select2" placeholder="Type in preferred location">
+
 								</div>
 							</div>
 							<!--/span-->
@@ -606,25 +605,51 @@
 
 <script src="http://maps.googleapis.com/maps/api/js?libraries=places&region=IN" type="text/javascript"></script>
 <script type="text/javascript">
-	function initialize() {
-		var options = {	types: ['(cities)'], componentRestrictions: {country: "in"}	};
+	// var inputId_div = $("#city");
+	function initializeCity() {
+		var options = {	types: ['(cities)'], componentRestrictions: {country: "in"}};
 		var input = document.getElementById('city');
 		var autocomplete = new google.maps.places.Autocomplete(input, options);
-		autocomplete.addListener('place_changed', onPlaceChanged); 
+		autocomplete.addListener('place_changed', onPlaceChanged);
 		function onPlaceChanged() {
 		  var place = autocomplete.getPlace();
-		  if (place.address_components) { city = place.address_components[0];
+		  if (place.address_components) { 
+		  	city = place.address_components[0];
+		  	// setTimeout(function(){ inputId_div.val(''); inputId_div.focus();},0);
 		  	document.getElementById('city').value = city.long_name;
+		  	// console.log(place);
 		  } else { document.getElementById('autocomplete').placeholder = 'Enter a city'; }
 		}
 	}
-   google.maps.event.addDomListener(window, 'load', initialize);   
+   google.maps.event.addDomListener(window, 'load', initializeCity);   
+
+   // preferred loc
+   var prefLoc = $("#pref_loc");
+	function initPrefLoc() {
+		var options = {	types: ['(regions)'], componentRestrictions: {country: "in"}};
+		var input = document.getElementById('pref_loc');
+		var autocomplete = new google.maps.places.Autocomplete(input, options);
+		autocomplete.addListener('place_changed', onPlaceChanged);
+		function onPlaceChanged() {
+		  var place = autocomplete.getPlace();
+		  if (place.address_components) { 
+		  	pref_loc = place.address_components[0];
+		  	setTimeout(function(){ prefLoc.val(''); prefLoc.focus();},0);
+		  	var selectedLoc = document.getElementById('prefered_location').value;
+		  	selectedLoc = selectedLoc + pref_loc.long_name+', ';
+		  	document.getElementById('prefered_location').value = selectedLoc;
+		  	console.log(place);
+		  } else { document.getElementById('autocomplete').placeholder = 'Your preferred location'; }
+		}
+	}
+   google.maps.event.addDomListener(window, 'load', initPrefLoc);   
 </script>
 	<script>
         $("#job-category").multipleSelect({
             filter: true,
             multiple: true
         });
+        $("#prefered_location").select2({ data: selectedLoc });
     </script>
 
 <script src="{{ asset('/assets/Edubranch.js') }}"></script>
