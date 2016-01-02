@@ -10,6 +10,7 @@
 @section('content')
 <!-- BEGIN PAGE HEADER-->
 <h3 class="page-title" style="margin:15px;">
+
 {{$title}} <small>results</small>
 </h3>
 <!-- END PAGE HEADER-->
@@ -26,6 +27,7 @@
 @endif
 
 <div class="row search-form-default" style="margin:15px;">
+
 	<div class="col-md-6">
 		<form class="search-form" action="/search/" method="GET">
 			<div class="input-group" style="margin: 0 0 15px 0;">
@@ -45,6 +47,7 @@
 </div>
 
 <div class="tabbable-line" style="margin:7px;">
+
 	<ul class="nav nav-tabs " style="padding:0">
 		<li>
 			<a href="#tab_ind" data-toggle="tab">Individual</a>
@@ -63,8 +66,7 @@
 
 		<div class="tab-pane active" id="tab_ind">
 			<div class="search-classic">
-				<p>About {{count($searchResultForInd)}} results for "{{$searchQuery}}"</p>
-					
+				<p>About {{count($searchResultForInd)}} results for "{{$searchQuery}}"</p>		
 				@foreach($searchResultForInd as $ind)
 				<div class="row search-user-tool" style="margin:0;">
 				<div class="col-md-7">					

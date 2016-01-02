@@ -161,8 +161,7 @@
         </ul>
       </div>
       </div>
-
-       <!-- Search -->
+      <!-- Search -->
       <form class="search-form search-form-expanded" action="/search/" method="GET">
         <div class="input-group search-input-box">
           <input type="text" class="form-control search-field" 

@@ -440,27 +440,20 @@ $.ajaxSetup({
 });
 
 var timer;
-function up()
-{
-	timer=setTimeout(function()
-		{
+function up(){
+	timer=setTimeout(function(){
 			var keywords = $('#search-input').val();
-			if(keywords.length>2)
-			{
-				$.post('/searchConnections', {keywords: keywords}, function(markup)
-				{
+			if(keywords.length>2){
+				$.post('/searchConnections', {keywords: keywords}, function(markup){
 					$('#search-results').html(markup);
 				});
-			}
-			else
-			{
+			}else{
 				$('#search-results').empty();
 			}
 		}, 500);
 }
 
-function down()
-{
+function down(){
 	clearTimeout(timer);
 }
 </script>

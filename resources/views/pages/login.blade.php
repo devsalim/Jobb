@@ -77,7 +77,7 @@
 						<i class="fa"></i>
 						<div class="input-group margin-top-10">
 							<span class="input-group-addon"><i class="icon-envelope"></i></span>	
-							<input type="text" name="email" class="form-control" value="{{ old('email') }}" placeholder="Email Id or Mobile No">
+							<input type="text" name="email" class="form-control" value="{{ old('email') }}" placeholder="Email Id or Mobile No" autocomplete="off">
 						</div>
 					</div>
 				</div>
@@ -154,7 +154,7 @@
 					<i class="fa"></i>
 					<div class="input-group margin-top-10">
 						<span class="input-group-addon"><i class="icon-envelope"></i></span>	
-						<input type="email" name="email" class="form-control" value="{{ old('email') }}" placeholder="Email Id">
+						<input type="email" name="email" class="form-control" value="{{ old('email') }}" placeholder="Email Id" autocomplete="off">
 					</div>
 				</div>
 			</div>

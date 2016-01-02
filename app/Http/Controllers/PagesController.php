@@ -45,6 +45,7 @@ class PagesController extends Controller {
 			$title = 'home';
 
 			if(Auth::user()->identifier == 1 || Auth::user()->identifier == 2){
+
 				$skills = Skills::lists('name', 'id');
 				$jobPosts = Postjob::orderBy('id', 'desc')
 								   ->with('indUser', 'corpUser', 'postActivity', 'taggedUser', 'taggedGroup')
@@ -133,11 +134,9 @@ class PagesController extends Controller {
 								->lists('name', 'id');
 
 				}
-				
 				return view('pages.home', compact('jobPosts', 'skillPosts', 'title', 'links', 'groups', 'following', 'userSkills', 'skills', 'linksApproval', 'linksPending', 'share_links', 'share_groups'));
-				// return $userSkills;
-
-			}elseif(Auth::user()->identifier == 3){
+			} 
+			elseif(Auth::user()->identifier == 3){
 				$reportAbuseCount = ReportAbuse::count();
 				$feedbackCount = Feedback::count();
 				$expFeedCounts = DB::select(
@@ -160,10 +159,11 @@ class PagesController extends Controller {
 										from dual;
 									')
 								);
-				// return $expFeedCounts;
+
 				return view('pages.dashboard', compact('title', 'reportAbuseCount', 'feedbackCount', 'expFeedCounts', 'useFeedCounts'));
 			}
-		}else{
+		}
+		else{
 			return redirect('login');
 		}	
 	}
@@ -516,10 +516,8 @@ class PagesController extends Controller {
 									 ->with('indUser', 'corpUser', 'postActivity', 'taggedUser', 'taggedGroup')
 									 ->where('post_type', '=', 'skill')
 									 ->paginate(15);
-		}
-
+			}
 			return view('pages.home', compact('jobPosts', 'skillPosts', 'title', 'links', 'groups', 'following', 'userSkills', 'skills', 'share_links', 'share_groups'));
-			// return $posts;
 		}else{
 			return redirect('login');
 		}	

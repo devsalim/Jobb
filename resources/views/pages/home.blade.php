@@ -279,15 +279,17 @@
 					@endif
 					
 
-				@if (count($jobPosts) > 0)
-					<?php $var = 1; ?>
-					@foreach($jobPosts as $post)
-					@if($post->post_type == 'job' && Auth::user()->induser_id != $post->individual_id)
-				<div class="portlet light bordered" style="border: none !important;background:transparent;padding:0 !important;margin: -20px 0px;">										
-					<div class="portlet-body form">
-							<div class="form-body">
-								<div class="row">
+		@if (count($jobPosts) > 0)
+			<?php $var = 1; ?>
+			<div class="portlet light bordered" 
+				 style="border: none !important; background:transparent; padding:0 !important; margin: -20px 0px;">										
+				<div class="portlet-body form" id="posts">
+					<div class="form-body" id="post-items">
+								
+					@foreach($jobPosts as $post)					
 
+						@if($post->post_type == 'job')				
+						<div class="row post-item" >
 										<?php $groupsTagged = array(); ?>
 										@foreach($post->groupTagged as $gt)
 											<?php $groupsTagged[] = $gt->group_id; ?>
@@ -1470,27 +1472,22 @@
 											</div>
 											<!-- END TIMELINE ITEM -->
 										</div>
-										@endif
-									
+										@endif									
+								
+								@endif
 								</div>
-
-
+							<?php $var++; ?>
+							@endforeach					 			
 							</div>
+						</div>
 					</div>
-				</div>
-				@endif
-				<?php $var++; ?>
-				 @endforeach
-
 				@endif
 
 				<div class="row">
 					<div class="col-md-12">
 						<?php echo $jobPosts->render(); ?>
 					</div>
-				</div>
-
-				
+				</div>			
 				
 			</div>
 			<div class="tab-pane" id="skill">
@@ -1765,12 +1762,12 @@
 
 				@if (count($skillPosts) > 0)
 					<?php $var = 1; ?>
+					<div class="portlet light bordered" style="border: none !important;background:transparent;padding:0 !important;margin: -20px 0px;">								
+						<div class="portlet-body form" id="post-skills">
+								<div class="form-body" id="post-skill-items">
 					@foreach($skillPosts as $post)
-					@if($post->post_type == 'skill')
-				<div class="portlet light bordered" style="border: none !important;background:transparent;padding:0 !important;margin: -20px 0px;">										
-					<div class="portlet-body form">
-							<div class="form-body">
-								<div class="row">
+						@if($post->post_type == 'skill')					
+							<div class="row post-skill-item">
 
 										<?php $groupsTagged = array(); ?>
 										@foreach($post->groupTagged as $gt)
@@ -2440,17 +2437,15 @@
 										</div>
 										@endif
 									
-								</div>
-
-
-							</div>
+								</div>							
+					@endif
+					<?php $var++; ?>
+				 @endforeach
+				 		</div>
 					</div>
 				</div>
-				@endif
-				<?php $var++; ?>
-				 @endforeach
-				 @elseif(count($skillPosts) == 0)
-				 <div>No skills Posted Yet!!!
+				@elseif(count($skillPosts) == 0)
+				<div>No skills Posted Yet!!!
 				@endif
 
 				<div class="row">
@@ -2602,7 +2597,7 @@ function resetFilter() {
 <script type="text/javascript">
   $(document).ready(function(){
 	// myactivity-post
-$('.myactivity-posts').on('click',function(event){  	    
+$('.myactivity-posts').live('click',function(event){  	    
   	event.preventDefault();
   	var post_id = $(this).parent().data('postid');
   	console.log(post_id);
@@ -3086,5 +3081,17 @@ $('.contact-btn').on('click',function(event){
   });
 });
 </script>
-
+<style type="text/css">
+.pagination{
+	display: none;
+}
+#infscr-loading{
+    text-align: center;
+    display: block;
+    clear: both;
+    padding: 10px 0;
+}
+</style>
+<script src = "/assets/js/jquery.infinitescroll.min.js"></script>
+<script src = "/assets/js/myinfinite.js"></script>
 @stop

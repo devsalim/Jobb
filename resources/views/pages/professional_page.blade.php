@@ -442,16 +442,17 @@
 										<span class="input-group-addon">
 											<i class="fa fa-map-marker"></i>
 										</span>
-										<select id="select2_sample_modal_2" value="{{ $user->prefered_location }}" placeholder="Prefered Location" name="prefered_location" class="form-control select2" multiple>
-											<option value="">&nbsp;</option>
-											<option @if($user->prefered_location=="Hyderabad") {{ $selected }} @endif value="Hyderabad">Hyderabad</option>
-											<option @if($user->prefered_location=="Bangalore") {{ $selected }} @endif value="Bangalore">Bangalore</option>
-											<option @if($user->prefered_location=="Patna") {{ $selected }} @endif value="Patna">Patna</option>
-											<option @if($user->prefered_location=="Mumbai") {{ $selected }} @endif value="Mumbai">Mumbai</option>
-											<option @if($user->prefered_location=="Delhi") {{ $selected }} @endif value="Delhi">Delhi</option>
-											<option @if($user->prefered_location=="Chennai") {{ $selected }} @endif value="Chennai">Chennai</option>
-										</select>
+
+										<input type="text" id="pref_loc" name="pref_loc" 
+										class="form-control" placeholder="Select preferred location"
+										onblur="pref_loc_locality()">									
+										
 									</div>
+
+									<input type="text" id="prefered_location" onblur="pref_loc_locality()"
+											name="prefered_location" class="form-control select2" disabled
+											placeholder="Selected preferred location" style="border-top: 0;">
+
 								</div>
 							</div>
 							<!--/span-->
@@ -462,8 +463,11 @@
 										<span class="input-group-addon">
 										<i class="fa fa-map-marker"></i>
 										</span>
-										<input type="text" name="p_locality" class="form-control" placeholder="Locality">
-										
+										<input type="text" id="pref_locality"
+										onblur="pref_loc_locality()" 
+										name="p_locality" class="form-control" placeholder="Select locality" disabled>
+										<input type="text" id="preferred_locality" placeholder="Selected locality" style="border-top:0" 
+										name="preferred_locality" class="form-control" disabled>
 									</div>
 								</div>
 							</div>
@@ -601,19 +605,114 @@
 
 <script src="http://maps.googleapis.com/maps/api/js?libraries=places&region=IN" type="text/javascript"></script>
 <script type="text/javascript">
-	function initialize() {
-		var options = {	types: ['(cities)'], componentRestrictions: {country: "in"}	};
+	// var inputId_div = $("#city");
+	function initializeCity() {
+		var options = {	types: ['(cities)'], componentRestrictions: {country: "in"}};
 		var input = document.getElementById('city');
 		var autocomplete = new google.maps.places.Autocomplete(input, options);
-		autocomplete.addListener('place_changed', onPlaceChanged); 
+		autocomplete.addListener('place_changed', onPlaceChanged);
 		function onPlaceChanged() {
 		  var place = autocomplete.getPlace();
-		  if (place.address_components) { city = place.address_components[0];
+		  if (place.address_components) { 
+		  	city = place.address_components[0];
 		  	document.getElementById('city').value = city.long_name;
 		  } else { document.getElementById('autocomplete').placeholder = 'Enter a city'; }
 		}
 	}
-   google.maps.event.addDomListener(window, 'load', initialize);   
+   google.maps.event.addDomListener(window, 'load', initializeCity);   
+
+    // preferred loc
+    var prefLoc = $("#pref_loc");
+	function initPrefLoc() {
+		var options = {	types: ['(cities)'], componentRestrictions: {country: "in"}};
+		var input = document.getElementById('pref_loc');
+		var autocomplete = new google.maps.places.Autocomplete(input, options);
+		autocomplete.addListener('place_changed', onPlaceChanged);
+
+		function onPlaceChanged() {
+		  var place = autocomplete.getPlace();
+		  if (place.address_components) { 
+		  	pref_loc_city = place.address_components[0].long_name;
+		  	if(place.address_components.length == 3){		  		
+		  		pref_loc_state = '('+place.address_components[1].long_name+')';
+		  	}else if(place.address_components.length == 4){
+		  		pref_loc_state = '('+place.address_components[2].long_name+')';
+		  	}else{
+		  		pref_loc_state = '';
+		  	}
+		  	setTimeout(function(){ prefLoc.val(''); prefLoc.focus();},0);
+		  	var selectedLoc = document.getElementById('prefered_location').value;
+		  	if(selectedLoc == ''){
+		  		selectedLoc = selectedLoc + pref_loc_city+pref_loc_state;
+		  	}else{
+		  		selectedLoc = selectedLoc + ', '+pref_loc_city+pref_loc_state;
+		  	}
+		  	
+		  	document.getElementById('prefered_location').value = selectedLoc;
+		  	// console.log(place);
+		  } else { 
+		  	document.getElementById('autocomplete').placeholder = 'Your preferred location'; 
+		  }
+		}
+
+	}
+   google.maps.event.addDomListener(window, 'load', initPrefLoc);
+
+
+	function pref_loc_locality(){
+		var selected_pref_locations = (document.getElementById('prefered_location').value).split(',');
+		var selected_pref_locality = (document.getElementById('preferred_locality').value).split(',');
+		if(selected_pref_locations.length == 1){
+			document.getElementById("prefered_location").disabled = false;
+			document.getElementById("pref_locality").disabled = false;
+			document.getElementById("pref_locality").value = '';
+		}else if(selected_pref_locations.length > 1){
+			document.getElementById("prefered_location").disabled = false;
+			document.getElementById("pref_locality").disabled = true;
+			document.getElementById("preferred_locality").disabled = true;
+			document.getElementById("pref_locality").value = 'Can\'t select locality for multiple location';
+		}else if(document.getElementById('prefered_location').value == ''){
+			document.getElementById("pref_locality").disabled = true;
+			document.getElementById("preferred_locality").disabled = true;
+		}
+
+		if(document.getElementById('preferred_locality').value == ''){
+			document.getElementById("preferred_locality").disabled = true;
+		}else if(selected_pref_locality.length >= 1 && selected_pref_locations.length == 1){
+			document.getElementById("preferred_locality").disabled = false;
+		}else{
+			document.getElementById("preferred_locality").disabled = true;
+		}
+	}
+
+	var prefLoc2 = $("#pref_locality");
+	function initializePrefLocality() {
+		var options = {	types: ['(regions)'], componentRestrictions: {country: "in"} };
+		var input = document.getElementById('pref_locality');
+		var autocomplete = new google.maps.places.Autocomplete(input, options);
+		autocomplete.addListener('place_changed', onPlaceChanged);
+		function onPlaceChanged() {
+		  var place2 = autocomplete.getPlace();
+		  if (place2.address_components) { 
+		  	var pref_locality = place2.address_components[0].long_name;
+
+		  	setTimeout(function(){ prefLoc2.val(''); prefLoc2.focus();},0);
+		  	var selectedLocality = document.getElementById('preferred_locality').value;
+		  	if(selectedLocality == ''){
+		  		selectedLocality = selectedLocality + pref_locality;
+		  	}else{
+		  		selectedLocality = selectedLocality + ', '+pref_locality;
+		  	}		  	
+		  	document.getElementById('preferred_locality').value = selectedLocality;
+		  	pref_loc_locality();
+
+		  	// console.log(place2);
+		  } else { document.getElementById('pref_locality').placeholder = 'select some locality'; }
+		}
+	}
+   google.maps.event.addDomListener(window, 'load', initializePrefLocality); 
+
+
 </script>
 <script type="text/javascript">
 $(document).ready(function() {
