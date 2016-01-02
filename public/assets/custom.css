@@ -47,6 +47,19 @@
     /*box-shadow: 0px 3px 3px lightgrey;*/
 }
 
+.profile-userpic-view {
+    position: relative;
+    overflow: hidden;
+    width: 100px;
+    height: 100px;
+    border-radius: 5% !important;
+    margin: auto;
+    background: url("images/ab.png") !important;
+    background-size: 100%;
+    text-align: center;
+    cursor: pointer;
+    box-shadow: 0px 3px 3px lightgrey; 
+}
 
 .hover-image {
     position: absolute;
@@ -969,7 +982,7 @@ div[class*='icheckbox_'], div[class*='iradio_'] {
 .dropdown-menu {
     position: absolute;
     top: 100%;
-    left: 0;
+    left: -35px;
     z-index: 1000;
     display: none;
     float: left;
@@ -1021,4 +1034,104 @@ button.btn.btn-xs.linkrequest-follow-icon-css {
     padding:1px 4px;
     color: white;
     
+}
+
+.portlet > .portlet-title-mypost > .nav-tabs > li.active > a, .portlet > .portlet-title-mypost > .nav-tabs > li:hover > a {
+    color: #333;
+    background: whitesmoke;
+    border: 0;
+}
+
+.post-title-new{
+    font-weight: 500;
+    color: dodgerblue;
+    font-size: 15px;
+    text-decoration: none;
+}
+
+.post-expire-duration-css{
+    padding: 0 8px;
+    border-radius: 15px !important;
+    background-color: dimgray;
+    border-color: dimgray;
+    color: white !important;
+}
+
+.contacted-css{
+    font-size: 14px;
+    font-weight: 500;
+    margin: 10px 5px;
+    color: #4DB3A2 !important;
+}
+
+button.btn.btn-default.btn-sm.dropdown-toggle.contact-view-css {
+    padding: 2px 8px;
+    background-color: transparent;
+    border-radius: 12px !important;
+    box-shadow: 0 2px 3px;
+}
+
+.resume-button-css{
+    font-size: 12px;
+    padding: 3px 10px;
+    border-radius: 15px !important;
+    text-decoration: none;
+    background-color: transparent;
+    color: black;
+    border: 1px solid lightgrey;
+    box-shadow: 0 2px 3px;
+}
+
+.dropdown-menu-contact li > a:hover, .dropdown-menu-contact .active > a, .dropdown-menu-contact .active > a:hover {
+    text-decoration: none;
+    background-image: none;
+    background-color: #404040;
+    filter: none;
+}
+
+.group-title-css{
+    font-weight: 600;
+    font-size: 14px;
+    text-decoration: none !important;
+}
+
+.group-back-position{
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.profile-edit-new {
+    top: 0px;
+    right: 64px;
+    margin: 0;
+    color: #fff;
+    opacity: 0.6;
+    border-top-right-radius: 5px !important;
+    padding: 0 9px;
+    font-size: 11px;
+    background: #000;
+    position: absolute;
+    filter: alpha(opacity=60);
+}
+
+.h3-new{
+    margin-bottom: 10px;
+    margin-top: 5px;
+}
+
+.tool-new{
+    position: absolute;
+    right: 10px;
+    top: 5px;
+}
+
+.profile-view-icon{
+    font-size: 20px !important;
+}
+
+.portlet-title-new{
+    min-height: 30px;
+    border-bottom: 1px solid lightgray;
+    margin: 8px 0;
 }

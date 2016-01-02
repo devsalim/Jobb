@@ -2,184 +2,123 @@
 
 <!--  -->
 @section('content')
-<!-- <dl class="dropdown"> 
-  
-    <dt>
-    <a href="#">
-      <span class="hida">Select</span>    
-      <p class="multiSel"></p>  
-    </a>
-    </dt>
-  
-    <dd>
-        <div class="mutliSelect">
-            <ul>
-                <li>
-                    <input type="checkbox" value="Apple" />Apple</li>
-                <li>
-                    <input type="checkbox" value="Blackberry" />Blackberry</li>
-                <li>
-                    <input type="checkbox" value="HTC" />HTC</li>
-                <li>
-                    <input type="checkbox" value="Sony Ericson" />Sony Ericson</li>
-                <li>
-                    <input type="checkbox" value="Motorola" />Motorola</li>
-                <li>
-                    <input type="checkbox" value="Nokia" />Nokia</li>
-            </ul>
-        </div>
-    </dd>
-</dl> -->
 <?php $selected = 'selected'; ?> 
-<div class="portlet light bordered" style="border: 1px solid #e1e1e1 !important;">
-	<div class="portlet-title">
-		<div class="caption">
-			<i class=""></i>
-			<span class="caption-subject font-blue-hoki bold uppercase">Profile Details</span>
-		</div>
-		<div class="tools">
-			<a href="" class="collapse"></a>
-		</div>
+<div class="row profile-account" style="margin:15px;">
+	<div class="col-md-3">
+		<ul class="ver-inline-menu tabbable margin-bottom-10">
+			<li class="active">
+				<a data-toggle="tab" href="#tab_1-1">
+				<i class="fa fa-cog"></i> Personal info </a>
+				<span class="after">
+				</span>
+			</li>
+			<li>
+				<a data-toggle="tab" href="#tab_2-2">
+				<i class="fa fa-picture-o"></i> Professional Details </a>
+			</li>
+			<li>
+				<a data-toggle="tab" href="#tab_3-3">
+				<i class="fa fa-eye"></i> Privacity Settings </a>
+			</li>
+		</ul>
 	</div>
-	<div class="portlet-body form">
-		<!-- BEGIN FORM-->
-		<form action="{{ url('/individual/basicupdate') }}" id="profile_validation" class="horizontal-form" method="post">
-			<input type="hidden" name="_token" value="{{ csrf_token() }}">
-			<div class="form-body">
-				<div class="row">
-					<div class="col-md-9" style="">
-						<div class="row">
-							@if (count($errors) > 0)
-							<div class="alert alert-danger">
-								<ul>
-									@foreach ($errors->all() as $error)
-										<li>{{ $error }}</li>
-									@endforeach
-								</ul>
-							</div>
-							@endif
-							<div class="col-md-6 col-sm-6">
-								<div class="form-group">
-									<label>First Name</label>
-									<div class="input-group">
-										<span class="input-group-addon">
-											<i class="glyphicon glyphicon-font"></i>
-										</span>
-										<input type="text" name="fname" class="form-control" placeholder="First Name" value="{{ $user->fname }}">
-									</div>
-								</div>
-							</div>
-							<!--/span-->
-							<div class="col-md-6 col-sm-6">
-								<div class="form-group">
-									<label>Last Name</label>
-									<div class="input-group">
-										<span class="input-group-addon">
-											<i class="glyphicon glyphicon-font"></i>
-										</span>
-										<input type="text" name="lname" class="form-control" value="{{ $user->lname }}" placeholder="Last Name">
-									</div>
-								</div>
-							</div>
-							<!--/span-->
-						</div>
-						<div class="row">
-							<div class="col-md-6 col-sm-6">
-								<div class="form-group">
-									<label>Mobile No</label>
-									<div class="input-group">
-										<span class="input-group-addon">
-											<i class="icon-call-end"></i>
-										</span>
-										<input type="text" 
-												name="mobile" 
-												class="form-control" 
-												placeholder="Mobile No" 
-												value="{{ $user->mobile }}"
-												@if($user->mobile_verify == 1)readonly @endif
-												>
-										<span class="input-group-addon">
-											@if($user->mobile_verify == 0)
-											<a>
-												<i class="fa fa-exclamation-circle" 
-												style="color: #cb5a5e;font-size: 16px;"></i>
-											</a>
-											@elseif($user->mobile_verify == 1)
-												<i class="glyphicon glyphicon-ok-circle" style="color: #1EC71E;font-size: 16px;"></i>
-											@endif
-										</span>
-										<span class="input-group-addon">
-											<a href="#edit-me-modal" data-toggle="modal" data-type="mobile" class="change-me">
-												<i class="fa fa-pencil"></i>
-											</a>
-										</span>
-									</div>
-								</div>
-							</div>
-							<!--/span-->
-							<div class="col-md-6 col-sm-6">
-								<div class="form-group">
-									<label>Email Id</label>								
-									<div class="input-group">
-										<span class="input-group-addon">
-											<i class="icon-envelope"></i>
-										</span>
-										<input type="text" name="email" 
-												class="form-control" 
-												placeholder="Email Id" 
-												value="{{ $user->email }}"
-												@if($user->email_verify == 1)readonly @endif>
-										<span class="input-group-addon">
-											@if($user->email_verify == 0)
-											<a>
-												<i class="fa fa-exclamation-circle" 
-												style="color: #cb5a5e;font-size: 16px;"></i>
-											</a>
-											@elseif($user->email_verify == 1)
-												<i class="glyphicon glyphicon-ok-circle" style="color: #1EC71E;font-size: 16px;"></i>
-											@endif
-										</span>
-										<span class="input-group-addon">
-											<a href="#edit-me-modal" data-toggle="modal" data-type="email" class="change-me">
-												<i class="fa fa-pencil"></i>
-											</a>
-										</span>
-									</div>
-								</div>
-							</div>
-							<!--/span-->
+	<div class="col-md-8" style="padding:0;">
+		<div class="tab-content">
+			<div id="tab_1-1" class="tab-pane active">
+				<form action="{{ url('/individual/basicupdate') }}" id="profile_validation" class="horizontal-form" method="post">
+				<input type="hidden" name="_token" value="{{ csrf_token() }}">
+					<div class="form-group">
+						<label class="control-label">Full Name</label>
+						<div class="input-group">
+							<span class="input-group-addon">
+								<i class="glyphicon glyphicon-font"></i>
+							</span>
+							<input type="text" id="name" name="fullname" class="form-control" placeholder="Full Name" value="{{ $user->fname }} {{ $user->lname }}">
+							<input type="hidden"  name="fname" id="first_name" class="form-control">
+							<input type="hidden"  name="lname" id="last_name" class="form-control">
 						</div>
 					</div>
-				</div>
-				<div class="form-actions ">
-					<button type="submit" class="btn blue"><i class="fa fa-check"></i> Update</button>
-					<a href="/profile/ind/{{Auth::user()->induser_id}}" class="btn default">Cancel</a>
-				</div>
+					<div class="row">
+						<div class="col-md-6 col-sm-6">
+							<div class="form-group">
+								<label>Mobile No</label>
+								<div class="input-group">
+									<span class="input-group-addon">
+										<i class="icon-call-end"></i>
+									</span>
+									<input type="text" 
+											name="mobile" 
+											class="form-control" 
+											placeholder="Mobile No" 
+											value="{{ $user->mobile }}"
+											@if($user->mobile_verify == 1)readonly @endif
+											>
+									<span class="input-group-addon">
+										@if($user->mobile_verify == 0)
+										<a>
+											<i class="fa fa-exclamation-circle" 
+											style="color: #cb5a5e;font-size: 16px;"></i>
+										</a>
+										@elseif($user->mobile_verify == 1)
+											<i class="glyphicon glyphicon-ok-circle" style="color: #1EC71E;font-size: 16px;"></i>
+										@endif
+									</span>
+									<span class="input-group-addon">
+										<a href="#edit-me-modal" data-toggle="modal" data-type="mobile" class="change-me">
+											<i class="fa fa-pencil"></i>
+										</a>
+									</span>
+								</div>
+							</div>
+						</div>
+						<!--/span-->
+						<div class="col-md-6 col-sm-6">
+							<div class="form-group">
+								<label>Email Id</label>								
+								<div class="input-group">
+									<span class="input-group-addon">
+										<i class="icon-envelope"></i>
+									</span>
+									<input type="text" name="email" 
+											class="form-control" 
+											placeholder="Email Id" 
+											value="{{ $user->email }}"
+											@if($user->email_verify == 1)readonly @endif>
+									<span class="input-group-addon">
+										@if($user->email_verify == 0)
+										<a>
+											<i class="fa fa-exclamation-circle" 
+											style="color: #cb5a5e;font-size: 16px;"></i>
+										</a>
+										@elseif($user->email_verify == 1)
+											<i class="glyphicon glyphicon-ok-circle" style="color: #1EC71E;font-size: 16px;"></i>
+										@endif
+									</span>
+									<span class="input-group-addon">
+										<a href="#edit-me-modal" data-toggle="modal" data-type="email" class="change-me">
+											<i class="fa fa-pencil"></i>
+										</a>
+									</span>
+								</div>
+							</div>
+						</div>
+						<!--/span-->
+					</div>
+					<div class="margiv-top-10">
+						<button type="submit" class="btn green"><i class="fa fa-check"></i> Update</button>
+						<a href="/profile/ind/{{Auth::user()->induser_id}}" class="btn default">Cancel</a>
+					</div>
+				</form>
 			</div>
-		</form>
-		<!-- END FORM-->
-	</div>
-</div>
-
-<div class="portlet light bordered" style="border: 1px solid #e1e1e1 !important;">
-	<div class="portlet-title">
-		<div class="caption">
-			<i class=""></i>
-			<span class="caption-subject font-blue-hoki bold uppercase">Professional Details</span>
-		</div>
-		<div class="tools">
-			<a href="" class="collapse"></a>
-		</div>		
-	</div>
-	<div class="portlet-body form ">
-		<!-- BEGIN FORM-->
+			<div id="tab_2-2" class="tab-pane">
+						<!-- BEGIN FORM-->
 		<form action="{{ url('/individual/update', Auth::user()->induser_id) }}" id="ind_validation" 
 				class="horizontal-form prof_detail" method="post" enctype="multipart/form-data">
 			<input type="hidden" name="_token" value="{{ csrf_token() }}">
 			<div class="form-body">
 				<div class="row">
 					<div class="" style=""></div>
-					<div class="col-md-9" style="">
+					<div class="col-md-12" style="">
 						<div class="row">
 							<div class="col-md-12">
 								<div class="form-group">
@@ -582,7 +521,63 @@
 			</div>
 		</form>
 		<!-- END FORM-->
+			</div>
+			<div id="tab_3-3" class="tab-pane">
+				<form action="#">
+					<table class="table table-bordered table-striped">
+					<tr>
+						<td>
+							 Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus..
+						</td>
+						<td>
+							<label class="uniform-inline">
+							<input type="radio" name="optionsRadios1" value="option1"/>
+							Yes </label>
+							<label class="uniform-inline">
+							<input type="radio" name="optionsRadios1" value="option2" checked/>
+							No </label>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							 Enim eiusmod high life accusamus terry richardson ad squid wolf moon
+						</td>
+						<td>
+							<label class="uniform-inline">
+							<input type="checkbox" value=""/> Yes </label>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							 Enim eiusmod high life accusamus terry richardson ad squid wolf moon
+						</td>
+						<td>
+							<label class="uniform-inline">
+							<input type="checkbox" value=""/> Yes </label>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							 Enim eiusmod high life accusamus terry richardson ad squid wolf moon
+						</td>
+						<td>
+							<label class="uniform-inline">
+							<input type="checkbox" value=""/> Yes </label>
+						</td>
+					</tr>
+					</table>
+					<!--end profile-settings-->
+					<div class="margin-top-10">
+						<a href="javascript:;" class="btn green">
+						Save Changes </a>
+						<a href="javascript:;" class="btn default">
+						Cancel </a>
+					</div>
+				</form>
+			</div>
+		</div>
 	</div>
+	<!--end col-md-9-->
 </div>
 
 <!-- Mobile/Email verification -->
@@ -619,6 +614,26 @@
 		}
 	}
    google.maps.event.addDomListener(window, 'load', initialize);   
+</script>
+<script type="text/javascript">
+$(document).ready(function() {
+  
+  $('#name').blur(function(){
+  
+    var nameVal = $('#name').val()
+    var nameLength = nameVal.length;
+    var nameSplit = nameVal.split(" ");
+    var lastLength = nameLength - nameSplit[0].length;
+    var lastNameLength = nameSplit[0].length + 1;
+    var lastName = nameVal.slice(lastNameLength);
+    
+    $('#first_name').val(nameSplit[0]);
+    $('#last_name').val(lastName);
+    
+    return false;
+  });
+	
+});
 </script>
 	<script>
         $("#job-category").multipleSelect({

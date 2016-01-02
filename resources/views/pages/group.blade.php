@@ -22,7 +22,7 @@
 			<div style="border: 1px dotted lightgray; margin:10px 0">
 				<div class="row" style="margin: 7px 0;padding: 7px 0px 0 0px;">
 					<div class="col-md-12 col-sm-12 col-xs-12">
-						<a href="/group/{{ $group->id }}" style="font-weight:600;">
+						<a href="/group/{{ $group->id }}" class="group-title-css">
 							{{ $group->group_name }}
 						</a>
 						@if($group->posts_count == 1)
@@ -46,7 +46,7 @@
 				</div>
 				<div class="row" style="margin:10px 0">
 					<div class="col-md-4 col-sm-4 col-xs-3">
-						<i class="fa fa-users"></i> ({{count($group->users)}})
+						<i class="fa fa-users" style="color:dimgrey;"></i> ({{count($group->users)}})
 					</div>
 					<div class="col-md-4 col-sm-4 col-xs-5 group-align">
 						@if($group->admin->id == Auth::user()->induser_id)

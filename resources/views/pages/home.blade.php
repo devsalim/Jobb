@@ -6,11 +6,11 @@
 	<div class="portlet-title portlet-title-home" style="float:none;margin:0 auto; display:table;background: white;padding: 0;">
 		<ul class="nav nav-tabs" style="padding:0;">
 			<li class="active home-tab-width-job" >
-				<a href="#portlet_tab1" data-toggle="tab" class="job-skill-tab">
+				<a href="#job" data-toggle="tab" class="job-skill-tab">
 				Jobs</a>
 			</li>
 			<li class="home-tab-width-skill">
-				<a href="#portlet_tab2" data-toggle="tab" class="job-skill-tab">
+				<a href="#skill" data-toggle="tab" class="job-skill-tab">
 				Skills </a>
 			</li>
 			<!-- <li>
@@ -21,7 +21,7 @@
 	</div>
 	<div class="portlet-body" style="background-color:whitesmoke;">
 		<div class="tab-content">
-			<div class="tab-pane active" id="portlet_tab1">
+			<div class="tab-pane active" id="job">
 				@if($title == 'home')
 					<!-- Jobtip Filter Start -->
 					<form id="home-filter" name="filter_form" action="/home" method="post">
@@ -221,7 +221,7 @@
 									</div> 
 									<div class="col-md-3 col-sm-3 col-xs-6 extra-show done-show" style="margin: 7px 0;">
 										<div class="form-group">		
-											<select class="bs-select form-control input-sm filter-input" name="education" multiple style="padding: 0;margin: 7px 0px;">
+											<select class="bs-select form-control input-sm filter-input" name="posted_by" multiple style="padding: 0;margin: 7px 0px;">
 												<optgroup label="Posted by">
 													<option selected value=""><b>Posted by:</b> All</option>
 													<option value="individual">Individual</option>
@@ -249,7 +249,7 @@
 								<div class="col-md-6 col-sm-6 col-xs-12 extra-show done-show" style="margin: 12px 0;">
 						         	<div class="form-group">
 							         	 <label style="font-size:13px;">
-											<input type="checkbox" checked class="icheck" data-checkbox="icheckbox_square-grey"> Do not include Expired Post
+											<input type="checkbox" name="expired" checked class="icheck" data-checkbox="icheckbox_square-grey"> Do not include Expired Post
 										</label>
 									</div>
 								</div>
@@ -510,16 +510,13 @@
 													
 													<div class="row post-postision" style="cursor:pointer;">
                                                         <div class="col-md-12">
-                                                            <div class="" style="font-weight: 500;color: dimgrey;font-size: 15px;text-decoration:none;">{{ $post->post_title }} </div>
+                                                            <div class="post-title-new capitalize">{{ $post->post_title }} </div>
                                                         </div>
                                                         @if($post->post_compname != null && $post->post_type == 'job')
                                                         <div class="col-md-12">
-                                                            <div><small style="font-size:13px;color:dimgrey !important;">Required at {{ $post->post_compname }}</small></div>
+                                                            <div><small class="capitalize" style="font-size:13px;color:dimgrey !important;">Required at {{ $post->post_compname }}</small></div>
                                                         </div>
-                                                         @elseif($post->post_compname != null && $post->post_type == 'skill')
-                                                         <div class="col-md-12">
-                                                            <div><small style="font-size:13px;color:dimgrey !important;">Working at {{ $post->post_compname }}</small></div>
-                                                        </div>   
+                                                            
                                                         @endif
                                                    	</div>
                                                    
@@ -533,12 +530,10 @@
                                                         <div class="col-md-4 col-sm-4 col-xs-4 elipsis-code elipsis-city-code" style="padding:0 12px;">
                                                         <small style="font-size:13px;color:dimgrey !important;"> <i class="glyphicon glyphicon-map-marker post-icon-color"></i>&nbsp;: {{ $post->city }}</small>
                                                         </div>
-                                                        <div id="{{ $post->id }}-{{$var}}-{{$var}}" class="col-md-4 col-sm-4 col-xs-4 hide-details" style="float: right;right: -40px;bottom: 16px;">
-                                                            <a><i class="fa fa-angle-double-down post-icon-color" style="font-size:20px;"></i></a>
+                                                        <div class="col-md-4 col-sm-4 col-xs-4 hide-details" style="float: right;right: -40px;bottom: 16px;">
+                                                           Details
                                                         </div>
-                                                        <div id="{{ $post->id }}-{{$var}}" class="col-md-4 col-sm-4 col-xs-4 show-details" style="float: right;right: -40px;bottom: 16px;">
-                                                            <a><i class="fa fa-angle-double-up post-icon-color" style="font-size:20px;"></i></a>
-                                                        </div>
+                                                       
                                                     </div>
                                                     </a></div>
 													<div class="row" style="margin: 5px 0px; border-top: 1px solid whitesmoke;">
@@ -637,7 +632,7 @@
 																								@endif
 																							</td>
 																						</tr>
-																						<tr class="@if(count($counts) > 0) success @else danger @endif">
+																						<tr class="@if(count($counts) > 0) success @else danger-new @endif">
 																							
 																							<td class="matching-criteria-align">
 
@@ -645,11 +640,15 @@
 																									{{$skill->name}},
 																								@endforeach
 																							</td>
+																							@if(Auth::user()->induser->linked_skill != null)
 																							<td class="matching-criteria-align">
 																								@foreach($userSkills as $myskill)
 																									{{$myskill}},
 																								@endforeach												
 																							</td>
+																							@else
+																							<td class="matching-criteria-align"><a href="/individual/edit">Add Skills </a></td>
+																							@endif
 																						</tr>
 																						<tr class="@if(strcasecmp($post->role, Auth::user()->induser->role) == 0) title-bacground-color @else title-bacground-color @endif">
 																							<td colspan="2" class="matching-criteria-align">
@@ -660,12 +659,16 @@
 																								@endif
 																							</td>
 																						</tr>
-																						<tr class="@if(strcasecmp($post->role, Auth::user()->induser->role) == 0) success @else danger @endif">
+																						<tr class="@if(strcasecmp($post->role, Auth::user()->induser->role) == 0) success @else danger-new @endif">
 																							<!-- <td>
 																								<label class="title-color">Job Role</label>
 																							</td> -->
 																							<td class="matching-criteria-align">{{ $post->role }}</td>
+																							@if(Auth::user()->induser->role != null)
 																							<td class="matching-criteria-align">{{ Auth::user()->induser->role }}</td>
+																							@else
+																							<td class="matching-criteria-align"><a href="/individual/edit">Add Job Role </a></td>
+																							@endif
 																						</tr>
 																						
 																						
@@ -679,12 +682,16 @@
 																								@endif
 																							</td>
 																						</tr>
-																						<tr class="@if($post->min_exp == Auth::user()->induser->experience) success @else danger @endif">
+																						<tr class="@if($post->min_exp == Auth::user()->induser->experience) success @else danger-new @endif">
 																							<!-- <td>
 																								<label class="title-color">Experience</label>
 																							</td> -->
 																							<td class="matching-criteria-align">{{ $post->min_exp }}-{{ $post->max_exp }}</td>
+																							@if(Auth::user()->induser->experience != null)
 																							<td class="matching-criteria-align">{{ Auth::user()->induser->experience }}</td>
+																							@else
+																							<td class="matching-criteria-align"><a href="/individual/edit">Add Experience </a></td>
+																							@endif
 																						</tr>
 																						<tr class="@if($post->education == Auth::user()->induser->education) title-bacground-color @else title-bacground-color @endif">
 																							<td colspan="2" class="matching-criteria-align">
@@ -696,12 +703,16 @@
 																								
 																							</td>
 																						</tr>
-																						<tr class="@if($post->education == Auth::user()->induser->education) success @else danger @endif">
+																						<tr class="@if($post->education == Auth::user()->induser->education) success @else danger-new @endif">
 																							<!-- <td>
 																								<label class="title-color">Education</label>
 																							</td> -->
 																							<td class="matching-criteria-align">{{ $post->education }}</td>
+																							@if(Auth::user()->induser->education != null)
 																							<td class="matching-criteria-align">{{ Auth::user()->induser->education }}</td>
+																							@else
+																							<td class="matching-criteria-align"><a href="/individual/edit">Add Education </a></td>
+																							@endif
 																						</tr>
 																						<tr class="@if($post->city == Auth::user()->induser->city) title-bacground-color @else title-bacground-color @endif">
 																							<td colspan="2" class="matching-criteria-align">
@@ -712,10 +723,14 @@
 																								@endif
 																							</td>
 																						</tr>
-																						<tr class="@if($post->city == Auth::user()->induser->city) success @else danger @endif">
+																						<tr class="@if($post->city == Auth::user()->induser->city) success @else danger-new @endif">
 																																					
 																							<td class="matching-criteria-align">{{ $post->city }}</td>
+																							@if(Auth::user()->induser->city != null)
 																							<td class="matching-criteria-align">{{ Auth::user()->induser->city }}</td>
+																							@else
+																							<td class="matching-criteria-align"><a href="/individual/edit">Add Job Location </a></td>
+																							@endif
 																						</tr>
 																						<tr class="@if($post->time_for == Auth::user()->induser->prefered_jobtype || ($post->time_for == 'Part Time' && Auth::user()->induser->prefered_jobtype == 'Full Time')) title-bacground-color @else title-bacground-color @endif">
 																							<td colspan="2" class="matching-criteria-align">
@@ -727,10 +742,14 @@
 																								
 																							</td>
 																						</tr>
-																						<tr class="@if($post->time_for == Auth::user()->induser->prefered_jobtype || ($post->time_for == 'Part Time' && Auth::user()->induser->prefered_jobtype == 'Full Time')) success @else danger @endif">
+																						<tr class="@if($post->time_for == Auth::user()->induser->prefered_jobtype || ($post->time_for == 'Part Time' && Auth::user()->induser->prefered_jobtype == 'Full Time')) success @else danger-new @endif">
 																																					
 																							<td class="matching-criteria-align">{{ $post->time_for }}</td>
+																							@if(Auth::user()->induser->prefered_jobtype != null)
 																							<td class="matching-criteria-align">{{ Auth::user()->induser->prefered_jobtype }}</td>
+																							@else
+																							<td class="matching-criteria-align"><a href="/individual/edit">Add Job Type </a></td>
+																							@endif
 																						</tr>
 																					</tbody>
 																					</table>
@@ -978,7 +997,7 @@
 																								@endif
 																							</td>
 																						</tr>
-																						<tr class="@if(count($counts) > 0) success @else danger @endif">
+																						<tr class="@if(count($counts) > 0) success @else danger-new @endif">
 																							
 																							<td class="matching-criteria-align">
 
@@ -986,27 +1005,33 @@
 																									{{$skill->name}},
 																								@endforeach
 																							</td>
+																							@if(Auth::user()->induser->linked_skill != null)
 																							<td class="matching-criteria-align">
 																								@foreach($userSkills as $myskill)
 																									{{$myskill}},
 																								@endforeach												
 																							</td>
+																							@else
+																							<td class="matching-criteria-align"><a href="/individual/edit">Add Details </a></td>
+																							@endif
 																						</tr>
 																						<tr class="@if(strcasecmp($post->role, Auth::user()->induser->role) == 0) title-bacground-color @else title-bacground-color @endif">
 																							<td colspan="2" class="matching-criteria-align">
 																								@if(strcasecmp($post->role, Auth::user()->induser->role) == 0)
 																								<i class="fa fa-check magic-match-icon-color"></i> <label class="title-color">Job Role</label>
 																								@else
-																								<label class="title-color">Job Role</label>
+																								<i class="fa fa-times"></i> <label class="title-color">Job Role</label>
 																								@endif
 																							</td>
 																						</tr>
-																						<tr class="@if(strcasecmp($post->role, Auth::user()->induser->role) == 0) success @else danger @endif">
-																							<!-- <td>
-																								<label class="title-color">Job Role</label>
-																							</td> -->
+																						<tr class="@if(strcasecmp($post->role, Auth::user()->induser->role) == 0) success @else danger-new @endif">
+																							
 																							<td class="matching-criteria-align">{{ $post->role }}</td>
+																							@if(Auth::user()->induser->role != null)
 																							<td class="matching-criteria-align">{{ Auth::user()->induser->role }}</td>
+																							@else
+																							<td class="matching-criteria-align"><a href="/individual/edit">Add Details </a></td>
+																							@endif
 																						</tr>
 																						
 																						
@@ -1016,62 +1041,76 @@
 																								@if($post->min_exp == Auth::user()->induser->experience)
 																								<i class="fa fa-check magic-match-icon-color"></i> <label class="title-color">Experience</label>
 																								@else
-																								<label class="title-color">Experience</label>
+																								<i class="fa fa-times"></i> <label class="title-color">Experience</label>
 																								@endif
 																							</td>
 																						</tr>
-																						<tr class="@if($post->min_exp == Auth::user()->induser->experience) success @else danger @endif">
-																							<!-- <td>
-																								<label class="title-color">Experience</label>
-																							</td> -->
+																						<tr class="@if($post->min_exp == Auth::user()->induser->experience) success @else danger-new @endif">
+																							
 																							<td class="matching-criteria-align">{{ $post->min_exp }}-{{ $post->max_exp }}</td>
+																							@if(Auth::user()->induser->experience != null)
 																							<td class="matching-criteria-align">{{ Auth::user()->induser->experience }}</td>
+																							@else
+																							<td class="matching-criteria-align"><a href="/individual/edit">Add Details </a></td>
+																							@endif
 																						</tr>
 																						<tr class="@if($post->education == Auth::user()->induser->education) title-bacground-color @else title-bacground-color @endif">
 																							<td colspan="2" class="matching-criteria-align">
 																								@if($post->education == Auth::user()->induser->education)
 																								<i class="fa fa-check magic-match-icon-color"></i> <label class="title-color">Education</label>
 																								@else
-																								<label class="title-color">Education</label>
+																								<i class="fa fa-times"></i> <label class="title-color">Education</label>
 																								@endif
 																								
 																							</td>
 																						</tr>
-																						<tr class="@if($post->education == Auth::user()->induser->education) success @else danger @endif">
+																						<tr class="@if($post->education == Auth::user()->induser->education) success @else danger-new @endif">
 																							<!-- <td>
 																								<label class="title-color">Education</label>
 																							</td> -->
 																							<td class="matching-criteria-align">{{ $post->education }}</td>
+																							@if(Auth::user()->induser->education != null)
 																							<td class="matching-criteria-align">{{ Auth::user()->induser->education }}</td>
+																							@else
+																							<td class="matching-criteria-align"><a href="/individual/edit">Add Details </a></td>
+																							@endif
 																						</tr>
 																						<tr class="@if($post->city == Auth::user()->induser->city) title-bacground-color @else title-bacground-color @endif">
 																							<td colspan="2" class="matching-criteria-align">
 																								@if($post->city == Auth::user()->induser->city)
 																								<i class="fa fa-check magic-match-icon-color"></i> <label class="title-color">Location</label>
 																								@else
-																								<label class="title-color">Location</label>
+																								<i class="fa fa-times"></i> <label class="title-color">Location</label>
 																								@endif
 																							</td>
 																						</tr>
-																						<tr class="@if($post->city == Auth::user()->induser->city) success @else danger @endif">
+																						<tr class="@if($post->city == Auth::user()->induser->city) success @else danger-new @endif">
 																																					
 																							<td class="matching-criteria-align">{{ $post->city }}</td>
+																							@if(Auth::user()->induser->city != null)
 																							<td class="matching-criteria-align">{{ Auth::user()->induser->city }}</td>
+																							@else
+																							<td class="matching-criteria-align"><a href="/individual/edit">Add Details </a></td>
+																							@endif
 																						</tr>
 																						<tr class="@if($post->time_for == Auth::user()->induser->prefered_jobtype || ($post->time_for == 'Part Time' && Auth::user()->induser->prefered_jobtype == 'Full Time')) title-bacground-color @else title-bacground-color @endif">
 																							<td colspan="2" class="matching-criteria-align">
 																								@if($post->time_for == Auth::user()->induser->prefered_jobtype || ($post->time_for == 'Part Time' && Auth::user()->induser->prefered_jobtype == 'Full Time'))
 																								<i class="fa fa-check magic-match-icon-color"></i> <label class="title-color">Job Type</label>
 																								@else
-																								<label class="title-color">Job Type</label>
+																								<i class="fa fa-times"></i> <label class="title-color">Job Type</label>
 																								@endif
 																								
 																							</td>
 																						</tr>
-																						<tr class="@if($post->time_for == Auth::user()->induser->prefered_jobtype || ($post->time_for == 'Part Time' && Auth::user()->induser->prefered_jobtype == 'Full Time')) success @else danger @endif">
+																						<tr class="@if($post->time_for == Auth::user()->induser->prefered_jobtype || ($post->time_for == 'Part Time' && Auth::user()->induser->prefered_jobtype == 'Full Time')) success @else danger-new @endif">
 																																					
 																							<td class="matching-criteria-align">{{ $post->time_for }}</td>
+																							@if(Auth::user()->induser->prefered_jobtype != null)
 																							<td class="matching-criteria-align">{{ Auth::user()->induser->prefered_jobtype }}</td>
+																							@else
+																							<td class="matching-criteria-align"><a href="/individual/edit">Add Details </a></td>
+																							@endif
 																						</tr>
 																					</tbody>
 																					</table>
@@ -1454,7 +1493,7 @@
 				
 				
 			</div>
-			<div class="tab-pane" id="portlet_tab2">
+			<div class="tab-pane" id="skill">
 				@if($title == 'home')
 					<!-- Jobtip Filter Start -->
 					<form id="home-filter" name="filter_form" action="/home" method="post">
@@ -1955,7 +1994,7 @@
 														@endif
 														<div class="row  post-postision" style="cursor:pointer;">
 	                                                        <div class="col-md-12">
-	                                                            <div class="" style="font-weight: 500;color: dodgerblue;font-size: 15px;">{{ $post->post_title }} </div>
+	                                                            <div class="post-title-new">{{ $post->post_title }} </div>
 	                                                        </div>
 	                                                        @if($post->post_compname != null && $post->post_type == 'skill')
 	                                                         <div class="col-md-12">

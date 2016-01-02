@@ -3,7 +3,7 @@
   <!-- DOC: Set data-auto-scroll="false" to disable the sidebar from auto scrolling/focusing -->
   <!-- DOC: Change data-auto-speed="200" to adjust the sub menu slide up/down speed -->
 
-  <div class="page-sidebar navbar-collapse collapse ">
+  <div class="page-sidebar navbar-collapse collapse " >
    <div class="navigation-bar"><a href="javascript:;" class="menu-toggler responsive-toggler toggle-disp" data-toggle="collapse" data-target=".navbar-collapse">
       <i class="fa fa-bars" style="font-size: 18px;"></i>
     </a>
@@ -12,7 +12,7 @@
       <div class="col-md-4 col-sm-4 col-xs-4">
         <a href="/notify/thanks/@if(Auth::user()->identifier==1){{'ind'}}@elseif(Auth::user()->identifier==2){{'corp'}}@endif/{{Auth::user()->induser_id}}{{Auth::user()->corpuser_id}}" data-utype="thank"
          class="icon-btn @if($title == 'notify_view'){{'active'}}@endif" style="border: 0 !important;background-color: transparent !important;min-width:55px !important;">
-          <i class="icon-like" style="color: white"></i>
+          <i class="fa fa-thumbs-up" style="color: white;font-size:20px;"></i>
           <div style="color: whitesmoke;">
              Thanks
           </div>

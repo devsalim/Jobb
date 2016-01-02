@@ -151,3 +151,55 @@ $(document).ready(function () {
 });
 
  
+ $(document).ready(function () {            
+//validation rules
+    var form = $('#search-profile');
+    var error = $('.alert-danger', form);
+    var success = $('.alert-success', form);
+    form.validate({
+        doNotHideMessage: true, //this option enables to show the error/success messages on tab switch.
+        errorElement: 'span', //default input error message container
+        errorClass: 'help-block help-block-error', // default input error message class
+        focusInvalid: false, // do not focus the last invalid input
+        groups: {
+                    namenew: "name mobile"
+                },
+        rules: {
+            name: {
+                require_from_group: [1, '.group']
+                    },
+            mobile: {
+                number: true,
+                maxlength: 10,
+                require_from_group: [1, '.group']
+            }
+        },
+        messages: {
+            namenew: {
+                require_from_group: { range: "Enter Name or Mobile Number" },
+                minlength: "Enter minimum 3 character"
+            }
+        },
+            invalidHandler: function (event, validator) { //display error alert on form submit   
+            success.hide();
+            error.show();
+            Metronic.scrollTo(error, -200);
+        },
+
+             highlight: function(element) {
+            $(element).closest('.form-group').addClass('has-error');
+        },
+            unhighlight: function(element) {
+            $(element).closest('.form-group').removeClass('has-error');
+        },
+            errorElement: 'span',
+            errorClass: 'help-block',
+            errorPlacement: function(error, element) {
+            if(element.parent('.input-group').length) {
+                error.insertAfter(element.parent());
+            } else {
+                error.insertAfter(element);
+            }
+         },
+    });
+});

@@ -11,12 +11,12 @@ Page Header
   /* Header seaech box */
 }
 .page-header.navbar .page-logo {
-  background: darkslategray;
+  background: #296173;
     /*box-shadow: 0 1px;*/
 }
 .page-header.navbar .page-top {
   box-shadow: 0px 1px 10px 0px rgba(50, 50, 50, 0.2);
-  background: darkslategray;
+  background: #296173;
 }
 .page-header.navbar .top-menu .navbar-nav {
   /* Extended Dropdowns */
@@ -167,7 +167,7 @@ Page Header
 /* Page sidebar */
 .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover,
 .page-sidebar {
-  background-color: darkslategray;
+  background-color: #20404A;
   /* Default sidebar */
 }
 .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu,
@@ -205,7 +205,7 @@ Page Header
 .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu > li:hover > a, .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu > li.open > a,
 .page-sidebar .page-sidebar-menu > li:hover > a,
 .page-sidebar .page-sidebar-menu > li.open > a {
-  background: darkslategray;
+  background: #20404A;
   color: white;
 }
 .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu > li:hover > a > i, .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu > li.open > a > i,
@@ -223,13 +223,13 @@ Page Header
 .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu > li.active > a, .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu > li.active.open > a,
 .page-sidebar .page-sidebar-menu > li.active > a,
 .page-sidebar .page-sidebar-menu > li.active.open > a {
-  background:darkslategray;
+  background:#20404A;
   color: white;
 }
 .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu > li.active > a:hover, .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu > li.active.open > a:hover,
 .page-sidebar .page-sidebar-menu > li.active > a:hover,
 .page-sidebar .page-sidebar-menu > li.active.open > a:hover {
-  background: darkslategray;
+  background: #20404A;
 }
 .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu > li.active > a > i, .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu > li.active.open > a > i,
 .page-sidebar .page-sidebar-menu > li.active > a > i,
@@ -370,7 +370,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3c3d2f', end
     /* Page container */
   }
   .page-boxed .page-container {
-    background-color: darkslategray;
+    background-color: #20404A;
   }
   .page-boxed.page-sidebar-reversed .page-container {
     border-left: 0;

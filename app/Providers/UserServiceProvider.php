@@ -18,7 +18,7 @@ class UserServiceProvider extends ServiceProvider {
 	public function boot()
 	{
 		view()->composer('includes.sidebar', function($view){
-			$favouritesCount = 0;
+			
 			$thanksCount = 0;
 			$followCount = 0;
 			if(Auth::user()->identifier == 1){

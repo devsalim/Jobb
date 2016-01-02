@@ -76,8 +76,8 @@
 <link href="../../assets/global/plugins/jcrop/css/jquery.Jcrop.min.css" rel="stylesheet"/>
 <link href="../../assets/admin/pages/css/image-crop.css" rel="stylesheet"/>
  
-    <link href="/assets/sumoselect.css" rel="stylesheet" />
-
+<link href="/assets/sumoselect.css" rel="stylesheet" />
+<link href="/assets/admin/pages/css/profile-old.css" rel="stylesheet" type="text/css"/>
 @yield('css')
 
 <style type="css/text" rel="stylesheet">
@@ -250,7 +250,7 @@ body.page-boxed{
 
         <!-- customizer -->
 
-        <div class="page-content-body">
+        <div class="page-content-body" style="margin:0px;">
         @yield('content')
         </div>
 
@@ -436,14 +436,14 @@ $(document).ready(function () {
     FormValidation.init();    
     
 
-      $('.toggle-display').click(function () {
-        $('#nav-display').hide();   
-        $('.page-content-wrapper').hide();
-      });
-      $(".toggle-disp").click(function () {
-        $(".nav-disp").show(); 
-        $('.page-content-wrapper').show();  
-      });
+      // $('.toggle-display').click(function () {
+      //   $('#nav-display').hide();   
+      //   $('.page-content-wrapper').hide();
+      // });
+      // $(".toggle-disp").click(function () {
+      //   $(".nav-disp").show(); 
+      //   $('.page-content-wrapper').show();  
+      // });
 
      $('input[type="radio"]').click(function() {
          if($(this).attr('id') == 'hide-comp') {

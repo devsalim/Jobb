@@ -32,7 +32,9 @@ var FormWizard = function () {
                 errorElement: 'span', //default input error message container
                 errorClass: 'help-block help-block-error', // default input error message class
                 focusInvalid: false, // do not focus the last invalid input
-                
+                groups: {
+                    name: "email_id phone"
+                },
                 rules: {
                     //profile
                     post_title: {
@@ -71,14 +73,14 @@ var FormWizard = function () {
                     time_for:{
                         required: true
                     },
-                    email_id:{
-                        required: true,
-                        email: true
+                    email_id: {
+                        email: true,
+                        require_from_group: [1, '.group']
                     },
-                    phone:{
-                        required: true,
+                    phone: {
                         number: true,
-                        maxlength:10
+                        maxlength: 10,
+                        require_from_group: [1, '.group']
                     }
                 },
 
@@ -86,14 +88,13 @@ var FormWizard = function () {
                 post_title: {
                     required: "Enter Job Title"
                 },
+
                 email_id: {
-                    required: "Enter Email ID",
-                    email: "Enter valid Email Id"
+                    email: "Enter correct email id",
+                    require_from_group: "Enter atleast one 'Email or Phone no'"
                 },
                 phone: {
-                    required: "Enter Phone No",
-                    number: "Enter Integer only",
-                    maxlength: "Maximum 10 Integer only"
+                    maxlength: "Enter maximum 10 integer"
                 },
                 job_detail: {
                     required: "Enter Job Detail"

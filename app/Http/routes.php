@@ -85,6 +85,8 @@ Route::group(array('before' => 'auth'), function(){
 	Route::post('group/deleteuser', 'GroupController@deleteUser');
 	Route::post('group/leavegroup', 'GroupController@leavegroup');
 
+
+
 	Route::post('user/imgUpload', 'UserController@imgUpload');	
 	Route::post('corporate/imgUpload', 'CorporateController@imgUpload');	
 
@@ -95,7 +97,7 @@ Route::group(array('before' => 'auth'), function(){
 	Route::post('feedback/home', 'FeedbackController@report');
 
 	Route::post('searchConnections', 'ConnectionsController@searchConnections');
-	Route::get('searchLinks', 'ConnectionsController@searchLinks');
+	Route::post('searchLinks', 'GroupController@searchLinks');
 
 	Route::get('individual_view', 'ViewpageController@index');
 	Route::get('individual_view/create', 'ViewpageController@create');
@@ -145,6 +147,8 @@ Route::group(array('before' => 'auth'), function(){
 	Route::post('jobcategory/roles', 'JobRoleController@roleByCategories');
 
 	Route::get('post/jobroles', 'JobController@jobRoles');
+
+	Route::get('search/', 'PagesController@search');
 
 });
 
