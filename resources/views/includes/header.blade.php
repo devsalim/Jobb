@@ -1,7 +1,7 @@
 <!-- BEGIN HEADER -->
 <div class="page-header navbar navbar-fixed-top nav-disp" id="nav-display">
   <!-- BEGIN HEADER INNER -->
-  <div class="page-header-inner container">
+  <div class="page-header-inner container nav-fixed-css" style="">
     <!-- BEGIN LOGO -->
       <div class="page-logo @if($title == 'home'){{'active'}}@endif">
       <a class="" href="/home"><img src="{{ asset('/assets/new_big_logo.png') }}" class="big-logo" />

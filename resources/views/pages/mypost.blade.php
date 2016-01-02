@@ -20,10 +20,10 @@
 				@endif
 			</ul>
 	</div>
-	<div class="portlet-body">
+	<div class="portlet-body" style="background-color:whitesmoke;">
 		<div class="tabbable-custom">
 			
-			<div class="tab-content">
+			<div class="tab-content" style="background-color:whitesmoke;">
 				<div class="tab-pane active" id="portlet_5_1">
 					<div class="row">
 				@if (count($posts) > 0)
@@ -35,9 +35,33 @@
 						<div class="timeline-item time-item">
 							<div class="timeline-body" style="border-radius:15px !important;margin-left: 10px;">
 								<div class="timeline-body-head">
+									
 									<div class="timeline-body-head-caption">
+										@if(count($post->groupTagged) > 0)
+                                        @if($post->sharedGroupBy->first()->mode == 'shared')
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <!-- Post shared by user -->                        
+                                                
+                                                    <div class="shared-by">
+                                                        {{$post->sharedGroupBy->first()->mode}} by 
+                                                        <b>{{$post->sharedGroupBy->first()->fname}} 
+                                                        {{$post->sharedGroupBy->first()->lname}}</b>
+                                                        to <b>{{$post->sharedToGroup->first()->group_name}}</b> group<br/>
+                                                    </div>
+                                                
+                                            </div>
+                                        </div>
+                                        @endif
+                                    @endif
+                                     @if($post->tagged->contains('user_id', Auth::user()->induser_id) && 
+                                        $post->sharedBy->first()->mode == 'shared')
+                                        
+                                    <small> {{$post->sharedBy->first()->mode}} by 
+                                        {{$post->sharedBy->first()->fname}} {{$post->sharedBy->first()->lname}}</small>
+                                        @endif
 										<a>	
-											Post Id:&nbsp;<a style="">{{ $post->id }}</a>
+											Post Id:&nbsp;<a style="">{{ $post->unique_id }}</a>
 										</a>
 										<span class="timeline-body-time font-grey-cascade">Posted at 
 											{{ date('M d, Y', strtotime($post->created_at)) }}
@@ -45,6 +69,7 @@
 									</div>
 								</div>
 								<div class="timeline-body-content">
+									
 									<div class="post-job-skill-bar">
 										<div class="{{ $post->post_type }}"><a class="post-type-class">{{ $post->post_type }}</a></div>
 									</div>
@@ -178,8 +203,42 @@
 											</div>
 											<!-- /.modal -->
 										</div>
+										<div class="col-md-4 col-md-4 col-md-8">
+											<div class="dropdown ">											
+												<button class="btn dropdown-toggle" type="button" 
+														data-toggle="dropdown" title="Share" 
+														style="">
+													<i class="fa fa-share-square-o" 
+														style="font-size: 18px;color: darkslateblue;"></i> Share
+													<span class="badge-share" id="share-count-{{ $post->id }}">@if($post->postactivity->sum('share') > 0){{ $post->postactivity->sum('share') }}@endif</span>
+												</button>
+												<ul class="dropdown-menu dropdown-menu-share pull-left" role="menu" 
+													style="min-width:0;box-shadow:0 0 !important">
+													<li style="background-color: tan;">
+														<a href="#share-post" data-toggle="modal" class="jobtip sojt" id="sojt-{{$post->id}}" data-share-post-id="{{$post->id}}">
+															Share on Jobtip
+														</a>
+													</li>
+													<li style="background-color: #3b5998;">
+														<a href="/" class="facebook">
+															<i class="fa fa-facebook post-social-icon" ></i>
+														</a>
+													</li>
+													<li style="background-color: #c32f10;">
+														<a href="/" class="google-plus">
+															<i class="fa fa-google-plus post-social-icon"></i>
+														</a>
+													</li>
+													<li style="background-color: #00aced;">
+														<a href="/" class="linkedin">
+															<i class="fa fa-linkedin post-social-icon" ></i>
+														</a>
+													</li>
+												</ul>													
+											</div>
+										</div>
 										@elseif($expired == 1)
-										<div class="col-md-3 col-sm-3 col-xs-8">
+										<div class="col-md-4 col-sm-4 col-xs-8">
 											<a class="btn btn-sm btn-danger" disabled data-toggle="modal" href="#expire">
 												 Expired
 											</a>
@@ -193,8 +252,13 @@
 										</div>
 									</div>
 									@endif
+								</div>
+								<div class="post-hover-act" data-postid="{{$post->id}}"><a class="myactivity-posts" data-toggle="modal" href="#myactivity-posts"> Details</a></div>
+								<div class="share-mypost">
+									
 								</div>		
 							</div>
+
 							<div class="box">
 										   <div class="ribbon"><span class="{{ $post->post_type }}">{{ $post->post_type }}</span></div>
 										</div>
@@ -203,9 +267,7 @@
 									<div class="panel panel-default" style=" position: relative;">
 										<div class="panel-heading">
 											<h4 class="panel-title">
-											<a class="accordion-toggle accordion-toggle-styled collapsed" 
-											data-toggle="collapse" data-parent="#accordion{{$post->id}}" href="#collapse_{{$post->id}}_{{$post->id}}"  style="font-size: 15px;font-weight: 600;">
-											Details :</a>	
+												
 											</h4>
 										</div>
 										<div id="collapse_{{$post->id}}_{{$post->id}}" class="panel-collapse collapse">
@@ -341,9 +403,7 @@
 									<div class="panel panel-default" style=" position: relative;border-radius: 0 0 4px 4px !important;">
 										<div class="panel-heading">
 											<h4 class="panel-title">
-											<a class="accordion-toggle accordion-toggle-styled" 
-											data-toggle="collapse" data-parent="#accordion2_{{$post->id}}" href="#collapse2_{{$post->id}}_{{$post->id}}"  style="font-size: 15px;font-weight: 600;">
-											Post Activity :</a>	
+												
 											</h4>
 										</div>
 										<div id="collapse2_{{$post->id}}_{{$post->id}}" class="panel-collapse">
@@ -359,16 +419,83 @@
 															</li>
 															@elseif(Auth::user()->identifier == 1)
 															<li class="active">
-																<a href="#tab_1_{{ $post->id }}_2" class="label-new" data-toggle="tab" style="border-left: 0;">Contacted</a>
+																<a href="#tab_1_{{ $post->id }}_2" class="label-new" data-toggle="tab" style="border-left: 0;padding:10px 6px;">
+																	Contacted 
+																	<span class="badge" style="background-color: deepskyblue;"><?php $i=0; ?>
+																				@foreach($post->postactivity as $pa)
+																		  			@if($pa->contact_view == 1) <?php $i++; ?> @endif
+																		  		@endforeach
+																		  		<?php 
+																			  		if($i>0){
+																			  			echo $i;
+																			  		} 
+																			  	?> 
+																	</span>
+																	
+																</a>
+															
 															</li>
 															@endif
 															<li>
-																<a href="#tab_1_{{ $post->id }}_3" class="label-new" data-toggle="tab" >Thanks </a>
+																<a href="#tab_1_{{ $post->id }}_3" class="label-new" data-toggle="tab" style="border-left: 0;padding:10px 6px;">
+																	Thanks 
+																	<?php $i=0; ?>
+																				@foreach($post->postactivity as $pa)
+																		  			@if($pa->thanks == 1) <?php $i++; ?> @endif
+																		  		@endforeach
+
+																	<span class="badge" style="background-color: deepskyblue;">
+																		
+																		  		<?php 
+																			  		if($i>0){
+																			  			echo $i;
+																			  		} 
+																			  	?>
+																	</span>
+																</a>
 															</li>
 															<li>
-																<a href="#tab_1_{{ $post->id }}_4" class="label-new" data-toggle="tab" >Share </a>
+																<a href="#tab_1_{{ $post->id }}_4" class="label-new" data-toggle="tab" style="border-left: 0;padding:10px 6px;">
+																	Share 
+																	<span class="badge" style="background-color: deepskyblue;">
+																		<?php $i=0; ?>
+																				@foreach($post->postactivity as $pa)
+																		  			@if($pa->share == 1) <?php $i++; ?> @endif
+																		  		@endforeach
+																		  		<?php 
+																			  		if($i>0){
+																			  			echo $i;
+																			  		} 
+																			  	?>
+																	</span>
+																</a>
 															</li>
 														</ul>
+														<div class="sort-css">
+															<div class="btn-group">
+																<button class="btn btn-default btn-sm dropdown-toggle" type="button" data-toggle="dropdown" style="border: 0;color:#8c8c8c;background:transparent;">
+																<i class="glyphicon glyphicon-sort"></i> Sort by <i class="fa fa-angle-down"></i>
+																</button>
+																<ul class="dropdown-menu dropdown-menu-sort" role="menu" style="min-width: 130px;margin: 4px -25px;">
+																	<li >
+																		<a href="javascript:;">
+																		Date </a>
+																	</li>
+																	<li>
+																		<a href="javascript:;">
+																		Magic Match </a>
+																	</li>
+																	<li>
+																		<a href="javascript:;">
+																		Individual Post </a>
+																	</li>
+																	<li>
+																		<a href="javascript:;">
+																		corporate Post </a>
+																	</li>
+																</ul>
+															</div>
+														</div>
 														<div class="tab-content" style="padding: 0px 0px;margin: -7px 0px;">
 															@if(Auth::user()->identifier == 2)
 															<div class="tab-pane" id="tab_1_{{ $post->id }}_1">
@@ -448,8 +575,9 @@
 														                    		Profile
 														                    	</div> -->
 														                    	<div class="col-md-4 col-sm-4 col-xs-3">
+														                    		<i class="glyphicon glyphicon-envelope"></i>
 														                    	<a class="viewcontact-view" style="font-size:12px;" data-toggle="modal" href="#viewcontact-view">
-														                    		<i class="icon-call-end" style="font-size:12px;"></i> <span class="hidden-sm hidden-xs">View Contact</span></a>
+														                    		<i class="icon-call-end" style="font-size:12px;"></i> <span class="hidden-sm hidden-xs">Call</span></a>
 														                    	</div>
 														                    	
 														                    	<div class="col-md-4 col-sm-4 col-xs-5" >
@@ -460,12 +588,12 @@
 													                    	</div>
 														                 	<div class="row" style="border-bottom:1px dotted lightgrey;margin:10px 0">
 													                    		@if($pa->user->induser->email != null)
-													                    		<div class="col-md-6 hide-contact show-hide-contact">
+													                    		<div class="col-md-6 ">
 														                    		<label style="font-size:13px;font-weight:500;">Email Id: {{ $pa->user->induser->email }}</label>
 														                    	</div>
 														                    	@endif
 														                    	@if($pa->user->induser->mobile != null)
-														                    	<div class="col-md-6 hide-contact show-hide-contact">
+														                    	<div class="col-md-6 ">
 														                    		<label style="font-size:13px;font-weight:500;">Phone No: {{ $pa->user->induser->mobile }}</label>
 														                    	</div>
 														                    	@endif
@@ -486,7 +614,7 @@
 												<div class="modal-content">
 													<div class="modal-header">
 														<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-													   <h4 class="modal-title">
+													   <h4 class="modal-title" style="text-align:center;">
 													   		<i class="icon-speedometer" style="font-size:16px;"></i> Match 
 													   		<?php
 																try{
@@ -504,83 +632,130 @@
 															<div class="portlet-body" style=" padding: 0 !important;">
 																<div class="table-scrollable">
 																	<table class="table table-bordered table-hover">
-																	<thead style="border:0 !important;">
-																	<tr style="border:0 !important;">
-																		<th class="col-md-4 col-sm-4 col-xs-6 matching-criteria-align">
-																			 Criteria
-																		</th>
-																		<th class="col-md-4 col-sm-4 col-xs-6 matching-criteria-align">
-																			 Required Profile
-																		</th>
-																		<th class="col-md-4 col-sm-4 col-xs-6 matching-criteria-align">
-																			 User's Profile
-																		</th>
-																	</tr>
-																	</thead>
+																					<thead style="border:0 !important;">
+																					<tr style="border:0 !important;">
+																						
+																						<th class="col-md-6 col-sm-6 col-xs-6 matching-criteria-align">
+																							 Required Profile
+																						</th>
+																						<th class="col-md-6 col-sm-6 col-xs-6 matching-criteria-align">
+																							{{ $pa->user->induser->fname }} Profile
+																						</th>
+																					</tr>
+																					</thead>
 
-																	<tbody>
-																		<tr class="@if(count($counts) > 0) success @else danger @endif">
-																			<td>
-																				<label class="title-color">
-																					Skills <i class="badge">{{count($counts)}}</i> 
-																				</label>
-																			</td>
-																			<td>
-																				@foreach($post->skills as $skill)
-																					{{$skill->name}},
-																				@endforeach
-																			</td>
-																			<td>
-																				@foreach($userSkills as $myskill)
-																					{{$myskill}},
-																				@endforeach												
-																			</td>
-																		</tr>
-																		<tr class="@if($post->role  == $pa->user->induser->role) success @else danger @endif">
-																			<td>
-																				<label class="title-color">Job Role</label>
-																			</td>
-																			<td>{{ $post->role }}</td>
-																			<td>{{ $pa->user->induser->role }}</td>
-																		</tr>
-																		<tr class="@if($post->prof_category == $pa->user->induser->prof_category) success @else danger @endif">
-																			<td>
-																				 <label class="title-color">Job Category</label>
-																			</td>																		
-																			<td>{{ $post->prof_category }}</td>
-																			<td>{{ $pa->user->induser->prof_category }}</td>
-																		</tr>
-																		<tr class="@if($post->min_exp == $pa->user->induser->experience) success @else danger @endif">
-																			<td>
-																				<label class="title-color">Experience</label>
-																			</td>
-																			<td>{{ $post->min_exp }}-{{ $post->max_exp }}</td>
-																			<td>{{ $pa->user->induser->experience }}</td>
-																		</tr>
-																		<tr class="@if($post->education == $pa->user->induser->education) success @else danger @endif">
-																			<td>
-																				<label class="title-color">Education</label>
-																			</td>
-																			<td>{{ $post->education }}</td>
-																			<td>{{ $pa->user->induser->education }}</td>
-																		</tr>
-																		<tr class="@if($post->city == $pa->user->induser->city) success @else danger @endif">
-																			<td>
-																				<label class="title-color">Location</label>			
-																			</td>															
-																			<td>{{ $post->city }}</td>
-																			<td>{{ $pa->user->induser->city }}</td>
-																		</tr>
-																		<tr class="@if($post->time_for == $pa->user->induser->prefered_jobtype || ($post->time_for == 'Part Time' && $pa->user->induser->prefered_jobtype == 'Full Time')) success @else danger @endif">
-																			<td>						
-																				<label class="title-color">Job Type
-																				</label>
-																			</td>															
-																			<td>{{ $post->time_for }}</td>
-																			<td>{{ $pa->user->induser->prefered_jobtype }}</td>
-																		</tr>
-																	</tbody>
-																	</table>
+																					<tbody>
+																						<tr class="@if(count($counts) > 0) title-bacground-color @else title-bacground-color @endif">
+																							<td colspan="2" class="matching-criteria-align">
+																								@if(count($counts) > 0)
+																								<label class="title-color">
+																									<i class="fa fa-check magic-match-icon-color"></i> Skills <i class="badge">{{count($counts)}}</i> 
+																								</label>
+																								@else
+																								<label class="title-color">
+																									<i class="fa fa-times"></i> Skills <i class="badge">{{count($counts)}}</i> 
+																								</label>
+																								@endif
+																							</td>
+																						</tr>
+																						<tr class="@if(count($counts) > 0) success @else danger @endif">
+																							
+																							<td class="matching-criteria-align">
+
+																								@foreach($post->skills as $skill)
+																									{{$skill->name}},
+																								@endforeach
+																							</td>
+																							<td class="matching-criteria-align">
+																								@foreach($userSkills as $myskill)
+																									{{$myskill}},
+																								@endforeach												
+																							</td>
+																						</tr>
+																						<tr class="@if(strcasecmp($post->role, $pa->user->induser->role) == 0) title-bacground-color @else title-bacground-color @endif">
+																							<td colspan="2" class="matching-criteria-align">
+																								@if(strcasecmp($post->role, $pa->user->induser->role) == 0)
+																								<i class="fa fa-check magic-match-icon-color"></i> <label class="title-color">Job Role</label>
+																								@else
+																								<i class="fa fa-times"></i> <label class="title-color">Job Role</label>
+																								@endif
+																							</td>
+																						</tr>
+																						<tr class="@if(strcasecmp($post->role, $pa->user->induser->role) == 0) success @else danger @endif">
+																							<!-- <td>
+																								<label class="title-color">Job Role</label>
+																							</td> -->
+																							<td class="matching-criteria-align">{{ $post->role }}</td>
+																							<td class="matching-criteria-align">{{ $pa->user->induser->role }}</td>
+																						</tr>
+																						
+																						
+																						<tr class="@if($post->min_exp == $pa->user->induser->experience) title-bacground-color @else title-bacground-color @endif">
+																							
+																							<td colspan="2" class="matching-criteria-align">
+																								@if($post->min_exp == $pa->user->induser->experience)
+																								<i class="fa fa-check magic-match-icon-color"></i> <label class="title-color">Experience</label>
+																								@else
+																								<i class="fa fa-times"></i> <label class="title-color">Experience</label>
+																								@endif
+																							</td>
+																						</tr>
+																						<tr class="@if($post->min_exp == $pa->user->induser->experience) success @else danger @endif">
+																							<!-- <td>
+																								<label class="title-color">Experience</label>
+																							</td> -->
+																							<td class="matching-criteria-align">{{ $post->min_exp }}-{{ $post->max_exp }}</td>
+																							<td class="matching-criteria-align">{{ $pa->user->induser->experience }}</td>
+																						</tr>
+																						<tr class="@if($post->education == $pa->user->induser->education) title-bacground-color @else title-bacground-color @endif">
+																							<td colspan="2" class="matching-criteria-align">
+																								@if($post->education == $pa->user->induser->education)
+																								<i class="fa fa-check magic-match-icon-color"></i> <label class="title-color">Education</label>
+																								@else
+																								<i class="fa fa-times"></i> <label class="title-color">Education</label>
+																								@endif
+																								
+																							</td>
+																						</tr>
+																						<tr class="@if($post->education == $pa->user->induser->education) success @else danger @endif">
+																							<!-- <td>
+																								<label class="title-color">Education</label>
+																							</td> -->
+																							<td class="matching-criteria-align">{{ $post->education }}</td>
+																							<td class="matching-criteria-align">{{ $pa->user->induser->education }}</td>
+																						</tr>
+																						<tr class="@if($post->city == $pa->user->induser->city) title-bacground-color @else title-bacground-color @endif">
+																							<td colspan="2" class="matching-criteria-align">
+																								@if($post->city == $pa->user->induser->city)
+																								<i class="fa fa-check magic-match-icon-color"></i> <label class="title-color">Location</label>
+																								@else
+																								<i class="fa fa-times"></i> <label class="title-color">Location</label>
+																								@endif
+																							</td>
+																						</tr>
+																						<tr class="@if($post->city == $pa->user->induser->city) success @else danger @endif">
+																																					
+																							<td class="matching-criteria-align">{{ $post->city }}</td>
+																							<td class="matching-criteria-align">{{ $pa->user->induser->city }}</td>
+																						</tr>
+																						<tr class="@if($post->time_for == $pa->user->induser->prefered_jobtype || ($post->time_for == 'Part Time' && $pa->user->induser->prefered_jobtype == 'Full Time')) title-bacground-color @else title-bacground-color @endif">
+																							<td colspan="2" class="matching-criteria-align">
+																								@if($post->time_for == $pa->user->induser->prefered_jobtype || ($post->time_for == 'Part Time' && $pa->user->induser->prefered_jobtype == 'Full Time'))
+																								<i class="fa fa-check magic-match-icon-color"></i> <label class="title-color">Job Type</label>
+																								@else
+																								<i class="fa fa-times"></i> <label class="title-color">Job Type</label>
+																								@endif
+																								
+																							</td>
+																						</tr>
+																						<tr class="@if($post->time_for == $pa->user->induser->prefered_jobtype || ($post->time_for == 'Part Time' && $pa->user->induser->prefered_jobtype == 'Full Time')) success @else danger @endif">
+																																					
+																							<td class="matching-criteria-align">{{ $post->time_for }}</td>
+																							<td class="matching-criteria-align">{{ $pa->user->induser->prefered_jobtype }}</td>
+																						</tr>
+																					</tbody>
+																					</table>
+																	
 																</div>
 															</div>
 														</div>
@@ -606,54 +781,7 @@
 															<div class="tab-pane active" id="tab_1_{{ $post->id }}_2">
 																<div class="portlet light" style="padding:0px !important;">
 
-																	<div class="portlet-title">
-																		<div class="btn-group" style="float:right;margin:7px;">
-																				<button class="btn btn-default btn-sm dropdown-toggle" type="button" data-toggle="dropdown" style="border: 0;">
-																				<i class="glyphicon glyphicon-sort"></i> Sort by <i class="fa fa-angle-down"></i>
-																				</button>
-																				<ul class="dropdown-menu" role="menu">
-																					<li>
-																						<a href="javascript:;">
-																						Date </a>
-																					</li>
-																					@if($post->post_type == 'job')
-																					<li>
-																						<a href="javascript:;">
-																						Magic Match </a>
-																					</li>
-																					@elseif($post->post_type == 'skill')
-																					<li>
-																						<a href="javascript:;">
-																						Individual Post </a>
-																					</li>
-																					<li>
-																						<a href="javascript:;">
-																						Company Post </a>
-																					</li>
-																					<li>
-																						<a href="javascript:;">
-																						Consultancy Post </a>
-																					</li>
-																					@endif
-																				</ul>
-																			</div>
-																		<div class="caption">
-																			<i class="fa fa-gift font-green-sharp"></i>
-																			<span class="caption-subject font-green-sharp ap-th-con">Contacted:</span>
-
-																			<span class="caption-helper">
-																				<?php $i=0; ?>
-																				@foreach($post->postactivity as $pa)
-																		  			@if($pa->contact_view == 1) <?php $i++; ?> @endif
-																		  		@endforeach
-																		  		<?php 
-																			  		if($i>0){
-																			  			echo $i;
-																			  		} 
-																			  	?>
-																			 </span>
-																		</div>		
-																	</div>
+																
 																	<div class="portlet-body">		
 
 																		<!-- <ul class="" data-handle-color="#637283"> 	 -->			                  
@@ -688,7 +816,7 @@
 																			<div class="row">
 																				@if($post->post_type == 'job')
 														                    	<div class="col-md-2 col-sm-4 col-xs-4" style="font-size:12px;">
-														                    		<a data-toggle="modal" class="btn-success" href="#post-mod-{{$post->id}}" style="padding: 3px 10px;border-radius: 15px !important;">
+														                    		<a data-toggle="modal" class="btn-success" href="#post-mod-{{$post->id}}" style="padding: 2px 8px;">
 														                    			<i class="icon-speedometer" style="font-size:12px;"></i> 
 																						<?php
 																						try{
@@ -715,8 +843,9 @@
 														                    		Profile
 														                    	</div> -->
 														                    	<div class="col-md-4 col-sm-4 col-xs-3">
-														                    	<a class="viewcontact-view btn-success" style="font-size:12px;padding: 3px 10px;border-radius: 15px !important;" data-toggle="modal" href="#viewcontact-view">
-														                    		<i class="icon-call-end" style="font-size:12px;"></i> <span class="hidden-sm hidden-xs">View Contact</span></a>
+														                    		<i class="glyphicon glyphicon-envelope"></i>
+														                    	<a class="viewcontact-view" style="font-size:12px;padding: 3px 10px;border-radius: 15px !important;" data-toggle="modal" href="#viewcontact-view">
+														                    		<i class="icon-call-end" style="font-size:12px;"></i> <span class="hidden-sm hidden-xs">Call</span></a>
 														                    	</div>
 														                    	@if($post->post_type == 'job' && $post->resume_required == 1)
 														                    	<div class="col-md-4 col-sm-4 col-xs-5" >
@@ -728,12 +857,12 @@
 													                    	</div>
 													                    	<div class="row" style="border-bottom:1px dotted lightgrey;margin:10px 0">
 													                    		@if($pa->user->induser->email != null)
-													                    		<div class="col-md-6 hide-contact show-hide-contact">
+													                    		<div class="col-md-6 ">
 														                    		<label style="font-size:13px;font-weight:500;">Email Id: {{ $pa->user->induser->email }}</label>
 														                    	</div>
 														                    	@endif
 														                    	@if($pa->user->induser->mobile != null)
-														                    	<div class="col-md-6 hide-contact show-hide-contact">
+														                    	<div class="col-md-6 ">
 														                    		<label style="font-size:13px;font-weight:500;">Phone No: {{ $pa->user->induser->mobile }}</label>
 														                    	</div>
 														                    	@endif
@@ -746,7 +875,7 @@
 												<div class="modal-content">
 													<div class="modal-header">
 														<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-													   <h4 class="modal-title">
+													   <h4 class="modal-title" style="text-align:center;">
 													   		<i class="icon-speedometer" style="font-size:16px;"></i> Match 
 													   		<?php
 																try{
@@ -764,83 +893,129 @@
 															<div class="portlet-body" style=" padding: 0 !important;">
 																<div class="table-scrollable">
 																	<table class="table table-bordered table-hover">
-																	<thead style="border:0 !important;">
-																	<tr style="border:0 !important;">
-																		<th class="col-md-4 col-sm-4 col-xs-6 matching-criteria-align">
-																			 Criteria
-																		</th>
-																		<th class="col-md-4 col-sm-4 col-xs-6 matching-criteria-align">
-																			 Required Profile
-																		</th>
-																		<th class="col-md-4 col-sm-4 col-xs-6 matching-criteria-align">
-																			 User's Profile
-																		</th>
-																	</tr>
-																	</thead>
+																					<thead style="border:0 !important;">
+																					<tr style="border:0 !important;">
+																						
+																						<th class="col-md-6 col-sm-6 col-xs-6 matching-criteria-align">
+																							 Required Profile
+																						</th>
+																						<th class="col-md-6 col-sm-6 col-xs-6 matching-criteria-align">
+																							 {{ $pa->user->induser->fname }} Profile
+																						</th>
+																					</tr>
+																					</thead>
 
-																	<tbody>
-																		<tr class="@if(count($counts) > 0) success @else danger @endif">
-																			<td>
-																				<label class="title-color">
-																					Skills <i class="badge">{{count($counts)}}</i> 
-																				</label>
-																			</td>
-																			<td>
-																				@foreach($post->skills as $skill)
-																					{{$skill->name}},
-																				@endforeach
-																			</td>
-																			<td>
-																				@foreach($userSkills as $myskill)
-																					{{$myskill}},
-																				@endforeach												
-																			</td>
-																		</tr>
-																		<tr class="@if($post->role  == $pa->user->induser->role) success @else danger @endif">
-																			<td>
-																				<label class="title-color">Job Role</label>
-																			</td>
-																			<td>{{ $post->role }}</td>
-																			<td>{{ $pa->user->induser->role }}</td>
-																		</tr>
-																		<tr class="@if($post->prof_category == $pa->user->induser->prof_category) success @else danger @endif">
-																			<td>
-																				 <label class="title-color">Job Category</label>
-																			</td>																		
-																			<td>{{ $post->prof_category }}</td>
-																			<td>{{ $pa->user->induser->prof_category }}</td>
-																		</tr>
-																		<tr class="@if($post->min_exp == $pa->user->induser->experience) success @else danger @endif">
-																			<td>
-																				<label class="title-color">Experience</label>
-																			</td>
-																			<td>{{ $post->min_exp }}-{{ $post->max_exp }}</td>
-																			<td>{{ $pa->user->induser->experience }}</td>
-																		</tr>
-																		<tr class="@if($post->education == $pa->user->induser->education) success @else danger @endif">
-																			<td>
-																				<label class="title-color">Education</label>
-																			</td>
-																			<td>{{ $post->education }}</td>
-																			<td>{{ $pa->user->induser->education }}</td>
-																		</tr>
-																		<tr class="@if($post->city == $pa->user->induser->city) success @else danger @endif">
-																			<td>
-																				<label class="title-color">Location</label>			
-																			</td>															
-																			<td>{{ $post->city }}</td>
-																			<td>{{ $pa->user->induser->city }}</td>
-																		</tr>
-																		<tr class="@if($post->time_for == $pa->user->induser->prefered_jobtype || ($post->time_for == 'Part Time' && $pa->user->induser->prefered_jobtype == 'Full Time')) success @else danger @endif">
-																			<td>						
-																				<label class="title-color">Job Type
-																				</label>
-																			</td>															
-																			<td>{{ $post->time_for }}</td>
-																			<td>{{ $pa->user->induser->prefered_jobtype }}</td>
-																		</tr>
-																	</tbody>
-																	</table>
+																					<tbody>
+																						<tr class="@if(count($counts) > 0) title-bacground-color @else title-bacground-color @endif">
+																							<td colspan="2" class="matching-criteria-align">
+																								@if(count($counts) > 0)
+																								<label class="title-color">
+																									<i class="fa fa-check magic-match-icon-color"></i> Skills <i class="badge">{{count($counts)}}</i> 
+																								</label>
+																								@else
+																								<label class="title-color">
+																									<i class="fa fa-times"></i> Skills <i class="badge">{{count($counts)}}</i> 
+																								</label>
+																								@endif
+																							</td>
+																						</tr>
+																						<tr class="@if(count($counts) > 0) success @else danger @endif">
+																							
+																							<td class="matching-criteria-align">
+
+																								@foreach($post->skills as $skill)
+																									{{$skill->name}},
+																								@endforeach
+																							</td>
+																							<td class="matching-criteria-align">
+																								@foreach($userSkills as $myskill)
+																									{{$myskill}},
+																								@endforeach												
+																							</td>
+																						</tr>
+																						<tr class="@if(strcasecmp($post->role, $pa->user->induser->role) == 0) title-bacground-color @else title-bacground-color @endif">
+																							<td colspan="2" class="matching-criteria-align">
+																								@if(strcasecmp($post->role, $pa->user->induser->role) == 0)
+																								<i class="fa fa-check magic-match-icon-color"></i> <label class="title-color">Job Role</label>
+																								@else
+																								<i class="fa fa-times"></i> <label class="title-color">Job Role</label>
+																								@endif
+																							</td>
+																						</tr>
+																						<tr class="@if(strcasecmp($post->role, $pa->user->induser->role) == 0) success @else danger @endif">
+																							<!-- <td>
+																								<label class="title-color">Job Role</label>
+																							</td> -->
+																							<td class="matching-criteria-align">{{ $post->role }}</td>
+																							<td class="matching-criteria-align">{{ $pa->user->induser->role }}</td>
+																						</tr>
+																						
+																						
+																						<tr class="@if($post->min_exp == $pa->user->induser->experience) title-bacground-color @else title-bacground-color @endif">
+																							
+																							<td colspan="2" class="matching-criteria-align">
+																								@if($post->min_exp == $pa->user->induser->experience)
+																								<i class="fa fa-check magic-match-icon-color"></i> <label class="title-color">Experience</label>
+																								@else
+																								<i class="fa fa-times"></i> <label class="title-color">Experience</label>
+																								@endif
+																							</td>
+																						</tr>
+																						<tr class="@if($post->min_exp == $pa->user->induser->experience) success @else danger @endif">
+																							<!-- <td>
+																								<label class="title-color">Experience</label>
+																							</td> -->
+																							<td class="matching-criteria-align">{{ $post->min_exp }}-{{ $post->max_exp }}</td>
+																							<td class="matching-criteria-align">{{ $pa->user->induser->experience }}</td>
+																						</tr>
+																						<tr class="@if($post->education == $pa->user->induser->education) title-bacground-color @else title-bacground-color @endif">
+																							<td colspan="2" class="matching-criteria-align">
+																								@if($post->education == $pa->user->induser->education)
+																								<i class="fa fa-check magic-match-icon-color"></i> <label class="title-color">Education</label>
+																								@else
+																								<i class="fa fa-times"></i> <label class="title-color">Education</label>
+																								@endif
+																								
+																							</td>
+																						</tr>
+																						<tr class="@if($post->education == $pa->user->induser->education) success @else danger @endif">
+																							<!-- <td>
+																								<label class="title-color">Education</label>
+																							</td> -->
+																							<td class="matching-criteria-align">{{ $post->education }}</td>
+																							<td class="matching-criteria-align">{{ $pa->user->induser->education }}</td>
+																						</tr>
+																						<tr class="@if($post->city == $pa->user->induser->city) title-bacground-color @else title-bacground-color @endif">
+																							<td colspan="2" class="matching-criteria-align">
+																								@if($post->city == $pa->user->induser->city)
+																								<i class="fa fa-check magic-match-icon-color"></i> <label class="title-color">Location</label>
+																								@else
+																								<i class="fa fa-times"></i> <label class="title-color">Location</label>
+																								@endif
+																							</td>
+																						</tr>
+																						<tr class="@if($post->city == $pa->user->induser->city) success @else danger @endif">
+																																					
+																							<td class="matching-criteria-align">{{ $post->city }}</td>
+																							<td class="matching-criteria-align">{{ $pa->user->induser->city }}</td>
+																						</tr>
+																						<tr class="@if($post->time_for == $pa->user->induser->prefered_jobtype || ($post->time_for == 'Part Time' && $pa->user->induser->prefered_jobtype == 'Full Time')) title-bacground-color @else title-bacground-color @endif">
+																							<td colspan="2" class="matching-criteria-align">
+																								@if($post->time_for == $pa->user->induser->prefered_jobtype || ($post->time_for == 'Part Time' && $pa->user->induser->prefered_jobtype == 'Full Time'))
+																								<i class="fa fa-check magic-match-icon-color"></i> <label class="title-color">Job Type</label>
+																								@else
+																								<i class="fa fa-times"></i> <label class="title-color">Job Type</label>
+																								@endif
+																								
+																							</td>
+																						</tr>
+																						<tr class="@if($post->time_for == $pa->user->induser->prefered_jobtype || ($post->time_for == 'Part Time' && $pa->user->induser->prefered_jobtype == 'Full Time')) success @else danger @endif">
+																																					
+																							<td class="matching-criteria-align">{{ $post->time_for }}</td>
+																							<td class="matching-criteria-align">{{ $pa->user->induser->prefered_jobtype }}</td>
+																						</tr>
+																					</tbody>
+																					</table>
 																</div>
 															</div>
 														</div>
@@ -885,10 +1060,10 @@
 																					</div>
 																				</div>
 																			</div>
-																			<div class="row" style="margin: 6px 7px;">
+																			<div class="row" style="margin: 6px -3px;">
 																				@if($post->post_type == 'job')
 														                    	<div class="col-md-2 col-sm-4 col-xs-4" style="font-size:12px;">
-														                    		<a data-toggle="modal" class="btn-success" href="#post-mod-{{$post->id}}" style="padding: 3px 10px;border-radius: 15px !important;">
+														                    		<a data-toggle="modal" class="btn-success" href="#post-mod-{{$post->id}}" style="padding: 2px 8px;">
 														                    			<i class="icon-speedometer" style="font-size:12px;"></i> 
 																						<?php
 																						try{
@@ -915,8 +1090,9 @@
 														                    		Profile
 														                    	</div> -->
 														                    	<div class="col-md-4 col-sm-4 col-xs-3">
-														                    	<a id="" class="show-contact btn-success" style="font-size:12px;padding: 3px 10px;border-radius: 15px !important;" >
-														                    		<i class="icon-call-end" style="font-size:12px;"></i> <span class="hidden-sm hidden-xs">View Contact</span></a>
+														                    		<i class="glyphicon glyphicon-envelope"></i>
+														                    	<a id="" class="show-contact" style="font-size:12px;padding: 3px 10px;border-radius: 15px !important;" >
+														                    		<i class="icon-call-end" style="font-size:12px;"></i> <span class="hidden-sm hidden-xs">Call</span></a>
 														                    	</div>
 														                    	@if($post->post_type == 'job' && $post->resume_required == 1)
 														                    	<div class="col-md-4 col-sm-4 col-xs-5" >
@@ -927,14 +1103,14 @@
 														                    	
 													                    	</div>
 													                    	<div class="row" style="border-bottom:1px dotted lightgrey;margin:10px 0">
-													                    		<div class="col-md-12" id="hide-contact-{{$post->id}}">
+													                    		<div class="col-md-12" id="">
 														                    		@if($pa->user->induser->email != null)
-														                    		<div class="col-md-6  show-hide-contact">
+														                    		<div class="col-md-6  ">
 															                    		<label style="font-size:13px;font-weight:500;">Email Id: {{ $pa->user->induser->email }}</label>
 															                    	</div>
 															                    	@endif
 															                    	@if($pa->user->induser->mobile != null)
-															                    	<div class="col-md-6 show-hide-contact">
+															                    	<div class="col-md-6 ">
 															                    		<label style="font-size:13px;font-weight:500;">Phone No: {{ $pa->user->induser->mobile }}</label>
 															                    	</div>
 															                    	@endif
@@ -948,7 +1124,7 @@
 												<div class="modal-content">
 													<div class="modal-header">
 														<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-													   <h4 class="modal-title">
+													   <h4 class="modal-title" style="text-align:center;">
 													   		<i class="icon-speedometer" style="font-size:16px;"></i> Match 
 													   		<?php
 																try{
@@ -966,83 +1142,129 @@
 															<div class="portlet-body" style=" padding: 0 !important;">
 																<div class="table-scrollable">
 																	<table class="table table-bordered table-hover">
-																	<thead style="border:0 !important;">
-																	<tr style="border:0 !important;">
-																		<th class="col-md-4 col-sm-4 col-xs-6 matching-criteria-align">
-																			 Criteria
-																		</th>
-																		<th class="col-md-4 col-sm-4 col-xs-6 matching-criteria-align">
-																			 Required Profile
-																		</th>
-																		<th class="col-md-4 col-sm-4 col-xs-6 matching-criteria-align">
-																			 User's Profile
-																		</th>
-																	</tr>
-																	</thead>
+																					<thead style="border:0 !important;">
+																					<tr style="border:0 !important;">
+																						
+																						<th class="col-md-6 col-sm-6 col-xs-6 matching-criteria-align">
+																							 Required Profile
+																						</th>
+																						<th class="col-md-6 col-sm-6 col-xs-6 matching-criteria-align">
+																							 {{ $pa->user->induser->fname }} Profile
+																						</th>
+																					</tr>
+																					</thead>
 
-																	<tbody>
-																		<tr class="@if(count($counts) > 0) success @else danger @endif">
-																			<td>
-																				<label class="title-color">
-																					Skills <i class="badge">{{count($counts)}}</i> 
-																				</label>
-																			</td>
-																			<td>
-																				@foreach($post->skills as $skill)
-																					{{$skill->name}},
-																				@endforeach
-																			</td>
-																			<td>
-																				@foreach($userSkills as $myskill)
-																					{{$myskill}},
-																				@endforeach												
-																			</td>
-																		</tr>
-																		<tr class="@if($post->role  == $pa->user->induser->role) success @else danger @endif">
-																			<td>
-																				<label class="title-color">Job Role</label>
-																			</td>
-																			<td>{{ $post->role }}</td>
-																			<td>{{ $pa->user->induser->role }}</td>
-																		</tr>
-																		<tr class="@if($post->prof_category == $pa->user->induser->prof_category) success @else danger @endif">
-																			<td>
-																				 <label class="title-color">Job Category</label>
-																			</td>																		
-																			<td>{{ $post->prof_category }}</td>
-																			<td>{{ $pa->user->induser->prof_category }}</td>
-																		</tr>
-																		<tr class="@if($post->min_exp == $pa->user->induser->experience) success @else danger @endif">
-																			<td>
-																				<label class="title-color">Experience</label>
-																			</td>
-																			<td>{{ $post->min_exp }}-{{ $post->max_exp }}</td>
-																			<td>{{ $pa->user->induser->experience }}</td>
-																		</tr>
-																		<tr class="@if($post->education == $pa->user->induser->education) success @else danger @endif">
-																			<td>
-																				<label class="title-color">Education</label>
-																			</td>
-																			<td>{{ $post->education }}</td>
-																			<td>{{ $pa->user->induser->education }}</td>
-																		</tr>
-																		<tr class="@if($post->city == $pa->user->induser->city) success @else danger @endif">
-																			<td>
-																				<label class="title-color">Location</label>			
-																			</td>															
-																			<td>{{ $post->city }}</td>
-																			<td>{{ $pa->user->induser->city }}</td>
-																		</tr>
-																		<tr class="@if($post->time_for == $pa->user->induser->prefered_jobtype || ($post->time_for == 'Part Time' && $pa->user->induser->prefered_jobtype == 'Full Time')) success @else danger @endif">
-																			<td>						
-																				<label class="title-color">Job Type
-																				</label>
-																			</td>															
-																			<td>{{ $post->time_for }}</td>
-																			<td>{{ $pa->user->induser->prefered_jobtype }}</td>
-																		</tr>
-																	</tbody>
-																	</table>
+																					<tbody>
+																						<tr class="@if(count($counts) > 0) title-bacground-color @else title-bacground-color @endif">
+																							<td colspan="2" class="matching-criteria-align">
+																								@if(count($counts) > 0)
+																								<label class="title-color">
+																									<i class="fa fa-check magic-match-icon-color"></i> Skills <i class="badge">{{count($counts)}}</i> 
+																								</label>
+																								@else
+																								<label class="title-color">
+																									<i class="fa fa-times"></i> Skills <i class="badge">{{count($counts)}}</i> 
+																								</label>
+																								@endif
+																							</td>
+																						</tr>
+																						<tr class="@if(count($counts) > 0) success @else danger @endif">
+																							
+																							<td class="matching-criteria-align">
+
+																								@foreach($post->skills as $skill)
+																									{{$skill->name}},
+																								@endforeach
+																							</td>
+																							<td class="matching-criteria-align">
+																								@foreach($userSkills as $myskill)
+																									{{$myskill}},
+																								@endforeach												
+																							</td>
+																						</tr>
+																						<tr class="@if(strcasecmp($post->role, $pa->user->induser->role) == 0) title-bacground-color @else title-bacground-color @endif">
+																							<td colspan="2" class="matching-criteria-align">
+																								@if(strcasecmp($post->role, $pa->user->induser->role) == 0)
+																								<i class="fa fa-check magic-match-icon-color"></i> <label class="title-color">Job Role</label>
+																								@else
+																								<i class="fa fa-times"></i> <label class="title-color">Job Role</label>
+																								@endif
+																							</td>
+																						</tr>
+																						<tr class="@if(strcasecmp($post->role, $pa->user->induser->role) == 0) success @else danger @endif">
+																							<!-- <td>
+																								<label class="title-color">Job Role</label>
+																							</td> -->
+																							<td class="matching-criteria-align">{{ $post->role }}</td>
+																							<td class="matching-criteria-align">{{ $pa->user->induser->role }}</td>
+																						</tr>
+																						
+																						
+																						<tr class="@if($post->min_exp == $pa->user->induser->experience) title-bacground-color @else title-bacground-color @endif">
+																							
+																							<td colspan="2" class="matching-criteria-align">
+																								@if($post->min_exp == $pa->user->induser->experience)
+																								<i class="fa fa-check magic-match-icon-color"></i> <label class="title-color">Experience</label>
+																								@else
+																								<i class="fa fa-times"></i> <label class="title-color">Experience</label>
+																								@endif
+																							</td>
+																						</tr>
+																						<tr class="@if($post->min_exp == $pa->user->induser->experience) success @else danger @endif">
+																							<!-- <td>
+																								<label class="title-color">Experience</label>
+																							</td> -->
+																							<td class="matching-criteria-align">{{ $post->min_exp }}-{{ $post->max_exp }}</td>
+																							<td class="matching-criteria-align">{{ $pa->user->induser->experience }}</td>
+																						</tr>
+																						<tr class="@if($post->education == $pa->user->induser->education) title-bacground-color @else title-bacground-color @endif">
+																							<td colspan="2" class="matching-criteria-align">
+																								@if($post->education == $pa->user->induser->education)
+																								<i class="fa fa-check magic-match-icon-color"></i> <label class="title-color">Education</label>
+																								@else
+																								<i class="fa fa-times"></i> <label class="title-color">Education</label>
+																								@endif
+																								
+																							</td>
+																						</tr>
+																						<tr class="@if($post->education == $pa->user->induser->education) success @else danger @endif">
+																							<!-- <td>
+																								<label class="title-color">Education</label>
+																							</td> -->
+																							<td class="matching-criteria-align">{{ $post->education }}</td>
+																							<td class="matching-criteria-align">{{ $pa->user->induser->education }}</td>
+																						</tr>
+																						<tr class="@if($post->city == $pa->user->induser->city) title-bacground-color @else title-bacground-color @endif">
+																							<td colspan="2" class="matching-criteria-align">
+																								@if($post->city == $pa->user->induser->city)
+																								<i class="fa fa-check magic-match-icon-color"></i> <label class="title-color">Location</label>
+																								@else
+																								<i class="fa fa-times"></i> <label class="title-color">Location</label>
+																								@endif
+																							</td>
+																						</tr>
+																						<tr class="@if($post->city == $pa->user->induser->city) success @else danger @endif">
+																																					
+																							<td class="matching-criteria-align">{{ $post->city }}</td>
+																							<td class="matching-criteria-align">{{ $pa->user->induser->city }}</td>
+																						</tr>
+																						<tr class="@if($post->time_for == $pa->user->induser->prefered_jobtype || ($post->time_for == 'Part Time' && $pa->user->induser->prefered_jobtype == 'Full Time')) title-bacground-color @else title-bacground-color @endif">
+																							<td colspan="2" class="matching-criteria-align">
+																								@if($post->time_for == $pa->user->induser->prefered_jobtype || ($post->time_for == 'Part Time' && $pa->user->induser->prefered_jobtype == 'Full Time'))
+																								<i class="fa fa-check magic-match-icon-color"></i> <label class="title-color">Job Type</label>
+																								@else
+																								<i class="fa fa-times"></i> <label class="title-color">Job Type</label>
+																								@endif
+																								
+																							</td>
+																						</tr>
+																						<tr class="@if($post->time_for == $pa->user->induser->prefered_jobtype || ($post->time_for == 'Part Time' && $pa->user->induser->prefered_jobtype == 'Full Time')) success @else danger @endif">
+																																					
+																							<td class="matching-criteria-align">{{ $post->time_for }}</td>
+																							<td class="matching-criteria-align">{{ $pa->user->induser->prefered_jobtype }}</td>
+																						</tr>
+																					</tbody>
+																					</table>
 																</div>
 															</div>
 														</div>
@@ -1325,9 +1547,116 @@
 	<!-- /.modal-dialog -->
 </div>
 <!-- /.modal -->
+<!-- SHARE MODAL FORM-->
+<div class="modal fade" id="share-post" tabindex="-1" role="dialog" aria-labelledby="share-post" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+     <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+        <h4 class="modal-title">Share post</h4>
+      </div>
+      <form class="form-horizontal" id="modal-post-share-form" role="form" method="POST" action="{{ url('/post/share') }}">
+      <div class="modal-body">
+                  
+          <input type="hidden" name="_token" value="{{ csrf_token() }}">
+          <input type="hidden" name="share_post_id" id="modal_share_post_id" value="">
+		@if(Auth::user()->induser)
+
+		<div id="post-share-msg-box" style="display:none">
+			<div id="post-share-msg"></div>
+		</div>
+		<div id="post-share-form-errors" style="display:none"></div>
+
+		<div class="row"> 
+            <div class="col-md-6">                      
+              <h4>Who can see this Post</h4>
+            </div>
+            <div class="col-md-6">
+              <!-- <label for="tag-group-all" style="padding: 5.5px 12px;">
+                <input type="checkbox" id="tag-group-all" name="tag-group" value="all" class="md-radiobtn">
+                Public 
+              </label> -->
+              <label for="tag-group-links" style="padding: 5.5px 12px;">
+                <input type="checkbox" id="tag-group-links" name="tag-group" value="links" class="md-radiobtn" >
+                Links 
+              </label>
+              <label for="tag-group-groups" style="padding: 5.5px 12px;">
+                <input type="checkbox" id="tag-group-groups" name="tag-group" value="groups" class="md-radiobtn" >                  
+                Groups 
+              </label>
+            </div>
+		</div>          
+
+      	<div class="row"> 
+            <div class="col-md-12" id="connections-list">
+            
+            <label>Links</label>
+            {!! Form::select('share_links[]', $share_links, null, ['id'=>'connections', 'class'=>'form-control', 'multiple']) !!}               
+            </div>    
+		</div>
+		<div class="row"> 
+			<div class="col-md-12" id="groups-list">
+	            <label>Groups</label>
+	            {!! Form::select('share_groups[]', $share_groups, null, ['id'=>'groups', 'class'=>'form-control', 'multiple']) !!}  
+	        </div>             
+		</div>
+		@endif            
+     
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-sm btn-success" id="modal-post-share-btn">Share</button>
+        <button type="button" class="btn btn-sm default" data-dismiss="modal">Close</button>
+      </div>      
+      </form>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+<!-- END SHARE MODAL FORM -->
+<div class="modal fade" id="myactivity-posts" tabindex="-1" role="basic" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div id="myactivity-posts-content">
+				My Activity Post 
+			</div>
+		</div>
+		<!-- /.modal-content -->
+	</div>
+	<!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
 @stop
 
 @section('javascript')
+<script type="text/javascript">
+  $(document).ready(function(){
+	// myactivity-post
+$('.myactivity-posts').on('click',function(event){  	    
+  	event.preventDefault();
+  	var post_id = $(this).parent().data('postid');
+  	console.log(post_id);
+    $.ajaxSetup({
+		headers: {
+			'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+		}
+	});
+
+    $.ajax({
+      url: "/postdetail/detail",
+      type: "post",
+      data: {postid: post_id},
+      cache : false,
+      success: function(data){
+    	$('#myactivity-posts-content').html(data);
+    	$('#myactivity-posts').modal('show');
+      }
+    }); 
+    return false;
+});
+});
+  </script>
 <script type="text/javascript">
 	jQuery('#show-social').hide();
 	jQuery(document).ready(function(){ 
@@ -1439,6 +1768,82 @@ $('.viewcontact-view').on('click',function(event){
       }
     }); 
     return false;
+});
+
+// get post id for post share
+	$('.sojt').on('click',function(event){
+	  	var share_post_id = $(this).data('share-post-id');
+	  	$('#modal_share_post_id').val(share_post_id);
+	});
+	
+	$('#connections').select2({
+            placeholder: "Select links to share"
+        });
+    $('#groups').select2({
+            placeholder: "Select groups to share"
+        });
+
+    // share post 
+    $('#modal-post-share-btn').on('click',function(event){       
+	    event.preventDefault();
+		loader('show');
+
+		var share_post_id = $("#modal_share_post_id").val();
+	    var formData = $('#modal-post-share-form').serialize(); // form data as string
+	    var formAction = $('#modal-post-share-form').attr('action'); // form handler url
+	    // console.log(share_post_id);
+	    $.ajaxSetup({
+	        headers: {
+	            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+	        }
+	    });
+
+	    $.ajax({
+	      url: formAction,
+	      type: "post",
+	      data: formData,
+	      cache : false,
+	      success: function(data){
+	      	loader('hide');
+	        if(data.data.page == 'home'){
+	            $('#post-share-msg-box').removeClass('alert alert-danger');
+	            $('#post-share-form-errors').hide();
+	            $('#post-share-msg-box').addClass('alert alert-success').fadeIn(1000, function(){
+	                $(this).show();
+	            });
+	            $('#share-count-'+share_post_id).text(data.data.sharecount);
+	            // console.log(data.data.sharecount+" - "+share_post_id);
+	            $('#modal-post-share-form')[0].reset();
+	            $("#connections").select2("val", "");
+	            $("#groups").select2("val", "");
+	            $("#connections").prop('disabled',true);
+               	$("#groups").prop('disabled',true);
+	            $('#post-share-msg').html('Post shared successfully ! <br/>');  
+	            $("#share-post").fadeTo(2000, 500).slideUp(500, function(){	            	
+               		 $('#share-post').modal('hide');
+               		 $('#post-share-msg-box').hide();
+               		 $('#post-share-msg-box').removeClass('alert alert-success');
+               		 $('#post-share-msg-box').removeClass('alert alert-danger');               		 
+                });   
+	           
+	        }
+	      },
+	      error: function(data) {
+	        loader('hide');
+		    var errors = data.responseJSON;
+		    // console.log(errors);
+		    $errorsHtml = '<div class="alert alert-danger"><ul>';
+		    $.each(errors.errors, function(index, value) {
+		    	console.log(value);
+				 $errorsHtml += '<li>' + value[0] + '</li>';
+		    });
+	 		$errorsHtml += '</ul></div>';	            
+	        $( '#post-share-form-errors' ).html( $errorsHtml );
+	        $( '#post-share-form-errors' ).show();
+	      }
+	    }); 
+	    return false;
+  });
 });
 
 });

@@ -27,6 +27,7 @@ Route::group(array('before' => 'auth'), function(){
 	Route::post('myactivity/post', 'PagesController@post');
 	Route::post('/matching_criteria', 'PagesController@matching');
 	Route::post('viewcontact/view', 'PagesController@viewContact');
+	Route::post('postdetail/detail', 'PagesController@postDetail');
 
 	Route::get('individual', 'UserController@index');
 	Route::get('individual/create', 'UserController@create');
