@@ -310,9 +310,21 @@
 				</p> -->
 				@if($utype == 'ind')
 				<ul class="list-inline">
+					@if(Auth::user()->induser_id == $user->id)
 					<li>
 						<i class="fa fa-calendar"></i> {{$user->dob}}
 					</li>
+					@elseif($connectionStatus == 'friend' && Auth::user()->induser_id != $user->id && $user->dob_show == 'Everyone' || $user->dob_show == 'Links')
+					<li>
+						<i class="fa fa-calendar"></i> {{$user->dob}}
+					</li>
+					@elseif($user->dob_show == 'Everyone')
+					<li>
+						<i class="fa fa-calendar"></i> {{$user->dob}}
+					</li>
+					@elseif(Auth::user()->induser_id != $user->id && $user->dob_show == 'None')
+					
+					@endif
 					@if($user->gender == 'Female')
 					<li>
 						<i class="fa fa-female"></i> {{$user->gender}}
@@ -930,6 +942,7 @@
 			<input type="hidden" name="_token" value="{{ csrf_token() }}">
 			<div class="form-body">
 				<div class="row" >
+					@if(Auth::user()->induser_id == $user->id)
 					<div class="col-md-6 col-sm-6 col-xs-12">
 						<div class="form-group">
 							<label class="control-label col-md-4 col-sm-4 col-xs-4" style="font-size:13px;">Email Id:</label>
@@ -948,7 +961,49 @@
 							</div>
 						</div>
 					</div>
+					@elseif($connectionStatus == 'friend' && Auth::user()->induser_id != $user->id && $user->dob_show == 'Everyone' || $user->dob_show == 'Links')
+					<div class="col-md-6 col-sm-6 col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-md-4 col-sm-4 col-xs-4" style="font-size:13px;">Email Id:</label>
+							<div class="col-md-8 col-sm-8 col-xs-8">
+								<p class="form-control-static view-page">
+									{{ $user->email }} 
+									@if($user->email_verify == 0)
+									<a>
+										<i class="fa fa-exclamation-circle" 
+										style="color: #cb5a5e;"></i>
+									</a>
+									@elseif($user->email_verify == 1)
+										<i class="glyphicon glyphicon-ok-circle" style="color: #1EC71E;"></i>
+									@endif
+								</p>
+							</div>
+						</div>
+					</div>
+					@elseif(Auth::user()->induser_id != $user->id && $user->dob_show == 'Everyone')
+					<div class="col-md-6 col-sm-6 col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-md-4 col-sm-4 col-xs-4" style="font-size:13px;">Email Id:</label>
+							<div class="col-md-8 col-sm-8 col-xs-8">
+								<p class="form-control-static view-page">
+									{{ $user->email }} 
+									@if($user->email_verify == 0)
+									<a>
+										<i class="fa fa-exclamation-circle" 
+										style="color: #cb5a5e;"></i>
+									</a>
+									@elseif($user->email_verify == 1)
+										<i class="glyphicon glyphicon-ok-circle" style="color: #1EC71E;"></i>
+									@endif
+								</p>
+							</div>
+						</div>
+					</div>
+					@elseif(Auth::user()->induser_id != $user->id && $user->dob_show == 'None')
+	
+					@endif
 					<!--/span-->
+					@if(Auth::user()->induser_id == $user->id)
 					<div class="col-md-6 col-sm-6 col-xs-12">
 						<div class="form-group">
 							<label class="control-label col-md-4 col-sm-4 col-xs-4">Mobile:</label>
@@ -967,6 +1022,47 @@
 							</div>
 						</div>
 					</div>
+					@elseif($connectionStatus == 'friend' && Auth::user()->induser_id != $user->id && $user->dob_show == 'Everyone' || $user->dob_show == 'Links')
+					<div class="col-md-6 col-sm-6 col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-md-4 col-sm-4 col-xs-4">Mobile:</label>
+							<div class="col-md-6 col-sm-8 col-xs-8">
+								<p class="form-control-static view-page">
+									{{ $user->mobile }} 
+									@if($user->mobile_verify == 0)
+									<a>
+										<i class="fa fa-exclamation-circle" 
+										style="color: #cb5a5e;font-size: 16px;"></i>
+									</a>
+									@elseif($user->mobile_verify == 1)
+										<i class="glyphicon glyphicon-ok-circle" style="color: #1EC71E;font-size: 16px;"></i>
+									@endif
+								</p>
+							</div>
+						</div>
+					</div>
+					@elseif(Auth::user()->induser_id != $user->id && $user->dob_show == 'Everyone')
+					<div class="col-md-6 col-sm-6 col-xs-12">
+						<div class="form-group">
+							<label class="control-label col-md-4 col-sm-4 col-xs-4">Mobile:</label>
+							<div class="col-md-6 col-sm-8 col-xs-8">
+								<p class="form-control-static view-page">
+									{{ $user->mobile }} 
+									@if($user->mobile_verify == 0)
+									<a>
+										<i class="fa fa-exclamation-circle" 
+										style="color: #cb5a5e;font-size: 16px;"></i>
+									</a>
+									@elseif($user->mobile_verify == 1)
+										<i class="glyphicon glyphicon-ok-circle" style="color: #1EC71E;font-size: 16px;"></i>
+									@endif
+								</p>
+							</div>
+						</div>
+					</div>
+					@elseif(Auth::user()->induser_id != $user->id && $user->dob_show == 'None')
+	
+					@endif
 					<!--/span-->
 				</div>
 				<div class="row" >

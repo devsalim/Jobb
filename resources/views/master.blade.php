@@ -78,6 +78,8 @@
  
 <link href="/assets/sumoselect.css" rel="stylesheet" />
 <link href="/assets/admin/pages/css/profile-old.css" rel="stylesheet" type="text/css"/>
+<link rel="shortcut icon" href="/assets/images/favicon.ico" type="image/x-icon">
+<link rel="icon" href="/assets/images/favicon.ico" type="image/x-icon">
 @yield('css')
 
 <style type="css/text" rel="stylesheet">

@@ -34,6 +34,8 @@ Route::group(array('before' => 'auth'), function(){
 	Route::get('individual/edit', 'UserController@edit');
 	Route::post('individual/update/{id}', 'UserController@update');
 	Route::post('individual/basicupdate', 'UserController@basicUpdate');
+	Route::post('individual/privacyUpdate/{id}', 'UserController@privacyUpdate');
+	Route::post('individual/preferenceUpdate/{id}', 'UserController@preferenceUpdate');
 
 	Route::get('corporate', 'CorporateController@index');
 	Route::get('corporate/create', 'CorporateController@create');

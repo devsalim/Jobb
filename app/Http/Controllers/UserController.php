@@ -208,19 +208,42 @@ class UserController extends Controller {
 			$data->education = Input::get('education');
 			$data->branch = Input::get('branch');
 			$data->prof_category = Input::get('prof_category');
-			$data->dob = Input::get('dob');
-			$data->gender = Input::get('gender');
 			$data->experience = Input::get('experience');
 			$data->role = Input::get('role');
 			$data->working_at = Input::get('working_at');
 			$data->working_status = Input::get('working_status');
-			$data->c_locality = Input::get('c_locality');
-			$data->p_locality = Input::get('p_locality');
+			$data->linked_skill = Input::get('linked_skill');
+			$data->about_individual = Input::get('about_individual');
+			$data->save();
+			return redirect('/profile/ind/'.$id);
+		}else{
+			return 'some error occured.';
+		}
+	}
+
+	public function privacyUpdate($id)
+	{
+		$data = Induser::where('id', '=', $id)->first();
+		if($data != null){
+			$data->email_show = Input::get('email_show');
+			$data->dob_show = Input::get('dob_show');
+			$data->mobile_show = Input::get('mobile_show');
+			$data->save();
+			return redirect('/profile/ind/'.$id);
+		}else{
+			return 'some error occured.';
+		}
+	}
+
+	public function preferenceUpdate($id)
+	{
+		$data = Induser::where('id', '=', $id)->first();
+		if($data != null){
 			$data->city = Input::get('city');
 			$data->prefered_location = Input::get('prefered_location');
 			$data->prefered_jobtype = Input::get('prefered_jobtype');
-			$data->linked_skill = Input::get('linked_skill');
-			$data->about_individual = Input::get('about_individual');
+			$data->c_locality = Input::get('c_locality');
+			$data->p_locality = Input::get('p_locality');
 			$data->save();
 			return redirect('/profile/ind/'.$id);
 		}else{
@@ -244,6 +267,8 @@ class UserController extends Controller {
 		if($data != null){
 			$data->fname = Input::get('fname');
 			$data->lname = Input::get('lname');
+			$data->dob = Input::get('dob');
+			$data->gender = Input::get('gender');
 			$data->email = Input::get('email');
 			$data->mobile = Input::get('mobile');
 			$data->save();

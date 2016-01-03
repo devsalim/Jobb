@@ -77,7 +77,7 @@
 						      	alt="DP" style="width:70%">
 						     </a>
 						</div>
-						<div class="col-md-6 col-sm-6 col-xs-7">
+						<div class="col-md-6 col-sm-6 col-xs-6">
 							 <a href="/profile/ind/{{$ind->id}}" data-utype="ind" style="font-size:15px;">
 						     {{ $ind->fname }} {{ $ind->lname }}</a><br>
 						    <small>
@@ -113,7 +113,14 @@
                             @endif
 						      </small>
 						</div>
-							    
+						<div class="col-md-3 col-sm-3 col-xs-3" style="margin:7px 0">
+								<form action="" method="post">
+									<input type="hidden" name="_token" value="{{ csrf_token() }}">
+									<button type="submit" name="action" value="accept" class="btn btn-success apply-ignore-font" style="padding:2px 7px;" >
+										Add Link
+									</button>
+								</form>
+							</div>	    
 					</div>
 				</div>
 				@endforeach
