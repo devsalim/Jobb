@@ -16,6 +16,8 @@ use App\Http\Requests\CreateImgUploadRequest;
 use Illuminate\Http\Response;
 use Mail;
 use Hash;
+use Redirect;
+use Socialize;
 
 
 class UserController extends Controller {
@@ -255,7 +257,7 @@ class UserController extends Controller {
 
 		// if($request->hasFile('profile_pic')) {
 			
-			if($request->ajax()){
+			/*if($request->ajax()){
 				$data = [];
 				$destinationPath = 'img/profile/temp/';
 				$extension = \Illuminate\Support\Facades\Request::file('profile_pic')->getClientOriginalExtension();
@@ -268,7 +270,15 @@ class UserController extends Controller {
 				$data['uplBtn'] = 'hide';
 				$data['filename'] = $fileName;
 				return response()->json(['success'=>true,'data'=>$data]);
-			}else{
+			}else{*/
+
+				$tempDestinationPath = 'img/profile/temp/';
+				$extension = \Illuminate\Support\Facades\Request::file('profile_pic')->getClientOriginalExtension();
+				$fileName = rand(11111,99999).'.'.$extension;
+				$tempPath = $tempDestinationPath.$fileName;
+				\Illuminate\Support\Facades\Request::file('profile_pic')->move($tempDestinationPath, $fileName);
+				Image::make($tempPath)->resize(400, null, function ($constraint) {$constraint->aspectRatio();})->save($tempPath);
+
 				$oldProfilePic = Induser::where('id', '=', Auth::user()->induser_id)->pluck('profile_pic');
 				$destinationPath = 'img/profile/';
 				// $extension = Input::file('profile_pic')->getClientOriginalExtension();
@@ -276,11 +286,11 @@ class UserController extends Controller {
 				// $path = $destinationPath.$fileName;
 				// Input::file('profile_pic')->move($destinationPath, $fileName);
 
-				$fileName = $request['filename'];
+				// $fileName = $request['filename'];
 				$path = $destinationPath.$fileName;
 				$img = 'img/profile/temp/'.$fileName;
 
-				Image::make($img)->crop($request['w'], $request['h'], $request['x'], $request['y'])->save($path);
+				Image::make($img)->crop(intval($request['w']), intval($request['h']), intval($request['x']), intval($request['y']))->save($path);
 				Induser::where('id', '=', Auth::user()->induser_id)->update(['profile_pic' => $fileName]);
 
 				if($oldProfilePic != null){
@@ -288,7 +298,7 @@ class UserController extends Controller {
 					\File::delete($img);
 				}
 				return redirect('/home');
-			}
+			// }
 			
 	    // }
 	}
@@ -358,6 +368,10 @@ class UserController extends Controller {
 				Mail::send('emails.auth.reminder', array('fname'=>$fname, 'token'=>$resetCode), function($message) use ($email,$fname){
 			        $message->to($email, $fname)->subject('Jobtip - Password Reset!')->from('admin@jobtip.in', 'JobTip');
 			    });
+			}elseif($user->mobile != null){
+				$mobile = $user->mobile;
+				$fname = $user->induser->fname;
+				// $data['reset_code'] = $resetCode;		
 			}
 
 			$data = ['page'=>'login', 'error'=>'none'];
@@ -429,6 +443,26 @@ class UserController extends Controller {
 				return redirect("/home#change-password")->withErrors(['Old password doesnt match']);
 			}
 	    }
+	}
+
+	// fb login
+	public function redirectToFacebook() {
+	  return Socialize::with('facebook')->redirect();
+	}
+
+	public function handleFacebookCallback() {
+	  $user = Socialize::with('facebook')->user();
+	  print_r($user);die;
+	}
+
+	// gp login
+	public function redirectToGoogle() {
+	  return Socialize::with('google')->redirect();
+	}
+
+	public function handleGoogleCallback() {
+	  $user = Socialize::with('google')->user();
+	  print_r($user);die;
 	}
 		
 }

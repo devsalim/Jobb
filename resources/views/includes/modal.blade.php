@@ -3,7 +3,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       @if(Auth::user()->induser_id !=null)
-      {!! Form::open(array('url' => 'user/imgUpload', 'files'=> true, 'id'=> 'profile-img-upload-form')) !!}
+      {!! Form::open(array('url' => 'user/imgUpload', 'files'=> true, 'id'=> 'profile-img-upload-form', 'onsubmit'=>'return checkForm()')) !!}
       @elseif(Auth::user()->corpuser_id !=null)
       {!! Form::open(array('url' => 'corporate/imgUpload', 'files'=> true)) !!}
       @endif
@@ -13,22 +13,26 @@
         <h4 class="modal-title">Add profile image</h4>
       </div>
       <div class="modal-body">       
-        {!! Form::file('profile_pic', ['class'=>'profile-image']) !!}
-        <div id="img-area" style="margin: 5px 0;"></div>
+        {!! Form::file('profile_pic', ['class'=>'profile-image', 'id'=>'image_file', 'onchange'=>'fileSelectHandler()']) !!}
+        <div class="error"></div>
+        <div id="img-area" style="margin: 5px 0;">
+          <img id="preview" style="width:auto" />
+        </div>
       </div>
       <div class="modal-footer">        
         {{-- {!! Form::submit('upload',['class'=>'btn btn-info']) !!} --}}
-        <button type="button" class="btn btn-info upload-img">Upload</button>{{-- 
-        <button type="button" class="btn btn-warning cropnsave-img" >Crop & Save</button> --}}
+        {{-- <button type="button" class="btn btn-info upload-img">Upload</button> --}}
 
-        <form action="user/imgUpload" target="_blank" method="post" id="demo8_form">
+        {{-- <button type="button" class="btn btn-warning cropnsave-img" >Crop & Save</button> --}}
+
+        {{-- <form action="user/imgUpload" target="_blank" method="post"> --}}
           <input type="hidden" id="crop_x" name="x"/>
           <input type="hidden" id="crop_y" name="y"/>
           <input type="hidden" id="crop_w" name="w"/>
           <input type="hidden" id="crop_h" name="h"/>
-          <input type="hidden" id="fn" name="filename"/>
-          <input type="submit" value="Crop & Save" class="btn btn-large green cropnsave-img" style="display:none"/>
-        </form>
+          {{-- <input type="hidden" id="fn" name="filename"/> --}}
+          <input type="submit" value="Crop & Save" class="btn btn-large green cropnsave-img"/>
+        {{-- </form> --}}
 
         <button type="button" class="btn default" data-dismiss="modal">Cancel</button>
       </div>

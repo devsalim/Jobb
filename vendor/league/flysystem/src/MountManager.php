@@ -30,7 +30,6 @@ use LogicException;
  * @method bool createDir($dirname, $config = [])
  * @method array listFiles($directory = '', $recursive = false)
  * @method array listPaths($directory = '', $recursive = false)
- * @method array listWith(array $keys = array(), $directory = '', $recursive = false)
  * @method array getWithMetadata($path, array $metadata)
  * @method string|false getMimetype($path)
  * @method string|false getTimestamp($path)
@@ -89,8 +88,8 @@ class MountManager
      */
     public function mountFilesystem($prefix, FilesystemInterface $filesystem)
     {
-        if (! is_string($prefix)) {
-            throw new InvalidArgumentException(__METHOD__.' expects argument #1 to be a string.');
+        if ( ! is_string($prefix)) {
+            throw new InvalidArgumentException(__METHOD__ . ' expects argument #1 to be a string.');
         }
 
         $this->filesystems[$prefix] = $filesystem;
@@ -109,15 +108,15 @@ class MountManager
      */
     public function getFilesystem($prefix)
     {
-        if (! isset($this->filesystems[$prefix])) {
-            throw new LogicException('No filesystem mounted with prefix '.$prefix);
+        if ( ! isset($this->filesystems[$prefix])) {
+            throw new LogicException('No filesystem mounted with prefix ' . $prefix);
         }
 
         return $this->filesystems[$prefix];
     }
 
     /**
-     * Retrieve the prefix form an arguments array.
+     * Retrieve the prefix from an arguments array.
      *
      * @param array $arguments
      *
@@ -131,12 +130,12 @@ class MountManager
 
         $path = array_shift($arguments);
 
-        if (! is_string($path)) {
+        if ( ! is_string($path)) {
             throw new InvalidArgumentException('First argument should be a string');
         }
 
-        if (! preg_match('#^[a-zA-Z0-9]+\:\/\/.*#', $path)) {
-            throw new InvalidArgumentException('No prefix detected in for path: '.$path);
+        if ( ! preg_match('#^.+\:\/\/.*#', $path)) {
+            throw new InvalidArgumentException('No prefix detected in path: ' . $path);
         }
 
         list($prefix, $path) = explode('://', $path, 2);
@@ -177,17 +176,7 @@ class MountManager
     {
         list($prefix, $arguments) = $this->filterPrefix($arguments);
 
-        $filesystem = $this->getFilesystem($prefix);
-
-        try {
-            return $this->invokePlugin($method, $arguments, $filesystem);
-        } catch (PluginNotFoundException $e) {
-            // Let it pass, it's ok, don't panic.
-        }
-
-        $callback = [$filesystem, $method];
-
-        return call_user_func_array($callback, $arguments);
+        return $this->invokePluginOnFilesystem($method, $arguments, $prefix);
     }
 
     /**
@@ -220,10 +209,27 @@ class MountManager
     }
 
     /**
+     * List with plugin adapter.
+     *
+     * @param array  $keys
+     * @param string $directory
+     * @param bool   $recursive
+     */
+    public function listWith(array $keys = [], $directory = '', $recursive = false)
+    {
+        list($prefix, $arguments) = $this->filterPrefix([$directory]);
+        $directory = $arguments[0];
+        $arguments = [$keys, $directory, $recursive];
+
+        return $this->invokePluginOnFilesystem('listWith', $arguments, $prefix);
+    }
+
+    /**
      * Move a file.
      *
      * @param $from
      * @param $to
+     *
      * @return bool
      */
     public function move($from, $to)
@@ -235,5 +241,29 @@ class MountManager
         }
 
         return false;
+    }
+
+    /**
+     * Invoke a plugin on a filesystem mounted on a given prefix.
+     *
+     * @param $method
+     * @param $arguments
+     * @param $prefix
+     *
+     * @return mixed
+     */
+    public function invokePluginOnFilesystem($method, $arguments, $prefix)
+    {
+        $filesystem = $this->getFilesystem($prefix);
+
+        try {
+            return $this->invokePlugin($method, $arguments, $filesystem);
+        } catch (PluginNotFoundException $e) {
+            // Let it pass, it's ok, don't panic.
+        }
+
+        $callback = [$filesystem, $method];
+
+        return call_user_func_array($callback, $arguments);
     }
 }

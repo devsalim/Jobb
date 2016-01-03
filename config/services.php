@@ -34,4 +34,16 @@ return [
 		'secret' => '',
 	],
 
+	'facebook' => [
+	    'client_id' => '1679926718913960',
+	    'client_secret' => '00bd52740edb628da4d946b9bb0072b1',
+	    'redirect' => 'http://jobtip.dev/user/fb',
+	],
+
+	'google' => [
+	    'client_id' => '602994102978-9q9fl6qdr0kmearg4fr867gmj5gib0c3.apps.googleusercontent.com',
+	    'client_secret' => '6Hf_gBXJvEgZdvexsVx9Ob00',
+	    'redirect' => 'http://jobtip.dev/user/gp',
+	],
+
 ];

@@ -148,6 +148,14 @@ Route::group(array('before' => 'auth'), function(){
 
 	Route::get('search/', 'PagesController@search');
 
+	Route::get('home/{post_type}/{sort_by}', 'PagesController@homeSorting');
+
+	Route::get('facebook', 'UserController@redirectToFacebook');
+	Route::get('user/fb', 'UserController@handleFacebookCallback');
+
+	Route::get('google', 'UserController@redirectToGoogle');
+	Route::get('user/gp', 'UserController@handleGoogleCallback');
+
 });
 
 

@@ -38,20 +38,16 @@
 										</button>
 										<ul class="dropdown-menu dropdown-menu-sort" role="menu" style="min-width: 130px;margin: 4px -25px;">
 											<li >
-												<a href="javascript:;">
-												Date </a>
+												<a href="/home/job/date">Date</a>
 											</li>
 											<li>
-												<a href="javascript:;">
-												Magic Match </a>
+												<a href="/home/job/magic-match">Magic Match</a>
 											</li>
 											<li>
-												<a href="javascript:;">
-												Individual Post </a>
+												<a href="/home/job/individual">Individual Post</a>
 											</li>
 											<li>
-												<a href="javascript:;">
-												corporate Post </a>
+												<a href="/home/job/corporate">corporate Post</a>
 											</li>
 										</ul>
 									</div>
