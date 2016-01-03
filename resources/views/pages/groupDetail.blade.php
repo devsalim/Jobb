@@ -276,7 +276,7 @@
 										<input type="hidden" name="add_user_id" value="{{$connection->id}}">
 										<input type="hidden" name="add_group_id" value="{{$group->id}}">
 										<button type="submit" name="action" value="accept" class="btn apply-ignore-font" style="padding: 0px 3px; background-color: white;">
-											<i class="icon-check icon-check-css"></i>
+											<i class="icon-check icon-check-css" style="font-size:20px !important;"></i>
 										</button>
 										<!-- <button type="submit" class="btn btn-sm btn-success">
 										<i class="icon-plus" style="font-size: 12px;background-color: white;color: black;border-radius: 10px;width: 20px;height: 20px;padding-top: 3px;"></i>
@@ -294,7 +294,7 @@
 						  @endif						
 					@endforeach
 					@else
-					No user
+					No Links to be added.
 					@endif
 				</div>
 			</div>

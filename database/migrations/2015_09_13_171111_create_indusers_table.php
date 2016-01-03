@@ -22,8 +22,12 @@ class CreateIndusersTable extends Migration {
                   $table->string('mobile')->nullable();
                   $table->string('dob')->nullable();
                   $table->string('gender')->nullable();
-
+                  $table->string('email_show')->nullable();
+                  $table->string('dob_show')->nullable();
+                  $table->string('mobile_show')->nullable();
                   //Added one column working status
+
+
                   $table->string('working_status')->nullable();
 
                   $table->string('profile_pic')->nullable();

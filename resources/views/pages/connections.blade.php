@@ -2,7 +2,7 @@
 
 @section('content')
 @if(Auth::user()->identifier == 1)
-<div class="portlet light bordered col-md-7">
+<div class="portlet light bordered col-md-7 col-xs-12 col-sm-8">
 	<div class="portlet-title" style="min-height:0 !important;">
 		<div class="caption links-title" style="float:none !important;margin:0 auto; display:table;line-height:0 !important;">
 			<span class="caption-subject font-blue-hoki bold uppercase">Manage your Links</span>
@@ -11,9 +11,11 @@
 	<div class="portlet-body form">
 		
 			<div class="form-body" style="padding:0;">
-				<label style="font-size: 16px;text-align: center;width: 100%;">Invite Your Friends on JobTip & Share Job Information</label>
+				<div class="normal_search">
+					<label style="font-size: 16px;text-align: center;width: 100%;">Invite Your Friends on JobTip & Share Job Information</label>
+				</div>
 				<div class="row">
-					<div class="col-md-12" style="margin-bottom:15px;">
+					<div class="col-md-12 normal_search" style="margin-bottom:15px;">
 						<div class="portlet light col-md-12 clearfix" style="background-color: transparent;">
 							<div class="row social" style="margin: 5px auto;display: table;">
 								<div class="col-md-4 col-xs-4 ">
@@ -30,8 +32,6 @@
 								</div>
 							</div>
 						</div>
-						
-						
 					</div>	
 					<div class="form-group col-md-12 col-sm-12 col-xs-12 clearfix" style="margin-bottom:10px">	
 							<!-- BEGIN FORM-->
@@ -45,7 +45,7 @@
 					                      <input type="hidden" name="_token" value="{{ csrf_token() }}">
 					                      <div class="row-md-2"></div>
 					                      <div class="row-md-6" style="margin-bottom: 20px;margin-top: 10px;">
-					                        <div class="col-md-12 col-sm-12 col-xs-12 advance-len">
+					                        <div class="col-md-12 col-sm-12 col-xs-12 advance-len" style="margin:10px 0;">
 					                          <div class="input-group" style="margin:0 auto;">
 					                            <div class="icheck-inline">
 					                              <label>
@@ -65,38 +65,38 @@
 											</div>
 					                      </div>
 					                      <div class="row">
-					                        <div class="col-md-6 col-sm-6 col-xs-6 advance-len">
+					                        <div class="col-md-6 col-sm-6 col-xs-12 advance-len">
 					                          <div class="form-group">              
-					                              <input type="text" name="name" class="form-control filter-input" placeholder="Enter Name or Email Id">
+					                              <input type="text" name="name" class="form-control filter-input group" placeholder="Enter Name or Company name or Email Id">
 					                          </div>  
 					                        </div>
-					                        <div class="col-md-6 col-sm-6 col-xs-6 advance-len">
+					                        <div class="col-md-6 col-sm-6 col-xs-12 advance-len">
 					                          <div class="form-group">              
 					                              <input type="text" name="city" class="form-control filter-input" placeholder="Location: Pune, Hyderabad">
 					                          </div>  
 					                        </div>
 					                      </div>
 					                      <div class="row">
-					                        <div class="col-md-6 col-sm-12 col-xs-12 advance-len">
+					                        <div class="col-md-6 col-sm-6 col-xs-12 advance-len">
 					                          <div class="form-group">              
 					                              <input type="text" name="role" class="form-control filter-input" placeholder="Job Role">
 					                          </div>  
 					                        </div>
-					                        <div class="col-md-6 col-sm-12 col-xs-12 advance-len">
+					                        <div class="col-md-6 col-sm-6 col-xs-12 advance-len">
 					                          <div class="form-group">              
 					                              <input type="text" name="category" class="form-control filter-input" placeholder="Job Category">
 					                          </div>  
 					                        </div>
 					                      </div>
 					                      <div class="row show-comp">
-					                        <div class="col-md-6 col-sm-12 col-xs-12 advance-len">
+					                        <div class="col-md-6 col-sm-6 col-xs-12 advance-len">
 					                          <div class="form-group">              
 					                              <input type="text" name="working_at" class="form-control filter-input" placeholder="Working at">
 					                          </div>  
 					                        </div>
-					                        <div class="col-md-6 col-sm-12 col-xs-12 advance-len">
+					                        <div class="col-md-6 col-sm-6 col-xs-12 advance-len">
 					                          <div class="form-group">              
-					                              <input type="text" name="mobile" class="form-control filter-input" placeholder="Mobile No">
+					                              <input type="text" name="mobile" class="form-control filter-input group" placeholder="Mobile No">
 					                          </div>  
 					                        </div>
 					                      </div>
@@ -104,19 +104,13 @@
 					                        <div class="col-md-12 col-sm-12 col-xs-12">
  					                          <div class="footer links-title center-css">              
 					                              <button type="submit" class="btn blue "><i class="glyphicon glyphicon-search"></i> Search</button>
-					                          		<a class="advance-search">
-					                              	<button type="button" class="btn"><i class="glyphicon glyphicon-chevron-left"></i> Back</button>
-					                         	  </a>
+					                          		
 					                          </div> 
+					                          <div class="advance-search group-back-position">
+				                              		<button type="button" class="btn" style="background-color:transparent;"><i class="glyphicon glyphicon-chevron-left"></i> Back</button>
+					                          </div>
 					                        </div>
-					                        <!-- <div class="col-md-6 col-sm-6 col-xs-6">
- 					                          <div class="footer links-title">              
-					                            
-					                              <a class="advance-search">
-					                              	<button type="button" class="btn"><i class="glyphicon glyphicon-chevron-left"></i> Back</button>
-					                         	  </a>
-					                          </div> 
-					                        </div> -->
+					                        
 					                      </div>
 					                    </form>
 						          </div>
@@ -133,7 +127,7 @@
 	</div>
 </div>
 <div class="row" style="margin:0 !important;">
-	<div class="col-md-7" style="padding-left:0 !important;">
+	<div class="col-md-7" style="padding-left:0 !important;margin:10px 0;">
 		<div class=" input-icon right normal_search">
 			<i class="fa fa-search" style="color: darkcyan;right:80px;"></i>
 			<input type="text" name="keywords" id="search-input" onkeydown="down()" onkeyup="up()" class="form-control" placeholder="Search Name or Email id" style="border: 1px solid darkcyan;margin:0 8px">
@@ -247,69 +241,66 @@
 					@if($linkrequestCount > 0)
 					@foreach(Auth::user()->induser->friendOf as $conreq)
 					@if($conreq->pivot->status == 0)
-					<div class="row" style="margin: 0px -35px 0px -9px;">
-						
-								
-							<div class="col-md-2 col-sm-3 col-xs-3">
-								<a href="#">
-							        <img class="media-object img-circle " 
-							        src="@if($conreq->profile_pic != null){{ '/img/profile/'.$conreq->profile_pic }}@else{{'/assets/images/ab.png'}}@endif" 
-							      	alt="DP" style="width:100%">
-							     </a>
-							</div>
-							<div class="col-md-5 col-sm-6 col-xs-6" style="    border-bottom: 1px dotted lightgrey;padding: 0px 7px 7px 2px;">
-								 <a href="/profile/ind/{{$conreq->id}}" data-utype="ind" style="font-size:15px;">
-							    		 	 	{{ $conreq->fname }} {{ $conreq->lname }}</a><br>
-							    <small>
-                                
-						          @if($conreq->working_status == "Student")
-                                
-                                     {{ $conreq->education }} in {{ $conreq->branch }}, {{ $conreq->city }}
-                                
-                                @elseif($conreq->working_status == "Searching Job")
-                                
-                                     {{ $conreq->working_status }} in {{ $conreq->prof_category }}, {{ $conreq->city }}
-                                
-                                @elseif($conreq->working_status == "Freelanching")
-                                
-                                     {{ $conreq->role }} {{ $conreq->working_status }}, {{ $conreq->city }}
-                                
-                                @elseif($conreq->role != null && $conreq->working_at !=null && $conreq->working_status == "Working")
-                                
-                                     {{ $conreq->role }} @ {{ $conreq->working_at }} 
+					<div class="row" style="margin: 0px -35px 0px -9px;">	
+						<div class="col-md-2 col-sm-3 col-xs-3">
+							<a href="#">
+						        <img class="media-object img-circle " 
+						        src="@if($conreq->profile_pic != null){{ '/img/profile/'.$conreq->profile_pic }}@else{{'/assets/images/ab.png'}}@endif" 
+						      	alt="DP" style="width:100%">
+						     </a>
+						</div>
+						<div class="col-md-5 col-sm-6 col-xs-6" style="    border-bottom: 1px dotted lightgrey;padding: 0px 7px 7px 2px;">
+							 <a href="/profile/ind/{{$conreq->id}}" data-utype="ind" style="font-size:15px;">
+						    		 	 	{{ $conreq->fname }} {{ $conreq->lname }}</a><br>
+						    <small>
                             
-                                @elseif($conreq->role != null && $conreq->working_at ==null && $conreq->working_status == "Working")
-                                
-                                     {{ $conreq->role }}, {{ $conreq->city }}
-                                
-                                @elseif($conreq->role == null && $conreq->working_at !=null && $conreq->working_status == "Working")
-                                
-                                     {{ $conreq->woring_at }}, {{ $conreq->city }}
-                                
-                                @elseif($conreq->role == null && $conreq->working_at ==null && $conreq->working_status == "Working")
-                                
-                                   {{ $conreq->prof_category }}, {{ $conreq->city }}
-                               
-                                @endif
-							      </small>
-							</div>
-							<div class="col-md-3 col-sm-3 col-xs-3" style="margin:4px 0">
-								<form action="{{ url('/connections/response', $conreq->pivot->id) }}" method="post">
-									<input type="hidden" name="_token" value="{{ csrf_token() }}">
-									<button type="submit" name="action" value="accept" class="btn apply-ignore-font" style="padding: 0px 3px; background-color: white;">
-										<i class="icon-check icon-check-css-new"></i>
-									</button>
-									<button type="submit" name="action" value="reject" class="btn apply-ignore-font" style="padding: 0px 3px; background-color: white;">
-										<i class="icon-close icon-close-css"></i>
-									</button>
-								</form>
-							</div>
-						 
+					          @if($conreq->working_status == "Student")
+                            
+                                 {{ $conreq->education }} in {{ $conreq->branch }}, {{ $conreq->city }}
+                            
+                            @elseif($conreq->working_status == "Searching Job")
+                            
+                                 {{ $conreq->working_status }} in {{ $conreq->prof_category }}, {{ $conreq->city }}
+                            
+                            @elseif($conreq->working_status == "Freelanching")
+                            
+                                 {{ $conreq->role }} {{ $conreq->working_status }}, {{ $conreq->city }}
+                            
+                            @elseif($conreq->role != null && $conreq->working_at !=null && $conreq->working_status == "Working")
+                            
+                                 {{ $conreq->role }} @ {{ $conreq->working_at }} 
+                        
+                            @elseif($conreq->role != null && $conreq->working_at ==null && $conreq->working_status == "Working")
+                            
+                                 {{ $conreq->role }}, {{ $conreq->city }}
+                            
+                            @elseif($conreq->role == null && $conreq->working_at !=null && $conreq->working_status == "Working")
+                            
+                                 {{ $conreq->woring_at }}, {{ $conreq->city }}
+                            
+                            @elseif($conreq->role == null && $conreq->working_at ==null && $conreq->working_status == "Working")
+                            
+                               {{ $conreq->prof_category }}, {{ $conreq->city }}
+                           
+                            @endif
+						      </small>
+						</div>
+						<div class="col-md-3 col-sm-3 col-xs-3" style="margin:4px 0">
+							<form action="{{ url('/connections/response', $conreq->pivot->id) }}" method="post">
+								<input type="hidden" name="_token" value="{{ csrf_token() }}">
+								<button type="submit" name="action" value="accept" class="btn apply-ignore-font" style="padding: 0px 3px; background-color: white;">
+									<i class="icon-check icon-check-css-new"></i>
+								</button>
+								<button type="submit" name="action" value="reject" class="btn apply-ignore-font" style="padding: 0px 3px; background-color: white;">
+									<i class="icon-close icon-close-css"></i>
+								</button>
+							</form>
+						</div>
 					</div>
 					@endif
 					@endforeach
 					@else
-						<div class="row">
+						<div class="row" style="margin: 0px -35px 0px -9px;">
 							<div class="col-md-12">
 								<i class="fa fa-frown-o" style="font-size: 16px !important;"></i> You have no Link Request
 							</div>
@@ -440,6 +431,7 @@
 @stop
 
 @section('javascript')
+<script src="{{ asset('/assets/ind_validation.js') }}"></script>
 <script type="text/javascript">
 $.ajaxSetup({
 	headers: {

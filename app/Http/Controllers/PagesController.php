@@ -403,7 +403,6 @@ class PagesController extends Controller {
 			$time_for = Input::get('time_for');
 			$unique_id = Input::get('unique_id');
 			$role = Input::get('role');
-
 			if($post_type == 'job'){
 			$jobPosts = Postjob::orderBy('id', 'desc')->with('indUser', 'corpUser', 'postActivity');
 

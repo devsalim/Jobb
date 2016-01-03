@@ -1478,7 +1478,7 @@
 						</div>
 					</div>
 				@endif
-
+				
 				<div class="row">
 					<div class="col-md-12">
 						<?php echo $jobPosts->render(); ?>

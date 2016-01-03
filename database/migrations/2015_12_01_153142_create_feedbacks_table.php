@@ -19,7 +19,7 @@ class CreateFeedbacksTable extends Migration {
 			$table->integer('experience')->unsigned();
 			$table->string('usability', 50);
 			$table->string('comments', 255);
-			$table->foreign('user_id')->references('id')->on('indusers');
+			$table->foreign('user_id')->references('id')->on('users');
 			$table->timestamps();
 		});
 	}

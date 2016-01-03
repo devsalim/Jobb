@@ -30,8 +30,9 @@ class FeedbackController extends Controller {
 	{
 		if(Auth::user()->identifier == 3){
 			$title = 'feedback';
-			$feedbacks = Feedback::all();
+			$feedbacks = Feedback::with('user')->get();
 			return view('pages.feedbacks', compact('title', 'feedbacks'));
+			// return $feedbacks;
 		}else{
 			return redirect('/home');
 		}
@@ -44,8 +45,13 @@ class FeedbackController extends Controller {
 	 */
 	public function create()
 	{
-		$title = 'feedback';
-		return view('pages.feedback', compact('title'));
+		if (Auth::check()) {
+			$title = 'feedback';
+			$feedbacks = Feedback::with('user')->get();
+			return view('pages.feedback', compact('title', 'feedbacks'));
+		}else{
+			return redirect('/login');
+		}
 	}
 
 	/**
@@ -56,7 +62,7 @@ class FeedbackController extends Controller {
 	public function store()
 	{
 		$feedback = new Feedback();
-		$feedback->user_id = Auth::user()->induser_id;
+		$feedback->user_id = Auth::user()->id;
 		$feedback->experience = Input::get('experience');
 		$feedback->usability = Input::get('usability');
 		$feedback->comments = Input::get('comments');

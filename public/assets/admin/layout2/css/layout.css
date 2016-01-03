@@ -2510,7 +2510,7 @@ Page Loading
   transition: all 2s;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 570px) {
   .big-logo {
     display: none;
   }
@@ -2522,7 +2522,7 @@ Page Loading
   }
 }
 
-@media (min-width: 786px) {
+@media (min-width: 570px) {
   .big-logo {
     display: block;
     width: 155px;

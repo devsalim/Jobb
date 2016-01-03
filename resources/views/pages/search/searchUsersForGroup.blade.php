@@ -31,7 +31,7 @@
 				@if($groupAdmin->contains('id', $user->id))
 	 				<div class="btn btn-info apply-ignore-font" style="padding:2px 5px;">Admin</div>
 	 			@else
-	 				<div class="btn btn-warning apply-ignore-font" style="padding:2px 5px;">In group</div>
+	 				<div class="btn btn-warning apply-ignore-font" style="padding:2px 5px;">Grouped</div>
 	 			@endif
 	 		@else
 	 			<form action="{{ url('/group/adduser') }}" method="post">
@@ -44,7 +44,9 @@
 				</form>
 			@endif
 		@elseif($user->id == Auth::user()->induser_id && $groupAdmin->contains('id', $user->id))
-			<div class="btn btn-info apply-ignore-font" style="padding:2px 5px;">Hi, Admin</div>
+			<div class="btn btn-info apply-ignore-font" style="padding:2px 5px;">Admin</div>
+		@elseif($user->id == Auth::user()->induser_id)
+			<div class="btn btn-warning apply-ignore-font" style="padding:2px 5px;">Grouped</div>
 		@endif
 	</div>
 </div>

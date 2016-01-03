@@ -2,200 +2,47 @@
 
 <!--  -->
 @section('content')
-<!-- <dl class="dropdown"> 
-  
-    <dt>
-    <a href="#">
-      <span class="hida">Select</span>    
-      <p class="multiSel"></p>  
-    </a>
-    </dt>
-  
-    <dd>
-        <div class="mutliSelect">
-            <ul>
-                <li>
-                    <input type="checkbox" value="Apple" />Apple</li>
-                <li>
-                    <input type="checkbox" value="Blackberry" />Blackberry</li>
-                <li>
-                    <input type="checkbox" value="HTC" />HTC</li>
-                <li>
-                    <input type="checkbox" value="Sony Ericson" />Sony Ericson</li>
-                <li>
-                    <input type="checkbox" value="Motorola" />Motorola</li>
-                <li>
-                    <input type="checkbox" value="Nokia" />Nokia</li>
-            </ul>
-        </div>
-    </dd>
-</dl> -->
 <?php $selected = 'selected'; ?> 
-<div class="portlet light bordered" style="border: 1px solid #e1e1e1 !important;">
-	<div class="portlet-title">
-		<div class="caption">
-			<i class=""></i>
-			<span class="caption-subject font-blue-hoki bold uppercase">Profile Details</span>
-		</div>
-		<div class="tools">
-			<a href="" class="collapse"></a>
-		</div>
+<div class="row profile-account" style="margin:15px;">
+	<div class="col-md-3">
+		<ul class="ver-inline-menu tabbable margin-bottom-10">
+			<li class="active">
+				<a data-toggle="tab" href="#tab_1-1">
+				<i class="fa fa-cog"></i> Personal info </a>
+				<span class="after">
+				</span>
+			</li>
+			<li>
+				<a data-toggle="tab" href="#tab_2-2">
+				<i class="fa fa-picture-o"></i> Professional Details </a>
+			</li>
+			<li>
+				<a data-toggle="tab" href="#tab_3-3">
+				<i class="fa fa-picture-o"></i> Preferences </a>
+			</li>
+			<li>
+				<a data-toggle="tab" href="#tab_4-4">
+				<i class="fa fa-eye"></i> Privacity Settings </a>
+			</li>
+		</ul>
 	</div>
-	<div class="portlet-body form">
-		<!-- BEGIN FORM-->
-		<form action="{{ url('/individual/basicupdate') }}" id="profile_validation" class="horizontal-form" method="post">
-			<input type="hidden" name="_token" value="{{ csrf_token() }}">
-			<div class="form-body">
-				<div class="row">
-					<div class="col-md-9" style="">
-						<div class="row">
-							@if (count($errors) > 0)
-							<div class="alert alert-danger">
-								<ul>
-									@foreach ($errors->all() as $error)
-										<li>{{ $error }}</li>
-									@endforeach
-								</ul>
-							</div>
-							@endif
-							<div class="col-md-6 col-sm-6">
-								<div class="form-group">
-									<label>First Name</label>
-									<div class="input-group">
-										<span class="input-group-addon">
-											<i class="glyphicon glyphicon-font"></i>
-										</span>
-										<input type="text" name="fname" class="form-control" placeholder="First Name" value="{{ $user->fname }}">
-									</div>
-								</div>
-							</div>
-							<!--/span-->
-							<div class="col-md-6 col-sm-6">
-								<div class="form-group">
-									<label>Last Name</label>
-									<div class="input-group">
-										<span class="input-group-addon">
-											<i class="glyphicon glyphicon-font"></i>
-										</span>
-										<input type="text" name="lname" class="form-control" value="{{ $user->lname }}" placeholder="Last Name">
-									</div>
-								</div>
-							</div>
-							<!--/span-->
-						</div>
-						<div class="row">
-							<div class="col-md-6 col-sm-6">
-								<div class="form-group">
-									<label>Mobile No</label>
-									<div class="input-group">
-										<span class="input-group-addon">
-											<i class="icon-call-end"></i>
-										</span>
-										<input type="text" 
-												name="mobile" 
-												class="form-control" 
-												placeholder="Mobile No" 
-												value="{{ $user->mobile }}"
-												@if($user->mobile_verify == 1)readonly @endif
-												>
-										<span class="input-group-addon">
-											@if($user->mobile_verify == 0)
-											<a>
-												<i class="fa fa-exclamation-circle" 
-												style="color: #cb5a5e;font-size: 16px;"></i>
-											</a>
-											@elseif($user->mobile_verify == 1)
-												<i class="glyphicon glyphicon-ok-circle" style="color: #1EC71E;font-size: 16px;"></i>
-											@endif
-										</span>
-										<span class="input-group-addon">
-											<a href="#edit-me-modal" data-toggle="modal" data-type="mobile" class="change-me">
-												<i class="fa fa-pencil"></i>
-											</a>
-										</span>
-									</div>
-								</div>
-							</div>
-							<!--/span-->
-							<div class="col-md-6 col-sm-6">
-								<div class="form-group">
-									<label>Email Id</label>								
-									<div class="input-group">
-										<span class="input-group-addon">
-											<i class="icon-envelope"></i>
-										</span>
-										<input type="text" name="email" 
-												class="form-control" 
-												placeholder="Email Id" 
-												value="{{ $user->email }}"
-												@if($user->email_verify == 1)readonly @endif>
-										<span class="input-group-addon">
-											@if($user->email_verify == 0)
-											<a>
-												<i class="fa fa-exclamation-circle" 
-												style="color: #cb5a5e;font-size: 16px;"></i>
-											</a>
-											@elseif($user->email_verify == 1)
-												<i class="glyphicon glyphicon-ok-circle" style="color: #1EC71E;font-size: 16px;"></i>
-											@endif
-										</span>
-										<span class="input-group-addon">
-											<a href="#edit-me-modal" data-toggle="modal" data-type="email" class="change-me">
-												<i class="fa fa-pencil"></i>
-											</a>
-										</span>
-									</div>
-								</div>
-							</div>
-							<!--/span-->
+	<div class="col-md-8" style="padding:0;">
+		<div class="tab-content">
+			<div id="tab_1-1" class="tab-pane active">
+				<form action="{{ url('/individual/basicupdate') }}" id="profile_validation" class="horizontal-form" method="post">
+				<input type="hidden" name="_token" value="{{ csrf_token() }}">
+					<div class="form-group">
+						<label class="control-label">Full Name</label>
+						<div class="input-group">
+							<span class="input-group-addon">
+								<i class="glyphicon glyphicon-font"></i>
+							</span>
+							<input type="text" id="name" name="fullname" class="form-control" placeholder="Full Name" value="{{ $user->fname }} {{ $user->lname }}">
+							<input type="hidden"  name="fname" id="first_name" class="form-control">
+							<input type="hidden"  name="lname" id="last_name" class="form-control">
 						</div>
 					</div>
-				</div>
-				<div class="form-actions ">
-					<button type="submit" class="btn blue"><i class="fa fa-check"></i> Update</button>
-					<a href="/profile/ind/{{Auth::user()->induser_id}}" class="btn default">Cancel</a>
-				</div>
-			</div>
-		</form>
-		<!-- END FORM-->
-	</div>
-</div>
-
-<div class="portlet light bordered" style="border: 1px solid #e1e1e1 !important;">
-	<div class="portlet-title">
-		<div class="caption">
-			<i class=""></i>
-			<span class="caption-subject font-blue-hoki bold uppercase">Professional Details</span>
-		</div>
-		<div class="tools">
-			<a href="" class="collapse"></a>
-		</div>		
-	</div>
-	<div class="portlet-body form ">
-		<!-- BEGIN FORM-->
-		<form action="{{ url('/individual/update', Auth::user()->induser_id) }}" id="ind_validation" 
-				class="horizontal-form prof_detail" method="post" enctype="multipart/form-data">
-			<input type="hidden" name="_token" value="{{ csrf_token() }}">
-			<div class="form-body">
-				<div class="row">
-					<div class="" style=""></div>
-					<div class="col-md-9" style="">
-						<div class="row">
-							<div class="col-md-12">
-								<div class="form-group">
-									<label>About Me</label>
-									<div class="input-group">
-										<span class="input-group-addon">
-											<i class="icon-note" style="color:darkcyan;"></i>
-										</span>
-										<textarea name="about_individual"  onkeyup="countChar(this)" class="form-control autosizeme" rows="3">{{ $user->about_individual }} </textarea>
-										
-									</div>
-									<div id="charNum" style="text-align:right;"></div>
-								</div>
-							</div>
-						</div>	
-						<!-- new column added as dob and gender	 -->
+											<!-- new column added as dob and gender	 -->
 						<div class="row">
 							<div class="col-md-6">
 								<div class="form-group">
@@ -257,7 +104,101 @@
 								</div>
 							</div>
 							<!--/span-->
-						</div>		
+						</div>
+					<div class="row">
+						<div class="col-md-6 col-sm-6">
+							<div class="form-group">
+								<label>Mobile No</label>
+								<div class="input-group">
+									<span class="input-group-addon">
+										<i class="icon-call-end"></i>
+									</span>
+									<input type="text" 
+											name="mobile" 
+											class="form-control" 
+											placeholder="Mobile No" 
+											value="{{ $user->mobile }}"
+											@if($user->mobile_verify == 1)readonly @endif
+											>
+									<span class="input-group-addon">
+										@if($user->mobile_verify == 0)
+										<a>
+											<i class="fa fa-exclamation-circle" 
+											style="color: #cb5a5e;font-size: 16px;"></i>
+										</a>
+										@elseif($user->mobile_verify == 1)
+											<i class="glyphicon glyphicon-ok-circle" style="color: #1EC71E;font-size: 16px;"></i>
+										@endif
+									</span>
+									<span class="input-group-addon">
+										<a href="#edit-me-modal" data-toggle="modal" data-type="mobile" class="change-me">
+											<i class="fa fa-pencil"></i>
+										</a>
+									</span>
+								</div>
+							</div>
+						</div>
+						<!--/span-->
+						<div class="col-md-6 col-sm-6">
+							<div class="form-group">
+								<label>Email Id</label>								
+								<div class="input-group">
+									<span class="input-group-addon">
+										<i class="icon-envelope"></i>
+									</span>
+									<input type="text" name="email" 
+											class="form-control" 
+											placeholder="Email Id" 
+											value="{{ $user->email }}"
+											@if($user->email_verify == 1)readonly @endif>
+									<span class="input-group-addon">
+										@if($user->email_verify == 0)
+										<a>
+											<i class="fa fa-exclamation-circle" 
+											style="color: #cb5a5e;font-size: 16px;"></i>
+										</a>
+										@elseif($user->email_verify == 1)
+											<i class="glyphicon glyphicon-ok-circle" style="color: #1EC71E;font-size: 16px;"></i>
+										@endif
+									</span>
+									<span class="input-group-addon">
+										<a href="#edit-me-modal" data-toggle="modal" data-type="email" class="change-me">
+											<i class="fa fa-pencil"></i>
+										</a>
+									</span>
+								</div>
+							</div>
+						</div>
+						<!--/span-->
+					</div>
+					<div class="margiv-top-10">
+						<button type="submit" class="btn green"><i class="fa fa-check"></i> Update</button>
+						<a href="/profile/ind/{{Auth::user()->induser_id}}" class="btn default">Cancel</a>
+					</div>
+				</form>
+			</div>
+			<div id="tab_2-2" class="tab-pane">
+						<!-- BEGIN FORM-->
+		<form action="{{ url('/individual/update', Auth::user()->induser_id) }}" id="ind_validation" 
+				class="horizontal-form prof_detail" method="post" enctype="multipart/form-data">
+			<input type="hidden" name="_token" value="{{ csrf_token() }}">
+			<div class="form-body">
+				<div class="row">
+					<div class="" style=""></div>
+					<div class="col-md-12" style="">
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
+									<label>About Me</label>
+									<!-- <div class="input-group"> -->
+										
+										<textarea name="about_individual" class="form-control" rows="6">{{ $user->about_individual }} </textarea>
+										
+									<!-- </div> -->
+									<div id="charNum" style="text-align:right;"></div>
+								</div>
+							</div>
+						</div>	
 						<div class="row">
 							<div class="col-md-6 col-sm-6">
 								<div class="form-group">
@@ -375,32 +316,6 @@
 										<span class="input-group-addon">
 											<i class="fa fa-cubes"></i>
 										</span>
-<!-- 										<ul class="form-control">
-											<li>Student</li>
-											<li>Searcing Job 
-
-											<ul class="sub-menu">
-									          <li>
-									            <a class="ajaxify" href="layout_ajax_content_2.html">
-									            Ajax Link Sample 1 </a>
-									          </li>
-									          <li>
-									            <a class="ajaxify" href="layout_ajax_content_3.html">
-									            Ajax Link Sample 2 </a>
-									          </li>
-									          <li>
-									            <a class="ajaxify" href="layout_ajax_content_2.html">
-									            Ajax Link Sample 3 </a>
-									          </li>
-									          <li>
-									            <a class="ajaxify" href="layout_ajax_content_3.html">
-									            Ajax Link Sample 4 </a>
-									          </li>
-									        </ul>
-									    </li>
-											<li></li>
-											<li></li>
-										</ul> -->	
 										<select class="form-control" name="prof_category" value="{{ $user->prof_category }}" >
 											<optgroup label="Accounting">
 												<option @if($user->experience=="Accounts/Finance/Tax") {{ $selected }} @endif value="Accounts/Finance/Tax">Accounts/Finance/Tax</option>
@@ -445,34 +360,6 @@
 						<div class="row">
 							<div class="col-md-6 col-sm-6">
 								<div class="form-group">
-									<label> Current City <span class="required">
-											* </span></label>									
-									<div class="input-group">
-										<span class="input-group-addon">
-											<i class="fa fa-map-marker"></i>
-										</span>
-										<input type="text" id="city" name="city" class="form-control" value="{{ $user->city }}" placeholder="City">
-									</div>
-								</div>
-							</div>
-							<!--/span-->
-							<div class="col-md-6 col-sm-6">
-								<div class="form-group">
-									<label>Locality </label>
-									<div class="input-group">
-										<span class="input-group-addon">
-										<i class="fa fa-map-marker"></i>
-										</span>
-										<input type="text" name="c_locality" class="form-control" placeholder="Locality">
-										
-									</div>
-								</div>
-							</div>
-							<!--/span-->
-						</div>
-						<div class="row">
-							<div class="col-md-6 col-sm-6">
-								<div class="form-group">
 									<!-- <form action="{{ url('job/newskill') }}" id="newskillfrm" method="post">					
 									<input type="hidden" name="_token" value="{{ csrf_token() }}"> -->
 									<label>Search Skills</label>
@@ -487,72 +374,15 @@
 									<label>Added Skills <span class="required">
 													* </span></label>
 								    <input type="text" id="linked_skill" value="{{ $user->linked_skill }}" name="linked_skill" 
-								     		class="form-control select2"
+								     		class="form-control select2 uppercase"
 								     		placeholder="List of skills to be added">
 								    <input type="hidden" id="linked_skill_id" name="linked_skill_id" 
-								     		class="form-control">
+								     		class="form-control select2">
 								</div>
 							</div>
 						</div>
+
 						<div class="row">
-							<div class="col-md-6 col-sm-6">
-								<div class="form-group">
-									<label>Prefered Location <span class="required">
-											* </span></label>
-									<div class="input-group">
-										<span class="input-group-addon">
-											<i class="fa fa-map-marker"></i>
-										</span>
-
-										<input type="text" id="pref_loc" name="pref_loc" 
-										class="form-control" placeholder="Select preferred location"
-										onblur="pref_loc_locality()">									
-										
-									</div>
-
-									<input type="text" id="prefered_location" onblur="pref_loc_locality()"
-											name="prefered_location" class="form-control select2" disabled
-											placeholder="Selected preferred location" style="border-top: 0;">
-
-								</div>
-							</div>
-							<!--/span-->
-							<div class="col-md-6 col-sm-6">
-								<div class="form-group">
-									<label>Prefered Locality </label>
-									<div class="input-group">
-										<span class="input-group-addon">
-										<i class="fa fa-map-marker"></i>
-										</span>
-										<input type="text" id="pref_locality"
-										onblur="pref_loc_locality()" 
-										name="p_locality" class="form-control" placeholder="Select locality" disabled>
-										<input type="text" id="preferred_locality" placeholder="Selected locality" style="border-top:0" 
-										name="preferred_locality" class="form-control" disabled>
-									</div>
-								</div>
-							</div>
-							
-						</div>
-						<div class="row">
-							<div class="col-md-6 col-sm-6">
-								<div class="form-group">
-									<label>Prefered Job Type <span class="required">
-											* </span></label>
-									<div class="input-group">
-										<span class="input-group-addon">
-											<i class=" icon-briefcase"></i>
-										</span>
-										<select class="form-control" value="{{ $user->prefered_jobtype }}" name="prefered_jobtype">
-											<option value="">&nbsp;</option>
-											<option @if($user->prefered_jobtype=="Full Time") {{ $selected }} @endif value="Full Time">Full Time</option>
-											<option @if($user->prefered_jobtype=="Part Time") {{ $selected }} @endif value="Part Time">Part Time</option>
-											<option @if($user->prefered_jobtype=="Freelancer") {{ $selected }} @endif value="Freelancer">Freelancer</option>
-											<option @if($user->prefered_jobtype=="Work from home") {{ $selected }} @endif value="Work from home">Work from home</option>
-										</select>
-									</div>
-								</div>
-							</div>
 							<div class="col-md-6 col-sm-6">
 								<div class="form-group" style="">
 									<label class="control-label">Upload Resume <small style="font-weight: 400; font-size: 13px;">(Optional) only pdf or word format</small></label>&nbsp;
@@ -586,7 +416,197 @@
 			</div>
 		</form>
 		<!-- END FORM-->
+			</div>
+			<div id="tab_3-3" class="tab-pane">
+				<form action="{{ url('/individual/preferenceUpdate', Auth::user()->induser_id) }}" id="preference_validation" 
+				class="horizontal-form prof_detail" method="post" enctype="multipart/form-data">
+					<input type="hidden" name="_token" value="{{ csrf_token() }}">						
+						<div class="row">
+							<div class="col-md-6 col-sm-6">
+								<div class="form-group">
+									<label> Current City <span class="required">
+											* </span></label>									
+									<div class="input-group">
+										<span class="input-group-addon">
+											<i class="fa fa-map-marker"></i>
+										</span>
+										<input type="text" id="city" name="city" class="form-control" value="{{ $user->city }}" placeholder="City">
+									</div>
+								</div>
+							</div>
+							<!--/span-->
+							<div class="col-md-6 col-sm-6">
+								<div class="form-group">
+									<label>Current Locality </label>
+									<div class="input-group">
+										<span class="input-group-addon">
+										<i class="fa fa-map-marker"></i>
+										</span>
+										<input type="text" name="c_locality" class="form-control" placeholder="Locality">
+										
+									</div>
+								</div>
+							</div>
+							<!--/span-->
+						</div>
+						<div class="row">
+							<div class="col-md-6 col-sm-6">
+								<div class="form-group">
+									<label>Prefered Location <span class="required">
+											* </span></label>
+									<div class="input-group">
+										<span class="input-group-addon">
+											<i class="fa fa-map-marker"></i>
+										</span>
+
+										<input type="text" id="pref_loc" name="pref_loc" 
+										class="form-control" placeholder="Select preferred location"
+										onblur="pref_loc_locality()">									
+										<input type="text" id="prefered_location" onblur="pref_loc_locality()"
+											name="prefered_location" class="form-control select2" disabled
+											placeholder="Selected preferred location" style="border-top: 0;">
+									</div>
+								</div>
+							</div>
+							<!--/span-->
+							<div class="col-md-6 col-sm-6">
+								<div class="form-group">
+									<label>Prefered Locality </label>
+									<div class="input-group">
+										<span class="input-group-addon">
+										<i class="fa fa-map-marker"></i>
+										</span>
+										<input type="text" id="pref_locality"
+										onblur="pref_loc_locality()" 
+										name="p_locality" class="form-control" placeholder="Select locality" disabled>
+										<input type="text" id="preferred_locality" placeholder="Selected locality" style="border-top:0" 
+										name="p_locality" class="form-control" disabled>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6 col-sm-6">
+								<div class="form-group">
+									<label>Prefered Job Type <span class="required">
+											* </span></label>
+									<div class="input-group">
+										<span class="input-group-addon">
+											<i class=" icon-briefcase"></i>
+										</span>
+										<select class="form-control" value="{{ $user->prefered_jobtype }}" name="prefered_jobtype">
+											<option value="">&nbsp;</option>
+											<option @if($user->prefered_jobtype=="Full Time") {{ $selected }} @endif value="Full Time">Full Time</option>
+											<option @if($user->prefered_jobtype=="Part Time") {{ $selected }} @endif value="Part Time">Part Time</option>
+											<option @if($user->prefered_jobtype=="Freelancer") {{ $selected }} @endif value="Freelancer">Freelancer</option>
+											<option @if($user->prefered_jobtype=="Work from home") {{ $selected }} @endif value="Work from home">Work from home</option>
+										</select>
+									</div>
+								</div>
+							</div>
+						</div>
+					<!--end profile-settings-->
+					<div class="margin-top-10">
+						<button type="submit" name="individual" value="Save" class="btn green">
+						<i class="fa fa-check"></i> Save Changes
+						</button>
+						<a href="/profile/ind/{{Auth::user()->induser_id}}" class="btn default">Cancel</a>
+					</div>
+				</form>
+			</div>
+			<div id="tab_4-4" class="tab-pane">
+				<form action="{{ url('/individual/privacyUpdate', Auth::user()->induser_id) }}" id="privacy_validation" 
+				class="horizontal-form prof_detail" method="post" enctype="multipart/form-data">
+					<input type="hidden" name="_token" value="{{ csrf_token() }}">
+					<table class="table table-bordered table-striped">
+					<tr>
+						<td>
+							 Who can see my Email Address.
+						</td>
+						<td>
+							<label class="uniform-inline" style="width:100%;">
+							<input type="radio" name="email_show" value="Everyone"
+							@if($user->email_show == 'Everyone')
+								checked
+							@endif >
+							Everyone </label>
+							<label class="uniform-inline" style="width:100%;">
+							<input type="radio" name="email_show" value="Links"
+							@if($user->email_show == 'Links')
+								checked
+							@endif >
+							Links </label>
+							<label class="uniform-inline" style="width:100%;">
+							<input type="radio" name="email_show" value="None"
+							@if($user->email_show == 'None')
+								checked
+							@endif >
+							None </label>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							 Who can see my Mobile No.
+						</td>
+						<td>
+							<label class="uniform-inline style="width:100%;"">
+							<input type="radio" name="mobile_show" value="Everyone"
+							@if($user->mobile_show == 'Everyone')
+								checked
+							@endif >
+							Everyone </label>
+							<label class="uniform-inline" style="width:100%;">
+							<input type="radio" name="mobile_show" value="Links"
+							@if($user->mobile_show == 'Links')
+								checked
+							@endif >
+							Links </label>
+							<label class="uniform-inline" style="width:100%;">
+							<input type="radio" name="mobile_show" value="None"
+							@if($user->mobile_show == 'None')
+								checked
+							@endif >
+							None </label>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							 Who can see my Date of Birth.
+						</td>
+						<td>
+							<label class="uniform-inline" style="width:100%;">
+							<input type="radio" name="dob_show" value="Everyone"
+							@if($user->dob_show == 'Everyone')
+								checked
+							@endif >
+							Everyone </label>
+							<label class="uniform-inline" style="width:100%;">
+							<input type="radio" name="dob_show" value="Links"
+							@if($user->dob_show == 'Links')
+								checked
+							@endif >
+							Links </label>
+							<label class="uniform-inline" style="width:100%;">
+							<input type="radio" name="dob_show" value="None"
+							@if($user->dob_show == 'None')
+								checked
+							@endif >
+							None </label>
+						</td>
+					</tr>
+					</table>
+					<!--end profile-settings-->
+					<div class="margin-top-10">
+						<button type="submit" name="individual" value="Save" class="btn green">
+						<i class="fa fa-check"></i> Save Changes
+						</button>
+						<a href="/profile/ind/{{Auth::user()->induser_id}}" class="btn default">Cancel</a>
+					</div>
+				</form>
+			</div>
+		</div>
 	</div>
+	<!--end col-md-9-->
 </div>
 
 <!-- Mobile/Email verification -->
@@ -718,6 +738,26 @@
    google.maps.event.addDomListener(window, 'load', initializePrefLocality); 
 
 
+</script>
+<script type="text/javascript">
+$(document).ready(function() {
+  
+  $('#name').blur(function(){
+  
+    var nameVal = $('#name').val()
+    var nameLength = nameVal.length;
+    var nameSplit = nameVal.split(" ");
+    var lastLength = nameLength - nameSplit[0].length;
+    var lastNameLength = nameSplit[0].length + 1;
+    var lastName = nameVal.slice(lastNameLength);
+    
+    $('#first_name').val(nameSplit[0]);
+    $('#last_name').val(lastName);
+    
+    return false;
+  });
+	
+});
 </script>
 	<script>
         $("#job-category").multipleSelect({

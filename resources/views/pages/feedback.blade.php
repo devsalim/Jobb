@@ -6,6 +6,43 @@
 	<h3 class="page-title">
 			Feedback <small>help us making it better</small>
 	</h3>
+
+	<div class="row" style="margin: 15px -15px;">
+		<div class="col-md-12 col-sm-12">
+			<ul class="feeds">
+				@foreach($feedbacks as $feed)
+				@if($feed->user->induser_id == Auth::user()->induser_id)
+				<li>
+					<div class="col1">
+						<div class="cont">
+							<div class="cont-col1">
+								<div class="label label-sm label-danger">
+									<i class="fa fa-bullhorn"></i>
+								</div>
+							</div>
+							<div class="cont-col2">
+								<div class="desc">
+									<b>You
+									</b> have rated  
+									<b>{{$feed->experience}}</b> for the experience with Jobtip &amp; find it  
+									<b>{{$feed->usability}}</b> to use
+									as commented "{{$feed->comments}}"									
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col2">
+						<div class="date">
+							 {{ \Carbon\Carbon::createFromTimeStamp(strtotime($feed->created_at))->diffForHumans() }}
+						</div>
+					</div>
+				</li>
+				@endif
+				@endforeach
+			</ul>		
+		</div>
+	</div>
+		
 	<div class="portlet-body form">
 		<!-- BEGIN FORM-->
 		<form action="{{ url('/feedback/store') }}" class="horizontal-form" method="post">

@@ -3410,7 +3410,7 @@ Forms
   font-weight: normal;
   color: #333;
   background-color: transparent;
-  border: 1px solid darkcyan;
+  border: 1px solid #c4d5df;
   box-shadow: none;
   transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
   -webkit-border-radius: 4px;
@@ -3420,7 +3420,7 @@ Forms
   border-radius: 4px;
 }
 .form-control:focus {
-  border-color: darkcyan;
+  border-color: #c4d5df;
   outline: 0;
   -webkit-box-shadow: none;
   box-shadow: none;
@@ -3533,7 +3533,7 @@ select.input-sm {
   border-color: #e5e5e5;
 }
 .input-group .input-group-addon {
-  border-color: darkcyan;
+  border-color: #c4d5df;
   background: transparent;
   min-width: 39px;
 }
