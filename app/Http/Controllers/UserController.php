@@ -472,12 +472,52 @@ class UserController extends Controller {
 
 	// fb login
 	public function redirectToFacebook() {
-	  return Socialize::with('facebook')->redirect();
+	  return Socialize::with('facebook')->scopes(['email', 'user_birthday'])->redirect();
 	}
 
 	public function handleFacebookCallback() {
-	  $user = Socialize::with('facebook')->user();
-	  print_r($user);die;
+	  $fb_user = Socialize::with('facebook')->user();
+
+	  $jtUser = Induser::where('email', '=', $fb_user->getEmail())->first();
+	  $authUser = User::where('email', '=', $fb_user->getEmail())->first();
+	  if(!empty($authUser)){
+	  	// user exist
+	  	Auth::login($authUser);
+	  	return Redirect::to('/home')->with('message', 'Logged in with Facebook');
+	  }else{
+	  	// user doesn't exist
+	  	DB::beginTransaction();
+		try{
+			$indUser = new Induser();
+			$indUser->fname = $fb_user->user['first_name'];
+			$indUser->lname = $fb_user->user['last_name'];
+			$indUser->gender = $fb_user->user['gender'];
+			$indUser->email = $fb_user->getEmail();
+			$indUser->fb_id = $fb_user->getId();
+			$indUser->fb_access_token = $fb_user->token;
+			$indUser->reg_via = 'facebook';
+			$indUser->email_verify = '1';
+			$indUser->save();
+
+			$user = new User();
+			$user->name = $fb_user->user['first_name'].' '.$fb_user->user['last_name'];
+			$user->email = $fb_user->getEmail();
+			$user->email_verify = '1';
+			$user->identifier = 1;
+
+			$indUser->user()->save($user);
+		}catch(\Exception $e){
+		   DB::rollback();
+		   throw $e;
+		}
+		
+		DB::commit();
+
+		Auth::login($user);
+		return Redirect::to('/home')->with('message', 'Logged in with Facebook');
+	  }
+	  
+	  // print_r($fb_user);die;
 	}
 
 	// gp login
