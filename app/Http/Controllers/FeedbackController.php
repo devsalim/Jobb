@@ -12,15 +12,6 @@ use App\Feedback;
 
 class FeedbackController extends Controller {
 
-	public function __construct()
-	{
-	    $this->beforeFilter(function() {
-	    	if(!Auth::check()){
-	        	return redirect('login');
-	        }
-	    });
-	}
-
 	/**
 	 * Display a listing of the resource.
 	 *

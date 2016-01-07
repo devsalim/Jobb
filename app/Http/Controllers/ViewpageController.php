@@ -14,17 +14,6 @@ use App\User;
 
 class ViewpageController extends Controller {
 
-	// public function __construct()
-	// {
-	//     $this->beforeFilter(function() {
-	//     	if(Auth::check()){
-	//         	return redirect('/home');
-	//         } else{
-	//         	return redirect('login');
-	//         }
-	//     });
-	// }
-
 	/**
 	 * Display a listing of the resource.
 	 *

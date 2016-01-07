@@ -14,15 +14,7 @@ use DB;
 
 class GroupController extends Controller {
 
-	public function __construct()
-	{
-	    $this->beforeFilter(function() {
-	    	if(!Auth::check()){
-	        	return redirect('/login');
-	        }
-	    });
-	}
-
+	
 	/**
 	 * Display a listing of the resource.
 	 *

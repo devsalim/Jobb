@@ -36,7 +36,7 @@
 						</div>
 						
 						<div class="col-md-4 col-xs-4 " style="padding-left:2px;padding-right:2px;">
-							<a class="btn btn-lg btn-google btn-block" href="#" style="background: #c32f10;color: white;">
+							<a class="btn btn-lg btn-google btn-block" href="{!!URL::to('google')!!}" style="background: #c32f10;color: white;">
 								<i class="fa fa-google-plus"></i><span class="hidden-xs">&nbsp;Google+</span>
 							</a>
 						</div>
@@ -290,7 +290,7 @@
 		<div class="login-options" >
 			<div class="row social">
 				<div class="col-md-4 col-xs-4 " style="padding-right:2px;">
-					<a  class="btn btn-lg btn-facebook btn-block" href="" style="background: #3b5998;color: white;">
+					<a  class="btn btn-lg btn-facebook btn-block" href="{!!URL::to('facebook')!!}" style="background: #3b5998;color: white;">
 						<i class="fa fa-facebook "></i><span class="hidden-xs">&nbsp;facebook</span>
 					</a>
 				</div>

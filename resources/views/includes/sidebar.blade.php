@@ -39,6 +39,11 @@
         <div class="user-short-detail-container">
            @if(Auth::user()->identifier == 1)
           <div class="profile-userpic user-image">
+            @if($session_user->reg_via == 'facebook')
+              <img src="{{ $session_user->avatar }}" style="width:150px"/>
+            @elseif($session_user->reg_via == 'google')
+              <img src="{{ $session_user->avatar }}0" style="width:150px"/>
+            @else
             <a id="ajax-demo" href="#profile-pic" data-toggle="modal" class="config">
                 @if($session_user->profile_pic == null && $session_user->fname != null)
                   <div class="hover-image">Add</div>
@@ -48,6 +53,7 @@
                   <div class="hover-image"><i class="glyphicon glyphicon-edit"></i>Change</div>
                 @endif
             </a>
+            @endif
           </div>
           @else
           <div class="profile-userpic-corp user-image">

@@ -54,9 +54,10 @@ class CreateIndusersTable extends Migration {
                   $table->string('mobile_otp')->nullable();
                   $table->string('email_vcode')->nullable();
 
-                  $table->biginteger('fb_id')->unsigned();
-                  $table->string('fb_access_token');
-                  $table->string('fb_access_token_secret');
+                  $table->biginteger('social_id')->unsigned();
+                  $table->string('access_token');
+                  $table->string('access_token_secret');
+                  $table->string('avatar');
 
          		$table->timestamps();
 		});

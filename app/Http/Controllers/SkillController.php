@@ -9,20 +9,6 @@ use Auth;
 
 class SkillController extends Controller {
 
-	public function __construct()
-	{
-	    $this->beforeFilter(function() {
-	    	// if(Auth::check()){
-	     //    	if(Auth::user()->identifier != 1) return redirect('/home');
-	     //    } else{
-	     //    	return redirect('login');
-	     //    }
-	    	if(!Auth::check()){
-	        	return redirect('login');
-	        }
-	    });
-	}
-
 	/**
 	 * Display a listing of the resource.
 	 *

@@ -480,7 +480,7 @@ class UserController extends Controller {
 
 	  $jtUser = Induser::where('email', '=', $fb_user->getEmail())->first();
 	  $authUser = User::where('email', '=', $fb_user->getEmail())->first();
-	  if(!empty($authUser)){
+	  if(!empty($jtUser)){
 	  	// user exist
 	  	Auth::login($authUser);
 	  	return Redirect::to('/home')->with('message', 'Logged in with Facebook');
@@ -493,8 +493,9 @@ class UserController extends Controller {
 			$indUser->lname = $fb_user->user['last_name'];
 			$indUser->gender = $fb_user->user['gender'];
 			$indUser->email = $fb_user->getEmail();
-			$indUser->fb_id = $fb_user->getId();
-			$indUser->fb_access_token = $fb_user->token;
+			$indUser->social_id = $fb_user->getId();
+			$indUser->access_token = $fb_user->token;
+			$indUser->avatar = $fb_user->avatar;
 			$indUser->reg_via = 'facebook';
 			$indUser->email_verify = '1';
 			$indUser->save();
@@ -514,7 +515,7 @@ class UserController extends Controller {
 		DB::commit();
 
 		Auth::login($user);
-		return Redirect::to('/home')->with('message', 'Logged in with Facebook');
+		return Redirect::to('/home')->with('message', 'Logged in with Google');
 	  }
 	  
 	  // print_r($fb_user);die;
@@ -522,12 +523,53 @@ class UserController extends Controller {
 
 	// gp login
 	public function redirectToGoogle() {
-	  return Socialize::with('google')->redirect();
+	  return Socialize::with('google')->scopes(['email', 'profile'])->redirect();
 	}
 
 	public function handleGoogleCallback() {
-	  $user = Socialize::with('google')->user();
-	  print_r($user);die;
+	  $gp_user = Socialize::with('google')->user();
+
+	  $jtUser = Induser::where('email', '=', $gp_user->getEmail())->first();
+	  $authUser = User::where('email', '=', $gp_user->getEmail())->first();
+	  if(!empty($jtUser)){
+	  	// user exist
+	  	Auth::login($authUser);
+	  	return Redirect::to('/home')->with('message', 'Logged in with Google');
+	  }else{
+	  	// user doesn't exist
+	  	DB::beginTransaction();
+		try{
+			$indUser = new Induser();
+			$indUser->fname = $gp_user->user['name']['givenName'];
+			$indUser->lname = $gp_user->user['name']['familyName'];
+			$indUser->gender = $gp_user->user['gender'];
+			$indUser->email = $gp_user->getEmail();
+			$indUser->social_id = $gp_user->getId();
+			$indUser->access_token = $gp_user->token;
+			$indUser->avatar = $gp_user->avatar;
+			$indUser->reg_via = 'google';
+			$indUser->email_verify = '1';
+			$indUser->save();
+
+			$user = new User();
+			$user->name = $gp_user->user['name']['givenName'].' '.$gp_user->user['name']['familyName'];
+			$user->email = $gp_user->getEmail();
+			$user->email_verify = '1';
+			$user->identifier = 1;
+
+			$indUser->user()->save($user);
+		}catch(\Exception $e){
+		   DB::rollback();
+		   throw $e;
+		}
+		
+		DB::commit();
+
+		Auth::login($user);
+		return Redirect::to('/home')->with('message', 'Logged in with Google');
+	  }
+	  
+	  print_r($gp_user);die;
 	}
 		
 }

@@ -17,7 +17,13 @@ Route::get('verify', 'PagesController@verifyPage');
 Route::get('verify/{id}', 'PagesController@verifyEmail');
 Route::post('verify', 'PagesController@verifyMobile');
 
-Route::group(array('before' => 'auth'), function(){
+Route::get('facebook', 'UserController@redirectToFacebook');
+Route::get('user/fb', 'UserController@handleFacebookCallback');
+
+Route::get('google', 'UserController@redirectToGoogle');
+Route::get('user/gp', 'UserController@handleGoogleCallback');
+
+Route::group(array('middleware' => 'auth'), function(){
 
 	Route::post('home', 'PagesController@homeFilter');
 	Route::post('search/profile', 'PagesController@searchProfile');
@@ -87,8 +93,6 @@ Route::group(array('before' => 'auth'), function(){
 	Route::post('group/deleteuser', 'GroupController@deleteUser');
 	Route::post('group/leavegroup', 'GroupController@leavegroup');
 
-
-
 	Route::post('user/imgUpload', 'UserController@imgUpload');	
 	Route::post('corporate/imgUpload', 'CorporateController@imgUpload');	
 
@@ -153,12 +157,6 @@ Route::group(array('before' => 'auth'), function(){
 	Route::get('search/', 'PagesController@search');
 
 	Route::get('home/{post_type}/{sort_by}', 'PagesController@homeSorting');
-
-	Route::get('facebook', 'UserController@redirectToFacebook');
-	Route::get('user/fb', 'UserController@handleFacebookCallback');
-
-	Route::get('google', 'UserController@redirectToGoogle');
-	Route::get('user/gp', 'UserController@handleGoogleCallback');
 
 });
 
