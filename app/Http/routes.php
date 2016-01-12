@@ -23,6 +23,9 @@ Route::get('user/fb', 'UserController@handleFacebookCallback');
 Route::get('google', 'UserController@redirectToGoogle');
 Route::get('user/gp', 'UserController@handleGoogleCallback');
 
+Route::get('linkedin', 'UserController@redirectToLinkedin');
+Route::get('user/li', 'UserController@handleLinkedinCallback');
+
 Route::group(array('middleware' => 'auth'), function(){
 
 	Route::post('home', 'PagesController@homeFilter');

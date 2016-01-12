@@ -43,6 +43,8 @@
               <img src="{{ $session_user->avatar }}" style="width:150px"/>
             @elseif($session_user->reg_via == 'google')
               <img src="{{ $session_user->avatar }}0" style="width:150px"/>
+            @elseif($session_user->reg_via == 'linkedin')
+              <img src="{{ $session_user->avatar }}" style="width:150px"/>
             @else
             <a id="ajax-demo" href="#profile-pic" data-toggle="modal" class="config">
                 @if($session_user->profile_pic == null && $session_user->fname != null)
