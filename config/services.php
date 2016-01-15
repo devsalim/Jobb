@@ -35,21 +35,21 @@ return [
 	],
 
 	'facebook' => [
-	    'client_id' => '1676295885993366',
-	    'client_secret' => 'ab0753395dae30b2b6ffa053a363bd85',
-	    'redirect' => 'http://jobtip.in/user/fb',
+	    'client_id' => 'You_app_client_id',
+	    'client_secret' => 'secret_code',
+	    'redirect' => 'redirect_url',
 	],
 
 	'google' => [
-	    'client_id' => '977947078684-4jiokgir292r0v10mav8ol0tcuqm29so.apps.googleusercontent.com',
-	    'client_secret' => 'B5TJsGgMCBhoxCJ5JHKqDO8y',
-	    'redirect' => 'http://jobtip.in/user/gp',
+	    'client_id' => 'You_app_client_id',
+	    'client_secret' => 'secret_code',
+	    'redirect' => 'redirect_url',
 	],
 
 	'linkedin' => [
-	    'client_id' => '75fpui9szgs844',
-	    'client_secret' => 'UlxmnXB6k7lEj4Mb',
-	    'redirect' => 'http://jobtip.in/user/li',
+	    'client_id' => 'You_app_client_id',
+	    'client_secret' => 'secret_code',
+	    'redirect' => 'redirect_url',
 	]
 
 ];
